@@ -2,6 +2,12 @@
 
 <h1>Contacts</h1>
 
+<%= form_tag contacts_path, method: :get do %>
+    <input type="text" name="query" placeholder="filter by name, email">
+    <button type="submit">Filter</button>
+<% end %>
+
+
 <table>
   <thead>
     <tr>

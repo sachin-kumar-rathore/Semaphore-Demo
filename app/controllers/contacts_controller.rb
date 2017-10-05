@@ -4,7 +4,11 @@ class ContactsController < ApplicationController
   # GET /contacts
   # GET /contacts.json
   def index
-    @contacts = Contact.all
+    if !params[:query].blank?
+      @contacts = Contact.search_contacts(params[:query])
+    else
+      @contacts = Contact.all
+    end
   end
 
   # GET /contacts/1

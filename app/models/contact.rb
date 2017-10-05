@@ -6,6 +6,9 @@ class Contact < ApplicationRecord
 
   # == File Uploader == #
 
+  # == Modules == #
+  include PgSearch
+
   # == Associations and Nested Attributes == #
   # belongs_to :company
   # has_many :project_contacts
@@ -17,6 +20,7 @@ class Contact < ApplicationRecord
   # == Callbacks == #
 
   # == Scopes and Other macros == #
+  pg_search_scope :search_contacts, :against => [:name, :email]
 
   # == Instance methods == #
 

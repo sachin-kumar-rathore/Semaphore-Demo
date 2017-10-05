@@ -22,6 +22,19 @@ RSpec.describe ContactsController, type: :controller do
       get :index, params: {}, session: valid_session
       expect(response).to be_success
     end
+
+    it "works when query is passed in" do
+      contacts = 3.times{ Contact.create! valid_attributes }
+      get :index, params: {query: Faker::Name.first_name}, session: valid_session
+      expect(response).to be_success
+    end
+
+    it "still works if nothing is passed in" do
+      contacts = 3.times{ Contact.create! valid_attributes }
+      get :index, params: {}, session: valid_session
+      expect(response).to be_success
+    end
+
   end
 
   describe "GET #show" do

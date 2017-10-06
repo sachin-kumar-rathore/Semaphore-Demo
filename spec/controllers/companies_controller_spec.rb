@@ -29,11 +29,11 @@ RSpec.describe CompaniesController, type: :controller do
   # Company. As you add validations to Company, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {name: Faker::Name.name, owner_id: Faker::Number.digit, subscription_id: Faker::Number.digit, email: Faker::Internet.email}
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {name: nil, owner_id: nil, subscription_id: nil}
   }
 
   # This should return the minimal set of values that should be in the session
@@ -96,15 +96,17 @@ RSpec.describe CompaniesController, type: :controller do
 
   describe "PUT #update" do
     context "with valid params" do
+
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {name: Faker::Name.name, owner_id: Faker::Number.digit, subscription_id: Faker::Number.digit, email: Faker::Internet.email}
       }
 
       it "updates the requested company" do
         company = Company.create! valid_attributes
+        previous_name = company.name
         put :update, params: {id: company.to_param, company: new_attributes}, session: valid_session
         company.reload
-        skip("Add assertions for updated state")
+        expect(company.name).not_to eq(previous_name)
       end
 
       it "redirects to the company" do

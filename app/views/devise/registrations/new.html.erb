@@ -1,0 +1,86 @@
+<%= form_for(resource, as: resource_name, html: {id:"msform"}, url: registration_path(resource_name)) do |user| %>
+  <%= devise_error_messages! %>
+  <ul id="progressbar">
+    <li class="active">Organization Setup</li>
+    <li>First User Setup</li>
+    <li>Payment</li>
+  </ul>
+  <fieldset>
+    <h2 class="fs-title">Organization Setup</h2>
+    <h3 class="fs-subtitle">This is step 1</h3>
+    <div class="row">
+      <div class="col-md-12 text-left">
+        <%= label_tag :name %><br/>
+        <%= text_field_tag 'org[name]',nil ,autofocus: true, placeholder: "ex: Acme EconDev Inc.", required: true %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 text-left">  
+        <%= label_tag :url %><br/>
+        <%= url_field_tag 'org[url]', nil ,placeholder: "'ex: acmeecondev", required: true %><br/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 text-left">
+        <%= label_tag :primary_contact_first_name %><br/>
+        <%= text_field_tag 'org[primary_contact_first_name]', nil, placeholder: "First Name", required: true %>
+      </div>
+      <div class="col-md-6 text-left">
+        <%= label_tag :primary_contact_last_name %><br/>
+        <%= text_field_tag 'org[primary_contact_last_name]', nil, placeholder: "Last Name", required: true %><br/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 text-left">
+        <%= label_tag :primary_contact_phone %><br/>
+        <%= text_field_tag 'org[primary_contact_phone]', nil, placeholder: "555-555-5555", required: true %>
+      </div>
+      <div class="col-md-6 text-left">
+        <%= label_tag :primary_contact_email %><br/>
+        <%= email_field_tag 'org[primary_contact_email]', nil, placeholder: "abc@example.com", required: true %><br/>
+      </div>
+    </div>
+    <input type="button" name="next" class="next action-button" value="Next" />
+  </fieldset>
+  <fieldset>
+      <h2 class="fs-title">First User Setup</h2>
+      <h3 class="fs-subtitle">This is step 2</h3>
+      <div class="row">
+        <div class="col-md-12 text-left field">
+          <%= user.label :first_name %><br/>
+          <%= user.text_field :first_name, placeholder: "First Name", required: true %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 text-left field">
+          <%= user.label :last_name %><br/>
+          <%= user.text_field :last_name, placeholder: "Last Name", required: true %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 text-left field">
+          <%= user.label :email %><br/>
+          <%= user.email_field :email, placeholder: "Email", required: true %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 text-left field">
+          <%= user.label :password %><br/>
+           <%= user.password_field :password, autocomplete: "off" %>
+        </div>
+        <div class="col-md-6 text-left field">
+          <%= user.label :password_confirmation %><br/>
+          <%= user.password_field :password_confirmation, autocomplete: "off" %>
+        </div>
+      </div>
+    <input type="button" name="previous" class="previous action-button" value="Previous" />
+    <input type="button" name="next" class="next action-button" value="Next" />
+  </fieldset>
+  <fieldset>
+    <h2 class="fs-title">Payment</h2>
+    <h3 class="fs-subtitle">Final step</h3>
+    <input type="button" name="previous" class="previous action-button" value="Previous" />
+    <%= user.submit class:"submit action-button", value:"Sign Up", name:"Sign Up" %>
+  </fieldset>
+<% end %>
+

@@ -18,6 +18,20 @@
 
  */
  
-@import "bootstrap-sprockets";
-@import "bootstrap";
+@import "bootstrap.min";
+@import "bootstrap-extend.min";
+@import "site";
+@import "animsition";
+@import "asScrollable.css";
+@import "switchery";
+@import "introjs";
+@import "slidePanel";
+@import "flag-icon-css/flag-icon";
+@import "waves";
+@import "chartist";
+@import "jvectormap/jquery-jvectormap";
+@import "chartist-plugin-tooltip";
+@import "dashboard-v1";
+@import "material-design/material-design.min";
+@import "brand-icons/brand-icons";
 @import "custom";

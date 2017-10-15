@@ -5,27 +5,37 @@
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <!--->
   </head>
 
-  <body>
+  <body class="animsition site-menubar-unfold" style="animation-duration: 800ms; opacity: 1;">
     <%= render 'layouts/navbar' %>
-    <div class="container-fluid content">
-      <div class="row">
-        <% if current_user %>
-          <div class="col-md-2">
-            <%= render 'layouts/sidenav' %>
-          </div>
-        <% end %>
-        <div class="col-md-10">
-          <div class="notice">
-            <% if flash[:notice] %>
-              <p style="color: green;" ><%= flash[:notice] %></p>
-            <% end %>
-          </div>
-          <%= yield %>
-        </div>
-      </div>
-    </div>
+    <%= render 'layouts/sidenav' %>
+
+
+    <!-- Page -->
+
+    <!-- End Page -->
+
+
+    <!--<div class="container-fluid content">-->
+      <!--<div class="row">-->
+        <!--<%# if current_user %>-->
+          <!--<div class="col-md-2">-->
+            <!--<%#= render 'layouts/sidenav' %>-->
+          <!--</div>-->
+        <!--# end %>-->
+        <!--<div class="col-md-10">-->
+          <!--<div class="notice">-->
+            <!--<%# if flash[:notice] %>-->
+              <!--<p style="color: green;" ><%#= flash[:notice] %></p>-->
+            <!--# end %>-->
+          <!--</div>-->
+          <!--<%#= yield %>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
   </body>
 </html>

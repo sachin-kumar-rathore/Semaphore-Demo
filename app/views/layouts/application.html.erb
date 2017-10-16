@@ -14,28 +14,11 @@
     <%= render 'layouts/navbar' %>
     <%= render 'layouts/sidenav' %>
 
+    <div class="page">
+      <div class="page-content container-fluid">
+        <%= yield %>
+      </div>
+    </div>
 
-    <!-- Page -->
-
-    <!-- End Page -->
-
-
-    <!--<div class="container-fluid content">-->
-      <!--<div class="row">-->
-        <!--<%# if current_user %>-->
-          <!--<div class="col-md-2">-->
-            <!--<%#= render 'layouts/sidenav' %>-->
-          <!--</div>-->
-        <!--# end %>-->
-        <!--<div class="col-md-10">-->
-          <!--<div class="notice">-->
-            <!--<%# if flash[:notice] %>-->
-              <!--<p style="color: green;" ><%#= flash[:notice] %></p>-->
-            <!--# end %>-->
-          <!--</div>-->
-          <!--<%#= yield %>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
   </body>
 </html>

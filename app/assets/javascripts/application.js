@@ -18,21 +18,15 @@
 //= require tether/tether
 //= require bootstrap
 //= require animsition/animsition
-//= require mousewheel/jquery.mousewheel
+////= require mousewheel/jquery.mousewheel
 //= require asscrollbar/jquery-asScrollbar
 //= require asscrollable/jquery-asScrollable
 //= require ashoverscroll/jquery-asHoverScroll
 //= require waves
-//= require switchery.min
-//= require intro
-//= require screenfull.min
-//= require jquery-slidePanel
-//= require chartist.min
-//= require chartist-plugin-tooltip.min
-//= require jquery-jvectormap.min
-//= require jquery-jvectormap-world-mill-en
-//= require jquery.matchHeight-min
-//= require jquery.peity.min
+////= require switchery.min
+////= require intro
+////= require screenfull.min
+////= require jquery-slidePanel
 //= require State
 //= require Component
 //= require Plugin
@@ -41,22 +35,24 @@
 //= require Menubar
 //= require GridMenu
 //= require Sidebar
-//= require PageAside
+////= require PageAside
 //= require menu
-//= require colors
-//= require tour
+////= require colors
+////= require tour
 //= require Site
-//= require Plugin/asscrollable.min
-//= require Plugin/slidepanel.min
-//= require Plugin/switchery.min
-//= require Plugin/matchheight.min
-//= require Plugin/jvectormap.min
-//= require Plugin/peity.min
-//= require dashboard-v1
+////= require Plugin/asscrollable.min
+////= require Plugin/slidepanel.min
+////= require Plugin/switchery.min
+////= require Plugin/matchheight.min
+////= require Plugin/jvectormap.min
+////= require Plugin/peity.min
+////= require dashboard-v1
 //// = require bootstrap-sprockets
 //// = require jquery_ujs
 //// = require jquery.easing
 //// = require rails-ujs
 //= require turbolinks
 
-
+$(document).ready(function() {
+    Site.run();
+});

@@ -4,6 +4,7 @@ class ContactsController < ApplicationController
   # GET /contacts
   # GET /contacts.json
   def index
+    @organization = current_user.organization
     if !params[:query].blank?
       @contacts = Contact.search_contacts(params[:query])
     else

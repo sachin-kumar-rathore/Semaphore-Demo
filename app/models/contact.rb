@@ -10,7 +10,7 @@ class Contact < ApplicationRecord
   include PgSearch
 
   # == Associations and Nested Attributes == #
-  # belongs_to :company
+  belongs_to :organization
   # has_many :project_contacts
   # has_many :projects, through: :project_contacts
 

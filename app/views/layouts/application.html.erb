@@ -1,41 +1,43 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Tracker</title>
-    <%= csrf_meta_tags %>
+<head>
+  <title>Tracker</title>
+  <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag "breakpoints.js" %>
-    <script>
-    Breakpoints();
-    </script>
-  </head>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag "breakpoints.js" %>
+  <script>
+      Breakpoints();
+  </script>
+</head>
 
-  <% if current_user %>
+<% if current_user %>
     <body class="animsition site-menubar-unfold" style="animation-duration: 800ms; opacity: 1;">
-      <%= render 'layouts/navbar' %>
-      <%= render 'layouts/sidenav' %>
+    <%= render 'layouts/navbar' %>
+    <%= render 'layouts/sidenav' %>
 
-      <div class="page">
-        <div class="page-content container-fluid">
-          <%= yield %>
-        </div>
+    <div class="page">
+      <div class="page-content container-fluid">
+        <%= yield %>
       </div>
+    </div>
 
-      <footer class="site-footer">
-        <div class="site-footer-legal">© 2017 <a href="http://themeforest.net/item/remark-responsive-bootstrap-admin-template/11989202">Remark</a></div>
-        <div class="site-footer-right">
-          Crafted with <i class="red-600 icon md-favorite"></i> by <a href="http://themeforest.net/user/amazingSurge">amazingSurge</a>
-        </div>
-      </footer>
-      <%= render 'layouts/javascript_theme' %>
+    <footer class="site-footer">
+      <div class="site-footer-legal">© 2017
+        <a href="http://themeforest.net/item/remark-responsive-bootstrap-admin-template/11989202">Remark</a></div>
+      <div class="site-footer-right">
+        Crafted with <i class="red-600 icon md-favorite"></i> by
+        <a href="http://themeforest.net/user/amazingSurge">amazingSurge</a>
+      </div>
+    </footer>
+    <%= render 'layouts/javascript_theme' %>
     </body>
-  <% else %>
-    <%= render 'layouts/sign_up/navbar' %>  
+<% else %>
+    <%= render 'layouts/sign_up/navbar' %>
     <body class="static_html_body">
-      <%= yield %>
+    <%= yield %>
     </body>
-  <% end %>
+<% end %>
 </html>

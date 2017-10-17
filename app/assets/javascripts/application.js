@@ -10,48 +10,16 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require breakpoints
-//= require breakpoints-execute
-//= require babel-external-helpers
+
 //= require jquery
 //= require jquery.validate
-//= require tether/tether
-//= require bootstrap
-//= require animsition/animsition
-////= require mousewheel/jquery.mousewheel
-//= require asscrollbar/jquery-asScrollbar
-//= require asscrollable/jquery-asScrollable
-//= require ashoverscroll/jquery-asHoverScroll
-//= require waves
-////= require switchery.min
-////= require intro
-////= require screenfull.min
-////= require jquery-slidePanel
-//= require State
-//= require Component
-//= require Plugin
-//= require Base
-//= require Config
-//= require Menubar
-//= require GridMenu
-//= require Sidebar
-////= require PageAside
-//= require menu
-////= require colors
-////= require tour
-//= require Site
-////= require Plugin/asscrollable.min
-////= require Plugin/slidepanel.min
-////= require Plugin/switchery.min
-////= require Plugin/matchheight.min
-////= require Plugin/jvectormap.min
-////= require Plugin/peity.min
-////= require dashboard-v1
-//// = require bootstrap-sprockets
-//// = require jquery_ujs
-//// = require jquery.easing
-//// = require rails-ujs
+//= require bootstrap-sprockets
+//= require jquery_ujs
+//= require jquery.easing
+//= require rails-ujs
 //= require turbolinks
+//= require sign_up_form
+
 
 $(document).ready(function() {
     Site.run();

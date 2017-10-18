@@ -6,7 +6,11 @@ Rails.application.routes.draw do
   resources :companies
 
   resources :organizations, only: [:edit, :update] do
-    resources :contacts
+    resources :contacts do
+      collection do
+        post :import_contacts, as: :import
+      end
+    end
   end
   resources :dashboard, only: [:index]
 

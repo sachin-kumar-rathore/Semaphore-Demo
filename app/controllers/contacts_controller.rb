@@ -74,6 +74,25 @@ class ContactsController < ApplicationController
     end
   end
 
+  def import_contacts
+    file_data = params[:import][:file]
+    if (!file_data.nil? && file_data.content_type.include?("csv"))
+      counter = 0
+      File.foreach(file_data.path).with_index do |line|
+        contact = generate_contact(line, params[:import][:category], params[:import][:business_unit])
+        begin
+          contact.save
+          counter += 1
+        rescue
+          next
+        end
+      end
+      redirect_to organization_contacts_path(@organization), :notice => "#{counter} Contact/s imported Successfully!"
+    else
+      redirect_to organization_contacts_path(@organization), :notice => "Upload CSV with given format!"
+    end
+  end
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_contact
@@ -82,6 +101,14 @@ class ContactsController < ApplicationController
 
   def set_organization
     @organization = Organization.find(params[:organization_id])
+  end
+
+  def generate_contact(contact, category, bussiness_unit)
+    contact_info = contact.split(",")
+    Contact.new(name: contact_info[0], organization_id: @organization.id, title: contact_info[2], address_line_1: contact_info[3],
+                address_line_2: contact_info[4], city_state_zip: contact_info[5], phone_number_1: contact_info[6],
+                phone_number_2: contact_info[7], cell_phone: contact_info[8], fax: contact_info[9], email: contact_info[10],
+                website: contact_info[11], notes: contact_info[12], category: category, business_unit: bussiness_unit)
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

@@ -1,4 +1,11 @@
-<p id="notice"><%= notice %></p>
+<% if notice.present? %>
+    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <%= notice %>
+    </div>
+<% end %>
 
 <div class="row">
   <div class="col-xl-12">
@@ -45,6 +52,9 @@
           <button class="btn btn-sm green-btn waves-effect waves-classic" data-href="<%= new_organization_contact_path(@organization) %>"
                   id="createNewContact" type="button">ADD CONTACT
           </button>
+          <button class="btn btn-sm green-btn waves-effect waves-classic" data-target="#contactImportFormCenter" data-toggle="modal"
+                  id="importNewContacts" type="button">IMPORT CONTACT
+          </button>
         </h3>
       </header>
       <div class="panel-body">
@@ -77,6 +87,7 @@
 </div>
 
 <div id="createOrEditContact"></div>
+<%= render :partial => 'contacts/import_contacts_form', locals: {organization: @organization} %>
 
 <script>
   $(document).on("click", "#contactsList tr", function () {
@@ -93,5 +104,18 @@
       url: link,
       type: "GET"
     });
+  });
+
+  function showUploadFileName(input) {
+    if (input.files && input.files[0]) {
+      $('.fileName').html(input.files[0].name);
+    }
+  }
+
+  $(document).on("click", "#fakeFileUploadBtn", function () {
+    $('#contactsFileUploadHidden').click();
+  });
+  $("#contactsFileUploadHidden").change(function () {
+    showUploadFileName(this);
   });
 </script>

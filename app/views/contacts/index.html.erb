@@ -2,12 +2,36 @@
 
 <div class="row">
   <div class="col-xl-12">
+
     <div class="panel">
-      <div class="panel-body">
-        <%= form_tag organization_contacts_path(@organization), method: :get do %>
-            <input type="text" name="query" placeholder="filter by name, email">
-            <button type="submit">Filter</button>
-        <% end %>
+      <div class="panel-heading" id="contactFilterHeadingOne" role="tab">
+        <a class="panel-title waves-effect waves-light waves-round collapsed" data-toggle="collapse" href="#contactFilterCollapseOne" data-parent="#siteMegaAccordion" aria-expanded="false" aria-controls="contactFilterCollapseOne">
+          Filter Contacts
+        </a>
+      </div>
+      <div class="panel-collapse collapse" id="contactFilterCollapseOne" aria-labelledby="contactFilterHeadingOne" role="tabpanel" style="">
+        <div class="panel-body">
+          <%= form_tag organization_contacts_path(@organization), method: :get do %>
+
+              <div class="row">
+                <div class="form-group form-material col-md-2">
+                  <input type="text" name="name" placeholder="Filter by name" class="form-control">
+                </div>
+                <div class="form-group form-material col-md-2">
+                  <input type="text" name="email" placeholder="Filter by email" class="form-control">
+                </div>
+                <div class="form-group form-material col-md-2">
+                  <input type="text" name="org" placeholder="Filter by organization" class="form-control">
+                </div>
+
+                <div class="form-group form-material col-md-2">
+                  <button type="submit" class="btn btn-block green-btn waves-effect waves-classic">Update & Show
+                    List
+                  </button>
+                </div>
+              </div>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
@@ -18,11 +42,13 @@
     <div class="panel">
       <header class="panel-heading">
         <h3 class="panel-title">
-          <a class="btn btn-success" href="<%= new_organization_contact_path() %>"><i class="glyphicon glyphicon-plus"></i> ADD CONTACT</a>
+          <button class="btn btn-sm green-btn waves-effect waves-classic" data-href="<%= new_organization_contact_path(@organization) %>"
+                  id="createNewContact" type="button">ADD CONTACT
+          </button>
         </h3>
       </header>
       <div class="panel-body">
-        <table class="table table-hover dataTable table-striped w-full" data-plugin="dataTable">
+        <table class="table table-hover dataTable table-striped w-full" data-plugin="dataTable" id="contactsList">
           <thead>
           <tr>
             <th>NAME</th>
@@ -33,7 +59,7 @@
           </thead>
           <tbody>
           <% for contact in @contacts %>
-              <tr>
+              <tr data-href="<%= organization_contact_path(@organization, contact) %>">
                 <td><%= contact.name %></td>
                 <td><%= contact.organization ? contact.organization.name : "ORG" %></td>
                 <td><%= contact.cell_phone %></td>
@@ -42,8 +68,30 @@
           <% end %>
           </tbody>
         </table>
+        <div class="digg_pagination">
+          <%= will_paginate @contacts, :container => false %>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
+<div id="createOrEditContact"></div>
+
+<script>
+  $(document).on("click", "#contactsList tr", function () {
+    var link = $(this).data("href");
+    $.ajax({
+      url: link,
+      type: "GET"
+    });
+  });
+
+  $(document).on("click", "#createNewContact", function () {
+    var link = $(this).data("href");
+    $.ajax({
+      url: link,
+      type: "GET"
+    });
+  });
+</script>

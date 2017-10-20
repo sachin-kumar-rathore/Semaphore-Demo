@@ -1,38 +1,121 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Contacts</h1>
-
-<%= form_tag contacts_path, method: :get do %>
-    <input type="text" name="query" placeholder="filter by name, email">
-    <button type="submit">Filter</button>
+<% if notice.present? %>
+    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <%= notice %>
+    </div>
 <% end %>
 
+<div class="row">
+  <div class="col-xl-12">
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Created Date</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+    <div class="panel">
+      <div class="panel-heading" id="contactFilterHeadingOne" role="tab">
+        <a class="panel-title waves-effect waves-light waves-round collapsed" data-toggle="collapse" href="#contactFilterCollapseOne" data-parent="#siteMegaAccordion" aria-expanded="false" aria-controls="contactFilterCollapseOne">
+          Filter Contacts
+        </a>
+      </div>
+      <div class="panel-collapse collapse" id="contactFilterCollapseOne" aria-labelledby="contactFilterHeadingOne" role="tabpanel" style="">
+        <div class="panel-body">
+          <%= form_tag organization_contacts_path(@organization), method: :get do %>
 
-  <tbody>
-    <% @contacts.each do |contact| %>
+              <div class="row">
+                <div class="form-group form-material col-md-2">
+                  <input type="text" name="name" placeholder="Filter by name" class="form-control">
+                </div>
+                <div class="form-group form-material col-md-2">
+                  <input type="text" name="email" placeholder="Filter by email" class="form-control">
+                </div>
+                <div class="form-group form-material col-md-2">
+                  <input type="text" name="org" placeholder="Filter by organization" class="form-control">
+                </div>
 
-      <tr>
-        <td><%= contact.name %></td>
-        <td><%= contact.email %></td>
-        <td><%= contact.created_at %></td>
-        <td><%= link_to 'Show', contact %></td>
-        <td><%= link_to 'Edit', edit_contact_path(contact) %></td>
-        <td><%= link_to 'Destroy', contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+                <div class="form-group form-material col-md-2">
+                  <button type="submit" class="btn btn-block green-btn waves-effect waves-classic">Update & Show
+                    List
+                  </button>
+                </div>
+              </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<br>
+<div class="row">
+  <div class="col-xl-12">
+    <div class="panel">
+      <header class="panel-heading">
+        <h3 class="panel-title">
+          <button class="btn btn-sm green-btn waves-effect waves-classic" data-href="<%= new_organization_contact_path(@organization) %>"
+                  id="createNewContact" type="button">ADD CONTACT
+          </button>
+          <button class="btn btn-sm green-btn waves-effect waves-classic" data-target="#contactImportFormCenter" data-toggle="modal"
+                  id="importNewContacts" type="button">IMPORT CONTACT
+          </button>
+        </h3>
+      </header>
+      <div class="panel-body">
+        <table class="table table-hover dataTable table-striped w-full" data-plugin="dataTable" id="contactsList">
+          <thead>
+          <tr>
+            <th>NAME</th>
+            <th>ORGANIZATION</th>
+            <th>PHONE</th>
+            <th>EMAIL</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% for contact in @contacts %>
+              <tr data-href="<%= organization_contact_path(@organization, contact) %>">
+                <td><%= contact.name %></td>
+                <td><%= contact.organization ? contact.organization.name : "ORG" %></td>
+                <td><%= contact.cell_phone %></td>
+                <td><%= contact.email %></td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+        <div class="digg_pagination">
+          <%= will_paginate @contacts, :container => false %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<%= link_to 'New Contact', new_contact_path %>
+<div id="createOrEditContact"></div>
+<%= render :partial => 'contacts/import_contacts_form', locals: {organization: @organization} %>
+
+<script>
+  $(document).on("click", "#contactsList tr", function () {
+    var link = $(this).data("href");
+    $.ajax({
+      url: link,
+      type: "GET"
+    });
+  });
+
+  $(document).on("click", "#createNewContact", function () {
+    var link = $(this).data("href");
+    $.ajax({
+      url: link,
+      type: "GET"
+    });
+  });
+
+  function showUploadFileName(input) {
+    if (input.files && input.files[0]) {
+      $('.fileName').html(input.files[0].name);
+    }
+  }
+
+  $(document).on("click", "#fakeFileUploadBtn", function () {
+    $('#contactsFileUploadHidden').click();
+  });
+  $("#contactsFileUploadHidden").change(function () {
+    showUploadFileName(this);
+  });
+</script>

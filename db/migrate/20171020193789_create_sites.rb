@@ -2,8 +2,8 @@ class CreateSites < ActiveRecord::Migration[5.1]
   def change
     create_table :sites do |t|
       t.integer :organization_id
-      t.string :peoperty_number
-      t.string :propoerty_name
+      t.string :property_number
+      t.string :property_name
       t.string :type
       t.string :address_line
       t.string :city

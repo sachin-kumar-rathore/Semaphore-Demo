@@ -69,6 +69,6 @@ class SitesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def site_params
-      params.require(:site).permit(:organization_id, :peoperty_number, :propoerty_name, :type, :address_line, :city, :state, :zip_code, :country, :available_acreage, :available_square_feet, :tota_acreage, :total_square_feet, :latitude, :longitude)
+      params.require(:site).permit(:organization_id, :property_number, :property_name, :type, :address_line, :city, :state, :zip_code, :country, :available_acreage, :available_square_feet, :tota_acreage, :total_square_feet, :latitude, :longitude)
     end
 end

@@ -31,7 +31,7 @@
 
           <tbody>
           <% @sites.each do |site| %>
-              <tr data-href="<%#= organization_contact_path(@organization, contact) %>">
+              <tr data-href="<%= organization_site_path(@organization, site) %>">
                 <td><%= site.property_number %></td>
                 <td><%= site.property_name %></td>
                 <td><%= site.zip_code %></td>

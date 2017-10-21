@@ -25,6 +25,9 @@ class SitesController < ApplicationController
   # GET /sites/1
   # GET /sites/1.json
   def show
+    respond_to do |format|
+      format.js
+    end
   end
 
   # GET /sites/new

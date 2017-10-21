@@ -19,4 +19,10 @@ Rails.application.routes.draw do
     root 'users/registrations#new'
   end
 
+  resources :tasks do
+    collection do
+      get :filter_tasks
+    end
+  end
+
 end

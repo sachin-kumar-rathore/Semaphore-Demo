@@ -12,7 +12,11 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :sites
+    resources :sites do
+      collection do
+        get :find_contact
+      end
+    end
   end
   resources :dashboard, only: [:index]
 

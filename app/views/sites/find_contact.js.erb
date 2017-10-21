@@ -1,0 +1,3 @@
+$('#addContactFromOrg').html("");
+$('#addContactFromOrg').html('<%=j render :partial => 'sites/organization_contacts', locals: {organization: @organization, contacts: @contacts} %>');
+$('#addContactFormCenter').modal('show');

@@ -51,7 +51,10 @@
                   <div class="form-group form-material col-md-6">
 
                     <label class="form-control-label">Contact:</label>
-
+                    <%= form.text_field :contact_id, class: 'form-control', id: 'inputContactDetails', required: true %>
+                    <button class="btn btn-sm green-btn waves-effect waves-classic" data-href="<%= find_contact_organization_sites_path(@organization) %>"
+                            id="findContactDetails" type="button">ADD CONTACT
+                    </button>
 
                   </div>
 
@@ -68,7 +71,7 @@
 
 
                     <%= form.radio_button :property_type, 'industrial', required: true %>
-                    <%= form.label :property_type, 'Industrial', :value => 'Industrial' %>
+                    <%= form.label :property_type, 'Industrial', :value => 'Industrial' %>3
 
 
                     <%= form.radio_button :property_type, 'office', required: true %>
@@ -220,3 +223,23 @@
 </div>
 <!-- End Modal -->
 
+<div id="addContactFormCenter"></div>
+
+<script>
+    $(document).on("click", "#sitesList tr", function () {
+        var link = $(this).data("href");
+        $.ajax({
+            url: link,
+            type: "GET"
+        });
+    });
+
+    $(document).on("click", "#findContactDetails", function () {
+        var link = $(this).data("href");
+        $.ajax({
+            url: link,
+            type: "GET"
+        });
+    });
+
+</script>

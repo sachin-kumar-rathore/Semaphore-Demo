@@ -88,6 +88,11 @@
   color: white;
   font-weight: 700;
 }
+.cancel-btn{
+  border-color: #2ED573;
+  background-color: #fff;
+  color: #2ED573;
+}
 
 #contactsList thead th {
   color: #2ED573;
@@ -95,7 +100,7 @@
 }
 
 #contactImportFormCenter {
-  .requirements .list-group-item{
+  .requirements .list-group-item {
     padding: 5px 5px;
   }
   .circle {
@@ -104,6 +109,32 @@
     margin-right: 5px;
   }
 }
-#contactsFileUploadHidden{
+
+#contactsFileUploadHidden {
   display: none;
 }
+
+.modal-content .modal-title{
+  color: #2ED573;
+}
+
+//Tasks page CSS Start
+.tasksNavs {
+  .nav-pills .nav-link.active, .show .nav-pills .nav-link {
+    color: #fff;
+    background-color: #2ED573;
+    border-radius: 50px;
+    font-weight: 700;
+  }
+  .nav-pills .nav-item a{
+    color: #000;
+    font-weight: 700;
+  }
+  .nav-pills{ line-height: 8px}
+}
+#tasksList thead th {
+  color: #2ED573;
+  font-weight: 500;
+}
+
+//Tasks page CSS End

@@ -16,7 +16,7 @@
           Filter Contacts
         </a>
       </div>
-      <div class="panel-collapse collapse" id="contactFilterCollapseOne" aria-labelledby="contactFilterHeadingOne" role="tabpanel" style="">
+      <div class="panel-collapse" id="contactFilterCollapseOne" aria-labelledby="contactFilterHeadingOne" role="tabpanel" style="">
         <div class="panel-body">
           <%= form_tag organization_contacts_path(@organization), method: :get do %>
 
@@ -118,4 +118,8 @@
   $("#contactsFileUploadHidden").change(function () {
     showUploadFileName(this);
   });
+
+  $('.digg_pagination a').each(function () {
+    $(this).attr("data-turbolinks", false);
+  })
 </script>

@@ -1,0 +1,96 @@
+<% if notice.present? %>
+    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <%= notice %>
+    </div>
+<% end %>
+
+<div class="row tasksNavs mb-30">
+  <div class="col-lg-12">
+    <ul class="nav nav-pills">
+      <li class="nav-item" id="item1">
+        <a class="nav-link active" href="javascript:void(0)">Assigned To Me</a>
+      </li>
+      <li class="nav-item" id="item2">
+        <a class="nav-link" href="javascript:void(0)">Assigned By Me</a>
+      </li>
+      <li class="nav-item" id="item3">
+        <a class="nav-link" href="javascript:void(0)">All Tasks</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xl-12">
+    <div class="panel">
+      <header class="panel-heading">
+        <h3 class="panel-title">
+          <div class="row">
+            <div class="col-md-2">
+              <%= select_tag :project_id, options_for_select(["All Projects", "Project #1", "Project #2", "Project #3"]), :class => 'form-control' %>
+            </div>
+            <div class="col-md-8"></div>
+            <div class="col-md-2 text-right">
+              <button class="btn btn-sm green-btn waves-effect waves-classic" data-href="<%= new_task_path() %>"
+                      id="addNewTask" type="button">ADD NEW TASK
+              </button>
+            </div>
+          </div>
+        </h3>
+      </header>
+      <div class="panel-body" id="tasksList">
+        <%= render :partial => 'tasks/tasks', locals: {tasks: @tasks} %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="createOrEditTask"></div>
+
+<script>
+  $(document).on("click", "#addNewTask", function () {
+    var link = $(this).data("href");
+    $.ajax({
+      url: link,
+      type: "GET"
+    });
+  });
+
+
+  $(document).on("click", "#tasksList tr", function () {
+    var link = $(this).data("href");
+    $.ajax({
+      url: link,
+      type: "GET"
+    });
+  });
+
+  $(document).on("click", ".nav-pills .nav-item", function () {
+    var filter_by = 1;
+    $('.nav-pills .nav-link').each(function () {
+      $(this).removeClass("active")
+    });
+    if ($(this).attr("id") == "item1") {
+      filter_by = 1;
+      $('.nav-pills #item1 .nav-link').addClass("active");
+    }
+    else if ($(this).attr("id") == "item2") {
+      $('.nav-pills #item2 .nav-link').addClass("active");
+      filter_by = 2;
+    }
+    else {
+      $('.nav-pills #item3 .nav-link').addClass("active");
+      filter_by = 3;
+    }
+
+    $.ajax({
+      url: '<%= filter_tasks_tasks_path %>',
+      type: "GET",
+      data: {filter_by: filter_by}
+    });
+  });
+
+</script>

@@ -1,0 +1,3 @@
+$('#createOrEditTask').html("");
+$('#createOrEditTask').html('<%=j render :partial => 'tasks/form', locals: {task: @task} %>');
+$('#taskFormCenter').modal('show');

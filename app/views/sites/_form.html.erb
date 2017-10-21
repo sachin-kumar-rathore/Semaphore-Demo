@@ -1,0 +1,92 @@
+<%= form_with(model: site, local: true) do |form| %>
+  <% if site.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(site.errors.count, "error") %> prohibited this site from being saved:</h2>
+
+      <ul>
+      <% site.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :organization_id %>
+    <%= form.number_field :organization_id, id: :site_organization_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :peoperty_number %>
+    <%= form.text_field :peoperty_number, id: :site_peoperty_number %>
+  </div>
+
+  <div class="field">
+    <%= form.label :propoerty_name %>
+    <%= form.text_field :propoerty_name, id: :site_propoerty_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :type %>
+    <%= form.text_field :type, id: :site_type %>
+  </div>
+
+  <div class="field">
+    <%= form.label :address_line %>
+    <%= form.text_field :address_line, id: :site_address_line %>
+  </div>
+
+  <div class="field">
+    <%= form.label :city %>
+    <%= form.text_field :city, id: :site_city %>
+  </div>
+
+  <div class="field">
+    <%= form.label :state %>
+    <%= form.text_field :state, id: :site_state %>
+  </div>
+
+  <div class="field">
+    <%= form.label :zip_code %>
+    <%= form.text_field :zip_code, id: :site_zip_code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :country %>
+    <%= form.text_field :country, id: :site_country %>
+  </div>
+
+  <div class="field">
+    <%= form.label :available_acreage %>
+    <%= form.text_field :available_acreage, id: :site_available_acreage %>
+  </div>
+
+  <div class="field">
+    <%= form.label :available_square_feet %>
+    <%= form.text_field :available_square_feet, id: :site_available_square_feet %>
+  </div>
+
+  <div class="field">
+    <%= form.label :tota_acreage %>
+    <%= form.text_field :tota_acreage, id: :site_tota_acreage %>
+  </div>
+
+  <div class="field">
+    <%= form.label :total_square_feet %>
+    <%= form.text_field :total_square_feet, id: :site_total_square_feet %>
+  </div>
+
+  <div class="field">
+    <%= form.label :latitude %>
+    <%= form.text_field :latitude, id: :site_latitude %>
+  </div>
+
+  <div class="field">
+    <%= form.label :longitude %>
+    <%= form.text_field :longitude, id: :site_longitude %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

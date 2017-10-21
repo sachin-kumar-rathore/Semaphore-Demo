@@ -1,0 +1,79 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Organization:</strong>
+  <%= @site.organization_id %>
+</p>
+
+<p>
+  <strong>Peoperty number:</strong>
+  <%= @site.peoperty_number %>
+</p>
+
+<p>
+  <strong>Propoerty name:</strong>
+  <%= @site.propoerty_name %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @site.type %>
+</p>
+
+<p>
+  <strong>Address line:</strong>
+  <%= @site.address_line %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @site.city %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @site.state %>
+</p>
+
+<p>
+  <strong>Zip code:</strong>
+  <%= @site.zip_code %>
+</p>
+
+<p>
+  <strong>Country:</strong>
+  <%= @site.country %>
+</p>
+
+<p>
+  <strong>Available acreage:</strong>
+  <%= @site.available_acreage %>
+</p>
+
+<p>
+  <strong>Available square feet:</strong>
+  <%= @site.available_square_feet %>
+</p>
+
+<p>
+  <strong>Tota acreage:</strong>
+  <%= @site.tota_acreage %>
+</p>
+
+<p>
+  <strong>Total square feet:</strong>
+  <%= @site.total_square_feet %>
+</p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @site.latitude %>
+</p>
+
+<p>
+  <strong>Longitude:</strong>
+  <%= @site.longitude %>
+</p>
+
+<%= link_to 'Edit', edit_site_path(@site) %> |
+<%= link_to 'Back', sites_path %>

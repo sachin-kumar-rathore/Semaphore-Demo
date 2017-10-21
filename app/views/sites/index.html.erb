@@ -1,0 +1,55 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Sites</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Organization</th>
+      <th>Peoperty number</th>
+      <th>Propoerty name</th>
+      <th>Type</th>
+      <th>Address line</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Zip code</th>
+      <th>Country</th>
+      <th>Available acreage</th>
+      <th>Available square feet</th>
+      <th>Tota acreage</th>
+      <th>Total square feet</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @sites.each do |site| %>
+      <tr>
+        <td><%= site.organization_id %></td>
+        <td><%= site.peoperty_number %></td>
+        <td><%= site.propoerty_name %></td>
+        <td><%= site.type %></td>
+        <td><%= site.address_line %></td>
+        <td><%= site.city %></td>
+        <td><%= site.state %></td>
+        <td><%= site.zip_code %></td>
+        <td><%= site.country %></td>
+        <td><%= site.available_acreage %></td>
+        <td><%= site.available_square_feet %></td>
+        <td><%= site.tota_acreage %></td>
+        <td><%= site.total_square_feet %></td>
+        <td><%= site.latitude %></td>
+        <td><%= site.longitude %></td>
+        <td><%= link_to 'Show', site %></td>
+        <td><%= link_to 'Edit', edit_site_path(site) %></td>
+        <td><%= link_to 'Destroy', site, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Site', new_site_path %>

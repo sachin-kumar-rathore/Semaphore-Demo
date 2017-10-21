@@ -16,7 +16,9 @@
           Filter Contacts
         </h3>
       </div>
+
       <div class="panel" id="contactFilterCollapseOne" aria-labelledby="contactFilterHeadingOne" role="tabpanel" style="">
+
         <div class="panel-body">
           <%= form_tag organization_contacts_path(@organization), method: :get do %>
 
@@ -71,7 +73,7 @@
           <% for contact in @contacts %>
               <tr data-href="<%= organization_contact_path(@organization, contact) %>">
                 <td><%= contact.name %></td>
-                <td><%= contact.organization ? contact.organization.name : "ORG" %></td>
+                <td><%= contact.organization ? contact.organization.name : 'ORG' %></td>
                 <td><%= contact.cell_phone %></td>
                 <td><%= contact.email %></td>
               </tr>
@@ -118,4 +120,8 @@
   $("#contactsFileUploadHidden").change(function () {
     showUploadFileName(this);
   });
+
+  $('.digg_pagination a').each(function () {
+    $(this).attr("data-turbolinks", false);
+  })
 </script>

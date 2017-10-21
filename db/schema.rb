@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 201710201937989) do
+=======
+ActiveRecord::Schema.define(version: 20171020033244) do
+>>>>>>> 733e9ebfd81c77771c41393734967e5a0e17e93e
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,6 +85,7 @@ ActiveRecord::Schema.define(version: 201710201937989) do
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id"
   end
 
+<<<<<<< HEAD
   create_table "sites", force: :cascade do |t|
     t.integer "organization_id"
     t.string "property_number"
@@ -98,6 +103,19 @@ ActiveRecord::Schema.define(version: 201710201937989) do
     t.float "latitude"
     t.float "longitude"
     t.string "business_unit"
+=======
+  create_table "tasks", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "project_id"
+    t.integer "assigned_to"
+    t.string "name"
+    t.text "description"
+    t.date "start_date"
+    t.date "end_date"
+    t.string "priority"
+    t.string "status"
+    t.float "progress", default: 0.0
+>>>>>>> 733e9ebfd81c77771c41393734967e5a0e17e93e
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

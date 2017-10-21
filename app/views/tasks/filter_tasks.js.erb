@@ -1,0 +1,3 @@
+$('#tasksList').html("");
+$('#tasksList').html('<%=j render :partial => 'tasks/tasks', locals: {tasks: @tasks} %>');
+

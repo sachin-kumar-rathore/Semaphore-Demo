@@ -19,7 +19,7 @@
         </h3>
       </header>
       <div class="panel-body">
-        <table class="table table-hover dataTable table-striped w-full" data-plugin="dataTable" id="contactsList">
+        <table class="table table-hover dataTable table-striped w-full" data-plugin="dataTable" id="sitesList">
 
           <thead>
           <tr>
@@ -45,12 +45,58 @@
       </div>
     </div>
   </div>
+
+  <div class="col-xl-4">
+    <div class="panel">
+      <header class="panel-heading">
+        <h3 class="panel-title">
+
+        </h3>
+      </header>
+
+      <div class="panel-body">
+
+        <%= form_tag organization_sites_path(@organization), method: :get do %>
+
+            <div class="row">
+              <div class="form-group form-material col-md-8">
+                <input type="text" name="property_number" placeholder="Property #" class="form-control">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group form-material col-md-8">
+                <input type="text" name="property_name" placeholder="Name" class="form-control">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group form-material col-md-8">
+                <input type="text" name="zip_code" placeholder="Zip" class="form-control">
+              </div>
+            </div>
+
+            <div class="form-group form-material col-md-8">
+
+              <button type="submit" class="btn btn-sm green-btn">Update List</button>
+              <%= link_to 'Clear All Filter', organization_sites_path(@organization), class: 'btn btn-sm site-filter-clear' %>
+
+            </div>
+            </div>
+        <% end %>
+
+      </div>
+    </div>
+
+  </div>
+
+
 </div>
 
 <div id="createOrEditSite"></div>
 
 <script>
-    $(document).on("click", "#contactsList tr", function () {
+    $(document).on("click", "#sitesList tr", function () {
         var link = $(this).data("href");
         $.ajax({
             url: link,
@@ -66,16 +112,4 @@
         });
     });
 
-    function showUploadFileName(input) {
-        if (input.files && input.files[0]) {
-            $('.fileName').html(input.files[0].name);
-        }
-    }
-
-    $(document).on("click", "#fakeFileUploadBtn", function () {
-        $('#contactsFileUploadHidden').click();
-    });
-    $("#contactsFileUploadHidden").change(function () {
-        showUploadFileName(this);
-    });
 </script>

@@ -12,11 +12,11 @@
 
     <div class="panel">
       <div class="panel-heading" id="contactFilterHeadingOne" role="tab">
-        <a class="panel-title waves-effect waves-light waves-round collapsed" data-toggle="collapse" href="#contactFilterCollapseOne" data-parent="#siteMegaAccordion" aria-expanded="false" aria-controls="contactFilterCollapseOne">
+        <h3 class="panel-title">
           Filter Contacts
-        </a>
+        </h3>
       </div>
-      <div class="panel-collapse collapse" id="contactFilterCollapseOne" aria-labelledby="contactFilterHeadingOne" role="tabpanel" style="">
+      <div class="panel" id="contactFilterCollapseOne" aria-labelledby="contactFilterHeadingOne" role="tabpanel" style="">
         <div class="panel-body">
           <%= form_tag organization_contacts_path(@organization), method: :get do %>
 

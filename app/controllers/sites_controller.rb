@@ -11,13 +11,13 @@ class SitesController < ApplicationController
 
     if params[:property_name].blank? && params[:property_number].blank? && params[:zip_code].blank?
 
-      @sites = @organization.sites.paginate(:page => params[:page], :per_page => 1)
+      @sites = @organization.sites.paginate(:page => params[:page], :per_page => 2)
 
     else
 
       @sites = Site.property_number_or_propery_name_or_zip_code_search(@organization.id,
                                                                        params[:property_number], params[:property_name],
-                                                                       params[:zip_code]).paginate(:page => params[:page], :per_page => 1)
+                                                                       params[:zip_code]).paginate(:page => params[:page], :per_page => 2)
     end
 
   end

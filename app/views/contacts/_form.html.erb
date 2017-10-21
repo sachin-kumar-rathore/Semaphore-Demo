@@ -77,14 +77,22 @@
               </div>
 
             </div>
+
+            <div class="row">
+
+              <div class="form-group form-material col-md-6">
+
+                <button type="submit" class="btn btn-sm green-btn"><%= contact.new_record? ? ' Save ' : ' Save changes ' %></button>
+                <button type="button" class="btn btn-sm white-btn" data-dismiss="modal">Cancel</button>
+
+              </div>
+
+            </div>
+
           </div>
 
         </div>
 
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default btn-pure" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary"><%= contact.new_record? ? "Save" : "Save changes" %></button>
-        </div>
       <% end %>
     </div>
   </div>

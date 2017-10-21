@@ -86,7 +86,7 @@
   background-color: #2ED573;
   box-shadow: none;
   color: white;
-  font-weight: 700;
+  font-weight: 400;
 }
 
 #contactsList thead th {
@@ -106,4 +106,12 @@
 }
 #contactsFileUploadHidden{
   display: none;
+}
+
+.white-btn {
+  border-color: #2ED573;
+  background-color: white;
+  box-shadow: none;
+  color: #2ED573;
+  font-weight: 400;
 }

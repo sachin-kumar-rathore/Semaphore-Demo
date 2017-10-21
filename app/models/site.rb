@@ -14,7 +14,7 @@ class Site < ApplicationRecord
   belongs_to :organization
 
   # == Validations == #
-  validates_presence_of :organization_id, :property_name, :property_number, :type, :address_line, :city, :state,
+  validates_presence_of :organization_id, :property_name, :property_number, :property_type, :address_line, :city, :state,
                         :zip_code, :country, :available_acreage, :available_square_feet, :total_acreage,
                         :total_square_feet, :latitude, :longitude
 

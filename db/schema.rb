@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171020193789) do
+ActiveRecord::Schema.define(version: 201710201937989) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -85,7 +85,7 @@ ActiveRecord::Schema.define(version: 20171020193789) do
     t.integer "organization_id"
     t.string "property_number"
     t.string "property_name"
-    t.string "type"
+    t.string "property_type"
     t.string "address_line"
     t.string "city"
     t.string "state"
@@ -93,10 +93,11 @@ ActiveRecord::Schema.define(version: 20171020193789) do
     t.string "country"
     t.float "available_acreage"
     t.float "available_square_feet"
-    t.float "tota_acreage"
+    t.float "total_acreage"
     t.float "total_square_feet"
     t.float "latitude"
     t.float "longitude"
+    t.string "business_unit"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -1,90 +1,207 @@
 <!-- Contact Modal -->
 <div class="modal fade" id="siteFormCenter" aria-hidden="true" aria-labelledby="siteFormCenter"
      role="dialog" tabindex="-1">
+
   <div class="modal-dialog modal-simple modal-center">
+
     <div class="modal-content">
+
       <%= form_for [organization, site] do |form| %>
+
           <div class="modal-header">
+
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
               <span aria-hidden="true">×</span>
+
             </button>
-            <h4 class="modal-title"><%= site.new_record? ? 'ADD SITE/ BUILDING' : 'EDIT SITE/ BUILDING' %></h4>
+
+            <h4 class="modal-title"><%= site.new_record? ? 'ADD SITE/ BUILDING' : 'UPDATE SITE/ BUILDING' %></h4>
+
           </div>
 
           <div class="modal-body">
+
             <div class="example-wrap">
+
               <%= render :partial => 'shared/error_messages', :locals => {:obj => form.object} %>
 
               <div class="example">
 
                 <div class="row">
+
                   <div class="form-group form-material col-md-4">
-                    <%= form.text_field :property_number, class: "form-control", id: "inputBasicPropertyNumber", placeholder: "Property #", required: true %>
+
+                    <%= form.text_field :property_number, class: 'form-control', id: 'inputBasicPropertyNumber', placeholder: 'Property #', required: true %>
+
                   </div>
 
                   <div class="form-group form-material col-md-4">
-                    <%= form.text_field :property_name, class: "form-control", id: "inputBasicPropertyName", placeholder: "Property Name", required: true %>
+
+                    <%= form.text_field :property_name, class: 'form-control', id: 'inputBasicPropertyName', placeholder: 'Property Name', required: true %>
+
                   </div>
 
                 </div>
 
+
                 <div class="row">
 
                   <div class="form-group form-material col-md-6">
+
                     <input type="text" class="form-control" id="inputBasicLastName" name="organizationName"
                            value="<%= organization.name %>" autocomplete="off" disabled/>
+
                   </div>
 
                 </div>
 
                 <div class="row">
-                  <div class="form-group form-material col-md-6">
-                    <%= form.text_field :address_line_1, class: "form-control", id: "inputBasicAddress1", placeholder: "Address 1" %>
-                  </div>
-                  <div class="form-group form-material col-md-6">
-                    <%= form.text_field :address_line_2, class: "form-control", id: "inputBasicAddress2", placeholder: "Address 2" %>
-                  </div>
-                </div>
 
-                <div class="row">
                   <div class="form-group form-material col-md-12">
-                    <%= form.text_field :city_state_zip, class: "form-control", id: "inputBasicCityState", placeholder: "City, State & Zip Code" %>
+
+                    <%= form.label :property_type %>
+
+                    <%= form.radio_button :property_type, 'flex', required: true %>
+                    <%= form.label :property_type, 'Flex', :value => 'Flex' %>
+
+
+                    <%= form.radio_button :property_type, 'industrial', required: true %>
+                    <%= form.label :property_type, 'Industrial', :value => 'Industrial' %>
+
+
+                    <%= form.radio_button :property_type, 'office', required: true %>
+                    <%= form.label :type, 'Office', :value => 'Office' %>
+
+                    <%= form.radio_button :property_type, 'site', required: true %>
+                    <%= form.label :property_type, 'Site', :value => 'Site' %>
+
                   </div>
+
+                </div>
+
+
+                <div class="row">
+
+                  <div class="form-group form-material col-md-12">
+
+                    <%= form.text_field :address_line, class: 'form-control', id: 'inputBasicAddress', placeholder: 'Address Line', required: true %>
+
+                  </div>
+
+                </div>
+
+
+                <div class="row">
+
+                  <div class="form-group form-material col-md-4">
+
+                    <%= form.text_field :city, class: 'form-control', id: 'inputBasicCity', placeholder: 'City', required: true %>
+
+                  </div>
+
+
+                  <div class="form-group form-material col-md-4">
+
+                    <%= form.text_field :state, class: 'form-control', id: 'inputBasicState', placeholder: 'State', required: true %>
+
+                  </div>
+
+                  <div class="form-group form-material col-md-4">
+
+                    <%= form.text_field :zip_code, class: 'form-control', id: 'inputBasicZipCode', placeholder: 'Zip Code', required: true %>
+
+                  </div>
+
                 </div>
 
                 <div class="row">
+
                   <div class="form-group form-material col-md-4">
-                    <%= form.text_field :phone_number_1, class: "form-control", id: "inputBasicphone_number_1", placeholder: "Phone Number 1" %>
+
+                    <%= form.text_field :country, class: 'form-control', id: 'inputBasicCountry', placeholder: 'Country', required: true %>
+
                   </div>
+
+
                   <div class="form-group form-material col-md-4">
-                    <%= form.text_field :phone_number_2, class: "form-control", id: "inputBasicphone_number_2", placeholder: "Phone Number 2" %>
+
+                    <%= form.text_field :available_acreage, class: 'form-control', id: 'inputBasicAvailableAcreage', placeholder: 'Available Acreage', required: true %>
+
                   </div>
+
                   <div class="form-group form-material col-md-4">
-                    <%= form.text_field :cell_phone, class: "form-control", id: "inputBasicCellPhone", placeholder: "Cell Phone" %>
+
+                    <%= form.text_field :available_square_feet, class: 'form-control', id: 'inputBasicAvailableSquareFeet', placeholder: 'Available Square Feet', required: true %>
+
                   </div>
+
                 </div>
 
+
                 <div class="row">
+
                   <div class="form-group form-material col-md-4">
-                    <%= form.text_field :fax, class: "form-control", id: "inputBasicFax", placeholder: "Fax" %>
+
+                    <%= form.text_field :total_acreage, class: 'form-control', id: 'inputBasicTotalAcreage', placeholder: 'Total Acreage', required: true %>
+
                   </div>
+
+
                   <div class="form-group form-material col-md-4">
-                    <%= form.url_field :website, class: "form-control", id: "inputBasicWebsite", placeholder: "Website" %>
+
+                    <%= form.text_field :total_square_feet, class: 'form-control', id: 'inputBasicTotalSquareFeet', placeholder: 'Total Square Feet', required: true %>
+
                   </div>
+
                   <div class="form-group form-material col-md-4">
-                    <%= form.email_field :email, class: "form-control", id: "inputBasicEmail", placeholder: "Email", required: true %>
+
+                    <%= form.text_field :latitude, class: 'form-control', id: 'inputBasicLatitude', placeholder: 'latitude', required: true %>
+
                   </div>
+
+                </div>
+
+
+                <div class="row">
+
+                  <div class="form-group form-material col-md-4">
+
+                    <%= form.text_field :longitude, class: 'form-control', id: 'inputBasicLongitude', placeholder: 'Longitude', required: true %>
+
+                  </div>
+
+
+                  <div class="form-group form-material col-md-4">
+
+                    <%= form.label :business_unit %>
+                    <%= form.select :business_unit, options_for_select(['Default', 'Cell', 'Work', 'Office', 'Home', 'Other']), placeholder: 'Business Unit', :class => 'form-control' %>
+
+                  </div>
+
+
                 </div>
 
               </div>
+
+
+              <div class="row">
+
+                <div class="form-group form-material col-md-6">
+
+                  <button type="submit" class="btn btn-sm green-btn"><%= site.new_record? ? ' Save ' : ' Save changes ' %></button>
+                  <button type="button" class="btn btn-sm white-btn" data-dismiss="modal">Cancel</button>
+
+                </div>
+
+              </div>
+
             </div>
 
+
+
           </div>
 
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default btn-pure" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary"><%= contact.new_record? ? "Save" : "Save changes" %></button>
-          </div>
       <% end %>
     </div>
   </div>

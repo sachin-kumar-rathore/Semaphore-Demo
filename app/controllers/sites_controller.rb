@@ -11,13 +11,13 @@ class SitesController < ApplicationController
 
     if params[:property_name].blank? && params[:property_number].blank? && params[:zip_code].blank?
 
-      @sites = @organization.sites.paginate(:page => params[:page], :per_page => 5)
+      @sites = @organization.sites.paginate(:page => params[:page], :per_page => 1)
 
     else
 
       @sites = Site.property_number_or_propery_name_or_zip_code_search(@organization.id,
                                                                        params[:property_number], params[:property_name],
-                                                                       params[:zip_code]).paginate(:page => params[:page], :per_page => 5)
+                                                                       params[:zip_code]).paginate(:page => params[:page], :per_page => 1)
     end
 
   end
@@ -30,6 +30,9 @@ class SitesController < ApplicationController
   # GET /sites/new
   def new
     @site = Site.new
+    respond_to do |format|
+      format.js
+    end
   end
 
   # GET /sites/1/edit
@@ -39,11 +42,12 @@ class SitesController < ApplicationController
   # POST /sites
   # POST /sites.json
   def create
-    @site = Site.new(site_params)
+
+    @site = @organization.sites.new(site_params)
 
     respond_to do |format|
       if @site.save
-        format.html { redirect_to @site, notice: 'Site was successfully created.' }
+        format.html { redirect_to organization_sites_path(@organization, @site), notice: 'Site/ Building was successfully updated.' }
         format.json { render :show, status: :created, location: @site }
       else
         format.html { render :new }
@@ -57,7 +61,7 @@ class SitesController < ApplicationController
   def update
     respond_to do |format|
       if @site.update(site_params)
-        format.html { redirect_to @site, notice: 'Site was successfully updated.' }
+        format.html { redirect_to organization_sites_path(@organization, @site), notice: 'Site/ Building was successfully updated.' }
         format.json { render :show, status: :ok, location: @site }
       else
         format.html { render :edit }
@@ -89,6 +93,8 @@ class SitesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def site_params
-      params.require(:site).permit(:organization_id, :property_number, :property_name, :type, :address_line, :city, :state, :zip_code, :country, :available_acreage, :available_square_feet, :total_acreage, :total_square_feet, :latitude, :longitude)
+      params.require(:site).permit(:organization_id, :property_number, :property_name, :property_type, :address_line, :city,
+                                   :state, :zip_code, :country, :available_acreage, :available_square_feet,
+                                   :total_acreage, :total_square_feet, :latitude, :longitude, :business_unit)
     end
 end

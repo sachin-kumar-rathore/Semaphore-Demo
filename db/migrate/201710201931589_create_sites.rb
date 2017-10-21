@@ -4,7 +4,7 @@ class CreateSites < ActiveRecord::Migration[5.1]
       t.integer :organization_id
       t.string :property_number
       t.string :property_name
-      t.string :type
+      t.string :property_type
       t.string :address_line
       t.string :city
       t.string :state
@@ -16,6 +16,7 @@ class CreateSites < ActiveRecord::Migration[5.1]
       t.float :total_square_feet
       t.float :latitude
       t.float :longitude
+      t.string :business_unit
 
       t.timestamps
     end

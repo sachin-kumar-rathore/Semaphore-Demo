@@ -83,6 +83,7 @@ ActiveRecord::Schema.define(version: 201710201937989) do
 
   create_table "sites", force: :cascade do |t|
     t.integer "organization_id"
+    t.integer "contact_id"
     t.string "property_number"
     t.string "property_name"
     t.string "property_type"

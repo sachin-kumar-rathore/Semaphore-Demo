@@ -32,13 +32,14 @@
 
                   <div class="form-group form-material col-md-4">
 
-                    <%= form.text_field :property_number, class: 'form-control', id: 'inputBasicPropertyNumber', placeholder: 'Property #', required: true %>
+                    <label class="form-control-label">Property #:</label>
+                    <%= form.text_field :property_number, class: 'form-control', id: 'inputBasicPropertyNumber', required: true %>
 
                   </div>
 
                   <div class="form-group form-material col-md-4">
-
-                    <%= form.text_field :property_name, class: 'form-control', id: 'inputBasicPropertyName', placeholder: 'Property Name', required: true %>
+                    <label class="form-control-label">Property Name:</label>
+                    <%= form.text_field :property_name, class: 'form-control', id: 'inputBasicPropertyName', required: true %>
 
                   </div>
 
@@ -49,8 +50,8 @@
 
                   <div class="form-group form-material col-md-6">
 
-                    <input type="text" class="form-control" id="inputBasicLastName" name="organizationName"
-                           value="<%= organization.name %>" autocomplete="off" disabled/>
+                    <label class="form-control-label">Contact:</label>
+
 
                   </div>
 
@@ -60,7 +61,7 @@
 
                   <div class="form-group form-material col-md-12">
 
-                    <%= form.label :property_type %>
+                    <label class="form-control-label">Type:</label>
 
                     <%= form.radio_button :property_type, 'flex', required: true %>
                     <%= form.label :property_type, 'Flex', :value => 'Flex' %>
@@ -85,7 +86,8 @@
 
                   <div class="form-group form-material col-md-12">
 
-                    <%= form.text_field :address_line, class: 'form-control', id: 'inputBasicAddress', placeholder: 'Address Line', required: true %>
+                    <label class="form-control-label">Address Line:</label>
+                    <%= form.text_field :address_line, class: 'form-control', id: 'inputBasicAddress', required: true %>
 
                   </div>
 
@@ -96,20 +98,23 @@
 
                   <div class="form-group form-material col-md-4">
 
-                    <%= form.text_field :city, class: 'form-control', id: 'inputBasicCity', placeholder: 'City', required: true %>
+                    <label class="form-control-label">City:</label>
+                    <%= form.text_field :city, class: 'form-control', id: 'inputBasicCity', required: true %>
 
                   </div>
 
 
                   <div class="form-group form-material col-md-4">
 
-                    <%= form.text_field :state, class: 'form-control', id: 'inputBasicState', placeholder: 'State', required: true %>
+                    <label class="form-control-label">State:</label>
+                    <%= form.text_field :state, class: 'form-control', id: 'inputBasicState', required: true %>
 
                   </div>
 
                   <div class="form-group form-material col-md-4">
 
-                    <%= form.text_field :zip_code, class: 'form-control', id: 'inputBasicZipCode', placeholder: 'Zip Code', required: true %>
+                    <label class="form-control-label">Zip Code:</label>
+                    <%= form.text_field :zip_code, class: 'form-control', id: 'inputBasicZipCode', required: true %>
 
                   </div>
 
@@ -119,44 +124,23 @@
 
                   <div class="form-group form-material col-md-4">
 
-                    <%= form.text_field :country, class: 'form-control', id: 'inputBasicCountry', placeholder: 'Country', required: true %>
+                    <label class="form-control-label">Country:</label>
+                    <%= form.text_field :country, class: 'form-control', id: 'inputBasicCountry', required: true %>
 
                   </div>
 
 
                   <div class="form-group form-material col-md-4">
 
-                    <%= form.text_field :available_acreage, class: 'form-control', id: 'inputBasicAvailableAcreage', placeholder: 'Available Acreage', required: true %>
+                    <label class="form-control-label">Available Acreage:</label>
+                    <%= form.text_field :available_acreage, class: 'form-control', id: 'inputBasicAvailableAcreage', required: true %>
 
                   </div>
 
                   <div class="form-group form-material col-md-4">
 
-                    <%= form.text_field :available_square_feet, class: 'form-control', id: 'inputBasicAvailableSquareFeet', placeholder: 'Available Square Feet', required: true %>
-
-                  </div>
-
-                </div>
-
-
-                <div class="row">
-
-                  <div class="form-group form-material col-md-4">
-
-                    <%= form.text_field :total_acreage, class: 'form-control', id: 'inputBasicTotalAcreage', placeholder: 'Total Acreage', required: true %>
-
-                  </div>
-
-
-                  <div class="form-group form-material col-md-4">
-
-                    <%= form.text_field :total_square_feet, class: 'form-control', id: 'inputBasicTotalSquareFeet', placeholder: 'Total Square Feet', required: true %>
-
-                  </div>
-
-                  <div class="form-group form-material col-md-4">
-
-                    <%= form.text_field :latitude, class: 'form-control', id: 'inputBasicLatitude', placeholder: 'latitude', required: true %>
+                    <label class="form-control-label">Available Square Feet:</label>
+                    <%= form.text_field :available_square_feet, class: 'form-control', id: 'inputBasicAvailableSquareFeet', required: true %>
 
                   </div>
 
@@ -167,15 +151,43 @@
 
                   <div class="form-group form-material col-md-4">
 
-                    <%= form.text_field :longitude, class: 'form-control', id: 'inputBasicLongitude', placeholder: 'Longitude', required: true %>
+                    <label class="form-control-label">Total Acreage:</label>
+                    <%= form.text_field :total_acreage, class: 'form-control', id: 'inputBasicTotalAcreage', required: true %>
 
                   </div>
 
 
                   <div class="form-group form-material col-md-4">
 
-                    <%= form.label :business_unit %>
-                    <%= form.select :business_unit, options_for_select(['Default', 'Cell', 'Work', 'Office', 'Home', 'Other']), placeholder: 'Business Unit', :class => 'form-control' %>
+                    <label class="form-control-label">Total Square Feet:</label>
+                    <%= form.text_field :total_square_feet, class: 'form-control', id: 'inputBasicTotalSquareFeet', required: true %>
+
+                  </div>
+
+                  <div class="form-group form-material col-md-4">
+
+                    <label class="form-control-label">Latitude:</label>
+                    <%= form.text_field :latitude, class: 'form-control', id: 'inputBasicLatitude', required: true %>
+
+                  </div>
+
+                </div>
+
+
+                <div class="row">
+
+                  <div class="form-group form-material col-md-4">
+
+                    <label class="form-control-label">Longitude:</label>
+                    <%= form.text_field :longitude, class: 'form-control', id: 'inputBasicLongitude', required: true %>
+
+                  </div>
+
+
+                  <div class="form-group form-material col-md-4">
+
+                    <label class="form-control-label">Business Unit</label>
+                    <%= form.select :business_unit, options_for_select(['Default', 'Executive', 'Investor Relations']), :class => 'form-control' %>
 
                   </div>
 

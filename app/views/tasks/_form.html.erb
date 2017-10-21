@@ -17,7 +17,7 @@
                 <div class="row">
                   <div class="form-group form-material col-md-12">
                     <label class="form-control-label">Name:</label>
-                    <%= form.text_field :name, class: "form-control", id: "inputBasicFirstName", placeholder: "Name", required: true %>
+                    <%= form.text_field :name, class: "form-control", id: "inputBasicFirstName", required: true %>
                   </div>
                 </div>
 
@@ -69,7 +69,7 @@
                         <%= form.select :status, options_for_select(Task::STATUS, form.object.status), {}, {:class => 'form-control'} %>
                       </div>
                       <div class="form-group form-material col-md-6">
-                        <%= form.text_field :progress, class: "form-control", placeholder: "70" %>
+                        <%= form.text_field :progress, class: "form-control", placeholder: '70' %>
                       </div>
                     </div>
                 <% end %>
@@ -81,7 +81,7 @@
 
           <div class="modal-footer">
             <button type="button" class="btn btn-default cancel-btn" data-dismiss="modal">Cancel</button>
-            <button type="submit" class="btn green-btn"><%= task.new_record? ? "Save" : "Save changes" %></button>
+            <button type="submit" class="btn green-btn"><%= task.new_record? ? 'Save' : 'Save changes' %></button>
           </div>
       <% end %>
     </div>

@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
 
 
-  resources :sites
   devise_for :users, controllers: { registrations: "users/registrations" }
 
   resources :companies
@@ -12,6 +11,8 @@ Rails.application.routes.draw do
         post :import_contacts, as: :import
       end
     end
+
+    resources :sites
   end
   resources :dashboard, only: [:index]
 

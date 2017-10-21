@@ -12,7 +12,7 @@ class CreateSites < ActiveRecord::Migration[5.1]
       t.string :country
       t.float :available_acreage
       t.float :available_square_feet
-      t.float :tota_acreage
+      t.float :total_acreage
       t.float :total_square_feet
       t.float :latitude
       t.float :longitude

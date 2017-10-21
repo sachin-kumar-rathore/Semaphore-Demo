@@ -1,0 +1,3 @@
+$('#createOrEditSite').html("");
+$('#createOrEditSite').html('<%=j render :partial => 'contacts/form', locals: {organization: @organization, contact: @contact} %>');
+$('#siteFormCenter').modal('show');

@@ -1,11 +1,25 @@
 class SitesController < ApplicationController
+
+  before_action :authenticate_user!
   before_action :set_site, only: [:show, :edit, :update, :destroy]
   before_action :set_organization, except: [:destroy]
 
   # GET /sites
   # GET /sites.json
   def index
-    @sites = Site.all
+    redirect_to dashboard_index_path, notice: "You Cannot see other organization's sites/ buildings." if @organization != current_user.organization
+
+    if params[:property_name].blank? && params[:property_number].blank? && params[:zip_code].blank?
+
+      @sites = @organization.sites.paginate(:page => params[:page], :per_page => 5)
+
+    else
+
+      @sites = Site.property_number_or_propery_name_or_zip_code_search(@organization.id,
+                                                                       params[:property_number], params[:property_name],
+                                                                       params[:zip_code]).paginate(:page => params[:page], :per_page => 5)
+    end
+
   end
 
   # GET /sites/1
@@ -75,6 +89,6 @@ class SitesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def site_params
-      params.require(:site).permit(:organization_id, :property_number, :property_name, :type, :address_line, :city, :state, :zip_code, :country, :available_acreage, :available_square_feet, :tota_acreage, :total_square_feet, :latitude, :longitude)
+      params.require(:site).permit(:organization_id, :property_number, :property_name, :type, :address_line, :city, :state, :zip_code, :country, :available_acreage, :available_square_feet, :total_acreage, :total_square_feet, :latitude, :longitude)
     end
 end

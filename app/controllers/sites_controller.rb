@@ -84,7 +84,11 @@ class SitesController < ApplicationController
   end
 
   def find_contact
-    @contacts = @organization.contacts
+    @contacts = @organization.contacts.where("name ilike ? or email ilike ?", "%#{params[:q]}%", "%#{params[:q]}%")
+    respond_to do |format|
+      format.html
+      format.json { render :json => @contacts.map(&:attributes) }
+    end
   end
 
   private
@@ -101,7 +105,7 @@ class SitesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def site_params
       params.require(:site).permit(:organization_id, :property_number, :property_name, :property_type, :address_line, :city,
-                                   :state, :zip_code, :country, :available_acreage, :available_square_feet,
+                                   :state, :zip_code, :country, :available_acreage, :available_square_feet, :contact_id,
                                    :total_acreage, :total_square_feet, :latitude, :longitude, :business_unit)
     end
 end

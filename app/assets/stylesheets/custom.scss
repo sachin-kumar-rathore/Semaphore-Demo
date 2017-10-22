@@ -174,3 +174,7 @@ span.next_page, a.next_page {
 #addContactFormCenter {
   z-index: 500;
 }
+
+.token-input-dropdown-facebook, .token-input-dropdown{
+  z-index: 1100000 !important;
+}

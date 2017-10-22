@@ -15,8 +15,15 @@ class Site < ApplicationRecord
 
   # == Validations == #
   validates_presence_of :organization_id, :property_name, :property_number, :property_type, :address_line, :city, :state,
-                        :zip_code, :country, :available_acreage, :available_square_feet, :total_acreage,
-                        :total_square_feet, :latitude, :longitude
+                        :zip_code, :country
+
+  validates :available_acreage, presence:true, numericality: {only_float: true}
+  validates :available_square_feet, presence:true, numericality: {only_float: true}
+  validates :total_acreage, presence:true, numericality: {only_float: true}
+  validates :total_square_feet, presence:true, numericality: {only_float: true}
+  validates :latitude, presence:true, numericality: {only_float: true}
+  validates :longitude, presence:true, numericality: {only_float: true}
+
 
   # == Callbacks == #
 

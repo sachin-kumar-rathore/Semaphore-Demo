@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171020033244) do
+ActiveRecord::Schema.define(version: 20171020193599) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,6 +79,28 @@ ActiveRecord::Schema.define(version: 20171020033244) do
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
     t.index ["name"], name: "index_roles_on_name"
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id"
+  end
+
+  create_table "sites", force: :cascade do |t|
+    t.integer "organization_id"
+    t.integer "contact_id"
+    t.string "property_number"
+    t.string "property_name"
+    t.string "property_type"
+    t.string "address_line"
+    t.string "city"
+    t.string "state"
+    t.string "zip_code"
+    t.string "country"
+    t.float "available_acreage"
+    t.float "available_square_feet"
+    t.float "total_acreage"
+    t.float "total_square_feet"
+    t.float "latitude"
+    t.float "longitude"
+    t.string "business_unit"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "tasks", force: :cascade do |t|

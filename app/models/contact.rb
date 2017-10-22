@@ -21,8 +21,12 @@ class Contact < ApplicationRecord
   # == Callbacks == #
 
   # == Scopes and Other macros == #
-  pg_search_scope :name_search, :against => :name
-  pg_search_scope :email_search, :against => :email
+  pg_search_scope :name_search, :against => :name, :using => {
+      :tsearch => {:prefix => true}
+  }
+  pg_search_scope :email_search, :against => :email, :using => {
+      :tsearch => {:prefix => true}
+  }
 
   # == Instance methods == #
   def self.name_or_email_search(org_id, name, email)

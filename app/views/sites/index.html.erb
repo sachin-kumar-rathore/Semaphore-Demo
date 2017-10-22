@@ -1,0 +1,118 @@
+<% if notice.present? %>
+    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <%= notice %>
+    </div>
+<% end %>
+
+
+<div class="row">
+  <div class="col-xl-8">
+    <div class="panel">
+      <header class="panel-heading">
+        <h3 class="panel-title">
+          <button class="btn btn-sm green-btn waves-effect waves-classic" data-href="<%= new_organization_site_path(@organization) %>"
+                  id="createNewSite" type="button">ADD SITE/ BUILDING
+          </button>
+        </h3>
+      </header>
+      <div class="panel-body">
+        <table class="table table-hover dataTable table-striped w-full" data-plugin="dataTable" id="sitesList">
+
+          <thead>
+          <tr>
+            <th>PROPERTY #</th>
+            <th>NAME</th>
+            <th>ZIP</th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <% @sites.each do |site| %>
+              <tr data-href="<%= organization_site_path(@organization, site) %>">
+                <td><%= site.property_number %></td>
+                <td><%= site.property_name %></td>
+                <td><%= site.zip_code %></td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+        <div class="digg_pagination">
+          <%= will_paginate @sites, :container => false %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xl-4">
+    <div class="panel">
+      <header class="panel-heading">
+        <h3 class="panel-title">
+
+        </h3>
+      </header>
+
+      <div class="panel-body">
+
+        <%= form_tag organization_sites_path(@organization), method: :get do %>
+
+            <div class="row">
+              <div class="form-group form-material col-md-8">
+                <label class="form-control-label">Property #:</label>
+                <input type="text" name="property_number" class="form-control">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group form-material col-md-8">
+                <label class="form-control-label">Name:</label>
+                <input type="text" name="property_name" class="form-control">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group form-material col-md-8">
+                <label class="form-control-label">Zip:</label>
+                <input type="text" name="zip_code" class="form-control">
+              </div>
+            </div>
+
+            <div class="form-group form-material col-md-8">
+
+              <button type="submit" class="btn btn-sm green-btn">Update List</button>
+              <%= link_to 'Clear All Filter', organization_sites_path(@organization), class: 'btn btn-sm site-filter-clear' %>
+
+            </div>
+            </div>
+        <% end %>
+
+      </div>
+    </div>
+
+  </div>
+
+
+</div>
+
+<div id="createOrEditSite"></div>
+
+<script>
+    $(document).on("click", "#sitesList tr", function () {
+        var link = $(this).data("href");
+        $.ajax({
+            url: link,
+            type: "GET"
+        });
+    });
+
+    $(document).on("click", "#createNewSite", function () {
+        var link = $(this).data("href");
+        $.ajax({
+            url: link,
+            type: "GET"
+        });
+    });
+
+</script>

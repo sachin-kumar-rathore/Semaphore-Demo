@@ -11,6 +11,12 @@ Rails.application.routes.draw do
         post :import_contacts, as: :import
       end
     end
+
+    resources :sites do
+      collection do
+        get :find_contact
+      end
+    end
   end
   resources :dashboard, only: [:index]
 

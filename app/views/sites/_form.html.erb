@@ -1,0 +1,259 @@
+<!-- Contact Modal -->
+<div class="modal fade" id="siteFormCenter" aria-hidden="true" aria-labelledby="siteFormCenter"
+     role="dialog" tabindex="-1">
+
+  <div class="modal-dialog modal-simple modal-center">
+
+    <div class="modal-content">
+
+      <%= form_for [organization, site] do |form| %>
+
+          <div class="modal-header">
+
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
+              <span aria-hidden="true">×</span>
+
+            </button>
+
+            <h4 class="modal-title"><%= site.new_record? ? 'ADD SITE/ BUILDING' : 'UPDATE SITE/ BUILDING' %></h4>
+
+          </div>
+
+          <div class="modal-body">
+
+            <div class="example-wrap">
+
+              <%= render :partial => 'shared/error_messages', :locals => {:obj => form.object} %>
+
+              <div class="example">
+
+                <div class="row">
+
+                  <div class="form-group form-material col-md-4">
+
+                    <label class="form-control-label">Property #:</label>
+                    <%= form.text_field :property_number, class: 'form-control', id: 'inputBasicPropertyNumber', required: true %>
+
+                  </div>
+
+                  <div class="form-group form-material col-md-4">
+                    <label class="form-control-label">Property Name:</label>
+                    <%= form.text_field :property_name, class: 'form-control', id: 'inputBasicPropertyName', required: true %>
+
+                  </div>
+
+                </div>
+
+
+                <div class="row">
+
+                  <div class="form-group form-material col-md-6">
+
+                    <label class="form-control-label">Contact:</label>
+                    <%= form.text_field :contact_id, class: 'form-control', id: 'tokenContactName', :data => {:org_id => @organization.id, :pre => form.object.contact_id.present? ? selected_contact(form.object.contact_id) : '' }, required: true %>
+                    <%#= form.text_field :contact_id, class: 'form-control', id: 'inputContactDetails', required: true %>
+                    <!--<button class="btn btn-sm green-btn waves-effect waves-classic" data-href="<%#= find_contact_organization_sites_path(@organization) %>"-->
+                    <!--id="findContactDetails" type="button">ADD CONTACT-->
+                    <!--</button>-->
+
+                  </div>
+
+                </div>
+
+                <div class="row">
+
+                  <div class="form-group form-material col-md-12">
+
+                    <label class="form-control-label">Type:</label>
+
+                    <%= form.radio_button :property_type, 'flex', required: true %>
+                    <%= form.label :property_type, 'Flex', :value => 'Flex' %>
+
+
+                    <%= form.radio_button :property_type, 'industrial', required: true %>
+                    <%= form.label :property_type, 'Industrial', :value => 'Industrial' %>3
+
+
+                    <%= form.radio_button :property_type, 'office', required: true %>
+                    <%= form.label :type, 'Office', :value => 'Office' %>
+
+                    <%= form.radio_button :property_type, 'site', required: true %>
+                    <%= form.label :property_type, 'Site', :value => 'Site' %>
+
+                  </div>
+
+                </div>
+
+
+                <div class="row">
+
+                  <div class="form-group form-material col-md-12">
+
+                    <label class="form-control-label">Address Line:</label>
+                    <%= form.text_field :address_line, class: 'form-control', id: 'inputBasicAddress', required: true %>
+
+                  </div>
+
+                </div>
+
+
+                <div class="row">
+
+                  <div class="form-group form-material col-md-4">
+
+                    <label class="form-control-label">City:</label>
+                    <%= form.text_field :city, class: 'form-control', id: 'inputBasicCity', required: true %>
+
+                  </div>
+
+
+                  <div class="form-group form-material col-md-4">
+
+                    <label class="form-control-label">State:</label>
+                    <%= form.text_field :state, class: 'form-control', id: 'inputBasicState', required: true %>
+
+                  </div>
+
+                  <div class="form-group form-material col-md-4">
+
+                    <label class="form-control-label">Zip Code:</label>
+                    <%= form.text_field :zip_code, class: 'form-control', id: 'inputBasicZipCode', required: true %>
+
+                  </div>
+
+                </div>
+
+                <div class="row">
+
+                  <div class="form-group form-material col-md-4">
+
+                    <label class="form-control-label">Country:</label>
+                    <%= form.text_field :country, class: 'form-control', id: 'inputBasicCountry', required: true %>
+
+                  </div>
+
+
+                  <div class="form-group form-material col-md-4">
+
+                    <label class="form-control-label">Available Acreage:</label>
+                    <%= form.text_field :available_acreage, class: 'form-control', id: 'inputBasicAvailableAcreage', required: true %>
+
+                  </div>
+
+                  <div class="form-group form-material col-md-4">
+
+                    <label class="form-control-label">Available Square Feet:</label>
+                    <%= form.text_field :available_square_feet, class: 'form-control', id: 'inputBasicAvailableSquareFeet', required: true %>
+
+                  </div>
+
+                </div>
+
+
+                <div class="row">
+
+                  <div class="form-group form-material col-md-4">
+
+                    <label class="form-control-label">Total Acreage:</label>
+                    <%= form.text_field :total_acreage, class: 'form-control', id: 'inputBasicTotalAcreage', required: true %>
+
+                  </div>
+
+
+                  <div class="form-group form-material col-md-4">
+
+                    <label class="form-control-label">Total Square Feet:</label>
+                    <%= form.text_field :total_square_feet, class: 'form-control', id: 'inputBasicTotalSquareFeet', required: true %>
+
+                  </div>
+
+                  <div class="form-group form-material col-md-4">
+
+                    <label class="form-control-label">Latitude:</label>
+                    <%= form.text_field :latitude, class: 'form-control', id: 'inputBasicLatitude', required: true %>
+
+                  </div>
+
+                </div>
+
+
+                <div class="row">
+
+                  <div class="form-group form-material col-md-4">
+
+                    <label class="form-control-label">Longitude:</label>
+                    <%= form.text_field :longitude, class: 'form-control', id: 'inputBasicLongitude', required: true %>
+
+                  </div>
+
+
+                  <div class="form-group form-material col-md-4">
+
+                    <label class="form-control-label">Business Unit</label>
+                    <%= form.select :business_unit, options_for_select(['Default', 'Executive', 'Investor Relations']), :class => 'form-control' %>
+
+                  </div>
+
+
+                </div>
+
+              </div>
+
+
+              <div class="row">
+
+                <div class="form-group form-material col-md-6">
+
+                  <button type="submit" class="btn btn-sm green-btn"><%= site.new_record? ? ' Save ' : ' Save changes ' %></button>
+                  <button type="button" class="btn btn-sm white-btn" data-dismiss="modal">Cancel</button>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+          </div>
+
+      <% end %>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->
+
+<div id="addContactFormCenter"></div>
+
+<script>
+    $(document).on("click", "#sitesList tr", function () {
+        var link = $(this).data("href");
+        $.ajax({
+            url: link,
+            type: "GET"
+        });
+    });
+
+    $(document).on("click", "#findContactDetails", function () {
+        var link = $(this).data("href");
+        $.ajax({
+            url: link,
+            type: "GET"
+        });
+    });
+
+    $('#tokenContactName').tokenInput('/organizations/' + $('#tokenContactName').data('org-id') + '/sites/find_contact.json', {
+        crossDomain: false,
+        hintText: 'Contact search',
+        minChars: 2,
+        tokenLimit: 1,
+        resultsFormatter: function (item) {
+            return "<li>" + "<div style='display: inline-block; padding-left: 10px;'><div class='full_name'>" + item.name + "</div><div class='email'>" + item.email + "</div></div></li>"
+        },
+        tokenFormatter: function (item) {
+            return "<li><p>Name: " + item.name + "</p><br><p>Email: " + item.email + "</p><br><p>Phone: " + item.cell_phone + "</p></li>"
+        },
+        prePopulate: $('#tokenContactName').data('pre')
+    });
+
+</script>

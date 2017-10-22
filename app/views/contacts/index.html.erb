@@ -12,23 +12,28 @@
 
     <div class="panel">
       <div class="panel-heading" id="contactFilterHeadingOne" role="tab">
-        <a class="panel-title waves-effect waves-light waves-round collapsed" data-toggle="collapse" href="#contactFilterCollapseOne" data-parent="#siteMegaAccordion" aria-expanded="false" aria-controls="contactFilterCollapseOne">
+        <h3 class="panel-title">
           Filter Contacts
-        </a>
+        </h3>
       </div>
-      <div class="panel-collapse" id="contactFilterCollapseOne" aria-labelledby="contactFilterHeadingOne" role="tabpanel" style="">
+
+      <div class="panel" id="contactFilterCollapseOne" aria-labelledby="contactFilterHeadingOne" role="tabpanel" style="">
+
         <div class="panel-body">
           <%= form_tag organization_contacts_path(@organization), method: :get do %>
 
               <div class="row">
                 <div class="form-group form-material col-md-2">
-                  <input type="text" name="name" placeholder="Filter by name" class="form-control">
+                  <label class="form-control-label">Name:</label>
+                  <input type="text" name="name" placeholder="Name" class="form-control">
                 </div>
                 <div class="form-group form-material col-md-2">
-                  <input type="text" name="email" placeholder="Filter by email" class="form-control">
+                  <label class="form-control-label">Email:</label>
+                  <input type="text" name="email" placeholder="Email" class="form-control">
                 </div>
                 <div class="form-group form-material col-md-2">
-                  <input type="text" name="org" placeholder="Filter by organization" class="form-control">
+                  <label class="form-control-label">Organization:</label>
+                  <input type="text" name="org" placeholder="Organization" class="form-control">
                 </div>
 
                 <div class="form-group form-material col-md-2">
@@ -71,7 +76,7 @@
           <% for contact in @contacts %>
               <tr data-href="<%= organization_contact_path(@organization, contact) %>">
                 <td><%= contact.name %></td>
-                <td><%= contact.organization ? contact.organization.name : "ORG" %></td>
+                <td><%= contact.organization ? contact.organization.name : 'ORG' %></td>
                 <td><%= contact.cell_phone %></td>
                 <td><%= contact.email %></td>
               </tr>

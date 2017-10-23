@@ -1,12 +1,3 @@
-<% if notice.present? %>
-    <div class="alert alert-primary alert-dismissible fade show" role="alert">
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-      <%= notice %>
-    </div>
-<% end %>
-
 <div class="row">
   <div class="col-xl-12">
 
@@ -20,7 +11,7 @@
       <div class="panel" id="contactFilterCollapseOne" aria-labelledby="contactFilterHeadingOne" role="tabpanel" style="">
 
         <div class="panel-body">
-          <%= form_tag organization_contacts_path(@organization), method: :get do %>
+          <%= form_tag contacts_path, method: :get do %>
 
               <div class="row">
                 <div class="form-group form-material col-md-2">
@@ -31,10 +22,10 @@
                   <label class="form-control-label">Email:</label>
                   <input type="text" name="email" placeholder="Email" class="form-control">
                 </div>
-                <div class="form-group form-material col-md-2">
+<!--                 <div class="form-group form-material col-md-2">
                   <label class="form-control-label">Organization:</label>
                   <input type="text" name="org" placeholder="Organization" class="form-control">
-                </div>
+                </div> -->  
 
                 <div class="form-group form-material col-md-2">
                   <button type="submit" class="btn btn-block green-btn waves-effect waves-classic">Update & Show
@@ -54,8 +45,8 @@
     <div class="panel">
       <header class="panel-heading">
         <h3 class="panel-title">
-          <button class="btn btn-sm green-btn waves-effect waves-classic" data-href="<%= new_organization_contact_path(@organization) %>"
-                  id="createNewContact" type="button">ADD CONTACT
+          <button class="btn btn-sm green-btn waves-effect waves-classic" data-href="<%= new_contact_path %>"
+                  id="createNewContact" type="button" >ADD CONTACT
           </button>
           <button class="btn btn-sm green-btn waves-effect waves-classic" data-target="#contactImportFormCenter" data-toggle="modal"
                   id="importNewContacts" type="button">IMPORT CONTACT
@@ -74,7 +65,7 @@
           </thead>
           <tbody>
           <% for contact in @contacts %>
-              <tr data-href="<%= organization_contact_path(@organization, contact) %>">
+              <tr data-href="<%= contact_path(contact) %>">
                 <td><%= contact.name %></td>
                 <td><%= contact.organization ? contact.organization.name : 'ORG' %></td>
                 <td><%= contact.cell_phone %></td>
@@ -92,7 +83,7 @@
 </div>
 
 <div id="createOrEditContact"></div>
-<%= render :partial => 'contacts/import_contacts_form', locals: {organization: @organization} %>
+<%= render :partial => 'contacts/import_contacts_form' %>
 
 <script>
   $(document).on("click", "#contactsList tr", function () {

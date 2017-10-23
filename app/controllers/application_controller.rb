@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   rescue_from ActiveRecord::RecordNotFound, :with => :render_404
+  helper_method :current_org
 
   def after_sign_in_path_for(resource)
     dashboard_index_path
@@ -19,4 +20,9 @@ class ApplicationController < ActionController::Base
     render :template => "layouts/error_404", :status => 404
   end
   
+  def current_org
+    current_user.organization
+  end
+
+
 end

@@ -5,20 +5,20 @@ Rails.application.routes.draw do
 
   resources :companies
 
-  resources :organizations, only: [:edit, :update] do
-    resources :contacts do
-      collection do
-        post :import_contacts, as: :import
-      end
-    end
+  resources :organizations, only: [:edit, :update]
+  resources :dashboard, only: [:index]
 
-    resources :sites do
-      collection do
-        get :find_contact
-      end
+  resources :contacts do
+    collection do
+      post :import_contacts, as: :import
     end
   end
-  resources :dashboard, only: [:index]
+
+  resources :sites do
+    collection do
+      get :find_contact
+    end
+  end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   devise_scope :user do

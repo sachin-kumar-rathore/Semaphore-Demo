@@ -6,7 +6,7 @@
 
     <div class="modal-content">
 
-      <%= form_for [organization, contact] do |form| %>
+      <%= form_for @contact  do |form| %>
 
           <div class="modal-header">
 
@@ -14,7 +14,7 @@
               <span aria-hidden="true">×</span>
             </button>
 
-            <h6 class="modal-title"><%= contact.new_record? ? 'ADD CONTACT' : 'EDIT CONTACT' %></h6>
+            <h6 class="modal-title"><%= @contact.new_record? ? 'ADD CONTACT' : 'EDIT CONTACT' %></h6>
           </div>
 
           <div class="modal-body">
@@ -48,7 +48,7 @@
                   <div class="form-group form-material col-md-6">
                     <label class="form-control-label">Organization:</label>
                     <input type="text" class="form-control" id="inputBasicLastName" name="organizationName"
-                           value="<%= organization.name %>" autocomplete="off" disabled/>
+                           value="<%= current_org.name %>" autocomplete="off" disabled/>
                   </div>
                   <div class="form-group form-material col-md-6">
                     <label class="form-control-label">Title:</label>
@@ -110,9 +110,11 @@
 
                 <div class="form-group form-material col-md-6">
 
-                  <button type="submit" class="btn btn-sm green-btn"><%= contact.new_record? ? ' Save ' : ' Save changes ' %></button>
+                  <button type="submit" class="btn btn-sm green-btn"><%= @contact.new_record? ? ' Save ' : ' Save changes ' %></button>
                   <button type="button" class="btn btn-sm white-btn" data-dismiss="modal">Cancel</button>
-
+                  <% unless @contact.new_record? %>
+                    <%= link_to 'Delete', contact_path(@contact), method: :delete, class: "btn btn-sm btn-danger" %>
+                  <% end %>
                 </div>
 
               </div>

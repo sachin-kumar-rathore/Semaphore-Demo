@@ -29,11 +29,11 @@ class Contact < ApplicationRecord
   }
 
   # == Instance methods == #
-  def self.name_or_email_search(org_id, name, email)
+  def self.name_or_email_search(name, email)
     name_relation = name_search(name).pluck(:id)
     email_relation = email_search(email).pluck(:id)
     search_result = name_relation | email_relation
-    return where('id IN (?) AND organization_id = ?', search_result, org_id)
+    return where('id IN (?)', search_result)
   end
 
   # == Private == #

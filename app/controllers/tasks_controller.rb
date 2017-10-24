@@ -6,13 +6,13 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.where(:assigned_to => current_user.id).paginate(:page => params[:page], :per_page => 10)
+    @tasks = Task.get_current_org_tasks(current_org.id).paginate(page: params[:page], per_page: 10)
   end
 
   # GET /tasks/1
   # GET /tasks/1.json
   def show
-    @users = current_user.organization.users
+    @users = current_org.users
     respond_to do |format|
       format.js
     end
@@ -20,7 +20,7 @@ class TasksController < ApplicationController
 
   # GET /tasks/new
   def new
-    @users = current_user.organization.users
+    @users = current_org.users
     @task = current_user.tasks.new
     respond_to do |format|
       format.js
@@ -35,7 +35,6 @@ class TasksController < ApplicationController
   # POST /tasks.json
   def create
     @task = current_user.tasks.new(task_params)
-
     respond_to do |format|
       if @task.save
         format.html { redirect_to tasks_path, notice: 'Task was successfully created.' }
@@ -64,34 +63,33 @@ class TasksController < ApplicationController
   # DELETE /tasks/1
   # DELETE /tasks/1.json
   def destroy
-    @task.destroy
     respond_to do |format|
-      format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
-      format.json { head :no_content }
+      if @task.destroy
+        format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to tasks_url, notice: 'Task could not be destroyed.' }
+        format.json { head :no_content }
+      end
     end
   end
 
-  # filter_by: 1 = Assigned_to_me, 2 = Assigned_by_me, 3 = All_tasks
+  # filter_by: 1 = All_tasks, 2 = Assigned_to_me, 3 = Assigned_by_me
   def filter_tasks
-    if params[:filter_by] == "1"
-      @tasks = Task.where(:assigned_to => current_user.id).paginate(:page => params[:page], :per_page => 10)
-    elsif params[:filter_by] == "2"
-      @tasks = current_user.tasks.paginate(:page => params[:page], :per_page => 10)
-    else
-      organization = current_user.organization
-      @tasks =  Task.joins(:user => :organization).where(:users => {organization_id: organization.id}).paginate(:page => params[:page], :per_page => 10)
-    end
+    @tasks = Task.get_current_org_tasks(current_org.id)
+    @tasks = params[:filter_id] == "assigned_to_me_filter" ? current_user.assigned_tasks : current_user.tasks
+    @tasks =  @tasks.paginate(page: params[:page], per_page: 10)    
   end
 
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_task
-    @task = Task.find(params[:id])
+    @task = Task.where(params[:id]).first
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def task_params
     params.require(:task).permit(:name, :description, :start_date, :end_date, :status,
-                                 :priority, :progress, :assigned_to, :project_id)
+                                 :priority, :progress,:assignee_id, :project_id)
   end
 end

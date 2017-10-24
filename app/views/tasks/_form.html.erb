@@ -1,88 +1,79 @@
 <!-- Task Modal -->
 <div class="modal fade" id="taskFormCenter" aria-hidden="true" aria-labelledby="taskFormCenter"
-     role="dialog" tabindex="-1">
+  role="dialog" tabindex="-1">
   <div class="modal-dialog modal-simple modal-center">
     <div class="modal-content">
       <%= form_for task, class: 'task_form' do |form| %>
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-            <h6 class="modal-title"><%= task.new_record? ? "ADD TASK" : "EDIT TASK" %></h6>
-          </div>
-
-          <div class="modal-body">
-            <div class="example-wrap">
-              <div class="example">
-                <div class="row">
-                  <div class="form-group form-material col-md-12">
-                    <label class="form-control-label">Name:</label>
-                    <%= form.text_field :name, class: "form-control", id: "inputBasicFirstName", required: true %>
-                  </div>
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+          </button>
+          <h6 class="modal-title"><%= task.new_record? ? "ADD TASK" : "EDIT TASK" %></h6>
+        </div>
+        <div class="modal-body">
+          <div class="example-wrap">
+            <div class="example">
+              <div class="row">
+                <div class="form-group form-material col-md-12">
+                  <label class="form-control-label">Name:</label>
+                  <%= form.text_field :name, class: "form-control", id: "inputBasicFirstName", required: true %>
                 </div>
-
-                <div class="row">
-                  <div class="form-group form-material col-md-6">
-                    <label class="form-control-label">Priority:</label>
-                    <%= form.select :priority, options_for_select(Task::PRIORITY, form.object.priority), {}, {:class => 'form-control'} %>
-                  </div>
-
-                  <div class="form-group form-material col-md-6">
-                    <label class="form-control-label">Assign To:</label>
-                    <%= form.select :assigned_to, options_for_select(@users.collect { |user| [user.full_name, user.id]}, form.object.assigned_to), {}, {:class => 'form-control'} %>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="form-group form-material col-md-12">
-                    <label class="form-control-label">Description:</label>
-                    <%= form.text_area :description, class: "form-control", rows: 3 %>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="form-group form-material col-md-6">
-                    <label class="form-control-label">Satrt Date:</label>
-                    <div class="input-group">
-                      <%= form.date_field :start_date, class: "form-control" %>
-                      <!--<input class="form-control" data-provide='datepicker' id="startTaskdatepicker" type="text" name="task[start_date]" value="<%#= task.start_date.present? ? task.start_date : '' %>">-->
-                      <span class="input-group-addon">
-                      <i class="icon md-calendar" aria-hidden="true"></i>
-                    </span>
-                    </div>
-                  </div>
-                  <div class="form-group form-material col-md-6">
-                    <label class="form-control-label">End Date:</label>
-                    <div class="input-group">
-                      <%= form.date_field :end_date, class: "form-control" %>
-                      <!--<input class="form-control" data-provide='datepicker' id="endTaskdatepicker" type="text" name="task[end_date]" value="<%#= task.end_date.present? ? task.end_date : '' %>">-->
-                      <span class="input-group-addon">
-                      <i class="icon md-calendar" aria-hidden="true"></i>
-                    </span>
-                    </div>
-                  </div>
-                </div>
-
-                <% unless task.new_record? %>
-                    <div class="row">
-                      <div class="form-group form-material col-md-6">
-                        <%= form.select :status, options_for_select(Task::STATUS, form.object.status), {}, {:class => 'form-control'} %>
-                      </div>
-                      <div class="form-group form-material col-md-6">
-                        <%= form.text_field :progress, class: "form-control", placeholder: '70' %>
-                      </div>
-                    </div>
-                <% end %>
-
               </div>
+              <div class="row">
+                <div class="form-group form-material col-md-6">
+                  <label class="form-control-label">Priority:</label>
+                  <%= form.select :priority, options_for_select(Task::PRIORITY, form.object.priority), {}, {:class => 'form-control'} %>
+                </div>
+                <div class="form-group form-material col-md-6">
+                  <label class="form-control-label">Assign To:</label>
+                  <%= form.select :assignee_id, options_for_select(@users.collect { |user| [user.full_name, user.id]}, form.object.assignee_id), {}, {:class => 'form-control'} %>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group form-material col-md-12">
+                  <label class="form-control-label">Description:</label>
+                  <%= form.text_area :description, class: "form-control", rows: 3 %>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group form-material col-md-6">
+                  <label class="form-control-label">Satrt Date:</label>
+                  <div class="input-group">
+                    <%= form.date_field :start_date, class: "form-control" %>
+                    <!--<input class="form-control" data-provide='datepicker' id="startTaskdatepicker" type="text" name="task[start_date]" value="<%#= task.start_date.present? ? task.start_date : '' %>">-->
+                    <span class="input-group-addon">
+                    <i class="icon md-calendar" aria-hidden="true"></i>
+                    </span>
+                  </div>
+                </div>
+                <div class="form-group form-material col-md-6">
+                  <label class="form-control-label">End Date:</label>
+                  <div class="input-group">
+                    <%= form.date_field :end_date, class: "form-control" %>
+                    <!--<input class="form-control" data-provide='datepicker' id="endTaskdatepicker" type="text" name="task[end_date]" value="<%#= task.end_date.present? ? task.end_date : '' %>">-->
+                    <span class="input-group-addon">
+                    <i class="icon md-calendar" aria-hidden="true"></i>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <% unless task.new_record? %>
+                <div class="row">
+                  <div class="form-group form-material col-md-6">
+                    <%= form.select :status, options_for_select(Task::STATUS, form.object.status), {}, {:class => 'form-control'} %>
+                  </div>
+                  <div class="form-group form-material col-md-6">
+                    <%= form.text_field :progress, class: "form-control", placeholder: '70' %>
+                  </div>
+              </div>
+              <% end %>
             </div>
-
           </div>
-
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default cancel-btn" data-dismiss="modal">Cancel</button>
-            <button type="submit" class="btn green-btn"><%= task.new_record? ? 'Save' : 'Save changes' %></button>
-          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default cancel-btn" data-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn green-btn"><%= task.new_record? ? 'Save' : 'Save changes' %></button>
+        </div>
       <% end %>
     </div>
   </div>

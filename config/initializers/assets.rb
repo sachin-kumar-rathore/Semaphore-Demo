@@ -15,7 +15,7 @@ Rails.application.config.assets.precompile += %w( breakpoints.js babel-external-
   jquery-jvectormap-world-mill-en.js jquery-jvectormap.min.js jquery.js jquery-slidePanel.js 
   jquery.matchHeight-min.js jquery.mousewheel.js jquery.peity.min.js jvectormap.js matchheight.js menu.js peity.js
   screenfull.js slidepanel.js switchery.js switchery.min.js tether.js tour.js v1.js waves.js jquery.tokeninput.js
-  sites.js contacts.js sites_contact_form.js)
+  sites.js contacts.js tasks.js sites_contact_form.js)
 
 
 # Precompile additional assets.

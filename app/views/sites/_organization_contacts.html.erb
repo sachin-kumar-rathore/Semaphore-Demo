@@ -1,55 +1,40 @@
 <!-- Contact Modal -->
 <div class="modal fade" id="addContactFormCenter" aria-hidden="true" aria-labelledby="addContactFormCenter"
-     role="dialog" tabindex="-1">
-
+  role="dialog" tabindex="-1">
   <div class="modal-dialog modal-simple modal-center">
-
     <div class="modal-content">
-
-
-          <div class="modal-header">
-
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-
-            <h6 class="modal-title">ADD CONTACT</h6>
-          </div>
-
-          <div class="modal-body">
-
-            <div class="example-wrap">
-
-              <div class="example">
-
-                <table class="table table-hover dataTable table-striped w-full" data-plugin="dataTable" id="contactsList">
-                  <thead>
-                  <tr>
-                    <th>NAME</th>
-                    <th>ORGANIZATION</th>
-                    <th>PHONE</th>
-                    <th>EMAIL</th>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">×</span>
+        </button>
+        <h6 class="modal-title">ADD CONTACT</h6>
+      </div>
+      <div class="modal-body">
+        <div class="example-wrap">
+          <div class="example">
+            <table class="table table-hover dataTable table-striped w-full" data-plugin="dataTable" id="contactsList">
+              <thead>
+                <tr>
+                  <th>NAME</th>
+                  <th>ORGANIZATION</th>
+                  <th>PHONE</th>
+                  <th>EMAIL</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for contact in current_org.contacts %>
+                  <tr data-href="<%= contact_path(contact) %>">
+                    <td><%= contact.name %></td>
+                    <td><%= contact.organization ? contact.organization.name : 'ORG' %></td>
+                    <td><%= contact.cell_phone %></td>
+                    <td><%= contact.email %></td>
                   </tr>
-                  </thead>
-                  <tbody>
-                  <% for contact in @contacts %>
-                      <tr data-href="<%= organization_contact_path(@organization, contact) %>">
-                        <td><%= contact.name %></td>
-                        <td><%= contact.organization ? contact.organization.name : 'ORG' %></td>
-                        <td><%= contact.cell_phone %></td>
-                        <td><%= contact.email %></td>
-                      </tr>
-                  <% end %>
-                  </tbody>
-                </table>
-
-              </div>
-
-
-            </div>
-
+                <% end %>
+              </tbody>
+            </table>
           </div>
-
+        </div>
+      </div>
     </div>
   </div>
 </div>

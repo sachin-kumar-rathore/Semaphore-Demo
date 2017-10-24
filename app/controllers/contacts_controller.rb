@@ -2,25 +2,20 @@ class ContactsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_contact, only: [:show, :edit, :update, :destroy]
 
-  # GET /contacts
-  # GET /contacts.json
   def index
-    if params[:name].blank? && params[:email].blank?
-      @contacts = current_org.contacts.paginate(page: params[:page], per_page: 5)
-    else
-      @contacts = current_org.contacts.name_or_email_search(params[:name], params[:email]).paginate(page: params[:page], per_page: 5)
-    end
+    @contacts = current_org.contacts
+    if params[:name].present? || params[:email].present?
+      @contacts = @contacts.name_or_email_search(params[:name], params[:email])
+    end    
+    @contacts = @contacts.paginate(page: params[:page], per_page: 5)
   end
 
-  # GET /contacts/1
-  # GET /contacts/1.json
   def show
     respond_to do |format|
       format.js
     end
   end
 
-  # GET /contacts/new
   def new
     @contact = current_org.contacts.new
     respond_to do |format|
@@ -28,12 +23,9 @@ class ContactsController < ApplicationController
     end
   end
 
-  # GET /contacts/1/edit
   def edit
   end
 
-  # POST /contacts
-  # POST /contacts.json
   def create
     @contact = current_org.contacts.new(contact_params)
 
@@ -48,8 +40,6 @@ class ContactsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /contacts/1
-  # PATCH/PUT /contacts/1.json
   def update
     respond_to do |format|
       if @contact.update(contact_params)
@@ -62,13 +52,15 @@ class ContactsController < ApplicationController
     end
   end
 
-  # DELETE /contacts/1
-  # DELETE /contacts/1.json
   def destroy
-    @contact.destroy
     respond_to do |format|
-      format.html { redirect_to contacts_url, notice: 'Contact was successfully destroyed.' }
-      format.json { head :no_content }
+      if @contact.destroy
+        format.html { redirect_to contacts_url, notice: 'Contact was successfully destroyed.' }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to contacts_url, notice: 'Contact could not be destroyed.' }
+        format.json { head :no_content }
+      end
     end
   end
 
@@ -96,7 +88,8 @@ class ContactsController < ApplicationController
   def set_contact
     @contact = current_org.contacts.where(id: params[:id]).first
   end
-
+  
+  # this method should be in any model related to this task. need to move !
   def generate_contact(contact, category, bussiness_unit)
     contact_info = contact.split(",")
     Contact.new(name: contact_info[0], organization_id: current_org.id, title: contact_info[2], address_line_1: contact_info[3],

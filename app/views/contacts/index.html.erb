@@ -1,77 +1,71 @@
 <div class="row">
   <div class="col-xl-12">
-
     <div class="panel">
       <div class="panel-heading" id="contactFilterHeadingOne" role="tab">
         <h3 class="panel-title">
           Filter Contacts
         </h3>
       </div>
-
       <div class="panel" id="contactFilterCollapseOne" aria-labelledby="contactFilterHeadingOne" role="tabpanel" style="">
-
         <div class="panel-body">
           <%= form_tag contacts_path, method: :get do %>
-
-              <div class="row">
-                <div class="form-group form-material col-md-2">
-                  <label class="form-control-label">Name:</label>
-                  <input type="text" name="name" placeholder="Name" class="form-control">
-                </div>
-                <div class="form-group form-material col-md-2">
-                  <label class="form-control-label">Email:</label>
-                  <input type="text" name="email" placeholder="Email" class="form-control">
-                </div>
-<!--                 <div class="form-group form-material col-md-2">
-                  <label class="form-control-label">Organization:</label>
-                  <input type="text" name="org" placeholder="Organization" class="form-control">
-                </div> -->  
-
-                <div class="form-group form-material col-md-2">
-                  <button type="submit" class="btn btn-block green-btn waves-effect waves-classic">Update & Show
-                    List
-                  </button>
-                </div>
+            <div class="row">
+              <div class="form-group form-material col-md-2">
+                <label class="form-control-label">Name:</label>
+                <input type="text" name="name" placeholder="Name" class="form-control">
               </div>
+              <div class="form-group form-material col-md-2">
+                <label class="form-control-label">Email:</label>
+                <input type="text" name="email" placeholder="Email" class="form-control">
+              </div>
+              <!--                 <div class="form-group form-material col-md-2">
+                <label class="form-control-label">Organization:</label>
+                <input type="text" name="org" placeholder="Organization" class="form-control">
+                </div> -->  
+              <div class="form-group form-material col-md-2">
+                <button type="submit" class="btn btn-block green-btn waves-effect waves-classic">Update & Show
+                List
+                </button>
+              </div>
+            </div>
           <% end %>
         </div>
       </div>
     </div>
   </div>
 </div>
-
 <div class="row">
   <div class="col-xl-12">
     <div class="panel">
       <header class="panel-heading">
         <h3 class="panel-title">
           <button class="btn btn-sm green-btn waves-effect waves-classic" data-href="<%= new_contact_path %>"
-                  id="createNewContact" type="button" >ADD CONTACT
+            id="createNewContact" type="button" >ADD CONTACT
           </button>
           <button class="btn btn-sm green-btn waves-effect waves-classic" data-target="#contactImportFormCenter" data-toggle="modal"
-                  id="importNewContacts" type="button">IMPORT CONTACT
+            id="importNewContacts" type="button">IMPORT CONTACT
           </button>
         </h3>
       </header>
       <div class="panel-body">
         <table class="table table-hover dataTable table-striped w-full" data-plugin="dataTable" id="contactsList">
           <thead>
-          <tr>
-            <th>NAME</th>
-            <th>ORGANIZATION</th>
-            <th>PHONE</th>
-            <th>EMAIL</th>
-          </tr>
+            <tr>
+              <th>NAME</th>
+              <th>ORGANIZATION</th>
+              <th>PHONE</th>
+              <th>EMAIL</th>
+            </tr>
           </thead>
           <tbody>
-          <% for contact in @contacts %>
+            <% for contact in @contacts %>
               <tr data-href="<%= contact_path(contact) %>">
                 <td><%= contact.name %></td>
                 <td><%= contact.organization ? contact.organization.name : 'ORG' %></td>
                 <td><%= contact.cell_phone %></td>
                 <td><%= contact.email %></td>
               </tr>
-          <% end %>
+            <% end %>
           </tbody>
         </table>
         <div class="digg_pagination">
@@ -81,41 +75,7 @@
     </div>
   </div>
 </div>
-
 <div id="createOrEditContact"></div>
 <%= render :partial => 'contacts/import_contacts_form' %>
+<%= javascript_include_tag "contacts.js" %>
 
-<script>
-  $(document).on("click", "#contactsList tr", function () {
-    var link = $(this).data("href");
-    $.ajax({
-      url: link,
-      type: "GET"
-    });
-  });
-
-  $(document).on("click", "#createNewContact", function () {
-    var link = $(this).data("href");
-    $.ajax({
-      url: link,
-      type: "GET"
-    });
-  });
-
-  function showUploadFileName(input) {
-    if (input.files && input.files[0]) {
-      $('.fileName').html(input.files[0].name);
-    }
-  }
-
-  $(document).on("click", "#fakeFileUploadBtn", function () {
-    $('#contactsFileUploadHidden').click();
-  });
-  $("#contactsFileUploadHidden").change(function () {
-    showUploadFileName(this);
-  });
-
-  $('.digg_pagination a').each(function () {
-    $(this).attr("data-turbolinks", false);
-  })
-</script>

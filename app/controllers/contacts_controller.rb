@@ -55,12 +55,13 @@ class ContactsController < ApplicationController
   def destroy
     respond_to do |format|
       if @contact.destroy
-        format.html { redirect_to contacts_url, notice: 'Contact was successfully destroyed.' }
-        format.json { head :no_content }
+        flash[:notice] = 'Contact was successfully destroyed.'
+        format.js
       else
-        format.html { redirect_to contacts_url, notice: 'Contact could not be destroyed.' }
-        format.json { head :no_content }
+        flash[:notice] = 'Contact could not be destroyed.'
+        format.js
       end
+      load_contacts
     end
   end
 
@@ -96,6 +97,10 @@ class ContactsController < ApplicationController
                 address_line_2: contact_info[4], city_state_zip: contact_info[5], phone_number_1: contact_info[6],
                 phone_number_2: contact_info[7], cell_phone: contact_info[8], fax: contact_info[9], email: contact_info[10],
                 website: contact_info[11], notes: contact_info[12], category: category, business_unit: bussiness_unit)
+  end
+
+  def load_contacts
+    @contacts = current_org.contacts.paginate(page: params[:page], per_page: 5)
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

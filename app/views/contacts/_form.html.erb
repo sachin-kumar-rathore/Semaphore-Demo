@@ -89,7 +89,7 @@
                 <button type="submit" class="btn btn-sm green-btn"><%= @contact.new_record? ? ' Save ' : ' Save changes' %></button>
                 <button type="button" class="btn btn-sm white-btn" data-dismiss="modal">Cancel</button>
                 <% unless @contact.new_record? %>
-                  <%= link_to 'Delete', contact_path(@contact), method: :delete, class: "btn btn-sm btn-danger" %>
+                  <%= link_to 'Delete', contact_path(@contact), method: :delete, remote: true, class: "btn btn-sm btn-danger" %>
                 <% end %>
               </div>
             </div>

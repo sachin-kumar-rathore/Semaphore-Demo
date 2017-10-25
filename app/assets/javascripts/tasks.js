@@ -16,9 +16,9 @@ $(document).on("click", "#tasksList tr", function () {
 });
 
 $(document).on("click", ".nav-pills .nav-item", function () {
-    $(".nav-item").children('.nav-link').removeClass("active");
-    $(this).children('.nav-link').addClass("active");
     if ($(this).attr("id") != "all_tasks_filter"){
+      $(".nav-item").children('.nav-link').removeClass("active");
+      $(this).children('.nav-link').addClass("active");
       $.ajax({
         url: '/tasks/filter_tasks',
         type: "GET",

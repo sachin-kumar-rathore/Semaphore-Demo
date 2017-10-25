@@ -9,7 +9,7 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'breakpoints.js' %>
   <script>
-      Breakpoints();
+    Breakpoints();
   </script>
 </head>
 
@@ -20,7 +20,7 @@
 
     <div class="page">
       <div class="page-content container-fluid">
-        <%= render partial: 'shared/flash_messages' %>
+        <div class="flashMessages"><%= render partial: 'shared/flash_messages' %></div>
         <%= yield %>
       </div>
     </div>

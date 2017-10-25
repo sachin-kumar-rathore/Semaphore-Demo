@@ -31,10 +31,11 @@ class ContactsController < ApplicationController
 
     respond_to do |format|
       if @contact.save
-        format.html { redirect_to contacts_path(@contact), notice: 'Contact was successfully created.' }
-        format.json { render :show, status: :created, location: @contact }
+        flash.now[:success] = 'Contact was successfully created.'
+        load_contacts
+        format.js
       else
-        format.html { render :new }
+        format.js
         format.json { render json: @contact.errors, status: :unprocessable_entity }
       end
     end
@@ -43,10 +44,11 @@ class ContactsController < ApplicationController
   def update
     respond_to do |format|
       if @contact.update(contact_params)
-        format.html { redirect_to contacts_path(@contact), notice: 'Contact was successfully updated.' }
-        format.json { render :show, status: :ok, location: @contact }
+        flash.now[:success] = 'Contact was successfully updated.'
+        load_contacts
+        format.js
       else
-        format.html { render :edit }
+        format.js
         format.json { render json: @contact.errors, status: :unprocessable_entity }
       end
     end
@@ -55,10 +57,10 @@ class ContactsController < ApplicationController
   def destroy
     respond_to do |format|
       if @contact.destroy
-        flash[:notice] = 'Contact was successfully destroyed.'
+        flash.now[:success] = 'Contact was successfully destroyed.'
         format.js
       else
-        flash[:notice] = 'Contact could not be destroyed.'
+        flash.now[:info] = 'Contact could not be destroyed.'
         format.js
       end
       load_contacts

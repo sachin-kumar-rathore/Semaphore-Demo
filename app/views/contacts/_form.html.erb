@@ -3,7 +3,7 @@
   role="dialog" tabindex="-1">
   <div class="modal-dialog modal-simple modal-center">
     <div class="modal-content">
-      <%= form_for @contact  do |form| %>
+      <%= form_for @contact, remote: true  do |form| %>
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">×</span>
@@ -12,7 +12,8 @@
         </div>
         <div class="modal-body">
           <div class="example-wrap">
-            <%= render :partial => 'shared/error_messages', :locals => {:obj => form.object} %>
+            <div class="error-messaes"></div>
+            <%#= render :partial => 'shared/error_messages', :locals => {:obj => form.object} %>
             <div class="example">
               <div class="row">
                 <div class="form-group form-material col-md-4">
@@ -80,7 +81,7 @@
                 </div>
                 <div class="form-group form-material col-md-4">
                   <label class="form-control-label">Email:</label>
-                  <%= form.email_field :email, class: 'form-control', id: 'inputBasicEmail', required: true %>
+                  <%= form.email_field :email, class: 'form-control', id: 'inputBasicEmail' %>
                 </div>
               </div>
             </div>

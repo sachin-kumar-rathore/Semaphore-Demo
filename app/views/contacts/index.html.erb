@@ -45,6 +45,9 @@
           <button class="btn btn-sm green-btn waves-effect waves-classic" data-target="#contactImportFormCenter" data-toggle="modal"
             id="importNewContacts" type="button">IMPORT CONTACT
           </button>
+          <%= link_to contacts_path, class: 'reload-page-link', data: { turbolinks: false } do %>
+              <i class="fa fa-refresh"></i>
+          <% end %>
         </h3>
       </header>
       <div class="panel-body" id="contactsList">

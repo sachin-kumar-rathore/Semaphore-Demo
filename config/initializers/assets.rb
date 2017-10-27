@@ -12,10 +12,12 @@ Rails.application.config.assets.precompile += %w( breakpoints.js babel-external-
   Component.js Config.js GridMenu.js Menubar.js PageAside.js Plugin.js Sidebar.js Site.js State.js 
   animsition.js application.js  asscrollable.js bootstrap.js chartist-plugin-tooltip.min.js 
   chartist.min.js colors.js intro.js jquery-asHoverScroll.js jquery-asScrollable.js jquery-asScrollbar.js 
-  jquery-jvectormap-world-mill-en.js jquery-jvectormap.min.js jquery.js jquery-slidePanel.js 
+  jquery-jvectormap-world-mill-en.js jquery-jvectormap.min.js jquery.js jquery-slidePanel.js plugins/bootstrap-select.js
   jquery.matchHeight-min.js jquery.mousewheel.js jquery.peity.min.js jvectormap.js matchheight.js menu.js peity.js
   screenfull.js slidepanel.js switchery.js switchery.min.js tether.js tour.js v1.js waves.js jquery.tokeninput.js
-  sites.js contacts.js tasks.js sites_contact_form.js)
+  sites.js contacts.js tasks.js sites_contact_form.js tabs.js bootstrap-datepicker.js bootstrap-select.js 
+  plugins/bootstrap-datepicker.js projects.js  )
+
 
 
 # Precompile additional assets.

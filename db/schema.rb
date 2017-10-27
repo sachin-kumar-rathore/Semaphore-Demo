@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171024093620) do
+ActiveRecord::Schema.define(version: 20171020193599) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,57 @@ ActiveRecord::Schema.define(version: 20171024093620) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "project_contacts", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "project_id"
+    t.bigint "contact_id"
+    t.index ["contact_id"], name: "index_project_contacts_on_contact_id"
+    t.index ["project_id"], name: "index_project_contacts_on_project_id"
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.string "name"
+    t.string "status"
+    t.string "project_type"
+    t.string "source"
+    t.integer "primary_contact_id"
+    t.string "industry_type"
+    t.string "business_unit"
+    t.text "description"
+    t.date "active_date"
+    t.date "successful_completion_date"
+    t.string "business_type"
+    t.string "square_feet_requested"
+    t.text "square_footage_note"
+    t.string "acres_requested"
+    t.text "acreage_note"
+    t.string "new_jobs"
+    t.text "new_jobs_notes"
+    t.decimal "wages"
+    t.text "wages_notes"
+    t.decimal "net_new_investment"
+    t.text "net_new_investment_notes"
+    t.date "public_release_date"
+    t.boolean "public_release"
+    t.boolean "site_selector"
+    t.boolean "utilize_sites"
+    t.boolean "speculative_building"
+    t.string "elimination_reason"
+    t.string "located"
+    t.string "unique_id"
+    t.string "retained_jobs"
+    t.date "site_visit_1"
+    t.date "site_visit_2"
+    t.date "site_visit_3"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "company_id"
+    t.bigint "organization_id"
+    t.index ["company_id"], name: "index_projects_on_company_id"
+    t.index ["organization_id"], name: "index_projects_on_organization_id"
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.string "resource_type"
@@ -106,6 +157,7 @@ ActiveRecord::Schema.define(version: 20171024093620) do
   create_table "tasks", force: :cascade do |t|
     t.integer "user_id"
     t.integer "project_id"
+    t.integer "assignee_id"
     t.string "name"
     t.text "description"
     t.date "start_date"
@@ -115,7 +167,6 @@ ActiveRecord::Schema.define(version: 20171024093620) do
     t.float "progress", default: 0.0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "assignee_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -147,5 +198,9 @@ ActiveRecord::Schema.define(version: 20171024093620) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
+  add_foreign_key "project_contacts", "contacts"
+  add_foreign_key "project_contacts", "projects"
+  add_foreign_key "projects", "companies"
+  add_foreign_key "projects", "organizations"
   add_foreign_key "users", "organizations"
 end

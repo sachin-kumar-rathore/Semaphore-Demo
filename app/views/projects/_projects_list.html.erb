@@ -1,0 +1,30 @@
+<div class="panel">
+  <div class="panel-body">
+    <table class="table table-hover table-striped w-full" id="projectsList">
+      <thead>
+        <tr>
+          <th>PROJECT#</th>
+          <th>PROJECT NAME</th>
+          <th>COMPANY NAME</th>
+          <th>STARTED</th>
+          <th>STATUS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @projects.each do |project| %>
+          <tr data-href="<%= edit_project_path(project) %>">
+            <td ><%= project.unique_id %></td>
+            <td><%= project.name %></td>
+            <td><%=  %></td>
+            <td><%= project.active_date %></td>
+            <td><%= project.status %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="digg_pagination">
+      <%= will_paginate @projects, :container => false %>
+    </div>
+  </div>
+</div>
+

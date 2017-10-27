@@ -13,12 +13,10 @@
 
 //= require jquery
 //= require jquery.validate
-//= require bootstrap-sprockets
 //= require jquery.easing
 //= require rails-ujs
 //= require turbolinks
 //= require sign_up_form
-//= require bootstrap-datepicker
 
 $(document).ready(function() {
     Site.run();

@@ -20,6 +20,10 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :dashboard, only: [:index]
+  resources :projects, only: [:new, :index, :create, :edit, :update]
+
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   devise_scope :user do
     root 'users/registrations#new'

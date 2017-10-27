@@ -6,7 +6,7 @@
       <%= form_for @contact, remote: true  do |form| %>
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">×</span>
+            <span aria-hidden="true">×</span>
           </button>
           <h6 class="modal-title"><%= @contact.new_record? ? 'ADD CONTACT' : 'EDIT CONTACT' %></h6>
         </div>
@@ -81,7 +81,7 @@
                 </div>
                 <div class="form-group form-material col-md-4">
                   <label class="form-control-label">Email:</label>
-                  <%= form.email_field :email, class: 'form-control', id: 'inputBasicEmail' %>
+                  <%= form.email_field :email, class: 'form-control', id: 'inputBasicEmail', required: true %>
                 </div>
               </div>
             </div>

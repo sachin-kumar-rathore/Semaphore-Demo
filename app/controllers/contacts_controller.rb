@@ -33,11 +33,8 @@ class ContactsController < ApplicationController
       if @contact.save
         flash.now[:success] = 'Contact was successfully created.'
         load_contacts
-        format.js
-      else
-        format.js
-        format.json { render json: @contact.errors, status: :unprocessable_entity }
       end
+      format.js
     end
   end
 
@@ -46,11 +43,8 @@ class ContactsController < ApplicationController
       if @contact.update(contact_params)
         flash.now[:success] = 'Contact was successfully updated.'
         load_contacts
-        format.js
-      else
-        format.js
-        format.json { render json: @contact.errors, status: :unprocessable_entity }
       end
+      format.js
     end
   end
 
@@ -58,12 +52,11 @@ class ContactsController < ApplicationController
     respond_to do |format|
       if @contact.destroy
         flash.now[:success] = 'Contact was successfully destroyed.'
-        format.js
       else
         flash.now[:info] = 'Contact could not be destroyed.'
-        format.js
       end
       load_contacts
+      format.js
     end
   end
 

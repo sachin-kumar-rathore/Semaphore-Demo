@@ -18,7 +18,6 @@
 //= require rails-ujs
 //= require turbolinks
 //= require sign_up_form
-//= require bootstrap-datepicker
 
 $(document).ready(function() {
     Site.run();

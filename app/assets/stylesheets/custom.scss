@@ -191,3 +191,13 @@ span.next_page, a.next_page {
 .token-input-dropdown-facebook, .token-input-dropdown{
   z-index: 1100000 !important;
 }
+
+#error_explanation ul li{
+  list-style-type: none;
+}
+.panel-title{
+  .reload-page-link{
+    margin-left: 15px;
+  }
+  a:hover{ background-color: #ffffff !important;};
+}

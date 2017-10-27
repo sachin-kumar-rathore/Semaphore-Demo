@@ -1,0 +1,9 @@
+$('#contactsList').html('');
+$('#contactsList').html("<%= escape_javascript render partial: 'contacts', locals: {contacts: @contacts} %>");
+$('#contactFormCenter').modal('hide');
+$('.flashMessages').html("<%= escape_javascript render partial: 'shared/flash_messages' %>")
+$('.pagination').find('a').each(function() {
+  var a = $(this).attr("href").split("?")[1];
+  $(this).attr('href', "contacts?" + a);
+  $(this).attr("data-turbolinks", false);
+});

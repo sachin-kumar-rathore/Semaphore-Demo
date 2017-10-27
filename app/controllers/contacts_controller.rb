@@ -31,36 +31,32 @@ class ContactsController < ApplicationController
 
     respond_to do |format|
       if @contact.save
-        format.html { redirect_to contacts_path(@contact), notice: 'Contact was successfully created.' }
-        format.json { render :show, status: :created, location: @contact }
-      else
-        format.html { render :new }
-        format.json { render json: @contact.errors, status: :unprocessable_entity }
+        flash.now[:success] = 'Contact was successfully created.'
+        load_contacts
       end
+      format.js
     end
   end
 
   def update
     respond_to do |format|
       if @contact.update(contact_params)
-        format.html { redirect_to contacts_path(@contact), notice: 'Contact was successfully updated.' }
-        format.json { render :show, status: :ok, location: @contact }
-      else
-        format.html { render :edit }
-        format.json { render json: @contact.errors, status: :unprocessable_entity }
+        flash.now[:success] = 'Contact was successfully updated.'
+        load_contacts
       end
+      format.js
     end
   end
 
   def destroy
     respond_to do |format|
       if @contact.destroy
-        format.html { redirect_to contacts_url, notice: 'Contact was successfully destroyed.' }
-        format.json { head :no_content }
+        flash.now[:success] = 'Contact was successfully destroyed.'
       else
-        format.html { redirect_to contacts_url, notice: 'Contact could not be destroyed.' }
-        format.json { head :no_content }
+        flash.now[:info] = 'Contact could not be destroyed.'
       end
+      load_contacts
+      format.js
     end
   end
 
@@ -96,6 +92,10 @@ class ContactsController < ApplicationController
                 address_line_2: contact_info[4], city_state_zip: contact_info[5], phone_number_1: contact_info[6],
                 phone_number_2: contact_info[7], cell_phone: contact_info[8], fax: contact_info[9], email: contact_info[10],
                 website: contact_info[11], notes: contact_info[12], category: category, business_unit: bussiness_unit)
+  end
+
+  def load_contacts
+    @contacts = current_org.contacts.paginate(page: params[:page], per_page: 5)
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

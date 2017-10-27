@@ -1,0 +1,11 @@
+<% if @contact.errors.blank? %>
+  $('#contactsList').html('');
+  $('#contactsList').html("<%= escape_javascript render partial: 'contacts', locals: {contacts: @contacts} %>");
+  $('#contactFormCenter').modal('hide');
+  $('.flashMessages').html("<%= escape_javascript render partial: 'shared/flash_messages' %>");
+  $('.pagination').find('a').each(function() {
+    $(this).attr("data-turbolinks", false);
+  });
+<% else %>
+  $('#contactFormCenter .error-messaes').html("<%= escape_javascript render partial: 'shared/error_messages', locals: {obj: @contact} %>");
+<% end %>

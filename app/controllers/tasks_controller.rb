@@ -6,7 +6,7 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.get_current_org_tasks(current_org.id).paginate(page: params[:page], per_page: 10)
+    @tasks = Task.get_current_org_tasks(current_org.id).paginate(page: params[:page], per_page: 5)
   end
 
   # GET /tasks/1
@@ -37,12 +37,9 @@ class TasksController < ApplicationController
     @task = current_user.tasks.new(task_params)
     respond_to do |format|
       if @task.save
-        format.html { redirect_to tasks_path, notice: 'Task was successfully created.' }
-        format.json { render :show, status: :created, location: @task }
-      else
-        format.html { render :new }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
+        flash.now[:success] = 'Task was successfully created.'
       end
+      format.js
     end
   end
 
@@ -51,12 +48,9 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if @task.update(task_params)
-        format.html { redirect_to tasks_path, notice: 'Task was successfully updated.' }
-        format.json { render :show, status: :ok, location: @task }
-      else
-        format.html { render :edit }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
+        flash.now[:success] = 'Task was successfully updated.'
       end
+      format.js
     end
   end
 
@@ -65,12 +59,11 @@ class TasksController < ApplicationController
   def destroy
     respond_to do |format|
       if @task.destroy
-        format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
-        format.json { head :no_content }
+        flash.now[:success] = 'Task was successfully destroyed.'
       else
-        format.html { redirect_to tasks_url, notice: 'Task could not be destroyed.' }
-        format.json { head :no_content }
+        flash.now[:info] = 'Task could not be destroyed.'
       end
+      format.js
     end
   end
 
@@ -78,13 +71,13 @@ class TasksController < ApplicationController
   def filter_tasks
     @tasks = Task.get_current_org_tasks(current_org.id)
     @tasks = params[:filter_id] == "assigned_to_me_filter" ? current_user.assigned_tasks : current_user.tasks
-    @tasks =  @tasks.paginate(page: params[:page], per_page: 10)    
+    @tasks =  @tasks.paginate(page: params[:page], per_page: 5)
   end
 
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_task
-    @task = Task.where(params[:id]).first
+    @task = Task.where(id: params[:id]).first
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

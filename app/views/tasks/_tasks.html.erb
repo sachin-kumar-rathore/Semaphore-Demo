@@ -1,37 +1,38 @@
 <table class="table table-hover dataTable table-striped w-full" data-plugin="dataTable">
   <thead>
-  <tr>
-    <th>TASK</th>
-    <th>PRIORITY</th>
-    <th>PROJECT</th>
-    <th>DESCRIPTION</th>
-    <th>STATUS</th>
-    <th>COMPLETE</th>
-    <th>ASSIGNED TO</th>
-    <th>ASSIGNED BY</th>
-    <th>DUE DATE</th>
-  </tr>
+    <tr>
+      <th>TASK</th>
+      <th>PRIORITY</th>
+      <th>PROJECT</th>
+      <th>DESCRIPTION</th>
+      <th>STATUS</th>
+      <th>COMPLETE</th>
+      <th>ASSIGNED TO</th>
+      <th>ASSIGNED BY</th>
+      <th>DUE DATE</th>
+    </tr>
   </thead>
   <tbody>
-  <% for task in tasks %>
+    <% for task in tasks %>
       <tr data-href="<%= task_path(task) %>">
         <td><%= task.name %></td>
         <td><%= task.priority %></td>
         <td><%= task.project_id ? task.project_id : "PRJ" %></td>
-        <td><%= task.description.truncate(50) %></td>
+        <td><%= task.description.truncate(50) if task.description.present? %></td>
         <td><%= task.status %></td>
         <td><%= task.progress %> %</td>
         <td><%= task.assignee.full_name %></td>
         <td><%= task.user.full_name %></td>
-        <td><%= task.end_date.strftime("%m/%d/%Y") %></td>
+        <td><%= task.end_date.strftime("%m/%d/%Y") if task.end_date.present? %></td>
       </tr>
-  <% end %>
+    <% end %>
   </tbody>
 </table>
+
 <div class="digg_pagination">
   <% if request.xhr? == 0 %>
-      <%= js_will_paginate tasks %>
+    <%= js_will_paginate tasks %>
   <% else %>
-      <%= will_paginate tasks, :container => false %>
+    <%= will_paginate tasks %>
   <% end %>
 </div>

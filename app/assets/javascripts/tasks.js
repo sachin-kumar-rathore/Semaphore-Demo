@@ -26,3 +26,7 @@ $(document).on("click", ".nav-pills .nav-item", function () {
       });
     }   
 });
+
+$('.pagination').find('a').each(function() {
+  $(this).attr("data-turbolinks", false);
+});

@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   end
 
   def render_404
-    render :template => "layouts/error_404", :status => 404
+    render :template => 'layouts/error_404', :status => 404
   end
   
   def current_org

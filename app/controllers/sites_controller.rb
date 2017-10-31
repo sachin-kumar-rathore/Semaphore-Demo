@@ -43,29 +43,27 @@ class SitesController < ApplicationController
   def update
     respond_to do |format|
       if @site.update(site_params)
-        format.html { redirect_to sites_path(@site), notice: 'Site/ Building was successfully updated.' }
-        format.json { render :show, status: :ok, location: @site }
-      else
-        format.html { render :edit }
-        format.json { render json: @site.errors, status: :unprocessable_entity }
+        flash.now[:success] = 'Contact was successfully updated.'
+        load_sites
       end
+      format.js
     end
   end
 
   def destroy
     respond_to do |format|
       if @site.destroy
-        format.html { redirect_to sites_url, notice: 'Site was successfully destroyed.' }
-        format.json { head :no_content }
+        flash.now[:success] = 'Site was successfully destroyed.'
       else
-        format.html { redirect_to sites_url, notice: 'Site could not be destroyed.' }
-        format.json { head :no_content }
+        flash.now[:info] = 'Site could not be destroyed.'
       end
+      load_sites
+      format.js
     end
   end
 
   def find_contact
-    @contacts = current_org.contacts.where("name ilike ? or email ilike ?", "%#{params[:q]}%", "%#{params[:q]}%")
+    @contacts = current_org.contacts.where('name ilike ? or email ilike ?', "%#{params[:q]}%", "%#{params[:q]}%")
     respond_to do |format|
       format.html
       format.json { render :json => @contacts.map(&:attributes) }
@@ -75,7 +73,7 @@ class SitesController < ApplicationController
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_site
-    @site = current_org.sites.where(params[:id]).first
+    @site = current_org.sites.where(id: params[:id]).first
   end
 
   def load_sites

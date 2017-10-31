@@ -1,0 +1,13 @@
+<% if @site.errors.blank? %>
+$('#sitesList').html('');
+$('#sitesList').html("<%= escape_javascript render partial: 'sites', locals: {sites: @sites} %>");
+$('#siteFormCenter').modal('hide');
+$('.flashMessages').html("<%= escape_javascript render partial: 'shared/flash_messages' %>");
+$('.pagination').find('a').each(function() {
+    var a = $(this).attr("href").split("?")[1];
+    $(this).attr('href', "sites?" + a);
+    $(this).attr("data-turbolinks", false);
+});
+<% else %>
+$('#siteFormCenter .error-messaes').html("<%= escape_javascript render partial: 'shared/error_messages', locals: {obj: @site} %>");
+<% end %>

@@ -27,11 +27,10 @@
               <div class="row">
                 <div class="form-group form-material col-md-6">
                   <label class="form-control-label">Contact:</label>
-                  <%= form.text_field :contact_id, class: 'form-control', id: 'tokenContactName', :data => {:org_id => current_org.id, :pre => form.object.contact_id.present? ? selected_contact(form.object.contact_id) : '' }, required: true %>
-                  <%#= form.text_field :contact_id, class: 'form-control', id: 'inputContactDetails', required: true %>
-                  <!--<button class="btn btn-sm green-btn waves-effect waves-classic" data-href="<%#= find_contact_organization_sites_path(@organization) %>"-->
-                  <!--id="findContactDetails" type="button">ADD CONTACT-->
-                  <!--</button>-->
+                  <%= form.text_field :contact_id, class: 'form-control', id: 'tokenContactName',
+                                      :data => {:org_id => current_org.id,
+                                                :pre => form.object.contact_id.present? ? selected_contact(form.object.contact_id) : '' },
+                                      required: true %>
                 </div>
               </div>
               <div class="row">
@@ -111,7 +110,7 @@
                 <button type="submit" class="btn btn-sm green-btn"><%= @site.new_record? ? ' Save ' : ' Save changes ' %></button>
                 <button type="button" class="btn btn-sm white-btn" data-dismiss="modal">Cancel</button>
                 <% unless @site.new_record? %>
-                    <%= link_to 'Delete', contact_path(@site), method: :delete, remote: true, class: "btn btn-sm btn-danger" %>
+                    <%= link_to 'Delete', site_path(@site), method: :delete, remote: true, class: 'btn btn-sm btn-danger' %>
                 <% end %>
               </div>
             </div>
@@ -122,5 +121,6 @@
     </div>
   </div>
 </div>
+
 <div id="addContactFormCenter"></div>
-<%= javascript_include_tag "sites_contact_form.js" %>
+<%= javascript_include_tag 'sites_contact_form.js' %>

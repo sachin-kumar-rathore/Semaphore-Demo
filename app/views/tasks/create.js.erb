@@ -1,18 +1,6 @@
 <% if @task.errors.blank? %>
-  $("#taskFormCenter").modal("hide");
-  var selected_tab_id = $('.nav-item .nav-link.active').closest("li").attr("id");
-
-  if(selected_tab_id == "all_tasks_filter"){
-    $.ajax({
-      url: '/tasks/filter_tasks',
-      type: "GET",
-      data: {filter_id: selected_tab_id}
-    })
-  }
-  else $("#" + selected_tab_id).click();
-
+  reloadTasks();
   $('.flashMessages').html("<%= escape_javascript render partial: 'shared/flash_messages' %>");
-
 <% else %>
   $('#taskFormCenter .error-messaes').html("<%= escape_javascript render partial: 'shared/error_messages', locals: {obj: @task} %>");
 <% end %>

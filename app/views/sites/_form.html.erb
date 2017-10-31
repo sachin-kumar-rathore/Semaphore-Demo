@@ -29,8 +29,8 @@
                   <label class="form-control-label">Contact:</label>
                   <%= form.text_field :contact_id, class: 'form-control', id: 'tokenContactName',
                                       :data => {:org_id => current_org.id,
-                                                :pre => form.object.contact_id.present? ? selected_contact(form.object.contact_id) : '' },
-                                      required: true %>
+                                                :pre => form.object.contact_id.present? ? selected_contact(form.object.contact_id) : '' }
+                                       %>
                 </div>
               </div>
               <div class="row">
@@ -122,5 +122,5 @@
   </div>
 </div>
 
-<div id="addContactFormCenter"></div>
+<!--<div id="addContactFormCenter"></div>-->
 <%= javascript_include_tag 'sites_contact_form.js' %>

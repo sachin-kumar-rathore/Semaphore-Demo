@@ -8,7 +8,7 @@ class SitesController < ApplicationController
     if params[:property_name].present? || params[:property_number].present? || params[:zip_code].present?
       @sites = @sites.property_number_or_propery_name_or_zip_code_search(params[:property_number], params[:property_name],params[:zip_code])
     end
-      @sites = @sites.paginate(page: params[:page], per_page: 2)                                                                
+      @sites = @sites.paginate(page: params[:page], per_page: Site::PAGINATION[:per_page])
   end
 
   def show
@@ -29,17 +29,14 @@ class SitesController < ApplicationController
   end
 
   def create
-
     @site = current_org.sites.new(site_params)
 
     respond_to do |format|
       if @site.save
-        format.html { redirect_to sites_path(@site), notice: 'Site/ Building was successfully updated.' }
-        format.json { render :show, status: :created, location: @site }
-      else
-        format.html { render :new }
-        format.json { render json: @site.errors, status: :unprocessable_entity }
+        flash.now[:success] = 'Site/ Building was successfully created.'
+        load_sites
       end
+      format.js
     end
   end
 
@@ -76,15 +73,19 @@ class SitesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_site
-      @site = current_org.sites.where(params[:id]).first
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_site
+    @site = current_org.sites.where(params[:id]).first
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def site_params
-      params.require(:site).permit(:organization_id, :contact_id, :property_number, :property_name, :property_type, :address_line, :city,
-                                   :state, :zip_code, :country, :available_acreage, :available_square_feet, :contact_id,
-                                   :total_acreage, :total_square_feet, :latitude, :longitude, :business_unit)
-    end
+  def load_sites
+    @sites = current_org.sites.paginate(page: params[:page], per_page: Site::PAGINATION[:per_page])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def site_params
+    params.require(:site).permit(:organization_id, :contact_id, :property_number, :property_name, :property_type, :address_line, :city,
+                                 :state, :zip_code, :country, :available_acreage, :available_square_feet, :contact_id,
+                                 :total_acreage, :total_square_feet, :latitude, :longitude, :business_unit)
+  end
 end

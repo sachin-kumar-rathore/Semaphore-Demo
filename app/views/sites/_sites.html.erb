@@ -1,0 +1,22 @@
+<table class="table table-hover dataTable table-striped w-full" data-plugin="dataTable">
+  <thead>
+  <tr>
+    <th>PROPERTY #</th>
+    <th>NAME</th>
+    <th>ZIP</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @sites.each do |site| %>
+      <tr data-href="<%= site_path(site) %>">
+        <td><%= site.property_number %></td>
+        <td><%= site.property_name %></td>
+        <td><%= site.zip_code %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<div class="digg_pagination">
+  <%= will_paginate sites %>
+</div>

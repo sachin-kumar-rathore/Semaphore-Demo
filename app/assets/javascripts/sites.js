@@ -33,4 +33,6 @@ $(document).on("click", "#findContactDetails", function() {
   });
 });
 
-
+$('.digg_pagination a').each(function () {
+    $(this).attr("data-turbolinks", false);
+});

@@ -1,5 +1,7 @@
 class Site < ApplicationRecord
 
+  acts_as_paranoid
+
   # == Constants == #
   self.per_page = 5
   PAGINATION = {per_page: 5}

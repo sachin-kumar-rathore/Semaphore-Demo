@@ -1,10 +1,19 @@
 class ProjectsController < ApplicationController
 
   before_action :authenticate_user!
-  before_action :set_project, only: [:edit, :update]
+  before_action :set_project, only: [:edit, :update, :dashboard]
 
+  def dashboard
+    if @project.blank? && params[:id].present?
+      redirect_to projects_path, notice: 'Project not found.'
+    end  
+  end
+  
   def new
     @project = current_org.projects.new
+    respond_to do |format|
+      format.js
+    end
   end
 
   def index
@@ -12,7 +21,7 @@ class ProjectsController < ApplicationController
     filtering_params(params).each do |key, value|
       @projects = @projects.public_send(key, value) if value.present?
     end
-    @projects = @projects.paginate(page: params[:page], per_page: 8)        
+    @projects = @projects.paginate(page: params[:page], per_page: 8)      
   end
 
   def create
@@ -21,16 +30,18 @@ class ProjectsController < ApplicationController
       if params[:commit] == "Save & Close"
         redirect_to projects_path, notice: 'Project was successfully created.'
       else
-        redirect_to edit_project_path(@project), notice: 'Project was successfully saved.'
+        redirect_to dashboard_projects_path(id: @project.id), notice: 'Project was successfully saved.'
       end 
     else
       flash[:notice] = 'Project could not be created.'
-      render :new
+      redirect_to dashboard_projects_path
     end
   end
   
   def edit
-    
+    respond_to do |format|
+      format.js
+    end
   end
 
   def update
@@ -38,11 +49,11 @@ class ProjectsController < ApplicationController
       if params[:commit] == "Save & Close"
         redirect_to projects_path, notice: 'Project was successfully updated.'
       else
-        redirect_to edit_project_path(@project), notice: 'Project successfully updated.'
+        redirect_to dashboard_projects_path(id: @project.id), notice: 'Project successfully updated.'
       end 
     else
       flash[:notice] = 'Project could not be updated.'
-      render :edit
+      redirect_to dashboard_projects_path(id: project.id)
     end
   end
 

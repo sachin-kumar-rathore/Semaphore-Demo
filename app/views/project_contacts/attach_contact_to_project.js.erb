@@ -1,0 +1,8 @@
+<% if @project_contact.errors.blank? %>
+  $('#showExistingContacts').modal('hide'); 
+  $('.flashMessages').html("<%= escape_javascript render partial: 'shared/flash_messages' %>");
+<% else %>
+  $('#showExistingContacts .error-messages').html("<%= escape_javascript render partial: 'shared/error_messages', locals: {obj: @contact} %>");
+<% end %>
+id = <%= @project.id %>
+reloadContacts(id);

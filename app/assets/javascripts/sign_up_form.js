@@ -1,6 +1,6 @@
 $(document).ready(function() {
   var animating, current_fs, left, next_fs, opacity, previous_fs, scale;
-  $('#msform').validate();
+  // $('#msform').validate();
   current_fs = void 0;
   next_fs = void 0;
   previous_fs = void 0;

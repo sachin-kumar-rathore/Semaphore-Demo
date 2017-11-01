@@ -194,10 +194,16 @@ span.next_page, a.next_page {
 
 #error_explanation ul li{
   list-style-type: none;
+  color: red;
 }
 .panel-title{
   .reload-page-link{
     margin-left: 15px;
   }
   a:hover{ background-color: #ffffff !important;};
+}
+
+.nav-tabs .nav-item .nav-link.active {
+  background-color: #2ED573;
+  border-color: #2ED573;
 }

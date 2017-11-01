@@ -1,0 +1,9 @@
+<% if @project_contact.errors.blank? %>
+  $('.modal-backdrop').remove();
+  $('#contactFormCenter').modal('hide');
+  $('.flashMessages').html("<%= escape_javascript render partial: 'shared/flash_messages' %>");
+  id = <%= @project.id %>
+  reloadContacts(id);
+<% else %>
+  $('#contactFormCenter .error-messages').html("<%= escape_javascript render partial: 'shared/error_messages', locals: {obj: @project_contact} %>");
+<% end %>

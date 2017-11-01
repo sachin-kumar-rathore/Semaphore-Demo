@@ -1,5 +1,6 @@
 class Contact < ApplicationRecord
 
+  attr_accessor :project_id
   # == Constants == #
   self.per_page = 5
 
@@ -12,7 +13,7 @@ class Contact < ApplicationRecord
 
   # == Associations and Nested Attributes == #
   belongs_to :organization
-  has_many :project_contacts
+  has_many :project_contacts, dependent: :destroy
   has_many :projects, through: :project_contacts
 
 
@@ -21,7 +22,7 @@ class Contact < ApplicationRecord
   validates_format_of :email, with: /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/, message: "Invalid"
 
   # == Callbacks == #
-
+  after_save :add_contact_to_project, if: :has_project_id?
   # == Scopes and Other macros == #
   pg_search_scope :name_search, :against => :name, :using => {
       :tsearch => {:prefix => true}
@@ -39,5 +40,12 @@ class Contact < ApplicationRecord
   end
 
   # == Private == #
+  def add_contact_to_project
+    self.project_contacts.create!(project_id: project_id)
+  end
+
+  def has_project_id?
+    project_id.present?    
+  end
 
 end

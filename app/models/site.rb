@@ -2,7 +2,7 @@ class Site < ApplicationRecord
 
   # == Constants == #
   self.per_page = 5
-  PAGINATION = {per_page: 2}
+  PAGINATION = {per_page: 5}
 
   # == Attributes == #
 

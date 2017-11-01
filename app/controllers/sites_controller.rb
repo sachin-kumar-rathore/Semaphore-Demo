@@ -77,7 +77,7 @@ class SitesController < ApplicationController
   end
 
   def load_sites
-    @sites = current_org.sites.paginate(page: params[:page], per_page: Site::PAGINATION[:per_page])
+    @sites = current_org.sites.paginate(page: params[:page], per_page: Site::PAGINATION[:per_page]).order('updated_at DESC')
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

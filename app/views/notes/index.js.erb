@@ -1,0 +1,9 @@
+<% if @project.present? %>
+  $('#notesTab').html("<%= j render 'notes_tab_content' %>");
+  $(".tab-content").children('.tab-pane').removeClass("active");
+  $('#notesTab').addClass("active");
+  $(".nav-item").children('.nav-link').removeClass("active");
+  $('#notesNavLink').addClass("active");
+<% else %>
+  $('.flashMessages').html("<%= escape_javascript render partial: 'shared/flash_messages' %>");
+<% end %>

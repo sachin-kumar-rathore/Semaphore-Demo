@@ -26,6 +26,7 @@ Rails.application.routes.draw do
       get :dashboard
     end
   end
+  resources :notes, except: [:edit]
   resources :project_contacts, only: [:index, :new, :create, :show, :update, :destroy] do
     member do
       get :show_existing_contacts

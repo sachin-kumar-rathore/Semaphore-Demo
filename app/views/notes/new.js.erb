@@ -1,0 +1,4 @@
+$('#createOrEditNote').html("");
+$('#createOrEditNote').html("<%= escape_javascript render 'form' %>");
+$('#noteFormCenter').modal('show');
+$('.datepicker').datepicker();

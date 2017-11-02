@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171020193599) do
+ActiveRecord::Schema.define(version: 20171102072009) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,16 @@ ActiveRecord::Schema.define(version: 20171020193599) do
     t.string "phone_number_2"
     t.string "cell_phone"
     t.text "notes"
+  end
+
+  create_table "notes", force: :cascade do |t|
+    t.date "date"
+    t.text "description"
+    t.string "subject"
+    t.bigint "project_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_notes_on_project_id"
   end
 
   create_table "organizations", force: :cascade do |t|
@@ -152,6 +162,8 @@ ActiveRecord::Schema.define(version: 20171020193599) do
     t.string "business_unit"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_sites_on_deleted_at"
   end
 
   create_table "tasks", force: :cascade do |t|
@@ -198,6 +210,7 @@ ActiveRecord::Schema.define(version: 20171020193599) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
+  add_foreign_key "notes", "projects"
   add_foreign_key "project_contacts", "contacts"
   add_foreign_key "project_contacts", "projects"
   add_foreign_key "projects", "companies"

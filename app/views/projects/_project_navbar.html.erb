@@ -3,7 +3,7 @@
     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="<%= @project ? edit_project_path(@project) : new_project_path %>" id="mainNavLink" data-remote="true" role="tab">Main</a></li>
     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="<%= project_contacts_path(project_id: @project ? @project.id : nil ) %>" data-remote="true" role="tab" id="contactsNavLink" >Contacts</a></li>
     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#sitesBuildingTab" role="tab">Sites/Buildings</a></li>
-    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#notesTab" role="tab">Notes</a></li>
+    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="<%= notes_path(project_id: @project ? @project.id : nil) %>" data-remote="true" role="tab" id="notesNavLink">Notes</a></li>
     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#taskTab" role="tab">Task</a></li>
     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#filesTab" role="tab">Files</a></li>
     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#emailsTab" role="tab">Emails</a></li>

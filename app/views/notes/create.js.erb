@@ -1,0 +1,8 @@
+<% if @note.errors.blank? %>
+  $('.modal-backdrop').remove();
+  $('#noteFormCenter').modal('hide');
+  $('.flashMessages').html("<%= escape_javascript render partial: 'shared/flash_messages' %>");
+  reloadNotes("<%= @project.id %>");
+<% else %>
+  $('#noteFormCenter .error-messages').html("<%= escape_javascript render partial: 'shared/error_messages', locals: {obj: @note} %>");
+<% end %>

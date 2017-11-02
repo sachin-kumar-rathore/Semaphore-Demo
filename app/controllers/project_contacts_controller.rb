@@ -1,13 +1,13 @@
 class ProjectContactsController < ContactsController
   
-  before_action :set_project, except: [:create]
+  before_action :set_project, except: [:create, :update]
   protect_from_forgery except: :attach_contact_to_project
 
   def index
     if params[:project_id]
       @project_contacts = @project.contacts.paginate(page: params[:page], per_page: 8)
     else
-      flash.now[:error] = 'You need to first save a project before adding contacts.'
+      flash.now[:info] = 'You need to first save a project before adding contacts.'
     end
     respond_to do |format|
       format.js
@@ -34,6 +34,7 @@ class ProjectContactsController < ContactsController
   end
 
   def update
+    @project = current_org.projects.where(id: params[:contact][:project_id]).first 
     super
   end
 

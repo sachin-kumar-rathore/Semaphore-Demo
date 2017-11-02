@@ -111,7 +111,7 @@ span.next_page, a.next_page {
 }
 
 
-#contactsList thead th, #projectsList thead th {
+#contactsList thead th, #projectsList thead th, #notesList thead th {
   color: #2ED573;
   font-weight: 500;
 }
@@ -206,4 +206,10 @@ span.next_page, a.next_page {
 .nav-tabs .nav-item .nav-link.active {
   background-color: #2ED573;
   border-color: #2ED573;
+}
+
+.note-description {
+  max-width : 50px; 
+  white-space : nowrap;
+  overflow : hidden;
 }

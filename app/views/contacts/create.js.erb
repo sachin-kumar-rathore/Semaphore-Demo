@@ -7,5 +7,5 @@
     $(this).attr("data-turbolinks", false);
   });
 <% else %>
-  $('#contactFormCenter .error-messaes').html("<%= escape_javascript render partial: 'shared/error_messages', locals: {obj: @contact} %>");
+  $('#contactFormCenter .error-messages').html("<%= escape_javascript render partial: 'shared/error_messages', locals: {obj: @contact} %>");
 <% end %>

@@ -10,15 +10,7 @@ function reloadContacts(id){
 
 // Contacts
 
-$(document).on("click", "#contactsList tr", function () {
-  var link = $(this).data("href");
-  $.ajax({
-    url: link,
-    type: "GET"
-  });
-});
-
-$(document).on("click", "#createNewContact", function () {
+$(document).on("click", ".clickable", function () {
   var link = $(this).data("href");
   $.ajax({
     url: link,
@@ -61,3 +53,13 @@ $(function() {
     });
   }
 });
+
+//notes
+
+function reloadNotes(id){
+  $.ajax({
+    url: '/notes',
+    type: "GET",
+    data: { project_id: id}
+  });
+}

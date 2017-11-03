@@ -8,6 +8,10 @@ class ContactsController < ApplicationController
       @contacts = @contacts.name_or_email_search(params[:name], params[:email])
     end    
     @contacts = @contacts.paginate(page: params[:page], per_page: 5)
+    respond_to do |format|
+      format.html {render 'index'}
+      format.js
+    end
   end
 
   def show
@@ -28,7 +32,6 @@ class ContactsController < ApplicationController
 
   def create
     @contact = current_org.contacts.new(contact_params)
-
     respond_to do |format|
       if @contact.save
         flash.now[:success] = 'Contact was successfully created.'
@@ -102,6 +105,6 @@ class ContactsController < ApplicationController
   def contact_params
     params.require(:contact).permit(:name, :email, :phone_number_1, :phone_number_2, :address_line_1,
                                     :address_line_2, :city_state_zip, :fax, :business_unit,
-                                    :website, :category, :title, :cell_phone, :notes)
+                                    :website, :category, :title, :cell_phone, :notes, :project_id)
   end
 end

@@ -9,8 +9,9 @@ class Project < ApplicationRecord
 
   # ASSOCIATION
   belongs_to :organization
-  has_many :project_contacts
+  has_many :project_contacts, dependent: :destroy
   has_many :contacts, through: :project_contacts
+  has_many :notes
   belongs_to :company, optional: true   #remove_optional_later
 
   # SCOPE

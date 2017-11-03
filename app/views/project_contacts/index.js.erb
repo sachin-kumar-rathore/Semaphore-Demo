@@ -1,0 +1,9 @@
+<% if @project.present? %>
+  $('#contactsTab').html("<%= j render partial: 'project_contacts_list', locals: {project_contacts: @project_contacts} %>");
+  $(".tab-content").children('.tab-pane').removeClass("active");
+  $('#contactsTab').addClass("active");
+  $(".nav-item").children('.nav-link').removeClass("active");
+  $('#contactsNavLink').addClass("active");
+<% else %>
+  $('.flashMessages').html("<%= escape_javascript render partial: 'shared/flash_messages' %>");
+<% end %>

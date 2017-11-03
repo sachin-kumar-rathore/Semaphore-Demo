@@ -1,0 +1,4 @@
+$('.modal-backdrop').remove();
+$('#noteFormCenter').modal('hide');
+$('.flashMessages').html("<%= j render partial: 'shared/flash_messages' %>");
+reloadNotes("<%= @project.id %>");

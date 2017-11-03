@@ -12,7 +12,7 @@
       </thead>
       <tbody>
         <% @projects.each do |project| %>
-          <tr data-href="<%= edit_project_path(project) %>">
+          <tr data-href="<%= dashboard_projects_path(id: project.id) %>">
             <td ><%= project.unique_id %></td>
             <td><%= project.name %></td>
             <td><%=  %></td>
@@ -23,7 +23,7 @@
       </tbody>
     </table>
     <div class="digg_pagination">
-      <%= will_paginate @projects, :container => false %>
+      <%= will_paginate @projects, container: false %>
     </div>
   </div>
 </div>

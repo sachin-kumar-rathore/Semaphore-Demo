@@ -5,7 +5,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   belongs_to :organization, optional: true
-  has_many :tasks, :dependent => :destroy
+  has_many :tasks, dependent: :destroy
   has_many :assigned_tasks, class_name: 'Task', foreign_key: :assignee_id
 
   def full_name

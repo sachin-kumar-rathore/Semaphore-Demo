@@ -35,6 +35,9 @@ class SitesController < ApplicationController
       if @site.save
         flash.now[:success] = 'Site/ Building was successfully created.'
         load_sites
+      else
+        flash.now[:info] = 'Site could not be created, Please try again.'
+        load_sites
       end
       format.js
     end
@@ -45,6 +48,8 @@ class SitesController < ApplicationController
       if @site.update(site_params)
         flash.now[:success] = 'Contact was successfully updated.'
         load_sites
+      else
+        flash.now[:info] = 'Site could not be updated, Please try again.'
       end
       format.js
     end

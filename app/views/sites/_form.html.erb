@@ -29,7 +29,7 @@
                   <label class="form-control-label">Contact:</label>
                   <%= form.text_field :contact_id, class: 'form-control', id: 'tokenContactName',
                                       :data => {:org_id => current_org.id,
-                                                :pre => form.object.contact_id.present? ? selected_contact(form.object.contact_id) : '' }
+                                                :pre => form.object.contact_id.present? ? selected_contact(form.object.contact_id) : '', required: true }
                                        %>
                 </div>
               </div>

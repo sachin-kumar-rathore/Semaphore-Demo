@@ -1,2 +1,2 @@
 $('#contactsList').html('');
-$('#contactsList').html("<%= escape_javascript render partial: 'contacts/contacts', locals: {contacts: @contacts} %>");
+$('#contactsList').html("<%= j render partial: 'contacts/contacts', locals: {contacts: @contacts} %>");

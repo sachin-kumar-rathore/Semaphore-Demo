@@ -2,5 +2,5 @@
   reloadTasks();
   $('.flashMessages').html("<%= escape_javascript render partial: 'shared/flash_messages' %>");
 <% else %>
-  $('#taskFormCenter .error-messaes').html("<%= escape_javascript render partial: 'shared/error_messages', locals: {obj: @task} %>");
+  $('#taskFormCenter .error-messages').html("<%= escape_javascript render partial: 'shared/error_messages', locals: {obj: @task} %>");
 <% end %>

@@ -1,4 +1,2 @@
-$(".nav-item").children('.nav-link').removeClass("active");
-$("#all_tasks_filter").children('.nav-link').addClass("active");
 $('#tasksList').html("");
 $('#tasksList').html('<%=j render partial: 'tasks', locals: {tasks: @tasks} %>');

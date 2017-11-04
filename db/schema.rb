@@ -168,12 +168,7 @@ ActiveRecord::Schema.define(version: 20171103081117) do
 
   create_table "tasks", force: :cascade do |t|
     t.integer "user_id"
-<<<<<<< HEAD
-    t.integer "project_id"
-    t.integer "assigned_to"
-=======
     t.integer "assignee_id"
->>>>>>> fa82b135dd5db89df0f40e5e2a6c832bd8d44f6a
     t.string "name"
     t.text "description"
     t.date "start_date"

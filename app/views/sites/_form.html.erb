@@ -2,6 +2,7 @@
   role="dialog" tabindex="-1">
   <div class="modal-dialog modal-simple modal-center">
     <div class="modal-content">
+      <div class="flashMessages"><%= render partial: 'shared/flash_messages' %></div>
       <%= form_for @site, remote: true do |form| %>
 
         <div class="modal-header">
@@ -12,7 +13,8 @@
         </div>
         <div class="modal-body">
           <div class="example-wrap">
-            <%= render :partial => 'shared/error_messages', :locals => {:obj => form.object} %>
+            <%#= render :partial => 'shared/error_messages', :locals => {:obj => form.object} %>
+            <div class="error-messages"></div>
             <div class="example">
               <div class="row">
                 <div class="form-group form-material col-md-4">
@@ -29,7 +31,7 @@
                   <label class="form-control-label">Contact:</label>
                   <%= form.text_field :contact_id, class: 'form-control', id: 'tokenContactName',
                                       :data => {:org_id => current_org.id,
-                                                :pre => form.object.contact_id.present? ? selected_contact(form.object.contact_id) : '', required: true }
+                                                :pre => form.object.contact_id.present? ? selected_contact(form.object.contact_id) : '' }
                                        %>
                 </div>
               </div>
@@ -122,5 +124,5 @@
   </div>
 </div>
 
-<!--<div id="addContactFormCenter"></div>-->
+<div id="addContactFormCenter"></div>
 <%= javascript_include_tag 'sites_contact_form.js' %>

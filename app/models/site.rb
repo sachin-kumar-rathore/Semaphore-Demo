@@ -31,16 +31,17 @@ class Site < ApplicationRecord
   # == Callbacks == #
 
   # == Scopes and Other macros == #
-  pg_search_scope :property_name_search, :against => :propoerty_name
+  pg_search_scope :property_name_search, :against => :property_name
   pg_search_scope :property_number_search, :against => :property_number
   pg_search_scope :zip_code_search, :against => :zip_code
 
   # == Instance methods == #
-  def self.property_number_or_propery_name_or_zip_code_search(number, name, zip_code)
+  def self.property_number_or_property_name_or_zip_code_search(number, name, zip_code)
     number_relation = property_number_search(number).pluck(:id)
-    name_relation = property_number_search(name).pluck(:id)
+    name_relation = property_name_search(name).pluck(:id)
     zip_code_relation = zip_code_search(zip_code).pluck(:id)
     search_result = number_relation | name_relation | zip_code_relation
+
     return where('id IN (?)', search_result)
   end
 

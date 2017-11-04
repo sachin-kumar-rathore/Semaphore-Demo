@@ -9,5 +9,5 @@ $('.pagination').find('a').each(function() {
     $(this).attr("data-turbolinks", false);
 });
 <% else %>
-$('#siteFormCenter .error-messaes').html("<%= escape_javascript render partial: 'shared/error_messages', locals: {obj: @site} %>");
+$('#siteFormCenter .error-messages').html("<%= escape_javascript render partial: 'shared/error_messages', locals: {obj: @site} %>");
 <% end %>

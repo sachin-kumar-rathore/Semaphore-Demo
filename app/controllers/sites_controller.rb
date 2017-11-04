@@ -6,7 +6,7 @@ class SitesController < ApplicationController
   def index
     @sites = current_org.sites
     if params[:property_name].present? || params[:property_number].present? || params[:zip_code].present?
-      @sites = @sites.property_number_or_propery_name_or_zip_code_search(params[:property_number], params[:property_name],params[:zip_code])
+      @sites = @sites.property_number_or_property_name_or_zip_code_search(params[:property_number], params[:property_name],params[:zip_code])
     end
       @sites = @sites.paginate(page: params[:page], per_page: Site::PAGINATION[:per_page])
   end

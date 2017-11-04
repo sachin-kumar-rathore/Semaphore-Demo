@@ -12,7 +12,7 @@
         </div>
         <div class="modal-body">
           <div class="example-wrap">
-            <div class="error-messaes"></div>
+            <div class="error-messages"></div>
             <div class="example">
               <div class="row">
                 <div class="form-group form-material col-md-12">
@@ -31,6 +31,12 @@
                 </div>
               </div>
               <div class="row">
+                <div class="form-group form-material col-md-6">
+                  <label class="form-control-label" >Project:</label>
+                  <%= form.select(:project_id, current_org.projects.all.map{ |project| [project.name, project.id] },{ include_blank: 'No Project' },{data:{ plugin: 'selectpicker', "live-search":true}}) %>
+                </div>
+              </div>
+              <div class="row">
                 <div class="form-group form-material col-md-12">
                   <label class="form-control-label">Description:</label>
                   <%= form.text_area :description, class: "form-control", rows: 3 %>
@@ -40,21 +46,19 @@
                 <div class="form-group form-material col-md-6">
                   <label class="form-control-label">Start Date:</label>
                   <div class="input-group">
-                    <%= form.date_field :start_date, class: "form-control" %>
-                    <!--<input class="form-control" data-provide='datepicker' id="startTaskdatepicker" type="text" name="task[start_date]" value="<%#= task.start_date.present? ? task.start_date : '' %>">-->
                     <span class="input-group-addon">
                       <i class="icon md-calendar" aria-hidden="true"></i>
                     </span>
+                    <%= form.text_field 'start_date_str', class: "form-control  datepicker", value:  @task.start_date ? @task.start_date : Date.today.strftime('%m/%d/%Y'), data: {plugin: "datepicker"}, required: true %>
                   </div>
                 </div>
                 <div class="form-group form-material col-md-6">
                   <label class="form-control-label">End Date:</label>
                   <div class="input-group">
-                    <%= form.date_field :end_date, class: "form-control" %>
-                    <!--<input class="form-control" data-provide='datepicker' id="endTaskdatepicker" type="text" name="task[end_date]" value="<%#= task.end_date.present? ? task.end_date : '' %>">-->
                     <span class="input-group-addon">
                       <i class="icon md-calendar" aria-hidden="true"></i>
                     </span>
+                    <%= form.text_field 'end_date_str', class: "form-control  datepicker", value:  @task.end_date ? @task.end_date : Date.today.strftime('%m/%d/%Y'), data: {plugin: "datepicker"}, required: true %>
                   </div>
                 </div>
               </div>

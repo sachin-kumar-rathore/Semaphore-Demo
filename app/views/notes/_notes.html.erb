@@ -12,7 +12,7 @@
       <tr data-href="<%= note_path(note, project_id: @project.id) %>" class="clickable" >
         <td class="col-md-2"><%= note.date %></td>
         <td class="col-md-2"><%= note.subject %></td>
-        <td class="col-md-8 note-description"><%= note.description %></td>
+        <td class="col-md-8"><%= note.description.truncate(100) %></td>
       </tr>
     <% end %>
   </tbody>

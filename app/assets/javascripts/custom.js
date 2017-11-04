@@ -63,3 +63,38 @@ function reloadNotes(id){
     data: { project_id: id}
   });
 }
+
+//tasks
+
+$(document).on("click", ".nav-pills .nav-item", function () {
+  $(".nav-item").children('.nav-link').removeClass("active");
+  $(this).children('.nav-link').addClass("active");
+  $(this).attr("id")=="current_user_filter" ? $('.assign-filter').attr('hidden',false) : $('.assign-filter').attr('hidden',true);
+  filterRequest(); 
+});
+
+
+function reloadTasks() {
+  $('.modal-backdrop').remove();
+  $("#taskFormCenter").modal("hide");
+  filterRequest();
+}
+
+$(document).on("change", "#task_filter_by_project", function () {
+  filterRequest();
+});
+
+$(document).on("change", "#assign", function () {
+  filterRequest();
+});
+
+function filterRequest(){
+  var project_id = $('#task_filter_by_project').val();
+  var user_filter = ($('#current_user_filter .nav-link').hasClass("active"));
+  var assigned_to_me = ($('#assign').val()=="Assigned To Me");
+  $.ajax({
+    url: "/tasks",
+    type: "GET",
+    data: { current_user_filter: user_filter, project_id: project_id, assigned_to_me: assigned_to_me  }
+  });  
+}

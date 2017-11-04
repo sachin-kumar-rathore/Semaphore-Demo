@@ -1,4 +1,4 @@
-<table class="table table-hover dataTable table-striped w-full" data-plugin="dataTable">
+<table class="table table-hover dataTable table-striped w-full" >
   <thead>
     <tr>
       <th>TASK</th>
@@ -13,12 +13,12 @@
     </tr>
   </thead>
   <tbody>
-    <% for task in tasks %>
-      <tr data-href="<%= task_path(task) %>">
+  <% for task in tasks %>
+      <tr data-href="<%= task_path(task) %>" class="clickable" >
         <td><%= task.name %></td>
         <td><%= task.priority %></td>
-        <td><%= task.project_id ? task.project_id : "PRJ" %></td>
-        <td><%= task.description.truncate(50) if task.description.present? %></td>
+        <td><%= task.project_id ? task.project.name : "" %></td>
+        <td><%= task.description.truncate(25) %></td>
         <td><%= task.status %></td>
         <td><%= task.progress %> %</td>
         <td><%= task.assignee.full_name %></td>

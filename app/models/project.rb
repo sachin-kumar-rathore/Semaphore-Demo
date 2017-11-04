@@ -13,6 +13,7 @@ class Project < ApplicationRecord
   has_many :contacts, through: :project_contacts
   has_many :notes
   belongs_to :company, optional: true   #remove_optional_later
+  has_many :tasks
 
   # SCOPE
   scope :status, -> (status) { where("status IN (?)", status.values) }

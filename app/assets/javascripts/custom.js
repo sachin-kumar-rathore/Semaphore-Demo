@@ -44,16 +44,6 @@ $(document).on("click", "#projectsList tr", function () {
   window.location.href = link;
 });
 
-$(function() { 
-  if (!$(".tab-content").children('.tab-pane').hasClass("active")){
-    var link = $('#mainNavLink').attr("href");
-    $.ajax({
-      url: link,
-      type: "GET"
-    });
-  }
-});
-
 //notes
 
 function reloadNotes(id){

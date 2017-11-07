@@ -32,3 +32,15 @@
     </div>
   </div>
 </div>
+
+<script>
+  $(function() { 
+    if (!$(".tab-content").children('.tab-pane').hasClass("active")){
+      var link = $('#mainNavLink').attr("href");
+      $.ajax({
+        url: link,
+        type: "GET"
+      });
+    }
+  });
+</script>

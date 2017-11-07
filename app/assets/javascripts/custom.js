@@ -2,9 +2,8 @@
 
 function reloadContacts(id){
   $.ajax({
-    url: '/project_contacts',
-    type: "GET",
-    data: { project_id: id}
+    url: '/projects/' + id + '/contacts',
+    type: "GET"
   });
 }
 
@@ -44,23 +43,14 @@ $(document).on("click", "#projectsList tr", function () {
   window.location.href = link;
 });
 
-$(function() { 
-  if (!$(".tab-content").children('.tab-pane').hasClass("active")){
-    var link = $('#mainNavLink').attr("href");
-    $.ajax({
-      url: link,
-      type: "GET"
-    });
-  }
-});
+
 
 //notes
 
 function reloadNotes(id){
   $.ajax({
-    url: '/notes',
-    type: "GET",
-    data: { project_id: id}
+    url: '/projects/' + id + '/notes',
+    type: "GET"
   });
 }
 
@@ -98,3 +88,14 @@ function filterRequest(){
     data: { current_user_filter: user_filter, project_id: project_id, assigned_to_me: assigned_to_me  }
   });  
 }
+
+//project_tasks
+
+function reloadProjectTasks(id){
+  $.ajax({
+    url: '/projects/' + id + '/tasks',
+    type: "GET",
+  });
+}
+
+

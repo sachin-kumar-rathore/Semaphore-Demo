@@ -22,7 +22,7 @@ class Contact < ApplicationRecord
   validates_format_of :email, with: /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/, message: "Invalid"
 
   # == Callbacks == #
-  after_save :add_contact_to_project, if: :has_project_id?
+  after_create :add_contact_to_project, if: :has_project_id? 
   # == Scopes and Other macros == #
   pg_search_scope :name_search, :against => :name, :using => {
       :tsearch => {:prefix => true}

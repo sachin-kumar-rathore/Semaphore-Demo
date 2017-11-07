@@ -3,5 +3,6 @@ $(".tab-content").children('.tab-pane').removeClass("active");
 $('#mainTab').addClass("active");
 $(".nav-item").children('.nav-link').removeClass("active");
 $('#mainNavLink').addClass("active");
+$('.flashMessages').html("<%= escape_javascript render partial: 'shared/flash_messages' %>");
 $('[data-plugin="datepicker"]').datepicker();
 $('[data-plugin="selectpicker"]').selectpicker();

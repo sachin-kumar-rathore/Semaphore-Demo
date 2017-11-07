@@ -1,4 +1,4 @@
 $('#createOrEditNote').html("");
-$('#createOrEditNote').html("<%= escape_javascript render 'form' %>");
+$('#createOrEditNote').html("<%= j render( partial: 'form', locals: { controller: 'notes', action: 'create' }) %>");
 $('#noteFormCenter').modal('show');
 $('.datepicker').datepicker();

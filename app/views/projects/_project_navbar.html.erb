@@ -1,10 +1,10 @@
-<div class="nav-tabs-horizontal" data-plugin="tabs">
+<div class="nav-tabs-horizontal" data-plugin="tabs" id="dashboard-tabs" >
   <ul class="nav nav-tabs" role="tablist">
     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="<%= @project ? edit_project_path(@project) : new_project_path %>" id="mainNavLink" data-remote="true" role="tab">Main</a></li>
-    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="<%= project_contacts_path(project_id: @project ? @project.id : nil ) %>" data-remote="true" role="tab" id="contactsNavLink" >Contacts</a></li>
+    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="<%= project_contacts_path(project_id: @project.id) if @project %>" data-remote="true" role="tab" id="contactsNavLink" >Contacts</a></li>
     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#sitesBuildingTab" role="tab">Sites/Buildings</a></li>
-    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="<%= notes_path(project_id: @project ? @project.id : nil) %>" data-remote="true" role="tab" id="notesNavLink">Notes</a></li>
-    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#taskTab" role="tab">Task</a></li>
+    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="<%= project_notes_path(project_id: @project.id) if @project%>" data-remote="true" role="tab" id="notesNavLink">Notes</a></li>
+    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="<%= project_tasks_path(project_id: @project.id) if @project %>" data-remote="true role="tab" id="tasksNavLink">Task</a></li>
     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#filesTab" role="tab">Files</a></li>
     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#emailsTab" role="tab">Emails</a></li>
   </ul>
@@ -21,7 +21,7 @@
     <div class="tab-pane" id="notesTab" role="tabpanel">
 
     </div>
-    <div class="tab-pane" id="taskTab" role="tabpanel">
+    <div class="tab-pane" id="tasksTab" role="tabpanel">
 
     </div>
     <div class="tab-pane" id="filesTab" role="tabpanel">
@@ -32,3 +32,15 @@
     </div>
   </div>
 </div>
+
+<script>
+$(function() { 
+  if (!$(".tab-content").children('.tab-pane').hasClass("active")){
+    var link = $('#mainNavLink').attr("href");
+    $.ajax({
+      url: link,
+      type: "GET"
+    });
+  }
+});
+</script>

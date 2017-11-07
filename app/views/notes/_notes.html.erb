@@ -9,7 +9,7 @@
 
   <tbody>
     <% for note in notes %>
-      <tr data-href="<%= note_path(note, project_id: @project.id) %>" class="clickable" >
+      <tr data-href="<%= project_note_path(note, project_id: @project.id) %>" class="clickable" >
         <td class="col-md-2"><%= note.date %></td>
         <td class="col-md-2"><%= note.subject %></td>
         <td class="col-md-8"><%= note.description.truncate(100) %></td>

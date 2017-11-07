@@ -4,5 +4,4 @@
 <% else %>
   $('#showExistingContacts .error-messages').html("<%= escape_javascript render partial: 'shared/error_messages', locals: {obj: @contact} %>");
 <% end %>
-id = <%= @project.id %>
-reloadContacts(id);
+reloadContacts('<%= @project.id %>');

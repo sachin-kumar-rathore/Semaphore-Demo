@@ -2,9 +2,8 @@
 
 function reloadContacts(id){
   $.ajax({
-    url: '/project_contacts',
-    type: "GET",
-    data: { project_id: id}
+    url: '/projects/' + id + '/contacts',
+    type: "GET"
   });
 }
 
@@ -48,9 +47,8 @@ $(document).on("click", "#projectsList tr", function () {
 
 function reloadNotes(id){
   $.ajax({
-    url: '/notes',
-    type: "GET",
-    data: { project_id: id}
+    url: '/projects/' + id + '/notes',
+    type: "GET"
   });
 }
 
@@ -88,3 +86,14 @@ function filterRequest(){
     data: { current_user_filter: user_filter, project_id: project_id, assigned_to_me: assigned_to_me  }
   });  
 }
+
+//project_tasks
+
+function reloadProjectTasks(id){
+  $.ajax({
+    url: '/projects/' + id + '/tasks',
+    type: "GET",
+  });
+}
+
+

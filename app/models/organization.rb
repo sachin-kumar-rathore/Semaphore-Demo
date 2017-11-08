@@ -6,4 +6,5 @@ class Organization < ApplicationRecord
   has_many :sites, dependent: :destroy
   has_many :projects
   has_many :tasks, through: :users
+  has_many :emails, dependent: :destroy
 end

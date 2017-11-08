@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171103081117) do
+ActiveRecord::Schema.define(version: 20171108054348) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,19 @@ ActiveRecord::Schema.define(version: 20171103081117) do
     t.string "phone_number_2"
     t.string "cell_phone"
     t.text "notes"
+  end
+
+  create_table "emails", force: :cascade do |t|
+    t.integer "organization_id"
+    t.integer "project_id"
+    t.string "sent_by"
+    t.string "sent_to"
+    t.string "subject"
+    t.string "messageID"
+    t.text "body"
+    t.datetime "email_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "notes", force: :cascade do |t|
@@ -162,13 +175,10 @@ ActiveRecord::Schema.define(version: 20171103081117) do
     t.string "business_unit"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
-    t.index ["deleted_at"], name: "index_sites_on_deleted_at"
   end
 
   create_table "tasks", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "assignee_id"
     t.string "name"
     t.text "description"
     t.date "start_date"
@@ -178,6 +188,7 @@ ActiveRecord::Schema.define(version: 20171103081117) do
     t.float "progress", default: 0.0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "assignee_id"
     t.bigint "project_id"
     t.index ["project_id"], name: "index_tasks_on_project_id"
   end

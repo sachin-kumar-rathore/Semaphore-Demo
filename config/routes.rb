@@ -45,4 +45,6 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :emails, only: [:index, :create]
+
 end

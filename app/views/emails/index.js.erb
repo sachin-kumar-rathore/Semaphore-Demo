@@ -1,0 +1,2 @@
+$('#emailsList').html("");
+$('#emailsList').html("<%= escape_javascript render partial: 'emails', locals: {emails: @emails} %>");

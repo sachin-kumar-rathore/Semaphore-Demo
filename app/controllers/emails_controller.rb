@@ -11,6 +11,10 @@ class EmailsController < ApplicationController
       @emails = @emails.public_send(key, value) if value.present?
     end
     @emails = @emails.paginate(page: params[:page], per_page: 3)
+    respond_to do |format|
+      format.html {render 'index'}
+      format.js
+    end
   end
 
   # GET /emails/1

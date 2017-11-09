@@ -3,7 +3,7 @@
     <div class="panel">
       <header class="panel-heading">
         <h3 class="panel-title">
-          <%= form_tag url_for(:controller => 'emails', :action => 'index'), :method => 'get' do %>
+          <%= form_tag url_for(:controller => 'emails', :action => 'index'), :method => 'get', remote: true do %>
             <div class="row">
               <div class="col-md-4">
                 <h4>Emails

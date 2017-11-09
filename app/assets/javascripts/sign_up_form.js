@@ -1,6 +1,5 @@
 $(document).ready(function() {
   var animating, current_fs, left, next_fs, opacity, previous_fs, scale;
-  // $('#msform').validate();
   current_fs = void 0;
   next_fs = void 0;
   previous_fs = void 0;
@@ -8,7 +7,19 @@ $(document).ready(function() {
   opacity = void 0;
   scale = void 0;
   animating = void 0;
-  $('.next').click(function() {
+  $(document).on("click", ".next", function (){
+    $("#msform").validate({
+      debug: true,
+      rules: {
+      "user[password]": {required: true, minlength: 6},
+      "user[password_confirmation]": {required: true, equalTo: "#user_password"}
+      },
+      messages: {
+        "user[password_confirmation]": {
+          equalTo : "Passwords don't match."
+        }
+      }
+    });
     if ($('#msform').valid()) {
       if (animating) {
         return false;
@@ -44,7 +55,7 @@ $(document).ready(function() {
       $('#msform').validate();
     }
   });
-  $('.previous').click(function() {
+  $(document).on("click", ".previous", function (){ 
     if (animating) {
       return false;
     }
@@ -76,8 +87,7 @@ $(document).ready(function() {
       easing: 'easeInOutBack'
     });
   });
-
-  $('#msform').on('keyup keypress', function(e) {
+  $(document).on("keyup keypress", "#msform", function (e){
     var keyCode = e.keyCode || e.which;
     if (keyCode === 13) { 
       e.preventDefault();

@@ -1,17 +1,12 @@
 class ProjectsController < ApplicationController
 
   before_action :authenticate_user!
-  before_action :set_project, only: [:edit, :update, :dashboard]
+  before_action :set_project, only: [:edit, :update, :show]
 
-  def dashboard
-    if @project.blank? && params[:id].present?
-      redirect_to projects_path, notice: 'Project not found.'
-    end  
-  end
-  
   def new
     @project = current_org.projects.new
     respond_to do |format|
+      format.html
       format.js
     end
   end
@@ -21,25 +16,45 @@ class ProjectsController < ApplicationController
     filtering_params(params).each do |key, value|
       @projects = @projects.public_send(key, value) if value.present?
     end
-    @projects = @projects.paginate(page: params[:page], per_page: 8)      
+    @projects = @projects.paginate(page: params[:page], per_page: 8)
+    respond_to do |format|
+      format.html
+      format.js
+    end      
+  end
+
+  def show
+    if @project
+      redirect_to edit_project_path(@project)
+    else
+      flash[:danger] = 'Project not found.'
+      redirect_to projects_path
+    end
   end
 
   def create
     @project = current_org.projects.new(project_params)
     if @project.save
       if params[:commit] == "Save & Close"
-        redirect_to projects_path, notice: 'Project was successfully created.'
+        flash[:success] = 'Project was successfully created.'
+        redirect_to projects_path
       else
-        redirect_to dashboard_projects_path(id: @project.id), notice: 'Project was successfully saved.'
+        flash[:success] = 'Project was successfully saved.'
+        redirect_to edit_project_path(@project)
       end 
     else
-      flash[:notice] = 'Project could not be created.'
-      redirect_to dashboard_projects_path
+      flash[:danger] = 'Project could not be created.'
+      render :new
     end
   end
   
   def edit
+    if @project.blank?
+      flash[:danger] = 'Project not found.'
+      redirect_to projects_path
+    end
     respond_to do |format|
+      format.html
       format.js
     end
   end
@@ -47,13 +62,15 @@ class ProjectsController < ApplicationController
   def update
     if @project.update(project_params)
       if params[:commit] == "Save & Close"
-        redirect_to projects_path, notice: 'Project was successfully updated.'
+        flash[:success] = 'Project was successfully updated.'
+        redirect_to projects_path
       else
-        redirect_to dashboard_projects_path(id: @project.id), notice: 'Project successfully updated.'
+        flash[:success] = 'Project was successfully updated.'
+        redirect_to edit_project_path(@project)
       end 
     else
-      flash[:notice] = 'Project could not be updated.'
-      redirect_to dashboard_projects_path(id: project.id)
+      flash[:danger] = 'Project could not be updated.'
+      render :edit
     end
   end
 

@@ -52,6 +52,10 @@ function reloadNotes(id){
   });
 }
 
+$(document).on("click", ".first-save-project", function () {
+  alert("First save a project before accessing this section.");
+});
+
 //tasks
 
 $(document).on("click", ".nav-pills .nav-item", function () {

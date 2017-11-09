@@ -6,7 +6,7 @@ class ProjectTasksController < TasksController
     @tasks = @project.tasks.paginate(page: params[:page], per_page: 8)
     respond_to do |format|
       format.js
-      format.html { redirect_to dashboard_projects_path(id: @project.id) }
+      format.html { redirect_to edit_project_path(@project) }
     end
   end
 

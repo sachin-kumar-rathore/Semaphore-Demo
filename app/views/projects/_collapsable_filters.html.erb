@@ -3,7 +3,7 @@
 <br/>
 <br/>
 <div class="collapse" id="project_filters">
-  <%= form_tag projects_path, method: :get do %>
+  <%= form_tag projects_path, method: :get, remote: true do %>
     <div class="row ">
       <div class="form-inline form-material col-md-12">
         <div class="col-md-2">
@@ -44,6 +44,7 @@
       <div class="form-group form-material col-md-3">
         <label class="form-control-label" for="inputProjectManager">Project Manager:</label>
         <select data-plugin="selectpicker" data-live-search="true" class="form-control">
+          <option value="">Please Select</option>
           <option>X</option>
           <option>Y</option>
           <option>Z</option>
@@ -56,6 +57,7 @@
       <div class="form-group form-material col-md-3">
         <label class="form-control-label" for="inputConsideredLocations">Considered Locations:</label>
         <select data-plugin="selectpicker" data-live-search="true" class="form-control">
+          <option value="">Please Select</option>
           <option>X</option>
           <option>Y</option>
           <option>Z</option>
@@ -99,6 +101,7 @@
       <div class="form-group form-material col-md-3">
         <label class="form-control-label" for="inputConsideredLocations">Source:</label>
         <select data-plugin="selectpicker" data-live-search="true" class="form-control">
+          <option value="">Please Select</option>
           <option>X</option>
           <option>Y</option>
           <option>Z</option>
@@ -228,7 +231,12 @@
         <button type="submit" class="col-md-12 btn btn-block green-btn ">Update & Show List</button>
       </div>
       <div class="col-md-3">
-        <%= link_to "Add New Project", dashboard_projects_path, class: "col-md-12 btn btn-block green-btn", data: { turbolinks: false } %>
+        <%= link_to "Add New Project", new_project_path, class: "col-md-12 btn btn-block green-btn", data: { turbolinks: false } %>
+      </div>
+      <div class="col-md-3">
+        <%= link_to projects_path, class: 'reload-page-link', data: { turbolinks: false } do %>
+            <i class="fa fa-refresh"></i>
+        <% end %>
       </div>
     </div>
   <% end %>

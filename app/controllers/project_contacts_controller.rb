@@ -6,7 +6,7 @@ class ProjectContactsController < ContactsController
     @project_contacts = @project.contacts.paginate(page: params[:page], per_page: 8)
     respond_to do |format|
       format.js
-      format.html { redirect_to dashboard_projects_path(id: @project.id) }
+      format.html { redirect_to edit_project_path(@project) }
     end
   end
   
@@ -37,7 +37,7 @@ class ProjectContactsController < ContactsController
       if @project_contact.destroy
         flash.now[:success] = 'Contact was successfully removed from the project.'
       else
-        flash.now[:info] = 'Contact could not be removed from the project.'
+        flash.now[:danger] = 'Contact could not be removed from the project.'
       end
       format.js
     end

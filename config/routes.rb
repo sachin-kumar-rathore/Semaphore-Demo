@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   end
 
   resources :dashboard, only: [:index]
-  resources :projects, only: [:new, :index, :create, :edit, :update] do
+  resources :projects, only: [:new, :index, :create, :edit, :update, :show] do
     resources :tasks, controller: 'project_tasks'
     resources :notes, except: [:edit]
     resources :contacts, controller: 'project_contacts', only: [:index, :new, :create, :show, :update, :destroy] do
@@ -31,9 +31,6 @@ Rails.application.routes.draw do
       collection do
         get :show_existing_contacts
       end
-    end
-    collection do
-      get :dashboard
     end
   end
   

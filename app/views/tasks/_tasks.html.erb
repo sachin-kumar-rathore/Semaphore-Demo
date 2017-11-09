@@ -30,9 +30,5 @@
 </table>
 
 <div class="digg_pagination">
-  <% if request.xhr? == 0 %>
-    <%= js_will_paginate tasks %>
-  <% else %>
-    <%= will_paginate tasks %>
-  <% end %>
+  <%= js_will_paginate tasks %>
 </div>

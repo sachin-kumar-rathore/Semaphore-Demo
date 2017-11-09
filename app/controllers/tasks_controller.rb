@@ -54,7 +54,7 @@ class TasksController < ApplicationController
       if @task.destroy
         flash.now[:success] = 'Task was successfully destroyed.'
       else
-        flash.now[:info] = 'Task could not be destroyed.'
+        flash.now[:danger] = 'Task could not be destroyed.'
       end
       format.js
     end

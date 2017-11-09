@@ -57,6 +57,7 @@ class EmailsController < ApplicationController
     @contact = current_org.contacts.find(params[:contact_id])
     respond_to do |format|
       @email.contacts << @contact
+      @emails = current_org.emails.includes(:contacts).paginate(page: params[:page], per_page: 3)
       flash.now[:success] = 'Contact was successfully added to Email.'
       format.js
     end

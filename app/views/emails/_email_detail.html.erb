@@ -18,27 +18,30 @@
                 <li class="list-group-item"><b>To: </b> <%= email.sent_to %></li>
                 <li class="list-group-item"><b>Cc: </b> <%= email.cc %></li>
                 <li class="list-group-item"><b>Subject: </b> <%= email.subject %></li>
-                <li class="list-group-item"><b>Attachment: </b> </li>
+                <li class="list-group-item"><b>Attachment: </b></li>
               </ul>
             </div>
           </div>
           <hr>
-          <!-- TODO Email Contact Details-->
-          <div class="row">
-            <div class="col-md-12">
-              <ul class="list-group list-group-full">
-                <li class="list-group-item">1. Active</li>
-                <li class="list-group-item">2. Dapibus ac facilisis in</li>
-                <li class="list-group-item">3. Morbi leo risus</li>
-                <li class="list-group-item">4. Disabled</li>
-                <li class="list-group-item">5. Vestibulum at eros</li>
-              </ul>
+
+          <% if email.contacts.count > 0 %>
+            <% email_contact = email.contacts.first %>
+            <div class="row">
+              <div class="col-md-12">
+                <ul class="list-group list-group-full">
+                  <li class="list-group-item"><%= email_contact.name %>, <%= email_contact.organization.name %></li>
+                  <li class="list-group-item"><%= email_contact.title %>, <%= email_contact.address_line_1 %></li>
+                  <li class="list-group-item"><%= email_contact.address_line_2 %>, <%= email_contact.city_state_zip %></li>
+                  <li class="list-group-item">Toll: <%= email_contact.phone_number_1 %></li>
+                  <li class="list-group-item">Direct: <%= email_contact.cell_phone %></li>
+                </ul>
+              </div>
             </div>
-          </div>
+          <% end %>
         </div>
         <div class="row">
           <div class="form-group form-material col-md-6">
-            <button type="button" class="btn btn-sm white-btn" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-sm green-btn" data-dismiss="modal">Close</button>
           </div>
         </div>
       </div>

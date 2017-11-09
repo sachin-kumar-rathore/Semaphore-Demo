@@ -15,9 +15,15 @@
         <td><%= email.sent_to %></td>
         <td><%= email.sent_by %></td>
         <td><%= truncate(email.subject, length: 27) %></td>
-        <td data-href="<%= show_existing_contacts_email_path(email) %>" class="add-contact">
-          <i class="fa fa-plus"></i> Add
-        </td>
+        <% if email.contacts.count > 0 %>
+          <td>
+            <%= email.contacts.first.name %>
+          </td>
+        <% else %>
+          <td data-href="<%= show_existing_contacts_email_path(email) %>" class="add-contact">
+            <i class="fa fa-plus"></i> Add
+          </td>
+        <% end %>
         <td>
           <i class="fa fa-plus"></i> Add
         </td>

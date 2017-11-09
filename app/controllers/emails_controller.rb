@@ -1,26 +1,21 @@
 class EmailsController < ApplicationController
-  skip_before_action :verify_authenticity_token
+  skip_before_action :verify_authenticity_token, only: [:create]
   before_action :authenticate_user!, only: [:index]
   before_action :set_email, only: [:show, :edit, :update, :destroy]
 
   # GET /emails
   # GET /emails.json
   def index
-    @emails = current_org.emails.all
+    @emails = current_org.emails.includes(:contacts)
+    filtering_params(params).each do |key, value|
+      @emails = @emails.public_send(key, value) if value.present?
+    end
+    @emails = @emails.paginate(page: params[:page], per_page: 3)
   end
 
   # GET /emails/1
   # GET /emails/1.json
   def show
-  end
-
-  # GET /emails/new
-  def new
-    @email = Email.new
-  end
-
-  # GET /emails/1/edit
-  def edit
   end
 
   # POST /emails
@@ -49,14 +44,32 @@ class EmailsController < ApplicationController
     end
   end
 
+  def show_existing_contacts
+    @email = current_org.emails.find(params[:id])
+    @contacts = current_org.contacts
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def attach_contact_to_email
+    @email = current_org.emails.find(params[:id])
+    @contact = current_org.contacts.find(params[:contact_id])
+    respond_to do |format|
+      @email.contacts << @contact
+      flash.now[:success] = 'Contact was successfully added to Email.'
+      format.js
+    end
+  end
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_email
     @email = Email.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
-  def email_params
-    # params.permit(:Cc, :bcc, :Date, :sender, :subject, :body-plain)
+  def filtering_params(params)
+    params.slice(:project, :contact)
   end
+
 end

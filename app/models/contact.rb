@@ -15,6 +15,7 @@ class Contact < ApplicationRecord
   belongs_to :organization
   has_many :project_contacts, dependent: :destroy
   has_many :projects, through: :project_contacts
+  has_and_belongs_to_many :emails
 
 
   # == Validations == #

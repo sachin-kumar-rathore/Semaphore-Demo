@@ -1,25 +1,35 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-xl-12">
+    <div class="panel">
+      <header class="panel-heading">
+        <h3 class="panel-title">
+          <%= form_tag url_for(:controller => 'emails', :action => 'index'), :method => 'get' do %>
+            <div class="row">
+              <div class="col-md-4">
+                <h4>Emails
+                  <%= link_to emails_path, class: 'reload-page-link pull-right', data: { turbolinks: false } do %>
+                    <i class="fa fa-refresh"></i>
+                  <% end %>
+                </h4>
+              </div>
+              <div class="col-md-3">
+                <%= select_tag :project, options_for_select(current_org.projects.all.map { |project| [project.name, project.id] }), include_blank: 'All Projects', class: 'form-control', data: {plugin: "selectpicker"} %>
+              </div>
+              <div class="col-md-3">
+                <%= select_tag :contact, options_for_select(current_org.contacts.all.map { |contact| [contact.name, contact.id] }), include_blank: 'All Contacts', class: 'form-control', data: {plugin: "selectpicker"} %>
+              </div>
+              <div class="col-md-2">
+                <button class="btn btn-sm green-btn waves-effect waves-classic" type="submit">Update & Show List</button>
+              </div>
+            </div>
+          <% end %>
+        </h3>
+      </header>
+      <div class="panel-body" id="emailsList">
+        <%= render partial: 'emails', locals: {emails: @emails} %>
+      </div>
+    </div>
+  </div>
+</div>
 
-<h1>Emails</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @emails.each do |email| %>
-      <tr>
-        <td><%= link_to 'Show', email %></td>
-        <td><%= link_to 'Edit', edit_email_path(email) %></td>
-        <td><%= link_to 'Destroy', email, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Email', new_email_path %>
+<div class="emailModals"></div>

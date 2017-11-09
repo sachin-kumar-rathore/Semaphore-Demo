@@ -12,6 +12,9 @@ function reloadContacts(id){
 
 $(document).on("click", ".clickable", function () {
   var link = $(this).data("href");
+  if($(event.target).hasClass('add-contact')) {
+    link = $(this).find('.add-contact').data("href");
+  }
   $.ajax({
     url: link,
     type: "GET"

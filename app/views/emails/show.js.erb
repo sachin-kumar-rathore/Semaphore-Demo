@@ -1,0 +1,3 @@
+$('.emailModals').html("");
+$('.emailModals').html("<%= escape_javascript render partial: 'email_detail', locals: {email: @email} %>");
+$('#emailDetailsModal').modal("show");

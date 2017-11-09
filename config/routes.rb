@@ -45,6 +45,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :emails, only: [:index, :create]
+  resources :emails, only: [:index, :create, :destroy, :show] do
+    member do
+      get :show_existing_contacts
+      post :attach_contact_to_email
+    end
+  end
 
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171108054348) do
+ActiveRecord::Schema.define(version: 20171109091122) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,12 @@ ActiveRecord::Schema.define(version: 20171108054348) do
     t.text "notes"
   end
 
+  create_table "contacts_emails", id: false, force: :cascade do |t|
+    t.bigint "contact_id", null: false
+    t.bigint "email_id", null: false
+    t.index ["contact_id", "email_id"], name: "index_contacts_emails_on_contact_id_and_email_id"
+  end
+
   create_table "emails", force: :cascade do |t|
     t.integer "organization_id"
     t.integer "project_id"
@@ -70,6 +76,7 @@ ActiveRecord::Schema.define(version: 20171108054348) do
     t.datetime "email_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "cc"
   end
 
   create_table "notes", force: :cascade do |t|

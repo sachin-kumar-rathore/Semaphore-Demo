@@ -111,7 +111,7 @@ span.next_page, a.next_page {
 }
 
 
-#contactsList thead th, #projectsList thead th, #notesList thead th {
+#contactsList thead th, #projectsList thead th, #notesList thead th, #emailsList thead th {
   color: #2ED573;
   font-weight: 500;
 }
@@ -206,4 +206,16 @@ span.next_page, a.next_page {
 .nav-tabs .nav-item .nav-link.active {
   background-color: #2ED573;
   border-color: #2ED573;
+}
+#emailsList tbody tr {
+  td i{
+    color: #2ED573;
+    margin-right: 5px;
+  }
+  td:nth-child(4), td:nth-child(5){
+    text-align: center
+  }
+}
+#emailDetailsModal .list-group-item{
+  padding: 2px;
 }

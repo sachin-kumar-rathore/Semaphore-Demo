@@ -1,0 +1,32 @@
+<table class="table table-hover dataTable table-striped w-full">
+  <thead>
+    <tr>
+      <th>SEND TO</th>
+      <th>SEND BY</th>
+      <th>SUBJECT</th>
+      <th>ASSOCIATED CONTACT</th>
+      <th>ASSIGNED PROJECT</th>
+      <th>DATE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for email in emails %>
+      <tr data-href="<%= email_path(email) %>" class="clickable">
+        <td><%= email.sent_to %></td>
+        <td><%= email.sent_by %></td>
+        <td><%= truncate(email.subject, length: 27) %></td>
+        <td data-href="<%= show_existing_contacts_email_path(email) %>" class="add-contact">
+          <i class="fa fa-plus"></i> Add
+        </td>
+        <td>
+          <i class="fa fa-plus"></i> Add
+        </td>
+        <td><%= email.email_date.strftime("%m/%d/%Y") %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="digg_pagination">
+  <%= will_paginate emails %>
+</div>

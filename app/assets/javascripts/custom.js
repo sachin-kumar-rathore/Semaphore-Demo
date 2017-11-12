@@ -14,6 +14,8 @@ $(document).on("click", ".clickable", function () {
   var link = $(this).data("href");
   if($(event.target).hasClass('add-contact')) {
     link = $(this).find('.add-contact').data("href");
+  }else if($(event.target).hasClass('add-project')){
+    link = $(this).find('.add-project').data("href");
   }
   $.ajax({
     url: link,

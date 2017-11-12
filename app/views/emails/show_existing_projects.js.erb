@@ -1,0 +1,4 @@
+$('.emailModals').html("");
+$('.emailModals').html("<%= escape_javascript render partial: 'assign_project', locals: {email: @email, projects: @projects} %>")
+$('#assignProjectToContact').modal('show');
+$('[data-plugin="selectpicker"]').selectpicker();

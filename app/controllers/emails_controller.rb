@@ -61,8 +61,27 @@ class EmailsController < ApplicationController
     @contact = current_org.contacts.find(params[:contact_id])
     respond_to do |format|
       @email.contacts << @contact
-      @emails = current_org.emails.includes(:contacts).paginate(page: params[:page], per_page: 3)
+      @emails = current_org.emails.includes(:contacts, :project).paginate(page: params[:page], per_page: 3)
       flash.now[:success] = 'Contact was successfully added to Email.'
+      format.js
+    end
+  end
+
+  def show_existing_projects
+    @email = current_org.emails.find(params[:id])
+    @projects = current_org.projects
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def attach_project_to_email
+    @email = current_org.emails.find(params[:id])
+    @project = current_org.projects.find(params[:project_id])
+    respond_to do |format|
+      @email.update(project_id: params[:project_id])
+      @emails = current_org.emails.includes(:contacts, :project).paginate(page: params[:page], per_page: 3)
+      flash.now[:success] = "Contact was successfully added to Project - #{@project.name}."
       format.js
     end
   end

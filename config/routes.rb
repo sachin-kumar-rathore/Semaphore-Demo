@@ -20,6 +20,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :files do
+    member do
+      get :show_projects
+      post :attach_project_to_file
+    end
+  end
   resources :dashboard, only: [:index]
   resources :projects, only: [:new, :index, :create, :edit, :update, :show] do
     resources :tasks, controller: 'project_tasks'

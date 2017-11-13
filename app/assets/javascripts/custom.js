@@ -100,4 +100,33 @@ function reloadProjectTasks(id){
   });
 }
 
+//files
+
+function reloadFiles(){
+  $('.modal-backdrop').remove();
+  $("#fileFormCenter").modal("hide");
+  $.ajax({
+    url: '/files',
+    type: "GET",
+    dataType: 'script'
+  });  
+}
+
+$(document).on("click", "#saveButton", function () {
+  this.innerHTML = 'Uploading....';
+  $('.spinner').removeAttr('hidden');
+});
+
+$(document).on("click", ".delete-clickable", function () {
+  var result = confirm("Are you sure you want to delete this file?");
+  if (result) {
+    var link = $(this).data("href");
+    $.ajax({
+      url: link,
+      beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+      type: "DELETE",
+      dataType: 'script'
+    });
+  }
+});
 

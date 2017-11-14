@@ -130,3 +130,13 @@ $(document).on("click", ".delete-clickable", function () {
   }
 });
 
+//project_files
+
+function reloadProjectFiles(id){
+  $('.modal-backdrop').remove();
+  $("#fileFormCenter").modal("hide");
+  $.ajax({
+    url: '/projects/' + id + '/files',
+    type: "GET",
+  });
+}

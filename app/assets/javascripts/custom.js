@@ -140,3 +140,14 @@ $(document).on("change", "#files_filter_by_project", function () {
   });
 });
 
+//project_files
+
+function reloadProjectFiles(id){
+  $('.modal-backdrop').remove();
+  $("#fileFormCenter").modal("hide");
+  $.ajax({
+    url: '/projects/' + id + '/files',
+    type: "GET",
+  });
+}
+

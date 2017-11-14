@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   resources :projects, only: [:new, :index, :create, :edit, :update, :show] do
     resources :tasks, controller: 'project_tasks'
     resources :notes, except: [:edit]
+    resources :files, controller: 'project_files'
     resources :contacts, controller: 'project_contacts', only: [:index, :new, :create, :show, :update, :destroy] do
       member do
         post :attach_contact_to_project

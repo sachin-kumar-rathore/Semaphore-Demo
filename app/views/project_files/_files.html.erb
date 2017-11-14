@@ -1,0 +1,27 @@
+<table class="table table-hover dataTable table-striped w-full" >
+  <thead>
+    <tr>
+      <th>NAME</th>
+      <th>SIZE</th>
+      <th>UPLOADED BY</th>
+      <th>DATE MODIFIED</th>
+      <th colspan="2" class="text-center">Options</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% for file in files %>
+      <tr>
+        <td title="Edit <%= File.basename(file.name.to_s) %>" data-href="<%= edit_project_file_path(file, project_id: @project) %>" class="clickable" ><%= File.basename(file.name.to_s) %></td>
+        <td title="Edit <%= File.basename(file.name.to_s) %>" data-href="<%= edit_project_file_path(file, project_id: @project) %>" class="clickable" ><%= (file.size.to_f/1000).round(1) %> kB </td>
+        <td title="Edit <%= File.basename(file.name.to_s) %>" data-href="<%= edit_project_file_path(file, project_id: @project) %>" class="clickable" ><%= file.user.full_name %></td>
+        <td title="Edit <%= File.basename(file.name.to_s) %>" data-href="<%= edit_project_file_path(file, project_id: @project) %>" class="clickable" ><%= file.updated_at.strftime("%m/%d/%Y") if file.updated_at.present? %></td>
+        <td title="Download <%= File.basename(file.name.to_s) %>"><a class="btn btn-xs green-btn download-btn" href="<%= file.name %>" >Download</a></td>
+        <td title="Delete <%= File.basename(file.name.to_s) %>"><button class="btn btn-xs btn-danger fa fa-trash delete-clickable" data-href="<%= project_file_path(file, project_id: @project) %>"  ></button></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="digg_pagination">
+  <%= js_will_paginate files %>
+</div>

@@ -6,7 +6,9 @@ class FilesController < ApplicationController
   respond_to :js
 
   def index
-    @files = current_org.documents.paginate(page: params[:page], per_page: 10).order('updated_at DESC')
+    @files = current_org.documents
+    @files = @files.where(project_id: params[:project_id]) if params[:project_id].present?
+    @files = @files.paginate(page: params[:page], per_page: 10).order('updated_at DESC')
   end
 
   def new

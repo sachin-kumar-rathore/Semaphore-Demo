@@ -130,3 +130,13 @@ $(document).on("click", ".delete-clickable", function () {
   }
 });
 
+$(document).on("change", "#files_filter_by_project", function () {
+  var project_id = $('#files_filter_by_project').val();
+  $.ajax({
+    url: "/files",
+    type: "GET",
+    data: { project_id: project_id },
+    dataType: 'script'
+  });
+});
+

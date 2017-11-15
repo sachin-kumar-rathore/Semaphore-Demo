@@ -59,6 +59,26 @@ ActiveRecord::Schema.define(version: 20171109062854) do
     t.text "notes"
   end
 
+  create_table "contacts_emails", id: false, force: :cascade do |t|
+    t.bigint "contact_id", null: false
+    t.bigint "email_id", null: false
+    t.index ["contact_id", "email_id"], name: "index_contacts_emails_on_contact_id_and_email_id"
+  end
+
+  create_table "emails", force: :cascade do |t|
+    t.integer "organization_id"
+    t.integer "project_id"
+    t.string "sent_by"
+    t.string "sent_to"
+    t.string "subject"
+    t.string "messageID"
+    t.text "body"
+    t.datetime "email_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "cc"
+  end 
+    
   create_table "documents", force: :cascade do |t|
     t.string "name"
     t.string "size"
@@ -175,13 +195,10 @@ ActiveRecord::Schema.define(version: 20171109062854) do
     t.string "business_unit"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
-    t.index ["deleted_at"], name: "index_sites_on_deleted_at"
   end
 
   create_table "tasks", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "assignee_id"
     t.string "name"
     t.text "description"
     t.date "start_date"
@@ -191,6 +208,7 @@ ActiveRecord::Schema.define(version: 20171109062854) do
     t.float "progress", default: 0.0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "assignee_id"
     t.bigint "project_id"
     t.index ["project_id"], name: "index_tasks_on_project_id"
   end

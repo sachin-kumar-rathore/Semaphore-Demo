@@ -49,7 +49,7 @@ class EmailsController < ApplicationController
   end
 
   def show_existing_contacts
-    @email = current_org.emails.find(params[:id])
+    @email = current_org.emails.where(id: params[:id]).first
     @contacts = current_org.contacts
     respond_to do |format|
       format.js
@@ -57,7 +57,7 @@ class EmailsController < ApplicationController
   end
 
   def attach_contact_to_email
-    @email = current_org.emails.find(params[:id])
+    @email = current_org.emails.where(id: params[:id]).first
     @contact = current_org.contacts.find(params[:contact_id])
     respond_to do |format|
       @email.contacts << @contact
@@ -68,7 +68,7 @@ class EmailsController < ApplicationController
   end
 
   def show_existing_projects
-    @email = current_org.emails.find(params[:id])
+    @email = current_org.emails.where(id: params[:id]).first
     @projects = current_org.projects
     respond_to do |format|
       format.js
@@ -76,7 +76,7 @@ class EmailsController < ApplicationController
   end
 
   def attach_project_to_email
-    @email = current_org.emails.find(params[:id])
+    @email = current_org.emails.where(id: params[:id]).first
     @project = current_org.projects.find(params[:project_id])
     respond_to do |format|
       @email.update(project_id: params[:project_id])
@@ -89,7 +89,7 @@ class EmailsController < ApplicationController
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_email
-    @email = Email.find(params[:id])
+    @email = current_org.emails.where(id: params[:id]).first
   end
 
   def filtering_params(params)

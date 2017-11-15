@@ -1,4 +1,3 @@
-$('.emailModals').html("");
 $('.emailModals').html("<%= escape_javascript render partial: 'assign_contact', locals: {email: @email, contacts: @contacts} %>")
 $('#assignEmailToContact').modal('show');
 $('[data-plugin="selectpicker"]').selectpicker();

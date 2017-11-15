@@ -9,7 +9,6 @@ $(document).ready(function() {
   animating = void 0;
   $(document).on("click", ".next", function (){
     $("#msform").validate({
-      debug: true,
       rules: {
       "user[password]": {required: true, minlength: 6},
       "user[password_confirmation]": {required: true, equalTo: "#user_password"}

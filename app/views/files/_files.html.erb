@@ -6,7 +6,7 @@
       <th>UPLOADED BY</th>
       <th>ASSIGNED PROJECT</th>
       <th>DATE MODIFIED</th>
-      <th colspan="2" class="text-center">Options</th>
+      <th colspan="2" class="text-center">OPERATIONS</th>
     </tr>
   </thead>
   <tbody>
@@ -22,7 +22,7 @@
             <button class="clickable btn btn-xs green-btn" data-href="<%= show_projects_file_path(file) %>" ><i class="fa fa-plus"></i> Add</button></td>
         <% end %>
         <td title="Edit <%= File.basename(file.name.to_s) %>" data-href="<%= edit_file_path(file) %>" class="clickable" ><%= file.updated_at.strftime("%m/%d/%Y") if file.updated_at.present? %></td>
-        <td title="Download <%= File.basename(file.name.to_s) %>"><a class="btn btn-xs green-btn download-btn" href="<%= file.name %>" >Download</a></td>
+        <td title="Download <%= File.basename(file.name.to_s) %>" class="text-right" ><a class="btn btn-xs green-btn download-btn fa fa-download" href="<%= file.name %>" ></a></td>
         <td title="Delete <%= File.basename(file.name.to_s) %>"><button class="btn btn-xs btn-danger fa fa-trash delete-clickable" data-href="<%= file_path(file) %>" ></button></td>
       </tr>
     <% end %>

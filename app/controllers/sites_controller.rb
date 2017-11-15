@@ -5,10 +5,14 @@ class SitesController < ApplicationController
 
   def index
     @sites = current_org.sites
-    if params[:property_name].present? || params[:property_number].present? || params[:zip_code].present?
-      @sites = @sites.property_number_or_property_name_or_zip_code_search(params[:property_number], params[:property_name],params[:zip_code])
+    filtering_params(params).each do |key, value|
+      @sites = @sites.public_send(key, value) if value.present?
     end
-      @sites = @sites.paginate(page: params[:page], per_page: Site::PAGINATION[:per_page])
+      @sites = @sites.paginate(page: params[:page], per_page: 8).order('updated_at DESC')
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def show
@@ -16,7 +20,6 @@ class SitesController < ApplicationController
       format.js
     end
   end
-
 
   def new
     @site = current_org.sites.new
@@ -30,13 +33,9 @@ class SitesController < ApplicationController
 
   def create
     @site = current_org.sites.new(site_params)
-
     respond_to do |format|
       if @site.save
         flash.now[:success] = 'Site/ Building was successfully created.'
-        load_sites
-      else
-        flash.now[:info] = 'Site could not be created, Please try again.'
         load_sites
       end
       format.js
@@ -48,8 +47,6 @@ class SitesController < ApplicationController
       if @site.update(site_params)
         flash.now[:success] = 'Contact was successfully updated.'
         load_sites
-      else
-        flash.now[:info] = 'Site could not be updated, Please try again.'
       end
       format.js
     end
@@ -59,8 +56,6 @@ class SitesController < ApplicationController
     respond_to do |format|
       if @site.destroy
         flash.now[:success] = 'Site was successfully destroyed.'
-      else
-        flash.now[:info] = 'Site could not be destroyed.'
       end
       load_sites
       format.js
@@ -82,7 +77,7 @@ class SitesController < ApplicationController
   end
 
   def load_sites
-    @sites = current_org.sites.paginate(page: params[:page], per_page: Site::PAGINATION[:per_page]).order('updated_at DESC')
+    @sites = current_org.sites.paginate(page: params[:page], per_page: 8).order('updated_at DESC')
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
@@ -91,4 +86,9 @@ class SitesController < ApplicationController
                                  :state, :zip_code, :country, :available_acreage, :available_square_feet, :contact_id,
                                  :total_acreage, :total_square_feet, :latitude, :longitude, :business_unit)
   end
+
+  def filtering_params(params)
+    params.slice(:property_name, :property_number, :zip_code)
+  end
+  
 end

@@ -24,7 +24,7 @@ class Project < ApplicationRecord
   scope :industry_type, -> (industry_type) { where("industry_type = ?",industry_type)}
   scope :start_date, -> (start_date) { where(active_date: (Date.strptime(start_date[:start], '%m/%d/%Y')..Date.strptime(start_date[:end], '%m/%d/%Y'))) if (start_date[:start].present? && start_date[:end].present?)}
   scope :completion, -> (completion) { where(successful_completion_date: (Date.strptime(completion[:start], '%m/%d/%Y')..Date.strptime(completion[:end], '%m/%d/%Y'))) if (completion[:start].present? && completion[:end].present?)}
-  scope :project_name, -> (project_name) { where("name ilike ?","%#{name}%")}
+  scope :project_name, -> (project_name) { where("name ilike ?","%#{project_name}%")}
   scope :public_release, -> (public_release) { where("public_release = ?",public_release)}
   scope :business_type, -> (business_type) { where("business_type IN (?)", business_type.values)}
   scope :site_visit, -> (site_visit) {  where("site_visit_1 BETWEEN :start AND :end 

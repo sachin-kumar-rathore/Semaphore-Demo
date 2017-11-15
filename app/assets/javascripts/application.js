@@ -19,6 +19,4 @@
 //= require sign_up_form
 //= require custom
 
-$(document).ready(function() {
-    Site.run();
-});
+

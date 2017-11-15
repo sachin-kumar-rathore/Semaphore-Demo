@@ -1,0 +1,8 @@
+$('#assignEmailToContact').modal('hide');
+$('#emailsList').html("<%= escape_javascript render partial: 'emails', locals: {emails: @emails} %>");
+$('.flashMessages').html("<%= j render partial: 'shared/flash_messages' %>");
+$('.pagination').find('a').each(function() {
+  var a = $(this).attr("href").split("?")[1];
+  $(this).attr('href', "emails?" + a);
+  $(this).attr("data-turbolinks", false);
+});

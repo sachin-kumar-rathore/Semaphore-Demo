@@ -1,0 +1,4 @@
+$('#createOrEditFile').html("");
+$('#createOrEditFile').html("<%= escape_javascript render partial: 'attach_project_to_file', locals: {file: @file, projects: @projects} %>")
+$('#assignProjectToFile').modal('show');
+$('[data-plugin="selectpicker"]').selectpicker();

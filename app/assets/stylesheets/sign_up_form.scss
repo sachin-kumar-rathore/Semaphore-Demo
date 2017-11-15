@@ -1,9 +1,3 @@
-/*custom font*/
-@import url(http://fonts.googleapis.com/css?family=Montserrat);
-
-
-
-
 /*form styles*/
 #msform {
   width: 60%;
@@ -118,4 +112,8 @@
 #progressbar li.active:before,  #progressbar li.active:after{
   background: #27AE60;
   color: white;
+}
+
+.error{
+  color: red;
 }

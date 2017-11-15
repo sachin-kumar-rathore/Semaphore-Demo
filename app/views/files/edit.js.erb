@@ -1,0 +1,4 @@
+$('#createOrEditFile').html("<%= escape_javascript render(partial: 'form', locals: { controller: 'files', action: 'update'}) %>");
+$('#fileFormCenter').modal('show');
+$('[data-plugin="datepicker"]').datepicker();
+$('[data-plugin="selectpicker"]').selectpicker();

@@ -2,9 +2,8 @@
 
 function reloadContacts(id){
   $.ajax({
-    url: '/project_contacts',
-    type: "GET",
-    data: { project_id: id}
+    url: '/projects/' + id + '/contacts',
+    type: "GET"
   });
 }
 
@@ -12,6 +11,11 @@ function reloadContacts(id){
 
 $(document).on("click", ".clickable", function () {
   var link = $(this).data("href");
+  if($(event.target).hasClass('add-contact')) {
+    link = $(this).find('.add-contact').data("href");
+  }else if($(event.target).hasClass('add-project')){
+    link = $(this).find('.add-project').data("href");
+  }
   $.ajax({
     url: link,
     type: "GET"
@@ -44,25 +48,18 @@ $(document).on("click", "#projectsList tr", function () {
   window.location.href = link;
 });
 
-$(function() { 
-  if (!$(".tab-content").children('.tab-pane').hasClass("active")){
-    var link = $('#mainNavLink').attr("href");
-    $.ajax({
-      url: link,
-      type: "GET"
-    });
-  }
-});
-
 //notes
 
 function reloadNotes(id){
   $.ajax({
-    url: '/notes',
-    type: "GET",
-    data: { project_id: id}
+    url: '/projects/' + id + '/notes',
+    type: "GET"
   });
 }
+
+$(document).on("click", ".first-save-project", function () {
+  alert("First save a project before accessing this section.");
+});
 
 //tasks
 
@@ -98,3 +95,64 @@ function filterRequest(){
     data: { current_user_filter: user_filter, project_id: project_id, assigned_to_me: assigned_to_me  }
   });  
 }
+
+//project_tasks
+
+function reloadProjectTasks(id){
+  $.ajax({
+    url: '/projects/' + id + '/tasks',
+    type: "GET",
+  });
+}
+
+//files
+
+function reloadFiles(){
+  $('.modal-backdrop').remove();
+  $("#fileFormCenter").modal("hide");
+  $.ajax({
+    url: '/files',
+    type: "GET",
+    dataType: 'script'
+  });  
+}
+
+$(document).on("click", "#saveButton", function () {
+  this.innerHTML = 'Uploading....';
+  $('.spinner').removeAttr('hidden');
+});
+
+$(document).on("click", ".delete-clickable", function () {
+  var result = confirm("Are you sure you want to delete this file?");
+  if (result) {
+    var link = $(this).data("href");
+    $.ajax({
+      url: link,
+      beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+      type: "DELETE",
+      dataType: 'script'
+    });
+  }
+});
+
+$(document).on("change", "#files_filter_by_project", function () {
+  var project_id = $('#files_filter_by_project').val();
+  $.ajax({
+    url: "/files",
+    type: "GET",
+    data: { project_id: project_id },
+    dataType: 'script'
+  });
+});
+
+//project_files
+
+function reloadProjectFiles(id){
+  $('.modal-backdrop').remove();
+  $("#fileFormCenter").modal("hide");
+  $.ajax({
+    url: '/projects/' + id + '/files',
+    type: "GET",
+  });
+}
+

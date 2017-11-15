@@ -1,0 +1,15 @@
+<div class="panel">
+  <div class="panel-body row">
+    <div class="col-md-10">
+      <h3>Project Tasks</h3>
+    </div>
+    <div class="col-md-2">
+      <button class="btn btn-sm green-btn waves-effect waves-classic clickable" data-href="<%= new_project_task_path(project_id: @project.id) %>" type="button">ADD NEW TASK
+      </button>
+    </div>
+  </div>
+  <div class="panel-body" id="tasksList" >
+    <%= render partial: 'tasks', locals: { tasks: @tasks } %>
+  </div>
+</div>
+<div id="createOrEditTask"></div>

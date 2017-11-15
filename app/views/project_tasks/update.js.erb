@@ -1,0 +1,8 @@
+<% if @task.errors.blank? %>
+  $('.modal-backdrop').remove();
+  $("#taskFormCenter").modal("hide");
+  $('.flashMessages').html("<%= escape_javascript render partial: 'shared/flash_messages' %>");
+  reloadProjectTasks("<%= @project.id %>");
+<% else %>
+  $('#taskFormCenter .error-messages').html("<%= j render partial: 'shared/error_messages', locals: {obj: @task} %>");
+<% end %>

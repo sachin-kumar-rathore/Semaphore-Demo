@@ -4,14 +4,12 @@ class Site < ApplicationRecord
 
   # == Constants == #
   self.per_page = 5
-  PAGINATION = {per_page: 5}
 
   # == Attributes == #
 
   # == File Uploader == #
 
   # == Modules == #
-  include PgSearch
 
   # == Associations and Nested Attributes == #
   belongs_to :organization
@@ -31,19 +29,10 @@ class Site < ApplicationRecord
   # == Callbacks == #
 
   # == Scopes and Other macros == #
-  pg_search_scope :property_name_search, :against => :property_name
-  pg_search_scope :property_number_search, :against => :property_number
-  pg_search_scope :zip_code_search, :against => :zip_code
-
+  scope :property_name, -> (property_name) { where("property_name ilike ?","%#{property_name}%")}
+  scope :property_number, -> (property_number) { where("property_number = ?",property_number)}
+  scope :zip_code, -> (zip_code) { where("zip_code = ?",zip_code)}
   # == Instance methods == #
-  def self.property_number_or_property_name_or_zip_code_search(number, name, zip_code)
-    number_relation = property_number_search(number).pluck(:id)
-    name_relation = property_name_search(name).pluck(:id)
-    zip_code_relation = zip_code_search(zip_code).pluck(:id)
-    search_result = number_relation | name_relation | zip_code_relation
-
-    return where('id IN (?)', search_result)
-  end
 
   # == Private == #
 end

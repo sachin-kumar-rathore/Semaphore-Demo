@@ -3,9 +3,12 @@
     <div class="panel">
       <header class="panel-heading">
         <h3 class="panel-title">
-          <button class="btn btn-sm green-btn waves-effect waves-classic" data-href="<%= new_site_path %>"
+          <button class="btn btn-sm green-btn waves-effect waves-classic clickable" data-href="<%= new_site_path %>"
             id="createNewSite" type="button">ADD SITE/ BUILDING
           </button>
+          <%= link_to sites_path, class: 'reload-page-link', data: { turbolinks: false } do %>
+            <i class="fa fa-refresh"></i>
+          <% end %>
         </h3>
       </header>
 
@@ -23,26 +26,26 @@
       <div class="panel-body">
         <%= form_tag sites_path, method: :get do %>
           <div class="row">
-            <div class="form-group form-material col-md-8">
+            <div class="form-group form-material col-md-10 offset-md-1">
               <label class="form-control-label">Property #:</label>
               <input type="text" name="property_number" class="form-control">
             </div>
           </div>
           <div class="row">
-            <div class="form-group form-material col-md-8">
+            <div class="form-group form-material col-md-10 offset-md-1">
               <label class="form-control-label">Name:</label>
               <input type="text" name="property_name" class="form-control">
             </div>
           </div>
           <div class="row">
-            <div class="form-group form-material col-md-8">
+            <div class="form-group form-material col-md-10 offset-md-1">
               <label class="form-control-label">Zip:</label>
               <input type="text" name="zip_code" class="form-control">
             </div>
           </div>
-          <div class="form-group form-material col-md-8">
+          <div class="form-group form-material col-md-12">
             <button type="submit" class="btn btn-sm green-btn">Update List</button>
-            <%= button_tag 'Clear All Filter', type: :reset, class: 'btn btn-sm site-filter-clear' %>
+            <%= button_tag 'Clear All Filters', type: :reset, class: 'btn btn-sm site-filter-clear' %>
           </div>
         </div>
       <% end %>
@@ -51,4 +54,3 @@
 </div>
 </div>
 <div id="createOrEditSite"></div>
-<%= javascript_include_tag 'sites.js' %>

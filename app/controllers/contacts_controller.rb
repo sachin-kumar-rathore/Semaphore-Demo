@@ -56,7 +56,7 @@ class ContactsController < ApplicationController
       if @contact.destroy
         flash.now[:success] = 'Contact was successfully destroyed.'
       else
-        flash.now[:info] = 'Contact could not be destroyed.'
+        flash.now[:danger] = 'Contact could not be destroyed.'
       end
       load_contacts
       format.js

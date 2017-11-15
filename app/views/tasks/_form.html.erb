@@ -3,7 +3,7 @@
   role="dialog" tabindex="-1">
   <div class="modal-dialog modal-simple modal-center">
     <div class="modal-content">
-      <%= form_for @task, class: 'task_form', remote: true do |form| %>
+      <%= form_for @task, url: url_for(controller: controller, action: action), class: 'task_form', remote: true do |form| %>
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
@@ -33,7 +33,7 @@
               <div class="row">
                 <div class="form-group form-material col-md-6">
                   <label class="form-control-label" >Project:</label>
-                  <%= form.select(:project_id, current_org.projects.all.map{ |project| [project.name, project.id] },{ include_blank: 'No Project' },{data:{ plugin: 'selectpicker', "live-search":true}}) %>
+                  <%= form.select :project_id, options_for_select( current_org.projects.all.map{ |project| [project.name, project.id] }, selected: @project ? @project.id : form.object.project_id ),{ include_blank: 'No Project' }, data:{ plugin: 'selectpicker', "live-search":true}, disabled: @project %>
                 </div>
               </div>
               <div class="row">
@@ -79,7 +79,7 @@
               <button type="submit" class="btn btn-sm green-btn"><%= @task.new_record? ? ' Save ' : ' Save changes' %></button>
               <button type="button" class="btn btn-sm white-btn" data-dismiss="modal">Cancel</button>
               <% unless @task.new_record? %>
-                <%= link_to 'Delete', task_path(@task), method: :delete, remote: true, class: "btn btn-sm btn-danger" %>
+                <%= link_to 'Delete', @project ? project_task_path(@task, project_id: @project.id) : task_path(@task), method: :delete, remote: true, class: "btn btn-sm btn-danger" %>
               <% end %>
             </div>
           </div>

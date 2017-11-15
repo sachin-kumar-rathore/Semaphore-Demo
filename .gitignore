@@ -38,3 +38,5 @@ build/
 config/database.yml
 /public/uploads/
 .rspec
+# Ignore application configuration
+/config/application.yml

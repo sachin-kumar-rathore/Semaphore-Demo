@@ -1,0 +1,32 @@
+<table class="table table-hover dataTable table-striped w-full" >
+  <thead>
+    <tr>
+      <th>TASK</th>
+      <th>PRIORITY</th>
+      <th>STATUS</th>
+      <th>COMPLETE</th>
+      <th>ASSIGNED TO</th>
+      <th>DESCRIPTION</th>
+      <th>START DATE</th>
+      <th>DUE DATE</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% for task in tasks %>
+      <tr data-href="<%= project_task_path(task, project_id: @project) %>" class="clickable" >
+        <td><%= task.name %></td>
+        <td><%= task.priority %></td>
+        <td><%= task.status %></td>
+        <td><%= task.progress %> %</td>
+        <td><%= task.assignee.full_name %></td>
+        <td><%= task.description.truncate(25) %></td>
+        <td><%= task.start_date.strftime("%m/%d/%Y") if task.start_date.present? %></td>
+        <td><%= task.end_date.strftime("%m/%d/%Y") if task.end_date.present? %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="digg_pagination">
+  <%= js_will_paginate tasks %>
+</div>

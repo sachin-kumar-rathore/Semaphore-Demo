@@ -20,19 +20,28 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :dashboard, only: [:index]
-  resources :projects, only: [:new, :index, :create, :edit, :update] do
-    collection do
-      get :dashboard
-    end
-  end
-  resources :notes, except: [:edit]
-  resources :project_contacts, only: [:index, :new, :create, :show, :update, :destroy] do
+  resources :files do
     member do
-      get :show_existing_contacts
-      post :attach_contact_to_project
+      get :show_projects
+      post :attach_project_to_file
     end
   end
+  resources :dashboard, only: [:index]
+  resources :projects, only: [:new, :index, :create, :edit, :update, :show] do
+    resources :tasks, controller: 'project_tasks'
+    resources :notes, except: [:edit]
+    resources :files, controller: 'project_files'
+    resources :contacts, controller: 'project_contacts', only: [:index, :new, :create, :show, :update, :destroy] do
+      member do
+        post :attach_contact_to_project
+      end
+      collection do
+        get :show_existing_contacts
+      end
+    end
+  end
+  
+
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   devise_scope :user do

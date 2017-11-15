@@ -1,0 +1,4 @@
+$('.modal-backdrop').remove();
+$("#taskFormCenter").modal("hide");
+reloadProjectTasks("<%= @project.id %>");
+$('.flashMessages').html("<%= escape_javascript render partial: 'shared/flash_messages' %>");

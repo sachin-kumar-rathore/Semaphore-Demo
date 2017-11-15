@@ -1,6 +1,9 @@
 <div class="panel" >
   <div class="panel-body">
     <%= form_for @project, class: "col-md-12" do |project| %>
+      <div class="error-messages">
+        <%= render partial: 'shared/error_messages', locals: {obj: @project} %>
+      </div>
       <div class="row">
         <div class="form-group form-material col-md-3">
           <label class="form-control-label">Active Date:</label>
@@ -344,12 +347,12 @@
       <div class="row">
         <div class="col-md-2">
           <div class="form-group form-material">
-            <%= project.submit 'Save & Close', class: "btn btn-block green-btn col-md-12"%>
+            <button type="submit" class="btn btn-block green-btn col-md-12" name= "commit", value= "Save & Close">Save & Close</button>
           </div>
         </div>
         <div class="col-md-2">
           <div class="form-group form-material">
-            <%= project.submit 'Save', class: "btn btn-block green-btn col-md-12", data: { turbolinks: false } %>
+            <button type="submit" class="btn btn-block green-btn col-md-12">Save</button>
           </div>
         </div>
         <div class="col-md-2">

@@ -36,6 +36,11 @@
 <%= javascript_include_tag "tour.js" %>
 <!-- Page -->
 <%= javascript_include_tag "Site.js" %>
+<script>
+  $(document).ready(function() {
+    Site.run();
+  });
+</script>
 <%= javascript_include_tag "asscrollable.js" %>
 <%= javascript_include_tag "slidepanel.js" %>
 <%= javascript_include_tag "switchery.js" %>

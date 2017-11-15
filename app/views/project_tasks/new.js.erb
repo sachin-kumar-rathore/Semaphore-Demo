@@ -1,0 +1,5 @@
+$('#createOrEditTask').html("");
+$('#createOrEditTask').html("<%= escape_javascript render(partial: 'tasks/form', locals: { controller: 'project_tasks', action: 'create'}) %>");
+$('#taskFormCenter').modal('show');
+$('[data-plugin="datepicker"]').datepicker();
+$('[data-plugin="selectpicker"]').selectpicker();

@@ -15,6 +15,7 @@ class Project < ApplicationRecord
   belongs_to :company, optional: true   #remove_optional_later
   has_many :tasks
   has_many :emails
+  has_many :documents
 
   # SCOPE
   scope :status, -> (status) { where("status IN (?)", status.values) }

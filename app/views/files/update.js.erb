@@ -1,0 +1,6 @@
+<% if @file.errors.blank? %>
+  reloadFiles();
+  $('.flashMessages').html("<%= escape_javascript render partial: 'shared/flash_messages' %>");
+<% else %>
+  $('#fileFormCenter .error-messages').html("<%= j render partial: 'shared/error_messages', locals: {obj: @file} %>");
+<% end %>

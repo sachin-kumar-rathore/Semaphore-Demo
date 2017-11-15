@@ -5,7 +5,7 @@
         <button class="btn btn-sm green-btn waves-effect waves-classic col-md-12 clickable" data-href="<%= new_project_contact_path(project_id: @project.id) %>" type="button" >ADD CONTACT </button>
       </div>
       <div class="col-md-2">
-        <%= button_to "ADD EXISTING PROJECT", show_existing_contacts_project_contact_path(@project), method: :get, class: "btn btn-sm green-btn waves-effect waves-classic", remote: true %>
+        <%= button_to "ADD EXISTING PROJECT", show_existing_contacts_project_contacts_path(project_id: @project.id), method: :get, class: "btn btn-sm green-btn waves-effect waves-classic", remote: true %>
       </div>
     </div>
   </div>

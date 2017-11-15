@@ -1,3 +1,4 @@
 $('#createOrEditSite').html("<%= escape_javascript render(partial: 'sites/form', locals: {site: @site, project: @project, controller: 'project_sites', action: 'update'}) %>");
 $('#siteFormCenter').modal('show');
-$('[data-plugin="selectpicker"]').selectpicker(); 
+$('[data-plugin="selectpicker"]').selectpicker();
+tokenInputforContact(); 

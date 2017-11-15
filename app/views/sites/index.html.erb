@@ -19,7 +19,38 @@
   </div>
   <div class="col-xl-4">
     <%= render partial: 'filters', locals: { controller: 'sites', action: 'index'} %>
+    <div class="panel">
+      <header class="panel-heading">
+        <h3 class="panel-title">
+        </h3>
+      </header>
+      <div class="panel-body">
+        <%= form_tag sites_path, method: :get do %>
+          <div class="row">
+            <div class="form-group form-material col-md-10 offset-md-1">
+              <label class="form-control-label">Property #:</label>
+              <input type="text" name="property_number" class="form-control">
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group form-material col-md-10 offset-md-1">
+              <label class="form-control-label">Name:</label>
+              <input type="text" name="property_name" class="form-control">
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group form-material col-md-10 offset-md-1">
+              <label class="form-control-label">Zip:</label>
+              <input type="text" name="zip_code" class="form-control">
+            </div>
+          </div>
+          <div class="form-group form-material col-md-12">
+            <button type="submit" class="btn btn-sm green-btn">Update List</button>
+            <%= button_tag 'Clear All Filters', type: :reset, class: 'btn btn-sm site-filter-clear' %>
+          </div>
+        <% end %>
+      </div>
+    </div>  
   </div>
-</div>
 </div>
 <div id="createOrEditSite"></div>

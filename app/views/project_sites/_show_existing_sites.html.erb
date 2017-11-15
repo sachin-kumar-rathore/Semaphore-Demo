@@ -1,0 +1,28 @@
+<!-- Existing Sites Modal -->
+<div class="modal" id="showExistingSites" aria-hidden="true" aria-labelledby="showExistingSites" role="dialog" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-center">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h6> ADD EXISTING SITE </h6>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-8">
+            <div class="panel">
+              <div class="panel-body" id="existingSitesList">
+                <%= render partial: "existing_sites_list", locals: {sites: @sites} %>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <%= render partial: 'sites/filters', locals: { controller: 'project_sites', action: 'show_existing_sites' } %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->

@@ -1,6 +1,8 @@
 // Project Contacts
 
 function reloadContacts(id){
+  $('.modal-backdrop').remove();
+  $('#contactFormCenter').modal('hide');
   $.ajax({
     url: '/projects/' + id + '/contacts',
     type: "GET"
@@ -156,3 +158,13 @@ function reloadProjectFiles(id){
   });
 }
 
+//project_sites
+
+function reloadSites(id){
+  $('.modal-backdrop').remove();
+  $('#siteFormCenter').modal('hide');
+  $.ajax({
+    url: '/projects/' + id + '/sites',
+    type: "GET"
+  });
+}

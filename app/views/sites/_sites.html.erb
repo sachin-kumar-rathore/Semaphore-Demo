@@ -7,8 +7,8 @@
   </tr>
   </thead>
   <tbody>
-  <% @sites.each do |site| %>
-      <tr data-href="<%= site_path(site) %>" class="clickable">
+  <% sites.each do |site| %>
+      <tr data-href="<%= @project ? project_site_path(@project, site) : site_path(site) %>" class="clickable">
         <td><%= site.property_number %></td>
         <td><%= site.property_name %></td>
         <td><%= site.zip_code %></td>

@@ -39,6 +39,14 @@ Rails.application.routes.draw do
         get :show_existing_contacts
       end
     end
+    resources :sites, controller: 'project_sites', only: [:index, :new, :create, :show, :update, :destroy] do
+      member do
+        post :attach_site_to_project
+      end
+      collection do
+        get :show_existing_sites
+      end
+    end
   end
   
 

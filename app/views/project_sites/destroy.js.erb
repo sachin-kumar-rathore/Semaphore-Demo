@@ -1,0 +1,6 @@
+<% if @project_site.errors.blank? %>
+  $('.flashMessages').html("<%= j render partial: 'shared/flash_messages' %>");
+  reloadSites("<%= @project.id %>");
+<% else %>
+  $('#siteFormCenter .error-messages').html("<%= j render partial: 'shared/error_messages', locals: {obj: @project_site} %>");
+<% end %>

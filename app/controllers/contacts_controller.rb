@@ -7,7 +7,7 @@ class ContactsController < ApplicationController
     if params[:name].present? || params[:email].present?
       @contacts = @contacts.name_or_email_search(params[:name], params[:email])
     end    
-    @contacts = @contacts.paginate(page: params[:page], per_page: 5)
+    @contacts = @contacts.paginate(page: params[:page], per_page: 5).order('updated_at DESC')
     respond_to do |format|
       format.html {render 'index'}
       format.js
@@ -98,7 +98,7 @@ class ContactsController < ApplicationController
   end
 
   def load_contacts
-    @contacts = current_org.contacts.paginate(page: params[:page], per_page: 5)
+    @contacts = current_org.contacts.paginate(page: params[:page], per_page: 5).order('updated_at DESC')
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

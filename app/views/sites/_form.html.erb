@@ -2,12 +2,12 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="flashMessages"><%= render partial: 'shared/flash_messages' %></div>
-      <%= form_for @site, remote: true do |form| %>
+      <%= form_for site, url: url_for(controller: controller, action: action), remote: true do |form| %>
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">×</span>
         </button>
-        <h4 class="modal-title"><%= @site.new_record? ? 'ADD SITE/ BUILDING' : 'UPDATE SITE/ BUILDING' %></h4>
+        <h6 class="modal-title"><%= @site.new_record? ? 'ADD SITE/ BUILDING' : 'UPDATE SITE/ BUILDING' %></h6>
       </div>
       <div class="modal-body">
         <div class="example-wrap">
@@ -103,13 +103,14 @@
                 <%= form.select :business_unit, options_for_select(['Default', 'Executive', 'Investor Relations'], form.object.business_unit), {}, class: 'form-control', data: { plugin: "selectpicker" } %>
               </div>
             </div>
+            <%= hidden_field_tag 'site[project_id]', @project ? @project.id : nil %>
           </div>
           <div class="row">
             <div class="form-group form-material col-md-6">
               <button type="submit" class="btn btn-sm green-btn"><%= @site.new_record? ? ' Save ' : ' Save changes ' %></button>
               <button type="button" class="btn btn-sm white-btn" data-dismiss="modal">Cancel</button>
               <% unless @site.new_record? %>
-                  <%= link_to 'Delete', site_path(@site), method: :delete, remote: true, class: 'btn btn-sm btn-danger' %>
+                  <%= link_to 'Delete', @project ? project_site_path(site, project_id: @project.id) : site_path(site), method: :delete, remote: true, class: 'btn btn-sm btn-danger' %>
               <% end %>
             </div>
           </div>

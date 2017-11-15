@@ -1,0 +1,16 @@
+<div class="panel">
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-2">
+        <button class="btn btn-sm green-btn waves-effect waves-classic col-md-12 clickable" data-href="<%= new_project_contact_path(@project) %>" type="button" >ADD CONTACT </button>
+      </div>
+      <div class="col-md-2">
+        <%= link_to "ADD EXISTING CONTACT", show_existing_contacts_project_contacts_path(@project), class: "btn btn-sm green-btn waves-effect waves-classic", remote: true %>
+      </div>
+    </div>
+  </div>
+  <div class="panel-body" id="contactsList">
+    <%= render partial: "contacts/contacts", locals: {contacts: project_contacts} %>
+  </div>
+  <div id="createOrEditContact"></div>
+</div>

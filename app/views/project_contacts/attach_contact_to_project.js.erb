@@ -1,7 +1,7 @@
 <% if @project_contact.errors.blank? %>
-  $('#showExistingContacts').modal('hide'); 
-  $('.flashMessages').html("<%= escape_javascript render partial: 'shared/flash_messages' %>");
+  $('#showExistingContacts').modal('hide');
+  $('.flashMessages').html("<%= j render partial: 'shared/flash_messages' %>"); 
 <% else %>
-  $('#showExistingContacts .error-messages').html("<%= escape_javascript render partial: 'shared/error_messages', locals: {obj: @contact} %>");
+  $('#showExistingContacts .error-messages').html("<%= j render partial: 'shared/error_messages', locals: {obj: @contact} %>");
 <% end %>
 reloadContacts('<%= @project.id %>');

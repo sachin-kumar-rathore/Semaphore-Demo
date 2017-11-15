@@ -11,6 +11,8 @@ class Project < ApplicationRecord
   belongs_to :organization
   has_many :project_contacts, dependent: :destroy
   has_many :contacts, through: :project_contacts
+  has_many :project_sites, dependent: :destroy
+  has_many :sites, through: :project_sites
   has_many :notes
   belongs_to :company, optional: true   #remove_optional_later
   has_many :tasks

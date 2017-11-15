@@ -1,9 +1,9 @@
 class ProjectContactsController < ContactsController
   
-  before_action :set_project, except: [:create, :update]
+  before_action :set_project
 
   def index
-    @project_contacts = @project.contacts.paginate(page: params[:page], per_page: 8)
+    @project_contacts = @project.contacts.paginate(page: params[:page], per_page: 8).order('updated_at DESC')
     respond_to do |format|
       format.js
       format.html { redirect_to edit_project_path(@project) }
@@ -11,7 +11,6 @@ class ProjectContactsController < ContactsController
   end
   
   def create
-    @project = current_org.projects.where(id: params[:contact][:project_id]).first
     @contact = current_org.contacts.new(contact_params)
     respond_to do |format| 
       if @contact.save
@@ -22,7 +21,6 @@ class ProjectContactsController < ContactsController
   end
 
   def update
-    @project = current_org.projects.where(id: params[:contact][:project_id]).first
     respond_to do |format| 
       if @contact.update(contact_params)
         flash.now[:success] = 'Contact was successfully updated.'

@@ -15,7 +15,7 @@
         <td><%= contact.organization ? contact.organization.name : 'ORG' %></td>
         <td><%= contact.cell_phone %></td>
         <td><%= contact.email %></td>
-        <td><%= button_to "Add To Project",attach_contact_to_project_project_contact_path(contact, project_id: @project.id), remote: true, data: { confirm: "Are you sure you want to add this contact to project?" }, class: "btn green-btn" %></td>
+        <td><%= button_to "Add To Project",attach_contact_to_project_project_contact_path(@project, contact), remote: true, data: { confirm: "Are you sure you want to add this contact to project?" }, class: "btn green-btn" %></td>
       </tr>
     <% end %>
   </tbody>

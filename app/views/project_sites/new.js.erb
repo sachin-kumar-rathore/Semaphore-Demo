@@ -1,0 +1,3 @@
+$('#createOrEditSite').html("<%= j render(partial: 'sites/form', locals: {site: @site, project: @project, controller: 'project_sites', action: 'create'}) %>");
+$('#siteFormCenter').modal('show');
+$('[data-plugin="selectpicker"]').selectpicker(); 

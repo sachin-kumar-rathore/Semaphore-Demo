@@ -84,7 +84,7 @@ class SitesController < ApplicationController
   def site_params
     params.require(:site).permit(:organization_id, :contact_id, :property_number, :property_name, :property_type, :address_line, :city,
                                  :state, :zip_code, :country, :available_acreage, :available_square_feet, :contact_id,
-                                 :total_acreage, :total_square_feet, :latitude, :longitude, :business_unit)
+                                 :total_acreage, :total_square_feet, :latitude, :longitude, :business_unit, :project_id)
   end
 
   def filtering_params(params)

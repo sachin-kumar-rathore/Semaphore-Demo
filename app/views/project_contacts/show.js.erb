@@ -1,3 +1,2 @@
-$('#createOrEditContact').html("");
-$('#createOrEditContact').html("<%= escape_javascript render(partial: 'contacts/form', locals: {contact: @contact, project: @project, controller: 'project_contacts', action: 'update'}) %>");
+$('#createOrEditContact').html("<%= j render(partial: 'contacts/form', locals: {contact: @contact, project: @project, controller: 'project_contacts', action: 'update'}) %>");
 $('#contactFormCenter').modal('show');

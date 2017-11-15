@@ -1,0 +1,25 @@
+<table class="table table-hover dataTable table-striped w-full" id="existingSitesTable">
+  <thead>
+    <tr>
+      <th>PROPERTY #</th>
+      <th>NAME</th>
+      <th>ZIP</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% for site in sites %>
+      <tr>
+        <td><%= site.property_number %></td>
+        <td><%= site.property_name %></td>
+        <td><%= site.zip_code %></td>
+        <td><%= button_to "Add To Project",attach_site_to_project_project_site_path(@project, site), remote: true, data: { confirm: "Are you sure you want to add this site to project?" }, class: "btn green-btn" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br/>
+<div class="digg_pagination">
+  <%= js_will_paginate sites %>
+</div>
+<br/>

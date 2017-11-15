@@ -5,5 +5,5 @@
   $(".nav-item").children('.nav-link').removeClass("active");
   $('#contactsNavLink').addClass("active");
 <% else %>
-  $('.flashMessages').html("<%= escape_javascript render partial: 'shared/flash_messages' %>");
+  $('.flashMessages').html("<%= j render partial: 'shared/flash_messages' %>");
 <% end %>

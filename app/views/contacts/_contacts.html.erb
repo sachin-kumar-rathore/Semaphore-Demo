@@ -10,7 +10,7 @@
 
   <tbody>
     <% for contact in contacts %>
-      <tr class="clickable" data-href="<%= @project ? project_contact_path(contact, project_id: @project.id) : contact_path(contact) %>">
+      <tr class="clickable" data-href="<%= @project ? project_contact_path(@project, contact) : contact_path(contact) %>">
         <td><%= contact.name %></td>
         <td><%= contact.organization ? contact.organization.name : 'ORG' %></td>
         <td><%= contact.cell_phone %></td>

@@ -1,6 +1,4 @@
 <% if @contact.errors.blank? %>
-  $('.modal-backdrop').remove();
-  $('#contactFormCenter').modal('hide');
   $('.flashMessages').html("<%= j render partial: 'shared/flash_messages' %>");
   reloadContacts("<%= @project.id %>");
 <% else %>

@@ -43,4 +43,5 @@ class Site < ApplicationRecord
   def has_project_id?
     project_id.present?    
   end
+  
 end

@@ -1,12 +1,12 @@
 <div class="nav-tabs-horizontal" data-plugin="tabs" id="dashboard-tabs" >
   <ul class="nav nav-tabs" role="tablist">
     <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="<%= @project ? edit_project_path(@project) : new_project_path %>" id="mainNavLink" data-remote="true" role="tab">Main</a></li>
-    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="<%= project_contacts_path(project_id: @project.id) if @project %>" data-remote="true" role="tab" id="contactsNavLink" >Contacts</a></li>
-    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="<%= project_sites_path(project_id: @project.id) if @project %>" data-remote="true" role="tab" id="sitesNavLink" >Sites/Buildings</a></li>
-    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="<%= project_notes_path(project_id: @project.id) if @project%>" data-remote="true" role="tab" id="notesNavLink">Notes</a></li>
-    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="<%= project_tasks_path(project_id: @project.id) if @project %>" data-remote="true" id="tasksNavLink">Task</a></li>
-    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="<%= project_files_path(project_id: @project.id) if @project %>" data-remote="true" id="filesNavLink"">Files</a></li>
-    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#emailsTab" role="tab">Emails</a></li>
+    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="<%= project_contacts_path(@project) if @project %>" data-remote="true" role="tab" id="contactsNavLink" >Contacts</a></li>
+    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="<%= project_sites_path(@project) if @project %>" data-remote="true" role="tab" id="sitesNavLink" >Sites/Buildings</a></li>
+    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="<%= project_notes_path(@project) if @project%>" data-remote="true" role="tab" id="notesNavLink">Notes</a></li>
+    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="<%= project_tasks_path(@project) if @project %>" data-remote="true" id="tasksNavLink">Task</a></li>
+    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="<%= project_files_path(@project) if @project %>" data-remote="true" id="filesNavLink"">Files</a></li>
+    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="<%= project_emails_path(@project) if @project %>" data-remote="true" id="emailsNavLink" role="tab">Emails</a></li>
   </ul>
   <div class="tab-content pt-20">
     <div class="tab-pane active" id="mainTab" role="tabpanel">

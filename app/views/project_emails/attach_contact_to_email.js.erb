@@ -1,0 +1,3 @@
+$('#assignEmailToContact').modal('hide');
+$('#emailsList').html("<%= j render partial: 'emails/emails', locals: {emails: @emails} %>");
+$('.flashMessages').html("<%= j render partial: 'shared/flash_messages' %>");

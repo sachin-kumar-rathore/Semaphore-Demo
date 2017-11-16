@@ -10,7 +10,7 @@ class EmailsController < ApplicationController
     filtering_params(params).each do |key, value|
       @emails = @emails.public_send(key, value) if value.present?
     end
-    @emails = @emails.paginate(page: params[:page], per_page: 3)
+    @emails = @emails.paginate(page: params[:page], per_page: 8).order('updated_at DESC')
     respond_to do |format|
       format.html {render 'index'}
       format.js

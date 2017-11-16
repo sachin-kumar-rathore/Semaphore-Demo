@@ -47,6 +47,14 @@ Rails.application.routes.draw do
         get :show_existing_sites
       end
     end
+
+    resources :emails, controller: 'project_emails', only: [:index, :create, :destroy, :show] do
+      member do
+        get :show_existing_contacts
+        post :attach_contact_to_email
+      end
+    end
+
   end
   
 

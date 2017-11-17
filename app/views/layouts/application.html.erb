@@ -8,14 +8,10 @@
 
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  <%= javascript_include_tag "breakpoints.js" %>
-  <script>
-    Breakpoints();
-  </script>
 </head>
 
 <% if current_user %>
-    <body class="animsition site-menubar-unfold" style="animation-duration: 800ms; opacity: 1;">
+    <body class="animsition theme-body site-menubar-unfold" style="animation-duration: 800ms; opacity: 1;">
     <%= render 'layouts/navbar' %>
     <%= render 'layouts/sidenav' %>
 

@@ -1,17 +1,18 @@
-<table class="table table-hover dataTable table-striped w-full">
+<table class="table table-striped table-hover toggle-circle footable" data-toggle-column="first" data-empty="There are no emails" data-show-toggle="true">
   <thead>
     <tr>
-      <th>SEND TO</th>
+      <th data-breakpoints="xs">SEND TO</th>
       <th>SEND BY</th>
       <th>SUBJECT</th>
-      <th>ASSOCIATED CONTACT</th>
-      <th>ASSIGNED PROJECT</th>
-      <th>DATE</th>
+      <th data-breakpoints="xs">ASSOCIATED CONTACT</th>
+      <th data-breakpoints="xs">ASSIGNED PROJECT</th>
+      <th data-breakpoints="xs">DATE</th>
+      <th data-breakpoints="xs">OPERATIONS</th>
     </tr>
   </thead>
   <tbody>
     <% for email in emails %>
-      <tr data-href="<%= email_path(email) %>" class="clickable">
+      <tr>
         <td><%= email.sent_to %></td>
         <td><%= email.sent_by %></td>
         <td><%= truncate(email.subject, length: 27) %></td>
@@ -21,7 +22,7 @@
           </td>
         <% else %>
           <td>
-            <button data-href="<%= show_existing_contacts_email_path(email) %>" class="add-contact btn btn-xs green-btn" ><i class="fa fa-plus white"></i> Add</button>
+            <button data-href="<%= show_existing_contacts_email_path(email) %>" class=" btn btn-xs green-btn clickable" ><i class="fa fa-plus white"></i> Add</button>
           </td>
         <% end %>
         <% if email.project.present? %>
@@ -29,11 +30,14 @@
               <%= email.project.name %>
             </td>
         <% else %>
-            <td data-href="<%= show_existing_projects_email_path(email) %>" class="add-project">
+            <td data-href="<%= show_existing_projects_email_path(email) %>" class="clickable">
               <i class="fa fa-plus"></i> Add
             </td>
         <% end %>
         <td><%= email.email_date.strftime("%m/%d/%Y") if email.email_date %></td>
+        <td>
+          <button class="clickable btn btn-sm green-btn" data-href="<%= email_path(email) %>">Edit</button>
+        </td>
       </tr>
     <% end %>
   </tbody>
@@ -42,3 +46,7 @@
 <div class="digg_pagination">
   <%= js_will_paginate emails %>
 </div>
+
+<script>
+  $('.footable').footable();
+</script>

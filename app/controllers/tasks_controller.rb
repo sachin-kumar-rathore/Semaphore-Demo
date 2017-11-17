@@ -7,7 +7,7 @@ class TasksController < ApplicationController
     @tasks = current_org.tasks
     @tasks = params[:assigned_to_me] == "true" ? current_user.assigned_tasks : current_user.tasks if params[:current_user_filter] == "true"
     @tasks = @tasks.where(project_id: params[:project_id]) if params[:project_id].present?
-    @tasks = @tasks.paginate(page: params[:page], per_page: 10)
+    @tasks = @tasks.paginate(page: params[:page], per_page: 8)
     respond_to do |format|
       format.js
       format.html

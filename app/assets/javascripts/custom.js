@@ -13,11 +13,6 @@ function reloadContacts(id){
 
 $(document).on("click", ".clickable", function () {
   var link = $(this).data("href");
-  if($(event.target).hasClass('add-contact')) {
-    link = $(this).find('.add-contact').data("href");
-  }else if($(event.target).hasClass('add-project')){
-    link = $(this).find('.add-project').data("href");
-  }
   $.ajax({
     url: link,
     type: "GET"
@@ -44,11 +39,6 @@ $( document ).ready(function() {
 });
 
 //Projects
-
-$(document).on("click", "#projectsList tr", function () {
-  var link = $(this).data("href");
-  window.location.href = link;
-});
 
 //notes
 

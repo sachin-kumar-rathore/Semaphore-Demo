@@ -1,19 +1,20 @@
-<table class="table table-hover dataTable table-striped w-full" >
+<table class="table table-striped table-hover toggle-circle footable" data-toggle-column="first" data-empty="There are no tasks." data-show-toggle="true" >
   <thead>
     <tr>
       <th>TASK</th>
       <th>PRIORITY</th>
-      <th>STATUS</th>
-      <th>COMPLETE</th>
-      <th>ASSIGNED TO</th>
-      <th>DESCRIPTION</th>
-      <th>START DATE</th>
-      <th>DUE DATE</th>
+      <th data-breakpoints="xs">STATUS</th>
+      <th data-breakpoints="xs">COMPLETE</th>
+      <th data-breakpoints="xs">ASSIGNED TO</th>
+      <th data-breakpoints="xs">DESCRIPTION</th>
+      <th data-breakpoints="xs">START DATE</th>
+      <th data-breakpoints="xs">DUE DATE</th>
+      <th data-breakpoints="xs">OPERATIONS</th>
     </tr>
   </thead>
   <tbody>
   <% for task in tasks %>
-      <tr data-href="<%= project_task_path(task, project_id: @project) %>" class="clickable" >
+      <tr>
         <td><%= task.name %></td>
         <td><%= task.priority %></td>
         <td><%= task.status %></td>
@@ -22,6 +23,9 @@
         <td><%= task.description.truncate(25) %></td>
         <td><%= task.start_date.strftime("%m/%d/%Y") if task.start_date.present? %></td>
         <td><%= task.end_date.strftime("%m/%d/%Y") if task.end_date.present? %></td>
+        <td>
+          <button class="clickable btn btn-sm green-btn" data-href="<%= project_task_path(task, project_id: @project) %>">Edit</button>
+        </td>
       </tr>
     <% end %>
   </tbody>
@@ -30,3 +34,7 @@
 <div class="digg_pagination">
   <%= js_will_paginate tasks %>
 </div>
+
+<script>
+  $('.footable').footable();
+</script>

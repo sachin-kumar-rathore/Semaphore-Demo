@@ -701,3 +701,5 @@
     exports.default = Breakpoints$1;
   }
 );
+
+Breakpoints();

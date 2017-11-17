@@ -1,11 +1,14 @@
 <div class="panel">
   <div class="panel-body">
     <div class="row">
-      <div class="col-md-2">
+      <div class="col-md-7 col-12">
+        <h3> Project Sites/Buildings</h3>
+      </div>
+      <div class="col-md-2 col-6">
         <button class="btn btn-sm green-btn waves-effect waves-classic col-md-12 clickable" data-href="<%= new_project_site_path(@project) %>" type="button" >ADD SITE/BUILDING </button>
       </div>
-      <div class="col-md-2">
-        <%= link_to "ADD EXISTING BUILDING", show_existing_sites_project_sites_path(@project), class: "btn btn-sm green-btn waves-effect waves-classic", remote: true %>
+      <div class="col-md-3 col-6">
+        <%= button_to "ADD EXISTING BUILDING", show_existing_sites_project_sites_path(@project), class: "btn btn-sm green-btn waves-effect waves-classic col-md-12", method: :get, remote: true %>
       </div>
     </div>
   </div>

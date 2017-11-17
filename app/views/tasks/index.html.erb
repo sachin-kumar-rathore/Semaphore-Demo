@@ -19,16 +19,16 @@
           <div class="row">
             <div class="col-md-10">
               <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-3 col-6">
                   <%= select_tag :task_filter_by_project, options_for_select(current_org.projects.all.map{ |project| [project.name, project.id] }), include_blank: 'All Projects' , class: 'form-control', data: { plugin: "selectpicker" } %>
                 </div>
-                <div class="col-md-3 assign-filter" hidden="true" >
+                <div class="col-md-3 col-6 assign-filter" hidden="true" >
                   <%= select_tag :assign, options_for_select(["Assigned To Me","Assigned By Me"]), class: 'form-control', data: { plugin: "selectpicker" } %>
                 </div>
               </div>
             </div>
-            <div class="col-md-2">
-              <button class="btn btn-sm green-btn waves-effect waves-classic clickable" data-href="<%= new_task_path %>" type="button">ADD NEW TASK
+            <div class="col-md-2 col-6">
+              <button class="btn btn-sm green-btn waves-effect waves-classic col-12 clickable" data-href="<%= new_task_path %>" type="button">ADD NEW TASK
               </button>
             </div>
           </div>

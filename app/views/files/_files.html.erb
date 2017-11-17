@@ -1,29 +1,36 @@
-<table class="table table-hover dataTable table-striped w-full" >
+<table class="table table-striped table-hover toggle-circle footable" data-toggle-column="first" data-empty="There are no files" data-show-toggle="true" >
   <thead>
     <tr>
       <th>NAME</th>
       <th>SIZE</th>
-      <th>UPLOADED BY</th>
-      <th>ASSIGNED PROJECT</th>
-      <th>DATE MODIFIED</th>
-      <th colspan="2" class="text-center">OPERATIONS</th>
+      <th data-breakpoints="xs">UPLOADED BY</th>
+      <th data-breakpoints="xs">ASSIGNED PROJECT</th>
+      <th data-breakpoints="xs">DATE MODIFIED</th>
+      <th data-breakpoints="xs">OPERATIONS</th>
     </tr>
   </thead>
   <tbody>
   <% for file in files %>
       <tr>
-        <td title="Edit <%= File.basename(file.name.to_s) %>" data-href="<%= edit_file_path(file) %>" class="clickable" ><%= File.basename(file.name.to_s) %></td>
-        <td title="Edit <%= File.basename(file.name.to_s) %>" data-href="<%= edit_file_path(file) %>" class="clickable" ><%= (file.size.to_f/1000).round(1) %> kB </td>
-        <td title="Edit <%= File.basename(file.name.to_s) %>" data-href="<%= edit_file_path(file) %>" class="clickable" ><%= file.user.full_name %></td>
+        <td><%= File.basename(file.name.to_s) %></td>
+        <td><%= (file.size.to_f/1000).round(1) %> kB </td>
+        <td><%= file.user.full_name %></td>
         <% if file.project %>
-          <td data-href="<%= edit_file_path(file) %>" class="clickable" ><%= file.project.name %></td>
+          <td><%= file.project.name %></td>
         <% else %>
-          <td title="Assign project to <%= File.basename(file.name.to_s) %>">
-            <button class="clickable btn btn-xs green-btn" data-href="<%= show_projects_file_path(file) %>" ><i class="fa fa-plus"></i> Add</button></td>
+          <td>
+            <button class="clickable btn btn-xs green-btn" data-href="<%= show_projects_file_path(file) %>" ><i class="fa fa-plus"></i> Add
+            </button>
+          </td>
         <% end %>
-        <td title="Edit <%= File.basename(file.name.to_s) %>" data-href="<%= edit_file_path(file) %>" class="clickable" ><%= file.updated_at.strftime("%m/%d/%Y") if file.updated_at.present? %></td>
-        <td title="Download <%= File.basename(file.name.to_s) %>" class="text-right" ><a class="btn btn-xs green-btn download-btn fa fa-download" href="<%= file.name %>" ></a></td>
-        <td title="Delete <%= File.basename(file.name.to_s) %>"><button class="btn btn-xs btn-danger fa fa-trash delete-clickable" data-href="<%= file_path(file) %>" ></button></td>
+        <td><%= file.updated_at.strftime("%m/%d/%Y") if file.updated_at.present? %></td>
+        <td>
+          <a class="btn btn-xs green-btn download-btn fa fa-download" href="<%= file.name %>" >
+          </a>
+          <button class="btn btn-xs btn-danger fa fa-trash delete-clickable" data-href="<%= file_path(file) %>" >
+          </button>
+          <button class="clickable btn btn-xs green-btn fa fa-pencil" data-href="<%= edit_file_path(file) %>"></button>
+        </td>
       </tr>
     <% end %>
   </tbody>
@@ -32,3 +39,7 @@
 <div class="digg_pagination">
   <%= js_will_paginate files %>
 </div>
+
+<script>
+  $('.footable').footable();
+</script>

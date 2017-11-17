@@ -1,9 +1,10 @@
-<table class="table table-hover dataTable table-striped w-full" id="existingSitesTable">
+<table class="table table-striped table-hover toggle-circle footable" data-toggle-column="first" data-empty="There are no sites/buildings." data-show-toggle="true" id="existingSitesTable">
   <thead>
     <tr>
-      <th>PROPERTY #</th>
+      <th data-breakpoints="xs">PROPERTY #</th>
       <th>NAME</th>
-      <th>ZIP</th>
+      <th data-breakpoints="xs">ZIP</th>
+      <th>Operations</th> 
     </tr>
   </thead>
 
@@ -13,7 +14,7 @@
         <td><%= site.property_number %></td>
         <td><%= site.property_name %></td>
         <td><%= site.zip_code %></td>
-        <td><%= button_to "Add To Project",attach_site_to_project_project_site_path(@project, site), remote: true, data: { confirm: "Are you sure you want to add this site to project?" }, class: "btn green-btn" %></td>
+        <td><%= button_to "Add To Project",attach_site_to_project_project_site_path(@project, site), remote: true, data: { confirm: "Are you sure you want to add this site to project?" }, class: "btn btn-sm green-btn" %></td>
       </tr>
     <% end %>
   </tbody>
@@ -23,3 +24,7 @@
   <%= js_will_paginate sites %>
 </div>
 <br/>
+
+<script>
+  $('.footable').footable();
+</script>

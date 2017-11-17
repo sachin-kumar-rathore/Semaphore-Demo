@@ -5,7 +5,7 @@
         <%= render partial: 'shared/error_messages', locals: {obj: @project} %>
       </div>
       <div class="row">
-        <div class="form-group form-material col-md-3">
+        <div class="form-group form-material col-md-3 col-6">
           <label class="form-control-label">Active Date:</label>
           <div class="input-group">
             <span class="input-group-addon">
@@ -14,8 +14,8 @@
             <%= project.text_field 'active_date_str', class: "form-control  datepicker", value: "#{@project.active_date}", data: {plugin: "datepicker"} %>
           </div>
         </div>
-        <div class="form-group form-material col-md-3">
-          <label class="form-control-label">Successful Completion Date</label>
+        <div class="form-group form-material col-md-3 col-6">
+          <label class="form-control-label">Completion Date</label>
           <div class="input-group">
             <span class="input-group-addon">
             <i class="icon md-calendar" aria-hidden="true"></i>
@@ -31,11 +31,11 @@
         </div>
         <div class="col-md-8">
           <div class="row">
-            <div class="form-inline col-md-3">
+            <div class="form-inline col-md-3 col-6">
               <%= project.radio_button :business_type, 'Existing Business', checked: true, class: "pull-left" %>
               <label for="inputRadiosUnchecked" class="pull-left">Existing Business</label>
             </div>
-            <div class="form-inline col-md-3">
+            <div class="form-inline col-md-3 col-6">
               <%= project.radio_button :business_type, 'New Business' %>
               <label for="inputRadiosChecked">New Business</label>
             </div>
@@ -49,27 +49,27 @@
         </div>
         <div class="col-md-10">
           <div class="row">
-            <div class="form-inline col-md-2">
+            <div class="form-inline col-md-2 col-4">
               <%= project.radio_button :status, 'Preliminary', checked: true %>
               <label for="inputRadiosChecked">Preliminary</label>
             </div>
-            <div class="form-inline col-md-2">
+            <div class="form-inline col-md-2 col-4">
               <%= project.radio_button :status, 'Active' %>
               <label for="inputRadiosChecked">Active</label>
             </div>
-            <div class="form-inline col-md-2">
+            <div class="form-inline col-md-2 col-4">
               <%= project.radio_button :status, 'Delayed' %>
               <label for="inputRadiosChecked">Delayed</label>
             </div>
-            <div class="form-inline col-md-2">
+            <div class="form-inline col-md-2 col-4">
               <%= project.radio_button :status, 'Eliminated' %>
               <label for="inputRadiosChecked">Eliminated</label>
             </div>
-            <div class="form-inline col-md-2">
+            <div class="form-inline col-md-2 col-4">
               <%= project.radio_button :status, 'Successful' %>
               <label for="inputRadiosChecked">Successful</label>
             </div>
-            <div class="form-inline col-md-2">
+            <div class="form-inline col-md-2 col-4">
               <%= project.radio_button :status, 'Inactive' %>
               <label for="inputRadiosChecked">Inactive</label>
             </div>
@@ -278,14 +278,14 @@
         <div class="col-md-6">
           <div class="row">
             <div class="form-inline form-material col-md-12">
-              <div class="col-md-7">
+              <div class="col-md-7 col-6">
                 <label class="form-control-label">Site Selector?</label>
               </div>
-              <div class="form-group col-md-2">
+              <div class="form-group col-md-2 col-3">
                 <%= project.radio_button :site_selector, 'false', checked: true %>
                 <label for="inputRadiosUnchecked">No</label>
               </div>
-              <div class="form-group col-md-2">
+              <div class="form-group col-md-2 col-3">
                 <%= project.radio_button :site_selector, 'true' %>
                 <label for="inputRadiosChecked">Yes</label>
               </div>
@@ -294,14 +294,14 @@
           <br/>
           <div class="row">
             <div class="form-inline form-material col-md-12">
-              <div class="col-md-7">
+              <div class="col-md-7 col-6">
                 <label class="form-control-label">Utilize sites and building database?</label>
               </div>
-              <div class="form-group col-md-2">
+              <div class="form-group col-md-2 col-3">
                 <%= project.radio_button :utilize_sites, 'false', checked: true %>
                 <label for="inputRadiosUnchecked">No</label>
               </div>
-              <div class="form-group col-md-2">
+              <div class="form-group col-md-2 col-3">
                 <%= project.radio_button :utilize_sites, 'true' %>
                 <label for="inputRadiosChecked">Yes</label>
               </div>
@@ -310,14 +310,14 @@
           <br/>
           <div class="row">
             <div class="form-inline form-material col-md-12">
-              <div class="col-md-7">
+              <div class="col-md-7 col-6">
                 <label class="form-control-label">Speculative Building?</label>
               </div>
-              <div class="form-group col-md-2">
+              <div class="form-group col-md-2 col-3">
                 <%= project.radio_button :speculative_building, 'false', checked: true %>
                 <label for="inputRadiosUnchecked">No</label>
               </div>
-              <div class="form-group col-md-2">
+              <div class="form-group col-md-2 col-3">
                 <%= project.radio_button :speculative_building, 'true' %>
                 <label for="inputRadiosChecked">Yes</label>
               </div>
@@ -326,14 +326,14 @@
           <br/>
           <div class="row">
             <div class="form-inline form-material col-md-12">
-              <div class="col-md-7">
+              <div class="col-md-7 col-6">
                 <label class="form-control-label">For public release?</label>
               </div>
-              <div class="form-group col-md-2">
+              <div class="form-group col-md-2 col-3">
                 <%= project.radio_button :public_release, 'false', checked: true %>
                 <label for="inputRadiosUnchecked">No</label>
               </div>
-              <div class="form-group col-md-2">
+              <div class="form-group col-md-2 col-3">
                 <%= project.radio_button :public_release, 'true' %>
                 <label for="inputRadiosChecked">Yes</label>
               </div>
@@ -343,17 +343,17 @@
       </div>
       <hr>
       <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-2 col-6">
           <div class="form-group form-material">
             <button type="submit" class="btn btn-block green-btn col-md-12" name= "commit", value= "Save & Close">Save & Close</button>
           </div>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-2 col-6">
           <div class="form-group form-material">
             <button type="submit" class="btn btn-block green-btn col-md-12">Save</button>
           </div>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-2 col-6 offset-3">
           <div class="form-group form-material">
             <%= link_to 'Cancel', projects_path, class: "btn btn-block green-btn col-md-12", data: { turbolinks: false } %>
           </div>

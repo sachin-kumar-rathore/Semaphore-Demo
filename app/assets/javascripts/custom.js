@@ -84,6 +84,7 @@ function filterRequest(){
   $.ajax({
     url: "/tasks",
     type: "GET",
+    dataType: 'script',
     data: { current_user_filter: user_filter, project_id: project_id, assigned_to_me: assigned_to_me  }
   });  
 }

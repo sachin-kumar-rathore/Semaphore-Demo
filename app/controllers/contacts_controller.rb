@@ -1,6 +1,8 @@
 class ContactsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_contact, only: [:show, :edit, :update, :destroy]
+  respond_to :html, only: [:index]
+  respond_to :js
 
   def index
     @contacts = current_org.contacts
@@ -8,23 +10,13 @@ class ContactsController < ApplicationController
       @contacts = @contacts.name_or_email_search(params[:name], params[:email])
     end    
     @contacts = @contacts.paginate(page: params[:page], per_page: 5).order('updated_at DESC')
-    respond_to do |format|
-      format.html {render 'index'}
-      format.js
-    end
   end
 
   def show
-    respond_to do |format|
-      format.js
-    end
   end
 
   def new
     @contact = current_org.contacts.new
-    respond_to do |format|
-      format.js
-    end
   end
 
   def edit
@@ -32,35 +24,26 @@ class ContactsController < ApplicationController
 
   def create
     @contact = current_org.contacts.new(contact_params)
-    respond_to do |format|
-      if @contact.save
-        flash.now[:success] = 'Contact was successfully created.'
-        load_contacts
-      end
-      format.js
+    if @contact.save
+      flash.now[:success] = 'Contact was successfully created.'
+      load_contacts
     end
   end
 
   def update
-    respond_to do |format|
-      if @contact.update(contact_params)
-        flash.now[:success] = 'Contact was successfully updated.'
-        load_contacts
-      end
-      format.js
+    if @contact.update(contact_params)
+      flash.now[:success] = 'Contact was successfully updated.'
+      load_contacts
     end
   end
 
   def destroy
-    respond_to do |format|
-      if @contact.destroy
-        flash.now[:success] = 'Contact was successfully destroyed.'
-      else
-        flash.now[:danger] = 'Contact could not be destroyed.'
-      end
-      load_contacts
-      format.js
+    if @contact.destroy
+      flash.now[:success] = 'Contact was successfully destroyed.'
+    else
+      flash.now[:danger] = 'Contact could not be destroyed.'
     end
+    load_contacts
   end
 
   def import_contacts

@@ -2,6 +2,8 @@ class SitesController < ApplicationController
 
   before_action :authenticate_user!
   before_action :set_site, only: [:show, :edit, :update, :destroy]
+  respond_to :html, only: [:index]
+  respond_to :js
 
   def index
     @sites = current_org.sites
@@ -9,23 +11,13 @@ class SitesController < ApplicationController
       @sites = @sites.public_send(key, value) if value.present?
     end
       @sites = @sites.paginate(page: params[:page], per_page: 8).order('updated_at DESC')
-    respond_to do |format|
-      format.html
-      format.js
-    end
   end
 
   def show
-    respond_to do |format|
-      format.js
-    end
   end
 
   def new
     @site = current_org.sites.new
-    respond_to do |format|
-      format.js
-    end
   end
 
   def edit
@@ -33,33 +25,24 @@ class SitesController < ApplicationController
 
   def create
     @site = current_org.sites.new(site_params)
-    respond_to do |format|
-      if @site.save
-        flash.now[:success] = 'Site/ Building was successfully created.'
-        load_sites
-      end
-      format.js
+    if @site.save
+      flash.now[:success] = 'Site/ Building was successfully created.'
+      load_sites
     end
   end
 
   def update
-    respond_to do |format|
-      if @site.update(site_params)
-        flash.now[:success] = 'Contact was successfully updated.'
-        load_sites
-      end
-      format.js
+    if @site.update(site_params)
+      flash.now[:success] = 'Contact was successfully updated.'
+      load_sites
     end
   end
 
   def destroy
-    respond_to do |format|
-      if @site.destroy
-        flash.now[:success] = 'Site was successfully destroyed.'
-      end
-      load_sites
-      format.js
+    if @site.destroy
+      flash.now[:success] = 'Site was successfully destroyed.'
     end
+    load_sites
   end
 
   def find_contact

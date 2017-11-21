@@ -2,13 +2,11 @@ class ProjectsController < ApplicationController
 
   before_action :authenticate_user!
   before_action :set_project, only: [:edit, :update, :show]
+  respond_to :html, only: [:index, :new, :edit]
+  respond_to :js
 
   def new
     @project = current_org.projects.new
-    respond_to do |format|
-      format.html
-      format.js
-    end
   end
 
   def index
@@ -16,11 +14,7 @@ class ProjectsController < ApplicationController
     filtering_params(params).each do |key, value|
       @projects = @projects.public_send(key, value) if value.present?
     end
-    @projects = @projects.paginate(page: params[:page], per_page: 8)
-    respond_to do |format|
-      format.html
-      format.js
-    end      
+    @projects = @projects.paginate(page: params[:page], per_page: 8)     
   end
 
   def show
@@ -52,10 +46,6 @@ class ProjectsController < ApplicationController
     if @project.blank?
       flash[:danger] = 'Project not found.'
       redirect_to projects_path
-    end
-    respond_to do |format|
-      format.html
-      format.js
     end
   end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171115100316) do
+ActiveRecord::Schema.define(version: 20171121065429) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,20 +23,59 @@ ActiveRecord::Schema.define(version: 20171115100316) do
     t.string "business_sector"
     t.string "address_line_1"
     t.string "address_line_2"
-    t.string "city"
-    t.string "state"
-    t.string "zip_code"
     t.string "country"
     t.string "website"
     t.string "email"
     t.boolean "member_investor"
-    t.string "utility_provider"
+    t.string "utility_provider_1"
     t.text "notes"
     t.string "business_unit"
     t.integer "company_establishment_year"
     t.integer "years_business_located"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "organization_id"
+    t.string "title"
+    t.string "phone_number_1"
+    t.string "phone_number_2"
+    t.string "cell_phone"
+    t.string "city"
+    t.string "state"
+    t.string "zip_code"
+    t.string "fax"
+    t.string "region"
+    t.string "utility_provider_2"
+    t.string "facility_type"
+    t.string "acreage"
+    t.string "building_size"
+    t.string "number_of"
+    t.string "average_age_of_buildings"
+    t.boolean "room_for_expansion"
+    t.string "owned_or_leased"
+    t.date "lease_expiration_date"
+    t.text "facility_notes"
+    t.text "primary_products_and_services"
+    t.integer "full_time_employees"
+    t.integer "part_time_employees"
+    t.integer "leased_employees"
+    t.integer "total_employees"
+    t.integer "number_of_jobs_added_or_lost_in_past_3_years"
+    t.integer "number_of_shifts_per_day"
+    t.integer "number_of_days_per_week"
+    t.string "average_annual_salary"
+    t.date "date_of_total"
+    t.text "employment_notes"
+    t.boolean "business_union_represented"
+    t.index ["organization_id"], name: "index_companies_on_organization_id"
+  end
+
+  create_table "company_contacts", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "company_id"
+    t.bigint "contact_id"
+    t.index ["company_id"], name: "index_company_contacts_on_company_id"
+    t.index ["contact_id"], name: "index_company_contacts_on_contact_id"
   end
 
   create_table "contacts", force: :cascade do |t|
@@ -253,6 +292,9 @@ ActiveRecord::Schema.define(version: 20171115100316) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
+  add_foreign_key "companies", "organizations"
+  add_foreign_key "company_contacts", "companies"
+  add_foreign_key "company_contacts", "contacts"
   add_foreign_key "documents", "organizations"
   add_foreign_key "documents", "projects"
   add_foreign_key "documents", "users"

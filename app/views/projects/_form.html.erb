@@ -11,7 +11,7 @@
             <span class="input-group-addon">
             <i class="icon md-calendar" aria-hidden="true"></i>
             </span>
-            <%= project.text_field 'active_date_str', class: "form-control  datepicker", value: "#{@project.active_date}", data: {plugin: "datepicker"} %>
+            <%= project.text_field 'active_date_str', class: "form-control  datepicker", value: "#{@project.active_date.strftime("%m/%d/%Y") if @project.active_date}", data: {plugin: "datepicker"} %>
           </div>
         </div>
         <div class="form-group form-material col-md-3 col-6">
@@ -96,24 +96,23 @@
       <div class="row">
         <div class="form-group form-material col-md-3">
           <label class="form-control-label" id="inputComapnyName" >Company Name:</label>
-          <input type="text" class="form-control" id="inputCompanyName" 
-            placeholder="Company Name" autocomplete="off" />
+          <%= project.select(:company_id, current_org.companies.all.map{ |company| [company.name, company.id] },{},{data:{ plugin: 'selectpicker', "live-search":true}}) %>
         </div>
       </div>
       <div class="row">
         <div class="form-group form-material col-md-3">
           <label class="form-control-label" for="inputProjectType">Project Type:</label>
-          <%= project.select :project_type, options_for_select(['Bio-Medical', 'Call Center', 'Data Center', 'Information Technology', 'Manufacturing', 'Warehouse'], project.object.project_type), {}, class: 'form-control', data: {
+          <%= project.select :project_type, options_for_select( Organization::PROJECT_TYPES, project.object.project_type), {}, class: 'form-control', data: {
             plugin: "selectpicker" } %>
         </div>
         <div class="form-group form-material col-md-3">
           <label class="form-control-label" for="inputIndustryType">Industry Type:</label>
-          <%= project.select :industry_type, options_for_select(['Advanced Manufacturing', 'Aerospace', 'Ag Service', 'Bioscience', 'Energy', 'Financial', 'Food Processing', 'Insurance', 'Logistics/Material Handling', 'Military', 'Retail'], project.object.industry_type), {}, class: 'form-control', data: {
+          <%= project.select :industry_type, options_for_select( Organization::INDUSTRY_TYPES, project.object.industry_type), {}, class: 'form-control', data: {
             plugin: "selectpicker" } %>
         </div>
         <div class="form-group form-material col-md-3">
           <label class="form-control-label" for="inputBusinessUnit">Business Unit:</label>
-          <%= project.select :business_unit, options_for_select(['Default', 'Executive', 'Investor Relations'], project.object.business_unit), {}, class: 'form-control', data: {
+          <%= project.select :business_unit, options_for_select( Project::BUSINESS_UNITS, project.object.business_unit), {}, class: 'form-control', data: {
             plugin: "selectpicker" } %>
         </div>
       </div>
@@ -139,7 +138,7 @@
       <div class="row">
         <div class="form-group form-material col-md-3">
           <label class="form-control-label" id="inputSquareFeet" >Square Feet Requested:</label>
-          <%= project.select :square_feet_requested, options_for_select(['1-25,999', '26-44,999', '45-75,999', '76-99,999', '100-149,999', '150-199,999', '200-399,999', '400,000+'], project.object.square_feet_requested), {}, class: 'form-control', data: {
+          <%= project.select :square_feet_requested, options_for_select( Project::SQUARE_FEET_REQUESTED, project.object.square_feet_requested), {}, class: 'form-control', data: {
             plugin: "selectpicker" } %>
         </div>
       </div>
@@ -152,7 +151,7 @@
       <div class="row">
         <div class="form-group form-material col-md-3">
           <label class="form-control-label" id="inputAcres" >Acres Requested:</label>
-          <%= project.select :acres_requested, options_for_select(['up to 1', 'up to 2', 'up to 3', 'up to 4', 'up to 5'], project.object.acres_requested), {}, class: 'form-control', data: { plugin: "selectpicker" } %>
+          <%= project.select :acres_requested, options_for_select( Project::ACRES_REQUESTED, project.object.acres_requested), {}, class: 'form-control', data: { plugin: "selectpicker" } %>
         </div>
       </div>
       <div class="row">
@@ -353,7 +352,7 @@
             <button type="submit" class="btn btn-block green-btn col-md-12">Save</button>
           </div>
         </div>
-        <div class="col-md-2 col-6 offset-3">
+        <div class="col-md-2 col-6">
           <div class="form-group form-material">
             <%= link_to 'Cancel', projects_path, class: "btn btn-block green-btn col-md-12", data: { turbolinks: false } %>
           </div>

@@ -1,0 +1,29 @@
+<table class="table table-striped table-hover toggle-circle footable" data-toggle-column="first" data-empty="There are no companies" data-show-toggle="true">
+  <thead>
+  <tr>
+    <th>COMPANY NAME</th>
+    <th>DATE</th>
+    <th data-breakpoints="xs">OPERATIONS</th>
+  </tr>
+  </thead>
+  <tbody>
+    <% companies.each do |company| %>
+        <tr>
+          <td><%= company.name %></td>
+          <td><%= company.created_at %></td>
+          <td>
+            <a class="btn btn-sm green-btn" href="<%= edit_company_path(company) %>" data-turbolinks="false" >Edit</a>
+          </td>
+      </tr>
+        </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="digg_pagination">
+  <%= js_will_paginate companies %>
+</div>
+
+<script>
+  $('.footable').footable();
+</script>

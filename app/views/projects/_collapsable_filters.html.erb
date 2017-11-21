@@ -71,32 +71,11 @@ aria-expanded="false" aria-controls="project_filters">
     <div class="form-inline col-md-12">
       <div class="form-group form-material col-md-3 col-12">
         <label class="form-control-label" for="inputProjectManager">Project Type:</label>
-        <select data-plugin="selectpicker" class="form-control" name="project_type">
-          <option value="">Please Select</option>
-          <option>Bio-Medical</option>
-          <option>Call Center</option>
-          <option>Data Center</option>
-          <option>Information Technology</option>
-          <option>Manufacturing</option>
-          <option>Warehouse</option>
-        </select>
+        <%= select_tag 'project_type', options_for_select( Organization::PROJECT_TYPES ), { class: "form-control", data:{ plugin: 'selectpicker', "live-search":true}, include_blank: 'Please Select' } %>
       </div>
       <div class="form-group form-material col-md-3 col-12">
         <label class="form-control-label" for="inputProjectContact">Industry Type:</label>
-        <select data-plugin="selectpicker" class="form-control" name="industry_type">
-          <option value="">Please Select</option>
-          <option>Advanced Manufacturing</option>
-          <option>Aerospace</option>
-          <option>Ag Service</option>
-          <option>Bioscience</option>
-          <option>Energy</option>
-          <option>Financial</option>
-          <option>Food Processing</option>
-          <option>Insurance</option>
-          <option>Logistics/Material Handling</option>
-          <option>Military</option>
-          <option>Retail</option>
-        </select>
+        <%= select_tag 'industry_type', options_for_select( Organization::INDUSTRY_TYPES ), { class: "form-control", data:{ plugin: 'selectpicker', "live-search":true}, include_blank: 'Please Select' } %>
       </div>
       <div class="form-group form-material col-md-3 col-12">
         <label class="form-control-label" for="inputConsideredLocations">Source:</label>
@@ -178,7 +157,7 @@ aria-expanded="false" aria-controls="project_filters">
       </div>
       <div class="form-group form-material col-md-3">
         <label class="form-control-label" for="inputCompanyName">Company Name:</label>
-        <input type="text" class="form-control" id="inputPrimaryContact" name="inputPrimaryContact" autocomplete="off" />
+        <%= select_tag "company_id", options_for_select(current_org.companies.all.map{ |company| [company.name, company.id] }), { class: "form-control", data:{ plugin: 'selectpicker', "live-search":true}, include_blank: 'Please Select' }  %>
       </div>
       <div class="form-group form-material col-md-3">
         <label class="form-control-label" for="inputProjectNotes">Project Notes:</label>

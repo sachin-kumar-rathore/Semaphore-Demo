@@ -1,74 +1,115 @@
 class CompaniesController < ApplicationController
-  before_action :set_company, only: [:show, :edit, :update, :destroy]
 
-  # GET /companies
-  # GET /companies.json
+  before_action :authenticate_user!
+  before_action :set_company, except: [:index, :new]
+  respond_to :html, only: [:index, :edit]
+  respond_to :js
+     
   def index
-    @companies = Company.all
+    @companies = current_org.companies.paginate(page: params[:page], per_page: 8).order('updated_at DESC')
   end
 
-  # GET /companies/1
-  # GET /companies/1.json
   def show
   end
 
-  # GET /companies/new
   def new
-    @company = Company.new
+    @company = current_org.companies.new
   end
 
-  # GET /companies/1/edit
   def edit
+    if @company.blank?
+      flash[:danger] = 'Company not found.'
+      redirect_to companies_path
+    end
   end
 
-  # POST /companies
-  # POST /companies.json
   def create
-    @company = Company.new(company_params)
-
-    respond_to do |format|
-      if @company.save
-        format.html { redirect_to @company, notice: 'Company was successfully created.' }
-        format.json { render :show, status: :created, location: @company }
-      else
-        format.html { render :new }
-        format.json { render json: @company.errors, status: :unprocessable_entity }
-      end
+    @company = current_org.companies.new(company_params)
+    if @company.save
+      flash.now[:success] = 'Company was successfully created.'
+      load_companies
     end
   end
 
-  # PATCH/PUT /companies/1
-  # PATCH/PUT /companies/1.json
-  def update
-    respond_to do |format|
-      if @company.update(company_params)
-        format.html { redirect_to @company, notice: 'Company was successfully updated.' }
-        format.json { render :show, status: :ok, location: @company }
-      else
-        format.html { render :edit }
-        format.json { render json: @company.errors, status: :unprocessable_entity }
-      end
-    end
+  def company_info_update
+    update_form(company_info_params)
   end
 
-  # DELETE /companies/1
-  # DELETE /companies/1.json
-  def destroy
-    @company.destroy
-    respond_to do |format|
-      format.html { redirect_to companies_url, notice: 'Company was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+  def history_update
+    update_form(history_params)
+  end
+
+  def facilities_update
+    update_form(facilities_params)
+  end
+
+  def products_and_services_update
+    update_form(products_and_services_params)
+  end
+
+  def local_employment_update
+    update_form(local_employment_params)
+  end
+
+  def union_representation_update
+    update_form(union_representation_params)
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_company
-      @company = Company.find(params[:id])
-    end
+    
+  def load_companies
+    @companies = current_org.companies.paginate(page: params[:page], per_page: 8).order('updated_at DESC')
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def company_params
-      params.require(:company).permit(:owner_id, :subscription_id, :name, :company_number, :business_sector, :address_line_1, :address_line_2, :city, :state, :zip_code, :country, :website, :email, :member_investor, :utility_provider, :notes, :business_unit, :company_establishment_year, :years_business_located)
+  def set_company
+    @company = current_org.companies.where(id: params[:id]).first
+  end
+
+  def company_params
+    params.require(:company).permit(:name, :company_number, :business_sector, :title, :address_line_1,
+                                    :address_line_2, :city_state_zip, :phone_number_1, :phone_number_2,
+                                    :cell_phone, :fax, :website, :email).merge(organization_id: current_org.id)
+  end
+
+  def company_info_params
+    params.require(:company).permit(:name, :company_number, :business_sector, :city, :state,
+                                    :zip_code, :country, :region, :phone_number_1, :fax, :website,
+                                    :email, :member_investor, :utility_provider_1, :utility_provider_2,
+                                    :notes, :business_unit )
+  end
+
+  def history_params
+    params.require(:company).permit(:company_establishment_year, :years_business_located)
+  end
+
+  def facilities_params
+    params.require(:company).permit(:facility_type, :acreage, :building_size, :number_of, :average_age_of_buildings,
+                                    :room_for_expansion, :owned_or_leased, :lease_expiration_date_str, :facility_notes)
+  end
+
+  def products_and_services_params
+    params.require(:company).permit(:primary_products_and_services)
+  end
+
+  def local_employment_params
+    params.require(:company).permit(:full_time_employees, :part_time_employees, :leased_employees,
+                                    :total_employees, :number_of_jobs_added_or_lost_in_past_3_years,
+                                    :number_of_shifts_per_day, :number_of_days_per_week, :average_annual_salary,
+                                    :date_of_total_str, :employment_notes)
+  end
+
+  def union_representation_params
+    params.require(:company).permit(:business_union_represented, :employment_notes)
+  end
+
+  def update_form(form_params)
+    if @company.update(form_params)
+      if params[:commit].present?
+        flash[:success] = 'Company was successfully updated.'
+        respond_to do |format|
+          format.js {render js: "window.location = '/companies';"}
+        end
+      end
     end
+  end
 end

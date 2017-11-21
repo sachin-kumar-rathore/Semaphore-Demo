@@ -105,6 +105,6 @@ class ContactsController < ApplicationController
   def contact_params
     params.require(:contact).permit(:name, :email, :phone_number_1, :phone_number_2, :address_line_1,
                                     :address_line_2, :city_state_zip, :fax, :business_unit,
-                                    :website, :category, :title, :cell_phone, :notes, :project_id)
+                                    :website, :category, :title, :cell_phone, :notes, :project_id, :company_id)
   end
 end

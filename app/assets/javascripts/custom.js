@@ -1,6 +1,6 @@
 // Project Contacts
 
-function reloadContacts(id){
+function reloadProjectContacts(id){
   $('.modal-backdrop').remove();
   $('#contactFormCenter').modal('hide');
   $.ajax({
@@ -175,3 +175,13 @@ function tokenInputforContact() {
   });
 };
 
+// Company Contacts
+
+function reloadCompanyContacts(id){
+  $('.modal-backdrop').remove();
+  $('#contactFormCenter').modal('hide');
+  $.ajax({
+    url: '/companies/' + id + '/contacts',
+    type: "GET"
+  });
+}

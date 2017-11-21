@@ -3,7 +3,24 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { registrations: 'users/registrations' }
 
-  resources :companies
+  resources :companies do
+    member do
+      patch :company_info_update
+      patch :history_update
+      patch :facilities_update
+      patch :products_and_services_update
+      patch :local_employment_update
+      patch :union_representation_update
+    end
+    resources :contacts, controller: 'company_contacts' do
+      member do
+        post :attach_contact_to_company
+      end
+      collection do
+        get :show_existing_contacts
+      end
+    end
+  end
 
   resources :organizations, only: [:edit, :update]
   resources :dashboard, only: [:index]

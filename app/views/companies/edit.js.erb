@@ -1,0 +1,7 @@
+$('#mainTab').html("<%= j render 'edit_company_form' %>");
+$(".tab-content").children('.tab-pane').removeClass("active");
+$('#mainTab').addClass("active");
+$(".nav-item").children('.nav-link').removeClass("active");
+$('#mainNavLink').addClass("active");
+$('[data-plugin="datepicker"]').datepicker();
+$('[data-plugin="selectpicker"]').selectpicker();

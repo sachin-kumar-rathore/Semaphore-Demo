@@ -1,6 +1,6 @@
 class Contact < ApplicationRecord
 
-  attr_accessor :project_id
+  attr_accessor :project_id, :company_id
   # == Constants == #
   self.per_page = 5
 
@@ -15,6 +15,8 @@ class Contact < ApplicationRecord
   belongs_to :organization
   has_many :project_contacts, dependent: :destroy
   has_many :projects, through: :project_contacts
+  has_many :company_contacts, dependent: :destroy
+  has_many :companies, through: :company_contacts
   has_and_belongs_to_many :emails
 
 
@@ -24,6 +26,7 @@ class Contact < ApplicationRecord
 
   # == Callbacks == #
   after_create :add_contact_to_project, if: :has_project_id? 
+  after_create :add_contact_to_company, if: :has_company_id?
   # == Scopes and Other macros == #
   pg_search_scope :name_search, :against => :name, :using => {
       :tsearch => {:prefix => true}
@@ -42,11 +45,19 @@ class Contact < ApplicationRecord
 
   # == Private == #
   def add_contact_to_project
-    self.project_contacts.create!(project_id: project_id)
+    project_contacts.create!(project_id: project_id)
   end
 
   def has_project_id?
     project_id.present?    
+  end
+
+  def add_contact_to_company
+    company_contacts.create!(company_id: company_id)
+  end
+
+  def has_company_id?
+    company_id.present?    
   end
 
 end

@@ -1,6 +1,6 @@
 <% if @contact.errors.blank? %>
   $('.flashMessages').html("<%= j render partial: 'shared/flash_messages' %>");
-  reloadProjectContacts("<%= @project.id %>");
+  reloadCompanyContacts("<%= @company.id %>");
 <% else %>
   $('#contactFormCenter .error-messages').html("<%= j render partial: 'shared/error_messages', locals: {obj: @contact} %>");
 <% end %>

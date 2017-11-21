@@ -1,0 +1,3 @@
+$('#createOrEditCompany').html("<%= j render(partial: 'form', locals: {company: @company, controller: 'companies', action: 'create'}) %>");
+$('#companyFormCenter').modal('show');
+$('[data-plugin="selectpicker"]').selectpicker();

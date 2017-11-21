@@ -1,0 +1,106 @@
+<div class="panel panel-bordered" id="facilities">
+  <div class="panel-heading collapsed" data-toggle="collapse" href="#facilities-form"
+aria-expanded="false" aria-controls="facilities-form">
+    <h3 class="panel-title"> Facilities <i class="fa fa-caret-down pull-right" aria-hidden="true"></i> </h3>
+  </div>
+  <div class="panel-body panel-collapse collapse"  id="facilities-form" aria-labelled-by="facilities-form" role="tabpanel">
+    <div class="error-messages"></div>
+    <div class="alerts"></div>
+    <br/>
+    <%= form_for @company, url: facilities_update_company_path, method: :patch, remote: true  do |company| %>
+      <div class="row">
+        <div class="form-group form-material col-md-3">
+          <label class="form-control-label" id="inputFacilityType" >Type of Facility:</label>
+          <%= company.select :facility_type, options_for_select([], company.object.facility_type), {}, {class: 'form-control', data:{ plugin: 'selectpicker', "live-search":true } } %>
+        </div>
+        <div class="form-group form-material col-md-3">
+          <label class="form-control-label" id="inputAcreage" >Acreage:</label>
+          <%= company.text_field 'acreage', class: "form-control" %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group form-material col-md-3">
+          <label class="form-control-label" id="inputBuildingSize" >Building Size:</label>
+          <%= company.text_field 'building_size', class: "form-control" %>
+        </div>
+        <div class="form-group form-material col-md-3">
+          <label class="form-control-label" id="inputNumberOf" >Number Of:</label>
+          <%= company.text_field 'number_of', class: "form-control" %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group form-material col-md-3">
+          <label class="form-control-label" id="inputAverageAgeOfBuildings" >Average Age of Buildings:</label>
+          <%= company.select :average_age_of_buildings, options_for_select([], company.object.average_age_of_buildings), {}, {class: 'form-control', data:{ plugin: 'selectpicker', "live-search":true } } %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-inline form-material col-md-12">
+          <label class="form-control-label">Is there room for expansion at this location?</label>
+          <div class="form-group col-md-1">
+            <%= company.radio_button :room_for_expansion, 'false', checked: true %>
+            <label for="inputRadiosUnchecked">No</label>
+          </div>
+          <div class="form-group col-md-1">
+            <%= company.radio_button :room_for_expansion, 'true' %>
+            <label for="inputRadiosChecked">Yes</label>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="form-inline form-material col-md-7">
+          <label class="form-control-label">Facility Owned or Leased?</label>
+          <div class="form-group col-md-2">
+            <%= company.radio_button :owned_or_leased, 'Owned', checked: true %>
+            <label for="inputRadiosUnchecked">Owned</label>
+          </div>
+          <div class="form-group col-md-2">
+            <%= company.radio_button :owned_or_leased, 'Leased' %>
+            <label for="inputRadiosChecked">Leased</label>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="form-group form-material col-md-3 ">
+          <label class="form-control-label">Lease Expiration Date:</label>
+          <div class="input-group">
+            <span class="input-group-addon">
+            <i class="icon md-calendar" aria-hidden="true"></i>
+            </span>
+            <%= company.text_field 'lease_expiration_date_str', class: "form-control  datepicker", value: "#{@company.lease_expiration_date.strftime("%m/%d/%Y") if @company.lease_expiration_date}", data: {plugin: "datepicker"} %>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group form-material col-md-6">
+          <label class="form-control-label" for="inputPropertyOwner">Property Owner:</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group form-material col-md-9">
+          <label class="form-control-label" id="inputFacilityNotes" >Facility Notes:</label>
+          <%= company.text_area 'facility_notes', class: "form-control", rows: "3" %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+          <div class="form-group form-material">
+            <button type="submit" class="btn btn-block green-btn col-md-12" name= "commit", value= "Save & Close">Save & Close</button>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group form-material">
+            <button type="submit" class="btn btn-block green-btn col-md-12">Save</button>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group form-material">
+            <%= link_to 'Cancel', companies_path, class: "btn btn-block green-btn col-md-12", data: { turbolinks: false } %>
+          </div>
+        </div>
+      </div> 
+    <% end %>
+  </div>
+</div>

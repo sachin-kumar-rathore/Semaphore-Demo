@@ -1,0 +1,7 @@
+<% if @company.errors.blank? %>
+  $('#companiesList').html("<%= j render partial: 'companies', locals: {companies: @companies} %>");
+  $('#companyFormCenter').modal('hide');
+  $('.flashMessages').html("<%= j render partial: 'shared/flash_messages' %>");
+<% else %>
+  $('#companyFormCenter .error-messages').html("<%= j render partial: 'shared/error_messages', locals: {obj: @company} %>");
+<% end %>

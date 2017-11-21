@@ -1,0 +1,41 @@
+<div class="panel panel-bordered" id="productsAndServices">
+  <div class="panel-heading collapsed" data-toggle="collapse" href="#products-and-services-form"
+aria-expanded="false" aria-controls="products-and-services-form">
+    <h3 class="panel-title"> Products & Services <i class="fa fa-caret-down pull-right" aria-hidden="true"></i></h3>
+  </div>
+  <div class="panel-body panel-collapse collapse" id="products-and-services-form" aria-labelled-by="products-and-services-form" role="tabpanel">
+    <div class="error-messages"></div>
+    <div class="alerts"></div>
+    <br/>
+    <%= form_for @company, url: products_and_services_update_company_path, method: :patch, remote: true  do |company| %>
+      <div class="row">
+        <div class="form-group form-material col-md-9">
+          <label class="form-control-label" id="inputPrimaryProducts&Services" >Primary Products and Services:</label>
+          <%= company.text_area 'primary_products_and_services', class: "form-control", rows: "3" %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group form-material col-md-9">
+          <label class="form-control-label" id="inputNAICSCodes" >NAICS Codes:</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+          <div class="form-group form-material">
+            <button type="submit" class="btn btn-block green-btn col-md-12" name= "commit", value= "Save & Close">Save & Close</button>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group form-material">
+            <button type="submit" class="btn btn-block green-btn col-md-12">Save</button>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group form-material">
+            <%= link_to 'Cancel', companies_path, class: "btn btn-block green-btn col-md-12", data: { turbolinks: false } %>
+          </div>
+        </div>
+      </div> 
+    <% end %>
+  </div>
+</div>

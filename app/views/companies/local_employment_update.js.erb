@@ -1,0 +1,7 @@
+<% if @company.errors.blank? %>
+  $('#localEmployment .alerts').html("Successfully saved data for company local employment.").removeClass("alerts-danger");
+  $('#localEmployment .error-messages').html("");
+<% else %>
+  $('#localEmployment .alerts').html("Could not save data for company local employment.").addClass("alerts-danger");
+  $('#localEmployment .error-messages').html("<%= j render partial: 'shared/error_messages', locals: {obj: @company} %>");
+<% end %>

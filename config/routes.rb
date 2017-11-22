@@ -20,6 +20,14 @@ Rails.application.routes.draw do
         get :show_existing_contacts
       end
     end
+    resources :projects, controller: 'company_projects', only: [:index] do
+      member do
+        post :attach_project_to_company
+      end
+      collection do
+        get :show_existing_projects
+      end
+    end
   end
 
   resources :organizations, only: [:edit, :update]

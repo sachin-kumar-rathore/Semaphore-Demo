@@ -1,0 +1,16 @@
+<div class="panel">
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-9">
+        <h3> Company Projects </h3>
+      </div>
+      <div class="col-md-3">
+        <button class="btn btn-sm green-btn waves-effect waves-classic col-md-12 clickable" data-href="<%= show_existing_projects_company_projects_path(@company.id) %>" type="button" >ASSOCIATE PROJECT </button>
+      </div>
+    </div>
+  </div>
+  <div class="panel-body" id="projectsList">
+    <%= render partial: "projects", locals: {company_projects: @company_projects} %>
+  </div>
+  <div id="associateProject"></div>
+</div>

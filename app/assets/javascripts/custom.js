@@ -186,3 +186,13 @@ function reloadCompanyContacts(id){
     type: "GET"
   });
 }
+
+// Company Projects
+
+function reloadCompanyProjects(id){
+  $('.modal-backdrop').remove();
+  $.ajax({
+    url: '/companies/' + id + '/projects',
+    type: "GET"
+  });
+}

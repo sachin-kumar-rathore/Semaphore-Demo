@@ -1,0 +1,4 @@
+$('.modal-backdrop').remove();
+$('#'.concat('<%= @type.singularize %>')+'FormCenter').modal("hide");
+$('#'.concat('<%= @type.singularize %>')+'List').html("<%= j render partial: 'list', locals: { setting_type_data: setting_list, setting_name: @type } %>");
+$('.flashMessages').html("<%= j render partial: 'shared/flash_messages' %>");

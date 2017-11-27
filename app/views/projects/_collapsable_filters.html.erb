@@ -71,20 +71,15 @@ aria-expanded="false" aria-controls="project_filters">
     <div class="form-inline col-md-12">
       <div class="form-group form-material col-md-3 col-12">
         <label class="form-control-label" for="inputProjectManager">Project Type:</label>
-        <%= select_tag 'project_type', options_for_select( Organization::PROJECT_TYPES ), { class: "form-control", data:{ plugin: 'selectpicker', "live-search":true}, include_blank: 'Please Select' } %>
+        <%= select_tag 'project_type', options_for_select( current_org.project_types.active.map{ |type| type.name } ), { class: "form-control", data:{ plugin: 'selectpicker', "live-search":true}, include_blank: 'Please Select' } %>
       </div>
       <div class="form-group form-material col-md-3 col-12">
         <label class="form-control-label" for="inputProjectContact">Industry Type:</label>
-        <%= select_tag 'industry_type', options_for_select( Organization::INDUSTRY_TYPES ), { class: "form-control", data:{ plugin: 'selectpicker', "live-search":true}, include_blank: 'Please Select' } %>
+        <%= select_tag 'industry_type', options_for_select( current_org.industry_types.active.map{ |type| type.name } ), { class: "form-control", data:{ plugin: 'selectpicker', "live-search":true}, include_blank: 'Please Select' } %>
       </div>
       <div class="form-group form-material col-md-3 col-12">
         <label class="form-control-label" for="inputConsideredLocations">Source:</label>
-        <select data-plugin="selectpicker" data-live-search="true" class="form-control">
-          <option value="">Please Select</option>
-          <option>X</option>
-          <option>Y</option>
-          <option>Z</option>
-        </select>
+        <%= select_tag 'source', options_for_select( current_org.sources.active.map{ |type| type.name } ), { class: "form-control", data:{ plugin: 'selectpicker', "live-search":true}, include_blank: 'Please Select' } %>
       </div>
       <div class="form-group form-material col-md-2 col-12">
         <label class="form-control-label" for="inputProject#">Referred Site/Building:</label>

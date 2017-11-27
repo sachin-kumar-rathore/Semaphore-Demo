@@ -1,0 +1,8 @@
+<% if @setting_type.errors.blank? %>
+  $('.modal-backdrop').remove();
+  $('#'.concat('<%= @type.singularize %>')+'FormCenter').modal("hide");
+  $('.flashMessages').html("<%= j render partial: 'shared/flash_messages' %>");
+  $('#'.concat('<%= @type.singularize %>')+'List').html("<%= j render partial: 'list', locals: { setting_type_data: setting_list, setting_name: @type } %>");
+<% else %>
+  $('#'.concat('<%= @type.singularize %>')+'FormCenter' + ' .error-messages').html("<%= j render partial: 'shared/error_messages', locals: {obj: @setting_type} %>");
+<% end %>

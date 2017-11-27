@@ -2,7 +2,6 @@ class Project < ApplicationRecord
 
   include DateParser
 
-  BUSINESS_UNITS = ['Default', 'Executive', 'Investor Relations']
   SQUARE_FEET_REQUESTED = ['1-25,999', '26-44,999', '45-75,999', '76-99,999', '100-149,999', '150-199,999', '200-399,999', '400,000+']
   ACRES_REQUESTED = ['up to 1', 'up to 2', 'up to 3', 'up to 4', 'up to 5']
   

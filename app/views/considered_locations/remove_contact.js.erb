@@ -1,0 +1,6 @@
+<% if @contact_considered_location.errors.blank? %>
+  $('#locationContactsList').html("<%= j render partial: 'contact_considered_locations' %>");
+  $('#consideredLocationsFormCenter .error-messages').html("<%= j render partial: 'shared/flash_messages' %>"); 
+<% else %>
+  $('#consideredLocationsFormCenter .error-messages').html("<%= j render partial: 'shared/error_messages', locals: {obj: @contact_considered_location} %>");
+<% end %>

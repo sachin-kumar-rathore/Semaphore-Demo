@@ -1,8 +1,8 @@
 class Organization < ApplicationRecord
 
-  BUSINESS_UNITS = ['Default', 'Cell', 'Work', 'Office', 'Home', 'Other']
-  PROJECT_TYPES = ['Bio-Medical', 'Call Center', 'Data Center', 'Information Technology', 'Manufacturing', 'Warehouse']
-  INDUSTRY_TYPES = ['Advanced Manufacturing', 'Aerospace', 'Ag Service', 'Bioscience', 'Energy', 'Financial', 'Food Processing', 'Insurance', 'Logistics/Material Handling', 'Military', 'Retail']
+  SETTINGS = ['project_types', 'industry_types', 'provided_services', 'competitions', 
+              'sources', 'elimination_reasons', 'contact_categories', 'business_units',
+              'contact_method_types', 'company_activity_types']
 
   has_many :users
 
@@ -13,7 +13,18 @@ class Organization < ApplicationRecord
   has_many :emails, dependent: :destroy
   has_many :documents, dependent: :destroy
   has_many :companies, dependent: :destroy
-
+  has_many :project_types, dependent: :destroy
+  has_many :industry_types, dependent: :destroy
+  has_many :provided_services, dependent: :destroy
+  has_many :competitions, dependent: :destroy
+  has_many :sources, dependent: :destroy
+  has_many :contact_categories, dependent: :destroy
+  has_many :elimination_reasons, dependent: :destroy
+  has_many :business_units, dependent: :destroy
+  has_many :contact_method_types, dependent: :destroy
+  has_many :company_activity_types, dependent: :destroy
+  has_many :considered_locations, dependent: :destroy
+    
   validates_presence_of :name, :primary_contact_first_name, :primary_contact_phone, :primary_contact_email
   validates_format_of :primary_contact_email, with: Devise::email_regexp
 

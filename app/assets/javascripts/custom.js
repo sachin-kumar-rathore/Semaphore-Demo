@@ -196,3 +196,19 @@ function reloadCompanyProjects(id){
     type: "GET"
   });
 }
+
+//Settings
+
+$(document).on("click", ".delete-option", function () {
+  var link = $(this).data("href");
+  $.ajax({
+    url: link,
+    type: "DELETE",
+    dataType: 'script'
+  });
+});
+
+$(document).on("click", "#addContactIcon", function (){
+   $(this).toggleClass("fa-plus");
+   $(this).toggleClass("fa-minus");
+});

@@ -21,11 +21,11 @@
                 </div>
                 <div class="form-group form-material col-md-4">
                   <label class="form-control-label">Category:</label>
-                  <%= form.select :category, options_for_select(['Default', 'Cell', 'Work', 'Office', 'Home', 'Other'], form.object.category), {}, :class => 'form-control' %>
+                  <%= form.select :category, options_for_select(current_org.contact_categories.map{ |type| type.name }, form.object.category), {}, class: 'form-control', data: { plugin: "selectpicker" } %>
                 </div>
                 <div class="form-group form-material col-md-4">
                   <label class="form-control-label">Business Unit:</label>
-                  <%= form.select :business_unit, options_for_select(['Default', 'Cell', 'Work', 'Office', 'Home', 'Other'], form.object.business_unit), {}, :class => 'form-control' %>
+                  <%= form.select :business_unit, options_for_select(current_org.business_units.map{ |type| type.name }, form.object.business_unit), {}, class: 'form-control', data: { plugin: "selectpicker" } %>
                 </div>
               </div>
               <div class="row">

@@ -31,6 +31,9 @@ ActiveRecord::Schema.define(version: 20171124101223) do
     t.string "business_sector"
     t.string "address_line_1"
     t.string "address_line_2"
+    t.string "city"
+    t.string "state"
+    t.string "zip_code"
     t.string "country"
     t.string "website"
     t.string "email"
@@ -47,9 +50,6 @@ ActiveRecord::Schema.define(version: 20171124101223) do
     t.string "phone_number_1"
     t.string "phone_number_2"
     t.string "cell_phone"
-    t.string "city"
-    t.string "state"
-    t.string "zip_code"
     t.string "fax"
     t.string "region"
     t.string "utility_provider_2"
@@ -323,15 +323,6 @@ ActiveRecord::Schema.define(version: 20171124101223) do
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id"
   end
 
-  create_table "service_provideds", force: :cascade do |t|
-    t.string "name"
-    t.string "status"
-    t.bigint "organization_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["organization_id"], name: "index_service_provideds_on_organization_id"
-  end
-
   create_table "sites", force: :cascade do |t|
     t.integer "organization_id"
     t.integer "contact_id"
@@ -367,7 +358,6 @@ ActiveRecord::Schema.define(version: 20171124101223) do
 
   create_table "tasks", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "assignee_id"
     t.string "name"
     t.text "description"
     t.date "start_date"
@@ -377,6 +367,7 @@ ActiveRecord::Schema.define(version: 20171124101223) do
     t.float "progress", default: 0.0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "assignee_id"
     t.bigint "project_id"
     t.index ["project_id"], name: "index_tasks_on_project_id"
   end
@@ -435,7 +426,6 @@ ActiveRecord::Schema.define(version: 20171124101223) do
   add_foreign_key "projects", "companies"
   add_foreign_key "projects", "organizations"
   add_foreign_key "provided_services", "organizations"
-  add_foreign_key "service_provideds", "organizations"
   add_foreign_key "sources", "organizations"
   add_foreign_key "tasks", "projects"
   add_foreign_key "users", "organizations"

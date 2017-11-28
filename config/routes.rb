@@ -102,4 +102,14 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :manage_configurations
+  resources :settings, only:[:index]
+  resources :considered_locations do
+    member do
+      post :attach_contact
+      get :show_contacts
+      delete :remove_contact
+    end
+  end
+
 end

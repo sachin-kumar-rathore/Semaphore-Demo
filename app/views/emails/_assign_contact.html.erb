@@ -15,7 +15,7 @@
             <div class="row">
               <div class="form-group form-material col-md-12">
                 <label class="form-control">Assign To:</label>
-                <%= select_tag "contact_id", options_for_select(contacts.all.map { |contact| [contact.name, contact.id] }), class: 'form-control', data: {plugin: "selectpicker"} %>
+                <%= select_tag "contact_id", options_for_select(load_data_with_id(contacts)), class: 'form-control', data: {plugin: "selectpicker"} %>
               </div>
             </div>
           </div>

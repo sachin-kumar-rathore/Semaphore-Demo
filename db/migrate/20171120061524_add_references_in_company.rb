@@ -6,9 +6,6 @@ class AddReferencesInCompany < ActiveRecord::Migration[5.1]
     add_column :companies, :phone_number_1, :string
     add_column :companies, :phone_number_2, :string
     add_column :companies, :cell_phone, :string
-    add_column :companies, :city, :string
-    add_column :companies, :state, :string
-    add_column :companies, :zip_code, :string
     add_column :companies, :fax, :string
     add_column :companies, :region, :string
     rename_column :companies, :utility_provider, :utility_provider_1

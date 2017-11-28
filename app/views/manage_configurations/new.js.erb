@@ -1,0 +1,2 @@
+$('#'.concat('<%= @type.singularize %>')+'Modal').html("<%= j render(partial: 'form', locals: { action: 'create' }) %>");
+$('#'.concat('<%= @type.singularize %>')+'FormCenter').modal('show');

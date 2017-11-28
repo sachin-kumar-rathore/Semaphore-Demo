@@ -17,7 +17,7 @@
           <br />
           <div class="row">
             <div class="col-md-3 col-6">
-              <%= select_tag :files_filter_by_project, options_for_select(current_org.projects.all.map{ |project| [project.name, project.id] }), include_blank: 'All Projects' , class: 'form-control', data: { plugin: "selectpicker" } %>
+              <%= select_tag :files_filter_by_project, options_for_select(load_data_with_id(current_org.projects)), include_blank: 'All Projects' , class: 'form-control', data: { plugin: "selectpicker" } %>
             </div>
           </div>
         </h3>

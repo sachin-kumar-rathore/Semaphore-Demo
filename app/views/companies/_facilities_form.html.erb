@@ -11,7 +11,7 @@ aria-expanded="false" aria-controls="facilities-form">
       <div class="row">
         <div class="form-group form-material col-md-3">
           <label class="form-control-label" id="inputFacilityType" >Type of Facility:</label>
-          <%= company.select :facility_type, options_for_select([], company.object.facility_type), {}, {class: 'form-control', data:{ plugin: 'selectpicker', "live-search":true } } %>
+          <%= company.select :facility_type, options_for_select( load_active_type("project_types"), company.object.facility_type), {}, {class: 'form-control', data:{ plugin: 'selectpicker', "live-search":true } } %>
         </div>
         <div class="form-group form-material col-md-3">
           <label class="form-control-label" id="inputAcreage" >Acreage:</label>
@@ -31,7 +31,7 @@ aria-expanded="false" aria-controls="facilities-form">
       <div class="row">
         <div class="form-group form-material col-md-3">
           <label class="form-control-label" id="inputAverageAgeOfBuildings" >Average Age of Buildings:</label>
-          <%= company.select :average_age_of_buildings, options_for_select([], company.object.average_age_of_buildings), {}, {class: 'form-control', data:{ plugin: 'selectpicker', "live-search":true } } %>
+          <%= company.select :average_age_of_buildings, options_for_select(Company::BUILDINGS_AGE, company.object.average_age_of_buildings), {}, {class: 'form-control', data:{ plugin: 'selectpicker', "live-search":true } } %>
         </div>
       </div>
       <div class="row">
@@ -76,6 +76,8 @@ aria-expanded="false" aria-controls="facilities-form">
       <div class="row">
         <div class="form-group form-material col-md-6">
           <label class="form-control-label" for="inputPropertyOwner">Property Owner:</label>
+          <%= company.text_field :owner_id, class: 'form-control', id: 'tokenContactName',:data => {:org_id => current_org.id,
+                              :pre => company.object.owner_id.present? ? selected_contact(company.object.owner_id) : '' }%>
         </div>
       </div>
       <div class="row">
@@ -104,3 +106,7 @@ aria-expanded="false" aria-controls="facilities-form">
     <% end %>
   </div>
 </div>
+
+<script>
+  tokenInputforContact();
+</script>

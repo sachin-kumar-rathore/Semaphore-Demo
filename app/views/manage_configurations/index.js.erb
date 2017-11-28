@@ -1,0 +1,6 @@
+$('#manageConfiguration').html("<%= j render 'setting_types_list' %>");
+$(".tab-content").children('.tab-pane').removeClass("active");
+$('#manageConfiguration').addClass("active");
+$(".nav-item").children('.nav-link').removeClass("active");
+$('#manageConfigurationLink').addClass("active");
+$('.flashMessages').html("<%= j render partial: 'shared/flash_messages' %>");

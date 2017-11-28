@@ -6,7 +6,11 @@ class CompaniesController < ApplicationController
   respond_to :js
      
   def index
-    @companies = current_org.companies.paginate(page: params[:page], per_page: 8).order('updated_at DESC')
+    @companies = current_org.companies
+    filtering_params(params).each do |key, value|
+      @companies = @companies.public_send(key, value) if value.present?
+    end
+    @companies = @companies.paginate(page: params[:page], per_page: 8).order('companies.updated_at DESC')
   end
 
   def show
@@ -55,6 +59,15 @@ class CompaniesController < ApplicationController
     update_form(union_representation_params)
   end
 
+  def destroy
+    if @company && @company.destroy
+      flash[:success] = "Company deleted successfully."
+    else
+      flash[:danger] = "Could not delete company."
+    end
+    redirect_to companies_path
+  end
+
   private
     
   def load_companies
@@ -66,13 +79,13 @@ class CompaniesController < ApplicationController
   end
 
   def company_params
-    params.require(:company).permit(:name, :company_number, :business_sector, :title, :address_line_1,
+    params.require(:company).permit(:name, :company_number, :industry_type, :title, :address_line_1,
                                     :address_line_2, :city_state_zip, :phone_number_1, :phone_number_2,
                                     :cell_phone, :fax, :website, :email).merge(organization_id: current_org.id)
   end
 
   def company_info_params
-    params.require(:company).permit(:name, :company_number, :business_sector, :city, :state,
+    params.require(:company).permit(:name, :company_number, :industry_type, :city, :state,
                                     :zip_code, :country, :region, :phone_number_1, :fax, :website,
                                     :email, :member_investor, :utility_provider_1, :utility_provider_2,
                                     :notes, :business_unit )
@@ -84,7 +97,7 @@ class CompaniesController < ApplicationController
 
   def facilities_params
     params.require(:company).permit(:facility_type, :acreage, :building_size, :number_of, :average_age_of_buildings,
-                                    :room_for_expansion, :owned_or_leased, :lease_expiration_date_str, :facility_notes)
+                                    :room_for_expansion, :owned_or_leased, :lease_expiration_date_str, :facility_notes, :owner_id)
   end
 
   def products_and_services_params
@@ -112,4 +125,9 @@ class CompaniesController < ApplicationController
       end
     end
   end
+
+  def filtering_params(params)
+    params.slice(:industry_type, :company_name, :associated_project, :associated_contact)
+  end
+
 end

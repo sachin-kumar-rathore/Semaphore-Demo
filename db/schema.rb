@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20171124101223) do
     t.integer "subscription_id"
     t.string "name"
     t.integer "company_number"
-    t.string "business_sector"
+    t.string "industry_type"
     t.string "address_line_1"
     t.string "address_line_2"
     t.string "city"
@@ -74,6 +74,8 @@ ActiveRecord::Schema.define(version: 20171124101223) do
     t.date "date_of_total"
     t.text "employment_notes"
     t.boolean "business_union_represented"
+    t.string "peak_season"
+    t.text "union_notes"
     t.index ["organization_id"], name: "index_companies_on_organization_id"
   end
 
@@ -321,6 +323,15 @@ ActiveRecord::Schema.define(version: 20171124101223) do
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
     t.index ["name"], name: "index_roles_on_name"
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id"
+  end
+
+  create_table "service_provideds", force: :cascade do |t|
+    t.string "name"
+    t.string "status"
+    t.bigint "organization_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_service_provideds_on_organization_id"
   end
 
   create_table "sites", force: :cascade do |t|

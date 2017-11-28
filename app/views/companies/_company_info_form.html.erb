@@ -20,8 +20,8 @@ aria-expanded="false" aria-controls="company-info-form">
           <%= company.text_field 'company_number', class: "form-control", required: true %>
         </div>
         <div class="form-group form-material col-md-3">
-          <label class="form-control-label" id="inputBusinessSector" >Business Sector:</label>
-          <%= company.select :business_sector, options_for_select(current_org.industry_types.active.map{ |type| type.name}, company.object.business_sector), {}, {class: 'form-control', data:{ plugin: 'selectpicker', "live-search":true } } %>
+          <label class="form-control-label" id="inputBusinessSector" >Industry Type:</label>
+          <%= company.select :industry_type, options_for_select( load_active_type("industry_types"), company.object.industry_type), {}, {class: 'form-control', data:{ plugin: 'selectpicker', "live-search":true } } %>
         </div>
       </div>
       <hr/>
@@ -52,15 +52,23 @@ aria-expanded="false" aria-controls="company-info-form">
       <hr>
       <div class="row">
         <div class="form-group form-material col-md-3">
-          <label class="form-control-label">Telephone:</label>
+          <label class="form-control-label">Phone Number 1:</label>
           <%= company.text_field :phone_number_1, class: 'form-control', id: 'inputTelephone' %>
         </div>
+        <div class="form-group form-material col-md-3">
+          <label class="form-control-label">Phone Number 2:</label>
+          <%= company.text_field :phone_number_2, class: 'form-control', id: 'inputTelephone' %>
+        </div>
+        <div class="form-group form-material col-md-3">
+          <label class="form-control-label">Cell Phone:</label>
+          <%= company.text_field :cell_phone, class: 'form-control', id: 'inputTelephone' %>
+        </div>
+      </div>
+      <div class="row">
         <div class="form-group form-material col-md-3">
           <label class="form-control-label">Fax:</label>
           <%= company.text_field :fax, class: 'form-control', id: 'inputFax' %>
         </div>
-      </div>
-      <div class="row">
         <div class="form-group form-material col-md-3">
           <label class="form-control-label">Website:</label>
           <%= company.text_field :website, class: 'form-control', id: 'inputWebsite' %>
@@ -104,7 +112,7 @@ aria-expanded="false" aria-controls="company-info-form">
       <div class="row">
         <div class="form-group form-material col-md-3">
           <label class="form-control-label">Business Unit:</label>
-          <%= company.select :business_unit, options_for_select(current_org.business_units.map{ |type| type.name }, company.object.business_unit), {}, {class: 'form-control', data:{ plugin: 'selectpicker', "live-search":true } } %>
+          <%= company.select :business_unit, options_for_select(load_type("business_units"), company.object.business_unit), {}, {class: 'form-control', data:{ plugin: 'selectpicker', "live-search":true } } %>
         </div>
       </div>
       <hr>
@@ -122,6 +130,11 @@ aria-expanded="false" aria-controls="company-info-form">
         <div class="col-md-2">
           <div class="form-group form-material">
             <%= link_to 'Cancel', companies_path, class: "btn btn-block green-btn col-md-12", data: { turbolinks: false } %>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group form-material">
+            <%= link_to 'Delete', company_path(id: @company), method: :delete, class: "btn btn-block btn-danger col-md-12" %>
           </div>
         </div>
       </div> 

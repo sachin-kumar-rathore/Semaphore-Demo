@@ -10,7 +10,7 @@
     <% companies.each do |company| %>
         <tr>
           <td><%= company.name %></td>
-          <td><%= company.created_at %></td>
+          <td><%= company.updated_at.strftime("%m/%d/%Y") %></td>
           <td>
             <a class="btn btn-sm green-btn" href="<%= edit_company_path(company) %>" data-turbolinks="false" >Edit</a>
           </td>

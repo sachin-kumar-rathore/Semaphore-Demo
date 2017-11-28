@@ -10,7 +10,11 @@ class CompanyProjectsController < ApplicationController
   end
 
   def show_existing_projects
-    @projects = current_org.projects.where(company_id: nil).paginate(page: params[:page], per_page: 5).order('updated_at DESC')
+    @projects = current_org.projects.where(company_id: nil)
+    filtering_params(params).each do |key, value|
+      @projects = @projects.public_send(key, value) if value.present?
+    end
+    @projects = @projects.paginate(page: params[:page], per_page: 5).order('updated_at DESC')
   end
 
   def attach_project_to_company
@@ -26,4 +30,8 @@ class CompanyProjectsController < ApplicationController
     @company = current_org.companies.where(id: params[:company_id]).first
   end
 
+  def filtering_params(params)
+    params.slice(:status, :primary_contact_id, :start_date, :site_visit, :completion, :unique_id, :industry_type, :project_name, :public_release, :business_type)
+  end
+  
 end

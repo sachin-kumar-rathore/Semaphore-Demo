@@ -16,11 +16,11 @@ class Project < ApplicationRecord
   has_many :contacts, through: :project_contacts
   has_many :project_sites, dependent: :destroy
   has_many :sites, through: :project_sites
-  has_many :notes
-  belongs_to :company
-  has_many :tasks
-  has_many :emails
-  has_many :documents
+  has_many :notes, dependent: :destroy
+  belongs_to :company, dependent: :destroy
+  has_many :tasks, dependent: :nullify
+  has_many :emails, dependent: :nullify
+  has_many :documents, dependent: :nullify
 
   # SCOPE
   scope :status, -> (status) { where("status IN (?)", status.values) }

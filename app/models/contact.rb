@@ -20,6 +20,7 @@ class Contact < ApplicationRecord
   has_and_belongs_to_many :emails
   has_many :contact_considered_locations, dependent: :destroy
   has_many :considered_locations, through: :contact_considered_locations
+  has_many :companies, class_name: 'Company', foreign_key: :owner_id
 
 
   # == Validations == #

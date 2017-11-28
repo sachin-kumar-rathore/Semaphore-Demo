@@ -197,8 +197,6 @@ function reloadCompanyProjects(id){
   });
 }
 
-//Settings
-
 $(document).on("click", ".delete-option", function () {
   var link = $(this).data("href");
   $.ajax({
@@ -212,3 +210,4 @@ $(document).on("click", "#addContactIcon", function (){
    $(this).toggleClass("fa-plus");
    $(this).toggleClass("fa-minus");
 });
+

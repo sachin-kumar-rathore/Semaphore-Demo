@@ -100,7 +100,7 @@
               </div>
               <div class="form-group form-material col-md-4">
                 <label class="form-control-label">Business Unit</label>
-                <%= form.select :business_unit, options_for_select(current_org.business_units.map{ |type| type.name }, form.object.business_unit), {}, class: 'form-control', data: { plugin: "selectpicker" } %>
+                <%= form.select :business_unit, options_for_select(load_type("business_units"), form.object.business_unit), {}, class: 'form-control', data: { plugin: "selectpicker" } %>
               </div>
             </div>
             <%= hidden_field_tag 'site[project_id]', @project ? @project.id : nil %>

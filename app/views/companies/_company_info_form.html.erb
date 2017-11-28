@@ -1,0 +1,143 @@
+<div class="panel panel-bordered" id="company-info">
+  <div class="panel-heading collapsed" data-toggle="collapse" href="#company-info-form"
+aria-expanded="false" aria-controls="company-info-form">
+    <h3 class="panel-title"> Company Info <i class="fa fa-caret-down pull-right" aria-hidden="true"></i></h3>
+  </div>
+  <div class="panel-body panel-collapse collapse" id="company-info-form" aria-labelled-by="company-info-form" role="tabpanel">
+    <div class="error-messages"></div>
+    <div class="alerts"></div>
+    <br/>
+    <%= form_for @company, url: company_info_update_company_path, method: :patch, remote: true  do |company| %>
+      <div class="row">
+        <div class="form-group form-material col-md-6">
+          <label class="form-control-label" id="inputCompanyName" >Company Name:</label>
+          <%= company.text_field 'name', class: "form-control", required: true %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group form-material col-md-3">
+          <label class="form-control-label" id="inputCompanyNumber" >Company Number:</label>
+          <%= company.text_field 'company_number', class: "form-control", required: true %>
+        </div>
+        <div class="form-group form-material col-md-3">
+          <label class="form-control-label" id="inputBusinessSector" >Industry Type:</label>
+          <%= company.select :industry_type, options_for_select( load_active_type("industry_types"), company.object.industry_type), {}, {class: 'form-control', data:{ plugin: 'selectpicker', "live-search":true } } %>
+        </div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="form-group form-material col-md-3">
+          <label class="form-control-label">City:</label>
+          <%= company.text_field :city, class: 'form-control', id: 'inputCity' %>
+        </div>
+        <div class="form-group form-material col-md-3">
+          <label class="form-control-label">State:</label>
+          <%= company.text_field :state, class: 'form-control', id: 'inputState' %>
+        </div>
+        <div class="form-group form-material col-md-3">
+          <label class="form-control-label">Zip Code:</label>
+          <%= company.text_field :zip_code, class: 'form-control', id: 'inputZipCode' %>
+        </div>
+      </div> 
+      <div class="row">
+        <div class="form-group form-material col-md-3">
+          <label class="form-control-label">Country:</label>
+          <%= company.text_field :country, class: 'form-control', id: 'inputCountry' %>
+        </div>
+        <div class="form-group form-material col-md-3">
+          <label class="form-control-label">Region:</label>
+          <%= company.text_field :region, class: 'form-control', id: 'inputRegion' %>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="form-group form-material col-md-3">
+          <label class="form-control-label">Phone Number 1:</label>
+          <%= company.text_field :phone_number_1, class: 'form-control', id: 'inputTelephone' %>
+        </div>
+        <div class="form-group form-material col-md-3">
+          <label class="form-control-label">Phone Number 2:</label>
+          <%= company.text_field :phone_number_2, class: 'form-control', id: 'inputTelephone' %>
+        </div>
+        <div class="form-group form-material col-md-3">
+          <label class="form-control-label">Cell Phone:</label>
+          <%= company.text_field :cell_phone, class: 'form-control', id: 'inputTelephone' %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group form-material col-md-3">
+          <label class="form-control-label">Fax:</label>
+          <%= company.text_field :fax, class: 'form-control', id: 'inputFax' %>
+        </div>
+        <div class="form-group form-material col-md-3">
+          <label class="form-control-label">Website:</label>
+          <%= company.text_field :website, class: 'form-control', id: 'inputWebsite' %>
+        </div>
+        <div class="form-group form-material col-md-3">
+          <label class="form-control-label">Email:</label>
+          <%= company.email_field :email, class: 'form-control', id: 'inputEmail' %>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="form-inline form-material col-md-12">
+          <label class="form-control-label">Member Investor?</label>
+          <div class="form-group col-md-1">
+            <%= company.radio_button :member_investor, 'false', checked: true %>
+            <label for="inputRadiosUnchecked">No</label>
+          </div>
+          <div class="form-group col-md-1">
+            <%= company.radio_button :member_investor, 'true' %>
+            <label for="inputRadiosChecked">Yes</label>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="form-group form-material col-md-3">
+          <label class="form-control-label">Utility Provider 1:</label>
+          <%= company.text_field :utility_provider_1, class: 'form-control', id: 'inputUtilityProvider1' %>
+        </div>
+        <div class="form-group form-material col-md-3">
+          <label class="form-control-label">Utility Provider 2:</label>
+          <%= company.text_field :utility_provider_2, class: 'form-control', id: 'inputUtilityProvider2' %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group form-material col-md-9">
+          <label class="form-control-label" id="inputCompanyNotes" >Company Notes:</label>
+          <%= company.text_area 'notes', class: "form-control", rows: "3" %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group form-material col-md-3">
+          <label class="form-control-label">Business Unit:</label>
+          <%= company.select :business_unit, options_for_select(load_type("business_units"), company.object.business_unit), {}, {class: 'form-control', data:{ plugin: 'selectpicker', "live-search":true } } %>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-md-2">
+          <div class="form-group form-material">
+            <button type="submit" class="btn btn-block green-btn col-md-12" name= "commit", value= "Save & Close">Save & Close</button>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group form-material">
+            <button type="submit" class="btn btn-block green-btn col-md-12">Save</button>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group form-material">
+            <%= link_to 'Cancel', companies_path, class: "btn btn-block green-btn col-md-12", data: { turbolinks: false } %>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group form-material">
+            <%= link_to 'Delete', company_path(id: @company), method: :delete, class: "btn btn-block btn-danger col-md-12" %>
+          </div>
+        </div>
+      </div> 
+    <% end %>
+  </div>
+</div>

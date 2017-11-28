@@ -1,0 +1,18 @@
+<div class="row">
+  <% Organization::SETTINGS.each do |type| %>
+    <div class="col-md-4">
+      <div class="panel panel-bordered">
+        <div class="panel-heading">
+          <h3 class="panel-title"> <%= type.titleize.singularize %>
+            <a class="btn btn-sm green-btn fa fa-plus pull-right clickable" href="<%= new_manage_configuration_path(type: type) %>" data-remote="true" > ADD</a>
+          </h3>
+        </div>
+        <div class="panel-body" id='<%= type.singularize.concat('List') %>' >
+          <%= render partial: 'list', locals: { setting_type_data: instance_variable_get("@#{type}"), setting_name: type } %>
+        </div>
+        <div id='<%= type.singularize.concat('Modal') %>'>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

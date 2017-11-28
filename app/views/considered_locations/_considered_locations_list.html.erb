@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-bordered">
+      <div class="panel-heading">
+        <h3 class="panel-title"> Considered Locations
+          <a class="btn btn-sm green-btn fa fa-plus pull-right clickable" href="<%= new_considered_location_path %>" data-remote="true" > ADD</a>
+        </h3>
+      </div>
+      <div class="panel-body" id="consideredLocationsList">
+        <%= render partial: 'list' %>
+      </div>
+      <div id='consideredLocationsModal'>
+      </div>
+    </div>
+  </div>
+</div>

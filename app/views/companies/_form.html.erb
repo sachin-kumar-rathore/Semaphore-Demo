@@ -1,112 +1,108 @@
-<%= form_with(model: company, local: true) do |form| %>
-  <% if company.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(company.errors.count, "error") %> prohibited this company from being saved:</h2>
-
-      <ul>
-      <% company.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+<!-- Company Modal -->
+<div class="modal fade" id="companyFormCenter" aria-hidden="true" aria-labelledby="companyFormCenter"
+  role="dialog" tabindex="-1">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <%= form_for company, url: url_for(controller: controller, action: action), remote: true do |form| %>
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+          <h6 class="modal-title">ADD COMPANY </h6>
+        </div>
+        <div class="modal-body">
+          <div class="example-wrap">
+            <div class="error-messages"></div>
+            <div class="example">
+              <div class="row">
+                <div class="form-group form-material col-md-4">
+                  <label class="form-control-label">Name:</label>
+                  <%= form.text_field :name, class: 'form-control', id: 'inputBasicName', required: true %>
+                </div>
+                <div class="form-group form-material col-md-3">
+                  <label class="form-control-label">Company Number:</label>
+                    <%= form.text_field :company_number, class: 'form-control', id: 'inputBasicName', required: true %>
+                </div>
+                <div class="form-group form-material col-md-5">
+                  <label class="form-control-label">Industry Type:</label>
+                  <%= form.select :industry_type, options_for_select( load_active_type("industry_types"), form.object.industry_type), {}, {class: 'form-control', data:{ plugin: 'selectpicker', "live-search":true } } %>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group form-material col-md-6">
+                  <label class="form-control-label">Organization:</label>
+                  <input type="text" class="form-control" id="inputBasicLastName" name="organizationName"
+                    value="<%= current_org.name %>" autocomplete="off" disabled/>
+                </div>
+                <div class="form-group form-material col-md-6">
+                  <label class="form-control-label">Title:</label>
+                  <%= form.text_field :title, class: 'form-control', id: 'inputTitle' %>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group form-material col-md-12">
+                  <label class="form-control-label">Street Address 1:</label>
+                  <%= form.text_field :address_line_1, class: 'form-control', id: 'inputAddress1' %>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group form-material col-md-12">
+                  <label class="form-control-label">Street Address 2:</label>
+                  <%= form.text_field :address_line_2, class: 'form-control', id: 'inputAddress2' %>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group form-material col-md-4">
+                  <label class="form-control-label">City:</label>
+                  <%= form.text_field :city, class: 'form-control', id: 'inputCity' %>
+                </div>
+                <div class="form-group form-material col-md-4">
+                  <label class="form-control-label">State:</label>
+                  <%= form.text_field :city, class: 'form-control', id: 'inputState' %>
+                </div>
+                <div class="form-group form-material col-md-4">
+                  <label class="form-control-label">Zip Code:</label>
+                  <%= form.text_field :city, class: 'form-control', id: 'inputZipCode' %>
+                </div>
+              </div> 
+              <div class="row">
+                <div class="form-group form-material col-md-4">
+                  <label class="form-control-label">Phone Number 1:</label>
+                  <%= form.text_field :phone_number_1, class: 'form-control', id: 'inputBasicphone_number_1' %>
+                </div>
+                <div class="form-group form-material col-md-4">
+                  <label class="form-control-label">Phone Number 2:</label>
+                  <%= form.text_field :phone_number_2, class: 'form-control', id: 'inputBasicphone_number_2' %>
+                </div>
+                <div class="form-group form-material col-md-4">
+                  <label class="form-control-label">Cell Phone:</label>
+                  <%= form.text_field :cell_phone, class: 'form-control', id: 'inputBasicCellPhone' %>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group form-material col-md-4">
+                  <label class="form-control-label">Fax:</label>
+                  <%= form.text_field :fax, class: 'form-control', id: 'inputBasicFax' %>
+                </div>
+                <div class="form-group form-material col-md-4">
+                  <label class="form-control-label">Website:</label>
+                  <%= form.text_field :website, class: 'form-control', id: 'inputBasicWebsite' %>
+                </div>
+                <div class="form-group form-material col-md-4">
+                  <label class="form-control-label">Email:</label>
+                  <%= form.email_field :email, class: 'form-control', id: 'inputBasicEmail', required: true %>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group form-material col-md-6">
+                <button type="submit" class="btn btn-sm green-btn"><%= company.new_record? ? ' Save ' : ' Save changes' %></button>
+                <button type="button" class="btn btn-sm white-btn" data-dismiss="modal">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
       <% end %>
-      </ul>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :owner_id %>
-    <%= form.number_field :owner_id, id: :company_owner_id %>
   </div>
-
-  <div class="field">
-    <%= form.label :subscription_id %>
-    <%= form.number_field :subscription_id, id: :company_subscription_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name, id: :company_name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :company_number %>
-    <%= form.number_field :company_number, id: :company_company_number %>
-  </div>
-
-  <div class="field">
-    <%= form.label :business_sector %>
-    <%= form.text_field :business_sector, id: :company_business_sector %>
-  </div>
-
-  <div class="field">
-    <%= form.label :address_line_1 %>
-    <%= form.text_field :address_line_1, id: :company_address_line_1 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :address_line_2 %>
-    <%= form.text_field :address_line_2, id: :company_address_line_2 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :city %>
-    <%= form.text_field :city, id: :company_city %>
-  </div>
-
-  <div class="field">
-    <%= form.label :state %>
-    <%= form.text_field :state, id: :company_state %>
-  </div>
-
-  <div class="field">
-    <%= form.label :zip_code %>
-    <%= form.text_field :zip_code, id: :company_zip_code %>
-  </div>
-
-  <div class="field">
-    <%= form.label :country %>
-    <%= form.text_field :country, id: :company_country %>
-  </div>
-
-  <div class="field">
-    <%= form.label :website %>
-    <%= form.text_field :website, id: :company_website %>
-  </div>
-
-  <div class="field">
-    <%= form.label :email %>
-    <%= form.text_field :email, id: :company_email %>
-  </div>
-
-  <div class="field">
-    <%= form.label :member_investor %>
-    <%= form.check_box :member_investor, id: :company_member_investor %>
-  </div>
-
-  <div class="field">
-    <%= form.label :utility_provider %>
-    <%= form.text_field :utility_provider, id: :company_utility_provider %>
-  </div>
-
-  <div class="field">
-    <%= form.label :notes %>
-    <%= form.text_area :notes, id: :company_notes %>
-  </div>
-
-  <div class="field">
-    <%= form.label :business_unit %>
-    <%= form.text_field :business_unit, id: :company_business_unit %>
-  </div>
-
-  <div class="field">
-    <%= form.label :company_establishment_year %>
-    <%= form.number_field :company_establishment_year, id: :company_company_establishment_year %>
-  </div>
-
-  <div class="field">
-    <%= form.label :years_business_located %>
-    <%= form.number_field :years_business_located, id: :company_years_business_located %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

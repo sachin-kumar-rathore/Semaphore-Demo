@@ -1,0 +1,9 @@
+<% if @company.present? %>
+  $('#contactsTab').html("<%= j render partial: 'company_contacts_list' %>");
+  $(".tab-content").children('.tab-pane').removeClass("active");
+  $('#contactsTab').addClass("active");
+  $(".nav-item").children('.nav-link').removeClass("active");
+  $('#contactsNavLink').addClass("active");
+<% else %>
+  $('.flashMessages').html("<%= j render partial: 'shared/flash_messages' %>");
+<% end %>

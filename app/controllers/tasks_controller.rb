@@ -2,29 +2,21 @@ class TasksController < ApplicationController
   before_action :authenticate_user!
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   before_action :set_users, only: [:show, :new]
+  respond_to :html, only: [:index]
+  respond_to :js
 
   def index
     @tasks = current_org.tasks
     @tasks = params[:assigned_to_me] == "true" ? current_user.assigned_tasks : current_user.tasks if params[:current_user_filter] == "true"
     @tasks = @tasks.where(project_id: params[:project_id]) if params[:project_id].present?
     @tasks = @tasks.paginate(page: params[:page], per_page: 8)
-    respond_to do |format|
-      format.js
-      format.html
-    end
   end
 
   def show
-    respond_to do |format|
-      format.js
-    end
   end
 
   def new
     @task = current_user.tasks.new
-    respond_to do |format|
-      format.js
-    end
   end
 
   def edit
@@ -32,31 +24,22 @@ class TasksController < ApplicationController
 
   def create
     @task = current_user.tasks.new(task_params)
-    respond_to do |format|
-      if @task.save
-        flash.now[:success] = 'Task was successfully created.'
-      end
-      format.js
+    if @task.save
+      flash.now[:success] = 'Task was successfully created.'
     end
   end
 
   def update
-    respond_to do |format|
-      if @task.update(task_params)
-        flash.now[:success] = 'Task was successfully updated.'
-      end
-      format.js
+    if @task.update(task_params)
+      flash.now[:success] = 'Task was successfully updated.'
     end
   end
 
   def destroy
-    respond_to do |format|
-      if @task.destroy
-        flash.now[:success] = 'Task was successfully destroyed.'
-      else
-        flash.now[:danger] = 'Task could not be destroyed.'
-      end
-      format.js
+    if @task.destroy
+      flash.now[:success] = 'Task was successfully destroyed.'
+    else
+      flash.now[:danger] = 'Task could not be destroyed.'
     end
   end
 

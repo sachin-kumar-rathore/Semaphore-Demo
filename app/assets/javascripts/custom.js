@@ -1,6 +1,6 @@
 // Project Contacts
 
-function reloadContacts(id){
+function reloadProjectContacts(id){
   $('.modal-backdrop').remove();
   $('#contactFormCenter').modal('hide');
   $.ajax({
@@ -84,6 +84,7 @@ function filterRequest(){
   $.ajax({
     url: "/tasks",
     type: "GET",
+    dataType: 'script',
     data: { current_user_filter: user_filter, project_id: project_id, assigned_to_me: assigned_to_me  }
   });  
 }
@@ -174,4 +175,39 @@ function tokenInputforContact() {
     prePopulate: $('#tokenContactName').data('pre')
   });
 };
+
+// Company Contacts
+
+function reloadCompanyContacts(id){
+  $('.modal-backdrop').remove();
+  $('#contactFormCenter').modal('hide');
+  $.ajax({
+    url: '/companies/' + id + '/contacts',
+    type: "GET"
+  });
+}
+
+// Company Projects
+
+function reloadCompanyProjects(id){
+  $('.modal-backdrop').remove();
+  $.ajax({
+    url: '/companies/' + id + '/projects',
+    type: "GET"
+  });
+}
+
+$(document).on("click", ".delete-option", function () {
+  var link = $(this).data("href");
+  $.ajax({
+    url: link,
+    type: "DELETE",
+    dataType: 'script'
+  });
+});
+
+$(document).on("click", "#addContactIcon", function (){
+   $(this).toggleClass("fa-plus");
+   $(this).toggleClass("fa-minus");
+});
 

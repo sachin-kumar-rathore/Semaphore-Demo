@@ -1,0 +1,5 @@
+$('#createOrEditContact').html("");
+$('#createOrEditContact').html("<%= j render(partial: 'show_existing_contacts') %>");
+$('.modal-backdrop').remove();
+$('#showExistingContacts').modal('hide');
+$('#showExistingContacts').modal('show');

@@ -1,0 +1,7 @@
+<% if @company_contact.errors.blank? %>
+  $('#showExistingContacts').modal('hide');
+  $('.flashMessages').html("<%= j render partial: 'shared/flash_messages' %>"); 
+<% else %>
+  $('#showExistingContacts .error-messages').html("<%= j render partial: 'shared/error_messages', locals: {obj: @contact} %>");
+<% end %>
+reloadCompanyContacts('<%= @company.id %>');

@@ -1,0 +1,8 @@
+<% if @considered_location.errors.blank? %>
+  $('.modal-backdrop').remove();
+  $('#consideredLocationsFormCenter').modal("hide");
+  $('.flashMessages').html("<%= j render partial: 'shared/flash_messages' %>");
+  $('#consideredLocationsList').html("<%= j render partial: 'list' %>");
+<% else %>
+  $('#consideredLocationsFormCenter .error-messages').html("<%= j render partial: 'shared/error_messages', locals: {obj: @considered_location} %>");
+<% end %>

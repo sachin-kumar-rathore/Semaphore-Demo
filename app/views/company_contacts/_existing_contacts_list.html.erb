@@ -1,0 +1,32 @@
+<table class="table table-striped table-hover toggle-circle footable" data-toggle-column="first" data-empty="There are no contacts" data-show-toggle="true" id="existingContactsTable">
+  <thead>
+    <tr>
+      <th>NAME</th>
+      <th data-breakpoints="xs">ORGANIZATION</th>
+      <th data-breakpoints="xs">PHONE</th>
+      <th data-breakpoints="xs">EMAIL</th>
+      <th>OPERATIONS</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% for contact in contacts %>
+      <tr>
+        <td><%= contact.name %></td>
+        <td><%= contact.organization ? contact.organization.name : 'ORG' %></td>
+        <td><%= contact.cell_phone %></td>
+        <td><%= contact.email %></td>
+        <td><%= button_to "Add To Company",attach_contact_to_company_company_contact_path(@company, contact), remote: true, data: { confirm: "Are you sure you want to add this contact to company?" }, class: "btn btn-sm green-btn" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br/>
+<div class="digg_pagination">
+  <%= js_will_paginate contacts %>
+</div>
+<br/>
+
+<script>
+  $('.footable').footable();
+</script>

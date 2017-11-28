@@ -10,17 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171115100316) do
+ActiveRecord::Schema.define(version: 20171124101223) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "business_units", force: :cascade do |t|
+    t.string "name"
+    t.bigint "organization_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_business_units_on_organization_id"
+  end
 
   create_table "companies", force: :cascade do |t|
     t.integer "owner_id"
     t.integer "subscription_id"
     t.string "name"
     t.integer "company_number"
-    t.string "business_sector"
+    t.string "industry_type"
     t.string "address_line_1"
     t.string "address_line_2"
     t.string "city"
@@ -30,13 +38,110 @@ ActiveRecord::Schema.define(version: 20171115100316) do
     t.string "website"
     t.string "email"
     t.boolean "member_investor"
-    t.string "utility_provider"
+    t.string "utility_provider_1"
     t.text "notes"
     t.string "business_unit"
     t.integer "company_establishment_year"
     t.integer "years_business_located"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "organization_id"
+    t.string "title"
+    t.string "phone_number_1"
+    t.string "phone_number_2"
+    t.string "cell_phone"
+    t.string "fax"
+    t.string "region"
+    t.string "utility_provider_2"
+    t.string "facility_type"
+    t.string "acreage"
+    t.string "building_size"
+    t.string "number_of"
+    t.string "average_age_of_buildings"
+    t.boolean "room_for_expansion"
+    t.string "owned_or_leased"
+    t.date "lease_expiration_date"
+    t.text "facility_notes"
+    t.text "primary_products_and_services"
+    t.integer "full_time_employees"
+    t.integer "part_time_employees"
+    t.integer "leased_employees"
+    t.integer "total_employees"
+    t.integer "number_of_jobs_added_or_lost_in_past_3_years"
+    t.integer "number_of_shifts_per_day"
+    t.integer "number_of_days_per_week"
+    t.string "average_annual_salary"
+    t.date "date_of_total"
+    t.text "employment_notes"
+    t.boolean "business_union_represented"
+    t.string "peak_season"
+    t.text "union_notes"
+    t.index ["organization_id"], name: "index_companies_on_organization_id"
+  end
+
+  create_table "company_activity_types", force: :cascade do |t|
+    t.string "name"
+    t.bigint "organization_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_company_activity_types_on_organization_id"
+  end
+
+  create_table "company_contacts", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "company_id"
+    t.bigint "contact_id"
+    t.index ["company_id"], name: "index_company_contacts_on_company_id"
+    t.index ["contact_id"], name: "index_company_contacts_on_contact_id"
+  end
+
+  create_table "competitions", force: :cascade do |t|
+    t.string "name"
+    t.string "status"
+    t.bigint "organization_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_competitions_on_organization_id"
+  end
+
+  create_table "considered_locations", force: :cascade do |t|
+    t.string "status"
+    t.string "location"
+    t.string "city"
+    t.string "country"
+    t.string "city_abbreviation"
+    t.string "country_abbreviation"
+    t.bigint "organization_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_considered_locations_on_organization_id"
+  end
+
+  create_table "contact_categories", force: :cascade do |t|
+    t.string "name"
+    t.string "status"
+    t.bigint "organization_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_contact_categories_on_organization_id"
+  end
+
+  create_table "contact_considered_locations", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "contact_id"
+    t.bigint "considered_location_id"
+    t.index ["considered_location_id"], name: "index_contact_considered_locations_on_considered_location_id"
+    t.index ["contact_id"], name: "index_contact_considered_locations_on_contact_id"
+  end
+
+  create_table "contact_method_types", force: :cascade do |t|
+    t.string "name"
+    t.bigint "organization_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_contact_method_types_on_organization_id"
   end
 
   create_table "contacts", force: :cascade do |t|
@@ -78,6 +183,15 @@ ActiveRecord::Schema.define(version: 20171115100316) do
     t.index ["user_id"], name: "index_documents_on_user_id"
   end
 
+  create_table "elimination_reasons", force: :cascade do |t|
+    t.string "name"
+    t.string "status"
+    t.bigint "organization_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_elimination_reasons_on_organization_id"
+  end
+
   create_table "emails", force: :cascade do |t|
     t.integer "organization_id"
     t.integer "project_id"
@@ -90,6 +204,15 @@ ActiveRecord::Schema.define(version: 20171115100316) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "cc"
+  end
+
+  create_table "industry_types", force: :cascade do |t|
+    t.string "name"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "organization_id"
+    t.index ["organization_id"], name: "index_industry_types_on_organization_id"
   end
 
   create_table "notes", force: :cascade do |t|
@@ -129,6 +252,15 @@ ActiveRecord::Schema.define(version: 20171115100316) do
     t.bigint "site_id"
     t.index ["project_id"], name: "index_project_sites_on_project_id"
     t.index ["site_id"], name: "index_project_sites_on_site_id"
+  end
+
+  create_table "project_types", force: :cascade do |t|
+    t.string "name"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "organization_id"
+    t.index ["organization_id"], name: "index_project_types_on_organization_id"
   end
 
   create_table "projects", force: :cascade do |t|
@@ -173,6 +305,15 @@ ActiveRecord::Schema.define(version: 20171115100316) do
     t.index ["organization_id"], name: "index_projects_on_organization_id"
   end
 
+  create_table "provided_services", force: :cascade do |t|
+    t.string "name"
+    t.string "status"
+    t.bigint "organization_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_provided_services_on_organization_id"
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.string "resource_type"
@@ -182,6 +323,15 @@ ActiveRecord::Schema.define(version: 20171115100316) do
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
     t.index ["name"], name: "index_roles_on_name"
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id"
+  end
+
+  create_table "service_provideds", force: :cascade do |t|
+    t.string "name"
+    t.string "status"
+    t.bigint "organization_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_service_provideds_on_organization_id"
   end
 
   create_table "sites", force: :cascade do |t|
@@ -208,9 +358,17 @@ ActiveRecord::Schema.define(version: 20171115100316) do
     t.index ["deleted_at"], name: "index_sites_on_deleted_at"
   end
 
+  create_table "sources", force: :cascade do |t|
+    t.string "name"
+    t.string "status"
+    t.bigint "organization_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_sources_on_organization_id"
+  end
+
   create_table "tasks", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "assignee_id"
     t.string "name"
     t.text "description"
     t.date "start_date"
@@ -220,6 +378,7 @@ ActiveRecord::Schema.define(version: 20171115100316) do
     t.float "progress", default: 0.0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "assignee_id"
     t.bigint "project_id"
     t.index ["project_id"], name: "index_tasks_on_project_id"
   end
@@ -253,16 +412,32 @@ ActiveRecord::Schema.define(version: 20171115100316) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
+  add_foreign_key "business_units", "organizations"
+  add_foreign_key "companies", "organizations"
+  add_foreign_key "company_activity_types", "organizations"
+  add_foreign_key "company_contacts", "companies"
+  add_foreign_key "company_contacts", "contacts"
+  add_foreign_key "competitions", "organizations"
+  add_foreign_key "considered_locations", "organizations"
+  add_foreign_key "contact_categories", "organizations"
+  add_foreign_key "contact_considered_locations", "considered_locations"
+  add_foreign_key "contact_considered_locations", "contacts"
+  add_foreign_key "contact_method_types", "organizations"
   add_foreign_key "documents", "organizations"
   add_foreign_key "documents", "projects"
   add_foreign_key "documents", "users"
+  add_foreign_key "elimination_reasons", "organizations"
+  add_foreign_key "industry_types", "organizations"
   add_foreign_key "notes", "projects"
   add_foreign_key "project_contacts", "contacts"
   add_foreign_key "project_contacts", "projects"
   add_foreign_key "project_sites", "projects"
   add_foreign_key "project_sites", "sites"
+  add_foreign_key "project_types", "organizations"
   add_foreign_key "projects", "companies"
   add_foreign_key "projects", "organizations"
+  add_foreign_key "provided_services", "organizations"
+  add_foreign_key "sources", "organizations"
   add_foreign_key "tasks", "projects"
   add_foreign_key "users", "organizations"
 end

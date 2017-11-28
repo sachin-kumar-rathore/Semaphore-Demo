@@ -1,0 +1,2 @@
+$('#createOrEditContact').html("<%= j render(partial: 'form', locals: {contact: @contact, controller: 'company_contacts', action: 'update'}) %>");
+$('#contactFormCenter').modal('show');

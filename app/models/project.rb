@@ -2,6 +2,9 @@ class Project < ApplicationRecord
 
   include DateParser
 
+  SQUARE_FEET_REQUESTED = ['1-25,999', '26-44,999', '45-75,999', '76-99,999', '100-149,999', '150-199,999', '200-399,999', '400,000+']
+  ACRES_REQUESTED = ['up to 1', 'up to 2', 'up to 3', 'up to 4', 'up to 5']
+  
   attr_accessor :active_date_str, :successful_completion_date_str, :site_visit_1_str,
                 :site_visit_2_str, :site_visit_3_str, :public_release_date_str
   # CALLBACK
@@ -13,11 +16,11 @@ class Project < ApplicationRecord
   has_many :contacts, through: :project_contacts
   has_many :project_sites, dependent: :destroy
   has_many :sites, through: :project_sites
-  has_many :notes
-  belongs_to :company, optional: true   #remove_optional_later
-  has_many :tasks
-  has_many :emails
-  has_many :documents
+  has_many :notes, dependent: :destroy
+  belongs_to :company, dependent: :destroy
+  has_many :tasks, dependent: :nullify
+  has_many :emails, dependent: :nullify
+  has_many :documents, dependent: :nullify
 
   # SCOPE
   scope :status, -> (status) { where("status IN (?)", status.values) }

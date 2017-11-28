@@ -1,0 +1,7 @@
+<% if @company.errors.blank? %>
+  $('#productsAndServices .alerts').html("Successfully saved data for company products and services.").removeClass("alerts-danger");
+  $('#productsAndServices .error-messages').html("");
+<% else %>
+  $('#productsAndServices .alerts').html("Could not save data for company products and services.").addClass("alerts-danger");
+  $('#productsAndServices .error-messages').html("<%= j render partial: 'shared/error_messages', locals: {obj: @company} %>");
+<% end %>

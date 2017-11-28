@@ -1,0 +1,88 @@
+<!-- Considered Locations Modal -->
+<div class="modal fade" id='consideredLocationsFormCenter' aria-hidden="true" aria-labelledby='consideredLocationsFormCenter'
+  role="dialog" tabindex="-1">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <%= form_for @considered_location, remote: true do |type| %>
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+          <h6 class="modal-title">CONSIDERED LOCATION INFORMATION</h6>
+        </div>
+        <div class="modal-body">
+          <div class="example-wrap">
+            <div class="error-messages"></div>
+            <div class="example">
+                <div class="row form-inline form-material">
+                  <div class="col-md-2 ">
+                    <label class="form-control-label pull-left">Status:</label>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="row">
+                      <div class="form-inline col-md-3 col-6">
+                        <%= type.radio_button :status, 'Active', checked: true, class: "pull-left" %>
+                        <label for="inputRadiosUnchecked" class="pull-left">Active</label>
+                      </div>
+                      <div class="form-inline col-md-3 col-6">
+                        <%= type.radio_button :status, 'Inactive' %>
+                        <label for="inputRadiosChecked">Inactive</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <br/>
+              <div class="row">
+                <div class="form-group form-material col-md-6">
+                  <label class="form-control-label">Considered Locations:</label>
+                  <%= type.text_field :location, class: "form-control" %>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group form-material col-md-4">
+                  <label class="form-control-label">City:</label>
+                  <%= type.text_field :city, class: "form-control" %>
+                </div>
+                <div class="form-group form-material col-md-4 offset-md-3">
+                  <label class="form-control-label">Abbreviation*:</label>
+                  <%= type.text_field :city_abbreviation, class: "form-control" %>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group form-material col-md-4">
+                  <label class="form-control-label">Country:</label>
+                  <%= type.text_field :country, class: "form-control" %>
+                </div>
+                <div class="form-group form-material col-md-4 offset-md-3">
+                  <label class="form-control-label">Abbreviation*:</label>
+                  <%= type.text_field :country_abbreviation, class: "form-control" %>
+                </div>
+              </div>
+              <% unless @considered_location.new_record? %>
+                <div class="col-md-12 panel panel-success ">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Contacts
+                      <i class="fa fa-plus pull-right clickable" id="addContactIcon" data-href="<%= show_contacts_considered_location_path(@considered_location) %>" data-toggle="collapse" href="#contactForm" aria-expanded="false" aria-controls="contactForm"></i>
+                    </h3>
+                  </div>
+                  <div id="contactForm" class="collapse"></div>
+                  <div class="panel-body" id="locationContactsList">
+                    <%= render partial: "contact_considered_locations" %> 
+                  </div>
+                </div>
+              <% end %>
+              <br/>
+              <div class="row">
+                <div class="form-group form-material col-md-6">
+                  <button type="submit" class="btn btn-sm green-btn"><%= @considered_location.new_record? ? ' Save ' : ' Save changes' %></button>
+                  <button type="button" class="btn btn-sm white-btn" data-dismiss="modal">Cancel</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->

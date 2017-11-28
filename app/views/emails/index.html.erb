@@ -13,10 +13,10 @@
                 </h4>
               </div>
               <div class="col-md-3 col-6">
-                <%= select_tag :project, options_for_select(current_org.projects.all.map { |project| [project.name, project.id] }), include_blank: 'All Projects', class: 'form-control', data: {plugin: "selectpicker"} %>
+                <%= select_tag :project, options_for_select(load_data_with_id(current_org.projects)), include_blank: 'All Projects', class: 'form-control', data: {plugin: "selectpicker"} %>
               </div>
               <div class="col-md-3 col-6">
-                <%= select_tag :contact, options_for_select(current_org.contacts.all.map { |contact| [contact.name, contact.id] }), include_blank: 'All Contacts', class: 'form-control', data: {plugin: "selectpicker"} %>
+                <%= select_tag :contact, options_for_select(load_data_with_id(current_org.contacts)), include_blank: 'All Contacts', class: 'form-control', data: {plugin: "selectpicker"} %>
               </div>
               <div class="col-md-2 col-6">
                 <button class="btn btn-sm green-btn waves-effect waves-classic" type="submit">Update & Show List</button>

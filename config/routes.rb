@@ -3,7 +3,32 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { registrations: 'users/registrations' }
 
-  resources :companies
+  resources :companies do
+    member do
+      patch :company_info_update
+      patch :history_update
+      patch :facilities_update
+      patch :products_and_services_update
+      patch :local_employment_update
+      patch :union_representation_update
+    end
+    resources :contacts, controller: 'company_contacts' do
+      member do
+        post :attach_contact_to_company
+      end
+      collection do
+        get :show_existing_contacts
+      end
+    end
+    resources :projects, controller: 'company_projects', only: [:index] do
+      member do
+        post :attach_project_to_company
+      end
+      collection do
+        get :show_existing_projects
+      end
+    end
+  end
 
   resources :organizations, only: [:edit, :update]
   resources :dashboard, only: [:index]
@@ -74,6 +99,16 @@ Rails.application.routes.draw do
     member do
       get :show_existing_contacts, :show_existing_projects
       post :attach_contact_to_email, :attach_project_to_email
+    end
+  end
+
+  resources :manage_configurations
+  resources :settings, only:[:index]
+  resources :considered_locations do
+    member do
+      post :attach_contact
+      get :show_contacts
+      delete :remove_contact
     end
   end
 

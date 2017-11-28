@@ -2,55 +2,38 @@ class NotesController < ApplicationController
   
   before_action :authenticate_user!, :set_project
   before_action :set_note, only: [:show, :update, :destroy]
+  respond_to :js
 
   def index
     @notes = @project.notes.paginate(page: params[:page], per_page: 8)
-    respond_to do |format|
-      format.js
-      format.html { redirect_to edit_project_path(@project) }
-    end
+    redirect_to edit_project_path(@project) if request.format.html?
   end
 
   def new
     @note = @project.notes.new
-    respond_to do |format|
-      format.js
-    end
   end
 
   def create
     @note = @project.notes.new(note_params)
-    respond_to do |format|
-      if @note.save
-        flash.now[:success] = 'Note was successfully created.'
-      end
-      format.js
+    if @note.save
+      flash.now[:success] = 'Note was successfully created.'
     end
   end
 
   def show
-    respond_to do |format|
-      format.js
-    end
   end
 
   def update
-    respond_to do |format|
-      if @note.update(note_params)
-        flash.now[:success] = 'Note was successfully updated.'
-      end
-      format.js
+    if @note.update(note_params)
+      flash.now[:success] = 'Note was successfully updated.'
     end
   end
 
   def destroy
-    respond_to do |format|
-      if @note.destroy
-        flash.now[:success] = 'Note was successfully destroyed.'
-      else
-        flash.now[:danger] = 'Note could not be destroyed.'
-      end
-      format.js
+    if @note.destroy
+      flash.now[:success] = 'Note was successfully destroyed.'
+    else
+      flash.now[:danger] = 'Note could not be destroyed.'
     end
   end
 

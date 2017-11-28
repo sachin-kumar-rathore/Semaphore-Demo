@@ -1,0 +1,6 @@
+$('#associateProject').html("<%= j render(partial: 'show_existing_projects') %>");
+$('.modal-backdrop').remove();
+$('#showExistingProjects').modal('hide');
+$('#showExistingProjects').modal('show');
+$('[data-plugin="datepicker"]').datepicker();
+$('[data-plugin="selectpicker"]').selectpicker();

@@ -1,0 +1,46 @@
+<div class="panel panel-bordered">
+  <%= form_tag companies_path, remote: true, method: :get do %>
+    <div class="panel-heading">
+      <h3 class="panel-title"> Filters</h3>
+      <div class="form-group form-material col-md-10 offset-md-1">
+        <button type="submit" class="btn btn-sm green-btn">Update List</button>
+        <%= button_tag 'Clear All Filters', type: :reset, class: 'btn btn-sm site-filter-clear' %>
+        <%= link_to companies_path, class: 'reload-page-link', data: { turbolinks: false } do %>
+          <i class="fa fa-refresh pull-right"></i>
+        <% end %>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="form-group form-material col-md-10 offset-md-1">
+          <label class="form-control-label">Company Name:</label>
+          <input type="text" class="form-control" name="company_name" autocomplete="off" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group form-material col-md-10 offset-md-1">
+          <label class="form-control-label">Contact Name:</label>
+          <input type="text" name="associated_contact" class="form-control">
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group form-material col-md-10 offset-md-1">
+          <label class="form-control-label">Associated Project:</label>
+          <input type="text" name="associated_project" class="form-control">
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group form-material col-md-10 offset-md-1">
+          <label class="form-control-label">Associated Activity:</label>
+          <input type="text" name="associated_activity" class="form-control">
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group form-material col-md-10 offset-md-1">
+          <label class="form-control-label" >Industry Type:</label>
+          <%= select_tag 'industry_type', options_for_select( load_active_type("industry_types") ), { class: "form-control", data:{ plugin: 'selectpicker', "live-search":true}, include_blank: 'Please Select' } %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

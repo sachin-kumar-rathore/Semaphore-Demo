@@ -1,0 +1,9 @@
+<ul class="list-group list-group-dividered list-group-full">
+  <% setting_type_data.each do |setting_type|%>
+    <li class="list-group-item">
+      <i class="fa fa-pencil-square-o fa-1x text-success clickable" style="cursor: pointer;" data-href="<%= edit_manage_configuration_path(setting_type, type:setting_name) %>"></i>&nbsp;&nbsp;
+      <%= setting_type.name %>
+      <i class="fa fa-times fa-1x text-danger pull-right delete-option" style="cursor: pointer;" data-href="<%= manage_configuration_path(setting_type, type: setting_name) %>"></i>
+    </li>
+  <% end %>
+</ul>

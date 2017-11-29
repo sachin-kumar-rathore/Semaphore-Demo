@@ -1,0 +1,37 @@
+<div class="panel">
+  <div class="panel-body">
+    <strong>Reporting Parameters</strong>
+    <div class="row mb-10 mt-10">
+      <div class="col-md-6">
+        <button type="submit" class="btn green-btn btn-sm">Generate Report</button>
+      </div>
+      <div class="col-md-6">
+        <button class="btn white-btn btn-sm">Generate Data</button>
+      </div>
+    </div>
+    <div class="row reportGenerationForm">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label class="form-control-label">Year:</label>
+          <%= text_field_tag 'year', 2017, class: 'form-control', id: 'yearToStartReport' %>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="form-group">
+          <label class="form-control-label">Years to compare:</label>
+          <%= select_tag 'years_to_compare', options_for_select((3..10).to_a), class: 'form-control', data: { plugin: "selectpicker" } %>
+        </div>
+      </div>
+
+      <div class="col-md-12 mt-15">
+        <% report_parameters.each do |param|%>
+          <div class="form-group">
+            <%= check_box_tag "report_params[#{param[:field]}][]", nil, true %>
+            <%= param[:name] %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

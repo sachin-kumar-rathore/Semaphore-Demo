@@ -42,4 +42,6 @@
 //= require plugins/bootstrap-datepicker
 //= require plugins/moment.min
 //= require plugins/footable.min
+//= require chartist.min
+//= require chartist-plugin-tooltip.min
 

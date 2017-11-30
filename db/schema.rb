@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171127095531) do
+ActiveRecord::Schema.define(version: 20171128110851) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
 
   create_table "business_units", force: :cascade do |t|
     t.string "name"
@@ -325,6 +326,20 @@ ActiveRecord::Schema.define(version: 20171127095531) do
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id"
   end
 
+  create_table "security_roles", force: :cascade do |t|
+    t.string "name"
+    t.hstore "projects", default: {}
+    t.hstore "users", default: {}
+    t.hstore "configuration", default: {}
+    t.hstore "sites", default: {}
+    t.hstore "contacts", default: {}
+    t.hstore "companies", default: {}
+    t.bigint "organization_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_security_roles_on_organization_id"
+  end
+
   create_table "sites", force: :cascade do |t|
     t.integer "organization_id"
     t.integer "contact_id"
@@ -428,6 +443,7 @@ ActiveRecord::Schema.define(version: 20171127095531) do
   add_foreign_key "projects", "companies"
   add_foreign_key "projects", "organizations"
   add_foreign_key "provided_services", "organizations"
+  add_foreign_key "security_roles", "organizations"
   add_foreign_key "sources", "organizations"
   add_foreign_key "tasks", "projects"
   add_foreign_key "users", "organizations"

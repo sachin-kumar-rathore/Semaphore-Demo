@@ -24,6 +24,7 @@ class Organization < ApplicationRecord
   has_many :contact_method_types, dependent: :destroy
   has_many :company_activity_types, dependent: :destroy
   has_many :considered_locations, dependent: :destroy
+  has_many :security_roles, dependent: :destroy
     
   validates_presence_of :name, :primary_contact_first_name, :primary_contact_phone, :primary_contact_email
   validates_format_of :primary_contact_email, with: Devise::email_regexp

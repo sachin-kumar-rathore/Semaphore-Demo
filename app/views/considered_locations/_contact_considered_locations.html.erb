@@ -3,7 +3,7 @@
   <% @considered_location.contacts.each do |contact|%>
     <li class="list-group-item">
       <%= contact.name %>
-      <i class="fa fa-times fa-1x text-danger pull-right delete-option" style="cursor: pointer;" data-href="<%= remove_contact_considered_location_path(@considered_location, contact_id: contact.id) %>"></i>
+      <i class="fa fa-times fa-1x text-danger pull-right delete-option pointerCursor" data-href="<%= remove_contact_considered_location_path(@considered_location, contact_id: contact.id) %>"></i>
     </li>
   <% end %>
 </ul>

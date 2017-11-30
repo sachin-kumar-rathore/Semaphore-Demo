@@ -1,0 +1,8 @@
+<% if @security_role.errors.blank? %>
+  $('.modal-backdrop').remove();
+  $('#securityRolesFormCenter').modal("hide");
+  $('.flashMessages').html("<%= j render partial: 'shared/flash_messages' %>");
+  $('#securityRolesList').html("<%= j render partial: 'list' %>");
+<% else %>
+  $('#securityRolesFormCenter .error-messages').html("<%= j render partial: 'shared/error_messages', locals: {obj: @security_role} %>");
+<% end %>

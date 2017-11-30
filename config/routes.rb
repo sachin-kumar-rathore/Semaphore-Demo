@@ -119,4 +119,5 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :security_roles
 end

@@ -1,9 +1,9 @@
 <ul class="list-group list-group-dividered list-group-full">
   <% @considered_locations.each do |considered_location|%>
     <li class="list-group-item">
-      <i class="fa fa-pencil-square-o fa-1x text-success clickable" style="cursor: pointer;" data-href="<%= edit_considered_location_path(considered_location) %>"></i>&nbsp;&nbsp;
+      <i class="fa fa-pencil-square-o fa-1x text-success clickable pointerCursor" data-href="<%= edit_considered_location_path(considered_location) %>"></i>&nbsp;&nbsp;
       <%= considered_location.location %>
-      <i class="fa fa-times fa-1x text-danger pull-right delete-option" style="cursor: pointer;" data-href="<%= considered_location_path(considered_location) %>"></i>
+      <i class="fa fa-times fa-1x text-danger pull-right delete-option pointerCursor" data-href="<%= considered_location_path(considered_location) %>"></i>
     </li>
   <% end %>
 </ul>

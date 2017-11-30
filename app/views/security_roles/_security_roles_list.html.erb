@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-bordered">
+      <div class="panel-heading">
+        <h3 class="panel-title"> Security Roles
+          <a class="btn btn-sm green-btn fa fa-plus pull-right clickable" href="<%= new_security_role_path %>" data-remote="true" > ADD</a>
+        </h3>
+      </div>
+      <div class="panel-body" id="securityRolesList">
+        <%= render partial: 'list' %>
+      </div>
+      <div id='securityRolesModal'>
+      </div>
+    </div>
+  </div>
+</div>

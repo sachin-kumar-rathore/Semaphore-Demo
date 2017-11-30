@@ -68,6 +68,10 @@ class CompaniesController < ApplicationController
     redirect_to companies_path
   end
 
+  def check_companies_number_validity
+    set_message_and_status_for_id_validity("companies")
+  end
+
   private
     
   def load_companies

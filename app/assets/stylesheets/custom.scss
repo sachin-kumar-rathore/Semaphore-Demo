@@ -119,7 +119,7 @@ span.next_page, a.next_page {
 }
 
 
-#contactsList thead th, #projectsList thead th, #notesList thead th, #filesList thead th, #emailsList thead th {
+#contactsList thead th, #projectsList thead th, #notesList thead th, #filesList thead th, #emailsList thead th, #contactsTable thead th {
   color: #2ED573;
   font-weight: 500;
 }
@@ -300,4 +300,8 @@ html, body {
 
 .theme-body {
   padding-top: 66.01px;
+}
+
+.success{
+  color: green;
 }

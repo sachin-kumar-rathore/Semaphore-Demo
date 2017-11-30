@@ -11,16 +11,19 @@ class Company < ApplicationRecord
   include DateParser
   # == Associations and Nested Attributes == #
 
-  # == Validations == #
-  validates_presence_of :name, :company_number
-  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
-
   has_many :projects, dependent: :destroy
   has_many :company_contacts, dependent: :destroy
   has_many :contacts, through: :company_contacts
   belongs_to :organization
   belongs_to :owner, class_name: 'Contact', foreign_key: :owner_id, optional: true
 
+  # == Validations == #
+  validates_presence_of :name, :company_number
+  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+  validates :average_age_of_buildings, inclusion: { in: Company::BUILDINGS_AGE, message: "%{value} is not a valid data." }
+  validates :owned_or_leased, inclusion: { in: %w(Owned Leased), message: "%{value} is not a valid data." }
+  validates :peak_season, inclusion: { in: Company::SEASONS, message: "%{value} is not a valid data." }
+  validates :company_number, uniqueness: true, presence: true, length: { is: 6 }
   # == Callbacks == #
   before_validation :convert_dates_format
   # == Scopes and Other macros == #

@@ -40,6 +40,10 @@ $( document ).ready(function() {
 
 //Projects
 
+$(document).on("input", "#projectsNumber", function () {
+  checkValidityofNumber("projects",this)
+});
+
 //notes
 
 function reloadNotes(id){
@@ -206,8 +210,49 @@ $(document).on("click", ".delete-option", function () {
   });
 });
 
-$(document).on("click", "#addContactIcon", function (){
-   $(this).toggleClass("fa-plus");
-   $(this).toggleClass("fa-minus");
+//company_id_check
+
+$(document).on("input", "#companiesNumber", function () {
+  checkValidityofNumber('companies', this);
 });
 
+//Property number
+
+$(document).on("input", "#sitesNumber", function () {
+  checkValidityofNumber('sites', this);
+});
+
+function checkValidityofNumber(section, element){
+  var data = $(element).val();
+  if(data.length<6 || isNaN(data)){
+    $(element).parent().removeClass("has-success");
+    $(element).parent().addClass("has-danger");
+    $('#' + section + 'NumberMessage').removeClass();
+    $('#' + section + 'NumberMessage').addClass("error");
+    $('#' + section + 'NumberMessage').html("Number must contain only 6 digits.");
+  }
+  else{
+    record_id = $('#' + section + 'NumberMessage').attr("value");
+    $.ajax({
+      url: '/' + section + '/check_' + section + '_number_validity',
+      type: "GET",
+      data: { data, id: record_id },
+      dataType: 'script'
+    });
+  } 
+}
+
+function updateViewAfterIdCheck(status, message, section){
+  $('#'+ section +'NumberMessage').removeClass();
+  if (status == "true") {
+    $('#'+ section +'Number').parent().removeClass("has-danger");
+    $('#'+ section +'Number').parent().addClass("has-success");
+    $('#'+ section +'NumberMessage').addClass("success");
+  }
+  else{
+    $('#'+ section +'Number').parent().removeClass("has-success");
+    $('#'+ section +'Number').parent().addClass("has-danger");
+    $('#'+ section +'NumberMessage').addClass("error");
+  }
+  $('#'+ section +'NumberMessage').html(message);
+}

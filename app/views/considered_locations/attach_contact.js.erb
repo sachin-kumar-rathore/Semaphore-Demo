@@ -1,5 +1,7 @@
 <% if @contact_considered_location.errors.blank? %>
-  $('#contactForm').html("");
+  $('#contactForm').addClass("collapse");
+  $('#addContactIcon').toggleClass("fa-plus");
+  $('#addContactIcon').toggleClass("fa-minus");
   $('#locationContactsList').html("<%= j render partial: 'contact_considered_locations' %>");
   $('#consideredLocationsFormCenter .error-messages').html("<%= j render partial: 'shared/flash_messages' %>"); 
 <% else %>

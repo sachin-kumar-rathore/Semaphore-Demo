@@ -11,7 +11,7 @@
   <tbody>
     <% for site in sites %>
       <tr>
-        <td><%= site.property_number %></td>
+        <td><%= site.site_number %></td>
         <td><%= site.property_name %></td>
         <td><%= site.zip_code %></td>
         <td><%= button_to "Add To Project",attach_site_to_project_project_site_path(@project, site), remote: true, data: { confirm: "Are you sure you want to add this site to project?" }, class: "btn btn-sm green-btn" %></td>

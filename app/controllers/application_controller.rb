@@ -24,5 +24,16 @@ class ApplicationController < ActionController::Base
     current_user.organization
   end
 
+  def set_message_and_status_for_id_validity(type)
+    @records = params[:id].present? ? current_org.send(type).where.not(id: params[:id]) : current_org.send(type)
+    instance_variable_set("@type", @records)
+    if @type.where((type.singularize + '_number').to_sym => params[:data]).blank?
+      @message = "Project ID is unique."
+      @status = true
+    else
+      @message = "Project ID already exists."
+      @status = false
+    end
+  end
 
 end

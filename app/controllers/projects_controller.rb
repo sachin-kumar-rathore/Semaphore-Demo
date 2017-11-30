@@ -64,6 +64,10 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def check_projects_number_validity
+    set_message_and_status_for_id_validity("projects")
+  end
+
   private
 
   def set_project
@@ -76,12 +80,14 @@ class ProjectsController < ApplicationController
       :square_footage_note, :acres_requested, :acreage_note, :new_jobs, :new_jobs_notes,
       :wages, :wages_notes, :net_new_investment, :net_new_investment_notes, :public_release_date_str,
       :public_release, :site_selector, :utilize_sites, :speculative_building, :elimination_reason,
-      :located, :unique_id, :retained_jobs, :site_visit_1_str, :site_visit_2_str, :site_visit_3_str, :company_id,
-      :primary_contact_id, :source)
+      :located, :project_number, :retained_jobs, :site_visit_1_str, :site_visit_2_str, :site_visit_3_str, :company_id,
+      :primary_contact_id, :source, :considered_location, :provided_service, :competition)
   end
 
   def filtering_params(params)
-    params.slice(:status, :primary_contact_id, :start_date, :site_visit, :completion, :unique_id, :industry_type, :project_name, :public_release, :business_type)
+    params.slice(:status, :primary_contact_id, :start_date, :site_visit, :completion,
+                 :project_number, :industry_type, :project_name, :public_release, :business_type,
+                 :considered_location, :project_type, :source, :company_id)
   end
-  
+
 end

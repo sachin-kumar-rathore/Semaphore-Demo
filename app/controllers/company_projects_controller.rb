@@ -31,7 +31,9 @@ class CompanyProjectsController < ApplicationController
   end
 
   def filtering_params(params)
-    params.slice(:status, :primary_contact_id, :start_date, :site_visit, :completion, :unique_id, :industry_type, :project_name, :public_release, :business_type)
+    params.slice(:status, :primary_contact_id, :start_date, :site_visit, :completion, :project_number,
+                 :industry_type, :project_name, :public_release, :business_type, :project_type,
+                 :considered_location, :company_id)
   end
   
 end

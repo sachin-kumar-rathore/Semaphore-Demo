@@ -53,6 +53,10 @@ class SitesController < ApplicationController
     end
   end
 
+  def check_sites_number_validity
+    set_message_and_status_for_id_validity("sites")
+  end
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_site
@@ -65,13 +69,13 @@ class SitesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def site_params
-    params.require(:site).permit(:organization_id, :contact_id, :property_number, :property_name, :property_type, :address_line, :city,
+    params.require(:site).permit(:organization_id, :contact_id, :site_number, :property_name, :property_type, :address_line, :city,
                                  :state, :zip_code, :country, :available_acreage, :available_square_feet, :contact_id,
                                  :total_acreage, :total_square_feet, :latitude, :longitude, :business_unit, :project_id)
   end
 
   def filtering_params(params)
-    params.slice(:property_name, :property_number, :zip_code)
+    params.slice(:property_name, :site_number, :zip_code)
   end
   
 end

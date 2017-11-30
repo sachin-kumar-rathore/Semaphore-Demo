@@ -16,7 +16,8 @@
             <div class="row">
               <div class="form-group form-material col-md-4">
                 <label class="form-control-label">Property #:</label>
-                <%= form.text_field :property_number, class: 'form-control', id: 'inputBasicPropertyNumber', required: true %>
+                <%= form.text_field :site_number, class: 'form-control', id: 'sitesNumber', maxlength: 6, minlength: 6, required: true %>
+                <div id="sitesNumberMessage" value="<%= @site ? @site.id : nil %>"></div>
               </div>
               <div class="form-group form-material col-md-4">
                 <label class="form-control-label">Property Name:</label>

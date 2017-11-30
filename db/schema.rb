@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171127095531) do
+ActiveRecord::Schema.define(version: 20171130121734) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
 
   create_table "business_units", force: :cascade do |t|
     t.string "name"
@@ -292,7 +293,7 @@ ActiveRecord::Schema.define(version: 20171127095531) do
     t.boolean "speculative_building"
     t.string "elimination_reason"
     t.string "located"
-    t.string "unique_id"
+    t.string "project_number"
     t.string "retained_jobs"
     t.date "site_visit_1"
     t.date "site_visit_2"
@@ -301,6 +302,9 @@ ActiveRecord::Schema.define(version: 20171127095531) do
     t.datetime "updated_at", null: false
     t.bigint "company_id"
     t.bigint "organization_id"
+    t.string "considered_location"
+    t.string "competition"
+    t.string "provided_service"
     t.index ["company_id"], name: "index_projects_on_company_id"
     t.index ["organization_id"], name: "index_projects_on_organization_id"
   end
@@ -325,10 +329,24 @@ ActiveRecord::Schema.define(version: 20171127095531) do
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id"
   end
 
+  create_table "security_roles", force: :cascade do |t|
+    t.string "name"
+    t.hstore "projects", default: {}
+    t.hstore "users", default: {}
+    t.hstore "configuration", default: {}
+    t.hstore "sites", default: {}
+    t.hstore "contacts", default: {}
+    t.hstore "companies", default: {}
+    t.bigint "organization_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_security_roles_on_organization_id"
+  end
+
   create_table "sites", force: :cascade do |t|
     t.integer "organization_id"
     t.integer "contact_id"
-    t.string "property_number"
+    t.string "site_number"
     t.string "property_name"
     t.string "property_type"
     t.string "address_line"
@@ -428,6 +446,7 @@ ActiveRecord::Schema.define(version: 20171127095531) do
   add_foreign_key "projects", "companies"
   add_foreign_key "projects", "organizations"
   add_foreign_key "provided_services", "organizations"
+  add_foreign_key "security_roles", "organizations"
   add_foreign_key "sources", "organizations"
   add_foreign_key "tasks", "projects"
   add_foreign_key "users", "organizations"

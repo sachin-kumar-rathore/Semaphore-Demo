@@ -12,6 +12,9 @@ Rails.application.routes.draw do
       patch :local_employment_update
       patch :union_representation_update
     end
+    collection do 
+      get :check_companies_number_validity
+    end
     resources :contacts, controller: 'company_contacts' do
       member do
         post :attach_contact_to_company
@@ -42,6 +45,7 @@ Rails.application.routes.draw do
   resources :sites do
     collection do
       get :find_contact
+      get :check_sites_number_validity
     end
   end
 
@@ -80,6 +84,9 @@ Rails.application.routes.draw do
       end
     end
 
+    collection do
+      get :check_projects_number_validity
+    end
   end
   
 

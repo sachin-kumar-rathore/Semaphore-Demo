@@ -222,37 +222,37 @@ $(document).on("input", "#sitesNumber", function () {
   checkValidityofNumber('sites', this);
 });
 
-function checkValidityofNumber(section, element){
-  var data = $(element).val();
-  if(data.length<6 || isNaN(data)){
-    $(element).parent().removeClass("has-success");
-    $(element).parent().addClass("has-danger");
-    $('#' + section + 'NumberMessage').removeClass();
-    $('#' + section + 'NumberMessage').addClass("error");
-    $('#' + section + 'NumberMessage').html("Number must contain only 6 digits.");
+function checkValidityofNumber(section_type, selected_element){
+  var fieldValue = $(selected_element).val();
+  var record_id = $("#" + section_type + "NumberMessage").attr("value");
+  if(fieldValue.length<6 || isNaN(fieldValue)){
+    $(selected_element).parent().removeClass("has-success");
+    $(selected_element).parent().addClass("has-danger");
+    $("#" + section_type + "NumberMessage").removeClass();
+    $("#" + section_type + "NumberMessage").addClass("error");
+    $("#" + section_type + "NumberMessage").html("Number must contain only 6 digits.");
   }
   else{
-    record_id = $('#' + section + 'NumberMessage').attr("value");
     $.ajax({
-      url: '/' + section + '/check_' + section + '_number_validity',
+      url: "/" + section_type + "/check_" + section_type + "_number_validity",
       type: "GET",
-      data: { data, id: record_id },
-      dataType: 'script'
+      data: { data: fieldValue, id: record_id },
+      dataType: "script"
     });
   } 
 }
 
-function updateViewAfterIdCheck(status, message, section){
-  $('#'+ section +'NumberMessage').removeClass();
-  if (status == "true") {
-    $('#'+ section +'Number').parent().removeClass("has-danger");
-    $('#'+ section +'Number').parent().addClass("has-success");
-    $('#'+ section +'NumberMessage').addClass("success");
+function updateViewAfterIdCheck(message_status, message_to_show, section_type){
+  $("#"+ section_type +"NumberMessage").removeClass();
+  if (message_status == "true") {
+    $("#"+ section_type +"Number").parent().removeClass("has-danger");
+    $("#"+ section_type +"Number").parent().addClass("has-success");
+    $("#"+ section_type +"NumberMessage").addClass("success");
   }
   else{
-    $('#'+ section +'Number').parent().removeClass("has-success");
-    $('#'+ section +'Number').parent().addClass("has-danger");
-    $('#'+ section +'NumberMessage').addClass("error");
+    $("#"+ section_type +"Number").parent().removeClass("has-success");
+    $("#"+ section_type +"Number").parent().addClass("has-danger");
+    $("#"+ section_type +"NumberMessage").addClass("error");
   }
-  $('#'+ section +'NumberMessage').html(message);
+  $("#"+ section_type +"NumberMessage").html(message_to_show);
 }

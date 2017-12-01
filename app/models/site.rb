@@ -15,6 +15,7 @@ class Site < ApplicationRecord
   belongs_to :organization
   has_many :project_sites, dependent: :destroy
   has_many :projects, through: :project_sites
+  belongs_to :business_unit
   # == Validations == #
   validates_presence_of :organization_id, :contact_id, :property_name, :site_number, :property_type, :address_line, :city, :state,
                         :zip_code, :country

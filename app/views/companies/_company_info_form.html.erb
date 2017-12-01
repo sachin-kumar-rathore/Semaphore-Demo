@@ -22,7 +22,7 @@ aria-expanded="false" aria-controls="company-info-form">
         </div>
         <div class="form-group form-material col-md-3">
           <label class="form-control-label" id="inputBusinessSector" >Industry Type:</label>
-          <%= company.select :industry_type, options_for_select( load_active_type("industry_types"), company.object.industry_type), {}, {class: 'form-control', data:{ plugin: 'selectpicker', "live-search":true } } %>
+          <%= company.select :industry_type_id, options_for_select( load_active_type("industry_types"), company.object.industry_type_id), {}, {class: 'form-control', data:{ plugin: 'selectpicker', "live-search":true } } %>
         </div>
       </div>
       <hr/>
@@ -113,7 +113,7 @@ aria-expanded="false" aria-controls="company-info-form">
       <div class="row">
         <div class="form-group form-material col-md-3">
           <label class="form-control-label">Business Unit:</label>
-          <%= company.select :business_unit, options_for_select(load_type("business_units"), company.object.business_unit), {}, {class: 'form-control', data:{ plugin: 'selectpicker', "live-search":true } } %>
+          <%= company.select :business_unit_id, options_for_select(load_type("business_units"), company.object.business_unit_id), {}, {class: 'form-control', data:{ plugin: 'selectpicker', "live-search":true } } %>
         </div>
       </div>
       <hr>

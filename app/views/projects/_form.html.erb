@@ -103,17 +103,17 @@
       <div class="row">
         <div class="form-group form-material col-md-3">
           <label class="form-control-label" for="inputProjectType">Project Type:</label>
-          <%= project.select :project_type, options_for_select(load_active_type("project_types"), project.object.project_type), {}, class: 'form-control', data: {
+          <%= project.select :project_type_id, options_for_select(load_active_type("project_types"), project.object.project_type_id), {}, class: 'form-control', data: {
             plugin: "selectpicker" } %>
         </div>
         <div class="form-group form-material col-md-3">
           <label class="form-control-label" for="inputIndustryType">Industry Type:</label>
-          <%= project.select :industry_type, options_for_select( load_active_type("industry_types"), project.object.industry_type), {}, class: 'form-control', data: {
+          <%= project.select :industry_type_id, options_for_select( load_active_type("industry_types"), project.object.industry_type_id), {}, class: 'form-control', data: {
             plugin: "selectpicker" } %>
         </div>
         <div class="form-group form-material col-md-3">
           <label class="form-control-label" for="inputBusinessUnit">Business Unit:</label>
-          <%= project.select :business_unit, options_for_select( load_type("business_units"), project.object.business_unit), {}, class: 'form-control', data: {
+          <%= project.select :business_unit_id, options_for_select( load_type("business_units"), project.object.business_unit_id), {}, class: 'form-control', data: {
             plugin: "selectpicker" } %>
         </div>
       </div>
@@ -210,15 +210,15 @@
       <div class="row">
         <div class="form-group form-material col-md-3">
           <label class="form-control-label" id="inputConsideredLocations" >Considered Locations: </label>
-          <%= project.select :considered_location, options_for_select( current_org.considered_locations.active.map { |type| type.location}, project.object.considered_location), {}, class: 'form-control', data: { plugin: "selectpicker" } %>
+          <%= project.select :considered_location_id, options_for_select( current_org.considered_locations.active.map { |type| [type.location, type.id] }, project.object.considered_location_id), {}, class: 'form-control', data: { plugin: "selectpicker" } %>
         </div>
         <div class="form-group form-material col-md-3">
           <label class="form-control-label" id="inputCompetition" >Competition: </label>
-          <%= project.select :competition, options_for_select( load_active_type("competitions"), project.object.competition), {}, class: 'form-control', data: { plugin: "selectpicker" } %>
+          <%= project.select :competition_id, options_for_select( load_active_type("competitions"), project.object.competition_id), {}, class: 'form-control', data: { plugin: "selectpicker" } %>
         </div>
         <div class="form-group form-material col-md-3">
           <label class="form-control-label" id="inputServiceProvided" >Service Provided: </label>
-          <%= project.select :provided_service, options_for_select( load_active_type("provided_services"), project.object.provided_service), {}, class: 'form-control', data: { plugin: "selectpicker" } %>
+          <%= project.select :provided_service_id, options_for_select( load_active_type("provided_services"), project.object.provided_service_id), {}, class: 'form-control', data: { plugin: "selectpicker" } %>
         </div>
       </div>
       <hr>
@@ -256,7 +256,7 @@
             </div>
             <div class="form-group form-material col-md-6">
               <label class="form-control-label" for="inputSource">Source:</label>
-              <%= project.select :source, options_for_select(load_active_type("sources") , project.object.source), {}, class: 'form-control', data: { plugin: "selectpicker" } %>
+              <%= project.select :source_id, options_for_select(load_active_type("sources") , project.object.source_id), {}, class: 'form-control', data: { plugin: "selectpicker" } %>
             </div>
           </div>
           <div class="row">
@@ -271,7 +271,7 @@
             </div>
             <div class="form-group form-material col-md-6">
               <label class="form-control-label" for="inputEliminationReason">Elimination Reason:</label>
-              <%= project.select :elimination_reason, options_for_select(load_active_type("elimination_reasons"), project.object.elimination_reason), {}, class: 'form-control', data: { plugin: "selectpicker" } %>
+              <%= project.select :elimination_reason_id, options_for_select(load_active_type("elimination_reasons"), project.object.elimination_reason_id), {}, class: 'form-control', data: { plugin: "selectpicker" } %>
             </div>
           </div>
         </div>

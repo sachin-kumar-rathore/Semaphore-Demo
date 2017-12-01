@@ -23,12 +23,20 @@ class Project < ApplicationRecord
   has_many :tasks, dependent: :nullify
   has_many :emails, dependent: :nullify
   has_many :documents, dependent: :nullify
+  belongs_to :project_type
+  belongs_to :industry_type
+  belongs_to :business_unit
+  belongs_to :considered_location
+  belongs_to :competition
+  belongs_to :provided_service
+  belongs_to :source
+  belongs_to :elimination_reason
 
   # SCOPE
   scope :status, -> (status) { where("status IN (?)", status.values) }
   scope :primary_contact_id, -> (primary_contact_id) { where("primary_contact_id = (?)", primary_contact_id) }
   scope :project_number, -> (project_number) { where("project_number = ?",project_number)}
-  scope :industry_type, -> (industry_type) { where("industry_type = ?",industry_type)}
+  scope :industry_type_id, -> (industry_type_id) { where("industry_type_id = ?",industry_type_id)}
   scope :start_date, -> (start_date) { where(active_date: (Date.strptime(start_date[:start], '%m/%d/%Y')..Date.strptime(start_date[:end], '%m/%d/%Y'))) if (start_date[:start].present? && start_date[:end].present?)}
   scope :completion, -> (completion) { where(successful_completion_date: (Date.strptime(completion[:start], '%m/%d/%Y')..Date.strptime(completion[:end], '%m/%d/%Y'))) if (completion[:start].present? && completion[:end].present?)}
   scope :project_name, -> (project_name) { where("name ilike ?","%#{project_name}%")}
@@ -40,9 +48,9 @@ class Project < ApplicationRecord
                                           start: site_visit[:start], end: site_visit[:end]  
                                         ) if site_visit[:start].present? && site_visit[:end].present?
                                       }
-  scope :considered_location, -> (considered_location) { where("considered_location = ?",considered_location)}
-  scope :project_type, -> (project_type) { where("project_type = ?",project_type)}
-  scope :source, -> (source) { where("source = ?",source)}
+  scope :considered_location_id, -> (considered_location_id) { where("considered_location_id = ?",considered_location_id)}
+  scope :project_type_id, -> (project_type_id) { where("project_type_id = ?",project_type_id)}
+  scope :source_id, -> (source_id) { where("source_id = ?",source_id)}
   scope :company_id, -> (company_id) { where("company_id = ?",company_id)}
 
   # VALIDATION

@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20171130121734) do
+ActiveRecord::Schema.define(version: 20171201093717) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,7 +29,6 @@ ActiveRecord::Schema.define(version: 20171130121734) do
     t.integer "subscription_id"
     t.string "name"
     t.integer "company_number"
-    t.string "industry_type"
     t.string "address_line_1"
     t.string "address_line_2"
     t.string "city"
@@ -42,7 +40,6 @@ ActiveRecord::Schema.define(version: 20171130121734) do
     t.boolean "member_investor"
     t.string "utility_provider_1"
     t.text "notes"
-    t.string "business_unit"
     t.integer "company_establishment_year"
     t.integer "years_business_located"
     t.datetime "created_at", null: false
@@ -55,7 +52,6 @@ ActiveRecord::Schema.define(version: 20171130121734) do
     t.string "fax"
     t.string "region"
     t.string "utility_provider_2"
-    t.string "facility_type"
     t.string "acreage"
     t.string "building_size"
     t.string "number_of"
@@ -78,7 +74,14 @@ ActiveRecord::Schema.define(version: 20171130121734) do
     t.boolean "business_union_represented"
     t.string "peak_season"
     t.text "union_notes"
+    t.string "naics_codes"
+    t.bigint "industry_type_id"
+    t.bigint "business_unit_id"
+    t.bigint "project_type_id"
+    t.index ["business_unit_id"], name: "index_companies_on_business_unit_id"
+    t.index ["industry_type_id"], name: "index_companies_on_industry_type_id"
     t.index ["organization_id"], name: "index_companies_on_organization_id"
+    t.index ["project_type_id"], name: "index_companies_on_project_type_id"
   end
 
   create_table "company_activity_types", force: :cascade do |t|
@@ -155,15 +158,17 @@ ActiveRecord::Schema.define(version: 20171130121734) do
     t.string "city_state_zip"
     t.string "fax"
     t.string "website"
-    t.string "business_unit"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "category"
     t.string "title"
     t.string "address_line_2"
     t.string "phone_number_2"
     t.string "cell_phone"
     t.text "notes"
+    t.bigint "contact_category_id"
+    t.bigint "business_unit_id"
+    t.index ["business_unit_id"], name: "index_contacts_on_business_unit_id"
+    t.index ["contact_category_id"], name: "index_contacts_on_contact_category_id"
   end
 
   create_table "contacts_emails", id: false, force: :cascade do |t|
@@ -268,11 +273,7 @@ ActiveRecord::Schema.define(version: 20171130121734) do
   create_table "projects", force: :cascade do |t|
     t.string "name"
     t.string "status"
-    t.string "project_type"
-    t.string "source"
     t.integer "primary_contact_id"
-    t.string "industry_type"
-    t.string "business_unit"
     t.text "description"
     t.date "active_date"
     t.date "successful_completion_date"
@@ -292,7 +293,6 @@ ActiveRecord::Schema.define(version: 20171130121734) do
     t.boolean "site_selector"
     t.boolean "utilize_sites"
     t.boolean "speculative_building"
-    t.string "elimination_reason"
     t.string "located"
     t.string "project_number"
     t.string "retained_jobs"
@@ -303,11 +303,24 @@ ActiveRecord::Schema.define(version: 20171130121734) do
     t.datetime "updated_at", null: false
     t.bigint "company_id"
     t.bigint "organization_id"
-    t.string "considered_location"
-    t.string "competition"
-    t.string "provided_service"
+    t.bigint "project_type_id"
+    t.bigint "industry_type_id"
+    t.bigint "business_unit_id"
+    t.bigint "considered_location_id"
+    t.bigint "competition_id"
+    t.bigint "provided_service_id"
+    t.bigint "source_id"
+    t.bigint "elimination_reason_id"
+    t.index ["business_unit_id"], name: "index_projects_on_business_unit_id"
     t.index ["company_id"], name: "index_projects_on_company_id"
+    t.index ["competition_id"], name: "index_projects_on_competition_id"
+    t.index ["considered_location_id"], name: "index_projects_on_considered_location_id"
+    t.index ["elimination_reason_id"], name: "index_projects_on_elimination_reason_id"
+    t.index ["industry_type_id"], name: "index_projects_on_industry_type_id"
     t.index ["organization_id"], name: "index_projects_on_organization_id"
+    t.index ["project_type_id"], name: "index_projects_on_project_type_id"
+    t.index ["provided_service_id"], name: "index_projects_on_provided_service_id"
+    t.index ["source_id"], name: "index_projects_on_source_id"
   end
 
   create_table "provided_services", force: :cascade do |t|
@@ -361,10 +374,11 @@ ActiveRecord::Schema.define(version: 20171130121734) do
     t.float "total_square_feet"
     t.float "latitude"
     t.float "longitude"
-    t.string "business_unit"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
+    t.bigint "business_unit_id"
+    t.index ["business_unit_id"], name: "index_sites_on_business_unit_id"
     t.index ["deleted_at"], name: "index_sites_on_deleted_at"
   end
 
@@ -423,7 +437,10 @@ ActiveRecord::Schema.define(version: 20171130121734) do
   end
 
   add_foreign_key "business_units", "organizations"
+  add_foreign_key "companies", "business_units"
+  add_foreign_key "companies", "industry_types"
   add_foreign_key "companies", "organizations"
+  add_foreign_key "companies", "project_types"
   add_foreign_key "company_activity_types", "organizations"
   add_foreign_key "company_contacts", "companies"
   add_foreign_key "company_contacts", "contacts"
@@ -433,6 +450,8 @@ ActiveRecord::Schema.define(version: 20171130121734) do
   add_foreign_key "contact_considered_locations", "considered_locations"
   add_foreign_key "contact_considered_locations", "contacts"
   add_foreign_key "contact_method_types", "organizations"
+  add_foreign_key "contacts", "business_units"
+  add_foreign_key "contacts", "contact_categories"
   add_foreign_key "documents", "organizations"
   add_foreign_key "documents", "projects"
   add_foreign_key "documents", "users"
@@ -444,10 +463,19 @@ ActiveRecord::Schema.define(version: 20171130121734) do
   add_foreign_key "project_sites", "projects"
   add_foreign_key "project_sites", "sites"
   add_foreign_key "project_types", "organizations"
+  add_foreign_key "projects", "business_units"
   add_foreign_key "projects", "companies"
+  add_foreign_key "projects", "competitions"
+  add_foreign_key "projects", "considered_locations"
+  add_foreign_key "projects", "elimination_reasons"
+  add_foreign_key "projects", "industry_types"
   add_foreign_key "projects", "organizations"
+  add_foreign_key "projects", "project_types"
+  add_foreign_key "projects", "provided_services"
+  add_foreign_key "projects", "sources"
   add_foreign_key "provided_services", "organizations"
   add_foreign_key "security_roles", "organizations"
+  add_foreign_key "sites", "business_units"
   add_foreign_key "sources", "organizations"
   add_foreign_key "tasks", "projects"
   add_foreign_key "users", "organizations"

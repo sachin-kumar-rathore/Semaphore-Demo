@@ -51,7 +51,7 @@ class ContactsController < ApplicationController
     if (!file_data.nil? && file_data.content_type.include?("csv"))
       counter = 0
       File.foreach(file_data.path).with_index do |line|
-        contact = generate_contact(line, params[:import][:category], params[:import][:business_unit])
+        contact = generate_contact(line, params[:import][:contact_category_id], params[:import][:business_unit_id])
         begin
           contact.save
           counter += 1
@@ -72,12 +72,12 @@ class ContactsController < ApplicationController
   end
   
   # this method should be in any model related to this task. need to move !
-  def generate_contact(contact, category, bussiness_unit)
+  def generate_contact(contact, contact_category_id, bussiness_unit)
     contact_info = contact.split(",")
     Contact.new(name: contact_info[0], organization_id: current_org.id, title: contact_info[2], address_line_1: contact_info[3],
                 address_line_2: contact_info[4], city_state_zip: contact_info[5], phone_number_1: contact_info[6],
                 phone_number_2: contact_info[7], cell_phone: contact_info[8], fax: contact_info[9], email: contact_info[10],
-                website: contact_info[11], notes: contact_info[12], category: category, business_unit: bussiness_unit)
+                website: contact_info[11], notes: contact_info[12], contact_category_id: contact_category_id, business_unit_id: bussiness_unit)
   end
 
   def load_contacts
@@ -87,7 +87,7 @@ class ContactsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def contact_params
     params.require(:contact).permit(:name, :email, :phone_number_1, :phone_number_2, :address_line_1,
-                                    :address_line_2, :city_state_zip, :fax, :business_unit,
-                                    :website, :category, :title, :cell_phone, :notes, :project_id, :company_id)
+                                    :address_line_2, :city_state_zip, :fax, :business_unit_id,
+                                    :website, :contact_category_id, :title, :cell_phone, :notes, :project_id, :company_id)
   end
 end

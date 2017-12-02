@@ -56,7 +56,7 @@ class Project < ApplicationRecord
   # VALIDATION
   validates :project_number, uniqueness: true, presence: true, length: { is: 6 }
   validates :name , presence: true
-  validate :successful_completion_date_is_after_active_date
+  validate  :successful_completion_date_is_after_active_date
   validates :business_type, inclusion: { in: Project::BUSINESS_TYPE, message: "%{value} is not a valid business type." }
   validates :status, inclusion: { in: Project::STATUS, message: "%{value} is not a valid status for a project." }
   validates :business_type, inclusion: { in: Project::BUSINESS_TYPE, message: "%{value} is not a valid business type." }

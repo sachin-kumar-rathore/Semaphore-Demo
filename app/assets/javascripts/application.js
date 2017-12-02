@@ -44,4 +44,6 @@
 //= require plugins/footable.min
 //= require chartist.min
 //= require chartist-plugin-tooltip.min
+//= require imagesloaded.pkgd.min
+//= require masonry.pkgd
 

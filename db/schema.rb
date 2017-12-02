@@ -31,9 +31,6 @@ ActiveRecord::Schema.define(version: 20171201093717) do
     t.integer "company_number"
     t.string "address_line_1"
     t.string "address_line_2"
-    t.string "city"
-    t.string "state"
-    t.string "zip_code"
     t.string "country"
     t.string "website"
     t.string "email"
@@ -49,6 +46,9 @@ ActiveRecord::Schema.define(version: 20171201093717) do
     t.string "phone_number_1"
     t.string "phone_number_2"
     t.string "cell_phone"
+    t.string "city"
+    t.string "state"
+    t.string "zip_code"
     t.string "fax"
     t.string "region"
     t.string "utility_provider_2"
@@ -357,6 +357,15 @@ ActiveRecord::Schema.define(version: 20171201093717) do
     t.index ["organization_id"], name: "index_security_roles_on_organization_id"
   end
 
+  create_table "service_provideds", force: :cascade do |t|
+    t.string "name"
+    t.string "status"
+    t.bigint "organization_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_service_provideds_on_organization_id"
+  end
+
   create_table "sites", force: :cascade do |t|
     t.integer "organization_id"
     t.integer "contact_id"
@@ -475,6 +484,7 @@ ActiveRecord::Schema.define(version: 20171201093717) do
   add_foreign_key "projects", "sources"
   add_foreign_key "provided_services", "organizations"
   add_foreign_key "security_roles", "organizations"
+  add_foreign_key "service_provideds", "organizations"
   add_foreign_key "sites", "business_units"
   add_foreign_key "sources", "organizations"
   add_foreign_key "tasks", "projects"

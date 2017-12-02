@@ -1,11 +1,177 @@
 <div class="row">
-  <% 13.times do |i| %>
-      <div class="col-md-6">
+  <div class="col-md-6">
+    <div class="row">
+      <div class="col-md-12">
         <div class="panel">
           <div class="panel-body">
-            HI, Card <%= i %>
+            <div class="panel-header">
+              <strong class="font-weight-bold">Business Prospect</strong>
+            </div>
+            <div class="ct-chart" id="businessProspectBar"></div>
           </div>
         </div>
       </div>
-  <% end %>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel">
+          <div class="panel-body">
+            <div class="panel-header">
+              <strong class="font-weight-bold">Prospects By Type</strong>
+            </div>
+            <div class="ct-chart" id="prospectsByTypeBar"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="panel">
+      <div class="panel-body">
+        <div class="panel-header">
+          <strong class="font-weight-bold">Industry Type Comparison</strong>
+        </div>
+        <div class="ct-chart" id="industryTypeComparisonBar"></div>
+      </div>
+    </div>
+  </div>
 </div>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="panel">
+      <div class="panel-body">
+        <div class="panel-header">
+          <strong class="font-weight-bold">Prospects By Type Comparison</strong>
+        </div>
+        <div class="ct-chart" id="prospectsByTypeComparisonBar"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="panel">
+      <div class="panel-body">
+        <div class="panel-header">
+          <strong class="font-weight-bold">Prospect Lead Sources Comparison</strong>
+        </div>
+        <div class="ct-chart" id="prospectLeadSourcesComparisonBar"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="panel">
+      <div class="panel-body">
+
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="panel">
+      <div class="panel-body">
+        <div class="panel-header">
+          <strong class="font-weight-bold">Industry Type</strong>
+        </div>
+        <div class="ct-chart" id="prospectsByIndustryTypeBar"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function ($) {
+
+    loadIndustryTypeComparison();
+    loadProspectsByTypeComparison();
+    loadProspectLeadSourcesComparison();
+    loadBusinessProspectBar();
+    loadProspectsByProjectType();
+    loadProspectsByIndustryType();
+
+    function loadIndustryTypeComparison() {
+      var labels = <%=raw current_org.industry_types.pluck(:name) %>;
+      var seriesList = <%=raw get_associated_types(@results, 'industry_type_id') %>;
+      loadComparisonCharts(labels, seriesList, '#industryTypeComparisonBar');
+    }
+
+    function loadProspectsByTypeComparison() {
+      var labels = <%=raw current_org.project_types.pluck(:name) %>;
+      var seriesList = <%=raw get_associated_types(@results, 'project_type_id') %>;
+      loadComparisonCharts(labels, seriesList, '#prospectsByTypeComparisonBar');
+    }
+
+    function loadProspectLeadSourcesComparison() {
+      var labels = <%=raw current_org.sources.pluck(:name) %>;
+      var seriesList = <%=raw get_associated_types(@results, 'source_id') %>;
+      loadComparisonCharts(labels, seriesList, '#prospectLeadSourcesComparisonBar');
+    }
+
+    function loadComparisonCharts(labels, seriesList, selector) {
+      var labelsHeight = labels.length * 40 * 2;
+
+      new Chartist.Bar(selector, {
+        labels: labels,
+        series: seriesList
+      }, {
+        horizontalBars: true,
+        height: labelsHeight +'px',
+        axisX: { onlyInteger: true },
+        axisY: { offset: 70 },
+        plugins: [
+          Chartist.plugins.tooltip()
+        ]
+      });
+    }
+
+    function loadBusinessProspectBar() {
+      var seriesList = [<%=raw get_business_prospect_total(@results, 'status') %>];
+      var labels = seriesList[0].map(function (a) {return a.meta});
+      new Chartist.Bar('#businessProspectBar', {
+        labels: labels,
+        series: seriesList
+      }, {
+        horizontalBars: true,
+        axisX: { onlyInteger: true },
+        axisY: { offset: 70 },
+        plugins: [
+          Chartist.plugins.tooltip()
+        ]
+      });
+    }
+
+    function loadProspectsByProjectType() {
+      var data = {
+        series: <%=raw get_associated_types_total(@results, 'project_type_id') %>
+      };
+      loadProspectsByDifferentType(data, '#prospectsByTypeBar');
+    }
+
+    function loadProspectsByIndustryType() {
+      var data = {
+        series: <%=raw get_associated_types_total(@results, 'industry_type_id') %>
+      };
+      loadProspectsByDifferentType(data, '#prospectsByIndustryTypeBar');
+    }
+
+    function loadProspectsByDifferentType(data, selector) {
+
+      var sum = function (a, b){
+        return a + b.value
+      };
+
+      new Chartist.Pie(selector, data, {
+        labelInterpolationFnc: function(value, idx) {
+          return Math.round(value / data.series.reduce(sum, 0) * 100) + '%';
+        },
+        plugins: [Chartist.plugins.tooltip()]
+      });
+    }
+
+  });
+</script>
+

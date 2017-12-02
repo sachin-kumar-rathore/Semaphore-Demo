@@ -1,0 +1,9 @@
+<ul class="list-group list-group-dividered list-group-full">
+  <% @security_roles.each do |security_role|%>
+    <li class="list-group-item">
+      <i class="fa fa-pencil-square-o fa-1x text-success clickable pointerCursor" data-href="<%= edit_security_role_path(security_role) %>"></i>&nbsp;&nbsp;
+      <%= security_role.name %>
+      <i class="fa fa-times fa-1x text-danger pull-right delete-option pointerCursor" data-href="<%= security_role_path(security_role) %>"></i>
+    </li>
+  <% end %>
+</ul>

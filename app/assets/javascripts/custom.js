@@ -40,6 +40,10 @@ $( document ).ready(function() {
 
 //Projects
 
+$(document).on("input", "#projectsNumber", function () {
+  checkValidityofNumber("projects",this)
+});
+
 //notes
 
 function reloadNotes(id){
@@ -206,8 +210,49 @@ $(document).on("click", ".delete-option", function () {
   });
 });
 
-$(document).on("click", "#addContactIcon", function (){
-   $(this).toggleClass("fa-plus");
-   $(this).toggleClass("fa-minus");
+//company_id_check
+
+$(document).on("input", "#companiesNumber", function () {
+  checkValidityofNumber('companies', this);
 });
 
+//Property number
+
+$(document).on("input", "#sitesNumber", function () {
+  checkValidityofNumber('sites', this);
+});
+
+function checkValidityofNumber(section_type, selected_element){
+  var fieldValue = $(selected_element).val();
+  var record_id = $("#" + section_type + "NumberMessage").attr("value");
+  if(fieldValue.length<6 || isNaN(fieldValue)){
+    $(selected_element).parent().removeClass("has-success");
+    $(selected_element).parent().addClass("has-danger");
+    $("#" + section_type + "NumberMessage").removeClass();
+    $("#" + section_type + "NumberMessage").addClass("error");
+    $("#" + section_type + "NumberMessage").html("Number must contain only 6 digits.");
+  }
+  else{
+    $.ajax({
+      url: "/" + section_type + "/check_" + section_type + "_number_validity",
+      type: "GET",
+      data: { data: fieldValue, id: record_id },
+      dataType: "script"
+    });
+  } 
+}
+
+function updateViewAfterIdCheck(message_status, message_to_show, section_type){
+  $("#"+ section_type +"NumberMessage").removeClass();
+  if (message_status == "true") {
+    $("#"+ section_type +"Number").parent().removeClass("has-danger");
+    $("#"+ section_type +"Number").parent().addClass("has-success");
+    $("#"+ section_type +"NumberMessage").addClass("success");
+  }
+  else{
+    $("#"+ section_type +"Number").parent().removeClass("has-success");
+    $("#"+ section_type +"Number").parent().addClass("has-danger");
+    $("#"+ section_type +"NumberMessage").addClass("error");
+  }
+  $("#"+ section_type +"NumberMessage").html(message_to_show);
+}

@@ -118,8 +118,7 @@ span.next_page, a.next_page {
   font-weight: 400;
 }
 
-
-#contactsList thead th, #projectsList thead th, #notesList thead th, #filesList thead th, #emailsList thead th {
+#contactsList thead th, #projectsList thead th, #notesList thead th, #filesList thead th, #emailsList thead th, #rolesTable thead th, #contactsTable thead th{
   color: #2ED573;
   font-weight: 500;
 }
@@ -302,13 +301,21 @@ html, body {
   padding-top: 66.01px;
 }
 
+.success{
+  color: green;
+}
+
+.pointerCursor{
+  cursor: pointer;
+}
+
 //Report Page
-.yearlyReport{
-  .panel-body{
-    padding:15px;
+.yearlyReport {
+  .panel-body {
+    padding: 15px;
   }
-  .reportGenerationForm{
-    .form-group{
+  .reportGenerationForm {
+    .form-group {
       margin-bottom: 5px;
     }
   }

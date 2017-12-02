@@ -1,0 +1,4 @@
+$('.modal-backdrop').remove();
+$('#securityRolesFormCenter').modal("hide");
+$('#securityRolesList').html("<%= j render partial: 'list' %>");
+$('.flashMessages').html("<%= j render partial: 'shared/flash_messages' %>");

@@ -1,4 +1,4 @@
-module DashboardHelper
+module ReportsHelper
   def report_parameters
     [
         {name: 'Business Prospects', field: 'status'}, # Business Prospect is the combination of all Project states

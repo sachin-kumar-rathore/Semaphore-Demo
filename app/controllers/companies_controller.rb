@@ -68,6 +68,10 @@ class CompaniesController < ApplicationController
     redirect_to companies_path
   end
 
+  def check_companies_number_validity
+    set_message_and_status_for_id_validity("companies")
+  end
+
   private
     
   def load_companies
@@ -79,16 +83,16 @@ class CompaniesController < ApplicationController
   end
 
   def company_params
-    params.require(:company).permit(:name, :company_number, :industry_type, :title, :address_line_1,
-                                    :address_line_2, :city_state_zip, :phone_number_1, :phone_number_2,
+    params.require(:company).permit(:name, :company_number, :industry_type_id, :title, :address_line_1,
+                                    :address_line_2, :city, :state, :zip_code, :phone_number_1, :phone_number_2,
                                     :cell_phone, :fax, :website, :email).merge(organization_id: current_org.id)
   end
 
   def company_info_params
-    params.require(:company).permit(:name, :company_number, :industry_type, :city, :state,
+    params.require(:company).permit(:name, :company_number, :industry_type_id, :city, :state,
                                     :zip_code, :country, :region, :phone_number_1, :fax, :website,
                                     :email, :member_investor, :utility_provider_1, :utility_provider_2,
-                                    :notes, :business_unit )
+                                    :notes, :business_unit_id )
   end
 
   def history_params
@@ -96,8 +100,9 @@ class CompaniesController < ApplicationController
   end
 
   def facilities_params
-    params.require(:company).permit(:facility_type, :acreage, :building_size, :number_of, :average_age_of_buildings,
-                                    :room_for_expansion, :owned_or_leased, :lease_expiration_date_str, :facility_notes, :owner_id)
+    params.require(:company).permit(:project_type_id, :acreage, :building_size, :number_of, :average_age_of_buildings,
+                                    :room_for_expansion, :owned_or_leased, :lease_expiration_date_str, :facility_notes,
+                                    :owner_id, :naics_codes)
   end
 
   def products_and_services_params
@@ -127,7 +132,7 @@ class CompaniesController < ApplicationController
   end
 
   def filtering_params(params)
-    params.slice(:industry_type, :company_name, :associated_project, :associated_contact)
+    params.slice(:industry_type_id, :company_name, :associated_project, :associated_contact)
   end
 
 end

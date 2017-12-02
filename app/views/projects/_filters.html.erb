@@ -50,30 +50,25 @@
   </div>
   <div class="form-group form-material col-md-3 col-12">
     <label class="form-control-label" for="inputConsideredLocations">Considered Locations:</label>
-    <select data-plugin="selectpicker" data-live-search="true" class="form-control">
-      <option value="">Please Select</option>
-      <option>X</option>
-      <option>Y</option>
-      <option>Z</option>
-    </select>
+    <%= select_tag "considered_location_id", options_for_select(current_org.considered_locations.active.map{ |type| type.location}), { class: "form-control", data:{ plugin: 'selectpicker', "live-search":true}, include_blank: 'Please Select' }  %>
   </div>
   <div class="form-group form-material col-md-2 col-12">
     <label class="form-control-label" for="inputProject#">Project #:</label>
-    <input type="text" class="form-control" id="unique_id" name="unique_id" autocomplete="off" />
+    <input type="text" class="form-control" id="project_number" name="project_number" autocomplete="off" />
   </div>
 </div>
 <div class="form-inline col-md-12">
   <div class="form-group form-material col-md-3 col-12">
     <label class="form-control-label" for="inputProjectManager">Project Type:</label>
-    <%= select_tag 'project_type', options_for_select( load_active_type("project_types") ), { class: "form-control", data:{ plugin: 'selectpicker', "live-search":true}, include_blank: 'Please Select' } %>
+    <%= select_tag 'project_type_id', options_for_select( load_active_type("project_types") ), { class: "form-control", data:{ plugin: 'selectpicker', "live-search":true}, include_blank: 'Please Select' } %>
   </div>
   <div class="form-group form-material col-md-3 col-12">
     <label class="form-control-label" for="inputProjectContact">Industry Type:</label>
-    <%= select_tag 'industry_type', options_for_select( load_active_type("industry_types") ), { class: "form-control", data:{ plugin: 'selectpicker', "live-search":true}, include_blank: 'Please Select' } %>
+    <%= select_tag 'industry_type_id', options_for_select( load_active_type("industry_types") ), { class: "form-control", data:{ plugin: 'selectpicker', "live-search":true}, include_blank: 'Please Select' } %>
   </div>
   <div class="form-group form-material col-md-3 col-12">
     <label class="form-control-label" for="inputConsideredLocations">Source:</label>
-    <%= select_tag 'source', options_for_select( load_active_type("sources")), { class: "form-control", data:{ plugin: 'selectpicker', "live-search":true}, include_blank: 'Please Select' } %>
+    <%= select_tag 'source_id', options_for_select( load_active_type("sources")), { class: "form-control", data:{ plugin: 'selectpicker', "live-search":true}, include_blank: 'Please Select' } %>
   </div>
   <div class="form-group form-material col-md-2 col-12">
     <label class="form-control-label" for="inputProject#">Referred Site/Building:</label>

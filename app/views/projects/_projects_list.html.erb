@@ -12,9 +12,9 @@
   <tbody>
     <% @projects.each do |project| %>
       <tr>
-        <td><%= project.unique_id %></td>
+        <td><%= project.project_number %></td>
         <td><%= project.name %></td>
-        <td><%=  %></td>
+        <td><%= project.company.name %></td>
         <td><%= project.active_date %></td>
         <td><%= project.status %></td>
         <td><a href="projects/<%= project.id %>/edit" class="btn btn-sm green-btn" data-turbolinks="false">View</a></td>

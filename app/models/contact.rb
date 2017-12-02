@@ -21,6 +21,8 @@ class Contact < ApplicationRecord
   has_many :contact_considered_locations, dependent: :destroy
   has_many :considered_locations, through: :contact_considered_locations
   has_many :companies, class_name: 'Company', foreign_key: :owner_id
+  belongs_to :contact_category
+  belongs_to :business_unit
 
 
   # == Validations == #

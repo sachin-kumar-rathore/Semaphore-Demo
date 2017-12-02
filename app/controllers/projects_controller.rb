@@ -64,6 +64,10 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def check_projects_number_validity
+    set_message_and_status_for_id_validity("projects")
+  end
+
   private
 
   def set_project
@@ -71,17 +75,19 @@ class ProjectsController < ApplicationController
   end
   
   def project_params
-    params.require(:project).permit(:name, :status, :project_type, :industry_type, :business_unit,
+    params.require(:project).permit(:name, :status, :project_type_id, :industry_type_id, :business_unit_id,
       :description, :active_date_str, :successful_completion_date_str, :business_type, :square_feet_requested,
       :square_footage_note, :acres_requested, :acreage_note, :new_jobs, :new_jobs_notes,
       :wages, :wages_notes, :net_new_investment, :net_new_investment_notes, :public_release_date_str,
-      :public_release, :site_selector, :utilize_sites, :speculative_building, :elimination_reason,
-      :located, :unique_id, :retained_jobs, :site_visit_1_str, :site_visit_2_str, :site_visit_3_str, :company_id,
-      :primary_contact_id, :source)
+      :public_release, :site_selector, :utilize_sites, :speculative_building, :elimination_reason_id,
+      :located, :project_number, :retained_jobs, :site_visit_1_str, :site_visit_2_str, :site_visit_3_str, :company_id,
+      :primary_contact_id, :source_id, :considered_location_id, :provided_service_id, :competition_id)
   end
 
   def filtering_params(params)
-    params.slice(:status, :primary_contact_id, :start_date, :site_visit, :completion, :unique_id, :industry_type, :project_name, :public_release, :business_type)
+    params.slice(:status, :primary_contact_id, :start_date, :site_visit, :completion,
+                 :project_number, :industry_type_id, :project_name, :public_release, :business_type,
+                 :considered_location_id, :project_type_id, :source_id, :company_id)
   end
-  
+
 end

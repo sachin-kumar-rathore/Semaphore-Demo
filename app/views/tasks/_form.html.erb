@@ -23,11 +23,13 @@
               <div class="row">
                 <div class="form-group form-material col-md-6">
                   <label class="form-control-label">Priority:</label>
-                  <%= form.select :priority, options_for_select(Task::PRIORITY, form.object.priority), {}, {:class => 'form-control'} %>
+                  <%= form.select :priority, options_for_select(Task::PRIORITY, form.object.priority), {}, class: 'form-control', data: {
+            plugin: "selectpicker" } %>
                 </div>
                 <div class="form-group form-material col-md-6">
                   <label class="form-control-label">Assign To:</label>
-                  <%= form.select :assignee_id, options_for_select(@users.collect { |user| [user.full_name, user.id]}, form.object.assignee_id), {}, {:class => 'form-control'} %>
+                  <%= form.select :assignee_id, options_for_select(@users.collect { |user| [user.full_name, user.id]}, form.object.assignee_id), {}, class: 'form-control', data: {
+            plugin: "selectpicker" } %>
                 </div>
               </div>
               <div class="row">
@@ -62,10 +64,14 @@
                   </div>
                 </div>
               </div>
+              <% if @task.new_record? %>
+                <%= hidden_field_tag 'task[status]', 'In-Progress' %>
+              <% end %>
               <% unless @task.new_record? %>
                 <div class="row">
                   <div class="form-group form-material col-md-6">
-                    <%= form.select :status, options_for_select(Task::STATUS, form.object.status), {}, {:class => 'form-control'} %>
+                    <%= form.select :status, options_for_select(Task::STATUS, form.object.status), {}, class: 'form-control', data: {
+            plugin: "selectpicker" } %>
                   </div>
                   <div class="form-group form-material col-md-6">
                     <%= form.text_field :progress, class: "form-control", placeholder: '70' %>

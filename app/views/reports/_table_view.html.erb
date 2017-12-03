@@ -1,11 +1,52 @@
 <div class="row">
-  <% 6.times do |i| %>
-      <div class="col-md-6">
-        <div class="panel">
-          <div class="panel-body">
-            HI <%= i %>
-          </div>
-        </div>
-      </div>
-  <% end %>
+	<div class="col-md-6">
+		<p class="font-weight-bold">Prospects by Type Comparison</p>
+		<div class="example table-responsive">
+			<table class="table table-bordered bg-white">
+				<thead>
+				<tr>
+					<th class="font-weight-bold text-center">Year</th>
+					<th class="font-weight-bold text-center">Type</th>
+					<th class="font-weight-bold text-center">Amount</th>
+				</tr>
+				</thead>
+				<tbody>
+				<% @results['project_type_id'].keys.each do |year| %>
+					<% @results['project_type_id'][year].keys.each do |typeId| %>
+						<tr>
+							<td class="text-center"><%= year %></td>
+							<td class="text-center"><%= ProjectType.find(typeId).name %></td>
+							<td class="text-center"><%= @results['project_type_id'][year][typeId].count %></td>
+						</tr>
+					<% end %>
+				<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<p class="font-weight-bold">Industry Type Comparison</p>
+		<div class="example table-responsive">
+			<table class="table table-bordered bg-white">
+				<thead>
+				<tr>
+					<th class="font-weight-bold text-center">Year</th>
+					<th class="font-weight-bold text-center">Type</th>
+					<th class="font-weight-bold text-center">Amount</th>
+				</tr>
+				</thead>
+				<tbody>
+				<% @results['industry_type_id'].keys.each do |year| %>
+						<% @results['industry_type_id'][year].keys.each do |typeId| %>
+								<tr>
+									<td class="text-center"><%= year %></td>
+									<td class="text-center"><%= IndustryType.find(typeId).name %></td>
+									<td class="text-center"><%= @results['industry_type_id'][year][typeId].count %></td>
+								</tr>
+						<% end %>
+				<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
 </div>

@@ -256,3 +256,19 @@ function updateViewAfterIdCheck(message_status, message_to_show, section_type){
   }
   $("#"+ section_type +"NumberMessage").html(message_to_show);
 }
+
+// reporting JS
+$(document).on("click", "#businessTypeCharts", function () {
+  if(this.href.indexOf("New") > -1)
+    $('#hiddenBusinessType').val("New Business");
+  else if (this.href.indexOf("Existing") > -1)
+    $('#hiddenBusinessType').val("Existing Business");
+  else $('#hiddenBusinessType').val("");
+
+  var link = this.href;
+  $.ajax({
+    url: link,
+    type: "GET",
+    dataType: 'script'
+  });
+});

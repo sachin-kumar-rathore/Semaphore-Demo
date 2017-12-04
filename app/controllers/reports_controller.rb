@@ -1,16 +1,19 @@
 class ReportsController < ApplicationController
 
   before_action :authenticate_user!
+  respond_to :html, only: [:index]
+  respond_to :js
 
   def index
+    filter_business_type = params[:type] ? {type: params[:type]} : {type_1: 'New Business', type_2: 'Existing Business'}
     @results = {"years_to_compare": 3}
-    parameters = %w(status project_type_id industry_type_id source_id elimination_reason_id net_new_investment new_jobs retained_jobs)
-    @projects = current_org.projects.includes(:project_type, :industry_type, :competition, :source, :elimination_reason)
+    parameters = %w(status square_feet_requested acres_requested project_type_id industry_type_id source_id elimination_reason_id net_new_investment new_jobs retained_jobs)
+    @projects = current_org.projects.business_type(filter_business_type).includes(:project_type, :industry_type, :competition, :source, :elimination_reason)
                     .where("created_at >= ? AND created_at <= ?", 3.year.ago, DateTime.new(2017).end_of_year)
     parameters.each_with_index do |param, indx|
       @results[param] = @projects.group_by{|p| p.created_at.year}
       @results[param].each do |key, values|
-        if indx > 4
+        if indx > 6
           @results[param][key] = values.sum{|p| p[param].to_i}
         else
           @results[param][key] = values.group_by{|p| p[param]}

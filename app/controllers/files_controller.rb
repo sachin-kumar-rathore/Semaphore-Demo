@@ -6,8 +6,8 @@ class FilesController < ApplicationController
   respond_to :js
 
   def index
-    @files = current_org.documents
-    @files = @files.where(project_id: params[:project_id]) if params[:project_id].present?
+    @files = current_org.documents.without_activity
+    @files = @files.where('documentable_id = ? AND documentable_type = ? ', params[:project_id], "Project") if params[:project_id].present?
     @files = @files.paginate(page: params[:page], per_page: 10).order('updated_at DESC')
   end
 
@@ -49,7 +49,8 @@ class FilesController < ApplicationController
 
   def attach_project_to_file
     @project = params[:project_id].present? ? current_org.projects.where(id: params[:project_id]).first : nil
-    @file.project = @project
+    @file.documentable_type = "Project"
+    @file.documentable_id = @project.id
     if @file.save && @project
       flash.now[:success] = "Successfully attached project to file. "
     else
@@ -64,7 +65,7 @@ class FilesController < ApplicationController
   end
 
   def file_params
-    params.require(:document).permit(:name, :project_id).merge(user_id: current_user.id)
+    params.require(:document).permit(:name, :documentable_id).merge(user_id: current_user.id, documentable_type: "Project")
   end
 
 end

@@ -1,0 +1,4 @@
+$('#createOrEditNote').html("");
+$('#createOrEditNote').html("<%= j render( partial: 'form', locals: { controller: 'activity_notes', action: 'create' }) %>");
+$('#noteFormCenter').modal('show');
+$('.datepicker').datepicker();

@@ -8,9 +8,10 @@ class Project < ApplicationRecord
   STATUS = ['Preliminary', 'Active', 'Delayed', 'Eliminated', 'Successful', 'Inactive']
   
   attr_accessor :active_date_str, :successful_completion_date_str, :site_visit_1_str,
-                :site_visit_2_str, :site_visit_3_str, :public_release_date_str
+                :site_visit_2_str, :site_visit_3_str, :public_release_date_str, :activity_id
   # CALLBACK
   before_validation :convert_dates_format
+  after_create :copy_activity_records, if: :has_activity_id?
 
   # ASSOCIATION
   belongs_to :organization
@@ -18,11 +19,11 @@ class Project < ApplicationRecord
   has_many :contacts, through: :project_contacts
   has_many :project_sites, dependent: :destroy
   has_many :sites, through: :project_sites
-  has_many :notes, dependent: :destroy
-  belongs_to :company, dependent: :destroy
-  has_many :tasks, dependent: :nullify
-  has_many :emails, dependent: :nullify
-  has_many :documents, dependent: :nullify
+  has_many :notes, as: :notable, dependent: :destroy
+  belongs_to :company
+  has_many :tasks, as: :taskable, dependent: :destroy
+  has_many :documents, as: :documentable, dependent: :destroy
+  has_many :emails, as: :mailable, dependent: :destroy
   belongs_to :project_type
   belongs_to :industry_type
   belongs_to :business_unit
@@ -81,6 +82,29 @@ class Project < ApplicationRecord
     if successful_completion_date < active_date
       errors.add(:successful_completion_date, "cannot be before the start date") 
     end 
+  end
+
+  def has_activity_id?
+    activity_id.present?    
+  end
+
+  def copy_activity_records
+    current_org = self.organization
+    @activity = current_org.activities.where(id: activity_id).first
+    @activity.notes.each do |note|
+      self.notes.new(note.dup.attributes.merge(notable_type: "Project"))
+    end
+    @activity.emails.each do |email|
+      self.emails.new(email.dup.attributes.merge(mailable_type: "Project"))
+    end
+    @activity.tasks.each do |task|
+      self.tasks.new(task.dup.attributes.merge(taskable_type: "Project"))
+    end
+    @activity.documents.each do |document|
+      self.documents.new(document.dup.attributes.merge(documentable_type: "Project", name: document.name))
+    end
+    self.save
+    @activity.update_attribute(:converted, true)
   end
 
 end

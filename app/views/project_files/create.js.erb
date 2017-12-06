@@ -2,5 +2,5 @@
   $('.flashMessages').html("<%= escape_javascript render partial: 'shared/flash_messages' %>");
   reloadProjectFiles("<%= @project.id %>");
 <% else %>
-  $('#taskFormCenter .error-messages').html("<%= j render partial: 'shared/error_messages', locals: {obj: @file} %>");
+  $('#fileFormCenter .error-messages').html("<%= j render partial: 'shared/error_messages', locals: {obj: @file} %>");
 <% end %>

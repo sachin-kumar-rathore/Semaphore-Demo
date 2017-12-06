@@ -1,0 +1,9 @@
+<% if @activity.present? %>
+  $('#emailsTab').html("<%= j render partial: 'activity_emails_list' %>");
+  $(".tab-content").children('.tab-pane').removeClass("active");
+  $('#emailsTab').addClass("active");
+  $(".nav-item").children('.nav-link').removeClass("active");
+  $('#emailsNavLink').addClass("active");
+<% else %>
+  $('.flashMessages').html("<%= escape_javascript render partial: 'shared/flash_messages' %>");
+<% end %>

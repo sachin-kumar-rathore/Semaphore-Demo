@@ -2,11 +2,12 @@ class Document < ApplicationRecord
 
   mount_uploader :name, FileUploader
   belongs_to :organization
-  belongs_to :project, optional: true
   belongs_to :user
-
+  belongs_to :documentable, polymorphic: true, optional: true
   before_save :update_size
   
+  scope :without_activity, -> { where("documentable_type IS NULL OR documentable_type != (?)", "Activity") }
+
   private
   
   def update_size

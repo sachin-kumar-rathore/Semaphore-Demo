@@ -14,7 +14,7 @@ class Task < ApplicationRecord
   # == Associations and Nested Attributes == #
   belongs_to :user
   belongs_to :assignee, class_name: 'User', foreign_key: :assignee_id
-  belongs_to :project, optional: true
+  belongs_to :taskable, polymorphic: true, optional: true
   # belongs_to :project
 
   # == Validations == #
@@ -28,7 +28,7 @@ class Task < ApplicationRecord
   # == Callbacks == #
   before_validation :convert_dates_format
   # == Scopes and Other macros == #
-  
+  scope :without_activity, -> { where("taskable_type IS NULL OR taskable_type != (?)", "Activity") }
   # == Instance methods == #
 
   # == Private == #

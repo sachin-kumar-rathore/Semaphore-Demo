@@ -58,7 +58,7 @@ class ManageConfigurationsController < ApplicationController
   def set_setting_type
     @setting_type = current_org.send(@type).where(id: params[:id]).first
     if @setting_type.blank?
-      flash[:success] = "#{setting_type_name} not found."
+      flash[:danger] = "#{setting_type_name} not found."
       redirect_to settings_path
     end
   end

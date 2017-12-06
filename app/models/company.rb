@@ -19,7 +19,7 @@ class Company < ApplicationRecord
   belongs_to :business_unit
   belongs_to :organization
   belongs_to :owner, class_name: 'Contact', foreign_key: :owner_id, optional: true
-
+  has_many :activities, dependent: :destroy
   # == Validations == #
   validates_presence_of :name, :company_number
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i

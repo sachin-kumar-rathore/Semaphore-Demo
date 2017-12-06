@@ -35,7 +35,7 @@
               <div class="row">
                 <div class="form-group form-material col-md-6">
                   <label class="form-control-label" >Project:</label>
-                  <%= form.select :project_id, options_for_select( load_data_with_id(current_org.projects), selected: @project ? @project.id : form.object.project_id ),{ include_blank: 'No Project' }, data:{ plugin: 'selectpicker', "live-search":true}, disabled: @project %>
+                  <%= form.select :taskable_id, options_for_select( load_data_with_id(current_org.projects), selected: @project ? @project.id : form.object.taskable_id ),{ include_blank: 'No Project' }, data:{ plugin: 'selectpicker', "live-search":true}, disabled: @project %>
                 </div>
               </div>
               <div class="row">

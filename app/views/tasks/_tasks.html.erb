@@ -3,7 +3,7 @@
     <tr>
       <th>TASK</th>
       <th>PRIORITY</th>
-      <th data-breakpoints="xs">PROJECT</th>
+      <th data-breakpoints="xs">PROJECT/ACTIVITY</th>
       <th data-breakpoints="xs">DESCRIPTION</th>
       <th data-breakpoints="xs">STATUS</th>
       <th data-breakpoints="xs">COMPLETE</th>
@@ -18,7 +18,7 @@
       <tr>
         <td><%= task.name %></td>
         <td><%= task.priority %></td>
-        <td><%= task.project_id ? task.project.name : "" %></td>
+        <td><%= task.taskable_id ? task.taskable.name : "" %></td>
         <td><%= task.description.truncate(25) %></td>
         <td><%= task.status %></td>
         <td><%= task.progress %> %</td>

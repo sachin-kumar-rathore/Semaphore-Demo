@@ -122,7 +122,7 @@ Rails.application.routes.draw do
   resources :security_roles
   resources :reports, only: [:index] do
     collection do
-      post :generate_pdf
+      get :generate_pdf
       post :generate_xsl
     end
   end

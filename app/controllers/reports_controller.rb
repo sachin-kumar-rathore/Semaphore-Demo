@@ -10,8 +10,11 @@ class ReportsController < ApplicationController
 
   def generate_pdf
     generate_report(params[:type], 3)
-    kit = PDFKit.new(as_html, page_size: 'A4')
-    kit.to_file("#{Rails.root}/public/report.pdf")
+    pdf = WickedPdf.new.pdf_from_string(as_html)
+    save_path = Rails.root.join('public','report.pdf')
+    File.open(save_path, 'wb') do |file|
+      file << pdf
+    end
   end
 
   def generate_xsl
@@ -41,7 +44,7 @@ class ReportsController < ApplicationController
   attr_reader :results
 
   def as_html
-    render template: "reports/generate_pdf.pdf", layout: false, locals: { results: results }
+    render template: "reports/generate_pdf.html.erb", layout: false, locals: { results: results }
   end
 
 end

@@ -54,7 +54,7 @@
   </div>
 
   <div class="col-xl-3">
-    <%= form_tag(generate_pdf_reports_path, method: 'get') do %>
+    <%= form_tag(download_report_reports_path, method: 'post') do %>
       <%= render partial: 'report_form' %>
     <% end %>
   </div>

@@ -272,3 +272,10 @@ $(document).on("click", "#businessTypeCharts", function () {
     dataType: 'script'
   });
 });
+
+$(document).on("click", "#xls-report-btn", function () {
+  $('#hiddenReportFormat').val("xls");
+});
+$(document).on("click", "#pdf-report-btn", function () {
+  $('#hiddenReportFormat').val("pdf");
+});

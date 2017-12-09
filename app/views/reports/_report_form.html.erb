@@ -3,13 +3,14 @@
     <strong>Reporting Parameters</strong>
     <div class="row mb-10 mt-10">
       <div class="col-md-6">
-        <button type="submit" class="btn green-btn btn-sm">Generate Report</button>
+        <button type="submit" class="btn green-btn btn-sm" id="pdf-report-btn">Generate Report</button>
       </div>
       <div class="col-md-6">
-        <button class="btn white-btn btn-sm">Generate Data</button>
+        <button type="submit" class="btn white-btn btn-sm" id="xls-report-btn">Generate Data</button>
       </div>
     </div>
 		<%= hidden_field_tag 'type', nil, id: 'hiddenBusinessType' %>
+		<%= hidden_field_tag 'format', 'pdf', id: 'hiddenReportFormat' %>
     <div class="row reportGenerationForm">
       <div class="col-md-12">
         <div class="form-group">

@@ -52,6 +52,7 @@ class Project < ApplicationRecord
   scope :project_type_id, -> (project_type_id) { where("project_type_id = ?",project_type_id)}
   scope :source_id, -> (source_id) { where("source_id = ?",source_id)}
   scope :company_id, -> (company_id) { where("company_id = ?",company_id)}
+  scope :filter_by_creation, -> (start_time, end_time) { where("created_at >= ? AND created_at <= ?", start_time, end_time)}
 
   # VALIDATION
   validates :project_number, uniqueness: true, presence: true, length: { is: 6 }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171201093717) do
+ActiveRecord::Schema.define(version: 20171209021339) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -282,7 +282,7 @@ ActiveRecord::Schema.define(version: 20171201093717) do
     t.text "square_footage_note"
     t.string "acres_requested"
     t.text "acreage_note"
-    t.string "new_jobs"
+    t.integer "new_jobs"
     t.text "new_jobs_notes"
     t.decimal "wages"
     t.text "wages_notes"
@@ -295,7 +295,7 @@ ActiveRecord::Schema.define(version: 20171201093717) do
     t.boolean "speculative_building"
     t.string "located"
     t.string "project_number"
-    t.string "retained_jobs"
+    t.integer "retained_jobs"
     t.date "site_visit_1"
     t.date "site_visit_2"
     t.date "site_visit_3"

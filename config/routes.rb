@@ -122,8 +122,7 @@ Rails.application.routes.draw do
   resources :security_roles
   resources :reports, only: [:index] do
     collection do
-      get :generate_pdf
-      post :generate_xsl
+      post :download_report
     end
   end
 

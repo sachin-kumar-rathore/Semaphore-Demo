@@ -2,10 +2,10 @@
   <div class="col-xl-9">
     <div class="row">
       <div class="col-md-9">
-        <p class="font-size-18"><i class="fa fa-database green-500"></i> Yearly Activity Report</p>
+        <p class="font-size-18"><i class="fa fa-database green-500"></i> <%= params[:period].capitalize %> Activity Report</p>
       </div>
       <div class="col-md-3 text-right">
-        <%= link_to reports_path, class: 'btn btn-cancel btn-sm', data: { turbolinks: false } do %>
+        <%= link_to reports_path(period: params[:period]), class: 'btn btn-cancel btn-sm', data: { turbolinks: false } do %>
             <i class="fa fa-refresh"></i> Refresh
         <% end %>
       </div>
@@ -15,9 +15,9 @@
       <div class="col-md-7 text-left">
         <div class="nav-tabs-horizontal" data-plugin="tabs">
           <ul class="nav nav-tabs nav-tabs-line" role="tablist">
-            <li class="nav-item" role="presentation"><a class="nav-link active" id="businessTypeCharts" data-toggle="tab" href="<%= reports_path %>" aria-controls="exampleTabsLineOne" role="tab" aria-expanded="true">Combined</a></li>
-            <li class="nav-item" role="presentation"><a class="nav-link" id="businessTypeCharts" data-toggle="tab" href="<%= reports_path(type: 'Existing Business') %>" aria-controls="exampleTabsLineTwo" role="tab" aria-expanded="false">Renetation/Expansion</a></li>
-            <li class="nav-item" role="presentation"><a class="nav-link" id="businessTypeCharts" data-toggle="tab" href="<%= reports_path(type: 'New Business') %>" aria-controls="exampleTabsLineThree" role="tab" aria-expanded="false">Attraction</a></li>
+						<li class="nav-item" role="presentation"><a class="nav-link active" id="businessTypeCharts" data-toggle="tab" href="<%= reports_path(period: params[:period]) %>" aria-controls="exampleTabsLineOne" role="tab" aria-expanded="true">Combined</a></li>
+						<li class="nav-item" role="presentation"><a class="nav-link" id="businessTypeCharts" data-toggle="tab" href="<%= reports_path(type: 'Existing Business', period: params[:period]) %>" aria-controls="exampleTabsLineTwo" role="tab" aria-expanded="false">Renetation/Expansion</a></li>
+						<li class="nav-item" role="presentation"><a class="nav-link" id="businessTypeCharts" data-toggle="tab" href="<%= reports_path(type: 'New Business', period: params[:period]) %>" aria-controls="exampleTabsLineThree" role="tab" aria-expanded="false">Attraction</a></li>
           </ul>
         </div>
       </div>
@@ -54,9 +54,15 @@
   </div>
 
   <div class="col-xl-3">
-    <%= form_tag(download_report_reports_path, method: 'post') do %>
-      <%= render partial: 'report_form' %>
-    <% end %>
+    <% if params[:period] == 'yearly' %>
+			<%= form_tag(yearly_report_reports_path, method: 'post') do %>
+				<%= render partial: 'report_form' %>
+			<% end %>
+		<% else %>
+			<%= form_tag(monthly_report_reports_path, method: 'post') do %>
+				<%= render partial: 'monthly_report_form' %>
+			<% end %>
+		<% end %>
   </div>
 
 </div>

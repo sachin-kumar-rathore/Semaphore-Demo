@@ -122,7 +122,8 @@ Rails.application.routes.draw do
   resources :security_roles
   resources :reports, only: [:index] do
     collection do
-      post :download_report
+      post :yearly_report
+      post :monthly_report
     end
   end
 

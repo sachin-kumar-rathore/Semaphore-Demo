@@ -1,0 +1,270 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+					xmlns:o="urn:schemas-microsoft-com:office:office"
+					xmlns:x="urn:schemas-microsoft-com:office:excel"
+					xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+					xmlns:html="http://www.w3.org/TR/REC-html40">
+	<% if @selected_parameters.include?('project_type_id') %>
+		<Worksheet ss:Name="Prospects by Type">
+			<Table>
+				<Row>
+					<Cell>
+						<Data ss:Type="String">Year</Data>
+					</Cell>
+					<Cell>
+						<Data ss:Type="String">Type</Data>
+					</Cell>
+					<Cell>
+						<Data ss:Type="String">Amount</Data>
+					</Cell>
+				</Row>
+				<% @results['project_type_id'].keys.each do |year| %>
+					<% @results['project_type_id'][year].keys.each do |typeId| %>
+						<Row>
+							<Cell>
+								<Data ss:Type="Number"><%= year %></Data>
+							</Cell>
+							<Cell>
+								<Data ss:Type="String"><%= ProjectType.find(typeId).name %></Data>
+							</Cell>
+							<Cell>
+								<Data ss:Type="Number"><%= @results['project_type_id'][year][typeId].count %></Data>
+							</Cell>
+						</Row>
+					<% end %>
+				<% end %>
+			</Table>
+		</Worksheet>
+	<% end %>
+
+	<% if @selected_parameters.include?('industry_type_id') %>
+		<Worksheet ss:Name="Industry Type Comparison">
+			<Table>
+				<Row>
+					<Cell>
+						<Data ss:Type="String">Year</Data>
+					</Cell>
+					<Cell>
+						<Data ss:Type="String">Type</Data>
+					</Cell>
+					<Cell>
+						<Data ss:Type="String">Amount</Data>
+					</Cell>
+				</Row>
+				<% @results['industry_type_id'].keys.each do |year| %>
+					<% @results['industry_type_id'][year].keys.each do |typeId| %>
+						<Row>
+							<Cell>
+								<Data ss:Type="Number"><%= year %></Data>
+							</Cell>
+							<Cell>
+								<Data ss:Type="String"><%= IndustryType.find(typeId).name %></Data>
+							</Cell>
+							<Cell>
+								<Data ss:Type="Number"><%= @results['industry_type_id'][year][typeId].count %></Data>
+							</Cell>
+						</Row>
+					<% end %>
+				<% end %>
+			</Table>
+		</Worksheet>
+	<% end %>
+
+	<% if @selected_parameters.include?('source_id') %>
+		<Worksheet ss:Name="Prospect Lead Sources Comparison">
+			<Table>
+				<Row>
+					<Cell>
+						<Data ss:Type="String">Year</Data>
+					</Cell>
+					<Cell>
+						<Data ss:Type="String">Type</Data>
+					</Cell>
+					<Cell>
+						<Data ss:Type="String">Amount</Data>
+					</Cell>
+				</Row>
+				<% @results['source_id'].keys.each do |year| %>
+					<% @results['source_id'][year].keys.each do |typeId| %>
+						<Row>
+							<Cell>
+								<Data ss:Type="Number"><%= year %></Data>
+							</Cell>
+							<Cell>
+								<Data ss:Type="String"><%= Source.find(typeId).name %></Data>
+							</Cell>
+							<Cell>
+								<Data ss:Type="Number"><%= @results['source_id'][year][typeId].count %></Data>
+							</Cell>
+						</Row>
+					<% end %>
+				<% end %>
+			</Table>
+		</Worksheet>
+	<% end %>
+
+	<% if @selected_parameters.include?('elimination_reason_id') %>
+		<Worksheet ss:Name="Elimination Reason Comparison">
+			<Table>
+				<Row>
+					<Cell>
+						<Data ss:Type="String">Year</Data>
+					</Cell>
+					<Cell>
+						<Data ss:Type="String">Type</Data>
+					</Cell>
+					<Cell>
+						<Data ss:Type="String">Amount</Data>
+					</Cell>
+				</Row>
+				<% @results['elimination_reason_id'].keys.each do |year| %>
+					<% @results['elimination_reason_id'][year].keys.each do |typeId| %>
+						<Row>
+							<Cell>
+								<Data ss:Type="Number"><%= year %></Data>
+							</Cell>
+							<Cell>
+								<Data ss:Type="String"><%= EliminationReason.find(typeId).name %></Data>
+							</Cell>
+							<Cell>
+								<Data ss:Type="Number"><%= @results['elimination_reason_id'][year][typeId].count %></Data>
+							</Cell>
+						</Row>
+					<% end %>
+				<% end %>
+			</Table>
+		</Worksheet>
+	<% end %>
+
+	<% if @selected_parameters.include?('competition_id') %>
+		<Worksheet ss:Name="Competition Comparison">
+			<Table>
+				<Row>
+					<Cell>
+						<Data ss:Type="String">Year</Data>
+					</Cell>
+					<Cell>
+						<Data ss:Type="String">Type</Data>
+					</Cell>
+					<Cell>
+						<Data ss:Type="String">Amount</Data>
+					</Cell>
+				</Row>
+				<% @results['competition_id'].keys.each do |year| %>
+					<% @results['competition_id'][year].keys.each do |typeId| %>
+						<Row>
+							<Cell>
+								<Data ss:Type="Number"><%= year %></Data>
+							</Cell>
+							<Cell>
+								<Data ss:Type="String"><%= Competition.find(typeId).name %></Data>
+							</Cell>
+							<Cell>
+								<Data ss:Type="Number"><%= @results['competition_id'][year][typeId].count %></Data>
+							</Cell>
+						</Row>
+					<% end %>
+				<% end %>
+			</Table>
+		</Worksheet>
+	<% end %>
+
+	<% if @selected_parameters.include?('status') %>
+		<Worksheet ss:Name="Business Prospect">
+			<Table>
+				<Row>
+					<Cell>
+						<Data ss:Type="String">Year</Data>
+					</Cell>
+					<Cell>
+						<Data ss:Type="String">Status</Data>
+					</Cell>
+					<Cell>
+						<Data ss:Type="String">Amount</Data>
+					</Cell>
+				</Row>
+				<% @results['status'].keys.each do |year| %>
+					<% @results['status'][year].keys.each do |typeId| %>
+						<Row>
+							<Cell>
+								<Data ss:Type="Number"><%= year %></Data>
+							</Cell>
+							<Cell>
+								<Data ss:Type="String"><%= typeId %></Data>
+							</Cell>
+							<Cell>
+								<Data ss:Type="Number"><%= @results['status'][year][typeId].count %></Data>
+							</Cell>
+						</Row>
+					<% end %>
+				<% end %>
+			</Table>
+		</Worksheet>
+	<% end %>
+
+	<% if @selected_parameters.include?('acres_requested') %>
+		<Worksheet ss:Name="Prospect Acreage Request">
+			<Table>
+				<Row>
+					<Cell>
+						<Data ss:Type="String">Year</Data>
+					</Cell>
+					<Cell>
+						<Data ss:Type="String">Acres</Data>
+					</Cell>
+					<Cell>
+						<Data ss:Type="String">Amount</Data>
+					</Cell>
+				</Row>
+				<% @results['acres_requested'].keys.each do |year| %>
+					<% @results['acres_requested'][year].keys.each do |typeId| %>
+						<Row>
+							<Cell>
+								<Data ss:Type="Number"><%= year %></Data>
+							</Cell>
+							<Cell>
+								<Data ss:Type="String"><%= typeId %></Data>
+							</Cell>
+							<Cell>
+								<Data ss:Type="Number"><%= @results['acres_requested'][year][typeId].count %></Data>
+							</Cell>
+						</Row>
+					<% end %>
+				<% end %>
+			</Table>
+		</Worksheet>
+	<% end %>
+
+	<% if @selected_parameters.include?('square_feet_requested') %>
+		<Worksheet ss:Name="Square foot Request">
+			<Table>
+				<Row>
+					<Cell>
+						<Data ss:Type="String">Year</Data>
+					</Cell>
+					<Cell>
+						<Data ss:Type="String">Square foot</Data>
+					</Cell>
+					<Cell>
+						<Data ss:Type="String">Amount</Data>
+					</Cell>
+				</Row>
+				<% @results['square_feet_requested'].keys.each do |year| %>
+					<% @results['square_feet_requested'][year].keys.each do |typeId| %>
+						<Row>
+							<Cell>
+								<Data ss:Type="Number"><%= year %></Data>
+							</Cell>
+							<Cell>
+								<Data ss:Type="String"><%= typeId %></Data>
+							</Cell>
+							<Cell>
+								<Data ss:Type="Number"><%= @results['square_feet_requested'][year][typeId].count %></Data>
+							</Cell>
+						</Row>
+					<% end %>
+				<% end %>
+			</Table>
+		</Worksheet>
+	<% end %>
+</Workbook>

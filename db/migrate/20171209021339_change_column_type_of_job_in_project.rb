@@ -7,7 +7,7 @@ class ChangeColumnTypeOfJobInProject < ActiveRecord::Migration[5.1]
   end
 
   def down
-    execute 'ALTER TABLE projects ALTER COLUMN new_jobs TYPE string USING (new_jobs::string)'
-    execute 'ALTER TABLE projects ALTER COLUMN retained_jobs TYPE string USING (retained_jobs::string)'
+    execute 'ALTER TABLE projects ALTER COLUMN new_jobs TYPE varchar USING (new_jobs::varchar)'
+    execute 'ALTER TABLE projects ALTER COLUMN retained_jobs TYPE varchar USING (retained_jobs::varchar)'
   end
 end

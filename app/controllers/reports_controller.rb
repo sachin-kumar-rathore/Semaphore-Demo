@@ -17,23 +17,24 @@ class ReportsController < ApplicationController
     @selected_parameters = params[:report_params].keys + ["new_jobs", "retained_jobs"]
     generate_yearly_report(params[:type], params[:years_to_compare].to_i, params[:year].to_i, @selected_parameters)
 
-    if (params[:format] == 'pdf')
+    if (params[:report_format] == 'pdf')
       pdf = WickedPdf.new.pdf_from_string(as_html)
       save_path = Rails.root.join('public', 'yearly_report.pdf')
       File.open(save_path, 'wb') do |file|
         file << pdf
       end
-      send_file("#{Rails.root}/public/yearly_report.pdf", type: "application/pdf")
     else
-      stream = render_to_string(:template => "reports/yearly_report.xls.erb")
+      stream = render_to_string(:template => "reports/periodic_report.xls.erb", locals: {results: results, params: @selected_parameters})
       save_path = Rails.root.join('public', 'yearly_report.xls')
       File.open(save_path, 'wb') do |file|
         file << stream
       end
-      send_file("#{Rails.root}/public/yearly_report.xls", type: 'application/xls; charset=UTF-8')
     end
 
-    head :ok
+    respond_to do |format|
+      format.js
+    end
+
   end
 
   def generate_yearly_report(type, compare_year = 3, compare_from_year = 2017, parameters)
@@ -58,22 +59,24 @@ class ReportsController < ApplicationController
     @selected_parameters = %w(status square_feet_requested acres_requested project_type_id industry_type_id source_id elimination_reason_id competition_id net_new_investment new_jobs retained_jobs)
     generate_monthly_report(params[:type], params[:start_date], params[:end_date], @selected_parameters)
 
-    if (params[:format] == 'pdf')
+    if (params[:report_format] == 'pdf')
       pdf = WickedPdf.new.pdf_from_string(as_html)
       save_path = Rails.root.join('public', 'monthly_report.pdf')
       File.open(save_path, 'wb') do |file|
         file << pdf
       end
-      send_file("#{Rails.root}/public/monthly_report.pdf", type: "application/pdf")
     else
-      stream = render_to_string(:template => "reports/monthly_report.xls.erb")
+      stream = render_to_string(:template => "reports/periodic_report.xls.erb", locals: {results: results, params: @selected_parameters})
       save_path = Rails.root.join('public', 'monthly_report.xls')
       File.open(save_path, 'wb') do |file|
         file << stream
       end
-      send_file("#{Rails.root}/public/monthly_report.xls", type: 'application/xls; charset=UTF-8')
     end
-    head :ok
+
+    respond_to do |format|
+      format.js
+    end
+
   end
 
   def generate_monthly_report(type, start_date, end_date, parameters)
@@ -94,15 +97,22 @@ class ReportsController < ApplicationController
     end
   end
 
+  def download_report
+    if(params[:period] == 'yearly')
+      send_file("#{Rails.root}/public/yearly_report.#{params[:file_type]}", type: "application/#{params[:file_type]}")
+    else
+      send_file("#{Rails.root}/public/monthly_report.#{params[:file_type]}", type: "application/#{params[:file_type]}")
+    end
+
+    head :ok
+  end
+
   private
 
   attr_reader :results
 
   def as_html
-    render template: "reports/generate_pdf.html.erb", layout: false, locals: {results: results},
-           header: {
-               content: render_to_string('reports/pdf_header.html.erb', layout: false)
-           }
+    render_to_string(template: "reports/generate_pdf.html.erb", layout: false, locals: {results: results})
   end
 
 end

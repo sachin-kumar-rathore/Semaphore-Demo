@@ -124,6 +124,7 @@ Rails.application.routes.draw do
     collection do
       post :yearly_report
       post :monthly_report
+      post :download_report
     end
   end
 

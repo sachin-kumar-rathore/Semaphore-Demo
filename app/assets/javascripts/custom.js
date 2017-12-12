@@ -279,6 +279,9 @@ $(document).on("click", "#xls-report-btn", function () {
 $(document).on("click", "#pdf-report-btn", function () {
   $('#hiddenReportFormat').val("pdf");
 });
+$(document).on("click", "#downloadGeneratedReportModal .green-btn", function () {
+  $('#downloadGeneratedReportModal').modal("hide");
+});
 
 //Activities
 

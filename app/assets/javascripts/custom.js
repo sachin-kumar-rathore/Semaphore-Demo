@@ -279,3 +279,53 @@ $(document).on("click", "#xls-report-btn", function () {
 $(document).on("click", "#pdf-report-btn", function () {
   $('#hiddenReportFormat').val("pdf");
 });
+
+//Activities
+
+$(document).on("click", ".first-save-activity", function () {
+  alert("First save a activity before accessing this section.");
+});
+
+//ActivityNotes
+
+function reloadActivityNotes(id){
+  $.ajax({
+    url: '/activities/' + id + '/notes',
+    type: "GET"
+  });
+}
+
+//ActivityFiles
+
+function reloadActivityFiles(id){
+  $('.modal-backdrop').remove();
+  $("#fileFormCenter").modal("hide");
+  $.ajax({
+    url: '/activities/' + id + '/files',
+    type: "GET",
+  });
+}
+
+//ActivityTasks
+
+function reloadActivityTasks(id){
+  $.ajax({
+    url: '/activities/' + id + '/tasks',
+    type: "GET",
+  });
+}
+
+$(document).on("change", "#activities_filter_by_company", function () {
+  var company_id = $('#activities_filter_by_company').val();
+  $.ajax({
+    url: "/activities",
+    type: "GET",
+    dataType: 'script',
+    data: { company_id: company_id }
+  });  
+});
+
+//Activity Number Check
+$(document).on("input", "#activitiesNumber", function () {
+  checkValidityofNumber('activities', this);
+});

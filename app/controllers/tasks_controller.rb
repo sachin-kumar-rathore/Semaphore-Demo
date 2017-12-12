@@ -6,9 +6,9 @@ class TasksController < ApplicationController
   respond_to :js
 
   def index
-    @tasks = current_org.tasks
-    @tasks = params[:assigned_to_me] == "true" ? current_user.assigned_tasks : current_user.tasks if params[:current_user_filter] == "true"
-    @tasks = @tasks.where(project_id: params[:project_id]) if params[:project_id].present?
+    @tasks = current_org.tasks.without_activity
+    @tasks = params[:assigned_to_me] == "true" ? current_user.assigned_tasks.without_activity : current_user.tasks.without_activity if params[:current_user_filter] == "true"
+    @tasks = @tasks.where('taskable_id = ? AND taskable_type = ? ', params[:project_id], "Project") if params[:project_id].present?
     @tasks = @tasks.paginate(page: params[:page], per_page: 8)
   end
 
@@ -52,7 +52,7 @@ class TasksController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def task_params
     params.require(:task).permit(:name, :description, :start_date_str, :end_date_str, :status,
-                                 :priority, :progress,:assignee_id, :project_id)
+                                 :priority, :progress,:assignee_id, :taskable_id).merge(taskable_type: "Project")
   end
 
   def set_users

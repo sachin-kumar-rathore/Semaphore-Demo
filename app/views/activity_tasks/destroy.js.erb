@@ -1,0 +1,4 @@
+$('.modal-backdrop').remove();
+$("#taskFormCenter").modal("hide");
+reloadActivityTasks("<%= @activity.id %>");
+$('.flashMessages').html("<%= j render partial: 'shared/flash_messages' %>");

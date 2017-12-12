@@ -1,7 +1,8 @@
 class EmailsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:create]
   before_action :authenticate_user!, only: [:index]
-  before_action :set_email, only: [:show, :edit, :update, :destroy]
+  before_action :set_email, only: [:show, :edit, :update, :destroy, :show_existing_contacts,
+                :attach_contact_to_email, :show_existing_projects_and_activities, :attach_project_or_activity_to_email]
   respond_to :html, only: [:index]
   respond_to :js
 
@@ -10,7 +11,7 @@ class EmailsController < ApplicationController
     filtering_params(params).each do |key, value|
       @emails = @emails.public_send(key, value) if value.present?
     end
-    @emails = @emails.paginate(page: params[:page], per_page: 8).order('updated_at DESC')
+    @emails = @emails.paginate(page: params[:page], per_page: 8).order('emails.updated_at DESC')
   end
 
   def show
@@ -38,29 +39,25 @@ class EmailsController < ApplicationController
   end
 
   def show_existing_contacts
-    @email = current_org.emails.where(id: params[:id]).first
     @contacts = current_org.contacts
   end
 
   def attach_contact_to_email
-    @email = current_org.emails.where(id: params[:id]).first
     @contact = current_org.contacts.find(params[:contact_id])
     @email.contacts << @contact
-    @emails = current_org.emails.includes(:contacts, :project).paginate(page: params[:page], per_page: 3)
+    @emails = current_org.emails.includes(:contacts).paginate(page: params[:page], per_page: 8)
     flash.now[:success] = 'Contact was successfully added to Email.'
   end
 
-  def show_existing_projects
-    @email = current_org.emails.where(id: params[:id]).first
+  def show_existing_projects_and_activities
     @projects = current_org.projects
+    @activities = current_org.activities
   end
 
-  def attach_project_to_email
-    @email = current_org.emails.where(id: params[:id]).first
-    @project = current_org.projects.find(params[:project_id])
-    @email.update(project_id: params[:project_id])
-    @emails = current_org.emails.includes(:contacts, :project).paginate(page: params[:page], per_page: 3)
-    flash.now[:success] = "Contact was successfully added to Project - #{@project.name}."
+  def attach_project_or_activity_to_email
+    @email.update(mailable_id: params[:mailable_id], mailable_type: params[:mailable_type])
+    @emails = current_org.emails.includes(:contacts).paginate(page: params[:page], per_page: 8)
+    flash.now[:success] = "Contact was successfully added to #{params[:mailable_type].to_s}."
   end
 
   private

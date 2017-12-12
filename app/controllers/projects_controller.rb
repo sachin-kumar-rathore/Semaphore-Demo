@@ -6,7 +6,12 @@ class ProjectsController < ApplicationController
   respond_to :js
 
   def new
-    @project = current_org.projects.new
+    @activity = current_org.activities.where(id: params[:activity_id]).first if params[:activity_id].present?
+    if @activity && !@activity.converted?
+      @project = current_org.projects.new(activity_params)
+    else
+      @project = current_org.projects.new
+    end
   end
 
   def index
@@ -81,13 +86,17 @@ class ProjectsController < ApplicationController
       :wages, :wages_notes, :net_new_investment, :net_new_investment_notes, :public_release_date_str,
       :public_release, :site_selector, :utilize_sites, :speculative_building, :elimination_reason_id,
       :located, :project_number, :retained_jobs, :site_visit_1_str, :site_visit_2_str, :site_visit_3_str, :company_id,
-      :primary_contact_id, :source_id, :considered_location_id, :provided_service_id, :competition_id)
+      :primary_contact_id, :source_id, :considered_location_id, :provided_service_id, :competition_id, :activity_id)
   end
 
   def filtering_params(params)
     params.slice(:status, :primary_contact_id, :start_date, :site_visit, :completion,
                  :project_number, :industry_type_id, :project_name, :public_release, :business_type,
                  :considered_location_id, :project_type_id, :source_id, :company_id)
+  end
+
+  def activity_params
+    @activity.slice(:name, :company_id, :primary_contact_id, :description)
   end
 
 end

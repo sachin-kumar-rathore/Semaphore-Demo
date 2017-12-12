@@ -104,8 +104,8 @@ Rails.application.routes.draw do
 
   resources :emails, only: [:index, :create, :destroy, :show] do
     member do
-      get :show_existing_contacts, :show_existing_projects
-      post :attach_contact_to_email, :attach_project_to_email
+      get :show_existing_contacts, :show_existing_projects_and_activities
+      post :attach_contact_to_email, :attach_project_or_activity_to_email
     end
   end
 
@@ -127,4 +127,13 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :activities do
+    resources :notes, controller: 'activity_notes'
+    resources :files, controller: 'activity_files'
+    resources :tasks, controller: 'activity_tasks'
+    resources :emails, controller: 'activity_emails'
+    collection do 
+      get :check_activities_number_validity
+    end
+  end
 end

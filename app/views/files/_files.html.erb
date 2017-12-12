@@ -15,8 +15,8 @@
         <td><%= File.basename(file.name.to_s) %></td>
         <td><%= (file.size.to_f/1000).round(1) %> kB </td>
         <td><%= file.user.full_name %></td>
-        <% if file.project %>
-          <td><%= file.project.name %></td>
+        <% if file.documentable_id? %>
+          <td><%= file.documentable.name %></td>
         <% else %>
           <td>
             <button class="clickable btn btn-xs green-btn" data-href="<%= show_projects_file_path(file) %>" ><i class="fa fa-plus"></i> Add

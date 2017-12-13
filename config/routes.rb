@@ -46,6 +46,7 @@ Rails.application.routes.draw do
     collection do
       get :find_contact
       get :check_sites_number_validity
+      post :import_sites, as: :import
     end
   end
 
@@ -130,4 +131,6 @@ Rails.application.routes.draw do
       get :check_activities_number_validity
     end
   end
+
+  resources :imports, only: [:index]
 end

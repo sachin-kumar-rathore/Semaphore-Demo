@@ -29,6 +29,8 @@ gem 'fog-aws'
 # Devise is a flexible authentication solution for Rails based on Warden
 gem 'devise'
 # 
+gem "roo", "~> 2.7.0"
+gem 'roo-xls'
 gem 'authority'
 # Very simple Roles library without any authorization enforcement supporting scope on resource object.
 gem 'rolify'

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171206111711) do
+ActiveRecord::Schema.define(version: 20171212100143) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -309,7 +309,7 @@ ActiveRecord::Schema.define(version: 20171206111711) do
     t.text "square_footage_note"
     t.string "acres_requested"
     t.text "acreage_note"
-    t.string "new_jobs"
+    t.integer "new_jobs", default: 0
     t.text "new_jobs_notes"
     t.decimal "wages"
     t.text "wages_notes"
@@ -322,7 +322,7 @@ ActiveRecord::Schema.define(version: 20171206111711) do
     t.boolean "speculative_building"
     t.string "located"
     t.string "project_number"
-    t.string "retained_jobs"
+    t.integer "retained_jobs", default: 0
     t.date "site_visit_1"
     t.date "site_visit_2"
     t.date "site_visit_3"
@@ -405,6 +405,7 @@ ActiveRecord::Schema.define(version: 20171206111711) do
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.bigint "business_unit_id"
+    t.string "special_district"
     t.index ["business_unit_id"], name: "index_sites_on_business_unit_id"
     t.index ["deleted_at"], name: "index_sites_on_deleted_at"
   end

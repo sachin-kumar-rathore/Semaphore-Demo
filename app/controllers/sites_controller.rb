@@ -45,6 +45,16 @@ class SitesController < ApplicationController
     load_sites
   end
 
+  def import_sites
+    errors = Site.import(params[:import], current_org.id)
+    if errors.blank?
+      flash[:success] = "Sites Successfully Imported."
+    else
+      flash[:danger] = "Sites could not be imported from file. <br/>" + errors.join("<br/>")
+    end
+    redirect_back fallback_location: sites_path
+  end
+
   def find_contact
     @contacts = current_org.contacts.where('name ilike ? or email ilike ?', "%#{params[:q]}%", "%#{params[:q]}%")
     respond_to do |format|
@@ -71,7 +81,7 @@ class SitesController < ApplicationController
   def site_params
     params.require(:site).permit(:organization_id, :contact_id, :site_number, :property_name, :property_type, :address_line, :city,
                                  :state, :zip_code, :country, :available_acreage, :available_square_feet, :contact_id,
-                                 :total_acreage, :total_square_feet, :latitude, :longitude, :business_unit_id, :project_id)
+                                 :total_acreage, :total_square_feet, :latitude, :longitude, :business_unit_id, :project_id, :special_district)
   end
 
   def filtering_params(params)

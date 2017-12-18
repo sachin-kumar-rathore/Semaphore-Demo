@@ -1,7 +1,7 @@
+# Manage notes inside a particular activity
 class ActivityNotesController < ApplicationController
-
   before_action :authenticate_user!, :set_activity
-  before_action :set_note, only: [:show, :update, :destroy]
+  before_action :set_note, only: %i[show update destroy]
   respond_to :js
 
   def index
@@ -15,18 +15,15 @@ class ActivityNotesController < ApplicationController
 
   def create
     @note = @activity.notes.new(note_params)
-    if @note.save
-      flash.now[:success] = 'Note was successfully created.'
-    end
+    return unless @note.save
+    flash.now[:success] = 'Note was successfully created.'
   end
 
-  def show
-  end
+  def show; end
 
   def update
-    if @note.update(note_params)
-      flash.now[:success] = 'Note was successfully updated.'
-    end
+    return unless @note.update(note_params)
+    flash.now[:success] = 'Note was successfully updated.'
   end
 
   def destroy
@@ -49,10 +46,8 @@ class ActivityNotesController < ApplicationController
 
   def set_note
     @note = @activity.notes.where(id: params[:id]).first
-    if @note.blank?
-      flash[:danger] = "Note not found."
-      redirect_to edit_activity_path
-    end
+    return unless @note.blank?
+    flash[:danger] = 'Note not found.'
+    redirect_to edit_activity_path
   end
-
 end

@@ -1,38 +1,36 @@
+# Manage companies inside an organization
 class CompaniesController < ApplicationController
-
   before_action :authenticate_user!
-  before_action :set_company, except: [:index, :new]
-  respond_to :html, only: [:index, :edit]
+  before_action :set_company, except: %i[index new]
+  respond_to :html, only: %i[index edit]
   respond_to :js
-     
+
   def index
     @companies = current_org.companies
     filtering_params(params).each do |key, value|
       @companies = @companies.public_send(key, value) if value.present?
     end
-    @companies = @companies.paginate(page: params[:page], per_page: 8).order('companies.updated_at DESC')
+    @companies = @companies.paginate(page: params[:page], per_page: 8)
+                           .order('companies.updated_at DESC')
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @company = current_org.companies.new
   end
 
   def edit
-    if @company.blank?
-      flash[:danger] = 'Company not found.'
-      redirect_to companies_path
-    end
+    return unless @company.blank?
+    flash[:danger] = 'Company not found.'
+    redirect_to companies_path
   end
 
   def create
     @company = current_org.companies.new(company_params)
-    if @company.save
-      flash.now[:success] = 'Company was successfully created.'
-      load_companies
-    end
+    return unless @company.save
+    flash.now[:success] = 'Company was successfully created.'
+    load_companies
   end
 
   def company_info_update
@@ -61,21 +59,23 @@ class CompaniesController < ApplicationController
 
   def destroy
     if @company && @company.destroy
-      flash[:success] = "Company deleted successfully."
+      flash[:success] = 'Company deleted successfully.'
     else
-      flash[:danger] = "Could not delete company."
+      flash[:danger] = 'Could not delete company.'
     end
     redirect_to companies_path
   end
 
   def check_companies_number_validity
-    set_message_and_status_for_id_validity("companies")
+    assign_message_and_status_for_id_validity('companies')
   end
 
   private
-    
+
   def load_companies
-    @companies = current_org.companies.paginate(page: params[:page], per_page: 8).order('updated_at DESC')
+    @companies = current_org.companies
+                            .paginate(page: params[:page], per_page: 8)
+                            .order('updated_at DESC')
   end
 
   def set_company
@@ -83,25 +83,33 @@ class CompaniesController < ApplicationController
   end
 
   def company_params
-    params.require(:company).permit(:name, :company_number, :industry_type_id, :title, :address_line_1,
-                                    :address_line_2, :city, :state, :zip_code, :phone_number_1, :phone_number_2,
-                                    :cell_phone, :fax, :website, :email).merge(organization_id: current_org.id)
+    params.require(:company).permit(:name, :company_number, :industry_type_id,
+                                    :title, :address_line_1, :address_line_2,
+                                    :city, :state, :zip_code, :phone_number_1,
+                                    :phone_number_2, :cell_phone, :fax,
+                                    :website, :email).merge(organization_id:
+                                    current_org.id)
   end
 
   def company_info_params
-    params.require(:company).permit(:name, :company_number, :industry_type_id, :city, :state,
-                                    :zip_code, :country, :region, :phone_number_1, :fax, :website,
-                                    :email, :member_investor, :utility_provider_1, :utility_provider_2,
-                                    :notes, :business_unit_id )
+    params.require(:company).permit(:name, :company_number, :industry_type_id,
+                                    :city, :state, :zip_code, :country,
+                                    :region, :phone_number_1, :fax, :website,
+                                    :email, :member_investor,
+                                    :utility_provider_1, :utility_provider_2,
+                                    :notes, :business_unit_id)
   end
 
   def history_params
-    params.require(:company).permit(:company_establishment_year, :years_business_located)
+    params.require(:company).permit(:company_establishment_year,
+                                    :years_business_located)
   end
 
   def facilities_params
-    params.require(:company).permit(:project_type_id, :acreage, :building_size, :number_of, :average_age_of_buildings,
-                                    :room_for_expansion, :owned_or_leased, :lease_expiration_date_str, :facility_notes,
+    params.require(:company).permit(:project_type_id, :acreage, :building_size,
+                                    :number_of, :average_age_of_buildings,
+                                    :room_for_expansion, :owned_or_leased,
+                                    :lease_expiration_date_str, :facility_notes,
                                     :owner_id, :naics_codes)
   end
 
@@ -110,29 +118,31 @@ class CompaniesController < ApplicationController
   end
 
   def local_employment_params
-    params.require(:company).permit(:full_time_employees, :part_time_employees, :leased_employees,
-                                    :total_employees, :number_of_jobs_added_or_lost_in_past_3_years,
-                                    :number_of_shifts_per_day, :number_of_days_per_week, :average_annual_salary,
+    params.require(:company).permit(:full_time_employees, :part_time_employees,
+                                    :leased_employees, :total_employees,
+                                    :number_of_jobs_added_or_lost_in_past_3_years,
+                                    :number_of_shifts_per_day,
+                                    :number_of_days_per_week,
+                                    :average_annual_salary,
                                     :date_of_total_str, :employment_notes)
   end
 
   def union_representation_params
-    params.require(:company).permit(:business_union_represented, :employment_notes)
+    params.require(:company).permit(:business_union_represented,
+                                    :employment_notes)
   end
 
   def update_form(form_params)
-    if @company.update(form_params)
-      if params[:commit].present?
-        flash[:success] = 'Company was successfully updated.'
-        respond_to do |format|
-          format.js {render js: "window.location = '/companies';"}
-        end
-      end
+    return unless @company.update(form_params)
+    return unless params[:commit].present?
+    flash[:success] = 'Company was successfully updated.'
+    respond_to do |format|
+      format.js { render js: "window.location = '/companies';" }
     end
   end
 
   def filtering_params(params)
-    params.slice(:industry_type_id, :company_name, :associated_project, :associated_contact)
+    params.slice(:industry_type_id, :company_name, :associated_project,
+                 :associated_contact)
   end
-
 end

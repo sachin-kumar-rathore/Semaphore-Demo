@@ -1,8 +1,8 @@
+# Manage configuration tab inside settings
 class ManageConfigurationsController < ApplicationController
-
   before_action :authenticate_user!
   before_action :initialize_type, except: [:index]
-  before_action :set_setting_type, only: [:edit, :destroy, :update]
+  before_action :set_setting_type, only: %i[edit destroy update]
   respond_to :js
 
   def index
@@ -17,28 +17,23 @@ class ManageConfigurationsController < ApplicationController
 
   def create
     @setting_type = current_org.send(@type).create(setting_params)
-    if @setting_type
-      flash[:success] = "#{setting_type_name} successfully added."
-      load_setting_types
-    end
+    return unless @setting_type
+    flash[:success] = "#{setting_type_name} successfully added."
+    load_setting_types
   end
 
-  def edit
-
-  end
+  def edit; end
 
   def update
-    if @setting_type.update(setting_params)
-      flash[:success] = "#{setting_type_name} successfully updated."
-      load_setting_types
-    end
+    return unless @setting_type.update(setting_params)
+    flash[:success] = "#{setting_type_name} successfully updated."
+    load_setting_types
   end
 
   def destroy
-    if @setting_type.destroy
-      flash[:success] = "#{setting_type_name} successfully deleted."
-      load_setting_types
-    end
+    return unless @setting_type.destroy
+    flash[:success] = "#{setting_type_name} successfully deleted."
+    load_setting_types
   end
 
   private
@@ -57,19 +52,17 @@ class ManageConfigurationsController < ApplicationController
 
   def set_setting_type
     @setting_type = current_org.send(@type).where(id: params[:id]).first
-    if @setting_type.blank?
-      flash[:danger] = "#{setting_type_name} not found."
-      redirect_to settings_path
-    end
+    return unless @setting_type.blank?
+    flash[:danger] = "#{setting_type_name} not found."
+    redirect_to settings_path
   end
 
   def initialize_type
     if Organization::SETTINGS.include? params[:type]
       @type = params[:type]
     else
-      flash[:danger] = "Could not process action. Please try again."
+      flash[:danger] = 'Could not process action. Please try again.'
       redirect_to manage_configurations_path
     end
   end
-
 end

@@ -14,9 +14,12 @@
     <body class="animsition theme-body site-menubar-unfold" style="animation-duration: 800ms; opacity: 1;">
     <%= render 'layouts/navbar' %>
     <%= render 'layouts/sidenav' %>
-
     <div class="page">
       <div class="page-content container-fluid">
+        <% if current_admin %>
+          <h5>Currently logged in as admin for <%= current_org.name %>.</h5>
+          <br>
+        <% end %>
         <div class="flashMessages"><%= render partial: 'shared/flash_messages' %></div>
         <%= yield %>
       </div>

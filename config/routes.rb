@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-
-
+  devise_for :admins, controllers: { sessions: 'admins/sessions' }
   devise_for :users, controllers: { registrations: 'users/registrations' }
 
   resources :companies do
@@ -12,7 +11,7 @@ Rails.application.routes.draw do
       patch :local_employment_update
       patch :union_representation_update
     end
-    collection do 
+    collection do
       get :check_companies_number_validity
     end
     resources :contacts, controller: 'company_contacts' do
@@ -33,7 +32,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :organizations, only: [:edit, :update]
+  resources :organizations, only: %i[edit update]
   resources :dashboard, only: [:index]
 
   resources :contacts do
@@ -57,11 +56,12 @@ Rails.application.routes.draw do
     end
   end
   resources :dashboard, only: [:index]
-  resources :projects, only: [:new, :index, :create, :edit, :update, :show] do
+  resources :projects, only: %i[new index create edit update show] do
     resources :tasks, controller: 'project_tasks'
     resources :notes, except: [:edit]
     resources :files, controller: 'project_files'
-    resources :contacts, controller: 'project_contacts', only: [:index, :new, :create, :show, :update, :destroy] do
+    resources :contacts, controller: 'project_contacts',
+                         only: %i[index new create show update destroy] do
       member do
         post :attach_contact_to_project
       end
@@ -69,7 +69,8 @@ Rails.application.routes.draw do
         get :show_existing_contacts
       end
     end
-    resources :sites, controller: 'project_sites', only: [:index, :new, :create, :show, :update, :destroy] do
+    resources :sites, controller: 'project_sites',
+                      only: %i[index new create show update destroy] do
       member do
         post :attach_site_to_project
       end
@@ -78,7 +79,8 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :emails, controller: 'project_emails', only: [:index, :create, :destroy, :show] do
+    resources :emails, controller: 'project_emails',
+                       only: %i[index create destroy show] do
       member do
         get :show_existing_contacts
         post :attach_contact_to_email
@@ -89,13 +91,9 @@ Rails.application.routes.draw do
       get :check_projects_number_validity
     end
   end
-  
-
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  devise_scope :user do
-    root 'users/registrations#new'
-  end
+  root 'dashboard#index'
 
   resources :tasks do
     collection do
@@ -103,7 +101,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :emails, only: [:index, :create, :destroy, :show] do
+  resources :emails, only: %i[index create destroy show] do
     member do
       get :show_existing_contacts, :show_existing_projects_and_activities
       post :attach_contact_to_email, :attach_project_or_activity_to_email
@@ -111,7 +109,7 @@ Rails.application.routes.draw do
   end
 
   resources :manage_configurations
-  resources :settings, only:[:index]
+  resources :settings, only: [:index]
   resources :considered_locations do
     member do
       post :attach_contact
@@ -127,10 +125,16 @@ Rails.application.routes.draw do
     resources :files, controller: 'activity_files'
     resources :tasks, controller: 'activity_tasks'
     resources :emails, controller: 'activity_emails'
-    collection do 
+    collection do
       get :check_activities_number_validity
     end
   end
 
   resources :imports, only: [:index]
+
+  resources :admin_dashboard, only: [:index] do
+    member do
+      get :sign_in_as_org_user
+    end
+  end
 end

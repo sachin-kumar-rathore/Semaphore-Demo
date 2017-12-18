@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171212100143) do
+ActiveRecord::Schema.define(version: 20171215103131) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,23 @@ ActiveRecord::Schema.define(version: 20171212100143) do
     t.index ["contact_method_type_id"], name: "index_activities_on_contact_method_type_id"
     t.index ["organization_id"], name: "index_activities_on_organization_id"
     t.index ["provided_service_id"], name: "index_activities_on_provided_service_id"
+  end
+
+  create_table "admins", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet "current_sign_in_ip"
+    t.inet "last_sign_in_ip"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_admins_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
   create_table "business_units", force: :cascade do |t|
@@ -309,7 +326,7 @@ ActiveRecord::Schema.define(version: 20171212100143) do
     t.text "square_footage_note"
     t.string "acres_requested"
     t.text "acreage_note"
-    t.integer "new_jobs", default: 0
+    t.string "new_jobs"
     t.text "new_jobs_notes"
     t.decimal "wages"
     t.text "wages_notes"
@@ -322,7 +339,7 @@ ActiveRecord::Schema.define(version: 20171212100143) do
     t.boolean "speculative_building"
     t.string "located"
     t.string "project_number"
-    t.integer "retained_jobs", default: 0
+    t.string "retained_jobs"
     t.date "site_visit_1"
     t.date "site_visit_2"
     t.date "site_visit_3"

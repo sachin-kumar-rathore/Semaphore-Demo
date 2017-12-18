@@ -35,6 +35,7 @@ class Site < ApplicationRecord
   scope :property_name, -> (property_name) { where("property_name ilike ?","%#{property_name}%")}
   scope :site_number, -> (site_number) { where("site_number = ?",site_number)}
   scope :zip_code, -> (zip_code) { where("zip_code = ?",zip_code)}
+  scope :filter_by_date, -> (start_date, end_date) { where("created_at >= ? AND created_at <= ?", start_date, end_date)}
   # == Instance methods == #
 
   # == Private == #

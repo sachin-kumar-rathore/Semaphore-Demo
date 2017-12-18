@@ -57,6 +57,26 @@ class SitesController < ApplicationController
     set_message_and_status_for_id_validity("sites")
   end
 
+  def export
+    start_date = Date.strptime(params[:start_date], '%m/%d/%Y')
+    end_date = Date.strptime(params[:end_date], '%m/%d/%Y')
+    if start_date < end_date
+      @sites = current_org.sites.filter_by_date(start_date, end_date).includes(:project_sites)
+      stream = render_to_string(:template => "sites/export_sites.xls.erb", locals: {sites: @sites})
+      save_path = Rails.root.join('public', 'site_referrals.xls')
+      File.open(save_path, 'wb') do |file|
+        file << stream
+      end
+    else
+      @error = true
+    end
+  end
+
+  def download_report
+    send_file("#{Rails.root}/public/site_referrals.xls", type: "application/xls", dispostion: 'download')
+    head :ok
+  end
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_site

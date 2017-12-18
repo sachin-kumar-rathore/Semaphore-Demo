@@ -1,0 +1,43 @@
+<div class="panel-heading" data-toggle="collapse" href="#export_site_refferals"
+		 aria-expanded="false" aria-controls="export_site_refferals">
+	<h3 class="panel-title">Export <i class="fa fa-caret-down pull-right" aria-hidden="true"></i></h3>
+</div>
+<div class="collapse" id="export_site_refferals">
+	<%= form_tag export_sites_path, method: :post, class: 'form-horizontal', remote: true do %>
+		<div class="panel-body">
+			<div class="row">
+				<div class=" form-group form-material col-md-6">
+					<div class="row">
+						<label class="form-control-label col-md-4" for="inputStartDateRange#">Start Date:</label>
+						<div class="input-daterange col-md-8" data-plugin="datepicker">
+							<div class="input-group">
+							<span class="input-group-addon">
+							<i class="icon md-calendar" aria-hidden="true"></i>
+							</span>
+								<input type="text" class="form-control" placeholder="dd/mm/yyyy" name="start_date" required/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class=" form-group form-material col-md-6">
+					<div class="row">
+						<label class="form-control-label col-md-4" for="inputStartDateRange#">End Date:</label>
+						<div class="input-daterange col-md-8" data-plugin="datepicker">
+							<div class="input-group">
+							<span class="input-group-addon">
+							<i class="icon md-calendar" aria-hidden="true"></i>
+							</span>
+								<input type="text" class="form-control" placeholder="dd/mm/yyyy" name="end_date" required/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<button type="submit" class="btn btn-sm green-btn">Export</button>
+				</div>
+			</div>
+		</div>
+	<% end %>
+</div>

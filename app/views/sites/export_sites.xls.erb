@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+					xmlns:o="urn:schemas-microsoft-com:office:office"
+					xmlns:x="urn:schemas-microsoft-com:office:excel"
+					xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+					xmlns:html="http://www.w3.org/TR/REC-html40">
+	<Worksheet ss:Name="Site/building referrals">
+		<Table>
+			<Row>
+				<Cell>
+					<Data ss:Type="Date">Referral Date</Data>
+				</Cell>
+				<Cell>
+					<Data ss:Type="String">Site/Building</Data>
+				</Cell>
+				<Cell>
+					<Data ss:Type="String">Project Name</Data>
+				</Cell>
+				<Cell>
+					<Data ss:Type="String">Company</Data>
+				</Cell>
+				<Cell>
+					<Data ss:Type="String">City</Data>
+				</Cell>
+				<Cell>
+					<Data ss:Type="String">Country</Data>
+				</Cell>
+			</Row>
+				<% sites.each do |site| %>
+					<Row>
+						<Cell>
+							<Data ss:Type="Date"><%= site.created_at.strftime('%m/%d/%Y') %></Data>
+						</Cell>
+						<Cell>
+							<Data ss:Type="String"><%= site.site_number %> | <%= site.property_name %></Data>
+						</Cell>
+						<Cell>
+							<Data ss:Type="String"><%= site.projects.collect { |p| p.name }.join(', ') %></Data>
+						</Cell>
+						<Cell>
+							<Data ss:Type="String"><%= site.projects.collect { |p| p.company.name }.join(', ') %></Data>
+						</Cell>
+						<Cell>
+							<Data ss:Type="String"><%= site.city %></Data>
+						</Cell>
+						<Cell>
+							<Data ss:Type="String"><%= site.country %></Data>
+						</Cell>
+					</Row>
+				<% end %>
+		</Table>
+	</Worksheet>
+</Workbook>

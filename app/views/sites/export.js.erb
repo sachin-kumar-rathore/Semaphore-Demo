@@ -1,0 +1,6 @@
+<% if @error.present? %>
+	alert('Start Date cannot be greater than end date');
+<% else %>
+	$("#downloadSitesReport").html("<%= escape_javascript render partial: 'download_report' %>");
+	$("#downloadSitesReportModal").modal('show');
+<% end %>

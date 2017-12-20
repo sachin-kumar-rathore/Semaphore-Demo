@@ -26,7 +26,7 @@
 					<Data ss:Type="String">Country</Data>
 				</Cell>
 			</Row>
-				<% sites.each do |site| %>
+				<% @sites.each do |site| %>
 					<Row>
 						<Cell>
 							<Data ss:Type="Date"><%= site.created_at.strftime('%m/%d/%Y') %></Data>

@@ -62,21 +62,15 @@ class SitesController < ApplicationController
     end_date = Date.strptime(params[:end_date], '%m/%d/%Y')
     if start_date < end_date
       @sites = current_org.sites.filter_by_date(start_date, end_date).includes(:project_sites)
-      stream = render_to_string(:template => "sites/export_sites.xls.erb", locals: {sites: @sites})
-      save_path = Rails.root.join('public', 'site_referrals.xls')
-      File.open(save_path, 'wb') do |file|
-        file << stream
-      end
     else
-      @error = true
+      flash[:danger] = "Start Date should be before End Date."
+      redirect_to sites_path
+    end
+    respond_to do |format|
+      format.xls
     end
   end
-
-  def download_report
-    send_file("#{Rails.root}/public/site_referrals.xls", type: "application/xls", dispostion: 'download')
-    head :ok
-  end
-
+  
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_site

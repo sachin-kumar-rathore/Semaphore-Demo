@@ -7,7 +7,7 @@ class DashboardController < ApplicationController
 
   def authenticate_user!
     if current_admin.present? && current_user.blank?
-      redirect_to admin_dashboard_index_path
+      redirect_to organizations_path
     elsif !current_user.present?
       redirect_to new_user_session_path
     end

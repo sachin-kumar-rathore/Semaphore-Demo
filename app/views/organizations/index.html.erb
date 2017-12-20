@@ -16,7 +16,8 @@
             <td><%= organization.users.count %></td>
             <td><%= %></td>
             <td>
-              <a class="btn btn-sm green-btn" href="<%= sign_in_as_org_user_admin_dashboard_path(organization) %>" target="_blank">Sign In as Admin</a>
+              <a class="btn btn-sm green-btn" href="<%= sign_in_as_admin_organization_path(organization) %>" target="_blank">Sign In as Admin</a>
+              <a class="btn btn-sm green-btn" href="<%= edit_organization_path(organization) %>" data-turbolinks="false">Manage</a>
             </td>
           </tr>
         <% end %>

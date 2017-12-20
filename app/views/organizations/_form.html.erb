@@ -1,37 +1,46 @@
-<div class="col-md-4">
-  <%= form_for @organization do |f| %>
-    <div class="form-group-field">
-      <%= f.label :name %><br>
-      <%= f.text_field :name, class: "form-control" %>
+<div class="panel-heading" data-toggle="collapse" href="#editOrgInfo"
+aria-expanded="false" aria-controls="editOrgInfo">
+  <h3 class="panel-title">Edit Organization Info <i class="fa fa-caret-down pull-right" aria-hidden="true"></i> </h3>
+</div>
+<div class="collapse" id="editOrgInfo">
+  <div class="panel-body">
+    <div class="orgInfoAlerts success"></div>
+    <div class="orgInfoErrors"></div>
+    <br>
+    <div class="col-md-12">
+      <%= form_for @organization, remote: true do |f| %>
+        <div class="row">
+          <div class="form-group form-material col-md-3">
+            <%= f.label :name %><br>
+            <%= f.text_field :name, class: "form-control", required: true %>
+          </div>
+          <div class="form-group form-material col-md-3">
+            <%= f.label :url %><br>
+            <%= f.url_field :url, class: "form-control", disabled: true %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group form-material col-md-3">
+            <%= f.label :primary_contact_first_name %><br>
+            <%= f.text_field :primary_contact_first_name, class: "form-control", required: true %>
+          </div>
+          <div class="form-group form-material col-md-3">
+            <%= f.label :primary_contact_last_name %><br>
+            <%= f.text_field :primary_contact_last_name, class: "form-control", required: true %>
+          </div>
+          <div class="form-group form-material col-md-3">
+            <%= f.label :primary_contact_phone %><br>
+            <%= f.text_field :primary_contact_phone, class: "form-control", required: true %>
+          </div>
+          <div class="form-group form-material col-md-3">
+            <%= f.label :primary_contact_email %><br>
+            <%= f.email_field :primary_contact_email, class: "form-control", required: true %>
+          </div>
+        </div>
+        <div class="form-group form-material">
+          <button type="submit" class="btn green-btn col-md-3">Save</button>
+        </div>
+      <% end %>
     </div>
-    <br/>
-    <div class="form-group-field">
-      <%= f.label :url %><br>
-      <%= f.url_field :url, class: "form-control" %>
-    </div>
-    <br/>
-    <div class="form-group-field">
-      <%= f.label :primary_contact_first_name %><br>
-      <%= f.text_field :primary_contact_first_name, class: "form-control" %>
-    </div>
-    <br/>
-    <div class="form-group-field">
-      <%= f.label :primary_contact_last_name %><br>
-      <%= f.text_field :primary_contact_last_name, class: "form-control" %>
-    </div>
-    <br/>
-    <div class="form-group-field">
-      <%= f.label :primary_contact_phone %><br>
-      <%= f.text_field :primary_contact_phone, class: "form-control" %>
-    </div>
-    <br/>
-    <div class="form-group-field">
-      <%= f.label :primary_contact_email %><br>
-      <%= f.email_field :primary_contact_email, class: "form-control" %>
-    </div>
-    </br>
-    <div class="form-group">
-      <%= f.submit class: "btn btn-primary" %>
-    </div>  
-  <% end %>
+  </div>
 </div>

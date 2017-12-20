@@ -1,0 +1,27 @@
+<table class="table table-striped table-hover toggle-circle footable tableDesign" data-toggle-column="first" data-empty="There are no users." data-show-toggle="true">
+  <thead>
+  <tr>
+    <th>NAME</th>
+    <th>EMAIL</th>
+    <th data-breakpoints="xs">LAST LOG IN</th>
+    <th data-breakpoints="xs">OPERATIONS</th>
+  </tr>
+  </thead>
+  <tbody>
+    <% users.each do |user| %>
+        <tr>
+          <td><%= user.full_name %></td>
+          <td><%= user.email %></td>
+          <td><%= user.last_sign_in_at.to_formatted_s(:long_ordinal) %></td>
+          <td>
+            <a class="btn btn-sm green-btn" href="<%= sign_in_as_user_organization_path(@organization, user_id: user.id) %>" target="_blank" >Sign In as User</a>
+            <a class="btn btn-sm green-btn clickable" data-href="<%=  edit_organization_user_path(@organization, user) %>" >Manage</a>
+          </td>
+        </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<script>
+  $('.footable').footable();
+</script>

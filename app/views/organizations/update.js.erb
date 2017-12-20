@@ -1,0 +1,7 @@
+<% if @organization.errors.blank? %>
+  $('.orgInfoAlerts').html("Successfully saved data for organization info.");
+  $('.orgInfoErrors').html("");
+<% else %>
+  $('.orgInfoAlerts').html("");
+  $('.orgInfoErrors').html("<%= j render partial: 'shared/error_messages', locals: {obj: @organization} %>");
+<% end %>

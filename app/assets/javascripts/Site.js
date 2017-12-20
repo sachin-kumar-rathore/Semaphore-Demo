@@ -312,6 +312,7 @@
         //   onLoadEvent: true
         // });
       }
+
     }, {
       key: 'setupTour',
       value: function setupTour(flag) {

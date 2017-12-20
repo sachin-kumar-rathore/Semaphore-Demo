@@ -1,2 +1,9 @@
-<h2> Edit Organization Details </h2>
-<%= render 'form' %>
+<div class="panel panel-bordered">
+  <div class="panel-heading">
+    <h3 class="panel-title text-center"><%= @organization.name %></h3>
+  </div>
+  <%= render 'form' %>
+  <%= render 'users' %>
+  <%= render 'payments' %>
+</div>
+<div id="editUser"></div>

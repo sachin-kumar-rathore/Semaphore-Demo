@@ -298,19 +298,19 @@
           return false;
         }
 
-        // let loadingType = 'default';
-        var assets = Config.get('assets');
-        $BODY.animsition({
-          inClass: 'fade-in',
-          outClass: 'fade-out',
-          inDuration: 800,
-          outDuration: 500,
-          loading: true,
-          loadingClass: 'loader-overlay',
-          loadingParentElement: 'html',
-          loadingInner: '\n      <div class="loader-content">\n        <div class="loader-index">\n          <div></div>\n          <div></div>\n          <div></div>\n          <div></div>\n          <div></div>\n          <div></div>\n        </div>\n      </div>',
-          onLoadEvent: true
-        });
+        let loadingType = 'default';
+        // var assets = Config.get('assets');
+        // $BODY.animsition({
+        //   inClass: 'fade-in',
+        //   outClass: 'fade-out',
+        //   inDuration: 800,
+        //   outDuration: 500,
+        //   loading: true,
+        //   loadingClass: 'loader-overlay',
+        //   loadingParentElement: 'html',
+        //   loadingInner: '\n      <div class="loader-content">\n        <div class="loader-index">\n          <div></div>\n          <div></div>\n          <div></div>\n          <div></div>\n          <div></div>\n          <div></div>\n        </div>\n      </div>',
+        //   onLoadEvent: true
+        // });
       }
     }, {
       key: 'setupTour',

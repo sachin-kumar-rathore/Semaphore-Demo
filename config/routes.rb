@@ -32,7 +32,16 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :organizations, only: %i[edit update]
+  resources :organizations, only: %i[show edit update index] do
+    member do
+      get :sign_in_as_admin
+    end
+    member do
+      get :sign_in_as_user
+    end
+    resources :users, controller: 'manage_users', only: %i[edit update]
+  end
+
   resources :dashboard, only: [:index]
 
   resources :contacts do
@@ -132,9 +141,4 @@ Rails.application.routes.draw do
 
   resources :imports, only: [:index]
 
-  resources :admin_dashboard, only: [:index] do
-    member do
-      get :sign_in_as_org_user
-    end
-  end
 end

@@ -298,7 +298,7 @@
           return false;
         }
 
-        let loadingType = 'default';
+        // let loadingType = 'default';
         // var assets = Config.get('assets');
         // $BODY.animsition({
         //   inClass: 'fade-in',

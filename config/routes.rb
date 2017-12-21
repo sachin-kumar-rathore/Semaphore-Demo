@@ -47,7 +47,6 @@ Rails.application.routes.draw do
       get :find_contact
       get :check_sites_number_validity
       post :export
-      post :download_report
     end
   end
 
@@ -126,7 +125,6 @@ Rails.application.routes.draw do
     collection do
       post :yearly_report
       post :monthly_report
-      post :download_report
     end
   end
 

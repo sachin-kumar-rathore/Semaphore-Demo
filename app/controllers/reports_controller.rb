@@ -23,16 +23,12 @@ class ReportsController < ApplicationController
       File.open(save_path, 'wb') do |file|
         file << pdf
       end
+      send_file("#{Rails.root}/public/yearly_report.pdf", type: "application/pdf", :disposition => 'attachment')
+      head :ok
     else
-      stream = render_to_string(:template => "reports/periodic_report.xls.erb", locals: {results: results, params: @selected_parameters})
-      save_path = Rails.root.join('public', 'yearly_report.xls')
-      File.open(save_path, 'wb') do |file|
-        file << stream
+      respond_to do |format|
+        format.xls
       end
-    end
-
-    respond_to do |format|
-      format.js
     end
 
   end
@@ -65,18 +61,13 @@ class ReportsController < ApplicationController
       File.open(save_path, 'wb') do |file|
         file << pdf
       end
+      send_file("#{Rails.root}/public/monthly_report.pdf", type: "application/pdf", :disposition => 'attachment')
+      head :ok
     else
-      stream = render_to_string(:template => "reports/periodic_report.xls.erb", locals: {results: results, params: @selected_parameters})
-      save_path = Rails.root.join('public', 'monthly_report.xls')
-      File.open(save_path, 'wb') do |file|
-        file << stream
+      respond_to do |format|
+        format.xls
       end
     end
-
-    respond_to do |format|
-      format.js
-    end
-
   end
 
   def generate_monthly_report(type, start_date, end_date, parameters)
@@ -95,16 +86,6 @@ class ReportsController < ApplicationController
         end
       end
     end
-  end
-
-  def download_report
-    if(params[:period] == 'yearly')
-      send_file("#{Rails.root}/public/yearly_report.#{params[:file_type]}", type: "application/#{params[:file_type]}")
-    else
-      send_file("#{Rails.root}/public/monthly_report.#{params[:file_type]}", type: "application/#{params[:file_type]}")
-    end
-
-    head :ok
   end
 
   private

@@ -55,16 +55,14 @@
 
   <div class="col-xl-3">
     <% if params[:period] == 'yearly' %>
-			<%= form_tag(yearly_report_reports_path(:format => "js"), method: 'post', remote: true) do %>
+			<%= form_tag(yearly_report_reports_path(format: :xls), method: 'post') do %>
 				<%= render partial: 'report_form' %>
 			<% end %>
 		<% else %>
-			<%= form_tag(monthly_report_reports_path(:format => "js"), method: 'post', remote: true) do %>
+			<%= form_tag(monthly_report_reports_path(format: :xls), method: 'post') do %>
 				<%= render partial: 'monthly_report_form' %>
 			<% end %>
 		<% end %>
   </div>
 
 </div>
-
-<div id="downloadGeneratedReport"></div>

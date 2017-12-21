@@ -27,7 +27,7 @@
       </div>
 
       <div class="col-md-12 mt-15">
-        <% report_parameters.each_with_index do |param, indx|%>
+        <% report_parameters.each do |param|%>
           <div class="form-group">
             <%= check_box_tag "report_params[#{param[:field]}][]", nil, true, {id: "field_#{param[:field]}"} %>
             <%= param[:name] %>

@@ -16,10 +16,6 @@
     <%= render 'layouts/sidenav' %>
     <div class="page">
       <div class="page-content container-fluid">
-        <% if current_admin %>
-          <h5 class="alert alert-warning"> NOTE: Currently logged in as <%= current_user.full_name %> for <%= current_org.name %>.</h5>
-          <br>
-        <% end %>
         <div class="flashMessages"><%= render partial: 'shared/flash_messages' %></div>
         <%= yield %>
       </div>

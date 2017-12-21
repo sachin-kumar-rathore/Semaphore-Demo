@@ -49,6 +49,7 @@ class OrganizationsController < ApplicationController
   def bypass_sign_in_with_user
     if @organization && @user
       bypass_sign_in @user.first, scope: :user
+      flash[:warning] = "NOTE : Currently logged in as #{@user.first.full_name} for #{@organization.name}."
       redirect_to dashboard_index_path
     else
       flash[:danger] = 'Unable to login as user. Please try again.'

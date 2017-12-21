@@ -87,6 +87,8 @@ Rails.application.routes.draw do
 
     collection do
       get :check_projects_number_validity
+      get :export
+      post :download
     end
   end
   

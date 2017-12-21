@@ -24,7 +24,6 @@ class ReportsController < ApplicationController
         file << pdf
       end
       send_file("#{Rails.root}/public/yearly_report.pdf", type: "application/pdf", :disposition => 'attachment')
-      head :ok
     else
       respond_to do |format|
         format.xls
@@ -62,7 +61,6 @@ class ReportsController < ApplicationController
         file << pdf
       end
       send_file("#{Rails.root}/public/monthly_report.pdf", type: "application/pdf", :disposition => 'attachment')
-      head :ok
     else
       respond_to do |format|
         format.xls

@@ -73,6 +73,29 @@ class ProjectsController < ApplicationController
     set_message_and_status_for_id_validity("projects")
   end
 
+  def export
+    if(params[:start_date])
+      generate_data(params[:start_date], params[:end_date])
+    else
+      generate_data(nil, nil)
+    end
+  end
+
+  def download
+    start_date = Date.strptime(params[:start_date], '%m/%d/%Y')
+    end_date = Date.strptime(params[:end_date], '%m/%d/%Y')
+    if start_date < end_date
+      generate_data(start_date, end_date)
+    else
+      flash[:danger] = "Start Date should be before End Date."
+      redirect_to export_projects_path
+    end
+    respond_to do |format|
+      redirect_to export_projects_path(start_date: start_date, end_date: end_date)
+      format.xls
+    end
+  end
+
   private
 
   def set_project
@@ -97,6 +120,17 @@ class ProjectsController < ApplicationController
 
   def activity_params
     @activity.slice(:name, :company_id, :primary_contact_id, :description)
+  end
+
+  def generate_data(start_date, end_date)
+    projects = current_org.projects.joins(:sites)
+    if(start_date != nil && end_date != nil)
+      projects = projects.where("projects.created_at >= ? AND projects.created_at <= ?", start_date, end_date)
+    end
+    @business_types = projects.group_by { |p| p.business_type }
+    @total_buildings = projects.group("project_sites.project_id").count.values.sum
+    @new_business = @business_types['New Business'] == nil ? [0,0,0] : @business_types['New Business'].pluck(:new_jobs, :wages, :net_new_investment).transpose.map(&:sum)
+    @existing_business = @business_types['Existing Business'] == nil ? [0,0,0] : @business_types['Existing Business'].pluck(:new_jobs, :wages, :net_new_investment).transpose.map(&:sum)
   end
 
 end

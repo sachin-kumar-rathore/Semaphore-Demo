@@ -12,24 +12,5 @@
  *
 
  *= require font-awesome
- *= require token-input
- *= require_tree ./brand-icons/
- *= require_tree ./material-design/
+ *= require_tree ./custom_layout/
  */
-@import "bootstrap.min";
-@import "bootstrap-extend.min";
-@import "site";
-@import "animsition";
-@import "asScrollable";
-@import "switchery";
-@import "introjs";
-@import "slidePanel";
-@import "waves";
-@import "footable.core";
-@import "custom";
-@import "bootstrap-datepicker";
-@import "bootstrap-select";
-@import "chartist-plugin-tooltip";
-@import "chartist";
-@import "select2";
-@import "site";

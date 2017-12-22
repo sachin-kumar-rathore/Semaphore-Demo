@@ -16,28 +16,4 @@
 //= require jquery.easing
 //= require rails-ujs
 //= require turbolinks
-//= require custom
-//= require breakpoints
-//Core
-//= require babel-external-helpers
-//= require jquery
-//= require tether
-//= require bootstrap
-//= require animsition
-//= require jquery.mousewheel
-//= require jquery-asScrollbar
-//= require jquery-asScrollable
-//= require jquery-asHoverScroll
-//= require waves
-//Plugins
-//= require switchery.min
-//= require intro
-//= require screenfull
-//= require jquery-slidePanel
-//= require jquery.matchHeight-min
-//= require jquery.tokeninput
-//= require plugins/bootstrap-select
-//= require plugins/bootstrap-datepicker
-//= require plugins/moment.min
-//= require plugins/footable.min
-
+//= require_tree ./custom_layout/

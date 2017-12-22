@@ -1,6 +1,5 @@
 # Manage common code for whole application
 class ApplicationController < ActionController::Base
-  layout :layout_by_resource
   protect_from_forgery with: :exception
 
   before_action :configure_permitted_parameters, if: :devise_controller?
@@ -13,14 +12,6 @@ class ApplicationController < ActionController::Base
       organizations_path
     else
       dashboard_index_path
-    end
-  end
-
-  def layout_by_resource
-    if devise_controller?
-      "custom_layout"
-    else
-      "application"
     end
   end
 

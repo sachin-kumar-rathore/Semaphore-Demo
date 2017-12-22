@@ -1,16 +1,40 @@
-<h2>Forgot your password?</h2>
-
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= devise_error_messages! %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+<header>
+  <div class="headerSection">
+    <div class="container">
+      <div class="logo"><a href="javascript:void(0)"><img src="/assets/logo.png" alt="EDLT"></a></div>
+    </div>
   </div>
-
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
+</header>
+<section>
+  <div class="rightImgBg loginPage">
+    <div class="container">
+      <div class="formSection">
+        <div class="formTitle">
+          <h3>Forgot your password?</h3>
+        </div>
+        <div class="formStyle">
+          <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+            <%= devise_error_messages! %>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="email">Email:</label>
+                <%= f.email_field :email, autofocus: true, class: "form-control outlineFld" %>
+              </div>
+            </div>
+            <div class="formBtnSection">
+              <%= f.submit "Send Me Reset Instructions" , class: "btn primaryBtn" %>
+            </div>
+            <div class="formBtmLink"><%= link_to "New User? Sign up first.", new_user_registration_path %></div>
+            <div class="formBtmLink"><%= link_to "Already have an account? Sign In.", new_user_session_path %></div>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+  <div class="pageBg">
+    <div class="pageBgCircle circleOne"></div>
+    <div class="pageBgCircle circleTwo"></div>
+    <div class="pageBgCircle circleThree"></div>
+  </div>
+  
+</section>

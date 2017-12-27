@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171211094456) do
+ActiveRecord::Schema.define(version: 20171222031422) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -311,9 +311,9 @@ ActiveRecord::Schema.define(version: 20171211094456) do
     t.text "acreage_note"
     t.integer "new_jobs", default: 0
     t.text "new_jobs_notes"
-    t.decimal "wages"
+    t.decimal "wages", default: "0.0"
     t.text "wages_notes"
-    t.decimal "net_new_investment"
+    t.decimal "net_new_investment", default: "0.0"
     t.text "net_new_investment_notes"
     t.date "public_release_date"
     t.boolean "public_release"

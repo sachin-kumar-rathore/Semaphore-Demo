@@ -3,7 +3,7 @@
 	<h3 class="panel-title">Export <i class="fa fa-caret-down pull-right" aria-hidden="true"></i></h3>
 </div>
 <div class="collapse" id="export_site_refferals">
-	<%= form_tag(export_sites_path(format: :xls), method: :post, class: 'form-horizontal') do %>
+	<%= form_tag(download_sites_path(format: :xls), method: :post, class: 'form-horizontal') do %>
 		<div class="panel-body">
 			<div class="row">
 				<div class=" form-group form-material col-md-6">
@@ -35,7 +35,8 @@
 			</div>
 			<div class="row">
 				<div class="col-md-12 text-center">
-					<button type="submit" class="btn btn-sm green-btn">Export</button>
+          <button type="submit" class="btn btn-sm green-btn" name="commit" value="filter">Filter</button>
+          <button type="submit" class="btn btn-sm green-btn" name="commit" value="export">Export</button>
 				</div>
 			</div>
 		</div>

@@ -1,0 +1,34 @@
+<div class="panel panel-bordered">
+  <%= render 'collapsable_export' %>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <p class="font-weight-700">Site/Building Referrals</p>
+    <div class="example table-responsive">
+      <table class="table table-bordered bg-white">
+        <thead>
+        <tr>
+          <th class="font-weight-bold text-center">Referral Date</th>
+          <th class="font-weight-bold text-center">Site/Building</th>
+          <th class="font-weight-bold text-center">Project Name</th>
+          <th class="font-weight-bold text-center">Company</th>
+          <th class="font-weight-bold text-center">City</th>
+          <th class="font-weight-bold text-center">Country</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @sites.each do |site| %>
+            <tr>
+              <td class="text-center"><%= site.created_at.strftime('%m/%d/%Y') %></td>
+              <td class="text-center"><%= site.site_number %> | <%= site.property_name %></td>
+              <td class="text-center"><%= site.projects.collect { |p| p.name }.join(', ') %></td>
+              <td class="text-center"><%= site.projects.collect { |p| p.company.name }.join(', ') %></td>
+              <td class="text-center"><%= site.city %></td>
+              <td class="text-center"><%= site.country %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

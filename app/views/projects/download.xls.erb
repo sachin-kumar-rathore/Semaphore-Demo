@@ -4,7 +4,7 @@
 					xmlns:x="urn:schemas-microsoft-com:office:excel"
 					xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
 					xmlns:html="http://www.w3.org/TR/REC-html40">
-	<Worksheet ss:Name="Project Data">
+	<Worksheet ss:Name="Successful Project Data">
 		<Table>
 			<Row>
 				<Cell>
@@ -14,28 +14,43 @@
 			<Row>
 				<Cell>
 					<Data ss:Type="String">Projects</Data>
-					<Data ss:Type="Number"><%= @business_types['Existing Business'].try(:length) %></Data>
 				</Cell>
+        <Cell>
+          <Data ss:Type="Number"><%= @business_types['Existing Business'].try(:length) %></Data>
+        </Cell>
 			</Row>
 			<Row>
 				<Cell>
 					<Data ss:Type="String">Jobs</Data>
-					<Data ss:Type="Number"><%= @existing_business[0] %></Data>
 				</Cell>
+        <Cell>
+          <Data ss:Type="Number"><%= @existing_business[0] %></Data>
+        </Cell>
 			</Row>
 			<Row>
 				<Cell>
 					<Data ss:Type="String">Wages</Data>
-					<Data ss:Type="Number"><%= @existing_business[1] %></Data>
 				</Cell>
+        <Cell>
+          <Data ss:Type="Number"><%= @existing_business[1] %></Data>
+        </Cell>
 			</Row>
 			<Row>
 				<Cell>
 					<Data ss:Type="String">New Investment</Data>
-					<Data ss:Type="Number"><%= @existing_business[2] %></Data>
 				</Cell>
+        <Cell>
+          <Data ss:Type="Number"><%= @existing_business[2] %></Data>
+        </Cell>
 			</Row>
 		</Table>
+
+    <Table>
+      <Row>
+        <Cell>
+        </Cell>
+      </Row>
+    </Table>
 
 		<Table>
 			<Row>
@@ -46,34 +61,52 @@
 			<Row>
 				<Cell>
 					<Data ss:Type="String">Projects</Data>
-					<Data ss:Type="Number"><%= @business_types['New Business'].try(:length) %></Data>
 				</Cell>
+        <Cell>
+          <Data ss:Type="Number"><%= @business_types['New Business'].try(:length) %></Data>
+        </Cell>
 			</Row>
 			<Row>
 				<Cell>
 					<Data ss:Type="String">Jobs</Data>
-					<Data ss:Type="Number"><%= @new_business[0] %></Data>
 				</Cell>
+        <Cell>
+          <Data ss:Type="Number"><%= @new_business[0] %></Data>
+        </Cell>
 			</Row>
 			<Row>
 				<Cell>
 					<Data ss:Type="String">Wages</Data>
-					<Data ss:Type="Number"><%= @new_business[1] %></Data>
 				</Cell>
+        <Cell>
+          <Data ss:Type="Number"><%= @new_business[1] %></Data>
+        </Cell>
 			</Row>
 			<Row>
 				<Cell>
 					<Data ss:Type="String">New Investment</Data>
-					<Data ss:Type="Number"><%= @new_business[2] %></Data>
 				</Cell>
+        <Cell>
+          <Data ss:Type="Number"><%= @new_business[2] %></Data>
+        </Cell>
 			</Row>
 		</Table>
+
+    <Table>
+      <Row>
+        <Cell>
+        </Cell>
+      </Row>
+    </Table>
+
 		<Table>
 			<Row>
 				<Cell>
 					<Data ss:Type="String">Total site / building referrals:</Data>
-					<Data ss:Type="Number"><%= @total_buildings %></Data>
 				</Cell>
+        <Cell>
+          <Data ss:Type="Number"><%= @total_buildings %></Data>
+        </Cell>
 			</Row>
 		</Table>
 	</Worksheet>

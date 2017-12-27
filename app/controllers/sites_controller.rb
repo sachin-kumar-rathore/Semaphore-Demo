@@ -58,16 +58,28 @@ class SitesController < ApplicationController
   end
 
   def export
+    if(params[:start_date])
+      @sites = current_org.sites.filter_by_date(params[:start_date], params[:end_date]).includes(:project_sites)
+    else
+      @sites = current_org.sites.includes(:project_sites)
+    end
+  end
+
+  def download
     start_date = Date.strptime(params[:start_date], '%m/%d/%Y')
     end_date = Date.strptime(params[:end_date], '%m/%d/%Y')
     if start_date < end_date
-      @sites = current_org.sites.filter_by_date(start_date, end_date).includes(:project_sites)
+      if(params[:commit] == 'filter')
+        redirect_to export_sites_path(start_date: start_date, end_date: end_date)
+      else
+        @sites = current_org.sites.filter_by_date(start_date, end_date).includes(:project_sites)
+        respond_to do |format|
+          format.xls { headers["Content-Disposition"] = "attachment; filename='building_referrals_data.xls'" }
+        end
+      end
     else
       flash[:danger] = "Start Date should be before End Date."
       redirect_to sites_path
-    end
-    respond_to do |format|
-      format.xls
     end
   end
   

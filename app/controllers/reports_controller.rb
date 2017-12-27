@@ -1,16 +1,20 @@
 class ReportsController < ApplicationController
 
   before_action :authenticate_user!
+  before_action :set_selected_parameters, only: [:index, :yearly, :monthly]
   respond_to :html, only: [:index]
   respond_to :js
 
   def index
-    @selected_parameters = %w(status square_feet_requested acres_requested project_type_id industry_type_id source_id elimination_reason_id competition_id net_new_investment new_jobs retained_jobs)
-    if(params[:period] == 'yearly')
-      generate_yearly_report(params[:type], 3, 2017, @selected_parameters)
-    else
-      generate_monthly_report(params[:type], Date.today.to_date - 30, Date.today, @selected_parameters)
-    end
+
+  end
+
+  def yearly
+    generate_yearly_report(params[:type], 3, 2017, @selected_parameters)
+  end
+
+  def monthly
+    generate_monthly_report(params[:type], Date.today.to_date - 30, Date.today, @selected_parameters)
   end
 
   def yearly_report
@@ -86,12 +90,80 @@ class ReportsController < ApplicationController
     end
   end
 
+  def sites
+    if(params[:start_date])
+      @sites = current_org.sites.filter_by_date(params[:start_date], params[:end_date]).includes(:project_sites)
+          .paginate(page: params[:page], per_page: 5).order('updated_at DESC')
+    else
+      @sites = current_org.sites.includes(:project_sites).paginate(page: params[:page], per_page: 5).order('updated_at DESC')
+    end
+  end
+
+  def download_sites
+    start_date = Date.strptime(params[:start_date], '%m/%d/%Y')
+    end_date = Date.strptime(params[:end_date], '%m/%d/%Y')
+    if start_date < end_date
+      if(params[:commit] == 'filter')
+        redirect_to sites_reports_path(start_date: start_date, end_date: end_date)
+      else
+        @sites = current_org.sites.filter_by_date(start_date, end_date).includes(:project_sites)
+        respond_to do |format|
+          format.xls { headers["Content-Disposition"] = "attachment; filename='building_referrals_data.xls'" }
+        end
+      end
+    else
+      flash[:danger] = "Start Date should be before End Date."
+      redirect_to sites_reports_path
+    end
+  end
+
+  def projects
+    if(params[:start_date])
+      generate_project_data(params[:start_date], params[:end_date])
+    else
+      generate_project_data(nil, nil)
+    end
+  end
+
+  def download_projects
+    start_date = Date.strptime(params[:start_date], '%m/%d/%Y')
+    end_date = Date.strptime(params[:end_date], '%m/%d/%Y')
+    if start_date < end_date
+      if(params[:commit] == 'filter')
+        redirect_to projects_reports_path(start_date: start_date, end_date: end_date)
+      else
+        generate_project_data(start_date, end_date)
+        respond_to do |format|
+          format.xls { headers["Content-Disposition"] = "attachment; filename='successful_project_data.xls'" }
+        end
+      end
+    else
+      flash[:danger] = "Start Date should be before End Date."
+      redirect_to projects_reports_path
+    end
+  end
+
   private
 
   attr_reader :results
 
   def as_html
     render_to_string(template: "reports/generate_pdf.html.erb", layout: false, locals: {results: results})
+  end
+
+  def generate_project_data(start_date, end_date)
+    projects = current_org.projects.includes(:sites)
+    if(start_date != nil && end_date != nil)
+      projects = projects.where("projects.created_at >= ? AND projects.created_at <= ?", start_date, end_date)
+    end
+    @business_types = projects.group_by { |p| p.business_type }
+    @total_buildings = projects.joins(:sites).group("project_sites.project_id").count.values.sum
+    @new_business = @business_types['New Business'] == nil ? [0,0,0] : @business_types['New Business'].pluck(:new_jobs, :wages, :net_new_investment).transpose.map(&:sum)
+    @existing_business = @business_types['Existing Business'] == nil ? [0,0,0] : @business_types['Existing Business'].pluck(:new_jobs, :wages, :net_new_investment).transpose.map(&:sum)
+  end
+
+  def set_selected_parameters
+    @selected_parameters = %w(status square_feet_requested acres_requested project_type_id industry_type_id source_id elimination_reason_id competition_id net_new_investment new_jobs retained_jobs)
   end
 
 end

@@ -4,7 +4,7 @@
 		<h3 class="panel-title">Export <i class="fa fa-caret-down pull-right" aria-hidden="true"></i></h3>
 	</div>
 	<div class="collapse" id="export_project_data">
-		<%= form_tag(download_projects_path(format: :xls), method: :post, class: 'form-horizontal') do %>
+		<%= form_tag(download_projects_reports_path(format: :xls), method: :post, class: 'form-horizontal') do %>
 				<div class="panel-body">
 					<div class="row">
 						<div class=" form-group form-material col-md-6">

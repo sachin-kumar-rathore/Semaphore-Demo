@@ -95,7 +95,7 @@ class ProjectsController < ApplicationController
                  :completion, :project_number, :industry_type_id,
                  :project_name, :public_release, :business_type,
                  :considered_location_id, :project_type_id, :source_id,
-                 :company_id)
+                 :company)
   end
 
   def activity_params

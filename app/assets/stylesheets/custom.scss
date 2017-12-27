@@ -117,6 +117,10 @@ span.next_page, a.next_page {
   font-weight: 400;
 }
 
+.themeColor{
+  color: #2ED573;
+}
+
 .tableDesign thead th{
   color: #2ED573;
   font-weight: 500;
@@ -307,4 +311,14 @@ html, body {
 
 .pointerCursor{
   cursor: pointer;
+}
+
+#activitiesBack {
+  color: #2ED573;
+  text-decoration: none;
+}
+
+#activitiesBack:hover, #activitiesBack:focus {
+  color: #00b33c;
+  text-decoration: underline;
 }

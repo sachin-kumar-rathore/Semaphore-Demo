@@ -1,4 +1,12 @@
-<div class="nav-tabs-horizontal" data-plugin="tabs" id="dashboard-tabs" >
+<div class="row animation-fade">
+  <div class ="col-md-12 themeColor">
+    <a href="<%= edit_company_path(@company) + '#activities' %>" class="themeColor" id="activitiesBack"><i class="fa fa-2x fa-arrow-left" aria-hidden="true"></i></a>
+    &nbsp;&nbsp;&nbsp;
+    <span><%= @activity.name %></span>
+  </div>
+</div>
+<br>
+<div class="nav-tabs-horizontal animation-fade" data-plugin="tabs" id="dashboard-tabs" >
   <ul class="nav nav-tabs" role="tablist">
     <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="<%= @activity ? edit_activity_path(@activity) : new_activity_path %>" id="mainNavLink" data-remote="true" role="tab">Main</a></li>
     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="<%= activity_notes_path(@activity) %>" data-remote="true" role="tab" id="notesNavLink" >Interactions</a></li>
@@ -8,11 +16,7 @@
   </ul>
   <div class="tab-content pt-20">
     <div class="tab-pane active" id="mainTab" role="tabpanel">
-      <% if @company %>
-        <%= render 'company_activities/form' %>
-      <% else %>
-        <%= render 'form' %>
-      <% end %>
+      <%= render 'form' %>
     </div>
     <div class="tab-pane" id="notesTab" role="tabpanel">
     </div>

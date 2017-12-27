@@ -30,6 +30,7 @@ Rails.application.routes.draw do
         get :show_existing_projects
       end
     end
+    resources :activities, controller: 'company_activities'
   end
 
   resources :organizations, only: %i[show edit update index] do

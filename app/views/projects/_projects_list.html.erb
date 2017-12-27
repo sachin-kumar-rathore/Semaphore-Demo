@@ -14,7 +14,7 @@
       <tr>
         <td><%= project.project_number %></td>
         <td><%= project.name %></td>
-        <td><%= project.company.name %></td>
+        <td><%= project.company ? project.company.name : "No Company" %></td>
         <td><%= project.active_date %></td>
         <td><%= project.status %></td>
         <td><a href="projects/<%= project.id %>/edit" class="btn btn-sm green-btn" data-turbolinks="false">View</a></td>

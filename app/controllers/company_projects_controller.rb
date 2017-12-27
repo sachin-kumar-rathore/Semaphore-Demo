@@ -4,13 +4,6 @@ class CompanyProjectsController < ApplicationController
   before_action :set_company
   respond_to :js
 
-  def index
-    @company_projects = @company.projects
-                                .paginate(page: params[:page], per_page: 8)
-                                .order('updated_at DESC')
-    redirect_to edit_company_path(@company) if request.format.html?
-  end
-
   def show_existing_projects
     @projects = current_org.projects.where(company_id: nil)
     filtering_params(params).each do |key, value|
@@ -24,6 +17,7 @@ class CompanyProjectsController < ApplicationController
     @project = current_org.projects.where(id: params[:id]).first
     return unless @project.update_attribute(:company_id, @company.id)
     flash.now[:success] = 'Project was successfully associated to company.'
+    load_company_projects
   end
 
   private
@@ -36,6 +30,12 @@ class CompanyProjectsController < ApplicationController
     params.slice(:status, :primary_contact_id, :start_date, :site_visit,
                  :completion, :project_number, :industry_type_id,
                  :project_name, :public_release, :business_type,
-                 :project_type, :considered_location_id, :company_id)
+                 :project_type, :considered_location_id, :company)
+  end
+
+  def load_company_projects
+    @company_projects = @company.projects
+                                .paginate(page: params[:page], per_page: 8)
+                                .order('updated_at DESC')
   end
 end

@@ -21,6 +21,7 @@ class CompaniesController < ApplicationController
   end
 
   def edit
+    load_company_data
     return unless @company.blank?
     flash[:danger] = 'Company not found.'
     redirect_to companies_path
@@ -144,5 +145,17 @@ class CompaniesController < ApplicationController
   def filtering_params(params)
     params.slice(:industry_type_id, :company_name, :associated_project,
                  :associated_contact)
+  end
+
+  def load_company_data
+    @company_contacts = @company.contacts
+                                .paginate(page: params[:page], per_page: 8)
+                                .order('updated_at DESC')
+    @activities = @company.activities
+                          .paginate(page: params[:page], per_page: 8)
+                          .order('updated_at DESC')
+    @company_projects = @company.projects
+                                .paginate(page: params[:page], per_page: 8)
+                                .order('updated_at DESC')
   end
 end

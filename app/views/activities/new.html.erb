@@ -8,7 +8,11 @@
   </ul>
   <div class="tab-content pt-20">
     <div class="tab-pane active" id="mainTab" role="tabpanel">
-      <%= render 'form' %>
+      <% if @company %>
+        <%= render 'company_activities/form' %>
+      <% else %>
+        <%= render 'form' %>
+      <% end %>
     </div>
     <div class="tab-pane" id="interactionsTab" role="tabpanel">
     </div>

@@ -1,6 +1,6 @@
 <div class="panel" >
   <div class="panel-body">
-    <%= form_for @activity, class: "col-md-12" do |activity| %>
+    <%= form_for [@company, @activity], class: "col-md-12" do |activity| %>
       <div class="error-messages">
         <%= render partial: 'shared/error_messages', locals: {obj: @activity} %>
       </div>
@@ -70,7 +70,7 @@
         </div>
       </div>
       <% if @company %>
-        <%= hidden_field_tag 'company_id', @company.id %>
+        <%= hidden_field_tag 'activity[company_id]', @company.id %>
       <% end %>
       <hr>
       <div class="row">
@@ -86,7 +86,7 @@
         </div>
         <div class="col-md-2 col-6">
           <div class="form-group form-material">
-            <%= link_to 'Cancel', activities_path, class: "btn btn-block green-btn col-md-12", data: { turbolinks: false } %>
+            <%= link_to 'Cancel', edit_company_path(@company) + '#activities', class: "btn btn-block green-btn col-md-12", data: { turbolinks: false } %>
           </div>
         </div>
         <% unless @activity.new_record? || @activity.converted? %>
@@ -99,7 +99,7 @@
         <% unless @activity.new_record? %>
           <div class="col-md-2 col-6">
             <div class="form-group form-material">
-              <%= link_to 'Delete', activity_path(id: @activity), method: :delete, class: "btn btn-block btn-danger col-md-12" %>
+              <%= link_to 'Delete', company_activity_path(id: @activity), method: :delete, class: "btn btn-block btn-danger col-md-12" %>
             </div>
           </div>
         <% end %>

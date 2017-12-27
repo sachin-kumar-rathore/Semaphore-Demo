@@ -1,9 +1,0 @@
-<% if @company.present? %>
-  $('#projectsTab').html("<%= j render partial: 'company_projects_list' %>");
-  $(".tab-content").children('.tab-pane').removeClass("active");
-  $('#projectsTab').addClass("active");
-  $(".nav-item").children('.nav-link').removeClass("active");
-  $('#projectsNavLink').addClass("active");
-<% else %>
-  $('.flashMessages').html("<%= j render partial: 'shared/flash_messages' %>");
-<% end %>

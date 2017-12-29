@@ -75,4 +75,8 @@ module ReportsHelper
     end
   end
 
+  def filter_date(date)
+    date.nil? ? nil : DateTime.parse(date).strftime("%m/%d/%Y")
+  end
+
 end

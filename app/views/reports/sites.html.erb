@@ -1,37 +1,89 @@
-<div class="panel panel-bordered">
-  <%= render 'collapsable_export' %>
-</div>
 <div class="row export-site-referrals-report">
-  <div class="col-md-12">
-    <p class="font-weight-700">Site/Building Referrals</p>
-    <div class="example table-responsive">
-      <table class="table table-bordered bg-white">
-        <thead>
-        <tr>
-          <th class="font-weight-bold text-center">Referral Date</th>
-          <th class="font-weight-bold text-center">Site/Building</th>
-          <th class="font-weight-bold text-center">Project Name</th>
-          <th class="font-weight-bold text-center">Company</th>
-          <th class="font-weight-bold text-center">City</th>
-          <th class="font-weight-bold text-center">Country</th>
-        </tr>
-        </thead>
-        <tbody>
-        <% @sites.each do |site| %>
-            <tr>
-              <td class="text-center"><%= site.created_at.strftime('%m/%d/%Y') %></td>
-              <td class="text-center"><%= site.site_number %> | <%= site.property_name %></td>
-              <td class="text-center"><%= site.projects.collect { |p| p.name }.join(', ') %></td>
-              <td class="text-center"><%= site.projects.collect { |p| p.company.name }.join(', ') %></td>
-              <td class="text-center"><%= site.city %></td>
-              <td class="text-center"><%= site.country %></td>
-            </tr>
-        <% end %>
-        </tbody>
-      </table>
+  <div class="col-md-9">
+    <div class="row">
+      <div class="col-md-12">
+        <p class="font-weight-700">Site/Building Referrals
+          <%= link_to sites_reports_path, class: 'reload-page-link pull-right', data: { turbolinks: false } do %>
+            <i class="fa fa-refresh"></i>
+          <% end %>
+        </p>
+        <div class="example table-responsive">
+          <table class="table table-bordered bg-white">
+            <thead>
+              <tr>
+                <th class="font-weight-bold text-center">Referral Date</th>
+                <th class="font-weight-bold text-center">Site/Building</th>
+                <th class="font-weight-bold text-center">Project Name</th>
+                <th class="font-weight-bold text-center">Company</th>
+                <th class="font-weight-bold text-center">City</th>
+                <th class="font-weight-bold text-center">Country</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @sites.each do |site| %>
+                <tr>
+                  <td class="text-center"><%= site.created_at.strftime('%m/%d/%Y') %></td>
+                  <td class="text-center"><%= site.site_number %> | <%= site.property_name %></td>
+                  <td class="text-center"><%= site.projects.collect { |p| p.name }.join(', ') %></td>
+                  <td class="text-center"><%= site.projects.collect { |p| p.company.name }.join(', ') %></td>
+                  <td class="text-center"><%= site.city %></td>
+                  <td class="text-center"><%= site.country %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+        <div class="digg_pagination">
+          <%= will_paginate @sites %>
+        </div>
+      </div>
     </div>
-		<div class="digg_pagination">
-			<%= will_paginate @sites %>
-		</div>
+  </div>
+
+  <div class="col-md-3">
+    <p class="font-weight-700">Site/Building Referrals</p>
+    <%= form_tag(download_sites_reports_path(format: :xls), method: :post, class: 'form-horizontal') do %>
+      <div class="panel">
+        <div class="panel-body">
+          <div class="row mb-10 mt-10">
+            <div class="col-md-6">
+              <button type="submit" class="btn btn-sm green-btn" name="commit" value="filter">Filter</button>
+            </div>
+            <div class="col-md-6">
+              <button type="submit" class="btn btn-sm green-btn" name="commit" value="export">Export</button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Start Date:</label>
+                <div class="input-daterange" data-plugin="datepicker">
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                    <i class="icon md-calendar" aria-hidden="true"></i>
+                    </span>
+                    <input type="text" class="form-control" value="<%= filter_date(params[:start_date]) %>" placeholder="dd/mm/yyyy" name="start_date" required/>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>End Date:</label>
+                <div class="input-daterange" data-plugin="datepicker">
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                    <i class="icon md-calendar" aria-hidden="true"></i>
+                    </span>
+                    <input type="text" class="form-control" value="<%= filter_date(params[:end_date]) %>" placeholder="dd/mm/yyyy" name="end_date" required/>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>

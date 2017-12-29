@@ -1,100 +1,112 @@
-<div class="panel panel-bordered">
-	<div class="panel-heading" data-toggle="collapse" href="#export_project_data"
-			 aria-expanded="false" aria-controls="export_site_refferals">
-		<h3 class="panel-title">Export <i class="fa fa-caret-down pull-right" aria-hidden="true"></i></h3>
-	</div>
-	<div class="collapse" id="export_project_data">
-		<%= form_tag(download_projects_reports_path(format: :xls), method: :post, class: 'form-horizontal') do %>
-				<div class="panel-body">
-					<div class="row">
-						<div class=" form-group form-material col-md-6">
-							<div class="row">
-								<label class="form-control-label col-md-4" for="inputStartDateRange#">Start Date:</label>
-								<div class="input-daterange col-md-8" data-plugin="datepicker">
-									<div class="input-group">
-										<span class="input-group-addon">
-										<i class="icon md-calendar" aria-hidden="true"></i>
-										</span>
-										<input type="text" class="form-control" placeholder="dd/mm/yyyy" name="start_date" required/>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class=" form-group form-material col-md-6">
-							<div class="row">
-								<label class="form-control-label col-md-4" for="inputStartDateRange#">End Date:</label>
-								<div class="input-daterange col-md-8" data-plugin="datepicker">
-									<div class="input-group">
-										<span class="input-group-addon">
-										<i class="icon md-calendar" aria-hidden="true"></i>
-										</span>
-										<input type="text" class="form-control" placeholder="dd/mm/yyyy" name="end_date" required/>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12 text-center">
+<div class="row successful-project-data">
+  <div class="col-md-9">
+    <div class="row">
+      <div class="col-md-6 col-sm-12">
+        <p class="font-weight-700">
+          Existing Business
+        </p>
+        <div class="example table-responsive">
+          <table class="table table-bordered bg-white">
+            <tr>
+              <td class="text-center">Projects</td>
+              <td class="text-center"><%= @business_types['Existing Business'].try(:length) %></td>
+            </tr>
+            <tr>
+              <td class="text-center">Jobs</td>
+              <td class="text-center"><%= @existing_business[0] %></td>
+            </tr>
+            <tr>
+              <td class="text-center">Wages</td>
+              <td class="text-center"><%= @existing_business[1] %></td>
+            </tr>
+            <tr>
+              <td class="text-center">New Investment</td>
+              <td class="text-center"><%= @existing_business[2] %></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-sm-12">
+        <p class="font-weight-700">
+          New Business
+          <%= link_to projects_reports_path, class: 'reload-page-link pull-right', data: { turbolinks: false } do %>
+            <i class="fa fa-refresh"></i>
+          <% end %>
+        </p>
+        <div class="example table-responsive">
+          <table class="table table-bordered bg-white">
+            <tr>
+              <td class="text-center">Projects</td>
+              <td class="text-center"><%= @business_types['New Business'].try(:length) %></td>
+            </tr>
+            <tr>
+              <td class="text-center">Jobs</td>
+              <td class="text-center"><%= @new_business[0] %></td>
+            </tr>
+            <tr>
+              <td class="text-center">Wages</td>
+              <td class="text-center"><%= @new_business[1] %></td>
+            </tr>
+            <tr>
+              <td class="text-center">New Investment</td>
+              <td class="text-center"><%= @new_business[2] %></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-sm-12">
+        <p class="font-weight-bold">Total site / building referrals: <%= @total_buildings %></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <p class="font-weight-700">Successful Project Data</p>
+    <%= form_tag(download_projects_reports_path(format: :xls), method: 'post', class: 'form-horizontal') do %>
+      <div class="panel">
+        <div class="panel-body">
+          <div class="row mb-10 mt-10">
+            <div class="col-md-6">
               <button type="submit" class="btn btn-sm green-btn" name="commit" value="filter">Filter</button>
+            </div>
+            <div class="col-md-6">
               <button type="submit" class="btn btn-sm green-btn" name="commit" value="export">Export</button>
-						</div>
-					</div>
-				</div>
-		<% end %>
-	</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Start Date:</label>
+                <div class="input-daterange" data-plugin="datepicker">
+                  <div class="input-group">
+                  <span class="input-group-addon">
+                  <i class="icon md-calendar" aria-hidden="true"></i>
+                  </span>
+                    <input type="text" class="form-control" value="<%= filter_date(params[:start_date]) %>" placeholder="dd/mm/yyyy" name="start_date" required/>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>End Date:</label>
+                <div class="input-daterange" data-plugin="datepicker">
+                  <div class="input-group">
+                  <span class="input-group-addon">
+                  <i class="icon md-calendar" aria-hidden="true"></i>
+                  </span>
+                    <input type="text" class="form-control" value="<%= filter_date(params[:end_date]) %>" placeholder="dd/mm/yyyy" name="end_date" required/>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+      </div>
+    <% end %>
+  </div>
 </div>
 
-<div class="row">
-	<div class="col-md-6 col-sm-12">
-		<p class="font-weight-700">Existing Business</p>
-		<div class="example table-responsive">
-			<table class="table table-bordered bg-white">
-				<tr>
-					<td class="text-center">Projects</td>
-					<td class="text-center"><%= @business_types['Existing Business'].try(:length) %></td>
-				</tr>
-				<tr>
-					<td class="text-center">Jobs</td>
-					<td class="text-center"><%= @existing_business[0] %></td>
-				</tr>
-				<tr>
-					<td class="text-center">Wages</td>
-					<td class="text-center"><%= @existing_business[1] %></td>
-				</tr>
-				<tr>
-					<td class="text-center">New Investment</td>
-					<td class="text-center"><%= @existing_business[2] %></td>
-				</tr>
-			</table>
-		</div>
-	</div>
-
-	<div class="col-md-6 col-sm-12">
-		<p class="font-weight-700">New Business</p>
-		<div class="example table-responsive">
-			<table class="table table-bordered bg-white">
-				<tr>
-					<td class="text-center">Projects</td>
-					<td class="text-center"><%= @business_types['New Business'].try(:length) %></td>
-				</tr>
-				<tr>
-					<td class="text-center">Jobs</td>
-					<td class="text-center"><%= @new_business[0] %></td>
-				</tr>
-				<tr>
-					<td class="text-center">Wages</td>
-					<td class="text-center"><%= @new_business[1] %></td>
-				</tr>
-				<tr>
-					<td class="text-center">New Investment</td>
-					<td class="text-center"><%= @new_business[2] %></td>
-				</tr>
-			</table>
-		</div>
-	</div>
-
-	<div class="col-md-6 col-sm-12">
-		<p class="font-weight-bold">Total site / building referrals: <%= @total_buildings %></p>
-	</div>
-</div>

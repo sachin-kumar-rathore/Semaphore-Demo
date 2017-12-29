@@ -12,7 +12,7 @@ class Email < ApplicationRecord
 
   # == Associations and Nested Attributes == #
   belongs_to :organization
-  belongs_to :project, optional: true
+  belongs_to :mailable, polymorphic: true, optional: true
   has_and_belongs_to_many :contacts
 
 
@@ -21,8 +21,9 @@ class Email < ApplicationRecord
   # == Callbacks == #
 
   # == Scopes == #
-  scope :project, -> (project) { where("project_id = ?", project)}
+  scope :project, -> (project) { where("mailable_type = ? AND mailable_id = ?", "Project", project)}
   scope :contact, -> (contact) { where(contacts: {id: contact})}
+  scope :without_activity, -> { where("mailable_type IS NULL OR mailable_type != (?)", "Activity") }
 
   # == Instance methods == #
   def generate_email(params)

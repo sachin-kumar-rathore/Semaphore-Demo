@@ -1,0 +1,97 @@
+<!-- Task Modal -->
+<div class="modal fade" id="taskFormCenter" aria-hidden="true" aria-labelledby="taskFormCenter"
+  role="dialog" tabindex="-1">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <%= form_for @task, url: url_for(controller: controller, action: action), class: 'task_form', remote: true do |form| %>
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+          <h6 class="modal-title"><%= @task.new_record? ? "ADD TASK" : "EDIT TASK" %></h6>
+        </div>
+        <div class="modal-body">
+          <div class="example-wrap">
+            <div class="error-messages"></div>
+            <div class="example">
+              <div class="row">
+                <div class="form-group form-material col-md-12">
+                  <label class="form-control-label">Name:</label>
+                  <%= form.text_field :name, class: "form-control", id: "inputBasicFirstName" %>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group form-material col-md-6">
+                  <label class="form-control-label">Priority:</label>
+                  <%= form.select :priority, options_for_select(Task::PRIORITY, form.object.priority), {}, class: 'form-control', data: {
+            plugin: "selectpicker" } %>
+                </div>
+                <div class="form-group form-material col-md-6">
+                  <label class="form-control-label">Assign To:</label>
+                  <%= form.select :assignee_id, options_for_select(@users.collect { |user| [user.full_name, user.id]}, form.object.assignee_id), {}, class: 'form-control', data: {
+            plugin: "selectpicker" } %>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group form-material col-md-6">
+                  <label class="form-control-label" >Activity:</label>
+                  <%= form.select :taskable_id, options_for_select( load_data_with_id(current_org.activities), selected: @activity ? @activity.id : form.object.taskable_id ),{ include_blank: 'No Activity' }, data:{ plugin: 'selectpicker', "live-search":true}, disabled: @activity %>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group form-material col-md-12">
+                  <label class="form-control-label">Description:</label>
+                  <%= form.text_area :description, class: "form-control", rows: 3 %>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group form-material col-md-6">
+                  <label class="form-control-label">Start Date:</label>
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="icon md-calendar" aria-hidden="true"></i>
+                    </span>
+                    <%= form.text_field 'start_date_str', class: "form-control  datepicker", value:  @task.start_date ? @task.start_date : Date.today.strftime('%m/%d/%Y'), data: {plugin: "datepicker"}, required: true %>
+                  </div>
+                </div>
+                <div class="form-group form-material col-md-6">
+                  <label class="form-control-label">End Date:</label>
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="icon md-calendar" aria-hidden="true"></i>
+                    </span>
+                    <%= form.text_field 'end_date_str', class: "form-control  datepicker", value:  @task.end_date ? @task.end_date : Date.today.strftime('%m/%d/%Y'), data: {plugin: "datepicker"}, required: true %>
+                  </div>
+                </div>
+              </div>
+              <% if @task.new_record? %>
+                <%= hidden_field_tag 'task[status]', 'In-Progress' %>
+              <% end %>
+              <% unless @task.new_record? %>
+                <div class="row">
+                  <div class="form-group form-material col-md-6">
+                    <%= form.select :status, options_for_select(Task::STATUS, form.object.status), {}, class: 'form-control', data: {
+            plugin: "selectpicker" } %>
+                  </div>
+                  <div class="form-group form-material col-md-6">
+                    <%= form.text_field :progress, class: "form-control", placeholder: '70' %>
+                  </div>
+              </div>
+              <% end %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group form-material col-md-6">
+              <button type="submit" class="btn btn-sm green-btn"><%= @task.new_record? ? ' Save ' : ' Save changes' %></button>
+              <button type="button" class="btn btn-sm white-btn" data-dismiss="modal">Cancel</button>
+              <% unless @task.new_record? %>
+                <%= link_to 'Delete', activity_task_path(@task, activity_id: @activity.id) , method: :delete, remote: true, class: "btn btn-sm btn-danger" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->

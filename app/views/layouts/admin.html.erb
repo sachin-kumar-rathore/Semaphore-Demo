@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tracker</title>
+  <%= csrf_meta_tags %>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+  <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body class="animsition theme-body site-menubar-unfold" style="animation-duration: 800ms; opacity: 1;">
+  <%= render 'layouts/admin/navbar' %>
+  <%= render 'layouts/admin/sidenav' %>
+  <div class="page">
+    <div class="page-content container-fluid">
+      <div class="flashMessages"><%= render partial: 'shared/flash_messages' %></div>
+      <%= yield %>
+    </div>
+  </div>
+
+  <%= render 'layouts/footer' %>
+  <%= render 'layouts/javascript_theme' %>
+</body>
+</html>

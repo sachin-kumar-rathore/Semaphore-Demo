@@ -1,19 +1,43 @@
 <div class="nav-tabs-horizontal" data-plugin="tabs" id="dashboard-tabs" >
-  <ul class="nav nav-tabs" role="tablist">
-    <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="<%= edit_company_path(@company) %>" id="mainNavLink" data-remote="true" role="tab">Main</a></li>
-    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="<%= company_contacts_path(@company) %>" data-remote="true" role="tab" id="contactsNavLink" >Contacts</a></li>
-    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="<%= company_projects_path(@company) %>" data-remote="true" role="tab" id="projectsNavLink" >Projects</a></li>
-    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="<%= %>" data-remote="true" role="tab" id="activitiesNavLink">Activities</a></li>
+  <ul class="nav nav-tabs animation-fade" role="tablist">
+    <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#main" id="mainNavLink" role="tab">Main</a></li>
+    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#contacts" role="tab" id="contactsNavLink" >Contacts</a></li>
+    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#projects" role="tab" id="projectsNavLink" >Projects</a></li>
+    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#activities" role="tab" id="activitiesNavLink">Activities</a></li>
   </ul>
   <div class="tab-content pt-20">
-    <div class="tab-pane active" id="mainTab" role="tabpanel">
+    <div class="tab-pane active" id="main" role="tabpanel">
       <%= render 'edit_company_form' %>
     </div>
-    <div class="tab-pane" id="contactsTab" role="tabpanel">
+    <div class="tab-pane" id="contacts" role="tabpanel">
+      <%= render 'company_contacts/company_contacts_list' %>
     </div>
-    <div class="tab-pane" id="projectsTab" role="tabpanel">
+    <div class="tab-pane" id="projects" role="tabpanel">
+      <%= render 'company_projects/company_projects_list' %>
     </div>
-    <div class="tab-pane" id="activitiesTab" role="tabpanel">
+    <div class="tab-pane" id="activities" role="tabpanel">
+      <%= render 'company_activities/company_activities_list' %>
     </div>
   </div>
 </div>
+
+
+<script>
+$(function(){
+  var hash = window.location.hash;
+  hash && $('ul.nav a[href="' + hash + '"]').tab('show');
+    
+  $(window).on('hashchange',function(){ 
+    var hash = window.location.hash;
+    hash && $('ul.nav a[href="' + hash + '"]').tab('show');
+  });
+
+
+  $('.nav-tabs a').click(function (e) {
+    $(this).tab('show');
+    var scrollmem = $('body').scrollTop();
+    window.location.hash = this.hash;
+    $('html,body').scrollTop(scrollmem);
+  });
+});
+</script>

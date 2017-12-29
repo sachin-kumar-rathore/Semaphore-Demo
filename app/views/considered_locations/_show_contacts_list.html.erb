@@ -1,3 +1,7 @@
-<h5> ADD CONTACT </h5>
-<%= render partial: 'contact_filters' %>
-<%= render partial: "contacts_list", locals: {contacts: @contacts} %>
+<div class="col-md-12">
+  <h5 class="text-success"> ADD CONTACT </h5>
+  <br/>
+  <%= render partial: 'contact_filters' %>
+  <br/>
+  <%= render partial: "contacts_list", locals: {contacts: @contacts} %>
+</div>

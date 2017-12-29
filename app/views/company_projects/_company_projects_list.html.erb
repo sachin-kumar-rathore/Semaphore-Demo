@@ -9,8 +9,8 @@
       </div>
     </div>
   </div>
-  <div class="panel-body" id="projectsList">
-    <%= render partial: "projects", locals: {company_projects: @company_projects} %>
+  <div class="panel-body tableDesign" id="projectsList">
+    <%= render partial: "company_projects/projects", locals: {company_projects: @company_projects} %>
   </div>
   <div id="associateProject"></div>
 </div>

@@ -13,11 +13,8 @@
 
  *= require font-awesome
  *= require token-input
- *= require_tree .
- *= require_self
-
-
-
+ *= require_tree ./brand-icons/
+ *= require_tree ./material-design/
  */
 @import "bootstrap.min";
 @import "bootstrap-extend.min";
@@ -29,6 +26,10 @@
 @import "slidePanel";
 @import "waves";
 @import "footable.core";
-@import "material-design/material-design.min";
-//@import "brand-icons/brand-icons";
 @import "custom";
+@import "bootstrap-datepicker";
+@import "bootstrap-select";
+@import "chartist-plugin-tooltip";
+@import "chartist";
+@import "select2";
+@import "site";

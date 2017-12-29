@@ -5,7 +5,7 @@
       <th>SEND BY</th>
       <th>SUBJECT</th>
       <th data-breakpoints="xs">ASSOCIATED CONTACT</th>
-      <th data-breakpoints="xs">ASSIGNED PROJECT</th>
+      <th data-breakpoints="xs">ASSIGNED PROJECT/ACTIVITY</th>
       <th data-breakpoints="xs">DATE</th>
       <th data-breakpoints="xs">OPERATIONS</th>
     </tr>
@@ -25,14 +25,16 @@
             <button data-href="<%= show_existing_contacts_email_path(email) %>" class=" btn btn-xs green-btn clickable" ><i class="fa fa-plus white"></i> Add</button>
           </td>
         <% end %>
-        <% if email.project.present? %>
-            <td>
-              <%= email.project.name %>
-            </td>
+        <% if email.mailable_id? %>
+          <td>
+            <%= email.mailable.name %>
+          </td>
         <% else %>
-            <td data-href="<%= show_existing_projects_email_path(email) %>" class="clickable">
-              <i class="fa fa-plus"></i> Add
-            </td>
+          <td>
+            <button data-href="<%= show_existing_projects_and_activities_email_path(email) %>" class=" btn btn-xs green-btn clickable">
+              <i class="fa fa-plus white"></i> Add
+            </button>
+          </td>
         <% end %>
         <td><%= email.email_date.strftime("%m/%d/%Y") if email.email_date %></td>
         <td>

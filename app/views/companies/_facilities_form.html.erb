@@ -11,7 +11,7 @@ aria-expanded="false" aria-controls="facilities-form">
       <div class="row">
         <div class="form-group form-material col-md-3">
           <label class="form-control-label" id="inputFacilityType" >Type of Facility:</label>
-          <%= company.select :facility_type, options_for_select( load_active_type("project_types"), company.object.facility_type), {}, {class: 'form-control', data:{ plugin: 'selectpicker', "live-search":true } } %>
+          <%= company.select :project_type_id, options_for_select( load_active_type("project_types"), company.object.project_type_id), {}, {class: 'form-control', data:{ plugin: 'selectpicker', "live-search":true } } %>
         </div>
         <div class="form-group form-material col-md-3">
           <label class="form-control-label" id="inputAcreage" >Acreage:</label>

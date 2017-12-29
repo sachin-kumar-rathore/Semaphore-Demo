@@ -1,7 +1,7 @@
+# Manage Notes inside a project
 class NotesController < ApplicationController
-  
   before_action :authenticate_user!, :set_project
-  before_action :set_note, only: [:show, :update, :destroy]
+  before_action :set_note, only: %i[show update destroy]
   respond_to :js
 
   def index
@@ -15,18 +15,14 @@ class NotesController < ApplicationController
 
   def create
     @note = @project.notes.new(note_params)
-    if @note.save
-      flash.now[:success] = 'Note was successfully created.'
-    end
+    flash.now[:success] = 'Note was successfully created.' if @note.save
   end
 
-  def show
-  end
+  def show; end
 
   def update
-    if @note.update(note_params)
-      flash.now[:success] = 'Note was successfully updated.'
-    end
+    return unless @note.update(note_params)
+    flash.now[:success] = 'Note was successfully updated.'
   end
 
   def destroy
@@ -50,5 +46,4 @@ class NotesController < ApplicationController
   def set_note
     @note = @project.notes.where(id: params[:id]).first
   end
-
 end

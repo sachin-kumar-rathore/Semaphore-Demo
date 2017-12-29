@@ -8,12 +8,13 @@
         <button class="btn btn-sm green-btn waves-effect waves-classic col-md-12 clickable" data-href="<%= new_company_contact_path(@company) %>" type="button" >ADD CONTACT </button>
       </div>
       <div class="col-md-3 col-6">
-        <%= button_to "ADD EXISTING CONTACT",show_existing_contacts_company_contacts_path(@company), class: "btn btn-sm green-btn waves-effect waves-classic col-md-12", method: :get, remote: true %>
+        <button data-href ="<%= show_existing_contacts_company_contacts_path(@company)%>" class ="btn btn-sm green-btn col-md-12 clickable" >
+      ADD EXISTING CONTACT </button>
       </div>
     </div>
   </div>
-  <div class="panel-body" id="contactsList">
-    <%= render partial: "contacts", locals: {contacts: @company_contacts} %>
+  <div class="panel-body tableDesign" id="contactsList">
+    <%= render partial: "company_contacts/contacts", locals: {contacts: @company_contacts} %>
   </div>
   <div id="createOrEditContact"></div>
 </div>

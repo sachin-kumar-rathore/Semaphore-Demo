@@ -1,0 +1,9 @@
+<% if @activity.present? %>
+  $('#filesTab').html("<%= j render 'show_activity_files' %>");
+  $(".tab-content").children('.tab-pane').removeClass("active");
+  $('#filesTab').addClass("active");
+  $(".nav-item").children('.nav-link').removeClass("active");
+  $('#filesNavLink').addClass("active");
+<% else %>
+  $('.flashMessages').html("<%= j render partial: 'shared/flash_messages' %>");
+<% end %>

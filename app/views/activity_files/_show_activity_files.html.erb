@@ -1,0 +1,17 @@
+<div class="panel">
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-10 col-12">
+        <h3>Activity Files</h3>
+      </div>
+      <div class="col-md-2 col-6">
+        <button class="btn btn-sm green-btn waves-effect waves-classic clickable col-md-12" data-href="<%= new_activity_file_path(activity_id: @activity.id) %>" type="button">ADD NEW FILE
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="panel-body tableDesign" id="filesList" >
+    <%= render partial: 'files', locals: { files: @files } %>
+  </div>
+</div>
+<div id="createOrEditFile"></div>

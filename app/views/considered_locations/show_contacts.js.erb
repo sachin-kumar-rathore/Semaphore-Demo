@@ -1,1 +1,8 @@
-$('#contactForm').html("<%= j render(partial: 'show_contacts_list') %>");
+$('#addContactIcon').toggleClass("fa-plus");
+$('#addContactIcon').toggleClass("fa-minus");
+if ($('#contactForm').hasClass("collapse")){
+  $('#contactForm').html("<%= j render(partial: 'show_contacts_list') %>");
+  $('#contactForm').removeClass("collapse");
+}
+else
+  $('#contactForm').addClass("collapse");

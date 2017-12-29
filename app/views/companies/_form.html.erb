@@ -21,11 +21,12 @@
                 </div>
                 <div class="form-group form-material col-md-3">
                   <label class="form-control-label">Company Number:</label>
-                    <%= form.text_field :company_number, class: 'form-control', id: 'inputBasicName', required: true %>
+                    <%= form.text_field :company_number, class: 'form-control', id: 'companiesNumber', maxlength: 6, minlength: 6, required: true %>
+                    <div id="companiesNumberMessage" value="<%= @company ? @company.id : nil %>"></div>
                 </div>
                 <div class="form-group form-material col-md-5">
                   <label class="form-control-label">Industry Type:</label>
-                  <%= form.select :industry_type, options_for_select( load_active_type("industry_types"), form.object.industry_type), {}, {class: 'form-control', data:{ plugin: 'selectpicker', "live-search":true } } %>
+                  <%= form.select :industry_type_id, options_for_select( load_active_type("industry_types"), form.object.industry_type_id), {}, {class: 'form-control', data:{ plugin: 'selectpicker', "live-search":true } } %>
                 </div>
               </div>
               <div class="row">
@@ -58,11 +59,11 @@
                 </div>
                 <div class="form-group form-material col-md-4">
                   <label class="form-control-label">State:</label>
-                  <%= form.text_field :city, class: 'form-control', id: 'inputState' %>
+                  <%= form.text_field :state, class: 'form-control', id: 'inputState' %>
                 </div>
                 <div class="form-group form-material col-md-4">
                   <label class="form-control-label">Zip Code:</label>
-                  <%= form.text_field :city, class: 'form-control', id: 'inputZipCode' %>
+                  <%= form.text_field :zip_code, class: 'form-control', id: 'inputZipCode' %>
                 </div>
               </div> 
               <div class="row">

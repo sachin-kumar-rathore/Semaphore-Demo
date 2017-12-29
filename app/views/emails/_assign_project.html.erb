@@ -3,19 +3,35 @@
      role="dialog" tabindex="-1">
   <div class="modal-dialog modal-simple modal-center">
     <div class="modal-content">
-      <%= form_tag attach_project_to_email_email_path(email), method: :post, remote: true do |form| %>
+      <%= form_tag attach_project_or_activity_to_email_email_path(email), method: :post, remote: true do |form| %>
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
-          <h6 class="modal-title"><%= "ADD PROJECT" %></h6>
+          <h6 class="modal-title"><%= "ADD PROJECT OR ACTIVITY" %></h6>
         </div>
         <div class="modal-body">
-          <div class="example">
-            <div class="row">
-              <div class="form-group form-material col-md-12">
-                <label class="form-control">Assign To:</label>
-                <%= select_tag "project_id", options_for_select(load_data_with_id(projects)), class: 'form-control', data: {plugin: "selectpicker"} %>
+        <div class="example">
+            <div class="row form-inline form-material">
+              <div class="col-md-8">
+                <div class="row">
+                  <div class="form-inline col-md-3 col-6">
+                    <%= radio_button_tag :mailable_type, 'Project', true, class: "pull-left emailAttachCheckBox" %>
+                    <label for="inputRadiosUnchecked" class="pull-left">Project</label>
+                  </div>
+                  <div class="form-inline col-md-3 col-6">
+                    <%= radio_button_tag :mailable_type, 'Activity', false, class: "emailAttachCheckBox" %>
+                    <label for="inputRadiosChecked">Activity</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class="row" id="selectProjectOrActivity" >
+              <div class="form-group form-material col-md-6">
+                <label class="form-control" for="mailable_id" >Assign To Project:</label>
+                <%= select_tag "mailable_id", options_for_select(load_data_with_id(current_org.projects)), class: 'form-control selectpicker', id: "emailSelect", data: { plugin: "selectpicker"} %>
+                <%= hidden_field_tag 'email[mailable_type]', "Project" %>
               </div>
             </div>
           </div>
@@ -32,3 +48,13 @@
 </div>
 <!-- End Modal -->
 
+<script>
+  $(".emailAttachCheckBox").on("click", function () {
+    data = $(this).val();
+    if (data == "Project")
+      $('#emailSelect').html('<%= j options_for_select(load_data_with_id(current_org.projects)) %>');
+    else
+      $('#emailSelect').html('<%= j options_for_select(load_data_with_id(current_org.activities)) %>');
+    $('.selectpicker').selectpicker('refresh') 
+  });
+</script>

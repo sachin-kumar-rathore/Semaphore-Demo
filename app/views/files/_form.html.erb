@@ -23,16 +23,16 @@
               <div class="row">
                 <div class="form-group form-material col-md-6">
                   <label class="form-control-label" >Project:</label>
-                  <%= form.select :project_id, options_for_select( load_data_with_id(current_org.projects), selected: @project ? @project.id : form.object.project_id ),{ include_blank: 'No Project' }, data:{ plugin: 'selectpicker', "live-search":true}, disabled: @project %>
+                  <%= form.select :documentable_id, options_for_select( load_data_with_id(current_org.projects), selected: @project ? @project.id : form.object.documentable_id ),{ include_blank: 'No Project' }, data:{ plugin: 'selectpicker', "live-search":true}, disabled: @project %>
                   <% if @project %>
-                    <%= hidden_field_tag 'document[project_id]', @project.id %>
+                    <%= hidden_field_tag 'document[documentable_id]', @project.id %>
                   <% end %>
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="form-group form-material col-md-12">
-                <button type="submit" class="btn btn-sm green-btn" id="saveButton"><%= @file.new_record? ? ' Save ' : ' Save changes' %></button>
+                <button type="submit" class="btn btn-sm green-btn spinnerButton"><%= @file.new_record? ? ' Save ' : ' Save changes' %></button>
                 <button type="button" class="btn btn-sm white-btn" data-dismiss="modal">Cancel</button>
                 <% unless @file.new_record? %>
                   <%= link_to 'Delete',file_path(@file), method: :delete, remote: true, class: "btn btn-sm btn-danger" %>

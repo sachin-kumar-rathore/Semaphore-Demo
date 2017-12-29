@@ -6,7 +6,7 @@ class Note < ApplicationRecord
   attr_accessor :date_str
 
   #Associations
-  belongs_to :project
+  belongs_to :notable, polymorphic: true
   
   #Callbacks
   before_validation :convert_dates_format

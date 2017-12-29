@@ -1,4 +1,4 @@
-<table class="table table-striped table-hover toggle-circle footable" data-toggle-column="first" data-empty="There are no sites/buildings" data-show-toggle="true">
+<table class="table table-striped table-hover toggle-circle footable tableDesign" data-toggle-column="first" data-empty="There are no sites/buildings" data-show-toggle="true">
   <thead>
   <tr>
     <th>PROPERTY #</th>
@@ -10,7 +10,7 @@
   <tbody>
     <% sites.each do |site| %>
         <tr>
-          <td><%= site.property_number %></td>
+          <td><%= site.site_number %></td>
           <td><%= site.property_name %></td>
           <td><%= site.zip_code %></td>
           <td>

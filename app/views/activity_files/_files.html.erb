@@ -1,0 +1,34 @@
+<table class="table table-striped table-hover toggle-circle footable" data-toggle-column="first" data-empty="There are no files." data-show-toggle="true" >
+  <thead>
+    <tr>
+      <th>NAME</th>
+      <th>SIZE</th>
+      <th data-breakpoints="xs">UPLOADED BY</th>
+      <th data-breakpoints="xs">DATE MODIFIED</th>
+      <th data-breakpoints="xs">OPERATIONS</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% for file in files %>
+      <tr>
+        <td><%= File.basename(file.name.to_s) %></td>
+        <td><%= (file.size.to_f/1000).round(1) %> kB </td>
+        <td><%= file.user.full_name %></td>
+        <td><%= file.updated_at.strftime("%m/%d/%Y") if file.updated_at.present? %></td>
+        <td>
+          <a class="btn btn-xs green-btn download-btn fa fa-download" href="<%= file.name %>" ></a>
+          <button class="btn btn-xs btn-danger fa fa-trash delete-clickable" data-href="<%= activity_file_path(file, activity_id: @activity) %>"  ></button>
+          <button class="clickable btn btn-xs green-btn fa fa-pencil" data-href="<%= edit_activity_file_path(file, activity_id: @activity) %>"></button>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="digg_pagination">
+  <%= js_will_paginate files %>
+</div>
+
+<script>
+  $('.footable').footable();
+</script>

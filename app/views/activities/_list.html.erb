@@ -1,0 +1,31 @@
+<table class="table table-striped table-hover toggle-circle footable tableDesign" id="activitiesList" data-toggle-column="first" data-empty="There are no activities." data-show-toggle="true">
+  <thead>
+    <tr>
+      <th>ACTIVITY NAME</th>
+      <th>ACTIVITY TYPE</th>
+      <th data-breakpoints="xs">COMPANY NAME</th>
+      <th data-breakpoints="xs">CONTACT DATE</th>
+      <th data-breakpoints="xs">CONVERTED</th>
+      <th data-breakpoints="xs">OPERATIONS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @activities.each do |activity| %>
+      <tr>
+        <td><%= activity.name %></td>
+        <td><%= activity.company_activity_type.name %></td>
+        <td><%= activity.company ? activity.company.name : "Unassigned" %></td>
+        <td><%= activity.contact_date %></td>
+        <td><%= activity.converted ? "Yes" : "No" %></td>
+        <td><a href="<%= edit_activity_path(activity) %>" class="btn btn-sm green-btn" data-turbolinks="false">View</a></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<div class="digg_pagination">
+  <%= js_will_paginate @activities %>
+</div>
+
+<script>
+  $('.footable').footable();
+</script>

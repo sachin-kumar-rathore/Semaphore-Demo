@@ -19,19 +19,6 @@ $(document).on("click", ".clickable", function () {
   });
 });
 
-function showUploadFileName(input) {
-  if (input.files && input.files[0]) {
-    $('.fileName').html(input.files[0].name);
-  }
-}
-
-$(document).on("click", "#fakeFileUploadBtn", function () {
-  $('#contactsFileUploadHidden').click();
-});
-$("#contactsFileUploadHidden").change(function () {
-  showUploadFileName(this);
-});
-
 $( document ).ready(function() {
   $('.digg_pagination a').each(function () {
     $(this).attr("data-turbolinks", false);
@@ -39,6 +26,10 @@ $( document ).ready(function() {
 });
 
 //Projects
+
+$(document).on("input", "#projectsNumber", function () {
+  checkValidityofNumber("projects",this)
+});
 
 //notes
 
@@ -110,8 +101,8 @@ function reloadFiles(){
   });  
 }
 
-$(document).on("click", "#saveButton", function () {
-  this.innerHTML = 'Uploading....';
+$(document).on("click", ".spinnerButton", function () {
+  this.innerHTML = 'Processing....';
   $('.spinner').removeAttr('hidden');
 });
 
@@ -206,8 +197,99 @@ $(document).on("click", ".delete-option", function () {
   });
 });
 
-$(document).on("click", "#addContactIcon", function (){
-   $(this).toggleClass("fa-plus");
-   $(this).toggleClass("fa-minus");
+//company_id_check
+
+$(document).on("input", "#companiesNumber", function () {
+  checkValidityofNumber('companies', this);
 });
 
+//Property number
+
+$(document).on("input", "#sitesNumber", function () {
+  checkValidityofNumber('sites', this);
+});
+
+function checkValidityofNumber(section_type, selected_element){
+  var fieldValue = $(selected_element).val();
+  var record_id = $("#" + section_type + "NumberMessage").attr("value");
+  if(fieldValue.length<6 || isNaN(fieldValue)){
+    $(selected_element).parent().removeClass("has-success");
+    $(selected_element).parent().addClass("has-danger");
+    $("#" + section_type + "NumberMessage").removeClass();
+    $("#" + section_type + "NumberMessage").addClass("error");
+    $("#" + section_type + "NumberMessage").html("Number must contain only 6 digits.");
+  }
+  else{
+    $.ajax({
+      url: "/" + section_type + "/check_" + section_type + "_number_validity",
+      type: "GET",
+      data: { data: fieldValue, id: record_id },
+      dataType: "script"
+    });
+  } 
+}
+
+function updateViewAfterIdCheck(message_status, message_to_show, section_type){
+  $("#"+ section_type +"NumberMessage").removeClass();
+  if (message_status == "true") {
+    $("#"+ section_type +"Number").parent().removeClass("has-danger");
+    $("#"+ section_type +"Number").parent().addClass("has-success");
+    $("#"+ section_type +"NumberMessage").addClass("success");
+  }
+  else{
+    $("#"+ section_type +"Number").parent().removeClass("has-success");
+    $("#"+ section_type +"Number").parent().addClass("has-danger");
+    $("#"+ section_type +"NumberMessage").addClass("error");
+  }
+  $("#"+ section_type +"NumberMessage").html(message_to_show);
+}
+
+//Activities
+
+$(document).on("click", ".first-save-activity", function () {
+  alert("First save a activity before accessing this section.");
+});
+
+//ActivityNotes
+
+function reloadActivityNotes(id){
+  $.ajax({
+    url: '/activities/' + id + '/notes',
+    type: "GET"
+  });
+}
+
+//ActivityFiles
+
+function reloadActivityFiles(id){
+  $('.modal-backdrop').remove();
+  $("#fileFormCenter").modal("hide");
+  $.ajax({
+    url: '/activities/' + id + '/files',
+    type: "GET",
+  });
+}
+
+//ActivityTasks
+
+function reloadActivityTasks(id){
+  $.ajax({
+    url: '/activities/' + id + '/tasks',
+    type: "GET",
+  });
+}
+
+$(document).on("change", "#activities_filter_by_company", function () {
+  var company_id = $('#activities_filter_by_company').val();
+  $.ajax({
+    url: "/activities",
+    type: "GET",
+    dataType: 'script',
+    data: { company_id: company_id }
+  });  
+});
+
+//Activity Number Check
+$(document).on("input", "#activitiesNumber", function () {
+  checkValidityofNumber('activities', this);
+});

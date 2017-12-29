@@ -18,9 +18,8 @@
   color: red;
 }
 
-.static_html_body {
-  background: #b6b6b6;
-  font-family: montserrat, arial, verdana;
+.logo img {
+  width: 160px;
 }
 
 #contactFilterHeadingOne a:hover {
@@ -118,8 +117,11 @@ span.next_page, a.next_page {
   font-weight: 400;
 }
 
+.themeColor{
+  color: #2ED573;
+}
 
-#contactsList thead th, #projectsList thead th, #notesList thead th, #filesList thead th, #emailsList thead th, #rolesTable thead th {
+.tableDesign thead th{
   color: #2ED573;
   font-weight: 500;
 }
@@ -302,6 +304,21 @@ html, body {
   padding-top: 66.01px;
 }
 
+.success{
+  color: green;
+}
+
 .pointerCursor{
   cursor: pointer;
 }
+
+#activitiesBack {
+  color: #2ED573;
+  text-decoration: none;
+}
+
+#activitiesBack:hover, #activitiesBack:focus {
+  color: #00b33c;
+  text-decoration: underline;
+}
+

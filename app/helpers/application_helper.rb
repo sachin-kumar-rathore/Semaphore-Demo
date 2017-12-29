@@ -17,4 +17,15 @@ module ApplicationHelper
     return unless url.path.split("/").drop(1).first.eql? section_name
     'active'
   end
+
+  def priority_class(priority)
+    case priority
+    when "High"
+      'dotHigh'
+    when "Medium"
+      'dotMedium'
+    else
+      ''
+    end
+  end
 end

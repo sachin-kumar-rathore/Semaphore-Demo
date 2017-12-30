@@ -1,0 +1,14 @@
+<div class="panel-heading" data-toggle="collapse" href="#orgUsers"
+aria-expanded="false" aria-controls="orgUsers">
+  <h3 class="panel-title">Organization User Management <i class="fa fa-caret-down pull-right" aria-hidden="true"></i> </h3>
+</div>
+<div class="collapse" id="orgUsers">
+  <div class="panel-body">
+    <div class="orgUserAlerts success"></div>
+    <div class="orgUserErrors"></div>
+    <br>
+    <div id="orgUsersList">
+      <%= render partial: 'users_list', locals: { users: @organization.users } %>
+    </div>
+  </div>
+</div>

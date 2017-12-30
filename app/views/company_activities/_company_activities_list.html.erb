@@ -1,0 +1,15 @@
+<div class="panel">
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-9">
+        <h3> Company Activities </h3>
+      </div>
+      <div class="col-md-3 col-6">
+        <%= link_to "ADD NEW ACTIVITY", new_company_activity_path(@company), class: "col-md-12 btn btn-block green-btn", data: { turbolinks: false } %>
+      </div>
+    </div>
+  </div>
+  <div class="panel-body tableDesign" id="activitiesList">
+    <%= render partial: "company_activities/activities" %>
+  </div>
+</div>

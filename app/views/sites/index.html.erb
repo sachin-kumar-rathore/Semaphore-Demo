@@ -11,6 +11,9 @@
           <button class="btn btn-sm green-btn waves-effect waves-classic clickable" data-href="<%= new_site_path %>"
             id="createNewSite" type="button">ADD SITE/ BUILDING
           </button>
+          <button class="btn btn-sm green-btn waves-effect waves-classic" data-target="#siteImportFormCenter" data-toggle="modal"
+            id="importNewSites" type="button">EXCEL IMPORT
+          </button>
           <%= link_to sites_path, class: 'reload-page-link', data: { turbolinks: false } do %>
             <i class="fa fa-refresh"></i>
           <% end %>
@@ -27,4 +30,4 @@
   </div>
 </div>
 <div id="createOrEditSite"></div>
-<div id="downloadSitesReport"></div>
+<%= render :partial => 'sites/import_sites_form' %>

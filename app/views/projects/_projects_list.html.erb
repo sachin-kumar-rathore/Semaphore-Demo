@@ -1,4 +1,4 @@
-<table class="table table-striped table-hover toggle-circle footable" id="projectsList" data-toggle-column="first" data-empty="There are no projects" data-show-toggle="true">
+<table class="table table-striped table-hover toggle-circle footable tableDesign" id="projectsList" data-toggle-column="first" data-empty="There are no projects" data-show-toggle="true">
   <thead>
     <tr>
       <th>PROJECT#</th>
@@ -14,7 +14,7 @@
       <tr>
         <td><%= project.project_number %></td>
         <td><%= project.name %></td>
-        <td><%= project.company.name %></td>
+        <td><%= project.company ? project.company.name : "No Company" %></td>
         <td><%= project.active_date %></td>
         <td><%= project.status %></td>
         <td><a href="projects/<%= project.id %>/edit" class="btn btn-sm green-btn" data-turbolinks="false">View</a></td>

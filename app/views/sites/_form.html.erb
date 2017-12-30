@@ -100,6 +100,10 @@
                 <%= form.text_field :longitude, class: 'form-control', id: 'inputBasicLongitude', required: true %>
               </div>
               <div class="form-group form-material col-md-4">
+                <label class="form-control-label">Special District:</label>
+                <%= form.text_field :special_district, class: 'form-control', id: 'inputBasicLongitude', required: true %>
+              </div>
+              <div class="form-group form-material col-md-4">
                 <label class="form-control-label">Business Unit</label>
                 <%= form.select :business_unit_id, options_for_select(load_type("business_units"), form.object.business_unit_id), {}, class: 'form-control', data: { plugin: "selectpicker" } %>
               </div>

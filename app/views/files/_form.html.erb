@@ -32,7 +32,7 @@
             </div>
             <div class="row">
               <div class="form-group form-material col-md-12">
-                <button type="submit" class="btn btn-sm green-btn" id="saveButton"><%= @file.new_record? ? ' Save ' : ' Save changes' %></button>
+                <button type="submit" class="btn btn-sm green-btn spinnerButton"><%= @file.new_record? ? ' Save ' : ' Save changes' %></button>
                 <button type="button" class="btn btn-sm white-btn" data-dismiss="modal">Cancel</button>
                 <% unless @file.new_record? %>
                   <%= link_to 'Delete',file_path(@file), method: :delete, remote: true, class: "btn btn-sm btn-danger" %>

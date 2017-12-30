@@ -1,0 +1,36 @@
+<div class="panel">
+  <div class="panel-body">
+    <table class="table table-striped table-hover toggle-circle footable designTable" data-toggle-column="first" data-empty="There are no organization." data-show-toggle="true" id="orgList" >
+      <thead>
+        <tr>
+          <th>ORGANIZATION</th>
+          <th>NUMBER OF USERS</th>
+          <th data-breakpoints="xs">PAYMENT STATUS</th>
+          <th data-breakpoints="xs">OPERATIONS</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% for organization in @organizations %>
+          <tr>
+            <td><%= organization.name %></td>
+            <td><%= organization.users.count %></td>
+            <td><%= %></td>
+            <td>
+              <a class="btn btn-sm green-btn" href="<%= sign_in_as_admin_organization_path(organization) %>" target="_blank">Sign In as Admin</a>
+              <a class="btn btn-sm green-btn" href="<%= edit_organization_path(organization) %>" data-turbolinks="false">Manage</a>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <h5>Note: You can only sign in as admin of one organization at a time.</h5>
+  </div>
+</div>
+
+<div class="digg_pagination">
+  <%= js_will_paginate @organizations %>
+</div>
+
+<script>
+  $('.footable').footable();
+</script>

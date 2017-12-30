@@ -1,87 +1,253 @@
-<div class="col-md-8 col-12 offset-md-2">
-  <%= form_for(resource, as: resource_name, html: {id:"msform"}, url: registration_path(resource_name)) do |user| %>
-    <%= devise_error_messages! %>
-    <ul id="progressbar">
-      <li class="active">Organization Setup</li>
-      <li>First User Setup</li>
-      <li>Payment</li>
-    </ul>
-    <fieldset>
-      <h2 class="fs-title">Organization Setup</h2>
-      <h3 class="fs-subtitle">This is step 1</h3>
-      <div class="row">
-        <div class="col-md-12 text-left">
-          <%= label_tag :name %><br/>
-          <%= text_field_tag 'org[name]',nil ,autofocus: true, placeholder: "ex: Acme EconDev Inc.", required: true %>
+<header>
+  <div class="headerSection">
+    <div class="container">
+      <div class="logo"><a href="javascript:void(0)"><img src="/assets/logo.png" alt="EDLT"></a></div>
+    </div>
+  </div>
+</header>
+<section>
+  <div class="rightImgBg signUpPage">
+    <div class="container">
+      <div class="formSection">
+        <div class="formTitle">
+          <h3>Sign up for your account</h3>
+        </div>
+        <div class="formSteps">
+          <ul>
+            <li class="active"><span class="stepNumber">01.</span> <span>Organization Setup</span></li>
+            <li><span class="stepNumber">02.</span> <span>First User Setup</span></li>
+            <li><span class="stepNumber">03.</span> <span>Payment Information</span></li>
+          </ul>
+        </div>
+        <div class="formStyle">
+          <div class="multiStepForm">
+            <%= form_for(resource, html: {class: "step-form", role: "form"}, as: resource_name, url: registration_path(resource_name)) do |user| %>
+              <fieldset>
+                <div class="form-top">
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="orgName">Organization Name:</label>
+                      <%= text_field_tag 'org[name]',nil ,autofocus: true, placeholder: "ex: Acme EconDev Inc.", required: true, class: "form-control outlineFld" %>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="orgURL">*Organization URL/ID:</label>
+                      <%= text_field_tag 'org[url]', nil ,placeholder: "'ex: acmeecondev", required: true, class: "form-control outlineFld" %>
+                    </div>
+                  </div>
+                  <div class="fldBtmInfo">
+                    <p><span class="red">*</span> This will be how your organization name appears in the URL and the unique name of your organization (You can change this later).</p>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="fName">Primary Contact First Name:</label>
+                      <%= text_field_tag 'org[primary_contact_first_name]', nil, placeholder: "First Name", required: true, class: "form-control outlineFld" %>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="lName">Primary Contact Last Name:</label>
+                      <%= text_field_tag 'org[primary_contact_last_name]', nil, placeholder: "Last Name", required: true, class: "form-control outlineFld" %>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="contactPhone">Primary Contact Phone:</label>
+                      <%= text_field_tag 'org[primary_contact_phone]', nil, placeholder: "555-555-5555", required: true, class: "form-control outlineFld" %>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="contactEmail">Primary Contact Email:</label>
+                      <%= email_field_tag 'org[primary_contact_email]', nil, placeholder: "abc@example.com", required: true, class: "form-control outlineFld" %>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-bottom formBtnSection">
+                  <button type="button" class="btn btn-next primaryBtn">Next Step</button>
+                </div>
+              </fieldset>
+              <fieldset>
+              <div class="form-top">
+                <div class="formTopInfo">
+                  <p>This will be your initial admin user for your organization. You will be able to change details of this user, as well as add more users with various roles later.</p>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="firstName">First Name:</label>
+                    <%= user.text_field :first_name, placeholder: "First Name", required: true, class: "form-control outlineFld" %>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="lastName">Last Name:</label>
+                    <%= user.text_field :last_name, placeholder: "Last Name", required: true, class: "form-control outlineFld" %>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="userEmail">Email:</label>
+                    <%= user.email_field :email, placeholder: "Email", required: true, class: "form-control outlineFld" %>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="pwd">Password:</label>
+                    <%= user.password_field :password, autocomplete: "off", required: true, class: "form-control outlineFld", id: "pwd", placeholder: "password" %>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="confirmPassword">Confirm Password:</label>
+                    <%= user.password_field :password_confirmation, autocomplete: "off", class: "form-control outlineFld", id: "confirmPassword", placeholder: "Confirm password" %>
+                  </div>
+                </div>
+              </div>
+              <div class="form-bottom formBtnSection">
+                <div class="row">
+                  <div class="col">
+                    <button type="button" class="btn btn-previous primaryBtn">Previous Step</button>
+                  </div>
+                  <div class="col text-right">
+                    <button type="button" class="btn btn-next primaryBtn">Next Step</button>
+                  </div>
+                </div>
+              </div>
+              </fieldset>
+              <fieldset>
+              <div class="form-top">
+                <div class="choosePaymentSection">
+                  <div id="paymentId" class="activeCC">
+                    <div class="cPTopSection">
+                      <label>Select payment method:</label>
+                      <div class="chooseMethod radioStyle">
+                        <label class="custom-control custom-radio">
+                        <input id="radio1" name="radio" type="radio" value="activeCC" class="custom-control-input" checked="checked">
+                        <span class="custom-control-indicator"></span> <span class="custom-control-description">Credit Card</span> </label>
+                        <label class="custom-control custom-radio">
+                        <input id="radio2" name="radio" type="radio" value="activeACH" class="custom-control-input">
+                        <span class="custom-control-indicator"></span> <span class="custom-control-description">ACH</span> </label>
+                        <label class="custom-control custom-radio">
+                        <input id="radio3" name="radio" type="radio" value="activeCM" class="custom-control-input">
+                        <span class="custom-control-indicator"></span> <span class="custom-control-description">Check by Mail</span> </label>
+                      </div>
+                    </div>
+                    <div class="cPBtmSection">
+                      <div class="paymentCC">
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                            <label for="cardNumber">Card Number:</label>
+                            <input type="text" class="form-control outlineFld" id="cardNumber" placeholder="6417 8532 9081 3272">
+                          </div>
+                        </div>
+                        <div class="form-row">
+                          <div class="col-md-6">
+                            <div class="form-row">
+                              <div class="form-group col-md-6">
+                                <label for="expDate">Expiration Date:</label>
+                                <input type="text" class="form-control outlineFld" id="expDate" placeholder="MM/YY">
+                              </div>
+                              <div class="form-group col-md-6">
+                                <label for="cvv">CVV Code:</label>
+                                <input type="text" class="form-control outlineFld" id="cvv" placeholder="">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="paymentACH">
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                            <label for="acHolderType">Account Holder Type:</label>
+                            <select class="form-control custom-select selectStyle">
+                              <option value="Individual">Individual</option>
+                              <option value="Option 2">Second Option</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                            <label for="acHolderName">Account Holder Name:</label>
+                            <input type="text" class="form-control outlineFld" id="acHolderName" placeholder="">
+                          </div>
+                        </div>
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                            <label for="routingNumber">Routing Number:</label>
+                            <input type="text" class="form-control outlineFld" id="routingNumber" placeholder="">
+                          </div>
+                        </div>
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                            <label for="accountNumber">Account Number:</label>
+                            <input type="text" class="form-control outlineFld" id="accountNumber" placeholder="">
+                          </div>
+                        </div>
+                        <div class="form-row">
+                          <div class="form-group col">
+                            <label class="custom-control custom-checkbox checkboxStyle">
+                            <input type="checkbox" class="custom-control-input">
+                            <span class="custom-control-indicator"></span> <span class="custom-control-description">I autorize to electronically debit my account and, if necessary, electronically credit my account to correct erroneous debits.</span> </label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="paymentCM">
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                            <label for="mName">Name:</label>
+                            <input type="text" class="form-control outlineFld" id="mName" placeholder="">
+                          </div>
+                        </div>
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                            <label for="checkNumber">Check Number:</label>
+                            <input type="text" class="form-control outlineFld" id="checkNumber" placeholder="">
+                          </div>
+                        </div>
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                            <label for="bankName">Bank Name:</label>
+                            <input type="text" class="form-control outlineFld" id="bankName" placeholder="">
+                          </div>
+                        </div>
+                        <div class="form-row">
+                          <div class="col-md-6">
+                            <div class="form-row">
+                              <div class="form-group col-md-6">
+                                <label for="acNumber">A/C Number:</label>
+                                <input type="text" class="form-control outlineFld" id="acNumber" placeholder="">
+                              </div>
+                              <div class="form-group col-md-6">
+                                <label for="amountDate">Amount & Date:</label>
+                                <input type="text" class="form-control outlineFld" id="amountDate" placeholder="">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-bottom formBtnSection">
+                <div class="row">
+                  <div class="col">
+                    <button type="button" class="btn btn-previous primaryBtn">Previous Step</button>
+                  </div>
+                  <div class="col text-right">
+                    <%= user.submit class:"submit action-button btn primaryBtn", value:"Sign Up", name:"Sign Up" %>
+                  </div>
+                </div>
+              </div>
+              </fieldset>
+            <% end %>
+          </div>
+          <div class="formBtmLink"><%= link_to "Already have an account? Sign In.", new_user_session_path %></div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-12 text-left">  
-          <%= label_tag :url %><br/>
-          <%= text_field_tag 'org[url]', nil ,placeholder: "'ex: acmeecondev", required: true %><br/>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6 text-left">
-          <%= label_tag :primary_contact_first_name %><br/>
-          <%= text_field_tag 'org[primary_contact_first_name]', nil, placeholder: "First Name", required: true %>
-        </div>
-        <div class="col-md-6 text-left">
-          <%= label_tag :primary_contact_last_name %><br/>
-          <%= text_field_tag 'org[primary_contact_last_name]', nil, placeholder: "Last Name", required: true %><br/>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6 text-left">
-          <%= label_tag :primary_contact_phone %><br/>
-          <%= text_field_tag 'org[primary_contact_phone]', nil, placeholder: "555-555-5555", required: true %>
-        </div>
-        <div class="col-md-6 text-left">
-          <%= label_tag :primary_contact_email %><br/>
-          <%= email_field_tag 'org[primary_contact_email]', nil, placeholder: "abc@example.com", required: true %><br/>
-        </div>
-      </div>
-      <input type="button" name="next" class="next action-button" value="Next" />
-    </fieldset>
-    <fieldset>
-        <h2 class="fs-title">First User Setup</h2>
-        <h3 class="fs-subtitle">This is step 2</h3>
-        <div class="row">
-          <div class="col-md-12 text-left field">
-            <%= user.label :first_name %><br/>
-            <%= user.text_field :first_name, placeholder: "First Name", required: true %>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12 text-left field">
-            <%= user.label :last_name %><br/>
-            <%= user.text_field :last_name, placeholder: "Last Name", required: true %>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12 text-left field">
-            <%= user.label :email %><br/>
-            <%= user.email_field :email, placeholder: "Email", required: true %>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6 text-left field">
-            <%= user.label :password %><br/>
-             <%= user.password_field :password, autocomplete: "off", required: true %>
-          </div>
-          <div class="col-md-6 text-left field">
-            <%= user.label :password_confirmation %><br/>
-            <%= user.password_field :password_confirmation, autocomplete: "off" %>
-          </div>
-        </div>
-      <input type="button" name="previous" class="previous action-button" value="Previous" />
-      <input type="button" name="next" class="next action-button" value="Next" />
-    </fieldset>
-    <fieldset>
-      <h2 class="fs-title">Payment</h2>
-      <h3 class="fs-subtitle">Final step</h3>
-      <input type="button" name="previous" class="previous action-button" value="Previous" />
-      <%= user.submit class:"submit action-button", value:"Sign Up", name:"Sign Up" %>
-    </fieldset>
-  <% end %>
-</div>
+    </div>
+  </div>
+  <div class="pageBg">
+    <div class="pageBgCircle circleOne"></div>
+    <div class="pageBgCircle circleTwo"></div>
+    <div class="pageBgCircle circleThree"></div>
+  </div>
+</section>
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->

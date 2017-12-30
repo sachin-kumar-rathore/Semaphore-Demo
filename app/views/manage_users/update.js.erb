@@ -1,0 +1,10 @@
+<% if @user.errors.blank? %>
+  $('#orgUsersList').html("<%= j render(partial: 'organizations/users_list', locals: { users: @organization.users }) %>")
+  $('.orgUserAlerts').html('Successfully saved data for <%= @user.full_name %>.');
+  $('.orgUserErrors').html("");
+  $('.modal-backdrop').remove();
+  $('#userFormCenter').modal('hide');
+<% else %>
+  $('.orgUserAlerts').html("");
+  $('.error-messages').html("<%= j render partial: 'shared/error_messages', locals: {obj: @user} %>");
+<% end %>

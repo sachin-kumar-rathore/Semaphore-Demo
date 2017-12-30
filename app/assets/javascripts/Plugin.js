@@ -129,7 +129,7 @@
     if (typeof plugins[name] !== 'undefined') {
       return plugins[name];
     } else {
-      console.warn('Plugin:' + name + ' has no warpped class.');
+      //console.warn('Plugin:' + name + ' has no warpped class.');
       return false;
     }
   }
@@ -162,7 +162,7 @@
       // console.log('Plugin:' + name + ' use api render.');
       return false;
     } else {
-      console.warn('Plugin:' + name + ' script is not loaded.');
+      //console.warn('Plugin:' + name + ' script is not loaded.');
       return false;
     }
   }

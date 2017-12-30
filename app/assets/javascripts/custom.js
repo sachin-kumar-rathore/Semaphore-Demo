@@ -19,19 +19,6 @@ $(document).on("click", ".clickable", function () {
   });
 });
 
-function showUploadFileName(input) {
-  if (input.files && input.files[0]) {
-    $('.fileName').html(input.files[0].name);
-  }
-}
-
-$(document).on("click", "#fakeFileUploadBtn", function () {
-  $('#contactsFileUploadHidden').click();
-});
-$("#contactsFileUploadHidden").change(function () {
-  showUploadFileName(this);
-});
-
 $( document ).ready(function() {
   $('.digg_pagination a').each(function () {
     $(this).attr("data-turbolinks", false);
@@ -114,8 +101,8 @@ function reloadFiles(){
   });  
 }
 
-$(document).on("click", "#saveButton", function () {
-  this.innerHTML = 'Uploading....';
+$(document).on("click", ".spinnerButton", function () {
+  this.innerHTML = 'Processing....';
   $('.spinner').removeAttr('hidden');
 });
 

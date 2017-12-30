@@ -16,7 +16,6 @@
 //= require jquery.easing
 //= require rails-ujs
 //= require turbolinks
-//= require sign_up_form
 //= require custom
 //= require breakpoints
 //Core
@@ -36,7 +35,6 @@
 //= require screenfull
 //= require jquery-slidePanel
 //= require jquery.matchHeight-min
-//= require jquery.peity.min
 //= require jquery.tokeninput
 //= require plugins/bootstrap-select
 //= require plugins/bootstrap-datepicker

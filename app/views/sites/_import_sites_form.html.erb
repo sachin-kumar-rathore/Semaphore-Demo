@@ -1,0 +1,61 @@
+<!-- Site Modal -->
+<div class="modal fade" id="siteImportFormCenter" aria-hidden="true" aria-labelledby="siteImportFormCenter"
+  role="dialog" tabindex="-1">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <%= form_tag import_sites_path, method: :post, multipart: true do |form| %>
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+          <h6 class="modal-title"><%= "IMPORT SITES/BUILDINGS" %></h6>
+        </div>
+        <div class="modal-body">
+          <div class="import-sites">
+            <div class="example">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="form-control-label">File:</label>
+                    <%= file_field_tag 'import[file]' %>
+                  </div>
+                  <div class="m-10">*Note: This may take a couple minutes.</div>
+                  <div class="form-group form-material">
+                    <label class="form-control-label">Business Unit:</label>
+                    <%= select_tag 'import[business_unit_id]', options_for_select(load_type("business_units")), :class => 'form-control', data: {
+            plugin: "selectpicker" }  %>
+                  </div>
+                  <%= check_box_tag 'import[create_new_contacts]', true, false %>
+                  <%= label_tag "import[create_new_contacts]", 'Create new contact if email not found', class: "label" %>
+                  <br/>
+                  <br/>
+                  <a class="btn green-btn" href="https://s3.amazonaws.com/edlt-rails/staging/uploads/Sample_Site_Import_file.xls">Download Sample File</a>
+                  <br/>
+                  <br/>
+                  <h5>Please refer to the sample file for order of columns.</h5>
+                </div>
+                <div class="col-md-6 requirements">
+                  <h5 class="example-title">Requirements</h5>
+                  <p>The order of the fields should be:</p>
+                  <p>Property ID, Property Name, Contact Email, Property Type, Address, City, Country, State, Zip, Special District, Available Acreage, Available Square Feet, Total Acreage, Total Square Feet, Latitude, Longitude
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer text-left">
+            <button type="submit" class="btn green-btn spinnerButton">Upload & import Sites/Buildings</button>
+            <div class="spinner" hidden>
+              <div class="bounce1"></div>
+              <div class="bounce2"></div>
+              <div class="bounce3"></div>
+            </div>
+            <button type="button" class="btn btn-default cancel-btn" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->
+

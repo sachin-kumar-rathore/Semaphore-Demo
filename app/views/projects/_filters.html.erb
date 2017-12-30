@@ -141,7 +141,7 @@
   </div>
   <div class="form-group form-material col-md-3">
     <label class="form-control-label" for="inputCompanyName">Company Name:</label>
-    <%= select_tag "company_id", options_for_select( load_data_with_id(current_org.companies) ), { class: "form-control", data:{ plugin: 'selectpicker', "live-search":true}, include_blank: 'Please Select' }  %>
+    <%= select_tag "company", options_for_select( load_data_with_id(current_org.companies) ), { class: "form-control", data:{ plugin: 'selectpicker', "live-search":true}, include_blank: 'Please Select' }  %>
   </div>
   <div class="form-group form-material col-md-3">
     <label class="form-control-label" for="inputProjectNotes">Project Notes:</label>

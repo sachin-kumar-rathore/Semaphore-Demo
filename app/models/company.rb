@@ -15,8 +15,8 @@ class Company < ApplicationRecord
   has_many :company_contacts, dependent: :destroy
   has_many :contacts, through: :company_contacts
   belongs_to :industry_type
-  belongs_to :project_type
-  belongs_to :business_unit
+  belongs_to :project_type, optional: true
+  belongs_to :business_unit, optional: true
   belongs_to :organization
   belongs_to :owner, class_name: 'Contact', foreign_key: :owner_id, optional: true
   has_many :activities, dependent: :destroy

@@ -1,5 +1,10 @@
+require 'roo'
 class Contact < ApplicationRecord
+  include SpreadSheet
 
+  IMPORT_PARAMETERS = ["name", "title", "address_line_1", "address_line_2",
+                      "city_state_zip", "phone_number_1", "phone_number_2", "cell_phone",
+                      "fax", "email", "website", "notes"]
   attr_accessor :project_id, :company_id
   # == Constants == #
   self.per_page = 5
@@ -28,7 +33,7 @@ class Contact < ApplicationRecord
   # == Validations == #
   validates_presence_of :name, :email
   validates_format_of :email, with: /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/, message: "Invalid"
-
+  validates_uniqueness_of :email, scope: :organization_id
   # == Callbacks == #
   after_create :add_contact_to_project, if: :has_project_id? 
   after_create :add_contact_to_company, if: :has_company_id?
@@ -48,6 +53,27 @@ class Contact < ApplicationRecord
     return where('id IN (?)', search_result)
   end
 
+  def self.import(import_params, current_org_id)
+      error_messages = []
+      contacts = []
+    begin 
+      spreadsheet, current_org = get_spreadsheet_and_organization(import_params, current_org_id)
+      (1..spreadsheet.last_row).each do |index|
+        contact = new
+        contact.attributes = Hash[Contact::IMPORT_PARAMETERS.each_with_index.collect{ |item,i| [item, spreadsheet.cell(index,i+1)] }]
+            .merge(organization_id: current_org_id,business_unit_id: import_params[:business_unit_id], contact_category_id:
+            import_params[:contact_category_id])
+        contact.handle_string_data_type
+        contacts << contact
+        contact.add_errors(index, error_messages)
+      end
+      contacts.map(&:save) if error_messages.blank?
+    rescue Exception => e
+      error_messages << e
+    end
+    error_messages 
+  end
+
   # == Private == #
   def add_contact_to_project
     project_contacts.create!(project_id: project_id)
@@ -65,4 +91,9 @@ class Contact < ApplicationRecord
     company_id.present?    
   end
 
+  def handle_string_data_type
+    self.phone_number_1 = self.phone_number_1.to_i.to_s
+    self.phone_number_2 = self.phone_number_2.to_i.to_s
+    self.cell_phone = self.cell_phone.to_i.to_s    
+  end
 end

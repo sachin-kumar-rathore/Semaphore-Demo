@@ -18,7 +18,7 @@
         </div>
         <div class="form-group form-material col-md-3">
           <label class="form-control-label" id="inputCompanyName" >Company Name:</label>
-          <%= activity.select(:company_id, load_data_with_id(current_org.companies),{ include_blank: 'No Company' },{data:{ plugin: 'selectpicker', "live-search":true}}) %>
+          <%= activity.select :company_id, options_for_select(load_data_with_id(current_org.companies), activity.object.company_id), { include_blank: 'No Company' },data:{ plugin: 'selectpicker', "live-search":true}, disabled: @company %>
         </div>
         <div class="form-group form-material col-md-3">
           <label class="form-control-label" for="inputActivityType">Activity Type:</label>
@@ -69,6 +69,9 @@
           <%= activity.text_area 'description', class: "form-control", rows: "3" %>
         </div>
       </div>
+      <% if @company %>
+        <%= hidden_field_tag 'company_id', @company.id %>
+      <% end %>
       <hr>
       <div class="row">
         <div class="col-md-2 col-6">

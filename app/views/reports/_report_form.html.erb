@@ -21,7 +21,7 @@
       <div class="col-md-12">
         <div class="form-group">
           <label class="form-control-label">Year:</label>
-          <%= text_field_tag 'year', Date.today.year, class: 'form-control', id: 'yearToStartReport' %>
+					<%= select_tag 'year', options_for_select((1990..Date.today.year).to_a.reverse), class: 'form-control', data: { plugin: "selectpicker" }, id: 'yearToStartReport' %>
         </div>
       </div>
 

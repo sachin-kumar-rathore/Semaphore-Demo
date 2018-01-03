@@ -4,7 +4,7 @@ class Task < ApplicationRecord
   # == Constants == #
   STATUS = ['In-Progress', 'Complete']
   PRIORITY = ['High', 'Medium', 'Low']
-
+  PAGINATION_VALUE = 8
   # == Attributes == #
 
   # == File Uploader == #

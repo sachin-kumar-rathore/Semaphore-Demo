@@ -31,3 +31,6 @@
 
 en:
   hello: "Hello world"
+  will_paginate:
+    next_label: <i class="fa fa-arrow-right grey" aria-hidden="true"></i>
+    previous_label: <i class="fa fa-arrow-left grey" aria-hidden="true"></i>

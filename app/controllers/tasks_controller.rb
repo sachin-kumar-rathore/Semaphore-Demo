@@ -9,7 +9,8 @@ class TasksController < ApplicationController
   def index
     @tasks = filter_tasks_by_user
     @tasks = filter_tasks_by_project
-    @tasks = @tasks.paginate(page: params[:page], per_page: 8)
+    @tasks = @tasks.paginate(page: params[:page], per_page: Task::PAGINATION_VALUE)
+                   .order('updated_at DESC')
   end
 
   def show; end
@@ -56,10 +57,12 @@ class TasksController < ApplicationController
   end
 
   def filter_tasks_by_user
-    if params[:assigned_to_me] == 'true'
-      current_user.assigned_tasks.without_activity
-    elsif params[:current_user_filter] == 'true'
-      current_user.tasks.without_activity
+    if params[:current_user_filter] == 'true'
+      if params[:assigned_to_me] == 'true'
+        current_user.assigned_tasks.without_activity
+      else
+        current_user.tasks.without_activity
+      end
     else
       current_org.tasks.without_activity
     end

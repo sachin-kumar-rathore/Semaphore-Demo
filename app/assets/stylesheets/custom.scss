@@ -33,39 +33,55 @@
 .digg_pagination {
   background: white;
   cursor: default;
+  text-align: center;
   /* self-clearing method: */
 }
 
 .digg_pagination a, .digg_pagination span, .digg_pagination em {
-  padding: 0.2em 0.5em;
-  display: block;
-  float: left;
-  margin-right: 1px;
+  line-height: 1.571429;
+  position: relative;
+  padding: .643rem 1.072rem;
+  color: #000000;
+  border: 1px solid #e0e0e0;
+  background-color: transparent;
 }
 
 .digg_pagination .disabled {
-  color: #999999;
-  border: 1px solid #dddddd;
+  line-height: 1.571429;
+  position: relative;
+  padding: .643rem 1.072rem;
+  color: #000000;
+  border: 1px solid #e0e0e0;
+  background-color: transparent;
 }
 
 .digg_pagination .current {
+  line-height: 1.571429;
+  position: relative;
+  padding: .643rem 1.072rem;
+  color: #000000;
   font-style: normal;
-  font-weight: bold;
-  background: #2ED573;
-  color: white;
-  border: 1px solid #2ED573;
+  border: 1px solid #e0e0e0;
+  background-color: #DCDCDC;
 }
 
 .digg_pagination a {
-  text-decoration: none;
-  color: #2ED573;
-  border: 1px solid #2ED573;
+  line-height: 1.571429;
+  position: relative;
+  padding: .643rem 1.072rem;
+  color: #000000;
+  border: 1px solid #e0e0e0;
+  background-color: transparent;
 }
 
 .digg_pagination a:hover, .digg_pagination a:focus {
-  color: white;
-  background: #2ED573;
-  border-color: #2ED573;
+  line-height: 1.571429;
+  position: relative;
+  padding: .643rem 1.072rem;
+  color: #000000;
+  text-decoration: none;
+  border: 1px solid #e0e0e0;
+  background-color: #DADADA;
 }
 
 .digg_pagination .page_info {
@@ -91,20 +107,16 @@
   visibility: hidden;
 }
 
+.grey{
+color: #808080;
+}
+
 * html .digg_pagination {
   height: 1%;
 }
 
 *:first-child + html .digg_pagination {
   overflow: hidden;
-}
-
-span.previous_page, a.previous_page {
-  display: none;
-}
-
-span.next_page, a.next_page {
-  display: none;
 }
 
 //pagination styles end
@@ -120,12 +132,6 @@ span.next_page, a.next_page {
 .themeColor{
   color: #2ED573;
 }
-
-.tableDesign thead th{
-  color: #2ED573;
-  font-weight: 500;
-}
-
 
 #contactImportFormCenter {
   .requirements .list-group-item {

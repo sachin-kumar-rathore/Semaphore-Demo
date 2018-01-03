@@ -10,7 +10,7 @@ class ContactsController < ApplicationController
     if params[:name].present? || params[:email].present?
       @contacts = search_contacts
     end
-    @contacts = @contacts.paginate(page: params[:page], per_page: 5)
+    @contacts = @contacts.paginate(page: params[:page], per_page: Contact::PAGINATION_VALUE)
                          .order('updated_at DESC')
   end
 
@@ -37,9 +37,9 @@ class ContactsController < ApplicationController
 
   def destroy
     if @contact.destroy
-      flash.now[:success] = 'Contact was successfully destroyed.'
+      flash.now[:success] = 'Contact was successfully deleted.'
     else
-      flash.now[:danger] = 'Contact could not be destroyed.'
+      flash.now[:danger] = 'Contact could not be deleted.'
     end
     load_contacts
   end
@@ -63,7 +63,7 @@ class ContactsController < ApplicationController
 
   def load_contacts
     @contacts = current_org.contacts
-                           .paginate(page: params[:page], per_page: 5)
+                           .paginate(page: params[:page], per_page: Contact::PAGINATION_VALUE)
                            .order('updated_at DESC')
   end
 

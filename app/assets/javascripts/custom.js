@@ -46,7 +46,7 @@ $(document).on("click", ".first-save-project", function () {
 
 //tasks
 
-$(document).on("click", ".nav-pills .nav-item", function () {
+$(document).on("click", ".tasksNav .nav-item", function () {
   $(".nav-item").children('.nav-link').removeClass("active");
   $(this).children('.nav-link').addClass("active");
   $(this).attr("id")=="current_user_filter" ? $('.assign-filter').attr('hidden',false) : $('.assign-filter').attr('hidden',true);

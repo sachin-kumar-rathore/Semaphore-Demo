@@ -9,6 +9,12 @@
         <button type="submit" class="btn white-btn btn-sm" id="xls-report-btn">Generate Data</button>
       </div>
     </div>
+		<div class="row mb-10 mt-10">
+			<div class="col-md-3"></div>
+			<div class="col-md-6">
+				<button type="button" data-href="<%= monthly_reports_path %>" id="filter-monthly-report" class="btn white-btn btn-sm" id="xls-report-btn">Filter Report</button>
+			</div>
+		</div>
 		<%= hidden_field_tag 'type', nil, id: 'hiddenBusinessType' %>
 		<%= hidden_field_tag 'report_format', 'pdf', id: 'hiddenReportFormat' %>
     <div class="row reportGenerationForm">

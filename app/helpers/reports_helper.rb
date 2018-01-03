@@ -13,10 +13,10 @@ module ReportsHelper
         {name: 'Prospect Acreage Request', field: 'acres_requested'},
         {name: 'Prospect Square foot Request', field: 'square_feet_requested'},
         {name: 'Total Number of New Jobs/Total New Investment', field: 'net_new_investment'},
-        {name: 'Prospects by Type (year to year comparison)', field: 'project_type_id'},
-        {name: 'Industry Type (year to year comparison)', field: 'industry_type_id'},
-        {name: 'Prospect Lead Sources (year to year comparison)', field: 'source_id'},
-        {name: 'Reasons or Project Elimination (year to year comparison)', field: 'elimination_reason_id'}
+        {name: 'Prospects by Type (year to year comparison)', field: 'project_type_id_comp'},
+        {name: 'Industry Type (year to year comparison)', field: 'industry_type_id_comp'},
+        {name: 'Prospect Lead Sources (year to year comparison)', field: 'source_id_comp'},
+        {name: 'Reasons or Project Elimination (year to year comparison)', field: 'elimination_reason_id_comp'}
     ]
   end
 
@@ -47,10 +47,10 @@ module ReportsHelper
     return seriesList.to_json
   end
 
-  def get_business_prospect_total(results, type)
-    seriesList = Project::STATUS.collect { |obj| {meta: obj, value: 0} }
+  def get_generic_prospect_total(results, type, parameters)
+    seriesList = parameters.collect { |obj| {meta: obj, value: 0} }
     results[type].keys.each do |year|
-      Project::STATUS.each do |obj|
+      parameters.each do |obj|
         if series = seriesList.find {|data| data[:meta] == obj}
           series[:value] += results[type][year][obj].try(:length) || 0
         end

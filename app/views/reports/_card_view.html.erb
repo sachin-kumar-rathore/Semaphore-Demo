@@ -177,7 +177,7 @@
     }
 
     function loadBusinessProspectBar() {
-      var seriesList = [<%=raw get_business_prospect_total(results, 'status') %>];
+      var seriesList = [<%=raw get_generic_prospect_total(results, 'status', Project::STATUS) %>];
       var labels = seriesList[0].map(function (a) {
         return a.meta
       });

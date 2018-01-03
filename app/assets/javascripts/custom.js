@@ -260,6 +260,26 @@ $(document).on("click", "#businessTypeCharts", function () {
   });
 });
 
+$(document).on("click", "#filter-periodic-report", function () {
+  var link = this.href;
+  $.ajax({
+    url: link,
+    type: "GET",
+    dataType: 'script',
+    data: { year: $('#yearToStartReport').val(), year_to_compare: $('#yearToCompareReport').val(), type: $('#hiddenBusinessType').val() },
+  });
+});
+
+$(document).on("click", "#filter-monthly-report", function () {
+  var link = this.href;
+  $.ajax({
+    url: link,
+    type: "GET",
+    dataType: 'script',
+    data: { start_date: $('#filterToStartReport').val(), end_date: $('#filterToEndReport').val(), type: $('#hiddenBusinessType').val() },
+  });
+});
+
 $(document).on("click", "#xls-report-btn", function () {
   $('#hiddenReportFormat').val("xls");
 });

@@ -31,7 +31,7 @@
             <div class="form-row">
               <div class="form-group col">
                 <label for="project">Project:</label>
-                <%= form.select :taskable_id, options_for_select( load_data_with_id(current_org.projects), selected: @project ? @project.id : form.object.taskable_id ),{ include_blank: 'No Project' }, data:{ plugin: 'selectpicker', "live-search":true}, disabled: @project %>
+                <%= form.select :taskable_id, options_for_select( load_data_with_id(current_org.projects), selected: @project ? @project.id : form.object.taskable_id ),{ include_blank: 'No Project' }, class: "form-control custom-select", disabled: @project %>
               </div>
             </div>
             <div class="form-row">
@@ -46,7 +46,7 @@
                 <div class="rightIconFld">
                   <%= form.text_field 'start_date_str', class: "form-control  datepicker", value:  @task.start_date ? @task.start_date : Date.today.strftime('%m/%d/%Y'), data: {plugin: "datepicker"}, required: true %>
                   <label for="startDate" class="fldRightIcon">
-                    <i class="icon ti-calendar" aria-hidden="true"></i>
+                    <i class="icon fa fa-calendar-o" aria-hidden="true"></i>
                   </label>
                 </div>
               </div>
@@ -55,7 +55,7 @@
                 <div class="rightIconFld">
                   <%= form.text_field 'end_date_str', class: "form-control  datepicker", value:  @task.end_date ? @task.end_date : Date.today.strftime('%m/%d/%Y'), data: {plugin: "datepicker"}, required: true %>
                   <label for="dueDate" class="fldRightIcon">
-                    <i class="icon ti-calendar" aria-hidden="true"></i>
+                    <i class="icon fa fa-calendar-o" aria-hidden="true"></i>
                   </label>
                 </div>
               </div>

@@ -7,6 +7,9 @@ ul {
 	padding: 0;
 	list-style-type: none;
 }
+img{
+	max-width:100%;
+}
 /*body.modal-open > .page, body.modal-open > .site-gridmenu, body.modal-open > .site-menubar, body.modal-open > .site-navbar  {
 	filter: blur(2px);
 }*/
@@ -64,11 +67,10 @@ label {
 	color: #2ed573;
 }
 .btn-primary {
-	color: #fff !important;
+	color :#fff !important;
 	border-color: #2ed573;
 	background-color: #2ed573;
 }
-
 .btn-primary.focus, .btn-primary:focus, .btn-primary:hover, .btn-primary.active, .btn-primary:active, .open > .btn-primary.dropdown-toggle, .btn-primary.active.focus, .btn-primary.active:focus, .btn-primary.active:hover, .btn-primary:active.focus, .btn-primary:active:focus, .btn-primary:active:hover, .open > .btn-primary.dropdown-toggle.focus,
 .open > .btn-primary.dropdown-toggle:focus, .open > .btn-primary.dropdown-toggle:hover  {
 	color: #fff;
@@ -566,6 +568,226 @@ h4.modal-title {
 	padding: 20px 20px 20px 50px;
 }
 
+.tableTitle > h2 {
+    margin: 0;
+    font-size: 24px;
+}
+.pageTitle > h2 {
+    margin-top: 0;
+    font-size: 22px;
+    padding-bottom: 8px;
+}
+.pageTitle h2 > i.icon {
+	margin-right: 2px;
+	color: #2ed573;
+}
+.btmLineLinks {
+    position: relative;
+}
+.btmLineLinks:before {
+	content: "";
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 2px;
+    border-bottom: 1px solid #e3e3e3;
+}
+.btmLineLinks .nav-link {
+	padding: 0 0rem .715rem;
+	color:#a2a5a9;
+	font-weight: 400;
+}
+.btmLineLinks .nav-link.active {	
+	color:#6d6f72;
+	font-weight: 600;
+}
+.btmLineLinks > .nav > .nav-item + .nav-item {
+	padding-left: 3rem;
+}
+.btmLineLinks .nav-link:focus, .btmLineLinks .nav-link:hover {
+	background: none;
+}
+.btmLineLinks .nav-link::before {
+	content: "";
+	background: #2ed573;
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 2px;
+	opacity: 0;
+}
+.btmLineLinks .nav-link:hover:before, .btmLineLinks .nav-link.active:before {
+	opacity: 1;
+}
+.bodrTop
+{
+   border-top: 1px solid rgba(0,0,0,0.1);
+}
+.filterSec
+{
+	background:#fff;
+	padding:20px;
+}
+.filter-heading > h3 {
+    text-align: left;
+    width: 100%;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    padding-bottom: 15px;
+    margin-top: 0;
+    font-size: 16px;
+}
+.updBtn {
+    padding: 0;
+}
+.modalFooterBtns {
+    text-align: left;
+    width: 100%;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    padding-top: 20px;
+    margin-top: 10px;
+}
+.updBtn .btn {
+    min-width: 100%;
+}
+.user-item > ul {
+    -webkit-column-count: 2; /* Chrome, Safari, Opera */
+    -moz-column-count: 2; /* Firefox */
+    column-count: 2;
+	
+}
+.user-item .custom-checkbox .custom-control-indicator {
+    background: transparent;
+    border: 1px solid #c4c4c4;
+    border-radius: .16rem;
+}
+.dashboard .card.configCardSpace {
+	margin-bottom: 15px;
+}
+.manageConfig > ul {
+	-webkit-column-count: 3; /* Chrome, Safari, Opera */
+    -moz-column-count: 3; /* Firefox */
+    column-count: 3;
+	 -webkit-column-gap: 15px; /* Chrome, Safari, Opera */
+    -moz-column-gap: 15px; /* Firefox */
+    column-gap: 15px;
+}
+.autoWd {
+	min-width: inherit;
+}
+.cardTitle {
+	padding-bottom: 8px;
+	border-bottom: 1px solid rgba(0,0,0,0.1);
+	margin-bottom: 5px;
+}
+.editableList > ul > li + li {
+	border-top: 1px solid #e3e3e3;
+}
+.editableList > ul > li {
+	position: relative;
+	padding-left: 30px;
+	padding-right: 25px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+.editableList .listEditIcon {
+	position: absolute;
+	left: 4px;
+	top: 9px;
+	color: #24c667;
+}
+.editableList .listRemoveIcon {
+	position: absolute;
+	right: 8px;
+	top: 9px;
+	color:#ff4757;
+}
+.cardTitle .col > h4 {
+    font-size: 14px;
+}
+
+.title-menu h3 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 100;
+    display: inline-block;
+}
+.btn.activeBtn {
+    display: inline-block;
+    background: #2ed573;
+    color: #fff;
+    padding: 0 5px;
+    margin-right: 4px;
+    min-width: auto;
+    font-size: 13px;
+    height: auto;
+}
+.viewReport ul > li {
+    display: inline-block;
+    padding: 3px 10px;
+    font-size: 13px;
+}
+.viewReport ul > li .priorityDot {
+    margin-top: -3px;
+}
+li.viewItem.viewlink {
+    border: 1px solid;
+    border-radius: 20px;
+}
+.prospectCont > h3 {
+    font-size: 14px;
+}
+.btn.activeBtn.primary
+{
+	background:#ff7544;
+}
+.projectMenu > h3 {
+    font-size: 15px;
+    position: relative;
+    margin: 0;
+    padding-left: 20px;
+}
+.projectSec .col-auto {
+    width: 150px;
+}
+.projectSec .form-row {
+    margin-top: 18px;
+}
+.projectMenu > h3 > span {
+    display: block;
+    font-weight: 100;
+    font-size: 13px;
+}
+.projectMenu .IconCart {
+    display: inline-block;
+    position: absolute;
+    left: 5px;
+    top: 2px;
+    margin: 0;
+    cursor: pointer;
+    color: #ff7544;
+}
+.projectMenu .IconCart.bgGreen
+{
+	color:#2ed573;
+}
+.projectSec {
+    background: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: .215rem;
+}
+.prospectCont > img {
+    max-width: 300px;
+    margin-bottom: 8px;
+    width: 100%;
+    margin-top: 20px;
+}
+.cardImg img {
+    padding-top: 30px;
+    padding-bottom: 36px;
+}
+
 /*************************************************************************/
 
 @media only screen and (max-width:1199px){
@@ -631,6 +853,40 @@ h4.modal-title {
 .modal-body > .formStyle {
 	margin-top: 0px;
 }
+.cardTitle .col > h4 {
+    font-size: 11px;
+}
+.manageConfig > ul {
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
+    -webkit-column-gap: 10px;
+    -moz-column-gap: 10px;
+    column-gap: 10px;
+}
+.prospectCont > h3 {
+    font-size: 11px;
+}
+.title-menu h3 {
+    font-size: 11px;
+}
+.viewReport ul > li {
+    padding: 3px 6px;
+    font-size: 11px;
+}
+.projectMenu > h3 {
+    font-size: 12px;
+}
+.projectMenu .IconCart {
+    top: 0;
+}
+.projectMenu > h3 > span {
+    font-size: 11px;
+}
+.projectMenu ul > li {
+    display: inline-block;
+    width: 49%;
+}
 }
 
 @media only screen and (max-width:767px){
@@ -681,6 +937,14 @@ label {
 	margin: 0 0 5px;
 	width: 100%;
 }
+.tableTitle > h2 {
+    font-size: 20px;
+}
+.manageConfig > ul {
+    -webkit-column-count: 1;
+    -moz-column-count: 1;
+    column-count: 1;
+}
 }
 @media only screen and (max-width:480px){
 	.page-content {
@@ -689,7 +953,29 @@ label {
 	.panel-body {
 	 /* padding: 20px 5px 30px;*/
 	}
+	.btmLineLinks .nav {
+    flex-wrap: nowrap;
+	-webkit-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
 }
+}
+	.btmLineLinks .nav-link {
+    font-size: .85rem;
+    text-align: center;
+    line-height: 1.2rem;
+}
+.tableTitle > h2 {
+    font-size: 16px;
+}
+.user-item > ul {
+    -webkit-column-count: 1;
+    -moz-column-count: 1;
+    column-count: 1;
+}
+.projectMenu ul > li {
+    width: 100%;
+}
+
 
 @media only screen and (max-width:440px){
 .panel-heading .col {

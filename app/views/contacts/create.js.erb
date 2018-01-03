@@ -1,11 +1,8 @@
 <% if @contact.errors.blank? %>
   $('#contactsList').html('');
-  $('#contactsList').html("<%= escape_javascript render partial: 'contacts', locals: {contacts: @contacts} %>");
+  $('#contactsList').html("<%= j render partial: 'contacts', locals: {contacts: @contacts} %>");
   $('#contactFormCenter').modal('hide');
-  $('.flashMessages').html("<%= escape_javascript render partial: 'shared/flash_messages' %>");
-  $('.pagination').find('a').each(function() {
-    $(this).attr("data-turbolinks", false);
-  });
+  $('.flashMessages').html("<%= j render partial: 'shared/flash_messages' %>");
 <% else %>
-  $('#contactFormCenter .error-messages').html("<%= escape_javascript render partial: 'shared/error_messages', locals: {obj: @contact} %>");
+  $('#contactFormCenter .error-messages').html("<%= j render partial: 'shared/error_messages', locals: {obj: @contact} %>");
 <% end %>

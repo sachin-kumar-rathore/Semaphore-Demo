@@ -5,6 +5,7 @@ class Contact < ApplicationRecord
   IMPORT_PARAMETERS = ["name", "title", "address_line_1", "address_line_2",
                       "city_state_zip", "phone_number_1", "phone_number_2", "cell_phone",
                       "fax", "email", "website", "notes"]
+  PAGINATION_VALUE = 6
   attr_accessor :project_id, :company_id
   # == Constants == #
   self.per_page = 5

@@ -2,4 +2,3 @@ $('#createOrEditTask').html("");
 $('#createOrEditTask').html("<%= j render(partial: 'tasks/form', locals: { controller: 'tasks', action: 'create'}) %>");
 $('#taskFormCenter').modal('show');
 $('[data-plugin="datepicker"]').datepicker();
-$('[data-plugin="selectpicker"]').selectpicker();

@@ -3,21 +3,23 @@
   <div class="col-xl-12">
     <div class="panel">
       <header class="panel-heading">
-        <h3 class="panel-title">
-          <button class="btn btn-sm green-btn waves-effect waves-classic clickable" data-href="<%= new_contact_path %>" type="button" >ADD CONTACT
-          </button>
-          <button class="btn btn-sm green-btn waves-effect waves-classic" data-target="#contactImportFormCenter" data-toggle="modal"
-            id="importNewContacts" type="button">IMPORT CONTACT
-          </button>
-          <%= link_to contacts_path, class: 'reload-page-link', data: { turbolinks: false } do %>
-              <i class="fa fa-refresh"></i>
-          <% end %>
-        </h3>
+        <div class="tasksTopOptions">
+          <div class="form-row">          
+            <div class="col">
+              <div class="form-row">
+                <div class="col-auto"> <a data-href="<%= new_contact_path %>" class="btn btn-primary clickable"><i class="icon fa fa-plus btnIcon" aria-hidden="true"></i> Add Contact</a> </div>
+                <div class="col-md"> <a class="btn btn-primary" data-toggle="modal" data-target="#contactImportFormCenter" id="importNewContacts"><i class="icon fa fa-download btnIcon" aria-hidden="true"></i> Import Contact</a> </div>
+              </div>
+            </div>      
+          </div>
+        </div>
       </header>
-      <div class="panel-body tableDesign" id="contactsList">
+      <div class="panel-body" id="contactsList">
         <%= render partial: 'contacts', locals: {contacts: @contacts} %>
       </div>
+    </div>
   </div>
 </div>
+
 <div id="createOrEditContact"></div>
 <%= render :partial => 'contacts/import_contacts_form' %>

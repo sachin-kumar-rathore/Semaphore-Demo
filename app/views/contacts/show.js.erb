@@ -1,4 +1,3 @@
 $('#createOrEditContact').html("");
-$('#createOrEditContact').html("<%= escape_javascript render(partial: 'form', locals: {contact: @contact, controller: 'contacts', action: 'update'}) %>");
+$('#createOrEditContact').html("<%= j render(partial: 'form', locals: {contact: @contact, controller: 'contacts', action: 'update'}) %>");
 $('#contactFormCenter').modal('show');
-$('[data-plugin="selectpicker"]').selectpicker();

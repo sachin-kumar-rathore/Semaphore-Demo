@@ -129,6 +129,18 @@ Rails.application.routes.draw do
   end
 
   resources :security_roles
+  resources :reports, only: [:index] do
+    collection do
+      post :yearly_report
+      post :monthly_report
+      get :sites
+      get :projects
+      post :download_sites
+      post :download_projects
+      get :yearly
+      get :monthly
+    end
+  end
 
   resources :activities do
     resources :notes, controller: 'activity_notes'

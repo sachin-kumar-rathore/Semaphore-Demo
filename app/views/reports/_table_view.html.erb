@@ -1,0 +1,155 @@
+<div class="row">
+	<div class="col-md-6 col-sm-12 masonry-item">
+		<p class="font-weight-bold">Prospects by Type Comparison</p>
+		<div class="example table-responsive">
+			<table class="table table-bordered bg-white">
+				<thead>
+				<tr>
+					<th class="font-weight-bold text-center">Year</th>
+					<th class="font-weight-bold text-center">Type</th>
+					<th class="font-weight-bold text-center">Amount</th>
+				</tr>
+				</thead>
+				<tbody>
+				<% results['project_type_id'].keys.each do |year| %>
+					<% results['project_type_id'][year].keys.each do |typeId| %>
+						<tr>
+							<td class="text-center"><%= year %></td>
+							<td class="text-center"><%= ProjectType.find(typeId).name %></td>
+							<td class="text-center"><%= results['project_type_id'][year][typeId].count %></td>
+						</tr>
+					<% end %>
+				<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="col-md-6 col-sm-12 masonry-item">
+		<p class="font-weight-bold">Industry Type Comparison</p>
+		<div class="example table-responsive">
+			<table class="table table-bordered bg-white">
+				<thead>
+				<tr>
+					<th class="font-weight-bold text-center">Year</th>
+					<th class="font-weight-bold text-center">Type</th>
+					<th class="font-weight-bold text-center">Amount</th>
+				</tr>
+				</thead>
+				<tbody>
+				<% results['industry_type_id'].keys.each do |year| %>
+						<% results['industry_type_id'][year].keys.each do |typeId| %>
+								<tr>
+									<td class="text-center"><%= year %></td>
+									<td class="text-center"><%= IndustryType.find(typeId).name %></td>
+									<td class="text-center"><%= results['industry_type_id'][year][typeId].count %></td>
+								</tr>
+						<% end %>
+				<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div class="col-md-6 col-sm-12 masonry-item">
+		<p class="font-weight-bold">Prospect Lead Sources Comparison</p>
+		<div class="example table-responsive">
+			<table class="table table-bordered bg-white">
+				<thead>
+				<tr>
+					<th class="font-weight-bold text-center">Year</th>
+					<th class="font-weight-bold text-center">Type</th>
+					<th class="font-weight-bold text-center">Amount</th>
+				</tr>
+				</thead>
+				<tbody>
+				<% results['source_id'].keys.each do |year| %>
+						<% results['source_id'][year].keys.each do |typeId| %>
+								<tr>
+									<td class="text-center"><%= year %></td>
+									<td class="text-center"><%= Source.find(typeId).name %></td>
+									<td class="text-center"><%= results['source_id'][year][typeId].count %></td>
+								</tr>
+						<% end %>
+				<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="col-md-6 col-sm-12 masonry-item">
+		<p class="font-weight-bold">Reasons or Project Elimination Comparison</p>
+		<div class="example table-responsive">
+			<table class="table table-bordered bg-white">
+				<thead>
+				<tr>
+					<th class="font-weight-bold text-center">Year</th>
+					<th class="font-weight-bold text-center">Type</th>
+					<th class="font-weight-bold text-center">Amount</th>
+				</tr>
+				</thead>
+				<tbody>
+				<% results['elimination_reason_id'].keys.each do |year| %>
+						<% results['elimination_reason_id'][year].keys.each do |typeId| %>
+								<tr>
+									<td class="text-center"><%= year %></td>
+									<td class="text-center"><%= EliminationReason.find(typeId).name %></td>
+									<td class="text-center"><%= results['elimination_reason_id'][year][typeId].count %></td>
+								</tr>
+						<% end %>
+				<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="col-md-6 col-sm-12 masonry-item">
+		<p class="font-weight-bold">Prospect Acreage Request</p>
+		<div class="example table-responsive">
+			<table class="table table-bordered bg-white">
+				<thead>
+				<tr>
+					<th class="font-weight-bold text-center">Year</th>
+					<th class="font-weight-bold text-center">Acres</th>
+					<th class="font-weight-bold text-center">Amount</th>
+				</tr>
+				</thead>
+				<tbody>
+				<% results['acres_requested'].keys.each do |year| %>
+						<% results['acres_requested'][year].keys.each do |typeId| %>
+								<tr>
+									<td class="text-center"><%= year %></td>
+									<td class="text-center"><%= typeId %></td>
+									<td class="text-center"><%= results['acres_requested'][year][typeId].count %></td>
+								</tr>
+						<% end %>
+				<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div class="col-md-6 col-sm-12 masonry-item">
+		<p class="font-weight-bold">Prospect Square foot Request</p>
+		<div class="example table-responsive">
+			<table class="table table-bordered bg-white">
+				<thead>
+				<tr>
+					<th class="font-weight-bold text-center">Year</th>
+					<th class="font-weight-bold text-center">Square foot</th>
+					<th class="font-weight-bold text-center">Amount</th>
+				</tr>
+				</thead>
+				<tbody>
+				<% results['square_feet_requested'].keys.each do |year| %>
+						<% results['square_feet_requested'][year].keys.each do |typeId| %>
+								<tr>
+									<td class="text-center"><%= year %></td>
+									<td class="text-center"><%= typeId %></td>
+									<td class="text-center"><%= results['square_feet_requested'][year][typeId].count %></td>
+								</tr>
+						<% end %>
+				<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+</div>

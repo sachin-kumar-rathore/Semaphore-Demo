@@ -1,0 +1,23 @@
+<div class="modal fade" id="downloadGeneratedReportModal" aria-labelledby="downloadGeneratedReportModal" role="dialog" tabindex="-1" aria-hidden="true" style="display: none;">
+	<div class="modal-dialog modal-simple modal-center">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+				<h4 class="modal-title">GENERATE DATA</h4>
+			</div>
+			<div class="modal-body">
+				<p><%= period.capitalize %> Activity Report was generated successfully to <%= file_type == 'pdf' ? 'PDF' : 'Excel' %> file.</p>
+			</div>
+			<%= form_tag(download_report_reports_path(), method: 'post') do %>
+				<%= hidden_field_tag 'period', period %>
+				<%= hidden_field_tag 'file_type', file_type %>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-sm white-btn" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-sm green-btn">Download</button>
+				</div>
+			<% end %>
+		</div>
+	</div>
+</div>

@@ -310,7 +310,6 @@ html, body {
   padding-top: 66.01px;
 }
 
-
 .success{
   color: green;
 }
@@ -328,3 +327,44 @@ html, body {
   color: #00b33c;
   text-decoration: underline;
 }
+
+//Report Page
+.yearlyReport {
+  .panel-body {
+    padding: 15px;
+  }
+  .reportGenerationForm {
+    .form-group {
+      margin-bottom: 5px;
+    }
+  }
+  .col-xl-9, .col-xl-3{
+    padding: 0 5px;
+  }
+  .font-weight-bold{
+    font-weight: 900 !important;
+  }
+  .ct-chart .ct-bar{
+    stroke-width: 5px;
+  }
+}
+.export-site-referrals-report{
+  .digg_pagination{
+    background: none;
+  }
+  table th{
+    color: #2ED573;
+  }
+  .input-daterange .input-group{
+    width: 100%;
+  }
+}
+.successful-project-data{
+  .input-daterange .input-group{
+    width: 100%;
+  }
+}
+.all-reports{
+  table th{color: #2ED573;}
+}
+.datepicker{z-index: 9999999 !important;}

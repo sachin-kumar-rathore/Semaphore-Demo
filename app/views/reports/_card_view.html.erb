@@ -1,0 +1,260 @@
+<div class="row">
+	<div class="col-md-6">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel mb-10">
+					<div class="panel-body">
+						<div class="panel-header">
+							<strong class="font-weight-bold">Business Prospect</strong>
+						</div>
+						<div class="ct-chart" id="businessProspectBar"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel mb-10">
+					<div class="panel-body">
+						<div class="panel-header">
+							<strong class="font-weight-bold">Prospects By Type</strong>
+						</div>
+						<div class="ct-chart" id="prospectsByTypeBar"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-6">
+		<div class="panel mb-10">
+			<div class="panel-body">
+				<div class="panel-header">
+					<strong class="font-weight-bold">Industry Type Comparison</strong>
+				</div>
+				<div class="ct-chart" id="industryTypeComparisonBar"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-6">
+		<div class="panel mb-10">
+			<div class="panel-body">
+				<div class="panel-header">
+					<strong class="font-weight-bold">Prospects By Type Comparison</strong>
+				</div>
+				<div class="ct-chart" id="prospectsByTypeComparisonBar"></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-6">
+		<div class="panel mb-10">
+			<div class="panel-body">
+				<div class="panel-header">
+					<strong class="font-weight-bold">Prospect Lead Sources Comparison</strong>
+				</div>
+				<div class="ct-chart" id="prospectLeadSourcesComparisonBar"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-6">
+		<div class="panel mb-10">
+			<div class="panel-body">
+				<div class="panel-header">
+					<strong class="font-weight-bold">Total New Investment</strong>
+				</div>
+				<div class="ct-chart" id="totalNewInvestmentBar"></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-6">
+		<div class="panel mb-10">
+			<div class="panel-body">
+				<div class="panel-header">
+					<strong class="font-weight-bold">Industry Type</strong>
+				</div>
+				<div class="ct-chart" id="prospectsByIndustryTypeBar"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-6">
+		<div class="panel mb-10">
+			<div class="panel-body">
+				<div class="panel-header">
+					<strong class="font-weight-bold">Total Numbers</strong>
+				</div>
+
+				<div id="widgetLineareaOne">
+					<div class="card-block p-20 pt-10">
+						<div class="mb-20 grey-500">
+							<i class="fa fa-caret-down red-500 font-size-18"></i>
+							<strong class="font-size-18 black"><%= results['retained_jobs'].values.sum %></strong>
+							<small>Total Numbers of Retained Jobs</small>
+						</div>
+						<div class="mb-20 grey-500">
+							<i class="fa fa-caret-up green-500 font-size-18"></i>
+							<strong class="font-size-18 black"><%= results['new_jobs'].values.sum %></strong>
+							<small>Total Numbers of New Jobs</small>
+						</div>
+						<div class="mb-20 grey-500">
+							<i class="fa fa-caret-up green-500 font-size-18"></i>
+							<strong class="font-size-18 black">$<%= results['net_new_investment'].values.sum %></strong>
+							<small>Total Number of New Investment</small>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-6">
+		<div class="panel mb-10">
+			<div class="panel-body">
+				<div class="panel-header">
+					<strong class="font-weight-bold">Elimination Reason Chart</strong>
+				</div>
+				<div class="ct-chart" id="eliminationReasonStack"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+  $(document).ready(function ($) {
+
+    loadIndustryTypeComparison();
+    loadProspectsByTypeComparison();
+    loadProspectLeadSourcesComparison();
+    loadBusinessProspectBar();
+    loadProspectsByProjectType();
+    loadProspectsByIndustryType();
+    loadTotalNewInvestment();
+    loadEliminationReasonStack();
+
+    function loadIndustryTypeComparison() {
+      var labels = <%=raw current_org.industry_types.pluck(:name) %>;
+      var seriesList = <%=raw get_associated_types(results, 'industry_type_id') %>;
+      loadComparisonCharts(labels, seriesList, '#industryTypeComparisonBar');
+    }
+
+    function loadProspectsByTypeComparison() {
+      var labels = <%=raw current_org.project_types.pluck(:name) %>;
+      var seriesList = <%=raw get_associated_types(results, 'project_type_id') %>;
+      loadComparisonCharts(labels, seriesList, '#prospectsByTypeComparisonBar');
+    }
+
+    function loadProspectLeadSourcesComparison() {
+      var labels = <%=raw current_org.sources.pluck(:name) %>;
+      var seriesList = <%=raw get_associated_types(results, 'source_id') %>;
+      loadComparisonCharts(labels, seriesList, '#prospectLeadSourcesComparisonBar');
+    }
+
+    function loadComparisonCharts(labels, seriesList, selector) {
+      var labelsHeight = labels.length * 40 * 2;
+
+      new Chartist.Bar(selector, {
+        labels: labels,
+        series: seriesList
+      }, {
+        horizontalBars: true,
+        height: labelsHeight + 'px',
+        axisX: {onlyInteger: true},
+        axisY: {offset: 70},
+        plugins: [
+          Chartist.plugins.tooltip()
+        ]
+      });
+    }
+
+    function loadBusinessProspectBar() {
+      var seriesList = [<%=raw get_generic_prospect_total(results, 'status', Project::STATUS) %>];
+      var labels = seriesList[0].map(function (a) {
+        return a.meta
+      });
+      new Chartist.Bar('#businessProspectBar', {
+        labels: labels,
+        series: seriesList
+      }, {
+        horizontalBars: true,
+        axisX: {onlyInteger: true},
+        axisY: {offset: 70},
+        plugins: [
+          Chartist.plugins.tooltip()
+        ]
+      });
+    }
+
+    function loadProspectsByProjectType() {
+      var data = {
+        series: <%=raw get_associated_types_total(results, 'project_type_id') %>
+      };
+      loadProspectsByDifferentType(data, '#prospectsByTypeBar');
+    }
+
+    function loadProspectsByIndustryType() {
+      var data = {
+        series: <%=raw get_associated_types_total(results, 'industry_type_id') %>
+      };
+      loadProspectsByDifferentType(data, '#prospectsByIndustryTypeBar');
+    }
+
+    function loadTotalNewInvestment() {
+      var labels = <%=raw results['net_new_investment'].keys %>;
+      var seriesList = [
+        <%=raw results['net_new_investment'].values %>
+      ];
+      new Chartist.Bar('#totalNewInvestmentBar', {
+        labels: labels,
+        series: seriesList
+      }, {
+        axisX: {onlyInteger: true},
+        axisY: {offset: 70},
+        plugins: [
+          Chartist.plugins.tooltip()
+        ]
+      });
+    }
+
+    function loadEliminationReasonStack() {
+      var labels = <%=raw current_org.elimination_reasons.pluck(:name) %>;
+      var seriesList = <%=raw get_associated_types(results, 'elimination_reason_id') %>;
+      new Chartist.Bar('#eliminationReasonStack', {
+        labels: labels,
+        series: seriesList
+      }, {
+        stackBars: true,
+        axisX: {onlyInteger: true},
+        axisY: {offset: 70},
+        plugins: [
+          Chartist.plugins.tooltip()
+        ]
+      });
+    }
+
+    function loadProspectsByDifferentType(data, selector) {
+
+      var sum = function (a, b) {
+        return a + b.value
+      };
+
+      new Chartist.Pie(selector, data, {
+        labelInterpolationFnc: function (value, idx) {
+          return Math.round(value / data.series.reduce(sum, 0) * 100) + '%';
+        },
+        plugins: [Chartist.plugins.tooltip()]
+      });
+    }
+
+  });
+</script>
+

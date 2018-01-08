@@ -60,6 +60,7 @@ class Project < ApplicationRecord
   scope :project_type_id, ->(project_type_id) { where('project_type_id = ?', project_type_id) }
   scope :source_id, ->(source_id) { where('source_id = ?', source_id) }
   scope :company, ->(company) { where('company_id = ?', company) }
+  scope :filter_by_active_date, -> (start_time, end_time) { where("active_date >= ? AND active_date <= ?", start_time, end_time)}
 
   # VALIDATION
   validates :project_number, uniqueness: true, presence: true, length: { is: 6 }
@@ -71,7 +72,7 @@ class Project < ApplicationRecord
   validates :square_feet_requested, inclusion: { in: Project::SQUARE_FEET_REQUESTED, message: '%{value} is not valid.' }
   validates :acres_requested, inclusion: { in: Project::ACRES_REQUESTED, message: '%{value} is not valid.' }
 
-  # Add validation for project manager and company
+  #Add validation for project manager and company
   private
 
   def convert_dates_format

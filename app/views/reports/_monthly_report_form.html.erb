@@ -1,0 +1,45 @@
+<div class="panel">
+  <div class="panel-body">
+    <strong>Reporting Parameters</strong>
+    <div class="row mb-10 mt-10">
+      <div class="col-md-6">
+        <button type="submit" class="btn green-btn btn-sm" id="pdf-report-btn">Generate Report</button>
+      </div>
+      <div class="col-md-6">
+        <button type="submit" class="btn white-btn btn-sm" id="xls-report-btn">Generate Data</button>
+      </div>
+    </div>
+		<div class="row mb-10 mt-10">
+			<div class="col-md-3"></div>
+			<div class="col-md-6">
+				<button type="button" data-href="<%= monthly_reports_path %>" id="filter-monthly-report" class="btn white-btn btn-sm" id="xls-report-btn">Filter Report</button>
+			</div>
+		</div>
+		<%= hidden_field_tag 'type', nil, id: 'hiddenBusinessType' %>
+		<%= hidden_field_tag 'report_format', 'pdf', id: 'hiddenReportFormat' %>
+    <div class="row reportGenerationForm">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label class="form-control-label">Start Date:</label>
+          <%= text_field_tag 'start_date', (Date.today.to_date - 30).strftime("%m/%d/%Y"), class: 'form-control', id: 'filterToStartReport', data: {plugin: "datepicker"} %>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="form-group">
+          <label class="form-control-label">End Date:</label>
+					<%= text_field_tag 'end_date', Date.today.strftime("%m/%d/%Y"), class: 'form-control', id: 'filterToEndReport', data: {plugin: "datepicker"} %>
+        </div>
+      </div>
+
+      <div class="col-md-12 mt-15">
+        <% report_parameters.each do |param|%>
+          <div class="form-group">
+            <%= check_box_tag "report_params[#{param[:field]}][]", nil, true, {id: "field_#{param[:field]}"} %>
+            <%= param[:name] %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

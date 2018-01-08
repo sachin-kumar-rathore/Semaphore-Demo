@@ -244,6 +244,52 @@ function updateViewAfterIdCheck(message_status, message_to_show, section_type){
   $("#"+ section_type +"NumberMessage").html(message_to_show);
 }
 
+// reporting JS
+$(document).on("click", "#businessTypeCharts", function () {
+  if(this.href.indexOf("New") > -1)
+    $('#hiddenBusinessType').val("New Business");
+  else if (this.href.indexOf("Existing") > -1)
+    $('#hiddenBusinessType').val("Existing Business");
+  else $('#hiddenBusinessType').val("");
+
+  var link = this.href;
+  $.ajax({
+    url: link,
+    type: "GET",
+    dataType: 'script'
+  });
+});
+
+$(document).on("click", "#filter-periodic-report", function () {
+  var link = this.href;
+  $.ajax({
+    url: link,
+    type: "GET",
+    dataType: 'script',
+    data: { year: $('#yearToStartReport').val(), year_to_compare: $('#yearToCompareReport').val(), type: $('#hiddenBusinessType').val() },
+  });
+});
+
+$(document).on("click", "#filter-monthly-report", function () {
+  var link = this.href;
+  $.ajax({
+    url: link,
+    type: "GET",
+    dataType: 'script',
+    data: { start_date: $('#filterToStartReport').val(), end_date: $('#filterToEndReport').val(), type: $('#hiddenBusinessType').val() },
+  });
+});
+
+$(document).on("click", "#xls-report-btn", function () {
+  $('#hiddenReportFormat').val("xls");
+});
+$(document).on("click", "#pdf-report-btn", function () {
+  $('#hiddenReportFormat').val("pdf");
+});
+$(document).on("click", "#downloadGeneratedReportModal .green-btn", function () {
+  $('#downloadGeneratedReportModal').modal("hide");
+});
+
 //Activities
 
 $(document).on("click", ".first-save-activity", function () {
@@ -303,3 +349,4 @@ function reloadUsers(){
     dataType: 'script'
   });
 }
+

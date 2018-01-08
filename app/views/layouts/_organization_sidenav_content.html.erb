@@ -12,13 +12,6 @@
     <span class="site-menu-arrow"></span>
   </a>
 </li>
-<li class="site-menu-item has-sub <%= active_class('files') %>">
-  <a href="<%= files_path %>">
-    <i class="site-menu-icon fa fa-files-o" aria-hidden="true"></i>
-    <span class="site-menu-title">Files</span>
-    <span class="site-menu-arrow"></span>
-  </a>
-</li>
 <li class="site-menu-item has-sub <%= active_class('activities') %>">
   <a href="<%= activities_path %>">
     <i class="site-menu-icon md-apps" aria-hidden="true"></i>
@@ -26,61 +19,59 @@
     <span class="site-menu-arrow"></span>
   </a>
 </li>
-<li class="site-menu-item has-sub <%= active_class('imports') %>"">
+<li class="site-menu-item has-sub <%= active_class('contacts') %>">
+  <a href="<%= contacts_path %>">
+    <i class="site-menu-icon fa fa-address-book-o" aria-hidden="true"></i>
+    <span class="site-menu-title">Contacts</span>
+    <span class="site-menu-arrow"></span>
+  </a>
+</li>
+<li class="site-menu-item has-sub <%= active_class('projects') %>">
+  <a href="/projects">
+    <i class="site-menu-icon fa fa-gears" aria-hidden="true"></i>
+    <span class="site-menu-title">Projects</span>
+    <span class="site-menu-arrow"></span>
+  </a>
+</li>
+<li class="site-menu-item has-sub <%= active_class('companies') %>">
+  <a href="/companies">
+    <i class="site-menu-icon fa fa-file-text-o" aria-hidden="true"></i>
+    <span class="site-menu-title">Companies</span>
+    <span class="site-menu-arrow"></span>
+  </a>
+</li>
+<li class="site-menu-item has-sub <%= active_class('sites') %>">
+  <a href="<%= sites_path %>">
+    <i class="site-menu-icon fa fa-building-o" aria-hidden="true"></i>
+    <span class="site-menu-title">Sites & Buildings</span>
+    <span class="site-menu-arrow"></span>
+  </a>
+</li>
+<li class="site-menu-item has-sub <%= active_class('reports') %>">
+  <a href="<%= reports_path %>">
+    <i class="site-menu-icon md-apps" aria-hidden="true"></i>
+    <span class="site-menu-title">Reports</span>
+    <span class="site-menu-arrow"></span>
+  </a>
+</li>
+<li class="site-menu-item has-sub <%= active_class('files') %>">
+  <a href="<%= files_path %>">
+    <i class="site-menu-icon fa fa-files-o" aria-hidden="true"></i>
+    <span class="site-menu-title">Files</span>
+    <span class="site-menu-arrow"></span>
+  </a>
+</li>
+<li class="site-menu-item has-sub <%= active_class('imports') %>">
   <a href="<%= imports_path %>">
     <i class="site-menu-icon fa fa-file-excel-o" aria-hidden="true"></i>
     <span class="site-menu-title">Data Imports</span>
     <span class="site-menu-arrow"></span>
   </a>
 </li>
-<li class="site-menu-category">PROJECTS</li>
-
-<li class="site-menu-item has-sub <%= active_class('projects') %>"">
-  <a href="/projects">
-    <i class="site-menu-icon fa fa-gears" aria-hidden="true"></i>
-    <span class="site-menu-title">Manage Projects</span>
-    <span class="site-menu-arrow"></span>
-  </a>
-</li>
-
 <li class="site-menu-item has-sub">
-  <a href="javascript:void(0)">
-    <i class="site-menu-icon fa fa-share-square-o" aria-hidden="true"></i>
-    <span class="site-menu-title">Exports Project Data</span>
-    <span class="site-menu-arrow"></span>
-  </a>
-</li>
-
-<li class="site-menu-category">COMPANIES AND ACTIVITIES</li>
-<li class="site-menu-item has-sub <%= active_class('companies') %>"">
-  <a href="/companies">
-    <i class="site-menu-icon fa fa-file-text-o" aria-hidden="true"></i>
-    <span class="site-menu-title">Manage Company Records</span>
-    <span class="site-menu-arrow"></span>
-  </a>
-</li>
-
-<li class="site-menu-item has-sub">
-  <a href="javascript:void(0)">
-    <i class="site-menu-icon fa fa-external-link" aria-hidden="true"></i>
-    <span class="site-menu-title">Exports Company Data</span>
-    <span class="site-menu-arrow"></span>
-  </a>
-</li>
-
-<li class="site-menu-category">SITES AND BUILDINGS</li>
-<li class="site-menu-item has-sub <%= active_class('sites') %>"">
-  <a href="<%= sites_path %>">
-    <i class="site-menu-icon fa fa-building-o" aria-hidden="true"></i>
-    <span class="site-menu-title">Manage Sites/ Buildings</span>
-    <span class="site-menu-arrow"></span>
-  </a>
-</li>
-<li class="site-menu-category">CONTACTS</li>
-<li class="site-menu-item has-sub <%= active_class('contacts') %>"">
-  <a href="<%= contacts_path %>">
-    <i class="site-menu-icon fa fa-address-book-o" aria-hidden="true"></i>
-    <span class="site-menu-title">Manage Contacts</span>
+  <a href="">
+    <i class="site-menu-icon fa fa-file-excel-o" aria-hidden="true"></i>
+    <span class="site-menu-title">Data Exports</span>
     <span class="site-menu-arrow"></span>
   </a>
 </li>

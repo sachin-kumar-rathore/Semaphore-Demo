@@ -40,3 +40,5 @@ config/database.yml
 .rspec
 # Ignore application configuration
 /config/application.yml
+/public/yearly_report.pdf
+/public/yearly_report.xls

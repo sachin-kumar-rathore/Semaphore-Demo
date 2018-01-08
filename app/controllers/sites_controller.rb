@@ -64,7 +64,7 @@ class SitesController < ApplicationController
   def check_sites_number_validity
     assign_message_and_status_for_id_validity('sites')
   end
-
+  
   private
 
   def set_site

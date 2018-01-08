@@ -1,0 +1,62 @@
+<div class="row yearlyReport">
+	<div class="col-xl-9">
+		<div class="row">
+			<div class="col-md-9">
+				<p class="font-size-18"><i class="fa fa-database green-500"></i> Yearly Activity Report</p>
+			</div>
+			<div class="col-md-3 text-right">
+				<%= link_to yearly_reports_path(), class: 'btn btn-cancel btn-sm', data: { turbolinks: false } do %>
+						<i class="fa fa-refresh"></i> Refresh
+				<% end %>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-7 text-left">
+				<div class="nav-tabs-horizontal" data-plugin="tabs">
+					<ul class="nav nav-tabs nav-tabs-line" role="tablist">
+						<li class="nav-item" role="presentation"><a class="nav-link active" id="businessTypeCharts" data-toggle="tab" href="<%= yearly_reports_path() %>" aria-controls="exampleTabsLineOne" role="tab" aria-expanded="true">Combined</a></li>
+						<li class="nav-item" role="presentation"><a class="nav-link" id="businessTypeCharts" data-toggle="tab" href="<%= yearly_reports_path(type: 'Existing Business') %>" aria-controls="exampleTabsLineTwo" role="tab" aria-expanded="false">Retention/Expansion</a></li>
+						<li class="nav-item" role="presentation"><a class="nav-link" id="businessTypeCharts" data-toggle="tab" href="<%= yearly_reports_path(type: 'New Business') %>" aria-controls="exampleTabsLineThree" role="tab" aria-expanded="false">Attraction</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-md-5 text-right">
+				<div class="nav-tabs-horizontal" data-plugin="tabs">
+					<ul class="nav nav-tabs nav-tabs-line" role="tablist">
+						<li class="nav-item" role="presentation">
+							<a class="nav-link active" data-toggle="tab" href="#exampleTabsLineCard" aria-controls="exampleTabsLineOne" role="tab" aria-expanded="true">
+								<i class="fa fa-th-large"></i> Card View
+							</a>
+						</li>
+						<li class="nav-item" role="presentation">
+							<a class="nav-link" data-toggle="tab" href="#exampleTabsLineTable" aria-controls="exampleTabsLineTwo" role="tab" aria-expanded="false">
+								<i class="fa fa-th-list"></i> Table View
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xl-12">
+				<div class="tab-content pt-20">
+					<div class="tab-pane active" id="exampleTabsLineCard" role="tabpanel" aria-expanded="true">
+						<%= render partial: 'card_view', locals: {results: @results} %>
+					</div>
+					<div class="tab-pane" id="exampleTabsLineTable" role="tabpanel" aria-expanded="false">
+						<%= render partial: 'table_view', locals: {results: @results} %>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-xl-3">
+		<%= form_tag(yearly_report_reports_path(format: :xls), method: 'post') do %>
+			<%= render partial: 'report_form' %>
+		<% end %>
+	</div>
+
+</div>

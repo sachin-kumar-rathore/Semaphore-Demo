@@ -1,0 +1,41 @@
+<div class="row all-reports">
+	<div class="col-md-12">
+
+    <div class="example table-responsive">
+      <table class="table table-bordered bg-white">
+        <thead>
+          <tr>
+            <th class="font-weight-bold text-center">Report Title</th>
+            <th class="font-weight-bold text-center">Report Details</th>
+            <th class="font-weight-bold text-center">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-center">Successful Project Data</td>
+            <td>Covers visitations, new investments, new jobs, site/building referrals and etc. for specified dates.</td>
+            <td><a class="green-btn btn btn-xs" href="<%= projects_reports_path() %>" data-turbolinks="false">Show</a></td>
+          </tr>
+          <tr>
+            <td class="text-center">Site/Building Referrals</td>
+            <td>Site/Building referral data for specified dates.</td>
+            <td><a class="green-btn btn btn-xs" href="<%= sites_reports_path() %>" data-turbolinks="false">Show</a></td>
+          </tr>
+          <tr>
+            <td class="text-center">Yearly Activity</td>
+            <td>Graphical reports that break down data along various categories with current year and
+              year to year comparisons for new and existing business.</td>
+            <td><a class="green-btn btn btn-xs" href="<%= yearly_reports_path() %>" data-turbolinks="false">Show</a></td>
+          </tr>
+          <tr>
+            <td class="text-center">Monthly Activity</td>
+            <td>Graphical reports that break down data along various categories with current year and
+              year to year comparisons for a specific month for new and existing business.</td>
+            <td><a class="green-btn btn btn-xs" href="<%= monthly_reports_path() %>" data-turbolinks="false">Show</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+	</div>
+</div>

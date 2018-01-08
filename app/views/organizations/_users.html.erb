@@ -8,7 +8,7 @@ aria-expanded="false" aria-controls="orgUsers">
     <div class="orgUserErrors"></div>
     <br>
     <div id="orgUsersList">
-      <%= render partial: 'users_list', locals: { users: @organization.users } %>
+      <%= render partial: 'users_list', locals: { users: @organization.users.invitation_accepted } %>
     </div>
   </div>
 </div>

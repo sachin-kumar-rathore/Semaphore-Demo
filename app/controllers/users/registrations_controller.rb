@@ -12,7 +12,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     super do |resource|
       organization = Organization.create!(organization_params)
       resource.organization_id = organization.id
-      resource.add_role :admin
+      resource.add_role("Administrator", organization)
+      resource.active = true
     end
   end
 

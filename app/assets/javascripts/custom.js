@@ -293,3 +293,13 @@ $(document).on("change", "#activities_filter_by_company", function () {
 $(document).on("input", "#activitiesNumber", function () {
   checkValidityofNumber('activities', this);
 });
+
+function reloadUsers(){
+  $('.modal-backdrop').remove();
+  $('#invitationFormCenter').modal('hide');
+  $.ajax({
+    url: '/manage_users',
+    type: "GET",
+    dataType: 'script'
+  });
+}

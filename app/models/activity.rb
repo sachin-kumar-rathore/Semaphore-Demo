@@ -6,7 +6,7 @@ class Activity < ApplicationRecord
 
   before_validation :convert_dates_format
 
-  belongs_to :organization
+  belongs_to :organization, dependent: :destroy
   belongs_to :company, optional: true
   belongs_to :company_activity_type
   belongs_to :provided_service

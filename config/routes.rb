@@ -119,7 +119,6 @@ Rails.application.routes.draw do
   end
 
   resources :manage_configurations
-  resources :settings, only: [:index]
   resources :considered_locations do
     member do
       post :attach_contact
@@ -141,5 +140,10 @@ Rails.application.routes.draw do
   end
 
   resources :imports, only: [:index]
-
+  resources :manage_users do
+    member do
+      get :edit_invitation
+      patch :update_invitation
+    end
+  end
 end

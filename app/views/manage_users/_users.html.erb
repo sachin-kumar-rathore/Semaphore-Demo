@@ -1,0 +1,42 @@
+<table class="table footable table tableCustomStyle table-hover removeTblSearch bodrTop" id="userLists" data-empty="There are no users." data-show-toggle="true">
+  <thead>
+    <tr>
+      <th data-breakpoints="xs sm">FIRST NAME</th>
+      <th data-breakpoints="xs sm">LAST NAME</th>
+      <th>EMAIL</th>
+      <th data-breakpoints="xs sm md">STATUS</th>
+      <th data-breakpoints="xs sm md">INVITATION STATUS</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.first_name %></td>
+        <td><%= user.last_name %></td>
+        <td><%= user.email %></td>
+        <td><%= user.status %></td>
+        <td><%= user.invitation_status %></td>
+        <td>
+          <div class="openLeft moreOptions dropdown">
+            <a class="" data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false" data-animation="scale-down" role="button">
+              <i class="icon md-more-vert" aria-hidden="true"></i>
+            </a>
+            <div class="dropdown-menu" role="menu">
+              <a class="dropdown-item clickable" data-href="<%= edit_invitation_manage_user_path(user.id) %>" role="menuitem"><i class="icon md-edit" aria-hidden="true"></i> Edit</a>
+              <a class="dropdown-item delete-option" data-href="<%= manage_user_path(user) %>" role="menuitem"><i class="icon md-delete" aria-hidden="true"></i> Delete</a>
+            </div>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="digg_pagination">
+  <%= js_will_paginate @users, container: false %>
+</div>
+
+<script>
+  $('.footable').footable();
+</script>

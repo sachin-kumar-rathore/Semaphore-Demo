@@ -1,0 +1,95 @@
+<!-- User Modal -->
+ <div class="modal fade modalStyle" id="invitationFormCenter" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel">
+  <div class="modal-dialog modal-simple" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="addUserModalLabel">User information</h4>
+      </div>
+      <div class="modal-body">
+        <div class="formStyle">
+          <div class="error-messages"></div>
+          <%= form_for @user, url: url_for(controller: controller, action: action), remote: true do |form| %>
+            <div class="form-row">
+              <div class="form-group col">
+                <div class="inline-items">
+                  <ul>
+                    <li class="lblMdBlock">
+                      <label>Status</label>
+                    </li>
+                    <li>
+                      <div class="custom-radioBtn">
+                        <%= form.radio_button :active, "true", checked: true, id: 'user_active_true' %>
+                        <label for="user_active_true">Active</label>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="custom-radioBtn">
+                        <%= form.radio_button :active, "false", id: 'user_active_false' %>
+                        <label for="user_active_false">Inactive</label>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="taskName">First name:</label>
+                <%= form.text_field :first_name, class: "form-control" %>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="taskName">Last name:</label>
+                <%= form.text_field :last_name, class: "form-control" %>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <label for="taskName">Email:</label>
+                <%= form.email_field :email, class: "form-control" %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-auto"><label>Roles</label></div>
+              <div class="form-group col">
+                <div class="user-item">
+                  <ul>
+                    <%= form.collection_check_boxes :security_role_ids, current_org.security_roles.all, :id, :name do |b| %>
+                      <li>
+                        <%=  b.check_box + b.label(:class => "custom-control custom-checkbox") %>
+                      </li>
+                    <% end %>
+                  <ul>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <% if @user.invitation_status == 'Pending' %>
+                <div class="form-group col-md-4">
+                  <%= check_box_tag 'resend_invite', 'true', false %>
+                  <label class='custom-control custom-checkbox'>Resend Invitation</label>
+                </div>
+              <% end %>
+            </div>
+            <div class="modalFooterBtns">
+              <button type="submit" class="btn btn-primary spinnerButton" ><%= @user.new_record? ? 'Create User' : 'Save changes' %></button>
+              <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
+              <% if !@user.new_record? %>
+                <%= link_to 'Delete', manage_user_path(@user.id), method: :delete, remote: true, class: "btn btn-outline-danger" %>
+              <% end %>
+            </div>
+            <div class="spinner" hidden>
+              <div class="bounce1"></div>
+              <div class="bounce2"></div>
+              <div class="bounce3"></div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->
+

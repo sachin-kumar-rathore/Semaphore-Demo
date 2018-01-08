@@ -3,7 +3,7 @@ module SettingTypes
 
   included do
     scope :active, -> { where(status: "Active")}
-    belongs_to :organization
+    belongs_to :organization, dependent: :destroy
   end
 
 end

@@ -7,10 +7,10 @@
       <a class="nav-link" href="<%= manage_users_path%>">Manage Users</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link active" href="<%= manage_configurations_path %>">Manage Configuration</a>
+      <a class="nav-link" href="<%= manage_configurations_path %>">Manage Configuration</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link " href="<%= considered_locations_path %>">Considered Locations</a>
+      <a class="nav-link active" href="<%= considered_locations_path %>">Considered Locations</a>
     </li>
     <li class="nav-item">
       <a class="nav-link " href="<%= security_roles_path %>">Manage Roles</a>
@@ -20,4 +20,4 @@
     </li>
   </ul>
 </div>
-<%=  render 'setting_types_list' %>
+<%= render 'considered_locations_list' %>

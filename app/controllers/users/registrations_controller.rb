@@ -11,8 +11,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     super do |resource|
       organization = Organization.create!(organization_params)
+      security_role = organization.security_roles.where(name: 'Administrator').first
       resource.organization_id = organization.id
-      resource.add_role("Administrator", organization)
+      resource.user_roles.new(security_role_id: security_role.id)
       resource.active = true
     end
   end

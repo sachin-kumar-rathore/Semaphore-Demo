@@ -10,7 +10,8 @@ class User < ApplicationRecord
   has_many :documents, dependent: :nullify
   has_many :user_roles, dependent: :destroy
   has_many :security_roles, through: :user_roles
-  
+  before_save :minimum_one_role
+
   PAGINATION_VALUE = 8
   
   scope :all_except, ->(user) { where.not(id: user) }
@@ -34,18 +35,12 @@ class User < ApplicationRecord
     end
   end
 
-  def add_role(role, organization)
-    security_role = organization.security_roles.where(name: role).first
-    self.user_roles.create!(security_role_id: security_role.id)
-  end
-
   validates_presence_of :first_name, :last_name
-  validate :minimum_one_role
 
   private
 
   def minimum_one_role
-    if self.user_roles.blank?
+    if user_roles.blank? && created_by_invite?
       errors.add(:base, 'User must be assigned atleast one role.')
     end
   end

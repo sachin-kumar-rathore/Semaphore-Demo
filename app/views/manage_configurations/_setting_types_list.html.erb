@@ -5,7 +5,9 @@
         <div class="card cardPadding configCardSpace">
           <div class="cardTitle">
             <div class="form-row">
-              <div class="col"><h4><%= type.titleize.singularize %></h4></div>
+              <div class="col">
+                <h4><%= type.titleize.singularize %></h4>
+              </div>
               <div class="col-auto align-self-center"><a href="<%= new_manage_configuration_path(type: type) %>" data-remote="true" class="btn btn-default autoWd"><i class="icon fa fa-plus btnIcon" aria-hidden="true"></i> Add</a></div>
             </div>
           </div>
@@ -14,7 +16,10 @@
           </div>
         </div>
       </li>
-      <div id='<%= type.singularize.concat('Modal') %>'>
+      <div id='<%= type.singularize.concat('Modal') %>'> </div>
     <% end %>
   </ul>
 </div>
+
+
+

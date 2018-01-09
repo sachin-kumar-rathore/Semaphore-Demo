@@ -20,6 +20,10 @@ class DashboardController < ApplicationController
     end
   end
 
+  def activity
+    generate_periodic_report(params[:activity].downcase)
+  end
+
   def authenticate_user!
     if current_admin.present? && current_user.blank?
       redirect_to organizations_path

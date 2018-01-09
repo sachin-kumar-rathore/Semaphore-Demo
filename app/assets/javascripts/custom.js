@@ -377,3 +377,32 @@ function taskFilterRequest(filter_by) {
     data: { project_id: project_id, filter: filter  }
   });
 }
+
+$(document).on("change", "#dashboard_activity_select", function () {
+  activityFilterRequest($('.dashboard-menu #activityReportFilter li.viewlink').text());
+});
+$(document).on("click", ".dashboard-menu #activityReportFilter li", function () {
+  activityFilterRequest($(this).text());
+});
+
+function activityFilterRequest(filter_by) {
+  var activity_type = $('#dashboard_activity_select').val();
+  $('.dashboard-menu #activityReportFilter li.viewlink').removeClass('viewlink');
+  var filter = null;
+  if (filter_by == ' Combined') {
+    $('.dashboard-menu #activityReportFilter li:nth-child(3)').addClass('viewlink');
+  }else if (filter_by == ' Attraction') {
+    $('.dashboard-menu #activityReportFilter li:nth-child(1)').addClass('viewlink');
+    filter = 'New Business'
+  }else{
+    $('.dashboard-menu #activityReportFilter li:nth-child(2)').addClass('viewlink');
+    filter = 'Existing Business'
+  }
+
+  $.ajax({
+    url: "/dashboard/activity",
+    type: "GET",
+    dataType: 'script',
+    data: { activity: activity_type, type: filter  }
+  });
+}

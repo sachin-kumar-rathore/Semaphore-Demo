@@ -251,6 +251,8 @@
         labelInterpolationFnc: function (value, idx) {
           return Math.round(value / data.series.reduce(sum, 0) * 100) + '%';
         },
+        labelOffset: 40,
+        labelDirection: 'explode',
         plugins: [Chartist.plugins.tooltip()]
       });
     }

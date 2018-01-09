@@ -17,24 +17,6 @@
     loadBusinessProspectBar();
     loadProspectsByTypeComparison();
 
-    function loadBusinessProspectBar() {
-      var seriesList = [<%=raw get_generic_prospect_total(results, 'status', Project::STATUS) %>];
-      var labels = seriesList[0].map(function (a) {
-        return a.meta
-      });
-      new Chartist.Bar('#businessProspectBar', {
-        labels: labels,
-        series: seriesList
-      }, {
-        horizontalBars: true,
-        axisX: {onlyInteger: true},
-        axisY: {offset: 70},
-        plugins: [
-          Chartist.plugins.tooltip()
-        ]
-      });
-    }
-
     function loadProspectsByTypeComparison() {
       var labels = <%=raw current_org.project_types.pluck(:name) %>;
       var seriesList = <%=raw get_associated_types(results, 'project_type_id') %>;
@@ -42,7 +24,7 @@
     }
 
     function loadComparisonCharts(labels, seriesList, selector) {
-      var labelsHeight = labels.length * 40 * 2;
+      var labelsHeight = labels.length * 30 * 2;
 
       new Chartist.Bar(selector, {
         labels: labels,
@@ -56,6 +38,61 @@
           Chartist.plugins.tooltip()
         ]
       });
+    }
+
+    function loadBusinessProspectBar() {
+      var seriesList = <%=raw get_generic_prospect_total(results, 'status', Project::STATUS) %>;
+      var total_types = 0;
+      seriesList.map(function (a) {
+        return total_types += a.value;
+      });
+      var labels = seriesList.map(function (a) {
+        return a.meta + (a.value/total_types);
+      });
+      var chart = new Chartist.Pie('#businessProspectBar', {
+        series: seriesList,
+        labels: labels
+      }, {
+        donut: true,
+        showLabel: true,
+//        chartPadding: 60,
+        labelOffset: 30,
+        labelDirection: 'explode',
+        plugins: [
+          Chartist.plugins.tooltip()
+        ]
+      });
+
+      chart.on('draw', function(data) {
+        if(data.type === 'slice') {
+          var pathLength = data.element._node.getTotalLength();
+
+          data.element.attr({
+            'stroke-dasharray': pathLength + 'px ' + pathLength + 'px'
+          });
+
+          var animationDefinition = {
+            'stroke-dashoffset': {
+              id: 'anim' + data.index,
+              dur: 1000,
+              from: -pathLength + 'px',
+              to:  '0px',
+              easing: Chartist.Svg.Easing.easeOutQuint,
+              fill: 'freeze'
+            }
+          };
+
+          if(data.index !== 0) {
+            animationDefinition['stroke-dashoffset'].begin = 'anim' + (data.index - 1) + '.end';
+          }
+
+          data.element.attr({
+            'stroke-dashoffset': -pathLength + 'px'
+          });
+					data.element.animate(animationDefinition, false);
+        }
+      });
+
     }
 
   })

@@ -87,24 +87,25 @@
         <div class="form-row">
           <div class="col">
             <div class="title-menu">
-              <span><button type="button" class="btn activeBtn">Monthly <i class="icon fa fa-caret-down"></i></button></span>
-              <h3> - Activity Report</h3>
+							<%= select_tag :activity, options_for_select(['Yearly', 'Monthly']),
+														 class: 'form-control custom-select', id: 'dashboard_activity_select' %>
+							<h3> - Activity Report</h3>
             </div>
           </div>
           <div class="col-auto">
-            <div class="viewReport">
+            <div class="viewReport" id="activityReportFilter">
               <ul>
-                <li class="viewItem"><span class="priorityDot"></span>Attraction</li>
-                <li class="viewItem"><span class="priorityDot dotHigh"></span> Retention/Expansion </li>
-                <li class="viewItem viewlink"><span class="priorityDot dotHigh"></span>Combined </li>
+                <li class="viewItem"><span class="priorityDot"></span> Attraction</li>
+                <li class="viewItem"><span class="priorityDot dotHigh"></span> Retention/Expansion</li>
+                <li class="viewItem viewlink"><span class="priorityDot dotHigh"></span> Combined</li>
               </ul>
             </div>
           </div>
         </div>
-        <div class="form-row">
+        <div class="form-row" id="dashboardActivityReport">
           <%= render partial: 'activity_report', locals: {results: @results} %>
         </div>
-        <div class="botmheading">View Report</div>
+        <div class="botmheading"><%= link_to 'View Report', yearly_reports_path %></div>
       </div>
     </div>
   </div>
@@ -114,8 +115,10 @@
         <div class="title-menu">
           <h3>Attraction - Industry type</h3>
         </div>
-        <div class="cardImg"><img src="assets/prospect.jpg"></div>
-        <div class="botmheading">View Report</div>
+        <div class="cardImg">
+					<div class="ct-chart" id="prospectsByIndustryTypeBar"></div>
+				</div>
+        <div class="botmheading"><%= link_to 'View Report', yearly_reports_path %></div>
       </div>
     </div>
     <div class="col-lg-8">
@@ -155,24 +158,55 @@
 <script>
   $(document).ready(function ($) {
 
+    loadProspectsByIndustryType();
+
     function loadProspectsByIndustryType() {
-      var data = {
-        series: <%=raw get_associated_types_total(@results, 'industry_type_id') %>
-      };
-      loadProspectsByDifferentType(data, '#prospectsByIndustryTypeBar');
-    }
+      var seriesList = <%=raw get_new_industry_report(@results['industry_type_id']) %>;
+      var labels = seriesList.map(function (a) {
+        return a.meta + " - " + a.percentage + "%";
+      });
+      var chart = new Chartist.Pie('#prospectsByIndustryTypeBar', {
+        series: seriesList,
+        labels: labels
+      }, {
+        donut: true,
+        showLabel: true,
+//        chartPadding: 60,
+        labelOffset: 30,
+        labelDirection: 'explode',
+        plugins: [
+          Chartist.plugins.tooltip()
+        ]
+      });
 
-    function loadProspectsByDifferentType(data, selector) {
+      chart.on('draw', function(data) {
+        if(data.type === 'slice') {
+          var pathLength = data.element._node.getTotalLength();
 
-      var sum = function (a, b) {
-        return a + b.value
-      };
+          data.element.attr({
+            'stroke-dasharray': pathLength + 'px ' + pathLength + 'px'
+          });
 
-      new Chartist.Pie(selector, data, {
-        labelInterpolationFnc: function (value, idx) {
-          return Math.round(value / data.series.reduce(sum, 0) * 100) + '%';
-        },
-        plugins: [Chartist.plugins.tooltip()]
+          var animationDefinition = {
+            'stroke-dashoffset': {
+              id: 'anim' + data.index,
+              dur: 1000,
+              from: -pathLength + 'px',
+              to:  '0px',
+              easing: Chartist.Svg.Easing.easeOutQuint,
+              fill: 'freeze'
+            }
+          };
+
+          if(data.index !== 0) {
+            animationDefinition['stroke-dashoffset'].begin = 'anim' + (data.index - 1) + '.end';
+          }
+
+          data.element.attr({
+            'stroke-dashoffset': -pathLength + 'px'
+          });
+          data.element.animate(animationDefinition, false);
+        }
       });
     }
 

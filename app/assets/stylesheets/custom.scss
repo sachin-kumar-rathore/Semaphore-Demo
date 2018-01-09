@@ -368,10 +368,24 @@ html, body {
   table th{color: #2ED573;}
 }
 .datepicker{z-index: 9999999 !important;}
-.dashboard-menu select.form-control.custom-select{
-  background: #2ED573;
-  color: #fff;
-  max-width: 200px;
-  font-weight: 500;
-  font-size: 13px;
+.dashboard-menu {
+  select.form-control.custom-select{
+    background: #2ED573;
+    color: #fff;
+    max-width: 200px;
+    font-weight: 500;
+    font-size: 13px;
+  }
+  select.form-control#dashboard_activity_select{
+    max-width: 100px;
+  }
+  .ct-chart .ct-bar{
+    stroke-width: 5px;
+  }
+  #businessProspectBar svg path {
+    stroke-width: 35px !important;
+  }
+  #prospectsByIndustryTypeBar svg path {
+    stroke-width: 35px !important;
+  }
 }

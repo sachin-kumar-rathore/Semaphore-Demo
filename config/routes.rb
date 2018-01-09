@@ -68,6 +68,7 @@ Rails.application.routes.draw do
   resources :dashboard, only: [:index] do
     collection do
       get :tasks
+      get :activity
     end
   end
   resources :projects, only: %i[new index create edit update show] do

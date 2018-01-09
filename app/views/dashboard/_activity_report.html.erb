@@ -1,0 +1,62 @@
+<div class="col-lg-6">
+  <div class="prospectCont">
+    <h3>Prospects by Type Comparison</h3>
+    <div class="ct-chart" id="prospectsByTypeComparisonBar"></div>
+  </div>
+</div>
+<div class="col-lg-6">
+  <div class="prospectCont">
+    <h3>Business Prospects</h3>
+    <div class="ct-chart" id="businessProspectBar"></div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function ($) {
+
+    loadBusinessProspectBar();
+    loadProspectsByTypeComparison();
+
+    function loadBusinessProspectBar() {
+      var seriesList = [<%=raw get_generic_prospect_total(results, 'status', Project::STATUS) %>];
+      var labels = seriesList[0].map(function (a) {
+        return a.meta
+      });
+      new Chartist.Bar('#businessProspectBar', {
+        labels: labels,
+        series: seriesList
+      }, {
+        horizontalBars: true,
+        axisX: {onlyInteger: true},
+        axisY: {offset: 70},
+        plugins: [
+          Chartist.plugins.tooltip()
+        ]
+      });
+    }
+
+    function loadProspectsByTypeComparison() {
+      var labels = <%=raw current_org.project_types.pluck(:name) %>;
+      var seriesList = <%=raw get_associated_types(results, 'project_type_id') %>;
+      loadComparisonCharts(labels, seriesList, '#prospectsByTypeComparisonBar');
+    }
+
+    function loadComparisonCharts(labels, seriesList, selector) {
+      var labelsHeight = labels.length * 40 * 2;
+
+      new Chartist.Bar(selector, {
+        labels: labels,
+        series: seriesList
+      }, {
+        horizontalBars: true,
+        height: labelsHeight + 'px',
+        axisX: {onlyInteger: true},
+        axisY: {offset: 70},
+        plugins: [
+          Chartist.plugins.tooltip()
+        ]
+      });
+    }
+
+  })
+</script>

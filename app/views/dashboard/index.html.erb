@@ -12,24 +12,30 @@
               <div class="form-row">
                 <div class="col">
                   <div class="projectMenu">
-                    <h3><span class="IconCart"><i class="icon fa fa-caret-down"></i></span>5<span>Projects</span></h3>
+                    <h3><span class="IconCart"><i class="icon fa fa-caret-down"></i></span><%= @project_status_group['Active'].count %><span>Projects</span></h3>
                   </div>
                 </div>
                 <div class="col-auto">
                   <div class="projectMenu">
-                    <h3><span class="IconCart bgGreen"><i class="icon fa fa-caret-up"></i></span>$5.560.020<span>wages</span></h3>
+                    <h3><span class="IconCart bgGreen"><i class="icon fa fa-caret-up"></i></span>
+											$<%= @project_status_group['Active'].pluck('wages').sum %><span>wages</span>
+										</h3>
                   </div>
                 </div>
               </div>
               <div class="form-row">
                 <div class="col">
                   <div class="projectMenu">
-                    <h3><span class="IconCart bgGreen"><i class="icon fa fa-caret-up"></i></span>650<span>Jobs</span></h3>
+                    <h3><span class="IconCart bgGreen"><i class="icon fa fa-caret-up"></i></span>
+											<%= @project_status_group['Active'].pluck('new_jobs').sum %><span>Jobs</span>
+										</h3>
                   </div>
                 </div>
                 <div class="col-auto">
                   <div class="projectMenu">
-                    <h3><span class="IconCart"><i class="icon fa fa-caret-down"></i></span>$185.234.567<span>Investment</span></h3>
+                    <h3><span class="IconCart"><i class="icon fa fa-caret-down"></i></span>
+											$<%= @project_status_group['Active'].pluck('net_new_investment').sum %><span>Investment</span>
+										</h3>
                   </div>
                 </div>
               </div>
@@ -49,19 +55,25 @@
                 </div>
                 <div class="col-auto">
                   <div class="projectMenu">
-                    <h3><span class="IconCart bgGreen"><i class="icon fa fa-caret-up"></i></span>$5.560.020<span>wages</span></h3>
+                    <h3><span class="IconCart bgGreen"><i class="icon fa fa-caret-up"></i></span>
+											$<%= @project_status_group['Preliminary'].pluck('wages').sum %><span>wages</span>
+										</h3>
                   </div>
                 </div>
               </div>
               <div class="form-row">
                 <div class="col">
                   <div class="projectMenu">
-                    <h3><span class="IconCart bgGreen"><i class="icon fa fa-caret-up"></i></span>650<span>Jobs</span></h3>
+                    <h3><span class="IconCart bgGreen"><i class="icon fa fa-caret-up"></i></span>
+											<%= @project_status_group['Preliminary'].pluck('new_jobs').sum %><span>Jobs</span>
+										</h3>
                   </div>
                 </div>
                 <div class="col-auto">
                   <div class="projectMenu">
-                    <h3><span class="IconCart"><i class="icon fa fa-caret-down"></i></span>$185.234.567<span>Investment</span></h3>
+                    <h3><span class="IconCart"><i class="icon fa fa-caret-down"></i></span>
+											$<%= @project_status_group['Preliminary'].pluck('net_new_investment').sum %><span>Investment</span>
+										</h3>
                   </div>
                 </div>
               </div>
@@ -90,19 +102,7 @@
           </div>
         </div>
         <div class="form-row">
-          <div class="col">
-            <div class="prospectCont">
-              <h3>Prospects by Type Comparison</h3>
-              <img src="assets/camparison.jpg">
-            </div>
-          </div>
-          <div class="col-auto">
-            <div class="prospectCont">
-              <h3>Business Prospects</h3>
-              .
-              <img src="assets/prospect.jpg">
-            </div>
-          </div>
+          <%= render partial: 'activity_report', locals: {results: @results} %>
         </div>
         <div class="botmheading">View Report</div>
       </div>
@@ -120,55 +120,61 @@
     </div>
     <div class="col-lg-8">
       <div class="card cardPadding">
+
+				<div class="form-row">
+					<div class="col">
+						<div class="title-menu">
+							<%= select_tag :project_id, options_for_select(load_data_with_id(@projects)), include_blank: 'All Projects' ,
+														 class: 'form-control custom-select', id: 'dashboard_task_by_project' %>
+              <h3> - Filter by Project</h3>
+						</div>
+					</div>
+					<div class="col-auto">
+						<div class="viewTaskReport viewReport">
+							<ul>
+								<li class="viewItem viewlink"><span class="priorityDot"></span> All Tasks</li>
+								<li class="viewItem"><span class="priorityDot dotHigh"></span> My Tasks</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
         <!-- Panel Filtering rows -->
         <table class="table tableCustomStyle table-hover removeTblSearch" id="dashboardTasks" data-paging="true" data-filtering="true" >
-          <thead>
-            <tr>
-              <th data-name="priority" data-breakpoints="xs">Priority</th>
-              <th data-name="Task Description" data-breakpoints="xs">Task Description</th>
-              <th data-name="complete" data-breakpoints="xs">Complete</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><span class="priorityDot dotHigh"></span> High</td>
-              <td><span class="nowrapCol">With so many different ways today to find</span></td>
-              <td>97%</td>
-            </tr>
-            <tr>
-              <td><span class="priorityDot"></span> Low</td>
-              <td><span class="nowrapCol">With so many different ways today to find</span></td>
-              <td>32%</td>
-            </tr>
-            <tr>
-              <td><span class="priorityDot dotMedium"></span> Medium</td>
-              <td><span class="nowrapCol">With so many different ways today to find</span></td>
-              <td>14%</td>
-            </tr>
-            <tr>
-              <td><span class="priorityDot"></span> Low</td>
-              <td><span class="nowrapCol">With so many different ways today to find</span></td>
-              <td>79%</td>
-            </tr>
-            <tr>
-              <td><span class="priorityDot dotHigh"></span> High</td>
-              <td><span class="nowrapCol">With so many different ways today to find</span></td>
-              <td>97%</td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td colspan="10">
-                <div class="text-right">
-                  <ul class="pagination"></ul>
-                </div>
-              </td>
-            </tr>
-          </tfoot>
+					<%= render partial: 'tasks', locals: {tasks: @tasks} %>
         </table>
-        <div class="botmheading">View All</div>
+        <div class="botmheading">
+					<%= link_to 'View All', tasks_path %>
+				</div>
       </div>
     </div>
   </div>
 </div>
 </div>
+
+<script>
+  $(document).ready(function ($) {
+
+    function loadProspectsByIndustryType() {
+      var data = {
+        series: <%=raw get_associated_types_total(@results, 'industry_type_id') %>
+      };
+      loadProspectsByDifferentType(data, '#prospectsByIndustryTypeBar');
+    }
+
+    function loadProspectsByDifferentType(data, selector) {
+
+      var sum = function (a, b) {
+        return a + b.value
+      };
+
+      new Chartist.Pie(selector, data, {
+        labelInterpolationFnc: function (value, idx) {
+          return Math.round(value / data.series.reduce(sum, 0) * 100) + '%';
+        },
+        plugins: [Chartist.plugins.tooltip()]
+      });
+    }
+
+  })
+</script>

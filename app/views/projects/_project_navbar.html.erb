@@ -1,5 +1,5 @@
-<div class="nav-tabs-horizontal" data-plugin="tabs" id="dashboard-tabs" >
-  <ul class="nav nav-tabs" role="tablist">
+<% content_for :navigation_bar do %>
+  <ul class="nav nav-tabs tasks-tabs" role="tablist">
     <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="<%= @project ? edit_project_path(@project) : new_project_path %>" id="mainNavLink" data-remote="true" role="tab">Main</a></li>
     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="<%= project_contacts_path(@project) if @project %>" data-remote="true" role="tab" id="contactsNavLink" >Contacts</a></li>
     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="<%= project_sites_path(@project) if @project %>" data-remote="true" role="tab" id="sitesNavLink" >Sites/Buildings</a></li>
@@ -8,27 +8,5 @@
     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="<%= project_files_path(@project) if @project %>" data-remote="true" id="filesNavLink"">Files</a></li>
     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="<%= project_emails_path(@project) if @project %>" data-remote="true" id="emailsNavLink" role="tab">Emails</a></li>
   </ul>
-  <div class="tab-content pt-20">
-    <div class="tab-pane active" id="mainTab" role="tabpanel">
-      <%= render 'form' %>
-    </div>
-    <div class="tab-pane" id="contactsTab" role="tabpanel">
-
-    </div>
-    <div class="tab-pane" id="sitesTab" role="tabpanel">
-
-    </div>
-    <div class="tab-pane" id="notesTab" role="tabpanel">
-
-    </div>
-    <div class="tab-pane" id="tasksTab" role="tabpanel">
-
-    </div>
-    <div class="tab-pane" id="filesTab" role="tabpanel">
-
-    </div>
-    <div class="tab-pane" id="emailsTab" role="tabpanel">
-
-    </div>
-  </div>
-</div>
+<% end %>
+<%= render 'tab_content' %>

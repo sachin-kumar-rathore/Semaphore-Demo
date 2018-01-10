@@ -1,367 +1,422 @@
-<div class="panel" >
-  <div class="panel-body">
-    <%= form_for @project, class: "col-md-12" do |project| %>
-      <div class="error-messages">
-        <%= render partial: 'shared/error_messages', locals: {obj: @project} %>
-      </div>
-      <div class="row">
-        <div class="form-group form-material col-md-3 col-6">
-          <label class="form-control-label">Active Date:</label>
-          <div class="input-group">
-            <span class="input-group-addon">
-            <i class="icon md-calendar" aria-hidden="true"></i>
-            </span>
+<div class="formStyle">
+  <%= form_for @project, class: "col-md-12" do |project| %>
+    <div class="error-messages">
+      <%= render partial: 'shared/error_messages', locals: {obj: @project} %>
+    </div>
+    <div class="formRowSize">
+      <div class="form-row">
+        <div class="form-group col-md-6 col-lg-3">
+          <label for="priority">Active Date:</label>
+          <div class="rightIconFld">
             <%= project.text_field 'active_date_str', class: "form-control  datepicker", value: "#{@project.active_date.strftime("%m/%d/%Y") if @project.active_date}", data: {plugin: "datepicker"} %>
+            <label for="activeDate" class="fldRightIcon"> <i class="icon fa fa-calendar-o" aria-hidden="true"></i> </label>
           </div>
         </div>
-        <div class="form-group form-material col-md-3 col-6">
-          <label class="form-control-label">Completion Date</label>
-          <div class="input-group">
-            <span class="input-group-addon">
-            <i class="icon md-calendar" aria-hidden="true"></i>
-            </span>
+        <div class="form-group col-md-6 col-lg-3">
+          <label for="priority">Successful Completion Date:</label>
+          <div class="rightIconFld">
             <%= project.text_field 'successful_completion_date_str', class: "form-control datepicker", value: "#{@project.successful_completion_date}", data: {plugin: "datepicker"} %>
+            <label for="scDate" class="fldRightIcon"> <i class="icon fa fa-calendar-o" aria-hidden="true"></i> </label>
           </div>
         </div>
       </div>
-      <br/>
-      <div class="row form-inline form-material">
-        <div class="col-md-2 ">
-          <label class="form-control-label pull-left">Business Type:</label>
-        </div>
-        <div class="col-md-8">
-          <div class="row">
-            <div class="form-inline col-md-3 col-6">
-              <%= project.radio_button :business_type, 'Existing Business', checked: true, class: "pull-left" %>
-              <label for="inputRadiosUnchecked" class="pull-left">Existing Business</label>
-            </div>
-            <div class="form-inline col-md-3 col-6">
-              <%= project.radio_button :business_type, 'New Business' %>
-              <label for="inputRadiosChecked">New Business</label>
-            </div>
+      <div class="form-row">
+        <div class="form-group col">
+          <div class="inline-items">
+            <ul>
+              <li class="lblMdBlock">
+                <label>Business Type</label>
+              </li>
+              <li>
+                <div class="custom-radioBtn">
+                  <%= project.radio_button :business_type, 'Existing Business', checked: true %>
+                  <label for="project_business_type_existing_business">Exiting Bussiness</label>
+                </div>
+              </li>
+              <li>
+                <div class="custom-radioBtn">
+                  <%= project.radio_button :business_type, 'New Business' %>
+                  <label for="project_business_type_new_business">New Bussiness</label>
+                </div>
+              </li>
+            </ul>
+            <ul>
+              <li class="lblMdBlock">
+                <label>Status</label>
+              </li>
+              <li>
+                <div class="custom-radioBtn">
+                  <%= project.radio_button :status, 'Preliminary', checked: true %>
+                  <label for="project_status_preliminary">Preliminary</label>
+                </div>
+              </li>
+              <li>
+                <div class="custom-radioBtn">
+                  <%= project.radio_button :status, 'Inactive' %>
+                  <label for="project_status_inactive">Inactive</label>
+                </div>
+              </li>
+              <li>
+                <div class="custom-radioBtn">
+                  <%= project.radio_button :status, 'Active' %>
+                  <label for="project_status_active">Active</label>
+                </div>
+              </li>
+              <li>
+                <div class="custom-radioBtn">
+                  <%= project.radio_button :status, 'Delayed' %>
+                  <label for="project_status_delayed">Delayed</label>
+                </div>
+              </li>
+              <li>
+                <div class="custom-radioBtn">
+                  <%= project.radio_button :status, 'Eliminated' %>
+                  <label for="project_status_eliminated">Eliminated</label>
+                </div>
+              </li>
+              <li>
+                <div class="custom-radioBtn">
+                  <%= project.radio_button :status, 'Successful' %>
+                  <label for="project_status_successful">Successful</label>
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
-      <br/>
-      <div class="row form-inline form-material">
-        <div class="col-md-1">
-          <label class="form-control-label pull-left">Status: </label>
-        </div>
-        <div class="col-md-10">
-          <div class="row">
-            <div class="form-inline col-md-2 col-4">
-              <%= project.radio_button :status, 'Preliminary', checked: true %>
-              <label for="inputRadiosChecked">Preliminary</label>
-            </div>
-            <div class="form-inline col-md-2 col-4">
-              <%= project.radio_button :status, 'Active' %>
-              <label for="inputRadiosChecked">Active</label>
-            </div>
-            <div class="form-inline col-md-2 col-4">
-              <%= project.radio_button :status, 'Delayed' %>
-              <label for="inputRadiosChecked">Delayed</label>
-            </div>
-            <div class="form-inline col-md-2 col-4">
-              <%= project.radio_button :status, 'Eliminated' %>
-              <label for="inputRadiosChecked">Eliminated</label>
-            </div>
-            <div class="form-inline col-md-2 col-4">
-              <%= project.radio_button :status, 'Successful' %>
-              <label for="inputRadiosChecked">Successful</label>
-            </div>
-            <div class="form-inline col-md-2 col-4">
-              <%= project.radio_button :status, 'Inactive' %>
-              <label for="inputRadiosChecked">Inactive</label>
-            </div>
-          </div>
-        </div>
-      </div>
-      <br/>
-      <div class="row">
-        <div class="form-group form-material col-md-3">
-          <label class="form-control-label" id="inputProjectId" >Project #</label>
-          <%= project.text_field 'project_number', class: "form-control", id: "projectsNumber", maxlength: 6, minlength: 6, required: true %>
+      <div class="form-row">
+        <div class="form-group col-md-6 col-lg-3">
+          <label for="project">Project #</label>
+          <%= project.text_field 'project_number', class: "form-control", id: "projectsNumber", maxlength: 6, minlength: 6, required: true, placeholder: "Project" %>
           <div id="projectsNumberMessage" value="<%= @project ? @project.id : nil %>"></div>
         </div>
-        <div class="form-group form-material col-md-3">
-          <label class="form-control-label" for="inputProjectManager">Project Manager:</label>
+        <div class="form-group col-md-6 col-lg-3">
+          <label for="projectManager">Project Manager:</label>
+          <select class="form-control custom-select">
+            <option>Nothing selected</option>
+            <option>Another Option</option>
+          </select>
         </div>
       </div>
-      <div class="row">
-        <div class="form-group form-material col-md-6">
-          <label class="form-control-label" id="inputProjectName" >Project Name:</label>
-          <%= project.text_field 'name', class: "form-control", required: true %>
+      <div class="form-row">
+        <div class="form-group col-lg-6 ">
+          <label for="projectName">Project Name:</label>
+          <%= project.text_field 'name', class: "form-control", required: true, placeholder: "Project Name" %>
         </div>
       </div>
-      <hr>
-      <div class="row">
-        <div class="form-group form-material col-md-3">
-          <label class="form-control-label" id="inputCompanyName" >Company Name:</label>
-          <%= project.select(:company_id, load_data_with_id(current_org.companies),{ include_blank: 'No Company' },{data:{ plugin: 'selectpicker', "live-search":true}}) %>
+    </div>
+    <div class="divider-hr"></div>
+    <div class="formRowSize">
+      <div class="form-row">
+        <div class="col-12">
+          <label for="companyName">Company Name:</label>
+        </div>
+        <div class="form-group col-md-9 col-lg-3">
+          <%= project.select(:company_id, load_data_with_id(current_org.companies),{ include_blank: 'No Company' }, class: 'custom-select form-control') %>
         </div>
       </div>
-      <div class="row">
-        <div class="form-group form-material col-md-3">
-          <label class="form-control-label" for="inputProjectType">Project Type:</label>
-          <%= project.select :project_type_id, options_for_select(load_active_type("project_types"), project.object.project_type_id), {}, class: 'form-control', data: {
-            plugin: "selectpicker" } %>
+      <div class="form-row">
+        <div class="form-group col-md-4 col-lg-3">
+          <label>Project Type:</label>
+          <%= project.select :project_type_id, options_for_select(load_active_type("project_types"), project.object.project_type_id), {}, class: 'form-control custom-select' %>
         </div>
-        <div class="form-group form-material col-md-3">
-          <label class="form-control-label" for="inputIndustryType">Industry Type:</label>
-          <%= project.select :industry_type_id, options_for_select( load_active_type("industry_types"), project.object.industry_type_id), {}, class: 'form-control', data: {
-            plugin: "selectpicker" } %>
+        <div class="form-group col-md-4 col-lg-3">
+          <label>Industry Type:</label>
+          <%= project.select :industry_type_id, options_for_select( load_active_type("industry_types"), project.object.industry_type_id), {}, class: 'form-control custom-select' %>
         </div>
-        <div class="form-group form-material col-md-3">
-          <label class="form-control-label" for="inputBusinessUnit">Business Unit:</label>
-          <%= project.select :business_unit_id, options_for_select( load_type("business_units"), project.object.business_unit_id), {}, class: 'form-control', data: {
-            plugin: "selectpicker" } %>
+        <div class="form-group col-md-4 col-lg-3">
+          <label>Business Unit:</label>
+          <%= project.select :business_unit_id, options_for_select( load_type("business_units"), project.object.business_unit_id), {}, class: 'form-control custom-select' %>
         </div>
       </div>
-      <div class="row">
-        <div class="form-group form-material col-md-9">
-          <label class="form-control-label" id="inputDescriptionName" >Description:</label>
-          <%= project.text_area 'description', class: "form-control", rows: "3" %>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group form-material col-md-6">
-          <label class="form-control-label" id="inputLocated" >Located:</label>
-          <%= project.text_field 'located', class: "form-control" %>
-        </div>
-      </div>
-      <hr>
-      <div class="row">
-        <div class="form-group form-material col-md-6">
-          <label class="form-control-label" id="inputPrimaryContact" >Primary Contact:</label>
-          <%= project.select(:primary_contact_id, load_data_with_id(current_org.contacts),{},{data:{ plugin: 'selectpicker', "live-search":true}}) %>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group form-material col-md-3">
-          <label class="form-control-label" id="inputSquareFeet" >Square Feet Requested:</label>
-          <%= project.select :square_feet_requested, options_for_select( Project::SQUARE_FEET_REQUESTED, project.object.square_feet_requested), {}, class: 'form-control', data: {
-            plugin: "selectpicker" } %>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group form-material col-md-9">
-          <label class="form-control-label" id="inputSquareFootageNotes" >Square Footage Notes:</label>
-          <%= project.text_area 'square_footage_note', class: "form-control", rows: "3" %>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group form-material col-md-3">
-          <label class="form-control-label" id="inputAcres" >Acres Requested:</label>
-          <%= project.select :acres_requested, options_for_select( Project::ACRES_REQUESTED, project.object.acres_requested), {}, class: 'form-control', data: { plugin: "selectpicker" } %>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group form-material col-md-9">
-          <label class="form-control-label" id="inputAcreageNotes" >Acreage Notes:</label>
-          <%= project.text_area 'acreage_note', class: "form-control", rows: "3" %>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group form-material col-md-3">
-          <label class="form-control-label" id="inputNewJobs" >New Jobs #</label>
-          <%= project.text_field 'new_jobs', class: "form-control" %>
-        </div>
-        <div class="form-group form-material col-md-3">
-          <label class="form-control-label" id="inputRetainedJobs" >Retained Jobs #</label>
-          <%= project.text_field 'retained_jobs', class: "form-control" %>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group form-material col-md-9">
-          <label class="form-control-label" id="inputNewJobsNotes" >New Jobs Notes:</label>
-          <%= project.text_area 'new_jobs_notes', class: "form-control", rows: "3" %>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group form-material col-md-3">
-          <label class="form-control-label" id="inputWages" >Wages #</label>
-          <%= project.text_field 'wages', class: "form-control" %>
-          <span class="text-help">
-          *Enter number with no dollar signs or commas
-          </span>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group form-material col-md-9">
-          <label class="form-control-label" id="inputWagesNotes" >Wages Notes:</label>
-          <%= project.text_area 'wages_notes', class: "form-control", rows: "3" %>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group form-material col-md-3">
-          <label class="form-control-label" id="inputNetNewInvestment" >Net New Investment #</label>
-          <%= project.text_field 'net_new_investment', class: "form-control" %>
-          <span class="text-help">
-          *Enter number with no dollar signs or commas
-          </span>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group form-material col-md-9">
-          <label class="form-control-label" id="inputNetNewInvestmentNotes" >Net New Investment Notes:</label>
-          <%= project.text_area 'net_new_investment_notes', class: "form-control", rows: "3" %>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group form-material col-md-3">
-          <label class="form-control-label" id="inputConsideredLocations" >Considered Locations: </label>
-          <%= project.select :considered_location_id, options_for_select( current_org.considered_locations.active.map { |type| [type.location, type.id] }, project.object.considered_location_id), {}, class: 'form-control', data: { plugin: "selectpicker" } %>
-        </div>
-        <div class="form-group form-material col-md-3">
-          <label class="form-control-label" id="inputCompetition" >Competition: </label>
-          <%= project.select :competition_id, options_for_select( load_active_type("competitions"), project.object.competition_id), {}, class: 'form-control', data: { plugin: "selectpicker" } %>
-        </div>
-        <div class="form-group form-material col-md-3">
-          <label class="form-control-label" id="inputServiceProvided" >Service Provided: </label>
-          <%= project.select :provided_service_id, options_for_select( load_active_type("provided_services"), project.object.provided_service_id), {}, class: 'form-control', data: { plugin: "selectpicker" } %>
-        </div>
-      </div>
-      <hr>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="row">
-            <div class="form-group form-material col-md-6">
-              <label class="form-control-label">Site Vist 1:</label>
-              <div class="input-group">
-                <span class="input-group-addon">
-                <i class="icon md-calendar" aria-hidden="true"></i>
-                </span>
-                <%= project.text_field 'site_visit_1_str', class: "form-control datepicker", value: "#{@project.site_visit_1}", data: {plugin: "datepicker"} %>
-              </div>
-            </div>
-            <div class="form-group form-material col-md-6">
-              <label class="form-control-label" for="inputPublicReleaseDate">Public Release Date:</label>
-              <div class="input-group">
-                <span class="input-group-addon">
-                <i class="icon md-calendar" aria-hidden="true"></i>
-                </span>
-                <%= project.text_field 'public_release_date_str', class: "form-control datepicker", value: "#{@project.public_release_date}", data: {plugin: "datepicker"} %>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="form-group form-material col-md-6">
-              <label class="form-control-label" for="inputSiteVisit2">Site Vist 2:</label>
-              <div class="input-group">
-                <span class="input-group-addon">
-                <i class="icon md-calendar" aria-hidden="true"></i>
-                </span>
-                <%= project.text_field 'site_visit_2_str', class: "form-control datepicker", value: "#{@project.site_visit_2}",  data: {plugin: "datepicker"} %>
-              </div>
-            </div>
-            <div class="form-group form-material col-md-6">
-              <label class="form-control-label" for="inputSource">Source:</label>
-              <%= project.select :source_id, options_for_select(load_active_type("sources") , project.object.source_id), {}, class: 'form-control', data: { plugin: "selectpicker" } %>
-            </div>
-          </div>
-          <div class="row">
-            <div class="form-group form-material col-md-6">
-              <label class="form-control-label" for="inputSiteVisit3">Site Vist 3:</label>
-              <div class="input-group">
-                <span class="input-group-addon">
-                <i class="icon md-calendar" aria-hidden="true"></i>
-                </span>
-                <%= project.text_field 'site_visit_3_str', class: "form-control datepicker", value: "#{@project.site_visit_3}", data: {plugin: "datepicker"} %>
-              </div>
-            </div>
-            <div class="form-group form-material col-md-6">
-              <label class="form-control-label" for="inputEliminationReason">Elimination Reason:</label>
-              <%= project.select :elimination_reason_id, options_for_select(load_active_type("elimination_reasons"), project.object.elimination_reason_id), {}, class: 'form-control', data: { plugin: "selectpicker" } %>
-            </div>
+      <div class="form-row">
+        <div class="form-group col-lg-9 ">
+          <label for="description">Description:</label>
+          <div class="formTextarea">
+            <%= project.text_area 'description', class: "form-control", rows: "3",placeholder: "Description" %>
           </div>
         </div>
-        <div class="col-md-6">
-          <div class="row">
-            <div class="form-inline form-material col-md-12">
-              <div class="col-md-7 col-6">
-                <label class="form-control-label">Site Selector?</label>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-lg-6">
+          <label for="located">Located:</label>
+          <%= project.text_field 'located', class: "form-control", placeholder:"Located" %>
+        </div>
+      </div>
+    </div>
+    <div class="divider-hr"></div>
+    <div class="formRowSize">
+      <div class="form-row">
+        <div class="col-12">
+          <label for="primaryContact">Primary Contact:</label>
+        </div>
+        <div class="form-group col-md-9 col-lg-6">
+          <%= project.select(:primary_contact_id, load_data_with_id(current_org.contacts),{}, class: "form-control custom-select") %>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-lg-3">
+          <label>Square Feet Requested:</label>
+          <%= project.select :square_feet_requested, options_for_select( Project::SQUARE_FEET_REQUESTED, project.object.square_feet_requested), {}, class: 'form-control custom-select' %>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-lg-9">
+          <label for="squareNotes">Square Footage Notes:</label>
+          <div class="formTextarea">
+            <%= project.text_area 'square_footage_note', class: "form-control", rows: "3", placeholder: "Square Footage Notes" %>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-lg-3">
+          <label>Acres Requested:</label>
+          <%= project.select :acres_requested, options_for_select( Project::ACRES_REQUESTED, project.object.acres_requested), {}, class: 'form-control custom-select' %>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-lg-9">
+          <label for="acreageNotes">Acreage Notes:</label>
+          <div class="formTextarea">
+            <%= project.text_area 'acreage_note', class: "form-control", rows: "3",placeholder: "Acreage Notes" %>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6 col-lg-3">
+          <label for="newJobs">New Jobs #</label>
+          <%= project.text_field 'new_jobs', class: "form-control", placeholder: "New Jobs" %>
+        </div>
+        <div class="form-group col-md-6 col-lg-3">
+          <label for="retainedJobs">Retained Jobs #</label>
+          <%= project.text_field 'retained_jobs', class: "form-control", placeholder: "Retained Jobs" %>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-lg-9">
+          <label for="newJobsNotes">New Jobs Notes:</label>
+          <div class="formTextarea">
+            <%= project.text_area 'new_jobs_notes', class: "form-control", rows: "3",placeholder: "New Jobs Notes" %>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-12">
+          <label for="wages">Wages #</label>
+        </div>
+        <div class="form-group col-md-5 col-lg-3">
+          <%= project.text_field 'wages', class: "form-control", placeholder: "Primary Contact" %>
+        </div>
+        <div class="form-group col-auto align-self-center"> <span class="red">*</span> Enter number with no dollar signs or commas </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-lg-9">
+          <label for="wagesNotes">Wages Notes:</label>
+          <div class="formTextarea">
+            <%= project.text_area 'wages_notes', class: "form-control", rows: "3",placeholder: "Wages Notes" %>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-12">
+          <label for="netNewInvestment">Net New Investment #</label>
+        </div>
+        <div class="form-group col-md-5 col-lg-3">
+          <%= project.text_field 'net_new_investment', class: "form-control", placeholder: "Net New Investment" %>
+        </div>
+        <div class="form-group col-auto align-self-center"> <span class="red">*</span> Enter number with no dollar signs or commas </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-lg-9">
+          <label for="newInvNotes">Net New Investment Notes:</label>
+          <div class="formTextarea">
+            <%= project.text_area 'net_new_investment_notes', class: "form-control", rows: "3", placeholder: "Net New Investment Notes" %>
+          </div>
+        </div>
+      </div>
+      <div class="selectOptionSection">
+        <div class="form-row">
+          <div class="col-12">
+            <label for="consideredLoc">Considered Locations:</label>
+          </div>
+          <div class="form-group col-md-9 col-lg-3">
+            <%= project.select :considered_location_id, options_for_select( current_org.considered_locations.active.map { |type| [type.location, type.id] }, project.object.considered_location_id), {}, class: 'form-control custom-select' %>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-12">
+            <label for="competition">Competition:</label>
+          </div>
+          <div class="form-group col-md-9 col-lg-3">
+            <%= project.select :competition_id, options_for_select( load_active_type("competitions"), project.object.competition_id), {}, class: 'form-control custom-select' %>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-12">
+            <label for="competition">Service Provided:</label>
+          </div>
+          <div class="form-group col-md-9 col-lg-3">
+            <%= project.select :provided_service_id, options_for_select( load_active_type("provided_services"), project.object.provided_service_id), {}, class: 'form-control custom-select' %>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-lg-7">
+          <div class="form-row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="sVisit1">Site Vist 1:</label>
+                <div class="rightIconFld">
+                  <%= project.text_field 'site_visit_1_str', class: "form-control datepicker", value: "#{@project.site_visit_1}", data: {plugin: "datepicker"} %>
+                  <label for="sVisit1" class="fldRightIcon"> <i class="icon fa fa-calendar-o" aria-hidden="true"></i> </label>
+                </div>
               </div>
-              <div class="form-group col-md-2 col-3">
-                <%= project.radio_button :site_selector, 'false', checked: true %>
-                <label for="inputRadiosUnchecked">No</label>
+              <div class="form-group">
+                <label for="sVisit2">Site Vist 2:</label>
+                <div class="rightIconFld">
+                  <%= project.text_field 'site_visit_2_str', class: "form-control datepicker", value: "#{@project.site_visit_2}",  data: {plugin: "datepicker"} %>
+                  <label for="sVisit2" class="fldRightIcon"> <i class="icon fa fa-calendar-o" aria-hidden="true"></i> </label>
+                </div>
               </div>
-              <div class="form-group col-md-2 col-3">
-                <%= project.radio_button :site_selector, 'true' %>
-                <label for="inputRadiosChecked">Yes</label>
+              <div class="form-group">
+                <label for="sVisit3">Site Vist 3:</label>
+                <div class="rightIconFld">
+                  <%= project.text_field 'site_visit_3_str', class: "form-control datepicker", value: "#{@project.site_visit_3}", data: {plugin: "datepicker"} %>
+                  <label for="sVisit3" class="fldRightIcon"> <i class="icon fa fa-calendar-o" aria-hidden="true"></i> </label>
+                </div>
               </div>
             </div>
-          </div>
-          <br/>
-          <div class="row">
-            <div class="form-inline form-material col-md-12">
-              <div class="col-md-7 col-6">
-                <label class="form-control-label">Utilize sites and building database?</label>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="feleaseDate">Public Release Date:</label>
+                <div class="rightIconFld">
+                  <%= project.text_field 'public_release_date_str', class: "form-control datepicker", value: "#{@project.public_release_date}", data: {plugin: "datepicker"} %>
+                  <label for="feleaseDate" class="fldRightIcon"> <i class="icon fa fa-calendar-o" aria-hidden="true"></i> </label>
+                </div>
               </div>
-              <div class="form-group col-md-2 col-3">
-                <%= project.radio_button :utilize_sites, 'false', checked: true %>
-                <label for="inputRadiosUnchecked">No</label>
+              <div class="form-group">
+                <label>Source:</label>
+                <%= project.select :source_id, options_for_select(load_active_type("sources") , project.object.source_id), {}, class: 'form-control custom-select' %>
               </div>
-              <div class="form-group col-md-2 col-3">
-                <%= project.radio_button :utilize_sites, 'true' %>
-                <label for="inputRadiosChecked">Yes</label>
-              </div>
-            </div>
-          </div>
-          <br/>
-          <div class="row">
-            <div class="form-inline form-material col-md-12">
-              <div class="col-md-7 col-6">
-                <label class="form-control-label">Speculative Building?</label>
-              </div>
-              <div class="form-group col-md-2 col-3">
-                <%= project.radio_button :speculative_building, 'false', checked: true %>
-                <label for="inputRadiosUnchecked">No</label>
-              </div>
-              <div class="form-group col-md-2 col-3">
-                <%= project.radio_button :speculative_building, 'true' %>
-                <label for="inputRadiosChecked">Yes</label>
-              </div>
-            </div>
-          </div>
-          <br/>
-          <div class="row">
-            <div class="form-inline form-material col-md-12">
-              <div class="col-md-7 col-6">
-                <label class="form-control-label">For public release?</label>
-              </div>
-              <div class="form-group col-md-2 col-3">
-                <%= project.radio_button :public_release, 'false', checked: true %>
-                <label for="inputRadiosUnchecked">No</label>
-              </div>
-              <div class="form-group col-md-2 col-3">
-                <%= project.radio_button :public_release, 'true' %>
-                <label for="inputRadiosChecked">Yes</label>
+              <div class="form-group">
+                <label>Elimination Reason:</label>
+                <%= project.select :elimination_reason_id, options_for_select(load_active_type("elimination_reasons"), project.object.elimination_reason_id), {}, class: 'form-control custom-select' %>
               </div>
             </div>
           </div>
         </div>
+        <div class="col-lg-5">
+          <div class="btmRadioSelector">
+            <div class="form-row">
+              <div class="col-md radioLbl">
+                <label>Site Selector?</label>
+              </div>
+              <div class="form-group col-auto">
+                <div class="inlineRadio">
+                  <ul>
+                    <li>
+                      <div class="custom-radioBtn">
+                        <%= project.radio_button :site_selector, 'false', checked: true %>
+                        <label for="project_site_selector_false">No</label>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="custom-radioBtn">
+                        <%= project.radio_button :site_selector, 'true' %>
+                        <label for="project_site_selector_true">Yes</label>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class=" col-md radioLbl">
+                <label>Utilize sites and building database?</label>
+              </div>
+              <div class="form-group col-auto">
+                <div class="inlineRadio">
+                  <ul>
+                    <li>
+                      <div class="custom-radioBtn">
+                        <%= project.radio_button :utilize_sites, 'false', checked: true %>
+                        <label for="project_utilize_sites_false">No</label>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="custom-radioBtn">
+                        <%= project.radio_button :utilize_sites, 'true' %>
+                        <label for="project_utilize_sites_true">Yes</label>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col-md radioLbl">
+                <label>Speculative Building?</label>
+              </div>
+              <div class="form-group col-auto">
+                <div class="inlineRadio">
+                  <ul>
+                    <li>
+                      <div class="custom-radioBtn">
+                        <%= project.radio_button :speculative_building, 'false', checked: true %>
+                        <label for="project_speculative_building_false">No</label>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="custom-radioBtn">
+                        <%= project.radio_button :speculative_building, 'true' %>
+                        <label for="project_speculative_building_true">Yes</label>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col radioLbl">
+                <label>For public release?</label>
+              </div>
+              <div class="form-group col-auto">
+                <div class="inlineRadio">
+                  <ul>
+                    <li>
+                      <div class="custom-radioBtn">
+                        <%= project.radio_button :public_release, 'false', checked: true %>
+                        <label for="project_public_release_false">No</label>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="custom-radioBtn">
+                        <%= project.radio_button :public_release, 'true' %>
+                        <label for="project_public_release_true">Yes</label>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <% if @activity %>
-        <%= hidden_field_tag "project[activity_id]", @activity.id %>
-      <% end %>
-      <hr>
-      <div class="row">
-        <div class="col-md-2 col-6">
-          <div class="form-group form-material">
-            <button type="submit" class="btn btn-block green-btn col-md-12" name= "commit", value= "Save & Close">Save & Close</button>
-          </div>
-        </div>
-        <div class="col-md-2 col-6">
-          <div class="form-group form-material">
-            <button type="submit" class="btn btn-block green-btn col-md-12">Save</button>
-          </div>
-        </div>
-        <div class="col-md-2 col-6">
-          <div class="form-group form-material">
-            <%= link_to 'Cancel', projects_path, class: "btn btn-block green-btn col-md-12", data: { turbolinks: false } %>
-          </div>
-        </div>
-      </div>
+    </div>
+    <% if @activity %>
+      <%= hidden_field_tag "project[activity_id]", @activity.id %>
     <% end %>
-  </div>
+    <div class="divider-hr"></div>
+    <div class="form-row">
+      <div class="form-group mbFullWd col-auto">
+        <button type="submit" class="btn btn-primary" name= "commit" value= "Save & Close">Save & Close</button>
+      </div>
+      <div class="form-group mbFullWd col-auto">
+        <button type="submit" class="btn btn-outline-primary">Save</button>
+      </div>
+      <div class="form-group mbFullWd col-auto">
+        <%= link_to 'Cancel', projects_path, class: "btn btn-outline-primary", data: { turbolinks: false } %>
+      </div>
+    </div>
+  <% end %>
 </div>

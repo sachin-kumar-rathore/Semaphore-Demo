@@ -13,7 +13,8 @@ Rails.application.config.assets.precompile += %w( Base.js Component.js
   State.js asscrollable.js colors.js menu.js slidepanel.js switchery.js
   tabs.js bootstrap-datepicker.js bootstrap-select.js matchheight.js
   application_new.css application_new.js custom_layout.js jquery.min.js
-  bootstrap.min.js jquery-3.2.1.slim.min popper.js )
+  bootstrap.min.js jquery-3.2.1.slim.min popper.js chartist.min.css
+  chartist-plugin-tooltip.css chartist.min chartist-plugin-tooltip.min )
 
 
 

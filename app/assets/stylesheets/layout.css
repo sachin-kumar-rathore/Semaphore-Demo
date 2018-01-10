@@ -1036,3 +1036,9 @@ table.tableCustomStyle td {
   color: #ffffff;
 }
 
+.listEditIcon .fa-pencil{
+  color: #24c667;
+}
+.listRemoveIcon .fa-close{
+  color: #ff4757;
+}

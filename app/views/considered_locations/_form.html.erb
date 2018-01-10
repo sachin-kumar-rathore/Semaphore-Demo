@@ -8,10 +8,10 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
-          <h6 class="modal-title">CONSIDERED LOCATION INFORMATION</h6>
+          <h4 class="modal-title"><%= @considered_location.new_record? ? "ADD " : "EDIT " %>CONSIDERED LOCATION INFORMATION</h4>
         </div>
         <div class="modal-body">
-          <div class="example-wrap">
+          <div class="formStyle">
             <div class="error-messages"></div>
             <div class="example">
                 <div class="row form-inline form-material">
@@ -33,34 +33,34 @@
                 </div>
                 <br/>
               <div class="row">
-                <div class="form-group form-material col-md-6">
+                <div class="form-group col">
                   <label class="form-control-label">Considered Locations:</label>
-                  <%= type.text_field :location, class: "form-control" %>
+                  <%= type.text_field :location, class: "form-control", placeholder: "Location" %>
                 </div>
               </div>
               <div class="row">
-                <div class="form-group form-material col-md-4">
+                <div class="form-group col-md-6">
                   <label class="form-control-label">City:</label>
-                  <%= type.text_field :city, class: "form-control" %>
+                  <%= type.text_field :city, class: "form-control", placeholder: "City" %>
                 </div>
-                <div class="form-group form-material col-md-4 offset-md-3">
+                <div class="form-group col-md-6">
                   <label class="form-control-label">Abbreviation*:</label>
                   <%= type.text_field :city_abbreviation, class: "form-control" %>
                 </div>
               </div>
               <div class="row">
-                <div class="form-group form-material col-md-4">
+                <div class="form-group col-md-6">
                   <label class="form-control-label">Country:</label>
-                  <%= type.text_field :country, class: "form-control" %>
+                  <%= type.text_field :country, class: "form-control", placeholder: "Country" %>
                 </div>
-                <div class="form-group form-material col-md-4 offset-md-3">
+                <div class="form-group col-md-6">
                   <label class="form-control-label">Abbreviation*:</label>
                   <%= type.text_field :country_abbreviation, class: "form-control" %>
                 </div>
               </div>
               <% unless @considered_location.new_record? %>
                 <div class="col-md-12 panel panel-success ">
-                  <div class="panel-heading">
+                  <div class="panel-heading-contacts">
                     <h3 class="panel-title">Contacts
                       <i class="fa fa-plus pull-right clickable" id="addContactIcon" data-href="<%= show_contacts_considered_location_path(@considered_location) %>"></i>
                     </h3>
@@ -72,7 +72,7 @@
                 </div>
               <% end %>
               <br/>
-              <div class="row">
+              <div class="modalFooterBtns">
                 <div class="form-group form-material col-md-6">
                   <button type="submit" class="btn btn-sm green-btn"><%= @considered_location.new_record? ? ' Save ' : ' Save changes' %></button>
                   <button type="button" class="btn btn-sm white-btn" data-dismiss="modal">Cancel</button>

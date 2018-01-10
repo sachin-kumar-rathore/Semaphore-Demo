@@ -1,9 +1,40 @@
-<ul class="list-group list-group-dividered list-group-full">
-  <% @considered_locations.each do |considered_location|%>
-    <li class="list-group-item">
-      <i class="fa fa-pencil-square-o fa-1x text-success clickable pointerCursor" data-href="<%= edit_considered_location_path(considered_location) %>"></i>&nbsp;&nbsp;
-      <%= considered_location.location %>
-      <i class="fa fa-times fa-1x text-danger pull-right delete-option pointerCursor" data-href="<%= considered_location_path(considered_location) %>"></i>
-    </li>
-  <% end %>
-</ul>
+<table class="table footable table tableCustomStyle table-hover removeTblSearch bodrTop" id="userLists" data-empty="There are no users." data-show-toggle="true">
+  <thead>
+    <tr>
+      <th data-breakpoints="xs sm">Location</th>
+      <th data-breakpoints="xs sm">City</th>
+      <th>Country</th>
+      <th data-breakpoints="xs sm md">STATUS</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @considered_locations.each do |considered_location|%>
+      <tr>
+        <td><%= considered_location.location %></td>
+        <td><%= considered_location.city %></td>
+        <td><%= considered_location.country %></td>
+        <td><%= considered_location.status %></td>
+        <td>
+          <div class="openLeft moreOptions dropdown">
+            <a class="" data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false" data-animation="scale-down" role="button">
+              <i class="icon md-more-vert" aria-hidden="true"></i>
+            </a>
+            <div class="dropdown-menu" role="menu">
+              <a class="dropdown-item clickable" data-href="<%= edit_considered_location_path(considered_location) %>" role="menuitem"><i class="icon md-edit" aria-hidden="true"></i> Edit</a>
+              <a class="dropdown-item delete-option" data-href="<%= considered_location_path(considered_location) %>" role="menuitem"><i class="icon md-delete" aria-hidden="true"></i> Delete</a>
+            </div>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="digg_pagination">
+  <%= js_will_paginate @considered_locations, container: false %>
+</div>
+
+<script>
+  $('.footable').footable();
+</script>

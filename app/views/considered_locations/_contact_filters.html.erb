@@ -2,15 +2,15 @@
   <div class="col-md-12">
     <%= form_with url: show_contacts_considered_location_path, method: :get, id: "contactsFilter" do %>
       <div class="row">
-        <div class="form-group form-material col-md-3">
+        <div class="form-group col-md-3">
           <label class="form-control-label">Name:</label>
           <input type="text" name="name" placeholder="Name" class="form-control">
         </div>
-        <div class="form-group form-material col-md-3">
+        <div class="form-group col-md-3">
           <label class="form-control-label">Email:</label>
           <input type="text" name="email" placeholder="Email" class="form-control">
         </div>  
-        <div class="form-group form-material col-md-4">
+        <div class="form-group col-md-4 align-self-end">
           <button type="submit" class="btn btn-block green-btn waves-effect waves-classic">Update & Show List
           </button>
         </div>

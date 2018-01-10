@@ -16,7 +16,7 @@
         <td><%= contact.organization ? contact.organization.name : 'ORG' %></td>
         <td><%= contact.cell_phone %></td>
         <td><%= contact.email %></td>
-        <td><a href="<%= attach_contact_considered_location_path(@considered_location, contact_id: contact.id) %>" data-method="POST" data-remote= "true" data-confirm ="Are you sure you want to add this contact to considered location?" class="btn btn-sm green-btn clickable" >Add To Project</a></td>
+        <td><a href="<%= attach_contact_considered_location_path(@considered_location, contact_id: contact.id) %>" data-method="POST" data-remote= "true" data-confirm ="Are you sure you want to add this contact to considered location?" class="btn btn-sm green-btn contact-btn clickable" >Add To Project</a></td>
       </tr>
     <% end %>
   </tbody>

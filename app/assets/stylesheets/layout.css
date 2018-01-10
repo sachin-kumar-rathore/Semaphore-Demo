@@ -1029,3 +1029,10 @@ table.tableCustomStyle td {
     content: '';
 }	
 }
+.panel-success .panel-heading-contacts {
+  background-color: #2ED573;
+}
+.contact-btn:hover{
+  color: #ffffff;
+}
+

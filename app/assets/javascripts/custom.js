@@ -190,11 +190,13 @@ function reloadCompanyProjects(id){
 
 $(document).on("click", ".delete-option", function () {
   var link = $(this).data("href");
-  $.ajax({
-    url: link,
-    type: "DELETE",
-    dataType: 'script'
-  });
+  if(confirm("Are you sure?")){
+    $.ajax({
+      url: link,
+      type: "DELETE",
+      dataType: 'script'
+    });
+  }
 });
 
 //company_id_check

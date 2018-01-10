@@ -1042,3 +1042,13 @@ table.tableCustomStyle td {
 .listRemoveIcon .fa-close{
   color: #ff4757;
 }
+
+.rolesTable thead th, td {
+  color: #757575;
+  font-size: 0.9286rem;
+}
+
+.modal-content .alert-modal-title {
+  color: #ff0000;
+  margin-left: 200px;
+}

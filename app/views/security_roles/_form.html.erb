@@ -8,21 +8,21 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
-          <h6 class="modal-title">SECURITY ROLE INFORMATION</h6>
+          <h4 class="modal-title">SECURITY ROLE INFORMATION</h4>
         </div>
         <div class="modal-body">
           <div class="example-wrap">
             <div class="error-messages"></div>
             <div class="example">
               <div class="row">
-                <div class="form-group form-material col-md-4 offset-md-4">
+                <div class="form-group col-md-4 offset-md-4">
                   <label class="form-control-label">Name:</label>
-                  <%= type.text_field :name, class: "form-control" %>
+                  <%= type.text_field :name, class: "form-control", placeholder: "Role Name" %>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12 table-responsive">
-                  <table class="table table-striped table-hover designTable" id="rolesTable">
+                  <table class="table table-striped table-hover designTable rolesTable" id="rolesTable">
                     <thead>
                       <th>Entity</th>
                       <th>Read</th>
@@ -36,7 +36,7 @@
                       <%= type.fields_for :project_permissions do |project| %>
                         <% SecurityRole::PERMISSIONS.each do |permission_type| %>
                           <td>
-                            <%= project.select permission_type.to_sym,options_for_select(["None","All"], type.object.project_permissions[permission_type] ), {}, class: 'form-control', data: { plugin: "selectpicker" } %>
+                            <%= project.select permission_type.to_sym,options_for_select(["None","All"], type.object.project_permissions[permission_type] ), {}, class: 'form-control custom-select' %>
                           </td>
                         <% end %>
                       <% end %>
@@ -46,7 +46,7 @@
                       <%= type.fields_for :user_permissions do |user| %>
                         <% SecurityRole::PERMISSIONS.each do |permission_type| %>
                           <td>
-                            <%= user.select permission_type.to_sym,options_for_select(["None","All"], type.object.user_permissions[permission_type]), {}, class: 'form-control', data: { plugin: "selectpicker" } %>
+                            <%= user.select permission_type.to_sym,options_for_select(["None","All"], type.object.user_permissions[permission_type]), {}, class: 'form-control custom-select' %>
                           </td>
                         <% end %>
                       <% end %>
@@ -56,7 +56,7 @@
                       <%= type.fields_for :configuration_permissions do |config| %>
                         <% SecurityRole::PERMISSIONS.each do |permission_type| %>
                           <td>
-                            <%= config.select permission_type.to_sym,options_for_select(["None","All"], type.object.configuration_permissions[permission_type]), {}, class: 'form-control', data: { plugin: "selectpicker" } %>
+                            <%= config.select permission_type.to_sym,options_for_select(["None","All"], type.object.configuration_permissions[permission_type]), {}, class: 'form-control custom-select' %>
                           </td>
                         <% end %>
                       <% end %>
@@ -66,7 +66,7 @@
                       <%= type.fields_for :site_permissions do |site| %>
                         <% SecurityRole::PERMISSIONS.each do |permission_type| %>
                           <td>
-                            <%= site.select permission_type.to_sym,options_for_select(["None","All"], type.object.site_permissions[permission_type]), {}, class: 'form-control', data: { plugin: "selectpicker" } %>
+                            <%= site.select permission_type.to_sym,options_for_select(["None","All"], type.object.site_permissions[permission_type]), {}, class: 'form-control custom-select' %>
                           </td>
                         <% end %>
                       <% end %>
@@ -76,7 +76,7 @@
                       <%= type.fields_for :contact_permissions do |contact| %>
                         <% SecurityRole::PERMISSIONS.each do |permission_type| %>
                           <td>
-                            <%= contact.select permission_type.to_sym,options_for_select(["None","All"], type.object.contact_permissions[permission_type]), {}, class: 'form-control', data: { plugin: "selectpicker" } %>
+                            <%= contact.select permission_type.to_sym,options_for_select(["None","All"], type.object.contact_permissions[permission_type]), {}, class: 'form-control custom-select' %>
                           </td>
                         <% end %>
                       <% end %>
@@ -86,7 +86,7 @@
                       <%= type.fields_for :company_permissions do |company| %>
                         <% SecurityRole::PERMISSIONS.each do |permission_type| %>
                           <td>
-                            <%= company.select permission_type.to_sym,options_for_select(["None","All"], type.object.company_permissions[permission_type]), {}, class: 'form-control', data: { plugin: "selectpicker" } %>
+                            <%= company.select permission_type.to_sym,options_for_select(["None","All"], type.object.company_permissions[permission_type]), {}, class: 'form-control custom-select' %>
                           </td>
                         <% end %>
                       <% end %>

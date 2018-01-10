@@ -1,3 +1,4 @@
 class BusinessUnit < ApplicationRecord
-  belongs_to :organization, dependent: :destroy
+  belongs_to :organization
+  validates :name, presence: true
 end

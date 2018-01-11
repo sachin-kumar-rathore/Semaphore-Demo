@@ -42,12 +42,12 @@
 
     function loadBusinessProspectBar() {
       var seriesList = <%=raw get_generic_prospect_total(results, 'status', Project::STATUS) %>;
-      var total_types = 0;
+      var total_types = 0.0;
       seriesList.map(function (a) {
         return total_types += a.value;
       });
       var labels = seriesList.map(function (a) {
-        return a.meta + (a.value/total_types);
+        return a.meta + ' ' + (a.value/total_types).toPrecision(2) + '%';
       });
       var chart = new Chartist.Pie('#businessProspectBar', {
         series: seriesList,

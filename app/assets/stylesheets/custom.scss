@@ -388,4 +388,8 @@ html, body {
   #prospectsByIndustryTypeBar svg path {
     stroke-width: 35px !important;
   }
+  .ct-chart .ct-label{
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
 }

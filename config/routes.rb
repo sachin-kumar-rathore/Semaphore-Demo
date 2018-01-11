@@ -69,6 +69,7 @@ Rails.application.routes.draw do
     collection do
       get :tasks
       get :activity
+      get :emails
     end
   end
   resources :projects, only: %i[new index create edit update show] do

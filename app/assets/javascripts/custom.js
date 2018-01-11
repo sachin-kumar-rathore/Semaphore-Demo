@@ -406,3 +406,18 @@ function activityFilterRequest(filter_by) {
     data: { activity: activity_type, type: filter  }
   });
 }
+$(document).on("change", "#dashboard_email_by_project", function () {
+  filterDashboardEmails();
+});
+$(document).on("change", "#dashboard_email_by_contact", function () {
+  filterDashboardEmails();
+});
+
+function filterDashboardEmails(){
+  $.ajax({
+    url: "/dashboard/emails",
+    type: "GET",
+    dataType: 'script',
+    data: { project: $('#dashboard_email_by_project').val(), contact: $('#dashboard_email_by_contact').val()  }
+  });
+}

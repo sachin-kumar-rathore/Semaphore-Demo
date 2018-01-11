@@ -1,135 +1,138 @@
 <div class="dashboard-menu">
-  <div class="row">
-    <div class="col-lg-4">
-      <div class="projectMenu">
-        <ul>
-          <li>
-            <div class="projectSec">
-              <div class="title-menu">
-                <span><button type="button" class="btn activeBtn">Active</button></span>
-                <h3> - Project Status</h3>
-              </div>
-              <div class="form-row">
-                <div class="col">
-                  <div class="projectMenu">
-                    <h3><span class="IconCart"><i class="icon fa fa-caret-down"></i></span><%= @project_status_group['Active'].count %><span>Projects</span></h3>
-                  </div>
-                </div>
-                <div class="col-auto">
-                  <div class="projectMenu">
-                    <h3><span class="IconCart bgGreen"><i class="icon fa fa-caret-up"></i></span>
+	<div class="row">
+		<div class="col-lg-4">
+			<div class="projectMenu">
+				<ul>
+					<li>
+						<div class="projectSec">
+							<div class="title-menu">
+								<span><button type="button" class="btn activeBtn">Active</button></span>
+								<h3> - Project Status</h3>
+							</div>
+							<div class="form-row">
+								<div class="col">
+									<div class="projectMenu">
+										<h3>
+											<span class="IconCart"><i class="icon fa fa-caret-down"></i></span><%= @project_status_group['Active'].count %>
+											<span>Projects</span></h3>
+									</div>
+								</div>
+								<div class="col-auto">
+									<div class="projectMenu">
+										<h3><span class="IconCart bgGreen"><i class="icon fa fa-caret-up"></i></span>
 											$<%= @project_status_group['Active'].pluck('wages').sum %><span>wages</span>
 										</h3>
-                  </div>
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="col">
-                  <div class="projectMenu">
-                    <h3><span class="IconCart bgGreen"><i class="icon fa fa-caret-up"></i></span>
+									</div>
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="col">
+									<div class="projectMenu">
+										<h3><span class="IconCart bgGreen"><i class="icon fa fa-caret-up"></i></span>
 											<%= @project_status_group['Active'].pluck('new_jobs').sum %><span>Jobs</span>
 										</h3>
-                  </div>
-                </div>
-                <div class="col-auto">
-                  <div class="projectMenu">
-                    <h3><span class="IconCart"><i class="icon fa fa-caret-down"></i></span>
+									</div>
+								</div>
+								<div class="col-auto">
+									<div class="projectMenu">
+										<h3><span class="IconCart"><i class="icon fa fa-caret-down"></i></span>
 											$<%= @project_status_group['Active'].pluck('net_new_investment').sum %><span>Investment</span>
 										</h3>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="projectSec">
-              <div class="title-menu">
-                <span><button type="button" class="btn activeBtn primary">Preliminary</button></span>
-                <h3> - Project Status</h3>
-              </div>
-              <div class="form-row">
-                <div class="col">
-                  <div class="projectMenu">
-                    <h3><span class="IconCart"><i class="icon fa fa-caret-down"></i></span>5<span>Projects</span></h3>
-                  </div>
-                </div>
-                <div class="col-auto">
-                  <div class="projectMenu">
-                    <h3><span class="IconCart bgGreen"><i class="icon fa fa-caret-up"></i></span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="projectSec">
+							<div class="title-menu">
+								<span><button type="button" class="btn activeBtn primary">Preliminary</button></span>
+								<h3> - Project Status</h3>
+							</div>
+							<div class="form-row">
+								<div class="col">
+									<div class="projectMenu">
+										<h3><span class="IconCart"><i class="icon fa fa-caret-down"></i></span>5<span>Projects</span></h3>
+									</div>
+								</div>
+								<div class="col-auto">
+									<div class="projectMenu">
+										<h3><span class="IconCart bgGreen"><i class="icon fa fa-caret-up"></i></span>
 											$<%= @project_status_group['Preliminary'].pluck('wages').sum %><span>wages</span>
 										</h3>
-                  </div>
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="col">
-                  <div class="projectMenu">
-                    <h3><span class="IconCart bgGreen"><i class="icon fa fa-caret-up"></i></span>
+									</div>
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="col">
+									<div class="projectMenu">
+										<h3><span class="IconCart bgGreen"><i class="icon fa fa-caret-up"></i></span>
 											<%= @project_status_group['Preliminary'].pluck('new_jobs').sum %><span>Jobs</span>
 										</h3>
-                  </div>
-                </div>
-                <div class="col-auto">
-                  <div class="projectMenu">
-                    <h3><span class="IconCart"><i class="icon fa fa-caret-down"></i></span>
-											$<%= @project_status_group['Preliminary'].pluck('net_new_investment').sum %><span>Investment</span>
+									</div>
+								</div>
+								<div class="col-auto">
+									<div class="projectMenu">
+										<h3><span class="IconCart"><i class="icon fa fa-caret-down"></i></span>
+											$<%= @project_status_group['Preliminary'].pluck('net_new_investment').sum %>
+											<span>Investment</span>
 										</h3>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="col-lg-8">
-      <div class="card cardPadding">
-        <div class="form-row">
-          <div class="col">
-            <div class="title-menu">
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="col-lg-8">
+			<div class="card cardPadding">
+				<div class="form-row">
+					<div class="col">
+						<div class="title-menu">
 							<%= select_tag :activity, options_for_select(['Yearly', 'Monthly']),
 														 class: 'form-control custom-select', id: 'dashboard_activity_select' %>
 							<h3> - Activity Report</h3>
-            </div>
-          </div>
-          <div class="col-auto">
-            <div class="viewReport" id="activityReportFilter">
-              <ul>
-                <li class="viewItem"><span class="priorityDot"></span> Attraction</li>
-                <li class="viewItem"><span class="priorityDot dotHigh"></span> Retention/Expansion</li>
-                <li class="viewItem viewlink"><span class="priorityDot dotHigh"></span> Combined</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="form-row" id="dashboardActivityReport">
-          <%= render partial: 'activity_report', locals: {results: @results} %>
-        </div>
-        <div class="botmheading"><%= link_to 'View Report', yearly_reports_path %></div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-4">
-      <div class="card cardPadding">
-        <div class="title-menu">
-          <h3>Attraction - Industry type</h3>
-        </div>
-        <div class="cardImg">
+						</div>
+					</div>
+					<div class="col-auto">
+						<div class="viewReport" id="activityReportFilter">
+							<ul>
+								<li class="viewItem"><span class="priorityDot"></span> Attraction</li>
+								<li class="viewItem"><span class="priorityDot dotHigh"></span> Retention/Expansion</li>
+								<li class="viewItem viewlink"><span class="priorityDot dotHigh"></span> Combined</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="form-row" id="dashboardActivityReport">
+					<%= render partial: 'activity_report', locals: {results: @results} %>
+				</div>
+				<div class="botmheading"><%= link_to 'View Report', yearly_reports_path %></div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-4">
+			<div class="card cardPadding">
+				<div class="title-menu">
+					<h3>Attraction - Industry type</h3>
+				</div>
+				<div class="cardImg">
 					<div class="ct-chart" id="prospectsByIndustryTypeBar"></div>
 				</div>
-        <div class="botmheading"><%= link_to 'View Report', yearly_reports_path %></div>
-      </div>
-    </div>
-    <div class="col-lg-8">
-      <div class="card cardPadding">
+				<div class="botmheading"><%= link_to 'View Report', yearly_reports_path %></div>
+			</div>
+		</div>
+		<div class="col-lg-8">
+			<div class="card cardPadding">
 
 				<div class="form-row">
 					<div class="col">
 						<div class="title-menu">
-							<%= select_tag :project_id, options_for_select(load_data_with_id(@projects)), include_blank: 'All Projects' ,
+							<%= select_tag :project_id, options_for_select(load_data_with_id(@projects)), include_blank: 'All Projects',
 														 class: 'form-control custom-select', id: 'dashboard_task_by_project' %>
-              <h3> - Filter by Project</h3>
+							<h3> - Filter by Project</h3>
 						</div>
 					</div>
 					<div class="col-auto">
@@ -142,17 +145,45 @@
 					</div>
 				</div>
 
-        <!-- Panel Filtering rows -->
-        <table class="table tableCustomStyle table-hover removeTblSearch" id="dashboardTasks" data-paging="true" data-filtering="true" >
+				<!-- Panel Filtering rows -->
+				<table class="table tableCustomStyle table-hover removeTblSearch" id="dashboardTasks" data-paging="true" data-filtering="true">
 					<%= render partial: 'tasks', locals: {tasks: @tasks} %>
-        </table>
-        <div class="botmheading">
+				</table>
+				<div class="botmheading">
 					<%= link_to 'View All', tasks_path %>
 				</div>
-      </div>
-    </div>
-  </div>
-</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="card cardPadding">
+
+				<div class="form-row">
+					<div class="col">
+						<div class="title-menu">
+							<%= select_tag :project, options_for_select(load_data_with_id(@projects)), include_blank: 'All Projects',
+														 class: 'form-control custom-select', id: 'dashboard_email_by_project' %>
+							<h3> - Filter by Project</h3>
+							<%= select_tag :contact, options_for_select(load_data_with_id(current_org.contacts)), include_blank: 'All Contacts',
+														 class: 'form-control custom-select', id: 'dashboard_email_by_contact' %>
+							<h3> - Filter by Contact</h3>
+						</div>
+					</div>
+				</div>
+
+				<!-- Panel Filtering rows -->
+				<table class="table tableCustomStyle table-hover removeTblSearch" id="dashboardEmails" data-paging="true" data-filtering="true">
+					<%= render partial: 'emails', locals: {emails: @emails} %>
+				</table>
+				<div class="botmheading">
+					<%= link_to 'View All', emails_path %>
+				</div>
+			</div>
+		</div>
+	</div>
+
 </div>
 
 <script>
@@ -179,8 +210,8 @@
         ]
       });
 
-      chart.on('draw', function(data) {
-        if(data.type === 'slice') {
+      chart.on('draw', function (data) {
+        if (data.type === 'slice') {
           var pathLength = data.element._node.getTotalLength();
 
           data.element.attr({
@@ -192,13 +223,13 @@
               id: 'anim' + data.index,
               dur: 1000,
               from: -pathLength + 'px',
-              to:  '0px',
+              to: '0px',
               easing: Chartist.Svg.Easing.easeOutQuint,
               fill: 'freeze'
             }
           };
 
-          if(data.index !== 0) {
+          if (data.index !== 0) {
             animationDefinition['stroke-dashoffset'].begin = 'anim' + (data.index - 1) + '.end';
           }
 

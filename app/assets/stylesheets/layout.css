@@ -1052,3 +1052,13 @@ table.tableCustomStyle td {
   color: #ff0000;
   margin-left: 200px;
 }
+a:not([href]):not([tabindex]){
+	cursor: pointer;
+}
+
+.manageConfig ul li {
+	display: inline-block;
+}
+.editableList ul li  {
+	width: 100%;
+}

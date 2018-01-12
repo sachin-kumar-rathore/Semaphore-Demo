@@ -14,7 +14,7 @@ class ManageUsersController < ApplicationController
     end
     @users = @users.paginate(page: params[:page],
                              per_page: User::PAGINATION_VALUE)
-                   .order('updated_at DESC')
+                   .order('users.updated_at DESC')
   end
 
   def new

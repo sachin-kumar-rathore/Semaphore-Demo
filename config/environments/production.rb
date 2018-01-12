@@ -88,4 +88,17 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+  config.action_mailer.default_url_options = { host: 'https://edlt-rails.herokuapp.com' }
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :authentication => :plain,
+    :address => ENV["mailgun_address"],
+    :port => 587,
+    :domain => ENV["mailgun_domain"],
+    :user_name => ENV["mailgun_username"],
+    :password => ENV["mailgun_password"],
+    :enable_starttls_auto => true
+  }
+  
 end

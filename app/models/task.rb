@@ -29,7 +29,8 @@ class Task < ApplicationRecord
   before_validation :convert_dates_format
   # == Scopes and Other macros == #
   scope :without_activity, -> { where("taskable_type IS NULL OR taskable_type != (?)", "Activity") }
-  scope :sort_tasks, -> { order(priority: :asc, end_date: :asc) }
+  scope :filter_by_project, ->(project_id) { where('taskable_id = ? AND taskable_type = ? ', project_id, 'Project') }
+  scope :sort_by_priority_then_end_date, -> { order(priority: :asc, end_date: :asc) }
   # == Instance methods == #
 
   # == Private == #

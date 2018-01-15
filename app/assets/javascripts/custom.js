@@ -160,7 +160,7 @@ function tokenInputforContact() {
     minChars: 2,
     tokenLimit: 1,
     resultsFormatter: function (item) {
-      return "<li>" + "<div style='display: inline-block; padding-left: 10px;'><div class='full_name'>" + item.name + "</div><div class='email'>" + item.email + "</div></div></li>"
+      return "<li>" + "<div class='res_formatter'><div class='full_name'>" + item.name + "</div><div class='email'>" + item.email + "</div></div></li>"
     },
     tokenFormatter: function (item) {
       return "<li><p>Name: " + item.name + "</p><br><p>Email: " + item.email + "</p><br><p>Phone: " + item.cell_phone + "</p></li>"
@@ -364,7 +364,7 @@ function taskFilterRequest(filter_by) {
   var project_id = $('#dashboard_task_by_project').val();
   $('.dashboard-menu .viewTaskReport li.viewlink').removeClass('viewlink');
   var filter = 'all_tasks';
-  if (filter_by == ' All Tasks') {
+  if (filter_by.indexOf("All Tasks") > -1) {
     $('.dashboard-menu .viewTaskReport li:first-child').addClass('viewlink');
   }
   else{
@@ -391,9 +391,9 @@ function activityFilterRequest(filter_by) {
   var activity_type = $('#dashboard_activity_select').val();
   $('.dashboard-menu #activityReportFilter li.viewlink').removeClass('viewlink');
   var filter = null;
-  if (filter_by == ' Combined') {
+  if (filter_by.indexOf("Combined") > -1) {
     $('.dashboard-menu #activityReportFilter li:nth-child(3)').addClass('viewlink');
-  }else if (filter_by == ' Attraction') {
+  }else if (filter_by.indexOf("Attraction") > -1) {
     $('.dashboard-menu #activityReportFilter li:nth-child(1)').addClass('viewlink');
     filter = 'New Business'
   }else{

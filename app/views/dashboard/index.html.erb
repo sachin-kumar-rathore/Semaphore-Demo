@@ -13,14 +13,14 @@
 								<div class="col">
 									<div class="projectMenu">
 										<h3>
-											<span class="IconCart"><i class="icon fa fa-caret-down"></i></span><%= @project_status_group['Active'].count %>
+											<span class="IconCart"><i class="icon fa fa-caret-down"></i></span><%= @project_status_group['Active'].try(:length) %>
 											<span>Projects</span></h3>
 									</div>
 								</div>
 								<div class="col-auto">
 									<div class="projectMenu">
 										<h3><span class="IconCart bgGreen"><i class="icon fa fa-caret-up"></i></span>
-											$<%= @project_status_group['Active'].pluck('wages').sum %><span>wages</span>
+											$<%= @project_status_group['Active'] ? @project_status_group['Active'].pluck('wages').sum : 0 %><span>wages</span>
 										</h3>
 									</div>
 								</div>
@@ -29,14 +29,14 @@
 								<div class="col">
 									<div class="projectMenu">
 										<h3><span class="IconCart bgGreen"><i class="icon fa fa-caret-up"></i></span>
-											<%= @project_status_group['Active'].pluck('new_jobs').sum %><span>Jobs</span>
+											<%= @project_status_group['Active'] ? @project_status_group['Active'].pluck('new_jobs').sum : 0 %><span>Jobs</span>
 										</h3>
 									</div>
 								</div>
 								<div class="col-auto">
 									<div class="projectMenu">
 										<h3><span class="IconCart"><i class="icon fa fa-caret-down"></i></span>
-											$<%= @project_status_group['Active'].pluck('net_new_investment').sum %><span>Investment</span>
+											$<%= @project_status_group['Active'] ? @project_status_group['Active'].pluck('net_new_investment').sum : 0 %><span>Investment</span>
 										</h3>
 									</div>
 								</div>
@@ -52,13 +52,15 @@
 							<div class="form-row">
 								<div class="col">
 									<div class="projectMenu">
-										<h3><span class="IconCart"><i class="icon fa fa-caret-down"></i></span>5<span>Projects</span></h3>
+										<h3><span class="IconCart"><i class="icon fa fa-caret-down"></i></span>
+											<%= @project_status_group['Preliminary'].try(:length) %><span>Projects</span>
+										</h3>
 									</div>
 								</div>
 								<div class="col-auto">
 									<div class="projectMenu">
 										<h3><span class="IconCart bgGreen"><i class="icon fa fa-caret-up"></i></span>
-											$<%= @project_status_group['Preliminary'].pluck('wages').sum %><span>wages</span>
+											$<%= @project_status_group['Preliminary'] ? @project_status_group['Preliminary'].pluck('wages').sum : 0 %><span>wages</span>
 										</h3>
 									</div>
 								</div>
@@ -67,14 +69,14 @@
 								<div class="col">
 									<div class="projectMenu">
 										<h3><span class="IconCart bgGreen"><i class="icon fa fa-caret-up"></i></span>
-											<%= @project_status_group['Preliminary'].pluck('new_jobs').sum %><span>Jobs</span>
+											<%= @project_status_group['Preliminary'] ? @project_status_group['Preliminary'].pluck('new_jobs').sum : 0 %><span>Jobs</span>
 										</h3>
 									</div>
 								</div>
 								<div class="col-auto">
 									<div class="projectMenu">
 										<h3><span class="IconCart"><i class="icon fa fa-caret-down"></i></span>
-											$<%= @project_status_group['Preliminary'].pluck('net_new_investment').sum %>
+											$<%= @project_status_group['Preliminary'] ? @project_status_group['Preliminary'].pluck('net_new_investment').sum : 0 %>
 											<span>Investment</span>
 										</h3>
 									</div>

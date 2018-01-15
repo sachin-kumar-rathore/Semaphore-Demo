@@ -8,14 +8,14 @@ class DashboardController < ApplicationController
     @projects = current_org.projects
     @project_status_group = @projects.status({'1': 'Active', '2': 'Preliminary'}).group_by { |p| p.status }
     generate_periodic_report('yearly')
-    @tasks = current_org.tasks.without_activity.limit(5).sort_by {|task| [task.priority, task.end_date]}
+    @tasks = current_org.tasks.without_activity.limit(5).sort_tasks
     @emails = current_org.emails.includes(:contacts).limit(5)
   end
 
   def tasks
     @tasks = filter_tasks_by_assigner
     @tasks = filter_tasks_by_project
-    @tasks = @tasks.limit(5).sort_by {|task| [task.priority, task.end_date]}
+    @tasks = @tasks.limit(5).sort_tasks
   end
 
   def activity
@@ -30,6 +30,8 @@ class DashboardController < ApplicationController
     @emails = @emails.limit(5)
   end
 
+  private
+
   def authenticate_user!
     if current_admin.present? && current_user.blank?
       redirect_to organizations_path
@@ -37,8 +39,6 @@ class DashboardController < ApplicationController
       redirect_to new_user_session_path
     end
   end
-
-  private
 
   def filter_tasks_by_assigner
     if params[:filter] == 'my_tasks'

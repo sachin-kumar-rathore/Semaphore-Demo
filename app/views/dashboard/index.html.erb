@@ -93,7 +93,7 @@
 					<div class="col">
 						<div class="title-menu">
 							<%= select_tag :activity, options_for_select(['Yearly', 'Monthly']),
-														 class: 'form-control custom-select', id: 'dashboard_activity_select' %>
+														 class: 'btn activeBtn', id: 'dashboard_activity_select' %>
 							<h3> - Activity Report</h3>
 						</div>
 					</div>
@@ -133,7 +133,7 @@
 					<div class="col">
 						<div class="title-menu">
 							<%= select_tag :project_id, options_for_select(load_data_with_id(@projects)), include_blank: 'All Projects',
-														 class: 'form-control custom-select', id: 'dashboard_task_by_project' %>
+														 class: 'btn activeBtn', id: 'dashboard_task_by_project' %>
 							<h3> - Filter by Project</h3>
 						</div>
 					</div>
@@ -166,10 +166,10 @@
 					<div class="col">
 						<div class="title-menu">
 							<%= select_tag :project, options_for_select(load_data_with_id(@projects)), include_blank: 'All Projects',
-														 class: 'form-control custom-select', id: 'dashboard_email_by_project' %>
+														 class: 'btn activeBtn', id: 'dashboard_email_by_project' %>
 							<h3> - Filter by Project</h3>
 							<%= select_tag :contact, options_for_select(load_data_with_id(current_org.contacts)), include_blank: 'All Contacts',
-														 class: 'form-control custom-select', id: 'dashboard_email_by_contact' %>
+														 class: 'btn activeBtn', id: 'dashboard_email_by_contact' %>
 							<h3> - Filter by Contact</h3>
 						</div>
 					</div>

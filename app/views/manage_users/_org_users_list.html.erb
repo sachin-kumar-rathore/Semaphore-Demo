@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-lg-8">
+    <!-- Panel Filtering rows -->
+    <div class="panel">
+      <header class="panel-heading">
+        <div class="tasksTopOptions">
+          <div class="row">
+            <div class="col">
+              <div class="tableTitle">
+               <h2>User List</h2>
+            </div>
+            </div>
+            <div class="col col-auto">
+              <div class="tasksRightOptions">
+                <ul>
+                  <li><a data-href="<%= new_manage_user_path %>" class="btn btn-default clickable"><i class="icon fa fa-plus btnIcon" aria-hidden="true"></i> Add User</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+      <div class="panel-body" id="usersList">
+        <%= render 'users' %>
+      </div>
+    </div>
+          <!-- End Panel Filtering -->
+  </div>
+  <div class="col-lg-4">     
+    <%= render 'user_filters' %>
+  </div>
+</div>
+<div id="createOrEditUser"></div>

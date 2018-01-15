@@ -2,7 +2,8 @@
 class SecurityRolesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_security_role, only: %i[edit update destroy]
-  respond_to :js
+  respond_to :js, except: [:index]
+  respond_to :html, except: [:index]
 
   def index
     @security_roles = current_org.security_roles
@@ -37,18 +38,18 @@ class SecurityRolesController < ApplicationController
   private
 
   def security_role_params
-    params.require(:security_role).permit(:name, projects: %i[read create update
+    params.require(:security_role).permit(:name, project_permissions: %i[read create update
                                                               delete assign],
-                                                 sites: %i[read create update
+                                                 site_permissions: %i[read create update
                                                            delete assign],
-                                                 contacts: %i[read create update
+                                                 contact_permissions: %i[read create update
                                                               delete assign],
-                                                 configuration: %i[read create
+                                                 configuration_permissions: %i[read create
                                                                    update delete
                                                                    assign],
-                                                 users: %i[read create update
+                                                 user_permissions: %i[read create update
                                                            delete assign],
-                                                 companies: %i[read create
+                                                 companie_permissions: %i[read create
                                                                update
                                                                delete assign])
   end

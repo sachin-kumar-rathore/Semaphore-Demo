@@ -1,11 +1,24 @@
 <div class="row">
-  <div class="col-md-12">
-    <div class="panel panel-bordered">
-      <div class="panel-heading">
-        <h3 class="panel-title"> Considered Locations
-          <a class="btn btn-sm green-btn fa fa-plus pull-right clickable" href="<%= new_considered_location_path %>" data-remote="true" > ADD</a>
-        </h3>
-      </div>
+  <div class="col-lg-12">
+    <div class="panel">
+      <header class="panel-heading">
+        <div class="tasksTopOptions">
+          <div class="row">
+            <div class="col">
+              <div class="tableTitle">
+               <h2>Considered Locations</h2>
+            </div>
+            </div>
+            <div class="col col-auto">
+              <div class="tasksRightOptions">
+                <ul>
+                  <li><a data-href="<%= new_considered_location_path %>" class="btn btn-default clickable"><i class="icon fa fa-plus btnIcon" aria-hidden="true"></i> Add </a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
       <div class="panel-body" id="consideredLocationsList">
         <%= render partial: 'list' %>
       </div>

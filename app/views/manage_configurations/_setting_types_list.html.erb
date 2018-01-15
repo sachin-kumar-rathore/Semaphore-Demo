@@ -1,18 +1,25 @@
-<div class="row">
-  <% Organization::SETTINGS.each do |type| %>
-    <div class="col-md-4">
-      <div class="panel panel-bordered">
-        <div class="panel-heading">
-          <h3 class="panel-title"> <%= type.titleize.singularize %>
-            <a class="btn btn-sm green-btn fa fa-plus pull-right clickable" href="<%= new_manage_configuration_path(type: type) %>" data-remote="true" > ADD</a>
-          </h3>
+<div class="manageConfig">
+  <ul>
+    <% Organization::SETTINGS.each do |type| %>
+      <li>
+        <div class="card cardPadding configCardSpace">
+          <div class="cardTitle">
+            <div class="form-row">
+              <div class="col">
+                <h4><%= type.titleize.singularize %></h4>
+              </div>
+              <div class="col-auto align-self-center"><a href="<%= new_manage_configuration_path(type: type) %>" data-remote="true" class="btn btn-default autoWd"><i class="icon fa fa-plus btnIcon" aria-hidden="true"></i> Add</a></div>
+            </div>
+          </div>
+          <div class="editableList" id='<%= type.singularize.concat('List') %>' >
+            <%= render partial: 'list', locals: { setting_type_data: instance_variable_get("@#{type}"), setting_name: type } %>
+          </div>
         </div>
-        <div class="panel-body" id='<%= type.singularize.concat('List') %>' >
-          <%= render partial: 'list', locals: { setting_type_data: instance_variable_get("@#{type}"), setting_name: type } %>
-        </div>
-        <div id='<%= type.singularize.concat('Modal') %>'>
-        </div>
-      </div>
-    </div>
-  <% end %>
+      </li>
+      <div id='<%= type.singularize.concat('Modal') %>'> </div>
+    <% end %>
+  </ul>
 </div>
+
+
+

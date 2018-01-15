@@ -192,11 +192,13 @@ function reloadCompanyProjects(id) {
 
 $(document).on("click", ".delete-option", function () {
   var link = $(this).data("href");
-  $.ajax({
-    url: link,
-    type: "DELETE",
-    dataType: 'script'
-  });
+  if(confirm("Are you sure?")){
+    $.ajax({
+      url: link,
+      type: "DELETE",
+      dataType: 'script'
+    });
+  }
 });
 
 //company_id_check
@@ -419,5 +421,15 @@ function filterDashboardEmails(){
     type: "GET",
     dataType: 'script',
     data: { project: $('#dashboard_email_by_project').val(), contact: $('#dashboard_email_by_contact').val()  }
+  });
+}
+
+function reloadUsers(){
+  $('.modal-backdrop').remove();
+  $('#invitationFormCenter').modal('hide');
+  $.ajax({
+    url: '/manage_users',
+    type: "GET",
+    dataType: 'script'
   });
 }

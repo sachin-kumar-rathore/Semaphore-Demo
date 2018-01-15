@@ -4,6 +4,7 @@ class ManageConfigurationsController < ApplicationController
   before_action :initialize_type, except: [:index]
   before_action :set_setting_type, only: %i[edit destroy update]
   respond_to :js
+  respond_to :html, only: [:index]
 
   def index
     Organization::SETTINGS.each do |type|

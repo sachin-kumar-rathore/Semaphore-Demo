@@ -4,7 +4,8 @@ class ConsideredLocationsController < ApplicationController
   before_action :set_considered_location, only: %i[edit destroy update
                                                    show_contacts attach_contact
                                                    remove_contact]
-  respond_to :js
+  respond_to :js, except: [:index]
+  respond_to :html, only: [:index]
 
   def index
     @considered_locations = current_org

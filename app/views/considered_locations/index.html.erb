@@ -1,0 +1,23 @@
+<div class="pageTitle">
+  <h2><i class="icon fa fa-cog"></i> Settings</h2>
+</div>
+<div class="btmLineLinks mb-20">
+  <ul class="nav">
+    <li class="nav-item">
+      <a class="nav-link" href="<%= manage_users_path%>">Manage Users</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="<%= manage_configurations_path %>">Manage Configuration</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" href="<%= considered_locations_path %>">Considered Locations</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link " href="<%= security_roles_path %>">Manage Roles</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link " href="">Project Logs</a>
+    </li>
+  </ul>
+</div>
+<%= render 'considered_locations_list' %>

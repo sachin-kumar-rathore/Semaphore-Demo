@@ -1,9 +1,8 @@
-<ul class="list-group list-group-dividered list-group-full">
+<ul>
   <% setting_type_data.each do |setting_type|%>
-    <li class="list-group-item">
-      <i class="fa fa-pencil-square-o fa-1x text-success clickable pointerCursor" data-href="<%= edit_manage_configuration_path(setting_type, type:setting_name) %>"></i>&nbsp;&nbsp;
-      <%= setting_type.name %>
-      <i class="fa fa-times fa-1x text-danger pull-right delete-option pointerCursor" data-href="<%= manage_configuration_path(setting_type, type: setting_name) %>"></i>
+    <li>
+      <a data-href="<%= edit_manage_configuration_path(setting_type, type:setting_name) %>" class="listEditIcon clickable"><i class="icon fa fa-pencil" aria-hidden="true"></i></a> <%= setting_type.name %>
+      <a data-href="<%= manage_configuration_path(setting_type, type: setting_name) %>" class="listRemoveIcon delete-option"><i class="icon fa fa-close" aria-hidden="true"></i></a>
     </li>
   <% end %>
 </ul>

@@ -664,6 +664,13 @@ h4.modal-title {
 .dashboard .card.configCardSpace {
 	margin-bottom: 15px;
 }
+
+.dashboard .card, .dashboard .panel {
+  height: -webkit-calc(100% - 30px);
+  height:         calc(100% - 30px);
+  margin-bottom: 30px;
+}
+
 .manageConfig > ul {
 	-webkit-column-count: 3; /* Chrome, Safari, Opera */
     -moz-column-count: 3; /* Firefox */
@@ -1015,5 +1022,43 @@ table.tableCustomStyle td {
 }
 .footable.breakpoint > tbody > tr > td > span.footable-toggle {
 	padding-right: 2px;
+}
+
+.fa-pencil:before
+{
+    content: '';
 }	
+}
+.panel-success .panel-heading-contacts {
+  background-color: #2ED573;
+}
+.contact-btn:hover{
+  color: #ffffff;
+}
+
+.listEditIcon .fa-pencil{
+  color: #24c667;
+}
+.listRemoveIcon .fa-close{
+  color: #ff4757;
+}
+
+.rolesTable thead th, td {
+  color: #757575;
+  font-size: 0.9286rem;
+}
+
+.modal-content .alert-modal-title {
+  color: #ff0000;
+  margin-left: 200px;
+}
+a:not([href]):not([tabindex]){
+	cursor: pointer;
+}
+
+.manageConfig ul li {
+	display: inline-block;
+}
+.editableList ul li  {
+	width: 100%;
 }

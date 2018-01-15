@@ -1,0 +1,10 @@
+<% if @user.errors.blank? %>
+  $('.modal-backdrop').remove();
+  $("#invitationFormCenter").modal("hide");
+  $('#usersList').html("<%= j render(partial: 'users') %>");
+  $('.flashMessages').html("<%= j render partial: 'shared/flash_messages' %>");
+<% else %>
+  $('#invitationFormCenter .error-messages').html("<%= j render partial: 'shared/error_messages', locals: {obj: @user} %>");
+  $('.spinner').attr('hidden', 'true');
+  $('.spinnerButton').html('Create User');
+<% end %>

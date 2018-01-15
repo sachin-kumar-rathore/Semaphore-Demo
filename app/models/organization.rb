@@ -4,7 +4,7 @@ class Organization < ApplicationRecord
               'sources', 'elimination_reasons', 'contact_categories', 'business_units',
               'contact_method_types', 'company_activity_types']
 
-  has_many :users
+  has_many :users, dependent: :destroy
 
   has_many :contacts, dependent: :destroy
   has_many :sites, dependent: :destroy
@@ -30,4 +30,16 @@ class Organization < ApplicationRecord
   validates_presence_of :name, :primary_contact_first_name, :primary_contact_phone, :primary_contact_email
   validates_format_of :primary_contact_email, with: Devise::email_regexp
 
+  after_create :create_admin_role
+
+
+  def create_admin_role
+    self.security_roles.create!(name: "Administrator",
+      project_permissions: {"read"=>"All", "assign"=>"All", "create"=>"All", "delete"=>"All", "update"=>"All"},
+      site_permissions: {"read"=>"All", "assign"=>"All", "create"=>"All", "delete"=>"All", "update"=>"All"},
+      contact_permissions: {"read"=>"All", "assign"=>"All", "create"=>"All", "delete"=>"All", "update"=>"All"},
+      configuration_permissions: {"read"=>"All", "assign"=>"All", "create"=>"All", "delete"=>"All", "update"=>"All"},
+      user_permissions: {"read"=>"All", "assign"=>"All", "create"=>"All", "delete"=>"All", "update"=>"All"},
+      company_permissions: {"read"=>"All", "assign"=>"All", "create"=>"All", "delete"=>"All", "update"=>"All"} ) 
+  end
 end

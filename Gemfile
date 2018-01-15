@@ -10,7 +10,6 @@ end
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
 gem 'bootstrap-sass', '~> 3.3.6'
-gem 'rolify'
 # Use postgresql as the database for Active Record
 gem 'pg'
 gem 'jquery-rails'
@@ -33,7 +32,6 @@ gem "roo", "~> 2.7.0"
 gem 'roo-xls'
 gem 'authority'
 # Very simple Roles library without any authorization enforcement supporting scope on resource object.
-gem 'rolify'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
@@ -45,6 +43,7 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 gem "figaro"
+gem 'devise_invitable', '~> 1.7.0'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -57,6 +56,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.4', '>= 3.4.2'
   gem 'factory_girl', '~> 4.7'
   gem 'faker', '~> 1.8', '>= 1.8.4'
+  gem "letter_opener"
 end
 
 group :development do

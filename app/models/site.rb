@@ -4,7 +4,6 @@ class Site < ApplicationRecord
   IMPORT_PARAMETERS = ["site_number", "property_name", "contact_id", "property_type", "address_line",
                       "city", "country", "state", "zip_code", "special_district", "available_acreage", "available_square_feet",
                       "total_acreage", "total_square_feet", "latitude", "longitude"]
-  acts_as_paranoid
   attr_accessor :project_id
   # == Constants == #
   self.per_page = 5
@@ -16,7 +15,7 @@ class Site < ApplicationRecord
   # == Modules == #
 
   # == Associations and Nested Attributes == #
-  belongs_to :organization
+  belongs_to :organization, dependent: :destroy
   has_many :project_sites, dependent: :destroy
   has_many :projects, through: :project_sites
   belongs_to :business_unit

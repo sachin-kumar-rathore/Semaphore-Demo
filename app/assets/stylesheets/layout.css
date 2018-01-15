@@ -1062,3 +1062,7 @@ a:not([href]):not([tabindex]){
 .editableList ul li  {
 	width: 100%;
 }
+.res_formatter{
+  display: inline-block;
+  padding-left: 10px;
+}

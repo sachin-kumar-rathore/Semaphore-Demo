@@ -1066,3 +1066,6 @@ a:not([href]):not([tabindex]){
   display: inline-block;
   padding-left: 10px;
 }
+.emails-listing .tableTitle h2{
+  margin-top: 10px;
+}

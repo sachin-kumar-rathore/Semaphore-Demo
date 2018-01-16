@@ -1,26 +1,37 @@
-<div class="row">
+<div class="row emails-listing">
   <div class="col-xl-12">
     <div class="panel">
       <header class="panel-heading">
         <h3 class="panel-title">
           <%= form_tag url_for(:controller => 'emails', :action => 'index'), :method => 'get', remote: true do %>
             <div class="row">
-              <div class="col-md-4">
-                <h4>Emails
-                  <%= link_to emails_path, class: 'reload-page-link pull-right', data: { turbolinks: false } do %>
-                    <i class="fa fa-refresh"></i>
-                  <% end %>
-                </h4>
-              </div>
-              <div class="col-md-3 col-6">
-                <%= select_tag :project, options_for_select(load_data_with_id(current_org.projects)), include_blank: 'All Projects', class: 'form-control', data: {plugin: "selectpicker"} %>
-              </div>
-              <div class="col-md-3 col-6">
-                <%= select_tag :contact, options_for_select(load_data_with_id(current_org.contacts)), include_blank: 'All Contacts', class: 'form-control', data: {plugin: "selectpicker"} %>
-              </div>
-              <div class="col-md-2 col-6">
-                <button class="btn btn-sm green-btn waves-effect waves-classic" type="submit">Update & Show List</button>
-              </div>
+							<div class="col-5">
+								<div class="tableTitle">
+									<h2>Emails
+										<%= link_to emails_path, class: 'reload-page-link pull-right', data: { turbolinks: false } do %>
+												<i class="fa fa-refresh"></i>
+										<% end %>
+									</h2>
+								</div>
+							</div>
+              <!--<div class="col-md-4 tableTitle">-->
+                <!--<h2>Emails-->
+                  <!---->
+                <!--</h2>-->
+              <!--</div>-->
+							<div class="col-7">
+								<div class="form-row">
+									<div class="col-md-4 tasksSelectFilter">
+										<%= select_tag :project, options_for_select(load_data_with_id(current_org.projects)), include_blank: 'All Projects', class: 'form-control custom-select' %>
+									</div>
+									<div class="col-md-4 tasksSelectFilter">
+										<%= select_tag :contact, options_for_select(load_data_with_id(current_org.contacts)), include_blank: 'All Contacts', class: 'form-control custom-select' %>
+									</div>
+									<div class="col-md-4 align-self-end">
+										<button class="btn btn-primary waves-effect waves-classic" type="submit">Update & Show List</button>
+									</div>
+								</div>
+							</div>
             </div>
           <% end %>
         </h3>

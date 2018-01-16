@@ -4,6 +4,7 @@
       <th>NAME</th>
       <th data-breakpoints="xs">ORGANIZATION</th>
       <th data-breakpoints="xs">EMAIL</th>
+      <th data-breakpoints="xs"></th>
     </tr>
   </thead>
 
@@ -12,8 +13,8 @@
       <tr>
         <td><%= contact.name %></td>
         <td><%= contact.organization ? contact.organization.name : 'ORG' %></td>
-        <td><%= button_to "Add To Project",attach_contact_to_project_project_contact_path(@project, contact), remote: true, data: { confirm: "Are you sure you want to add this contact to project?" }, class: "btn btn-primary green-btn" %></td>
         <td><%= contact.email %></td>
+        <td><%= button_to "Add To Project",attach_contact_to_project_project_contact_path(@project, contact), remote: true, data: { confirm: "Are you sure you want to add this contact to project?" }, class: "btn btn-primary green-btn" %></td>
       </tr>
     <% end %>
   </tbody>

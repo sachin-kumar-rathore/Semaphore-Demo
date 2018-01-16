@@ -1,0 +1,16 @@
+<thead>
+	<tr>
+		<th data-name="priority" data-breakpoints="xs">Priority</th>
+		<th data-name="Task Description" data-breakpoints="xs">Task Description</th>
+		<th data-name="complete" data-breakpoints="xs">Complete</th>
+	</tr>
+</thead>
+<tbody>
+	<% tasks.each do |task| %>
+		<tr>
+			<td><span class="priorityDot dot<%= task.priority %>"></span> <%= task.priority %></td>
+			<td><span class="nowrapCol"><%= task.description %></span></td>
+			<td><%= task.progress %>%</td>
+		</tr>
+	<% end %>
+</tbody>

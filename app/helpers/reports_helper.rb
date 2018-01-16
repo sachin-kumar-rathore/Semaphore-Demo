@@ -60,6 +60,20 @@ module ReportsHelper
     return seriesList.to_json
   end
 
+  def get_new_industry_report(data)
+    grouped_result = data.values.collect { |year| year.values }.flatten
+        .select { |p| p if p.business_type == "New Business" }
+        .group_by {|p| p.industry_type_id}
+    seriesList = grouped_result.collect { |obj| {meta: '', value: 0, percentage: 0.0} }
+    total_projects = grouped_result.inject(0.0) { |result, obj| result + obj[1].count }
+    grouped_result.keys.each_with_index do |industry_id, indx|
+      seriesList[indx][:meta] = current_org.industry_types.find(industry_id).name
+      seriesList[indx][:value] = grouped_result[industry_id].count
+      seriesList[indx][:percentage] = (seriesList[indx][:value]/total_projects).round(2)
+    end
+    return seriesList.to_json
+  end
+
   def filter_model_rows(reference_column)
     case reference_column
       when "project_type_id"

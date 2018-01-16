@@ -65,7 +65,13 @@ Rails.application.routes.draw do
       post :attach_project_to_file
     end
   end
-  resources :dashboard, only: [:index]
+  resources :dashboard, only: [:index] do
+    collection do
+      get :tasks
+      get :activity
+      get :emails
+    end
+  end
   resources :projects, only: %i[new index create edit update show] do
     resources :tasks, controller: 'project_tasks'
     resources :notes, except: [:edit]

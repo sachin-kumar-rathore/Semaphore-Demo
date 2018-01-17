@@ -1,10 +1,12 @@
 <div class="nav-tabs-horizontal" data-plugin="tabs" id="dashboard-tabs" >
-  <ul class="nav nav-tabs animation-fade" role="tablist">
-    <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#main" id="mainNavLink" role="tab">Main</a></li>
-    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#contacts" role="tab" id="contactsNavLink" >Contacts</a></li>
-    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#projects" role="tab" id="projectsNavLink" >Projects</a></li>
-    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#activities" role="tab" id="activitiesNavLink">Activities</a></li>
-  </ul>
+	<% content_for :navigation_bar do %>
+		<ul class="nav nav-tabs animation-fade tasks-tabs" role="tablist">
+			<li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#main" id="mainNavLink" role="tab">Main</a></li>
+			<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#contacts" role="tab" id="contactsNavLink" >Contacts</a></li>
+			<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#projects" role="tab" id="projectsNavLink" >Projects</a></li>
+			<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#activities" role="tab" id="activitiesNavLink">Activities</a></li>
+		</ul>
+	<% end %>
   <div class="tab-content pt-20">
     <div class="tab-pane active" id="main" role="tabpanel">
       <%= render 'edit_company_form' %>

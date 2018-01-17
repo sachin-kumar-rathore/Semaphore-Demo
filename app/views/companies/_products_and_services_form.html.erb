@@ -9,34 +9,35 @@ aria-expanded="false" aria-controls="products-and-services-form">
     <br/>
     <%= form_for @company, url: products_and_services_update_company_path, method: :patch, remote: true  do |company| %>
       <div class="row">
-        <div class="form-group form-material col-md-9">
-          <label class="form-control-label" id="inputPrimaryProducts&Services" >Primary Products and Services:</label>
-          <%= company.text_area 'primary_products_and_services', class: "form-control", rows: "3" %>
+        <div class="form-group col-md-9">
+          <label id="inputPrimaryProducts&Services" >Primary Products and Services:</label>
+					<div class="formTextarea">
+          	<%= company.text_area 'primary_products_and_services', class: "form-control", rows: "3" %>
+					</div>
         </div>
       </div>
       <div class="row">
-        <div class="form-group form-material col-md-9">
-          <label class="form-control-label" id="inputNAICSCodes" >NAICS Codes:</label>
+        <div class="form-group col-md-9">
+          <label id="inputNAICSCodes" >NAICS Codes:</label>
           <%= company.text_field 'naics_codes', class: "form-control" %>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-2">
-          <div class="form-group form-material">
-            <button type="submit" class="btn btn-block green-btn col-md-12" name= "commit", value= "Save & Close">Save & Close</button>
-          </div>
-        </div>
-        <div class="col-md-2">
-          <div class="form-group form-material">
-            <button type="submit" class="btn btn-block green-btn col-md-12">Save</button>
-          </div>
-        </div>
-        <div class="col-md-2">
-          <div class="form-group form-material">
-            <%= link_to 'Cancel', companies_path, class: "btn btn-block green-btn col-md-12", data: { turbolinks: false } %>
-          </div>
-        </div>
-      </div> 
+
+			<div class="modalFooterBtns">
+				<div class="form-row">
+					<div class="col-auto">
+						<button type="submit" class="btn btn-primary" name= "commit", value= "Save & Close">Save & Close</button>
+					</div>
+					<div class="col-auto">
+						<button type="submit" class="btn btn-outline-primary">Save</button>
+					</div>
+					<div class="col-auto">
+						<div class="form-group form-material">
+							<%= link_to 'Cancel', companies_path, class: "btn btn-outline-primary", data: { turbolinks: false } %>
+						</div>
+					</div>
+				</div>
+			</div>
     <% end %>
   </div>
 </div>

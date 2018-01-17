@@ -1,4 +1,4 @@
-<table class="table table-striped table-hover toggle-circle footable" data-toggle-column="first" data-empty="There are no contacts" data-show-toggle="true" >
+<table class="table tableCustomStyle tableImg table-hover removeTblSearch bodrTop footable footable-6 footable-filtering footable-filtering-right footable-paging footable-paging-center breakpoint-lg" data-toggle-column="first" data-empty="There are no contacts" data-show-toggle="true" >
   <thead>
     <tr>
       <th>NAME</th>
@@ -17,7 +17,7 @@
         <td><%= contact.cell_phone %></td>
         <td><%= contact.email %></td>
         <td>
-          <button class="clickable btn btn-sm green-btn" data-href="<%= company_contact_path(@company, contact) %>">Edit</button>
+          <button class="clickable btn btn-primary" data-href="<%= company_contact_path(@company, contact) %>">Edit</button>
         </td>
       </tr>
     <% end %>

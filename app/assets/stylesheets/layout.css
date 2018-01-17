@@ -1070,3 +1070,6 @@ a:not([href]):not([tabindex]){
 .emails-listing .tableTitle h2, .activitiesTabOptions .tableTitle h2{
   margin-top: 10px;
 }
+.updBtn .reload-page-link .fa-refresh{
+  margin-top: 10px;
+}

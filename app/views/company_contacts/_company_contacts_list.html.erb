@@ -1,16 +1,19 @@
-<div class="panel">
+<div class="panel activitiesTabOptions">
   <div class="panel-body">
     <div class="row">
-      <div class="col-md-7 col-12">
-        <h3> Company Contacts </h3>
-      </div>
-      <div class="col-md-2 col-6">
-        <button class="btn btn-sm green-btn waves-effect waves-classic col-md-12 clickable" data-href="<%= new_company_contact_path(@company) %>" type="button" >ADD CONTACT </button>
-      </div>
-      <div class="col-md-3 col-6">
-        <button data-href ="<%= show_existing_contacts_company_contacts_path(@company)%>" class ="btn btn-sm green-btn col-md-12 clickable" >
-      ADD EXISTING CONTACT </button>
-      </div>
+			<div class="col">
+				<div class="tableTitle">
+					<h2>Company Contacts</h2>
+				</div>
+			</div>
+			<div class="col col-auto">
+				<button class="btn btn-default clickable" data-href="<%= new_company_contact_path(@company) %>" type="button" >
+					<i class="icon fa fa-plus btnIcon" aria-hidden="true"></i> ADD CONTACT
+				</button>
+				<button data-href ="<%= show_existing_contacts_company_contacts_path(@company)%>" class ="btn btn-default clickable" >
+					<i class="icon fa fa-plus btnIcon" aria-hidden="true"></i> ADD EXISTING CONTACT
+				</button>
+			</div>
     </div>
   </div>
   <div class="panel-body tableDesign" id="contactsList">

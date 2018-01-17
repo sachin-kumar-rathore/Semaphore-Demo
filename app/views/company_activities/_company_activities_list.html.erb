@@ -1,11 +1,15 @@
-<div class="panel">
+<div class="panel activitiesTabOptions">
   <div class="panel-body">
     <div class="row">
-      <div class="col-md-9">
-        <h3> Company Activities </h3>
+      <div class="col">
+        <div class="tableTitle">
+          <h2>Company Activities</h2>
+        </div>
       </div>
-      <div class="col-md-3 col-6">
-        <%= link_to "ADD NEW ACTIVITY", new_company_activity_path(@company), class: "col-md-12 btn btn-block green-btn", data: { turbolinks: false } %>
+      <div class="col col-auto">
+        <%= link_to new_company_activity_path(@company), class: "btn btn-default", data: { turbolinks: false } do %>
+          <i class="icon fa fa-plus btnIcon" aria-hidden="true"></i> ADD NEW ACTIVITY
+        <% end %>
       </div>
     </div>
   </div>

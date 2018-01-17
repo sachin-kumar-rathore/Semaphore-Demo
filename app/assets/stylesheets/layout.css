@@ -1073,3 +1073,6 @@ a:not([href]):not([tabindex]){
 .updBtn .reload-page-link .fa-refresh{
   margin-top: 10px;
 }
+#showExistingContacts .modal-body .card{
+    padding: 0px;
+}

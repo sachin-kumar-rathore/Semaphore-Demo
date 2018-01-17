@@ -1,4 +1,4 @@
-<table class="table table-striped table-hover toggle-circle footable" data-toggle-column="first" data-empty="There are no projects" data-show-toggle="true" id="existingProjectsTable">
+<table class="table tableCustomStyle tableImg table-hover removeTblSearch bodrTop footable footable-6 footable-filtering footable-filtering-right footable-paging footable-paging-center breakpoint-lg"  data-toggle-column="first" data-empty="There are no projects" data-show-toggle="true" id="existingProjectsTable">
   <thead>
     <tr>
       <th>PROJECT#</th>
@@ -15,7 +15,7 @@
         <td><%= project.name %></td>
         <td><%= project.active_date %></td>
         <td><%= project.status %></td>
-        <td><%= button_to "Add To Company",attach_project_to_company_company_project_path(@company, project), remote: true, data: { confirm: "Are you sure you want to add this project to company?" }, class: "btn btn-sm green-btn" %></td>
+        <td><%= button_to "Add To Company", attach_project_to_company_company_project_path(@company, project), remote: true, data: { confirm: "Are you sure you want to add this project to company?" }, class: "btn btn-primary" %></td>
       </tr>
     <% end %>
   </tbody>

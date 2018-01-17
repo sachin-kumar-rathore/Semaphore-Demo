@@ -1,104 +1,104 @@
 <!-- Company Modal -->
-<div class="modal fade" id="companyFormCenter" aria-hidden="true" aria-labelledby="companyFormCenter"
+<div class="modal fade modalStyle" id="companyFormCenter" aria-hidden="true" aria-labelledby="companyFormCenter"
   role="dialog" tabindex="-1">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-simple modal-center" role="document">
     <div class="modal-content">
       <%= form_for company, url: url_for(controller: controller, action: action), remote: true do |form| %>
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
-          <h6 class="modal-title">ADD COMPANY </h6>
+          <h4 class="modal-title" id="addUserModalLabel">ADD COMPANY </h4>
         </div>
         <div class="modal-body">
-          <div class="example-wrap">
+          <div class="example-wrap formStyle">
             <div class="error-messages"></div>
             <div class="example">
               <div class="row">
-                <div class="form-group form-material col-md-4">
-                  <label class="form-control-label">Name:</label>
+                <div class="form-group col-md-4">
+                  <label>Name:</label>
                   <%= form.text_field :name, class: 'form-control', id: 'inputBasicName', required: true %>
                 </div>
-                <div class="form-group form-material col-md-3">
-                  <label class="form-control-label">Company Number:</label>
+                <div class="form-group col-md-4">
+                  <label>Company Number:</label>
                     <%= form.text_field :company_number, class: 'form-control', id: 'companiesNumber', maxlength: 6, minlength: 6, required: true %>
                     <div id="companiesNumberMessage" value="<%= @company ? @company.id : nil %>"></div>
                 </div>
-                <div class="form-group form-material col-md-5">
-                  <label class="form-control-label">Industry Type:</label>
-                  <%= form.select :industry_type_id, options_for_select( load_active_type("industry_types"), form.object.industry_type_id), {}, {class: 'form-control', data:{ plugin: 'selectpicker', "live-search":true } } %>
+                <div class="form-group col-md-4">
+                  <label>Industry Type:</label>
+                  <%= form.select :industry_type_id, options_for_select( load_active_type("industry_types"), form.object.industry_type_id), {}, {class: 'form-control custom-select', data:{"live-search":true } } %>
                 </div>
               </div>
               <div class="row">
-                <div class="form-group form-material col-md-6">
-                  <label class="form-control-label">Organization:</label>
+                <div class="form-group col-md-6">
+                  <label>Organization:</label>
                   <input type="text" class="form-control" id="inputBasicLastName" name="organizationName"
                     value="<%= current_org.name %>" autocomplete="off" disabled/>
                 </div>
-                <div class="form-group form-material col-md-6">
-                  <label class="form-control-label">Title:</label>
+                <div class="form-group col-md-6">
+                  <label>Title:</label>
                   <%= form.text_field :title, class: 'form-control', id: 'inputTitle' %>
                 </div>
               </div>
               <div class="row">
-                <div class="form-group form-material col-md-12">
-                  <label class="form-control-label">Street Address 1:</label>
+                <div class="form-group col-md-12">
+                  <label>Street Address 1:</label>
                   <%= form.text_field :address_line_1, class: 'form-control', id: 'inputAddress1' %>
                 </div>
               </div>
               <div class="row">
-                <div class="form-group form-material col-md-12">
-                  <label class="form-control-label">Street Address 2:</label>
+                <div class="form-group col-md-12">
+                  <label>Street Address 2:</label>
                   <%= form.text_field :address_line_2, class: 'form-control', id: 'inputAddress2' %>
                 </div>
               </div>
               <div class="row">
-                <div class="form-group form-material col-md-4">
-                  <label class="form-control-label">City:</label>
+                <div class="form-group col-md-4">
+                  <label>City:</label>
                   <%= form.text_field :city, class: 'form-control', id: 'inputCity' %>
                 </div>
-                <div class="form-group form-material col-md-4">
-                  <label class="form-control-label">State:</label>
+                <div class="form-group col-md-4">
+                  <label>State:</label>
                   <%= form.text_field :state, class: 'form-control', id: 'inputState' %>
                 </div>
-                <div class="form-group form-material col-md-4">
-                  <label class="form-control-label">Zip Code:</label>
+                <div class="form-group col-md-4">
+                  <label>Zip Code:</label>
                   <%= form.text_field :zip_code, class: 'form-control', id: 'inputZipCode' %>
                 </div>
               </div> 
               <div class="row">
-                <div class="form-group form-material col-md-4">
-                  <label class="form-control-label">Phone Number 1:</label>
+                <div class="form-group col-md-4">
+                  <label>Phone Number 1:</label>
                   <%= form.text_field :phone_number_1, class: 'form-control', id: 'inputBasicphone_number_1' %>
                 </div>
-                <div class="form-group form-material col-md-4">
-                  <label class="form-control-label">Phone Number 2:</label>
+                <div class="form-group col-md-4">
+                  <label>Phone Number 2:</label>
                   <%= form.text_field :phone_number_2, class: 'form-control', id: 'inputBasicphone_number_2' %>
                 </div>
-                <div class="form-group form-material col-md-4">
-                  <label class="form-control-label">Cell Phone:</label>
+                <div class="form-group col-md-4">
+                  <label>Cell Phone:</label>
                   <%= form.text_field :cell_phone, class: 'form-control', id: 'inputBasicCellPhone' %>
                 </div>
               </div>
               <div class="row">
-                <div class="form-group form-material col-md-4">
-                  <label class="form-control-label">Fax:</label>
+                <div class="form-group col-md-4">
+                  <label>Fax:</label>
                   <%= form.text_field :fax, class: 'form-control', id: 'inputBasicFax' %>
                 </div>
-                <div class="form-group form-material col-md-4">
-                  <label class="form-control-label">Website:</label>
+                <div class="form-group col-md-4">
+                  <label>Website:</label>
                   <%= form.text_field :website, class: 'form-control', id: 'inputBasicWebsite' %>
                 </div>
-                <div class="form-group form-material col-md-4">
-                  <label class="form-control-label">Email:</label>
+                <div class="form-group col-md-4">
+                  <label>Email:</label>
                   <%= form.email_field :email, class: 'form-control', id: 'inputBasicEmail', required: true %>
                 </div>
               </div>
             </div>
             <div class="row">
-              <div class="form-group form-material col-md-6">
-                <button type="submit" class="btn btn-sm green-btn"><%= company.new_record? ? ' Save ' : ' Save changes' %></button>
-                <button type="button" class="btn btn-sm white-btn" data-dismiss="modal">Cancel</button>
+              <div class="form-group col-md-6">
+                <button type="submit" class="btn btn-primary"><%= company.new_record? ? ' Save ' : ' Save changes' %></button>
+                <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
               </div>
             </div>
           </div>

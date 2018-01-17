@@ -1,12 +1,23 @@
 <div class="panel">
   <div class="panel-body">
     <div class="row">
-      <div class="col-md-10 col-12">
+      <div class="col-md-9 col-12">
         <h3>Project Files</h3>
       </div>
-      <div class="col-md-2 col-6">
-        <button class="btn btn-sm green-btn waves-effect waves-classic clickable col-md-12" data-href="<%= new_project_file_path(project_id: @project.id) %>" type="button">ADD NEW FILE
-        </button>
+      <div class="col">
+        <div class="tasksRightOptions pull-right">
+        <ul>
+          <li>
+            <button class="btn btn-default waves-effect waves-classic clickable col-auto" data-href="<%= new_project_file_path(project_id: @project.id) %>" type="button"><i class="icon fa fa-plus btnIcon" aria-hidden="true"></i>Add File
+            </button>
+          </li>
+          <li>
+            <div class="openLeft moreOptions dropdown"> <a class="" data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false" data-animation="scale-down" role="button"> <i class="icon md-more-vert" aria-hidden="true"></i> </a>
+              <div class="dropdown-menu" role="menu"> <a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon md-view-dashboard" aria-hidden="true"></i> Action</a> <a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon md-view-dashboard" aria-hidden="true"></i> Action</a> </div>
+            </div>
+          </li>
+        </ul>
+        </div>
       </div>
     </div>
   </div>

@@ -1,22 +1,22 @@
-<table class="table table-striped table-hover toggle-circle footable" data-toggle-column="first" data-empty="There are no tasks." data-show-toggle="true" >
+<table class="table tableCustomStyle tableImg table-hover removeTblSearch bodrTop footable footable-6 footable-filtering footable-filtering-right footable-paging footable-paging-center breakpoint-lg" data-toggle-column="first" data-empty="There are no tasks." data-show-toggle="true" >
   <thead>
     <tr>
-      <th>TASK</th>
-      <th>PRIORITY</th>
-      <th data-breakpoints="xs">STATUS</th>
-      <th data-breakpoints="xs">COMPLETE</th>
-      <th data-breakpoints="xs">ASSIGNED TO</th>
-      <th data-breakpoints="xs">DESCRIPTION</th>
-      <th data-breakpoints="xs">START DATE</th>
-      <th data-breakpoints="xs">DUE DATE</th>
-      <th data-breakpoints="xs">OPERATIONS</th>
+      <th data-name="task" data-type="number" data-breakpoints="xs sm" class="footable-first-visible">Task</th>
+      <th data-name="priority" data-breakpoints="xs sm">Priority</th>
+      <th data-name="status">Status</th>
+      <th data-name="complete" data-breakpoints="xs sm md">Complete</th>
+      <th data-name="assignedTo">Assigned To</th>
+      <th data-name="description" data-breakpoints="xs sm md">Description</th>
+      <th data-breakpoints="xs">Start date</th>
+      <th data-name="sDate" data-type="date" data-breakpoints="xs sm md" data-format-string="MMM YYYY" class="footable-last-visible">Due Date</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
   <% for task in tasks %>
       <tr>
         <td><%= task.name %></td>
-        <td><%= task.priority %></td>
+        <td><span class="priorityDot <%= priority_class(task.priority) %>"></span><%= task.priority %></td>
         <td><%= task.status %></td>
         <td><%= task.progress %> %</td>
         <td><%= task.assignee.full_name %></td>
@@ -24,7 +24,13 @@
         <td><%= task.start_date.strftime("%m/%d/%Y") if task.start_date.present? %></td>
         <td><%= task.end_date.strftime("%m/%d/%Y") if task.end_date.present? %></td>
         <td>
-          <button class="clickable btn btn-sm green-btn" data-href="<%= project_task_path(task, project_id: @project) %>">Edit</button>
+          <div class="openLeft moreOptions dropdown"> 
+            <a class="" data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false" data-animation="scale-down" role="button"> <i class="icon md-more-vert" aria-hidden="true"></i> </a>
+            <div class="dropdown-menu" role="menu"> 
+              <a class="dropdown-item clickable" data-href="<%= project_task_path(task, project_id: @project) %>" role="menuitem" data-toggle="modal" data-target="#viewContactModal1"><i class="icon fa fa-pencil" aria-hidden="true"></i> Edit</a> 
+              <a class="dropdown-item delete-clickable" data-href="<%= project_task_path(task, project_id: @project.id) %>" role="menuitem"><i class="icon md-delete" aria-hidden="true"></i> Delete</a> 
+            </div>
+          </div>
         </td>
       </tr>
     <% end %>

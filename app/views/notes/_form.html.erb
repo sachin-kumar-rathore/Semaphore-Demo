@@ -1,24 +1,24 @@
 <!-- Note Modal -->
-<div class="modal fade" id="noteFormCenter" aria-hidden="true" aria-labelledby="noteFormCenter"
+<div class="modal fade modalStyle" id="noteFormCenter" aria-hidden="true" aria-labelledby="noteFormCenter"
   role="dialog" tabindex="-1">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <%= form_for @note, url: url_for(controller: controller, action: action), remote: true do |form| %>
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
-          <h6 class="modal-title"><%= @note.new_record? ? 'ADD NEW NOTE' : 'EDIT NOTE' %></h6>
+          <h4 class="modal-title"><%= @note.new_record? ? 'ADD NEW NOTE' : 'EDIT NOTE' %></h4>
         </div>
         <div class="modal-body">
-          <div class="example-wrap">
+          <div class="formStyle">
             <div class="error-messages"></div>
-            <div class="row">
-              <div class="form-group form-material col-md-8">
+            <div class="form-row">
+              <div class="form-group col-md-8">
                 <label class="form-control-label" id="inputSubject" >Subject:</label>
                 <%= form.text_field 'subject', class: "form-control", required: true %>
               </div>
-              <div class="form-group form-material col-md-4">
+              <div class="form-group col-md-4">
                 <label class="form-control-label">Date:</label>
                 <div class="input-group">
                   <span class="input-group-addon">
@@ -29,19 +29,16 @@
               </div>
             </div>
             <%= hidden_field_tag 'project_id', @project.id %>
-            <div class="row">
-              <div class="form-group form-material col-md-12">
+            <div class="form-row">
+              <div class="form-group col-md-12">
                 <label class="form-control-label" id="inputDescription" >Descriptor:</label>
-                <%= form.text_area 'description', class: "form-control", required: true %>
+                <%= form.text_area 'description', rows: 6, class: "form-control", required: true %>
               </div>
             </div>
-            <div class="row">
-              <div class="form-group form-material col-md-6">
+            <div class="form-row">
+              <div class="form-group col-md-6">
                 <button type="submit" class="btn btn-sm green-btn"><%= @note.new_record? ? ' Save ' : ' Save changes' %></button>
                 <button type="button" class="btn btn-sm white-btn" data-dismiss="modal">Cancel</button>
-                <% unless @note.new_record? %>
-                  <%= link_to 'Delete', project_note_path(@note, project_id: @project.id), method: :delete, remote: true, class: "btn btn-sm btn-danger" %>
-                <% end %>
               </div>
             </div>
           </div>

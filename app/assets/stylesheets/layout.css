@@ -1058,6 +1058,7 @@ a:not([href]):not([tabindex]){
 
 .manageConfig ul li {
 	display: inline-block;
+  width: 100%;
 }
 .editableList ul li  {
 	width: 100%;

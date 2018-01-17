@@ -1,13 +1,16 @@
-<div class="panel">
+<div class="panel activitiesTabOptions">
   <div class="panel-body">
     <div class="row">
-      <div class="col-md-10 col-12">
-        <h3>Activity Files</h3>
-      </div>
-      <div class="col-md-2 col-6">
-        <button class="btn btn-sm green-btn waves-effect waves-classic clickable col-md-12" data-href="<%= new_activity_file_path(activity_id: @activity.id) %>" type="button">ADD NEW FILE
-        </button>
-      </div>
+			<div class="col">
+				<div class="tableTitle">
+					<h2>Activity Files</h2>
+				</div>
+			</div>
+			<div class="col col-auto">
+				<button class="btn btn-default col-md-12 clickable" data-href="<%= new_activity_file_path(activity_id: @activity.id) %>" type="button" >
+					<i class="icon fa fa-plus btnIcon" aria-hidden="true"></i> Add New File
+				</button>
+			</div>
     </div>
   </div>
   <div class="panel-body tableDesign" id="filesList" >

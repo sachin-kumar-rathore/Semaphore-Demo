@@ -1,4 +1,4 @@
-<table class="table table-striped table-hover toggle-circle footable" data-toggle-column="first" data-empty="There are no tasks." data-show-toggle="true" >
+<table class="table tableCustomStyle tableImg table-hover removeTblSearch bodrTop footable footable-6 footable-filtering footable-filtering-right footable-paging footable-paging-center breakpoint-lg" data-toggle-column="first" data-empty="There are no tasks." data-show-toggle="true" >
   <thead>
     <tr>
       <th>TASK</th>
@@ -24,7 +24,7 @@
         <td><%= task.start_date.strftime("%m/%d/%Y") if task.start_date.present? %></td>
         <td><%= task.end_date.strftime("%m/%d/%Y") if task.end_date.present? %></td>
         <td>
-          <button class="clickable btn btn-sm green-btn" data-href="<%= activity_task_path(task, activity_id: @activity) %>">Edit</button>
+          <button class="clickable btn btn-primary" data-href="<%= activity_task_path(task, activity_id: @activity) %>">Edit</button>
         </td>
       </tr>
     <% end %>

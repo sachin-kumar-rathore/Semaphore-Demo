@@ -1,17 +1,17 @@
 <!-- File Modal -->
-<div class="modal fade" id="fileFormCenter" aria-hidden="true" aria-labelledby="fileFormCenter"
+<div class="modal fade modalStyle" id="fileFormCenter" aria-hidden="true" aria-labelledby="fileFormCenter"
   role="dialog" tabindex="-1">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-simple modal-center" role="document">
     <div class="modal-content">
       <%= form_for @file, url: url_for(controller: controller, action: action), remote: true do |form| %>
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
-          <h6 class="modal-title"><%= @file.new_record? ? "ADD FILE" : "EDIT FILE" %></h6>
+          <h6 class="modal-title" id="addUserModalLabel"><%= @file.new_record? ? "ADD FILE" : "EDIT FILE" %></h6>
         </div>
         <div class="modal-body">
-          <div class="example-wrap">
+          <div class="example-wrap formStyle">
             <div class="error-messages"></div>
             <div class="example">
               <div class="row">
@@ -21,24 +21,31 @@
                 </div>
               </div>
               <div class="row">
-                <div class="form-group form-material col-md-6">
-                  <label class="form-control-label" >Activity:</label>
-                  <%= form.select :documentable_id, options_for_select( load_data_with_id(current_org.activities), selected: @activity ? @activity.id : form.object.documentable_id ),{ include_blank: 'No Activity' }, data:{ plugin: 'selectpicker', "live-search":true}, disabled: @activity %>
+                <div class="form-group col-md-6">
+                  <label>Activity:</label>
+                  <%= form.select :documentable_id, options_for_select( load_data_with_id(current_org.activities), selected: @activity ? @activity.id : form.object.documentable_id ),{ include_blank: 'No Activity' }, class: 'form-control custom-select',data:{ "live-search":true}, disabled: @activity %>
                   <% if @activity %>
                     <%= hidden_field_tag 'document[documentable_id]', @activity.id %>
                   <% end %>
                 </div>
               </div>
             </div>
-            <div class="row">
-              <div class="form-group form-material col-md-12">
-                <button type="submit" class="btn btn-sm green-btn" id="saveButton"><%= @file.new_record? ? ' Save ' : ' Save changes' %></button>
-                <button type="button" class="btn btn-sm white-btn" data-dismiss="modal">Cancel</button>
-                <% unless @file.new_record? %>
-                  <%= link_to 'Delete',file_path(@file), method: :delete, remote: true, class: "btn btn-sm btn-danger" %>
-                <% end %>
-              </div>
-            </div>
+						<div class="modalFooterBtns">
+							<div class="form-row">
+								<div class="col-auto">
+									<button type="submit" class="btn btn-primary" id="saveButton"><%= @file.new_record? ? ' Save ' : ' Save changes' %></button>
+								</div>
+								<div class="col-auto">
+									<button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
+								</div>
+								<div class="col-auto">
+									<% unless @file.new_record? %>
+											<%= link_to 'Delete', file_path(@file), method: :delete, remote: true, class: "btn btn-block btn-danger" %>
+									<% end %>
+								</div>
+							</div>
+						</div>
+
             <div class="spinner" hidden>
               <div class="bounce1"></div>
               <div class="bounce2"></div>

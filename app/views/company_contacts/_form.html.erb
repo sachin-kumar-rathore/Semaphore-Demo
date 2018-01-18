@@ -1,6 +1,5 @@
 <!-- Contact Modal -->
-<div class="modal fade modalStyle" id="contactFormCenter" aria-hidden="true" aria-labelledby="contactFormCenter"
-  role="dialog" tabindex="-1">
+<div class="modal fade modalStyle" id="contactFormCenter" aria-hidden="true" aria-labelledby="contactFormCenter" role="dialog" tabindex="-1">
   <div class="modal-dialog modal-simple modal-center" role="document">
     <div class="modal-content">
       <%= form_for contact, url: url_for(controller: controller, action: action), remote: true do |form| %>
@@ -90,7 +89,7 @@
               <button type="submit" class="btn btn-primary"><%= contact.new_record? ? ' Save ' : ' Save changes' %></button>
               <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
               <% unless contact.new_record? %>
-                  <%= link_to 'Delete', @company ? company_contact_path(contact, company_id: @company.id) : contact_path(contact), method: :delete, remote: true, class: "btn btn-block btn-danger" %>
+                <%= link_to 'Delete', @company ? company_contact_path(contact, company_id: @company.id) : contact_path(contact), method: :delete, remote: true, class: "btn btn-block btn-danger" %>
               <% end %>
             </div>
 

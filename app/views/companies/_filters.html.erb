@@ -3,16 +3,11 @@
   <%= form_tag companies_path, remote: true, method: :get do %>
     <div class="form-group updBtn">
       <div class="form-row">
-        <div class="col-auto">
+        <div class="col-md-6">
           <button type="submit" class="btn btn-primary">Update List</button>
         </div>
-        <div class="col-auto">
+        <div class="col-md-6">
           <%= button_tag 'Clear All Filters', type: :reset, class: 'btn btn-outline-primary site-filter-clear' %>
-        </div>
-        <div class="col-auto">
-          <%= link_to companies_path, class: 'reload-page-link', data: { turbolinks: false } do %>
-            <i class="fa fa-refresh pull-right"></i>
-          <% end %>
         </div>
       </div>
     </div>

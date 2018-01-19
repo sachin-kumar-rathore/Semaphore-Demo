@@ -6,7 +6,7 @@
       <th data-breakpoints="xs">UPLOADED BY</th>
       <th data-breakpoints="xs">ASSIGNED PROJECT</th>
       <th data-breakpoints="xs">DATE MODIFIED</th>
-      <th data-breakpoints="xs">OPERATIONS</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -24,9 +24,16 @@
         <% end %>
         <td><%= file.updated_at.strftime("%m/%d/%Y") if file.updated_at.present? %></td>
         <td>
-          <a class="btn btn-primary download-btn fa fa-download" href="<%= file.name %>" ></a>
-          <button class="btn btn-danger fa fa-trash delete-clickable" data-href="<%= file_path(file) %>" ></button>
-          <button class="clickable btn btn-primary fa fa-pencil" data-href="<%= edit_file_path(file) %>"></button>
+          <div class="openLeft moreOptions dropdown">
+            <a class="" data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false" data-animation="scale-down" role="button">
+              <i class="icon md-more-vert" aria-hidden="true"></i>
+            </a>
+            <div class="dropdown-menu" role="menu">
+              <a class="dropdown-item" href="<%= file.name %>" role="menuitem"><i class="fa fa-download" aria-hidden="true"></i> Download</a>
+              <a class="dropdown-item delete-clickable" data-href="<%= file_path(file) %>" role="menuitem"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
+              <a class="dropdown-item clickable" data-href="<%= edit_file_path(file) %>" role="menuitem"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
+            </div>
+          </div>
         </td>
       </tr>
     <% end %>

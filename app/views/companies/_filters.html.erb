@@ -1,6 +1,6 @@
 <div class="filterSec">
-	<div class="filter-heading"><h3>Filters</h3></div>
-	<%= form_tag companies_path, remote: true, method: :get do %>
+  <div class="filter-heading"><h3>Filters</h3></div>
+  <%= form_tag companies_path, remote: true, method: :get do %>
     <div class="form-group updBtn">
       <div class="form-row">
         <div class="col-auto">
@@ -38,5 +38,5 @@
         <%= select_tag 'industry_type_id', options_for_select(load_active_type("industry_types") ), { class: "form-control custom-select", data:{"live-search":true}, include_blank: 'Please Select' } %>
       </div>
     </div>
-	<% end %>
+  <% end %>
 </div>

@@ -30,21 +30,21 @@
                 </div>
               </div>
             </div>
-						<div class="modalFooterBtns">
-							<div class="form-row">
-								<div class="col-auto">
-									<button type="submit" class="btn btn-primary" id="saveButton"><%= @file.new_record? ? ' Save ' : ' Save changes' %></button>
-								</div>
-								<div class="col-auto">
-									<button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
-								</div>
-								<div class="col-auto">
-									<% unless @file.new_record? %>
+            <div class="modalFooterBtns">
+              <div class="form-row">
+                <div class="col-auto">
+                  <button type="submit" class="btn btn-primary" id="saveButton"><%= @file.new_record? ? ' Save ' : ' Save changes' %></button>
+                </div>
+                <div class="col-auto">
+                  <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
+                </div>
+                <div class="col-auto">
+                  <% unless @file.new_record? %>
                     <%= link_to 'Delete', file_path(@file), method: :delete, remote: true, class: "btn btn-block btn-danger" %>
-									<% end %>
-								</div>
-							</div>
-						</div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
 
             <div class="spinner" hidden>
               <div class="bounce1"></div>

@@ -1,97 +1,97 @@
 <div class="panel">
-	<div class="panel-body">
-		<%= form_for @activity, class: "col-md-12" do |activity| %>
-			<div class="error-messages">
-				<%= render partial: 'shared/error_messages', locals: {obj: @activity} %>
-			</div>
-			<div class="row">
-				<div class="form-group col-md-4">
-					<label id="inputActvityName">Actvity Name:</label>
-					<%= activity.text_field 'name', class: "form-control", required: true %>
-				</div>
-			</div>
-			<div class="row">
-				<div class="form-group col-md-3">
-					<label id="inputActivityId">Activity #</label>
-					<%= activity.text_field 'activity_number', class: "form-control", id: "activitiesNumber", maxlength: 6, minlength: 6, required: true %>
-					<div id="activitiesNumberMessage" value="<%= @activity ? @activity.id : nil %>"></div>
-				</div>
-				<div class="form-group col-md-3">
-					<label id="inputCompanyName">Company Name:</label>
-					<%= activity.select :company_id, options_for_select(load_data_with_id(current_org.companies), activity.object.company_id), {include_blank: 'No Company'}, data: {"live-search": true}, disabled: @company, class: 'form-control custom-select' %>
-				</div>
-				<div class="form-group col-md-3">
-					<label for="inputActivityType">Activity Type:</label>
-					<%= activity.select :company_activity_type_id, options_for_select(load_type("company_activity_types"), activity.object.company_activity_type_id), {}, class: 'form-control custom-select' %>
-				</div>
-				<div class="form-group col-md-3">
-					<label for="inputProvidedService">Service Provided:</label>
-					<%= activity.select :provided_service_id, options_for_select(load_active_type("provided_services"), activity.object.provided_service_id), {}, class: 'form-control custom-select' %>
-				</div>
-			</div>
-			<div class="row">
-				<div class="form-group col-md-3 col-6">
-					<label>Date of Contact:</label>
-					<div class="rightIconFld">
-						<%= activity.text_field 'contact_date_str', class: "form-control  datepicker", value: "#{@activity.contact_date.strftime("%m/%d/%Y") if @activity.contact_date}", data: {plugin: "datepicker"} %>
-						<label for="contactDate" class="fldRightIcon"> <i class="icon fa fa-calendar-o" aria-hidden="true"></i></label>
-					</div>
-				</div>
-				<div class="form-group col-md-3">
-					<label for="inputContactMethod">Contact Method:</label>
-					<%= activity.select :contact_method_type_id, options_for_select(load_type("contact_method_types"), activity.object.contact_method_type_id), {}, class: 'form-control custom-select' %>
-				</div>
-				<div class="form-group col-md-3 col-6">
-					<label>Follow Up Date:</label>
-					<div class="rightIconFld">
-						<%= activity.text_field 'follow_up_date_str', class: "form-control  datepicker", value: "#{@activity.follow_up_date.strftime("%m/%d/%Y") if @activity.follow_up_date}", data: {plugin: "datepicker"} %>
-						<label for="contactDate" class="fldRightIcon"> <i class="icon fa fa-calendar-o" aria-hidden="true"></i></label>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="form-group col-md-3">
-					<label id="inputPrimaryContact">Primary Contact:</label>
-					<%= activity.select(:primary_contact_id, load_data_with_id(current_org.contacts), {}, data: {"live-search": true}, class: 'form-control custom-select') %>
-				</div>
-				<div class="form-group col-md-3">
-					<label id="inputAssignedUser">Assigned User:</label>
-					<%= activity.select(:assigned_user, load_data_with_id(current_org.contacts), {}, data: {"live-search": true}, class: 'form-control custom-select') %>
-				</div>
-			</div>
-			<div class="row">
-				<div class="form-group col-md-9">
-					<label id="inputActivityDescription">Activity Description:</label>
-					<div class="formTextarea">
-						<%= activity.text_area 'description', class: "form-control", rows: "3", placeholder: "Activity Description" %>
-					</div>
-				</div>
-			</div>
-			<% if @company %>
-				<%= hidden_field_tag 'company_id', @company.id %>
-			<% end %>
-			<div class="divider-hr"></div>
-			<div class="form-row">
-				<div class="form-group mbFullWd col-auto">
-					<button type="submit" class="btn btn-primary" name="commit" value="Save & Close">Save & Close</button>
-				</div>
-				<div class="form-group mbFullWd col-auto">
-					<button type="submit" class="btn btn-outline-primary">Save</button>
-				</div>
-				<div class="form-group mbFullWd col-auto">
-					<%= link_to 'Cancel', activities_path, class: "btn btn-outline-primary", data: {turbolinks: false} %>
-				</div>
-				<% unless @activity.new_record? || @activity.converted? %>
-					<div class="form-group mbFullWd col-auto">
-						<%= link_to 'Push Activity To Project', new_project_path(activity_id: @activity.id), class: "btn btn-primary", data: {turbolinks: "false"} %>
-					</div>
-				<% end %>
-				<% unless @activity.new_record? %>
-					<div class="form-group mbFullWd col-auto">
-						<%= link_to 'Delete', activity_path(id: @activity), method: :delete, class: "btn btn-block btn-danger col-md-12" %>
-					</div>
-				<% end %>
-			</div>
-		<% end %>
-	</div>
+  <div class="panel-body">
+    <%= form_for @activity, class: "col-md-12" do |activity| %>
+      <div class="error-messages">
+        <%= render partial: 'shared/error_messages', locals: {obj: @activity} %>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-4">
+          <label id="inputActvityName">Actvity Name:</label>
+          <%= activity.text_field 'name', class: "form-control", required: true %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-3">
+          <label id="inputActivityId">Activity #</label>
+          <%= activity.text_field 'activity_number', class: "form-control", id: "activitiesNumber", maxlength: 6, minlength: 6, required: true %>
+          <div id="activitiesNumberMessage" value="<%= @activity ? @activity.id : nil %>"></div>
+        </div>
+        <div class="form-group col-md-3">
+          <label id="inputCompanyName">Company Name:</label>
+          <%= activity.select :company_id, options_for_select(load_data_with_id(current_org.companies), activity.object.company_id), {include_blank: 'No Company'}, data: {"live-search": true}, disabled: @company, class: 'form-control custom-select' %>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="inputActivityType">Activity Type:</label>
+          <%= activity.select :company_activity_type_id, options_for_select(load_type("company_activity_types"), activity.object.company_activity_type_id), {}, class: 'form-control custom-select' %>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="inputProvidedService">Service Provided:</label>
+          <%= activity.select :provided_service_id, options_for_select(load_active_type("provided_services"), activity.object.provided_service_id), {}, class: 'form-control custom-select' %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-3 col-6">
+          <label>Date of Contact:</label>
+          <div class="rightIconFld">
+            <%= activity.text_field 'contact_date_str', class: "form-control  datepicker", value: "#{@activity.contact_date.strftime("%m/%d/%Y") if @activity.contact_date}", data: {plugin: "datepicker"} %>
+            <label for="contactDate" class="fldRightIcon"> <i class="icon fa fa-calendar-o" aria-hidden="true"></i></label>
+          </div>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="inputContactMethod">Contact Method:</label>
+          <%= activity.select :contact_method_type_id, options_for_select(load_type("contact_method_types"), activity.object.contact_method_type_id), {}, class: 'form-control custom-select' %>
+        </div>
+        <div class="form-group col-md-3 col-6">
+          <label>Follow Up Date:</label>
+          <div class="rightIconFld">
+            <%= activity.text_field 'follow_up_date_str', class: "form-control  datepicker", value: "#{@activity.follow_up_date.strftime("%m/%d/%Y") if @activity.follow_up_date}", data: {plugin: "datepicker"} %>
+            <label for="contactDate" class="fldRightIcon"> <i class="icon fa fa-calendar-o" aria-hidden="true"></i></label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-3">
+          <label id="inputPrimaryContact">Primary Contact:</label>
+          <%= activity.select(:primary_contact_id, load_data_with_id(current_org.contacts), {}, data: {"live-search": true}, class: 'form-control custom-select') %>
+        </div>
+        <div class="form-group col-md-3">
+          <label id="inputAssignedUser">Assigned User:</label>
+          <%= activity.select(:assigned_user, load_data_with_id(current_org.contacts), {}, data: {"live-search": true}, class: 'form-control custom-select') %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-9">
+          <label id="inputActivityDescription">Activity Description:</label>
+          <div class="formTextarea">
+            <%= activity.text_area 'description', class: "form-control", rows: "3", placeholder: "Activity Description" %>
+          </div>
+        </div>
+      </div>
+      <% if @company %>
+        <%= hidden_field_tag 'company_id', @company.id %>
+      <% end %>
+      <div class="divider-hr"></div>
+      <div class="form-row">
+        <div class="form-group mbFullWd col-auto">
+          <button type="submit" class="btn btn-primary" name="commit" value="Save & Close">Save & Close</button>
+        </div>
+        <div class="form-group mbFullWd col-auto">
+          <button type="submit" class="btn btn-outline-primary">Save</button>
+        </div>
+        <div class="form-group mbFullWd col-auto">
+          <%= link_to 'Cancel', activities_path, class: "btn btn-outline-primary", data: {turbolinks: false} %>
+        </div>
+        <% unless @activity.new_record? || @activity.converted? %>
+          <div class="form-group mbFullWd col-auto">
+            <%= link_to 'Push Activity To Project', new_project_path(activity_id: @activity.id), class: "btn btn-primary", data: {turbolinks: "false"} %>
+          </div>
+        <% end %>
+        <% unless @activity.new_record? %>
+          <div class="form-group mbFullWd col-auto">
+            <%= link_to 'Delete', activity_path(id: @activity), method: :delete, class: "btn btn-block btn-danger col-md-12" %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 </div>

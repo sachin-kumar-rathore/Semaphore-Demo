@@ -22,7 +22,7 @@
                 <label>Date:</label>
                 <div class="rightIconFld">
                   <%= form.text_field 'date_str', class: "form-control  datepicker", value:  @note.date ? @note.date : Date.today.strftime('%m/%d/%Y'), data: {plugin: "datepicker"}, required: true %>
-									<label class="fldRightIcon"> <i class="icon fa fa-calendar-o" aria-hidden="true"></i></label>
+                  <label class="fldRightIcon"> <i class="icon fa fa-calendar-o" aria-hidden="true"></i></label>
                 </div>
               </div>
             </div>
@@ -30,27 +30,27 @@
             <div class="row">
               <div class="form-group col-md-12">
                 <label id="inputDescription" >Description:</label>
-								<div class="formTextarea">
-                	<%= form.text_area 'description', class: "form-control", required: true, rows: "2", placeholder: "Description" %>
-								</div>
+                <div class="formTextarea">
+                  <%= form.text_area 'description', class: "form-control", required: true, rows: "2", placeholder: "Description" %>
+                </div>
               </div>
             </div>
 
-						<div class="modalFooterBtns">
-							<div class="form-row">
-								<div class="col-auto">
-									<button type="submit" class="btn btn-primary"><%= @note.new_record? ? ' Save ' : ' Save changes' %></button>
-								</div>
-								<div class="col-auto">
-									<button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
-								</div>
-								<div class="col-auto">
-									<% unless @note.new_record? %>
-										<%= link_to 'Delete', activity_note_path(@note, activity_id: @activity.id), method: :delete, remote: true, class: "btn btn-block btn-danger" %>
-									<% end %>
-								</div>
-							</div>
-						</div>
+            <div class="modalFooterBtns">
+              <div class="form-row">
+                <div class="col-auto">
+                  <button type="submit" class="btn btn-primary"><%= @note.new_record? ? ' Save ' : ' Save changes' %></button>
+                </div>
+                <div class="col-auto">
+                  <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
+                </div>
+                <div class="col-auto">
+                  <% unless @note.new_record? %>
+                    <%= link_to 'Delete', activity_note_path(@note, activity_id: @activity.id), method: :delete, remote: true, class: "btn btn-block btn-danger" %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
 
           </div>
         </div>

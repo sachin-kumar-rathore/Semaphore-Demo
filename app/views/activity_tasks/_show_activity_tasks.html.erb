@@ -1,16 +1,16 @@
 <div class="panel activitiesTabOptions">
   <div class="panel-body">
     <div class="row">
-			<div class="col">
-				<div class="tableTitle">
-					<h2>Activity Tasks</h2>
-				</div>
-			</div>
-			<div class="col col-auto">
-				<button class="btn btn-default col-md-12 clickable" data-href="<%= new_activity_task_path(activity_id: @activity.id) %>" type="button" >
-					<i class="icon fa fa-plus btnIcon" aria-hidden="true"></i> Add New Task
-				</button>
-			</div>
+      <div class="col">
+        <div class="tableTitle">
+          <h2>Activity Tasks</h2>
+        </div>
+      </div>
+      <div class="col col-auto">
+        <button class="btn btn-default col-md-12 clickable" data-href="<%= new_activity_task_path(activity_id: @activity.id) %>" type="button" >
+          <i class="icon fa fa-plus btnIcon" aria-hidden="true"></i> Add New Task
+        </button>
+      </div>
     </div>
   </div>
   <div class="panel-body tableDesign" id="tasksList" >

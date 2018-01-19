@@ -10,9 +10,9 @@
       <div class="row">
         <div class="form-group col-md-9">
           <label id="inputPrimaryProducts&Services" >Primary Products and Services:</label>
-					<div class="formTextarea">
-          	<%= company.text_area 'primary_products_and_services', class: "form-control", rows: "3" %>
-					</div>
+          <div class="formTextarea">
+            <%= company.text_area 'primary_products_and_services', class: "form-control", rows: "3" %>
+          </div>
         </div>
       </div>
       <div class="row">
@@ -22,21 +22,21 @@
         </div>
       </div>
 
-			<div class="modalFooterBtns">
-				<div class="form-row">
-					<div class="col-auto">
-						<button type="submit" class="btn btn-primary" name= "commit", value= "Save & Close">Save & Close</button>
-					</div>
-					<div class="col-auto">
-						<button type="submit" class="btn btn-outline-primary">Save</button>
-					</div>
-					<div class="col-auto">
-						<div class="form-group form-material">
-							<%= link_to 'Cancel', companies_path, class: "btn btn-outline-primary", data: { turbolinks: false } %>
-						</div>
-					</div>
-				</div>
-			</div>
+      <div class="modalFooterBtns">
+        <div class="form-row">
+          <div class="col-auto">
+            <button type="submit" class="btn btn-primary" name= "commit", value= "Save & Close">Save & Close</button>
+          </div>
+          <div class="col-auto">
+            <button type="submit" class="btn btn-outline-primary">Save</button>
+          </div>
+          <div class="col-auto">
+            <div class="form-group form-material">
+              <%= link_to 'Cancel', companies_path, class: "btn btn-outline-primary", data: { turbolinks: false } %>
+            </div>
+          </div>
+        </div>
+      </div>
     <% end %>
   </div>
 </div>

@@ -80,21 +80,21 @@
       </div>
       <hr>
       <div class="row">
-				<div class="col-md-2">
-					Member Investor?
-				</div>
-				<div class="col-md-10">
-					<div class="row">
-						<div class="form-inline col-md-3 col-6 custom-radioBtn">
-							<%= company.radio_button :member_investor, 'false', checked: true, id: 'inputRadiosUnchecked' %>
-							<label for="inputRadiosUnchecked">No</label>
-						</div>
-						<div class="form-inline col-md-3 col-6 custom-radioBtn">
-							<%= company.radio_button :member_investor, 'true', id: 'inputRadiosChecked' %>
-							<label for="inputRadiosChecked">Yes</label>
-						</div>
-					</div>
-				</div>
+        <div class="col-md-2">
+          Member Investor?
+        </div>
+        <div class="col-md-10">
+          <div class="row">
+            <div class="form-inline col-md-3 col-6 custom-radioBtn">
+              <%= company.radio_button :member_investor, 'false', checked: true, id: 'inputRadiosUnchecked' %>
+              <label for="inputRadiosUnchecked">No</label>
+            </div>
+            <div class="form-inline col-md-3 col-6 custom-radioBtn">
+              <%= company.radio_button :member_investor, 'true', id: 'inputRadiosChecked' %>
+              <label for="inputRadiosChecked">Yes</label>
+            </div>
+          </div>
+        </div>
       </div>
       <br>
       <div class="row">
@@ -110,9 +110,9 @@
       <div class="row">
         <div class="form-group col-md-9">
           <label id="inputCompanyNotes" >Company Notes:</label>
-					<div class="formTextarea">
-          	<%= company.text_area 'notes', class: "form-control", rows: "3" %>
-					</div>
+          <div class="formTextarea">
+            <%= company.text_area 'notes', class: "form-control", rows: "3" %>
+          </div>
         </div>
       </div>
       <div class="row">
@@ -121,16 +121,16 @@
           <%= company.select :business_unit_id, options_for_select(load_type("business_units"), company.object.business_unit_id), {}, {class: 'form-control custom-select', data:{"live-search":true } } %>
         </div>
       </div>
-			<div class="divider-hr"></div>
+      <div class="divider-hr"></div>
       <div class="form-row">
         <div class="col-auto">
-					<button type="submit" class="btn btn-primary" name= "commit", value= "Save & Close">Save & Close</button>
+          <button type="submit" class="btn btn-primary" name= "commit", value= "Save & Close">Save & Close</button>
         </div>
         <div class="col-auto">
           <button type="submit" class="btn btn-outline-primary">Save</button>
         </div>
         <div class="col-auto">
-					<%= link_to 'Cancel', companies_path, class: "btn btn-outline-primary", data: { turbolinks: false } %>
+          <%= link_to 'Cancel', companies_path, class: "btn btn-outline-primary", data: { turbolinks: false } %>
         </div>
         <div class="col-auto">
           <%= link_to 'Delete', company_path(id: @company), method: :delete, class: "btn btn-block btn-danger" %>

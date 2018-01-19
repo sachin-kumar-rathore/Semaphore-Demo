@@ -1,7 +1,7 @@
 <!-- Task Modal -->
 <div class="modal fade modalStyle" id="taskFormCenter" aria-hidden="true" aria-labelledby="taskFormCenter"
   role="dialog" tabindex="-1">
-  <div class="modal-dialog modal-simple modal-center" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <%= form_for @task, url: url_for(controller: controller, action: action), class: 'task_form', remote: true do |form| %>
         <div class="modal-header">

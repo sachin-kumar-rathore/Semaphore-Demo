@@ -1,4 +1,4 @@
-<table class="table table-striped table-hover toggle-circle footable" data-toggle-column="first" data-empty="There are no files" data-show-toggle="true" >
+<table class="table tableCustomStyle tableImg table-hover removeTblSearch bodrTop footable footable-6 footable-filtering footable-filtering-right footable-paging footable-paging-center breakpoint-lg" data-toggle-column="first" data-empty="There are no files" data-show-toggle="true" >
   <thead>
     <tr>
       <th>NAME</th>
@@ -6,11 +6,11 @@
       <th data-breakpoints="xs">UPLOADED BY</th>
       <th data-breakpoints="xs">ASSIGNED PROJECT</th>
       <th data-breakpoints="xs">DATE MODIFIED</th>
-      <th data-breakpoints="xs">OPERATIONS</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
-  <% for file in files %>
+    <% for file in files %>
       <tr>
         <td><%= File.basename(file.name.to_s) %></td>
         <td><%= (file.size.to_f/1000).round(1) %> kB </td>
@@ -19,17 +19,21 @@
           <td><%= file.documentable.name %></td>
         <% else %>
           <td>
-            <button class="clickable btn btn-xs green-btn" data-href="<%= show_projects_file_path(file) %>" ><i class="fa fa-plus"></i> Add
-            </button>
+            <button class="clickable btn btn-primary" data-href="<%= show_projects_file_path(file) %>" ><i class="fa fa-plus"></i> Add</button>
           </td>
         <% end %>
         <td><%= file.updated_at.strftime("%m/%d/%Y") if file.updated_at.present? %></td>
         <td>
-          <a class="btn btn-xs green-btn download-btn fa fa-download" href="<%= file.name %>" >
-          </a>
-          <button class="btn btn-xs btn-danger fa fa-trash delete-clickable" data-href="<%= file_path(file) %>" >
-          </button>
-          <button class="clickable btn btn-xs green-btn fa fa-pencil" data-href="<%= edit_file_path(file) %>"></button>
+          <div class="openLeft moreOptions dropdown">
+            <a class="" data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false" data-animation="scale-down" role="button">
+              <i class="icon md-more-vert" aria-hidden="true"></i>
+            </a>
+            <div class="dropdown-menu" role="menu">
+              <a class="dropdown-item" href="<%= file.name %>" role="menuitem"><i class="icon fa fa-download" aria-hidden="true"></i> Download</a>
+              <a class="dropdown-item delete-clickable" data-href="<%= file_path(file) %>" role="menuitem"><i class="icon fa fa-trash" aria-hidden="true"></i> Delete</a>
+              <a class="dropdown-item clickable" data-href="<%= edit_file_path(file) %>" role="menuitem"><i class="icon fa fa-pencil" aria-hidden="true"></i> Edit</a>
+            </div>
+          </div>
         </td>
       </tr>
     <% end %>

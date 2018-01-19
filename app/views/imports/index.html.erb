@@ -1,26 +1,27 @@
 <div class="row">
   <div class="col-md-6">
     <div class="panel panel-bordered">
-      <div class="panel-heading">
-        <h3 class="panel-title">Import Contacts</h3>
+      <div class="panel-heading tableTitle">
+        <h2 class="panel-title">Import Contacts</h2>
       </div>
       <div class="panel-body">
-        <button class="btn btn-sm green-btn waves-effect waves-classic" data-target="#contactImportFormCenter" data-toggle="modal" id="importNewContacts" type="button">EXCEL IMPORT
+        <button class="btn btn-primary" data-target="#contactImportFormCenter" data-toggle="modal" id="importNewContacts" type="button">EXCEL IMPORT
         </button>
       </div>
     </div>
   </div>
-<%= render :partial => 'contacts/import_contacts_form' %>
+
   <div class="col-md-6">
     <div class="panel panel-bordered">
-      <div class="panel-heading">
-        <h3 class="panel-title">Import Sites/Buildings</h3>
+      <div class="panel-heading tableTitle">
+        <h2 class="panel-title">Import Sites/Buildings</h2>
       </div>
       <div class="panel-body">
-        <button class="btn btn-sm green-btn waves-effect waves-classic" data-target="#siteImportFormCenter" data-toggle="modal" id="importNewSites" type="button">EXCEL IMPORT</button>
-        <button class="btn btn-sm green-btn waves-effect waves-classic" data-target="" data-toggle="modal" type="button">LOIS IMPORT</button>
+        <button class="btn btn-primary" data-target="#siteImportFormCenter" data-toggle="modal" id="importNewSites" type="button">EXCEL IMPORT</button>
+        <button class="btn btn-primary" data-target="" data-toggle="modal" type="button">LOIS IMPORT</button>
       </div>
     </div>
   </div>
 </div>
 <%= render :partial => 'sites/import_sites_form' %>
+<%= render :partial => 'contacts/import_contacts_form' %>

@@ -84,10 +84,11 @@
               </div>
             </div>
             <%= hidden_field_tag 'contact[company_id]', @company ? @company.id : nil %>
-            <div class="form-row">
-              <div class="form-group mbFullWd col-auto">
-                <button type="submit" class="btn btn-primary green-btn"><%= contact.new_record? ? ' Save ' : ' Save changes' %></button>
-                <button type="button" class="btn btn-outline-primary " data-dismiss="modal">Cancel</button>
+
+            <div class="modalFooterBtns">
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary"><%= contact.new_record? ? ' Save ' : ' Save changes' %></button>
+                <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
               </div>
             </div>
           </div>

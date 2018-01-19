@@ -1076,3 +1076,9 @@ a:not([href]):not([tabindex]){
 #showExistingContacts .modal-body .card{
     padding: 0px;
 }
+.border-right-1{
+    border-right: 1px solid #e3e3e3;
+}
+#emailsList tbody tr td .moreOptions i {
+    color: #bbb;
+}

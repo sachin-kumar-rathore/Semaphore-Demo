@@ -1,28 +1,28 @@
 <!-- Assign Project to File Modal -->
-<div class="modal fade" id="assignProjectToFile" aria-hidden="true" aria-labelledby="assignProjectToFile"
+<div class="modal fade modalStyle" id="assignProjectToFile" aria-hidden="true" aria-labelledby="assignProjectToFile"
      role="dialog" tabindex="-1">
-  <div class="modal-dialog modal-simple modal-center">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <%= form_tag attach_project_to_file_file_path(file), method: :post, remote: true do |form| %>
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
-          <h6 class="modal-title"><%= "ADD PROJECT" %></h6>
+          <h6 class="modal-title" id="addUserModalLabel"><%= "ADD PROJECT" %></h6>
         </div>
         <div class="modal-body">
-          <div class="example">
+          <div class="example-wrap formStyle">
             <div class="row">
-              <div class="form-group form-material col-md-12">
-                <label class="form-control">Assign To:</label>
-                <%= select_tag "project_id", options_for_select(current_org.projects.all.map{ |project| [project.name, project.id] }), {data:{ plugin: 'selectpicker', "live-search":true}, include_blank: 'Please Select' } %>
+              <div class="form-group col-md-12">
+                <label>Assign To:</label>
+                <%= select_tag "project_id", options_for_select(current_org.projects.all.map{ |project| [project.name, project.id] }), class: 'form-control custom-select', data:{"live-search":true}, include_blank: 'Please Select' %>
               </div>
             </div>
           </div>
-          <div class="row">
-            <div class="form-group form-material col-md-6">
-              <button type="submit" class="btn btn-sm green-btn">Assign</button>
-              <button type="button" class="btn btn-sm white-btn" data-dismiss="modal">Cancel</button>
+          <div class="modalFooterBtns">
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary">Assign</button>
+              <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
             </div>
           </div>
         </div>

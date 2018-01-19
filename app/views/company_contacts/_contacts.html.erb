@@ -5,7 +5,7 @@
       <th data-breakpoints="xs">ORGANIZATION</th>
       <th data-breakpoints="xs">PHONE</th>
       <th data-breakpoints="xs">EMAIL</th>
-      <th data-breakpoints="xs">OPERATIONS</th>
+      <th></th>
     </tr>
   </thead>
 
@@ -17,7 +17,14 @@
         <td><%= contact.cell_phone %></td>
         <td><%= contact.email %></td>
         <td>
-          <button class="clickable btn btn-primary" data-href="<%= company_contact_path(@company, contact) %>">Edit</button>
+          <div class="openLeft moreOptions dropdown">
+            <a class="" data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false" data-animation="scale-down" role="button">
+              <i class="icon md-more-vert" aria-hidden="true"></i>
+            </a>
+            <div class="dropdown-menu" role="menu">
+              <a class="dropdown-item clickable" data-href="<%= company_contact_path(@company, contact) %>" role="menuitem"><i class="icon md-edit" aria-hidden="true"></i> Edit</a>
+            </div>
+          </div>
         </td>
       </tr>
     <% end %>

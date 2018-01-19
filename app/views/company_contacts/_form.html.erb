@@ -86,11 +86,13 @@
             <%= hidden_field_tag 'contact[company_id]', @company ? @company.id : nil %>
 
             <div class="modalFooterBtns">
-              <button type="submit" class="btn btn-primary"><%= contact.new_record? ? ' Save ' : ' Save changes' %></button>
-              <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
-              <% unless contact.new_record? %>
-                <%= link_to 'Delete', @company ? company_contact_path(contact, company_id: @company.id) : contact_path(contact), method: :delete, remote: true, class: "btn btn-block btn-danger" %>
-              <% end %>
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary"><%= contact.new_record? ? ' Save ' : ' Save changes' %></button>
+                <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
+                <% unless contact.new_record? %>
+                  <%= link_to 'Delete', @company ? company_contact_path(contact, company_id: @company.id) : contact_path(contact), method: :delete, remote: true, class: "btn btn-danger" %>
+                <% end %>
+              </div>
             </div>
 
           </div>

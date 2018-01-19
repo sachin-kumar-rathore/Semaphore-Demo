@@ -5,7 +5,7 @@
       <th>ACTIVITY TYPE</th>
       <th data-breakpoints="xs">CONTACT DATE</th>
       <th data-breakpoints="xs">CONVERTED</th>
-      <th data-breakpoints="xs">OPERATIONS</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -15,7 +15,16 @@
         <td><%= activity.company_activity_type.name %></td>
         <td><%= activity.contact_date %></td>
         <td><%= activity.converted ? "Yes" : "No" %></td>
-        <td><a href="<%= edit_company_activity_path(@company, activity) %>" class="btn btn-primary" data-turbolinks="false">View</a></td>
+        <td>
+          <div class="openLeft moreOptions dropdown">
+            <a class="" data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false" data-animation="scale-down" role="button">
+              <i class="icon md-more-vert" aria-hidden="true"></i>
+            </a>
+            <div class="dropdown-menu" role="menu">
+              <a class="dropdown-item" href="<%= edit_company_activity_path(@company, activity) %>" data-turbolinks="false" role="menuitem"><i class="icon fa fa-eye" aria-hidden="true"></i> View</a>
+            </div>
+          </div>
+        </td>
       </tr>
     <% end %>
   </tbody>

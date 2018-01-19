@@ -7,7 +7,7 @@
       <th data-breakpoints="xs md">ASSOCIATED CONTACT</th>
       <th data-breakpoints="xs md">ASSIGNED PROJECT/ACTIVITY</th>
       <th data-breakpoints="xs">DATE</th>
-      <th data-breakpoints="xs">OPERATIONS</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -40,7 +40,14 @@
         <% end %>
         <td><%= email.email_date.strftime("%m/%d/%Y") if email.email_date %></td>
         <td>
-          <button class="clickable btn btn-primary" data-href="<%= email_path(email) %>">View</button>
+          <div class="openLeft moreOptions dropdown">
+            <a class="" data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false" data-animation="scale-down" role="button">
+              <i class="icon md-more-vert" aria-hidden="true"></i>
+            </a>
+            <div class="dropdown-menu" role="menu">
+              <a class="dropdown-item clickable" data-href="<%= email_path(email) %>" role="menuitem"><i class="icon fa fa-eye" aria-hidden="true"></i> View</a>
+            </div>
+          </div>
         </td>
       </tr>
     <% end %>

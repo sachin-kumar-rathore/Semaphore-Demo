@@ -1079,3 +1079,6 @@ a:not([href]):not([tabindex]){
 .border-right-1{
     border-right: 1px solid #e3e3e3;
 }
+#emailsList tbody tr td .moreOptions i {
+    color: #bbb;
+}

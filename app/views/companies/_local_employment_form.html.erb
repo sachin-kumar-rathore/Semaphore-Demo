@@ -1,6 +1,5 @@
 <div class="panel panel-bordered" id="localEmployment">
-  <div class="panel-heading collapsed" data-toggle="collapse" href="#local-employment-form"
-aria-expanded="false" aria-controls="local-employment-form">
+  <div class="panel-heading collapsed" data-toggle="collapse" href="#local-employment-form" aria-expanded="false" aria-controls="local-employment-form">
     <h3 class="panel-title"> Local Employment <i class="fa fa-caret-down pull-right" aria-hidden="true"></i> </h3>
   </div>
   <div class="panel-body panel-collapse collapse" id="local-employment-form" aria-labelled-by="local-employment-form" role="tabpanel">
@@ -9,86 +8,84 @@ aria-expanded="false" aria-controls="local-employment-form">
     <br/>
     <%= form_for @company, url: local_employment_update_company_path, method: :patch, remote: true  do |company| %>
       <div class="row">
-        <div class="form-group form-material col-md-3">
-          <label class="form-control-label" id="inputFullTimeEmployees" >Full Time Employees:</label>
+        <div class="form-group col-md-3">
+          <label id="inputFullTimeEmployees" >Full Time Employees:</label>
           <%= company.number_field 'full_time_employees', class: "form-control", min: "0" %>
         </div>
-        <div class="form-group form-material col-md-3">
-          <label class="form-control-label" id="inputPartTimeEmployees" >Part Time Employees:</label>
+        <div class="form-group col-md-3">
+          <label id="inputPartTimeEmployees" >Part Time Employees:</label>
           <%= company.number_field 'part_time_employees', class: "form-control", min: "0" %>
         </div>
       </div>
       <div class="row">
-        <div class="form-group form-material col-md-3">
-          <label class="form-control-label" id="inputLocalEmployees" >Leased Employees:</label>
+        <div class="form-group col-md-3">
+          <label id="inputLocalEmployees" >Leased Employees:</label>
           <%= company.number_field 'leased_employees', class: "form-control", min: "0" %>
         </div>
-        <div class="form-group form-material col-md-3">
-          <label class="form-control-label" id="inputTotalEmployees" >Total Employees:</label>
+        <div class="form-group col-md-3">
+          <label id="inputTotalEmployees" >Total Employees:</label>
           <%= company.number_field 'total_employees', class: "form-control", min: "0" %>
         </div>
       </div>
       <div class="row">
-        <div class="form-group form-material col-md-6">
-          <label class="form-control-label" id="inputnumberOfJobsAddedOrLostInPast3Years" >Number of Jobs Added or Lost in past 3 years:</label>
+        <div class="form-group col-md-6">
+          <label id="inputnumberOfJobsAddedOrLostInPast3Years" >Number of Jobs Added or Lost in past 3 years:</label>
           <%= company.number_field 'number_of_jobs_added_or_lost_in_past_3_years', class: "form-control", min: "0" %>
         </div>
       </div>
       <div class="row">
-        <div class="form-group form-material col-md-3">
-          <label class="form-control-label" id="inputNumberOfShiftsPerDay" >Number of Shifts per Day:</label>
+        <div class="form-group col-md-3">
+          <label id="inputNumberOfShiftsPerDay" >Number of Shifts per Day:</label>
           <%= company.number_field 'number_of_shifts_per_day', class: "form-control", min: "0" %>
         </div>
-        <div class="form-group form-material col-md-3">
-          <label class="form-control-label" id="inputNumberOfDaysPerWeek" >Number of Days per Week:</label>
+        <div class="form-group col-md-3">
+          <label id="inputNumberOfDaysPerWeek" >Number of Days per Week:</label>
           <%= company.number_field 'number_of_days_per_week', class: "form-control", min: "0" %>
         </div>
       </div>
       <div class="row">
-        <div class="form-group form-material col-md-3">
-          <label class="form-control-label" id="inputPeakSeason" >Peak Season: </label>
-          <%= company.select :peak_season, options_for_select( Company::SEASONS , company.object.peak_season), {}, class: 'form-control', data: {
-            plugin: "selectpicker" } %>
+        <div class="form-group col-md-3">
+          <label id="inputPeakSeason" >Peak Season: </label>
+          <%= company.select :peak_season, options_for_select( Company::SEASONS , company.object.peak_season), {}, class: 'form-control custom-select' %>
         </div>
-        <div class="form-group form-material col-md-3">
-          <label class="form-control-label" id="inputAverageAnnualSalary" >Average Annual Wage/Salary:</label>
+        <div class="form-group col-md-3">
+          <label id="inputAverageAnnualSalary" >Average Annual Wage/Salary:</label>
           <%= company.text_field 'average_annual_salary', class: "form-control" %>
         </div>
       </div>
       <div class="row">
-        <div class="form-group form-material col-md-3 ">
+        <div class="form-group col-md-3 ">
           <label class="form-control-label">Date of Total:</label>
-          <div class="input-group">
-            <span class="input-group-addon">
-            <i class="icon md-calendar" aria-hidden="true"></i>
-            </span>
+          <div class="rightIconFld">
             <%= company.text_field 'date_of_total_str', class: "form-control  datepicker", value: "#{@company.date_of_total.strftime("%m/%d/%Y") if @company.date_of_total}", data: {plugin: "datepicker"} %>
+            <label for="contactDate" class="fldRightIcon"> <i class="icon fa fa-calendar-o" aria-hidden="true"></i></label>
           </div>
         </div>
       </div>
       <div class="row">
-        <div class="form-group form-material col-md-9">
-          <label class="form-control-label" id="inputEmploymentNotes" >Employment Notes:</label>
-          <%= company.text_area 'employment_notes', class: "form-control", rows: "3" %>
+        <div class="form-group col-md-9">
+          <label id="inputEmploymentNotes" >Employment Notes:</label>
+          <div class="formTextarea">
+            <%= company.text_area 'employment_notes', class: "form-control", rows: "3" %>
+          </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-2">
-          <div class="form-group form-material">
-            <button type="submit" class="btn btn-block green-btn col-md-12" name= "commit", value= "Save & Close">Save & Close</button>
+
+      <div class="modalFooterBtns">
+        <div class="form-row">
+          <div class="col-auto">
+            <button type="submit" class="btn btn-primary" name= "commit", value= "Save & Close">Save & Close</button>
+          </div>
+          <div class="col-auto">
+            <button type="submit" class="btn btn-outline-primary">Save</button>
+          </div>
+          <div class="col-auto">
+            <div class="form-group form-material">
+              <%= link_to 'Cancel', companies_path, class: "btn btn-outline-primary", data: { turbolinks: false } %>
+            </div>
           </div>
         </div>
-        <div class="col-md-2">
-          <div class="form-group form-material">
-            <button type="submit" class="btn btn-block green-btn col-md-12">Save</button>
-          </div>
-        </div>
-        <div class="col-md-2">
-          <div class="form-group form-material">
-            <%= link_to 'Cancel', companies_path, class: "btn btn-block green-btn col-md-12", data: { turbolinks: false } %>
-          </div>
-        </div>
-      </div> 
+      </div>
     <% end %>
   </div>
 </div>

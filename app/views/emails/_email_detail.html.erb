@@ -1,4 +1,4 @@
-<div class="modal fade" id="emailDetailsModal" aria-hidden="true" aria-labelledby="emailDetailsModal"
+<div class="modal fade modalStyle" id="emailDetailsModal" aria-hidden="true" aria-labelledby="emailDetailsModal"
      role="dialog" tabindex="-1">
   <div class="modal-dialog modal-simple modal-center">
     <div class="modal-content">
@@ -6,7 +6,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">×</span>
         </button>
-        <h6 class="modal-title"><%= "EMAIL DETAILS" %></h6>
+        <h6 class="modal-title" id="addUserModalLabel"><%= "EMAIL DETAILS" %></h6>
       </div>
       <div class="modal-body">
         <hr>
@@ -40,8 +40,8 @@
           <% end %>
         </div>
         <div class="row">
-          <div class="form-group form-material col-md-6">
-            <button type="button" class="btn btn-sm green-btn" data-dismiss="modal">Close</button>
+          <div class="form-group col-md-6">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
           </div>
         </div>
       </div>

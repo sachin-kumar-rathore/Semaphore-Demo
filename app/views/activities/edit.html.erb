@@ -1,11 +1,13 @@
 <div class="nav-tabs-horizontal" data-plugin="tabs" id="dashboard-tabs" >
-  <ul class="nav nav-tabs" role="tablist">
-    <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="<%= @activity ? edit_activity_path(@activity) : new_activity_path %>" id="mainNavLink" data-remote="true" role="tab">Main</a></li>
-    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="<%= activity_notes_path(@activity) %>" data-remote="true" role="tab" id="notesNavLink" >Interactions</a></li>
-    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="<%= activity_files_path(@activity) %>" data-remote="true" role="tab" id="filesNavLink" >Files</a></li>
-    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="<%= activity_tasks_path(@activity) %>" data-remote="true" role="tab" id="tasksNavLink">Tasks</a></li>
-    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="<%= activity_emails_path(@activity) %>" data-remote="true" role="tab" id="emailsNavLink">Emails</a></li>
-  </ul>
+  <% content_for :navigation_bar do %>
+    <ul class="nav nav-tabs tasks-tabs" role="tablist">
+      <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="<%= @activity ? edit_activity_path(@activity) : new_activity_path %>" id="mainNavLink" data-remote="true" role="tab">Main</a></li>
+      <li class="nav-item"><a class="nav-link" data-toggle="tab" href="<%= activity_notes_path(@activity) %>" data-remote="true" role="tab" id="notesNavLink" >Interactions</a></li>
+      <li class="nav-item"><a class="nav-link" data-toggle="tab" href="<%= activity_files_path(@activity) %>" data-remote="true" role="tab" id="filesNavLink" >Files</a></li>
+      <li class="nav-item"><a class="nav-link" data-toggle="tab" href="<%= activity_tasks_path(@activity) %>" data-remote="true" role="tab" id="tasksNavLink">Tasks</a></li>
+      <li class="nav-item"><a class="nav-link" data-toggle="tab" href="<%= activity_emails_path(@activity) %>" data-remote="true" role="tab" id="emailsNavLink">Emails</a></li>
+    </ul>
+  <% end %>
   <div class="tab-content pt-20">
     <div class="tab-pane active" id="mainTab" role="tabpanel">
       <% if @company %>
@@ -14,13 +16,9 @@
         <%= render 'form' %>
       <% end %>
     </div>
-    <div class="tab-pane" id="notesTab" role="tabpanel">
-    </div>
-    <div class="tab-pane" id="filesTab" role="tabpanel">
-    </div>
-    <div class="tab-pane" id="tasksTab" role="tabpanel">
-    </div>
-    <div class="tab-pane" id="emailsTab" role="tabpanel">
-    </div>
+    <div class="tab-pane" id="notesTab" role="tabpanel"></div>
+    <div class="tab-pane" id="filesTab" role="tabpanel"></div>
+    <div class="tab-pane" id="tasksTab" role="tabpanel"></div>
+    <div class="tab-pane" id="emailsTab" role="tabpanel"></div>
   </div>
 </div>

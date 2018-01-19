@@ -1,6 +1,5 @@
 <div class="panel panel-bordered" id="history">
-  <div class="panel-heading collapsed" data-toggle="collapse" href="#history-form"
-aria-expanded="false" aria-controls="history-form">
+  <div class="panel-heading collapsed" data-toggle="collapse" href="#history-form" aria-expanded="false" aria-controls="history-form">
     <h3 class="panel-title"> History <i class="fa fa-caret-down pull-right" aria-hidden="true"></i> </h3>
   </div>
   <div class="panel-body panel-collapse collapse" id="history-form" aria-labelled-by="history-form" role="tabpanel">
@@ -9,34 +8,33 @@ aria-expanded="false" aria-controls="history-form">
     <br/>
     <%= form_for @company, url: history_update_company_path, method: :patch, remote: true  do |company| %>
       <div class="row">
-        <div class="form-group form-material col-md-6">
-          <label class="form-control-label" id="inputCompanyName" >Years Business Located In Community:</label>
+        <div class="form-group col-md-6">
+          <label id="inputCompanyName" >Years Business Located In Community:</label>
           <%= company.text_field 'years_business_located', class: "form-control" %>
         </div>
       </div>
       <div class="row">
-        <div class="form-group form-material col-md-6">
-          <label class="form-control-label" id="inputCompanyNumber" >Years company established in Community:</label>
+        <div class="form-group col-md-6">
+          <label id="inputCompanyNumber" >Years company established in Community:</label>
           <%= company.text_field 'company_establishment_year', class: "form-control" %>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-2">
-          <div class="form-group form-material">
-            <button type="submit" class="btn btn-block green-btn col-md-12" name= "commit", value= "Save & Close">Save & Close</button>
+
+      <div class="modalFooterBtns">
+        <div class="form-row">
+          <div class="col-auto">
+            <button type="submit" class="btn btn-primary" name= "commit", value= "Save & Close">Save & Close</button>
+          </div>
+          <div class="col-auto">
+            <button type="submit" class="btn btn-outline-primary">Save</button>
+          </div>
+          <div class="col-auto">
+            <div class="form-group form-material">
+              <%= link_to 'Cancel', companies_path, class: "btn btn-outline-primary", data: { turbolinks: false } %>
+            </div>
           </div>
         </div>
-        <div class="col-md-2">
-          <div class="form-group form-material">
-            <button type="submit" class="btn btn-block green-btn col-md-12">Save</button>
-          </div>
-        </div>
-        <div class="col-md-2">
-          <div class="form-group form-material">
-            <%= link_to 'Cancel', companies_path, class: "btn btn-block green-btn col-md-12", data: { turbolinks: false } %>
-          </div>
-        </div>
-      </div> 
+      </div>
     <% end %>
   </div>
 </div>

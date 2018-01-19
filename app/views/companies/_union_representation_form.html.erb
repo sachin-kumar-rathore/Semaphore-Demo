@@ -1,6 +1,5 @@
 <div class="panel panel-bordered" id="unionRepresentation">
-  <div class="panel-heading collapsed" data-toggle="collapse" href="#union-representation-form"
-aria-expanded="false" aria-controls="union-representation-form">
+  <div class="panel-heading collapsed" data-toggle="collapse" href="#union-representation-form" aria-expanded="false" aria-controls="union-representation-form">
     <h3 class="panel-title"> Union Representation <i class="fa fa-caret-down pull-right" aria-hidden="true"></i> </h3>
   </div>
   <div class="panel-body panel-collapsed collapse" id="union-representation-form" aria-labelled-by="union-representation-form" role="tabpanel">
@@ -9,42 +8,48 @@ aria-expanded="false" aria-controls="union-representation-form">
     <br/>
     <%= form_for @company, url: union_representation_update_company_path, method: :patch, remote: true  do |company| %>
       <div class="row">
-        <div class="form-inline form-material col-md-12">
-          <label class="form-control-label">Is Business Union Represented?</label>
-          <div class="form-group col-md-1">
-            <%= company.radio_button :business_union_represented, 'false', checked: true %>
-            <label for="inputRadiosUnchecked">No</label>
-          </div>
-          <div class="form-group col-md-1">
-            <%= company.radio_button :business_union_represented, 'true' %>
-            <label for="inputRadiosChecked">Yes</label>
+        <div class="col-md-5">
+          Is Business Union Represented?
+        </div>
+        <div class="col-md-5">
+          <div class="row">
+            <div class="form-inline col-md-3 col-6 custom-radioBtn">
+              <%= company.radio_button :business_union_represented, 'false', checked: true, id: 'inputRadiosUncheckedUnion' %>
+              <label for="inputRadiosUncheckedUnion">No</label>
+            </div>
+            <div class="form-inline col-md-3 col-6 custom-radioBtn">
+              <%= company.radio_button :business_union_represented, 'true', id: 'inputRadiosCheckedUnion' %>
+              <label for="inputRadiosCheckedUnion">Yes</label>
+            </div>
           </div>
         </div>
       </div>
+
       <br>
       <div class="row">
-        <div class="form-group form-material col-md-9">
-          <label class="form-control-label" id="inputEmploymentNotes" >Union Notes:</label>
-          <%= company.text_area 'union_notes', class: "form-control", rows: "3" %>
+        <div class="form-group col-md-9">
+          <label  id="inputEmploymentNotes" >Union Notes:</label>
+          <div class="formTextarea">
+            <%= company.text_area 'union_notes', class: "form-control", rows: "3" %>
+          </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-2">
-          <div class="form-group form-material">
-            <button type="submit" class="btn btn-block green-btn col-md-12" name= "commit", value= "Save & Close" >Save & Close</button>
+
+      <div class="modalFooterBtns">
+        <div class="form-row">
+          <div class="col-auto">
+            <button type="submit" class="btn btn-primary" name= "commit", value= "Save & Close">Save & Close</button>
+          </div>
+          <div class="col-auto">
+            <button type="submit" class="btn btn-outline-primary">Save</button>
+          </div>
+          <div class="col-auto">
+            <div class="form-group form-material">
+              <%= link_to 'Cancel', companies_path, class: "btn btn-outline-primary", data: { turbolinks: false } %>
+            </div>
           </div>
         </div>
-        <div class="col-md-2">
-          <div class="form-group form-material">
-            <button type="submit" class="btn btn-block green-btn col-md-12">Save</button>
-          </div>
-        </div>
-        <div class="col-md-2">
-          <div class="form-group form-material">
-            <%= link_to 'Cancel', companies_path, class: "btn btn-block green-btn col-md-12", data: { turbolinks: false } %>
-          </div>
-        </div>
-      </div> 
+      </div>
     <% end %>
   </div>
 </div>

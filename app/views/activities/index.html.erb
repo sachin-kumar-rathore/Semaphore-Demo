@@ -1,24 +1,26 @@
 <div class="row">
   <div class="col-xl-12">
     <div class="panel">
+      <header class="panel-heading tableTitle">
+        <h2 class="panel-title">Activities</h2>
+      </header>
       <header class="panel-heading">
-        <h3 class="panel-title"> Activities
-        </h3>
-      <header class="panel-heading">
-        <h3 class="panel-title">
+        <div class="tasksTopOptions">
           <div class="row">
-            <div class="col-md-9">
-              <div class="row">
-                <div class="col-md-3 col-6">
-                  <%= select_tag :activities_filter_by_company, options_for_select(load_data_with_id(current_org.companies)), include_blank: 'All Companies' , class: 'form-control', data: { plugin: "selectpicker" } %>
-                </div>
+            <div class="col">
+              <div class="tasksSelectFilter">
+                <%= select_tag :activities_filter_by_company, options_for_select(load_data_with_id(current_org.companies)), include_blank: 'All Companies' , class: 'form-control custom-select' %>
               </div>
             </div>
-            <div class="col-md-3 col-6">
-              <%= link_to "ADD NEW ACTIVITY", new_activity_path, class: "col-md-12 btn btn-block green-btn", data: { turbolinks: false } %>
+            <div class="col col-auto">
+              <div class="tasksRightOptions">
+                <ul>
+                  <li><a class="btn btn-default" href="<%= new_activity_path %>"><i class="icon fa fa-plus btnIcon" aria-hidden="true"></i> Add New Activity</a></li>
+                </ul>
+              </div>
             </div>
           </div>
-        </h3>
+        </div>
       </header>
       <div class="panel-body designTable" id="activitiesList">
         <%= render :partial => 'list', locals: {activities: @activities} %>

@@ -1,99 +1,98 @@
 <!-- Contact Modal -->
-<div class="modal fade" id="contactFormCenter" aria-hidden="true" aria-labelledby="contactFormCenter"
-  role="dialog" tabindex="-1">
-  <div class="modal-dialog" role="document">
+<div class="modal fade modalStyle" id="contactFormCenter" aria-hidden="true" aria-labelledby="contactFormCenter" role="dialog" tabindex="-1">
+  <div class="modal-dialog modal-simple modal-center" role="document">
     <div class="modal-content">
       <%= form_for contact, url: url_for(controller: controller, action: action), remote: true do |form| %>
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
-          <h6 class="modal-title"><%= contact.new_record? ? 'ADD CONTACT' : 'EDIT CONTACT' %></h6>
+          <h4 class="modal-title" id="addUserModalLabel"><%= contact.new_record? ? 'ADD CONTACT' : 'EDIT CONTACT' %></h4>
         </div>
         <div class="modal-body">
-          <div class="example-wrap">
+          <div class="example-wrap formStyle">
             <div class="error-messages"></div>
             <div class="example">
               <div class="row">
-                <div class="form-group form-material col-md-4">
-                  <label class="form-control-label">Name:</label>
+                <div class="form-group col-md-4">
+                  <label>Name:</label>
                   <%= form.text_field :name, class: 'form-control', id: 'inputBasicFirstName', required: true %>
                 </div>
-                <div class="form-group form-material col-md-4">
-                  <label class="form-control-label">Category:</label>
-                  <%= form.select :contact_category_id, options_for_select( load_active_type("contact_categories"), form.object.contact_category_id), {}, class: 'form-control', data: { plugin: "selectpicker" } %>
+                <div class="form-group col-md-4">
+                  <label>Category:</label>
+                  <%= form.select :contact_category_id, options_for_select( load_active_type("contact_categories"), form.object.contact_category_id), {}, class: 'form-control custom-select' %>
                 </div>
-                <div class="form-group form-material col-md-4">
-                  <label class="form-control-label">Business Unit:</label>
-                  <%= form.select :business_unit_id, options_for_select(load_type("business_units"), form.object.business_unit_id), {}, class: 'form-control', data: { plugin: "selectpicker" } %>
+                <div class="form-group col-md-4">
+                  <label>Business Unit:</label>
+                  <%= form.select :business_unit_id, options_for_select(load_type("business_units"), form.object.business_unit_id), {}, class: 'form-control custom-select' %>
                 </div>
               </div>
               <div class="row">
-                <div class="form-group form-material col-md-6">
-                  <label class="form-control-label">Organization:</label>
+                <div class="form-group col-md-6">
+                  <label>Organization:</label>
                   <input type="text" class="form-control" id="inputBasicLastName" name="organizationName"
                     value="<%= current_org.name %>" autocomplete="off" disabled/>
                 </div>
-                <div class="form-group form-material col-md-6">
-                  <label class="form-control-label">Title:</label>
+                <div class="form-group col-md-6">
+                  <label>Title:</label>
                   <%= form.text_field :title, class: 'form-control', id: 'inputBasicTitle' %>
                 </div>
               </div>
               <div class="row">
-                <div class="form-group form-material col-md-6">
-                  <label class="form-control-label">Address 1:</label>
+                <div class="form-group col-md-6">
+                  <label>Address 1:</label>
                   <%= form.text_field :address_line_1, class: 'form-control', id: 'inputBasicAddress1' %>
                 </div>
-                <div class="form-group form-material col-md-6">
-                  <label class="form-control-label">Address 2:</label>
+                <div class="form-group col-md-6">
+                  <label>Address 2:</label>
                   <%= form.text_field :address_line_2, class: 'form-control', id: 'inputBasicAddress2' %>
                 </div>
               </div>
               <div class="row">
-                <div class="form-group form-material col-md-12">
-                  <label class="form-control-label">City, State & Zip Code:</label>
+                <div class="form-group col-md-12">
+                  <label>City, State & Zip Code:</label>
                   <%= form.text_field :city_state_zip, class: 'form-control', id: 'inputBasicCityState' %>
                 </div>
               </div>
               <div class="row">
-                <div class="form-group form-material col-md-4">
-                  <label class="form-control-label">Phone Number 1:</label>
+                <div class="form-group col-md-4">
+                  <label>Phone Number 1:</label>
                   <%= form.text_field :phone_number_1, class: 'form-control', id: 'inputBasicphone_number_1' %>
                 </div>
-                <div class="form-group form-material col-md-4">
-                  <label class="form-control-label">Phone Number 2:</label>
+                <div class="form-group col-md-4">
+                  <label>Phone Number 2:</label>
                   <%= form.text_field :phone_number_2, class: 'form-control', id: 'inputBasicphone_number_2' %>
                 </div>
-                <div class="form-group form-material col-md-4">
-                  <label class="form-control-label">Cell Phone:</label>
+                <div class="form-group col-md-4">
+                  <label>Cell Phone:</label>
                   <%= form.text_field :cell_phone, class: 'form-control', id: 'inputBasicCellPhone' %>
                 </div>
               </div>
               <div class="row">
-                <div class="form-group form-material col-md-4">
-                  <label class="form-control-label">Fax:</label>
+                <div class="form-group col-md-4">
+                  <label>Fax:</label>
                   <%= form.text_field :fax, class: 'form-control', id: 'inputBasicFax' %>
                 </div>
-                <div class="form-group form-material col-md-4">
-                  <label class="form-control-label">Website:</label>
+                <div class="form-group col-md-4">
+                  <label>Website:</label>
                   <%= form.url_field :website, class: 'form-control', id: 'inputBasicWebsite' %>
                 </div>
-                <div class="form-group form-material col-md-4">
-                  <label class="form-control-label">Email:</label>
+                <div class="form-group col-md-4">
+                  <label>Email:</label>
                   <%= form.email_field :email, class: 'form-control', id: 'inputBasicEmail', required: true %>
                 </div>
               </div>
             </div>
             <%= hidden_field_tag 'contact[company_id]', @company ? @company.id : nil %>
-            <div class="row">
-              <div class="form-group form-material col-md-6">
-                <button type="submit" class="btn btn-sm green-btn"><%= contact.new_record? ? ' Save ' : ' Save changes' %></button>
-                <button type="button" class="btn btn-sm white-btn" data-dismiss="modal">Cancel</button>
-                <% unless contact.new_record? %>
-                  <%= link_to 'Delete', @company ? company_contact_path(contact, company_id: @company.id) : contact_path(contact), method: :delete, remote: true, class: "btn btn-sm btn-danger" %>
-                <% end %>
-              </div>
+
+            <div class="modalFooterBtns">
+              <button type="submit" class="btn btn-primary"><%= contact.new_record? ? ' Save ' : ' Save changes' %></button>
+              <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
+              <% unless contact.new_record? %>
+                <%= link_to 'Delete', @company ? company_contact_path(contact, company_id: @company.id) : contact_path(contact), method: :delete, remote: true, class: "btn btn-block btn-danger" %>
+              <% end %>
             </div>
+
           </div>
         </div>
       <% end %>

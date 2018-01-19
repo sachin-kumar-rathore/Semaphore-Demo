@@ -1,14 +1,19 @@
-<div class="panel">
-  <div class="panel-body">
-    <div class="row">
-      <div class="col-md-9">
-        <h3> Company Projects </h3>
+<div class="panel activitiesTabOptions">
+  <header class="panel-heading">
+    <h3 class="panel-title">
+      <div class="row">
+        <div class="col-md-4 tableTitle">
+          <h2>Company Projects</h2>
+        </div>
+        <div class="col-md-8">
+          <button class="pull-right btn btn-default clickable" data-href="<%= show_existing_projects_company_projects_path(@company.id) %>" type="button">
+            ASSOCIATE PROJECT
+          </button>
+        </div>
       </div>
-      <div class="col-md-3">
-        <button class="btn btn-sm green-btn waves-effect waves-classic col-md-12 clickable" data-href="<%= show_existing_projects_company_projects_path(@company.id) %>" type="button" >ASSOCIATE PROJECT </button>
-      </div>
-    </div>
-  </div>
+    </h3>
+  </header>
+
   <div class="panel-body tableDesign" id="projectsList">
     <%= render partial: "company_projects/projects", locals: {company_projects: @company_projects} %>
   </div>

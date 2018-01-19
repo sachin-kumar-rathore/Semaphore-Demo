@@ -1,4 +1,4 @@
-<table class="table table-striped table-hover toggle-circle footable tableDesign" id="activitiesList" data-toggle-column="first" data-empty="There are no activities." data-show-toggle="true">
+<table class="table tableCustomStyle tableImg table-hover removeTblSearch bodrTop footable footable-6 footable-filtering footable-filtering-right footable-paging footable-paging-center breakpoint-lg" id="activitiesList" data-toggle-column="first" data-empty="There are no activities." data-show-toggle="true">
   <thead>
     <tr>
       <th>ACTIVITY NAME</th>
@@ -15,7 +15,7 @@
         <td><%= activity.company_activity_type.name %></td>
         <td><%= activity.contact_date %></td>
         <td><%= activity.converted ? "Yes" : "No" %></td>
-        <td><a href="<%= edit_company_activity_path(@company, activity) %>" class="btn btn-sm green-btn" data-turbolinks="false">View</a></td>
+        <td><a href="<%= edit_company_activity_path(@company, activity) %>" class="btn btn-primary" data-turbolinks="false">View</a></td>
       </tr>
     <% end %>
   </tbody>

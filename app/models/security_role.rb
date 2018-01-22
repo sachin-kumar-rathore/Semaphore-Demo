@@ -6,4 +6,13 @@ class SecurityRole < ApplicationRecord
   belongs_to :organization
   has_many :user_roles, dependent: :destroy
   has_many :users, through: :user_roles
+
+  SECURITY_ROLES = %i[Board Contact/Visit_Review Project_Manager Read_Only_User]
+
+  def self.create_configs( org_id )
+    organization =  Organization.find org_id
+    SECURITY_ROLES.each do |name|
+      organization.create_admin_role(name)
+    end
+  end
 end

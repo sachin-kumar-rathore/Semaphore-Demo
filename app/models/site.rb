@@ -15,7 +15,7 @@ class Site < ApplicationRecord
   # == Modules == #
 
   # == Associations and Nested Attributes == #
-  belongs_to :organization, dependent: :destroy
+  belongs_to :organization
   has_many :project_sites, dependent: :destroy
   has_many :projects, through: :project_sites
   belongs_to :business_unit

@@ -8,18 +8,30 @@
               <h4> Sites/Buildings</h4>
             </div>
           </div>
-          <button class="btn btn-sm green-btn waves-effect waves-classic clickable" data-href="<%= new_site_path %>"
-            id="createNewSite" type="button">ADD SITE/ BUILDING
-          </button>
-          <button class="btn btn-sm green-btn waves-effect waves-classic" data-target="#siteImportFormCenter" data-toggle="modal"
-            id="importNewSites" type="button">EXCEL IMPORT
-          </button>
-          <%= link_to sites_path, class: 'reload-page-link', data: { turbolinks: false } do %>
-            <i class="fa fa-refresh"></i>
-          <% end %>
         </h3>
       </header>
-
+      <header class="panel-heading">
+        <div class="tasksTopOptions">
+          <div class="row">
+            <div class="col col-auto">
+              <div class="tasksRightOptions">
+                <ul>
+                  <li>
+                    <button class="btn btn-default waves-effect waves-classic clickable pull-right" data-href="<%= new_site_path %>"
+                    id="createNewSite" type="button"><i class="icon fa fa-plus btnIcon" aria-hidden="true"></i> Add Site/Buiding
+                  </button>
+                  </li>
+                  <li>
+                    <button class="btn btn-default waves-effect waves-classic" data-target="#siteImportFormCenter" data-toggle="modal"
+                      id="importNewSites" type="button">Excel Import
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
       <div class="panel-body" id="sitesList">
         <%= render partial: 'sites', locals: {sites: @sites} %>
       </div>

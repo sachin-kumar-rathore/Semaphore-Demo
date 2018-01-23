@@ -28,7 +28,7 @@
                 <%= form.select :assignee_id, options_for_select(@users.collect { |user| [user.full_name, user.id]}, form.object.assignee_id), {}, class: 'form-control custom-select' %>
               </div>
             </div>
-            <%= form.hidden_field :taskable_id, value: @project.id %>
+            <%= form.hidden_field :taskable_id, value: @project.try(:id) %>
             <div class="form-row">
               <div class="form-group col">
                 <label for="description">Description:</label>

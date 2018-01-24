@@ -1,0 +1,62 @@
+<div class="panel activitiesTabOptions">
+  <header class="panel-heading">
+    <div class="tasksTopOptions">
+      <h3>Results</h3>
+    </div>
+  </header>
+</div>
+<% models_to_search = ['project', 'company', 'site', 'activity', 'contact', 'document', 'task'] %>
+<% models_to_search.each do | model_result| %>
+  <% if @data_hash[model_result.to_sym].present? %>
+    <div class="panel activitiesTabOptions">
+      <header class="panel-heading">
+        <div class="tasksTopOptions">
+          <div class="tableTitle">
+            <strong class="font-weight-bold"><%= model_result.capitalize.pluralize %>: </strong><br/>
+          </div>
+        </div>
+      </header>
+      <div class="data-list">
+        <table class="table tableCustomStyle tableImg table-hover removeTblSearch bodrTop footable footable-6 footable-filtering footable-filtering-right footable-paging footable-paging-center breakpoint-lg" data-toggle-column="first" data-empty="There are no sites/buildings" data-show-toggle="true">
+          <thead>
+            <tr>
+              <% header_titles = @data_hash[model_result.to_sym].first[:hint].split(',') %>
+              <th><%= header_titles[0].split(':').first %></th>
+              <th><%= header_titles[1].split(':').first %></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @data_hash[model_result.to_sym].each do |data| %>
+              <tr>
+                <% row_data = data[:hint].split(',') %>
+                <td><%= row_data[0].split(':').last %></td>
+                <td><%= row_data[1].split(':').last%> </td>
+                <td>
+                  <div class="openLeft moreOptions dropdown"> 
+                    <a class="" data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false" data-animation="scale-down" role="button"> <i class="icon md-more-vert" aria-hidden="true"></i> </a>
+                    <div class="dropdown-menu" role="menu"> 
+                      <a class="dropdown-item <%= search_css_styles(model_result) %>" <%= get_data_href(model_result, data[:link]) %> role="menuitem"><i class="icon fa fa-eye" aria-hidden="true"></i> View</a> 
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+<div id="createOrEditContact"></div>
+<div id="createOrEditSite"></div>
+<div id="createOrEditTask"></div>
+
+<script>
+
+  $(document).ready(function () {
+    $('#search_query').val('<%= params[:term] %>');
+    $('#site-navbar-search').collapse('show');
+  });
+
+</script>

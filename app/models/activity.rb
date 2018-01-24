@@ -1,7 +1,8 @@
+require 'searchable'
 class Activity < ApplicationRecord
-
-  include DateParser
   
+  include DateParser
+  include Searchable
   attr_accessor :contact_date_str, :follow_up_date_str
 
   before_validation :convert_dates_format

@@ -1,5 +1,8 @@
-class Task < ApplicationRecord
+require 'searchable'
 
+class Task < ApplicationRecord
+  include Searchable
+  
   attr_accessor :start_date_str, :end_date_str
   # == Constants == #
   STATUS = ['In-Progress', 'Complete']

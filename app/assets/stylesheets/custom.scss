@@ -368,6 +368,7 @@ html, body {
   table th{color: #2ED573;}
 }
 .datepicker{z-index: 9999999 !important;}
+
 .dashboard-menu {
   select.form-control.custom-select{
     background: #2ED573;
@@ -436,6 +437,28 @@ html, body {
       font-size: .85rem;
       line-height: 1.2rem;
     }
+  }
+}
 
+ul.ui-autocomplete {
+  position: absolute;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: solid 1px #999;
+  cursor: default;
+  li {
+    background-color: #FFF;
+    border-top: solid 1px #DDD;
+    margin: 0;
+    padding: 0;
+    a {
+      color: #000;
+      display: block;
+      padding: 3px;
+    }
+    a.ui-state-hover, a.ui-state-active {
+      background-color: #FFFCB2;
+    }
   }
 }

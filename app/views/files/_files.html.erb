@@ -18,9 +18,7 @@
         <% if file.documentable_id? %>
           <td><%= file.documentable.name %></td>
         <% else %>
-          <td>
-            <button class="clickable btn btn-primary" data-href="<%= show_projects_file_path(file) %>" ><i class="fa fa-plus"></i> Add</button>
-          </td>
+          <td><span> Unassigned</span></td>
         <% end %>
         <td><%= file.updated_at.strftime("%m/%d/%Y") if file.updated_at.present? %></td>
         <td>
@@ -32,6 +30,9 @@
               <a class="dropdown-item" href="<%= file.name %>" role="menuitem"><i class="icon fa fa-download" aria-hidden="true"></i> Download</a>
               <a class="dropdown-item delete-clickable" data-href="<%= file_path(file) %>" role="menuitem"><i class="icon fa fa-trash" aria-hidden="true"></i> Delete</a>
               <a class="dropdown-item clickable" data-href="<%= edit_file_path(file) %>" role="menuitem"><i class="icon fa fa-pencil" aria-hidden="true"></i> Edit</a>
+              <% if !file.documentable_id? %>
+                <a class="dropdown-item clickable" data-href="<%= show_projects_file_path(file) %>" role="menuitem"><i class="icon fa fa-plus" aria-hidden="true"></i> Assign Project</a>
+              <%end%>
             </div>
           </div>
         </td>

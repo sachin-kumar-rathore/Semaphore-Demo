@@ -50,7 +50,7 @@
         <div class="form-group">
           <div class="input-search">
             <i class="input-search-icon md-search" aria-hidden="true"></i>
-            <input type="text" class="form-control" name="site-search" placeholder="Search...">
+            <input type="text" class="form-control" name="site-search" placeholder="Search..." data-autocomplete-source = "<%= search_index_path %>" id="search_query">
             <button type="button" class="input-search-close icon md-close" data-target="#site-navbar-search" data-toggle="collapse" aria-label="Close"></button>
           </div>
         </div>
@@ -59,3 +59,22 @@
     <!-- End Site Navbar Seach -->
   </div>
 </nav>
+
+<script>
+  $('#search_query').autocomplete({
+    source: $('#search_query').data('autocomplete-source'),
+    
+    open: function(e, ui) {
+      var url = '/search?all_results=true&term=' + $('#search_query').val();
+      if ($('.ui-menu-item').length >= 6) {
+        $('.ui-autocomplete').append('<li><a href='+ url + ' class="nav-link see-all-link">See All Results</a></li>'); //See all results
+      }
+    },
+
+    select: function (e, ui) {
+      window.location.replace(window.location.protocol + '//' + window.location.host + '/' + ui.item.value);
+      return false;
+    }
+  });
+
+</script>

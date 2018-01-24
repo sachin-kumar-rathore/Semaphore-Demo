@@ -166,4 +166,6 @@ Rails.application.routes.draw do
       patch :update_invitation
     end
   end
+
+  resources :search, only: [:index]
 end

@@ -1,5 +1,8 @@
+require 'searchable'
 class Note < ApplicationRecord
 
+  include Searchable
+  
   #Modules
   include DateParser
 

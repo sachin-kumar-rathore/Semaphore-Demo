@@ -1,5 +1,7 @@
+require 'searchable'
 class Company < ApplicationRecord
 
+  include Searchable
   # == Constants == #
   SEASONS = ["Spring", "Summer", "Fall", "Winter"]
   BUILDINGS_AGE = ["< 10 years","11-25 years","> 25 years"]

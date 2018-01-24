@@ -1082,6 +1082,7 @@ a:not([href]):not([tabindex]){
 #emailsList tbody tr td .moreOptions i {
     color: #bbb;
 }
+
 .yearlyReport .btn-primary, .btn-outline-primary {
   font-size: 12px;
   padding: 4px 10px;
@@ -1130,4 +1131,11 @@ a:not([href]):not([tabindex]){
 /*************************************************************************/
 .navbar-brand {
   margin-left: 6px;
+}
+
+.ui-menu a {
+  color: #0000FF !important;
+}
+.ui-menu-item .ui-menu-item-wrapper:hover {
+  border: none !important;
 }

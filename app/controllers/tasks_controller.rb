@@ -8,7 +8,7 @@ class TasksController < ApplicationController
 
   def index
     @tasks = filter_tasks_by_user
-    @tasks = filter_tasks_by_project
+    @tasks = filter_tasks_by_project_or_search_result
     @tasks = @tasks.paginate(page: params[:page], per_page: Task::PAGINATION_VALUE)
                    .order('updated_at DESC')
   end
@@ -68,9 +68,14 @@ class TasksController < ApplicationController
     end
   end
 
-  def filter_tasks_by_project
-    return @tasks unless params[:project_id].present?
-    @tasks = @tasks.where('taskable_id = ? AND taskable_type = ? ',
+  def filter_tasks_by_project_or_search_result
+    if params[:project_id].present?
+      @tasks.where('taskable_id = ? AND taskable_type = ? ',
                           params[:project_id], 'Project')
+    elsif params[:id].present?
+      @tasks.where(id: params[:id])
+    else
+      @tasks
+    end
   end
 end

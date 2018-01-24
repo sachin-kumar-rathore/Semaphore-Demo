@@ -7,6 +7,8 @@ class SitesController < ApplicationController
 
   def index
     @sites = current_org.sites
+    @sites = @sites.where('id = ?', params[:id]) if params[:id].present?
+
     filtering_params(params).each do |key, value|
       @sites = @sites.public_send(key, value) if value.present?
     end
@@ -31,7 +33,7 @@ class SitesController < ApplicationController
 
   def update
     return unless @site.update(site_params)
-    flash.now[:success] = 'Contact was successfully updated.'
+    flash.now[:success] = 'Site was successfully updated.'
     load_sites
   end
 

@@ -1,5 +1,8 @@
+require 'searchable'
 class Document < ApplicationRecord
 
+  include Searchable
+  
   mount_uploader :name, FileUploader
   belongs_to :organization
   belongs_to :user, optional: true

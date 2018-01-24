@@ -8,6 +8,8 @@ class FilesController < ApplicationController
 
   def index
     @files = current_org.documents.without_activity
+    @files= @files.where('id = ?', params[:id]) if params[:id].present?
+    
     if params[:project_id].present?
       @files = @files
                .where('documentable_id = ? AND documentable_type = ?',

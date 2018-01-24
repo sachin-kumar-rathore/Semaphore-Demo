@@ -12,6 +12,7 @@
 //
 
 //= require jquery
+//= require jquery-ui
 //= require jquery.validate
 //= require jquery.easing
 //= require rails-ujs

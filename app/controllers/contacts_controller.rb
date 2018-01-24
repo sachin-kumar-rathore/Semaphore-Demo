@@ -7,6 +7,8 @@ class ContactsController < ApplicationController
 
   def index
     @contacts = current_org.contacts
+    @contacts = @contacts.where('id = ?', params[:id]) if params[:id].present?
+
     if params[:name].present? || params[:email].present?
       @contacts = search_contacts
     end

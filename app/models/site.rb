@@ -1,8 +1,10 @@
+require 'searchable'
+
 class Site < ApplicationRecord
   include SpreadSheet
+  include Searchable
 
   IMPORT_PARAMETERS = ["site_number", "name", "contact_id", "property_type", "address_line",
-
                       "city", "country", "state", "zip_code", "special_district", "available_acreage", "available_square_feet",
                       "total_acreage", "total_square_feet", "latitude", "longitude"]
   attr_accessor :project_id

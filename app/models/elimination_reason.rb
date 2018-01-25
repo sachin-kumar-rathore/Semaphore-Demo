@@ -1,8 +1,7 @@
 class EliminationReason < ApplicationRecord
   include SettingTypes
 
-  ELIMINATION_REASON = %i[Lackof_building_availability Lack_of_suitable_land_space NDA_breech 
-                          No_financing_locally Not_close_enough_to_HQ Project_cancelled Other]
+  ELIMINATION_REASON = ["Lack of building availability", "Lack of suitable land space", "NDA breech", "No financing locally", "Not close enough to HQ", "Project cancelled", "Other"]
 
   def self.create_configs( org_id )
     ELIMINATION_REASON.each do |name|

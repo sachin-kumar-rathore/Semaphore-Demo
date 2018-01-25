@@ -23,10 +23,6 @@
           <label id="inputBusinessSector" >Industry Type:</label>
           <%= company.select :industry_type_id, options_for_select( load_active_type("industry_types"), company.object.industry_type_id), {}, {class: 'form-control custom-select', data:{"live-search":true } } %>
         </div>
-        <div class="form-group col-md-3">
-          <label id="" >Company Organization:</label>
-          <%= company.text_field :company_organization_name, class: 'form-control', id: 'companiesOrganizationName' %>
-        </div>
       </div>
       <hr/>
       <div class="row">
@@ -45,7 +41,7 @@
       </div> 
       <div class="row">
         <div class="form-group col-md-3">
-          <label>Country:</label>
+          <label>County:</label>
           <%= company.text_field :country, class: 'form-control', id: 'inputCountry' %>
         </div>
         <div class="form-group col-md-3">

@@ -1,9 +1,7 @@
 class ProvidedService < ApplicationRecord
   include SettingTypes
 
-  PROVIDED_SERVICE = %i[Build_to_Suit_Proposal Cost_Comparison Customer_Search Demographic_Information
-                        Existing_Building_Proposal Financial_Review Incentive_Information Other
-                        Relocation Packet Tax_Abatement]
+  PROVIDED_SERVICE = ["Build to Suit Proposal", "Cost Comparison", "Customer Search", "Demographic Information", "Existing Building Proposal", "Financial Review", "Incentive Information", "Relocation", "Packet", "Tax Abatement", "Other"]
 
   def self.create_configs( org_id )
     PROVIDED_SERVICE.each do |name|

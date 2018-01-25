@@ -7,7 +7,7 @@ class SecurityRole < ApplicationRecord
   has_many :user_roles, dependent: :destroy
   has_many :users, through: :user_roles
 
-  SECURITY_ROLES = %i[Board Contact/Visit_Review Project_Manager Read_Only_User]
+  SECURITY_ROLES = ["Board" "Contact/Visit Review" "Project Manager" "Read Only User"]
 
   def self.create_configs( org_id )
     organization =  Organization.find org_id

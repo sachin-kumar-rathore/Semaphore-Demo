@@ -27,6 +27,8 @@ class Company < ApplicationRecord
   validates :owned_or_leased, inclusion: { in: %w(Owned Leased), message: "%{value} is not a valid data." }, allow_nil: true
   validates :peak_season, inclusion: { in: Company::SEASONS, message: "%{value} is not a valid data." }, allow_nil: true
   validates :company_number, uniqueness: true, presence: true, length: { is: 6 }
+  validates :state, length: { is: 2 }
+  validates :zip_code, length: { is: 5 }
   # == Callbacks == #
   before_validation :convert_dates_format
   # == Scopes and Other macros == #

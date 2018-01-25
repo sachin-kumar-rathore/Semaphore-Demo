@@ -2,7 +2,7 @@ class CompanyActivityType < ApplicationRecord
   belongs_to :organization
   validates :name, presence: true
 
-  COMPANY_ACTIVITY_TYPE = %i[business_Assistance Quarterly_Review Retention_Visit Survey]
+  COMPANY_ACTIVITY_TYPE = ["Business Assistance", "Quarterly Review", "Retention Visit", "Survey"]
 
   def self.create_configs( org_id )
     COMPANY_ACTIVITY_TYPE.each do |name|

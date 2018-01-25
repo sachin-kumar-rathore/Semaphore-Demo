@@ -85,10 +85,10 @@ class CompaniesController < ApplicationController
 
   def company_params
     params.require(:company).permit(:name, :company_number, :industry_type_id,
-                                    :title, :address_line_1, :address_line_2,
+                                    :address_line_1, :address_line_2,
                                     :city, :state, :zip_code, :phone_number_1,
                                     :phone_number_2, :cell_phone, :fax,
-                                    :website, :email, :company_organization_name).merge(organization_id:
+                                    :website, :email).merge(organization_id:
                                     current_org.id)
   end
 
@@ -98,7 +98,7 @@ class CompaniesController < ApplicationController
                                     :region, :phone_number_1, :fax, :website,
                                     :email, :member_investor,
                                     :utility_provider_1, :utility_provider_2,
-                                    :notes, :business_unit_id, :company_organization_name)
+                                    :notes, :business_unit_id)
   end
 
   def history_params

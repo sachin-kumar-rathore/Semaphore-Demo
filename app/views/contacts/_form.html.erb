@@ -24,11 +24,10 @@
                 <%= form.select :business_unit_id, options_for_select(load_type("business_units"), form.object.business_unit_id), {}, class: 'form-control custom-select' %>
               </div>
             </div>
-      
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="addOrg">Organization:</label>
-                <input type="text" class="form-control" id="inputBasicLastName" name="organizationName" value="<%= current_org.name %>" autocomplete="off" disabled/>
+                <label for="addOrg">Organization Name:</label>
+                <%= form.text_field :organization_name, class: 'form-control', id: 'inputBasicOrganizationName' %>
               </div>
               <div class="form-group col-md-6">
                 <label for="addTitle">Title:</label>

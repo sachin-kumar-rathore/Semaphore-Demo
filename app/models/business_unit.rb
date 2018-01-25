@@ -2,7 +2,7 @@ class BusinessUnit < ApplicationRecord
   belongs_to :organization
   validates :name, presence: true
 
-  BUSINESS_UNIT = %i[Default Executive Investor_Relations]
+  BUSINESS_UNIT = ["Default", "Executive", "Investor Relations"]
 
   def self.create_configs( org_id )
     BUSINESS_UNIT.each do |name|

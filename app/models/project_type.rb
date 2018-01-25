@@ -1,9 +1,7 @@
 class ProjectType < ApplicationRecord
   include SettingTypes
 
-  PROJECT_TYPES = %i[Advanced_Manfacturing Agriculture Big_Box_Retail Bio_Medical Call_Center
-                      Data_Center Industrial Information_Technology Manufacturing Restaurant
-                      Retail Warehouse]
+  PROJECT_TYPES = ["Advanced Manfacturing", "Agriculture", "Big Box Retail", "Bio Medical", "Call Center", "Data Center", "Industrial", "Information Technology", "Manufacturing", "Restaurant", "Retail", "Warehouse"]
 
   def self.create_configs( org_id )
     PROJECT_TYPES.each do |name|

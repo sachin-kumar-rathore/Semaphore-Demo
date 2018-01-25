@@ -30,8 +30,8 @@ class Site < ApplicationRecord
   validates :latitude, presence:true, numericality: {only_float: true}
   validates :longitude, presence:true, numericality: {only_float: true}
   validates :site_number, uniqueness: true, presence: true, length: { is: 6 }
-  validates_presence_of :contact_id, message: "not found or invalid."
-
+  validates :state, length: { is: 2 }
+  validates :zip_code, length: { is: 5 }
 
   # == Callbacks == #
   after_create :add_site_to_project, if: :has_project_id?

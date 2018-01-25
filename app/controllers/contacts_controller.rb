@@ -78,6 +78,6 @@ class ContactsController < ApplicationController
                                     :fax, :business_unit_id, :website,
                                     :contact_category_id, :title,
                                     :cell_phone, :notes, :project_id,
-                                    :company_id)
+                                    :company_id, :organization_name)
   end
 end

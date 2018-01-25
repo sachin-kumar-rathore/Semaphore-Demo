@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180103121358) do
+ActiveRecord::Schema.define(version: 20180123134627) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -118,6 +118,7 @@ ActiveRecord::Schema.define(version: 20180103121358) do
     t.bigint "industry_type_id"
     t.bigint "business_unit_id"
     t.bigint "project_type_id"
+    t.string "company_organization_name"
     t.index ["business_unit_id"], name: "index_companies_on_business_unit_id"
     t.index ["industry_type_id"], name: "index_companies_on_industry_type_id"
     t.index ["organization_id"], name: "index_companies_on_organization_id"

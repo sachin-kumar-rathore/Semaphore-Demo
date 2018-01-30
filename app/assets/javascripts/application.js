@@ -43,4 +43,8 @@
 //= require chartist.min
 //= require chartist-plugin-tooltip.min
 //= require masonry.pkgd.min
-
+//= require highcharts
+//= require highcharts/modules/exporting
+//= require highcharts/modules/no-data-to-display
+//= require highcharts/modules/offline-exporting
+//= require highcharts/themes/grid

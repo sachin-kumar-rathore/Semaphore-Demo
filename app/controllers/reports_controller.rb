@@ -10,6 +10,18 @@ class ReportsController < ApplicationController
   def index
   end
 
+  def highcharts
+  end
+
+  def highchart_report
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "highchart_report"   # Excluding ".pdf" extension.
+      end
+    end
+  end
+
   def yearly
     generate_periodic_report('yearly')
   end
@@ -18,6 +30,10 @@ class ReportsController < ApplicationController
     generate_periodic_report('monthly')
   end
 
+  # def highchart_report
+  #   download_report('highcharts')
+  # end
+  
   def yearly_report
     @selected_parameters = params[:report_params].keys + ["new_jobs", "retained_jobs"]
     generate_periodic_report('yearly')

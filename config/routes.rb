@@ -144,6 +144,8 @@ Rails.application.routes.draw do
       post :download_projects
       get :yearly
       get :monthly
+      get :highcharts
+      get :highchart_report
     end
   end
 

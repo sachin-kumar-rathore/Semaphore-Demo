@@ -1082,3 +1082,7 @@ a:not([href]):not([tabindex]){
 #emailsList tbody tr td .moreOptions i {
     color: #bbb;
 }
+.yearlyReport .btn-primary, .btn-outline-primary {
+  font-size: 12px;
+  padding: 4px 10px;
+}

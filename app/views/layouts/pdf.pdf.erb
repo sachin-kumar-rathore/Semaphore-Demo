@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <%= wicked_pdf_stylesheet_link_tag "pdf" -%>
+    <%= wicked_pdf_javascript_include_tag "number_pages" %>
+  	<%= wicked_pdf_javascript_include_tag "highcharts" %>
+  	<%= wicked_pdf_javascript_include_tag "highcharts/modules/exporting" %>
+  	<%= wicked_pdf_javascript_include_tag "highcharts/modules/no-data-to-display" %>
+  	<%= wicked_pdf_javascript_include_tag "highcharts/modules/offline-exporting" %>
+  	<%= wicked_pdf_javascript_include_tag "highcharts/themes/grid" %>
+  </head>
+  <body onload='number_pages'>
+    
+    <div id="content">
+      <%= yield %>
+    </div>
+    
+  </body>
+</html>

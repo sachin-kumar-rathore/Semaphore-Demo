@@ -1,191 +1,262 @@
 <div class="dashboard-menu">
-	<div class="row">
-		<div class="col-lg-4">
-			<div class="projectMenu">
-				<ul>
-					<li>
-						<div class="projectSec">
-							<div class="title-menu">
-								<span><button type="button" class="btn activeBtn">Active</button></span>
-								<h3> - Project Status</h3>
-							</div>
-							<div class="form-row">
-								<div class="col">
-									<div class="projectMenu">
-										<h3>
-											<span class="IconCart"><i class="icon fa fa-caret-down"></i></span><%= @project_status_group['Active'].try(:length) %>
-											<span>Projects</span></h3>
-									</div>
-								</div>
-								<div class="col-auto">
-									<div class="projectMenu">
-										<h3><span class="IconCart bgGreen"><i class="icon fa fa-caret-up"></i></span>
-											$<%= @project_status_group['Active'] ? @project_status_group['Active'].pluck('wages').sum : 0 %><span>wages</span>
-										</h3>
-									</div>
-								</div>
-							</div>
-							<div class="form-row">
-								<div class="col">
-									<div class="projectMenu">
-										<h3><span class="IconCart bgGreen"><i class="icon fa fa-caret-up"></i></span>
-											<%= @project_status_group['Active'] ? @project_status_group['Active'].pluck('new_jobs').sum : 0 %><span>Jobs</span>
-										</h3>
-									</div>
-								</div>
-								<div class="col-auto">
-									<div class="projectMenu">
-										<h3><span class="IconCart"><i class="icon fa fa-caret-down"></i></span>
-											$<%= @project_status_group['Active'] ? @project_status_group['Active'].pluck('net_new_investment').sum : 0 %><span>Investment</span>
-										</h3>
-									</div>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li>
-						<div class="projectSec">
-							<div class="title-menu">
-								<span><button type="button" class="btn activeBtn primary">Preliminary</button></span>
-								<h3> - Project Status</h3>
-							</div>
-							<div class="form-row">
-								<div class="col">
-									<div class="projectMenu">
-										<h3><span class="IconCart"><i class="icon fa fa-caret-down"></i></span>
-											<%= @project_status_group['Preliminary'].try(:length) %><span>Projects</span>
-										</h3>
-									</div>
-								</div>
-								<div class="col-auto">
-									<div class="projectMenu">
-										<h3><span class="IconCart bgGreen"><i class="icon fa fa-caret-up"></i></span>
-											$<%= @project_status_group['Preliminary'] ? @project_status_group['Preliminary'].pluck('wages').sum : 0 %><span>wages</span>
-										</h3>
-									</div>
-								</div>
-							</div>
-							<div class="form-row">
-								<div class="col">
-									<div class="projectMenu">
-										<h3><span class="IconCart bgGreen"><i class="icon fa fa-caret-up"></i></span>
-											<%= @project_status_group['Preliminary'] ? @project_status_group['Preliminary'].pluck('new_jobs').sum : 0 %><span>Jobs</span>
-										</h3>
-									</div>
-								</div>
-								<div class="col-auto">
-									<div class="projectMenu">
-										<h3><span class="IconCart"><i class="icon fa fa-caret-down"></i></span>
-											$<%= @project_status_group['Preliminary'] ? @project_status_group['Preliminary'].pluck('net_new_investment').sum : 0 %>
-											<span>Investment</span>
-										</h3>
-									</div>
-								</div>
-							</div>
-						</div>
-					</li>
-				</ul>
-			</div>
-		</div>
-		<div class="col-lg-8">
-			<div class="card cardPadding">
-				<div class="form-row">
-					<div class="col">
-						<div class="title-menu">
-							<%= select_tag :activity, options_for_select(['Yearly', 'Monthly']),
-														 class: 'btn activeBtn', id: 'dashboard_activity_select' %>
-							<h3> - Activity Report</h3>
-						</div>
-					</div>
-					<div class="col-auto">
-						<div class="viewReport" id="activityReportFilter">
-							<ul>
-								<li class="viewItem"><span class="priorityDot"></span> Attraction</li>
-								<li class="viewItem"><span class="priorityDot dotHigh"></span> Retention/Expansion</li>
-								<li class="viewItem viewlink"><span class="priorityDot dotHigh"></span> Combined</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<div class="form-row" id="dashboardActivityReport">
-					<%= render partial: 'activity_report', locals: {results: @results} %>
-				</div>
-				<div class="botmheading"><%= link_to 'View Report', yearly_reports_path %></div>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-lg-4">
-			<div class="card cardPadding">
-				<div class="title-menu">
-					<h3>Attraction - Industry type</h3>
-				</div>
-				<div class="cardImg">
-					<div align="center" id="prospectsByIndustryTypeBar"></div>
-				</div>
-				<div class="botmheading"><%= link_to 'View Report', yearly_reports_path %></div>
-			</div>
-		</div>
-		<div class="col-lg-8">
-			<div class="card cardPadding">
+  <div class="row">
+    <div class="col-lg-4">
+      <div class="projectMenu">
+        <ul>
+          <li>
+            <div class="projectSec">
+              <div class="title-menu">
+                <span><button type="button" class="btn activeBtn">Active</button></span>
+                <h3> - Project Status</h3>
+              </div>
+              <div class="form-row">
+                <div class="col">
+                  <div class="projectMenu">
+                    <h3>
+                      <span class="IconCart"><i class="icon fa fa-caret-down"></i></span><%= @project_status_group['Active'].try(:length) %>
+                      <span>Projects</span></h3>
+                  </div>
+                </div>
+                <div class="col-auto">
+                  <div class="projectMenu">
+                    <h3><span class="IconCart bgGreen"><i class="icon fa fa-caret-up"></i></span>
+                      $<%= @project_status_group['Active'] ? @project_status_group['Active'].pluck('wages').sum : 0 %>
+                      <span>wages</span>
+                    </h3>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col">
+                  <div class="projectMenu">
+                    <h3><span class="IconCart bgGreen"><i class="icon fa fa-caret-up"></i></span>
+                      <%= @project_status_group['Active'] ? @project_status_group['Active'].pluck('new_jobs').sum : 0 %>
+                      <span>Jobs</span>
+                    </h3>
+                  </div>
+                </div>
+                <div class="col-auto">
+                  <div class="projectMenu">
+                    <h3><span class="IconCart"><i class="icon fa fa-caret-down"></i></span>
+                      $<%= @project_status_group['Active'] ? @project_status_group['Active'].pluck('net_new_investment').sum : 0 %>
+                      <span>Investment</span>
+                    </h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="projectSec">
+              <div class="title-menu">
+                <span><button type="button" class="btn activeBtn primary">Preliminary</button></span>
+                <h3> - Project Status</h3>
+              </div>
+              <div class="form-row">
+                <div class="col">
+                  <div class="projectMenu">
+                    <h3><span class="IconCart"><i class="icon fa fa-caret-down"></i></span>
+                      <%= @project_status_group['Preliminary'].try(:length) %><span>Projects</span>
+                    </h3>
+                  </div>
+                </div>
+                <div class="col-auto">
+                  <div class="projectMenu">
+                    <h3><span class="IconCart bgGreen"><i class="icon fa fa-caret-up"></i></span>
+                      $<%= @project_status_group['Preliminary'] ? @project_status_group['Preliminary'].pluck('wages').sum : 0 %>
+                      <span>wages</span>
+                    </h3>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col">
+                  <div class="projectMenu">
+                    <h3><span class="IconCart bgGreen"><i class="icon fa fa-caret-up"></i></span>
+                      <%= @project_status_group['Preliminary'] ? @project_status_group['Preliminary'].pluck('new_jobs').sum : 0 %>
+                      <span>Jobs</span>
+                    </h3>
+                  </div>
+                </div>
+                <div class="col-auto">
+                  <div class="projectMenu">
+                    <h3><span class="IconCart"><i class="icon fa fa-caret-down"></i></span>
+                      $<%= @project_status_group['Preliminary'] ? @project_status_group['Preliminary'].pluck('net_new_investment').sum : 0 %>
+                      <span>Investment</span>
+                    </h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-lg-8">
+      <div class="card cardPadding">
+        <div class="form-row">
+          <div class="col">
+            <div class="title-menu">
+              <%= select_tag :activity, options_for_select(['Yearly', 'Monthly']),
+                             class: 'btn activeBtn', id: 'dashboard_activity_select' %>
+              <h3> - Activity Report</h3>
+            </div>
+          </div>
+          <div class="col-auto">
+            <div class="viewReport" id="activityReportFilter">
+              <ul>
+                <li class="viewItem"><span class="priorityDot"></span> Attraction</li>
+                <li class="viewItem"><span class="priorityDot dotHigh"></span> Retention/Expansion</li>
+                <li class="viewItem viewlink"><span class="priorityDot dotHigh"></span> Combined</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="form-row" id="dashboardActivityReport">
+          <%= render partial: 'activity_report', locals: {results: @results} %>
+        </div>
+        <div class="botmheading"><%= link_to 'View Report', yearly_reports_path %></div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-4">
+      <div class="card cardPadding">
+        <div class="title-menu">
+          <h3>Attraction - Industry type</h3>
+        </div>
+        <div class="cardImg">
+          <div align="center" id="prospectsByIndustryTypeBarDashboard"></div>
+        </div>
+        <div class="botmheading"><%= link_to 'View Report', yearly_reports_path %></div>
+      </div>
+    </div>
+    <div class="col-lg-8">
+      <div class="card cardPadding">
 
-				<div class="form-row">
-					<div class="col">
-						<div class="title-menu">
-							<%= select_tag :project_id, options_for_select(load_data_with_id(@projects)), include_blank: 'All Projects',
-														 class: 'btn activeBtn', id: 'dashboard_task_by_project' %>
-							<h3> - Filter by Project</h3>
-						</div>
-					</div>
-					<div class="col-auto">
-						<div class="viewTaskReport viewReport">
-							<ul>
-								<li class="viewItem viewlink"><span class="priorityDot"></span> All Tasks</li>
-								<li class="viewItem"><span class="priorityDot dotHigh"></span> My Tasks</li>
-							</ul>
-						</div>
-					</div>
-				</div>
+        <div class="form-row">
+          <div class="col">
+            <div class="title-menu">
+              <%= select_tag :project_id, options_for_select(load_data_with_id(@projects)), include_blank: 'All Projects',
+                             class: 'btn activeBtn', id: 'dashboard_task_by_project' %>
+              <h3> - Filter by Project</h3>
+            </div>
+          </div>
+          <div class="col-auto">
+            <div class="viewTaskReport viewReport">
+              <ul>
+                <li class="viewItem viewlink"><span class="priorityDot"></span> All Tasks</li>
+                <li class="viewItem"><span class="priorityDot dotHigh"></span> My Tasks</li>
+              </ul>
+            </div>
+          </div>
+        </div>
 
-				<!-- Panel Filtering rows -->
-				<table class="table tableCustomStyle table-hover removeTblSearch" id="dashboardTasks" data-paging="true" data-filtering="true">
-					<%= render partial: 'tasks', locals: {tasks: @tasks} %>
-				</table>
-				<div class="botmheading">
-					<%= link_to 'View All', tasks_path %>
-				</div>
-			</div>
-		</div>
-	</div>
+        <!-- Panel Filtering rows -->
+        <table class="table tableCustomStyle table-hover removeTblSearch" id="dashboardTasks" data-paging="true" data-filtering="true">
+          <%= render partial: 'tasks', locals: {tasks: @tasks} %>
+        </table>
+        <div class="botmheading">
+          <%= link_to 'View All', tasks_path %>
+        </div>
+      </div>
+    </div>
+  </div>
 
-	<div class="row">
-		<div class="col-lg-12">
-			<div class="card cardPadding">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card cardPadding">
 
-				<div class="form-row">
-					<div class="col">
-						<div class="title-menu">
-							<%= select_tag :project, options_for_select(load_data_with_id(@projects)), include_blank: 'All Projects',
-														 class: 'btn activeBtn', id: 'dashboard_email_by_project' %>
-							<h3> - Filter by Project</h3>
-							<%= select_tag :contact, options_for_select(load_data_with_id(current_org.contacts)), include_blank: 'All Contacts',
-														 class: 'btn activeBtn', id: 'dashboard_email_by_contact' %>
-							<h3> - Filter by Contact</h3>
-						</div>
-					</div>
-				</div>
+        <div class="form-row">
+          <div class="col">
+            <div class="title-menu">
+              <%= select_tag :project, options_for_select(load_data_with_id(@projects)), include_blank: 'All Projects',
+                             class: 'btn activeBtn', id: 'dashboard_email_by_project' %>
+              <h3> - Filter by Project</h3>
+              <%= select_tag :contact, options_for_select(load_data_with_id(current_org.contacts)), include_blank: 'All Contacts',
+                             class: 'btn activeBtn', id: 'dashboard_email_by_contact' %>
+              <h3> - Filter by Contact</h3>
+            </div>
+          </div>
+        </div>
 
-				<!-- Panel Filtering rows -->
-				<table class="table tableCustomStyle table-hover removeTblSearch" id="dashboardEmails" data-paging="true" data-filtering="true">
-					<%= render partial: 'emails', locals: {emails: @emails} %>
-				</table>
-				<div class="botmheading">
-					<%= link_to 'View All', emails_path %>
-				</div>
-			</div>
-		</div>
-	</div>
+        <!-- Panel Filtering rows -->
+        <table class="table tableCustomStyle table-hover removeTblSearch" id="dashboardEmails" data-paging="true" data-filtering="true">
+          <%= render partial: 'emails', locals: {emails: @emails} %>
+        </table>
+        <div class="botmheading">
+          <%= link_to 'View All', emails_path %>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </div>
 
-<%= render 'chart_script' %>
+<script>
+  $(document).ready(function ($) {
+
+    loadProspectsByIndustryType();
+
+    function loadProspectsByIndustryType() {
+      Highcharts.chart('prospectsByIndustryTypeBarDashboard', {
+        chart: {
+          plotBackgroundColor: null,
+          plotBorderWidth: null,
+          plotShadow: false,
+          backgroundColor: 'white',
+          borderColor: 'white',
+          height: 250,
+          type: 'pie'
+        },
+        title: {
+          text: 'New Business',
+          align: 'center',
+          verticalAlign: 'middle'
+        },
+        tooltip: {
+          pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+          pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+              enabled: true,
+              format: '<b>{point.name}</b>: <br/>{point.percentage:.1f} %',
+              style: {
+                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || '#757575'
+              },
+              connectorColor: '#757575'
+            }
+          },
+          series: {
+            innerSize: '70%',
+            enableMouseTracking: false,
+            shadow: false,
+            animation: false
+          }
+        },
+        legend: {
+          enabled: false
+        },
+        exporting: {
+          buttons: {
+            contextButton: {
+              enabled: false
+            },
+            exportButton: {
+              enabled: false
+            }
+          }
+        },
+        credits: {
+          enabled: false
+        },
+        series: [{
+          data: <%=raw dashboard_industry_report(@results['industry_type_id']) %>
+        }]
+      });
+    }
+  });
+</script>

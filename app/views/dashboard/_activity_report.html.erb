@@ -7,6 +7,155 @@
 <div class="col-lg-6">
   <div class="prospectCont">
     <h3>Business Prospects</h3>
-    <div id="businessProspectBar" align="center"></div>
+    <div id="businessProspectBarDashboard" align="center"></div>
   </div>
 </div>
+
+<script>
+  $(document).ready(function ($) {
+
+    loadBusinessProspectBar();
+    loadProspectsByTypeComparison();
+
+    function loadProspectsByTypeComparison() {
+      var resultedData = <%=raw get_project_types(results) %>;
+
+      Highcharts.chart('prospectsByTypeComparisonBar', {
+
+        chart: {
+          plotBackgroundColor: null,
+          plotBorderWidth: null,
+          plotShadow: false,
+          backgroundColor: 'white',
+          borderColor: 'white',
+          height: 250,
+          type: 'bar'
+        },
+        title: {
+          text: null
+        },
+        xAxis: {
+          categories: resultedData.labels,
+          gridLineWidth: 0,
+          minorGridLineWidth: 0,
+          lineColor: 'transparent',
+          minorTickLength: 0,
+          tickLength: 0,
+          labels: {
+            style: {
+              color: '#757575'
+            }
+          }
+        },
+        yAxis: {
+          title: {
+            text: null,
+          },
+          gridLineWidth: 0,
+          minorGridLineWidth: 0,
+          lineColor: 'transparent',
+          minorTickLength: 0,
+          tickLength: 0,
+          tickInterval: 1,
+          labels: {
+            style: {
+              color: '#757575'
+            }
+          }
+        },
+        plotOptions: {
+          series: {
+            pointWidth: 3,
+            enableMouseTracking: false,
+            shadow: false,
+            animation: false
+          }
+        },
+        legend: {
+          enabled: true,
+          symbolRadius: 0,
+          align: 'left',
+          itemStyle: {color: '#757575'}
+        },
+        exporting: {
+          buttons: {
+            contextButton: {
+              enabled: false
+            },
+            exportButton: {
+              enabled: false,
+            }
+          }
+        },
+        credits: {
+          enabled: false
+        },
+        series: resultedData.data
+      });
+    }
+
+    function loadBusinessProspectBar() {
+      Highcharts.chart('businessProspectBarDashboard', {
+        chart: {
+          plotBackgroundColor: null,
+          plotBorderWidth: null,
+          plotShadow: false,
+          backgroundColor: 'white',
+          borderColor: 'white',
+          height: 250,
+          type: 'pie'
+        },
+        title: {
+          text: 'Prospects',
+          align: 'center',
+          verticalAlign: 'middle'
+        },
+        tooltip: {
+          pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+          pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+              enabled: true,
+              format: '<b>{point.name}</b>: <br/>{point.percentage:.1f} %',
+              style: {
+                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || '#757575'
+              },
+              connectorColor: '#757575'
+            }
+          },
+          series: {
+            innerSize: '70%',
+            enableMouseTracking: false,
+            shadow: false,
+            animation: false
+          }
+        },
+        legend: {
+          enabled: false
+        },
+        exporting: {
+          buttons: {
+            contextButton: {
+              enabled: false
+            },
+            exportButton: {
+              enabled: false
+            }
+          }
+        },
+        credits: {
+          enabled: false
+        },
+        series: [{
+          data: <%=raw dashboard_generic_prospect_total(results) %>
+        }]
+      });
+
+    }
+
+  });
+
+</script>

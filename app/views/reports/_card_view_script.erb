@@ -1,0 +1,434 @@
+<script>
+
+  Highcharts.chart('prospectsByTypeComparisonBar', {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        backgroundColor: 'white',
+        borderColor: 'white',
+        height: 250,
+        type: 'bar'
+    },
+    title: {
+        text: null
+    },
+    xAxis: {
+        categories: ['Waterhouse', 'Call Center', 'Manufacturing', 'Data Center'],
+        gridLineWidth: 0,
+        minorGridLineWidth: 0,
+        lineColor: 'transparent',
+        minorTickLength: 0,
+        tickLength: 0,
+        labels: {
+           style: {
+              color: '#757575'
+           }
+        }
+    },
+    yAxis: {
+        title: {
+            text: null,
+        },
+        gridLineWidth: 0,
+        minorGridLineWidth: 0,
+        lineColor: 'transparent',
+        minorTickLength: 0,
+        tickLength: 0,
+        tickInterval: 1,
+        labels: {
+           style: {
+              color: '#757575'
+           }
+        }
+    },
+    plotOptions: { 
+      series: {
+        pointWidth: 3,
+        enableMouseTracking: false, 
+        shadow: false, 
+        animation: false
+      } 
+    },
+    legend: {
+      enabled: true,
+      symbolRadius: 0,
+      align: 'left',
+      itemStyle: { color: '#757575'}
+    },
+    exporting: {
+     buttons: {
+       contextButton: {
+         enabled: false
+       },
+       exportButton: {
+         enabled: false,
+       }
+      }
+    },
+    credits: {
+        enabled: false
+    },
+    series: [{
+        name: '2015', color: '#24c667',
+        data: [0.5, 1.9, 0.6, 1.1],
+      },
+      {
+        name: '2016', color: 'red',
+        data: [0.9, 0, 1.05, 0]
+      },
+      {
+        name: '2017', color: 'blue',
+        data: [0, 0, 0.95, 0]
+    }]
+  });
+
+  Highcharts.chart('businessProspectColumn', {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        backgroundColor: 'white',
+        borderColor: 'white',
+        height: 250,
+        type: 'column'
+    },
+    title: {
+        text: null
+    },
+    xAxis: {
+        categories: ['2015', '2016', '2017', '2017'],
+        gridLineWidth: 0,
+        minorGridLineWidth: 0,
+        lineColor: 'transparent',
+        minorTickLength: 0,
+        tickLength: 0,
+        labels: {
+           style: {
+              color: '#757575'
+           }
+        }
+    },
+    yAxis: {
+        title: {
+            text: null
+        },
+        max: 7,
+        gridLineWidth: 0,
+        minorGridLineWidth: 0,
+        lineColor: 'transparent',
+        minorTickLength: 0,
+        tickLength: 0,
+        tickInterval: 1,
+        labels: {
+           style: {
+              color: '#757575'
+           }
+        }
+    },
+    plotOptions: { 
+      series: {
+        pointWidth: 20,
+        enableMouseTracking: false, 
+        shadow: false, 
+        animation: false ,
+      },
+      column: {
+          borderWidth: 0,
+          stacking: 'normal',
+          dataLabels: {
+              enabled: true,
+              formatter: function () {
+                return (7-this.y);
+              },
+              verticalAlign: 'top',
+              style: {
+                textOutline: 0
+              },
+              color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'black'
+          }
+      }
+    },
+    legend: {
+      enabled: false
+    },
+    exporting: {
+      buttons: {
+       contextButton: {
+         enabled: false
+       },
+       exportButton: {
+         enabled: false,
+       }
+      }
+    },
+    credits: {
+        enabled: false
+    },
+    series: [{
+        data: [
+               {y: 7-6, color: '#b3e6c9'},
+               {y: 7-4, color: '#ffe9e6'},
+               {y: 7-2, color: '#ffcccc'},
+               {y: 7-3, color: '#ccccff'}
+              ]
+    },
+    {
+        dataLabels: false,
+        data: [
+               {y: 6, color: '#24c667'},
+               {y: 4, color: '#FF6347'},
+               {y: 2, color: 'red'},
+               {y: 3, color: 'blue'}
+              ]
+    }]
+  });
+
+  Highcharts.chart('businessProspectBar', {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        backgroundColor: 'white',
+        borderColor: 'white',
+        height: 125,
+        type: 'bar'
+    },
+    title: {
+        text: null
+    },
+    xAxis: {
+        categories: ['2015', '2016', '2017'],
+        gridLineWidth: 0,
+        minorGridLineWidth: 0,
+        lineColor: 'transparent',
+        minorTickLength: 0,
+        tickLength: 0,
+        labels: {
+           style: {
+              color: '#757575'
+           }
+        }
+    },
+    yAxis: {
+        title: {
+            text: null
+        },
+        max: 7,
+        gridLineWidth: 0,
+        minorGridLineWidth: 0,
+        lineColor: 'transparent',
+        minorTickLength: 0,
+        tickLength: 0,
+        tickInterval: 1,
+        labels: {
+           style: {
+              color: '#757575'
+           }
+        }
+    },
+    plotOptions: {
+      bar: {
+        borderWidth: 0
+      },
+      series: { 
+        pointWidth: 10,
+        enableMouseTracking: false, 
+        shadow: false, 
+        animation: false,
+        stacking: 'normal'
+      }
+    },
+    legend: {
+      enabled: false
+    },
+    exporting: {
+     buttons: {
+       contextButton: {
+         enabled: false
+       },
+       exportButton: {
+         enabled: false,
+       }
+      }
+    },
+    credits: {
+        enabled: false
+    },
+    series: [{
+        data: [
+               {y: 0, color: '#b3e6c9'},
+               {y: 4, color: '#ffe9e6'},
+               {y: 5, color: '#ffcccc'}
+              ]
+        },
+        {
+        data: [
+               {y: 7, color: '#24c667'},
+               {y: 3, color: '#FF6347'},
+               {y: 2, color: 'red'}
+              ]
+    }]
+  });
+
+  Highcharts.chart('businessProspectBar1', {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        backgroundColor: 'white',
+        borderColor: 'white',
+        height: 125,
+        type: 'bar'
+    },
+    title: {
+        text: null
+    },
+    xAxis: {
+        categories: ['2015', '2016', '2017'],
+        gridLineWidth: 0,
+        minorGridLineWidth: 0,
+        lineColor: 'transparent',
+        minorTickLength: 0,
+        tickLength: 0,
+        labels: {
+           style: {
+              color: '#757575'
+           }
+        }
+    },
+    yAxis: {
+        title: {
+            text: null
+        },
+        max: 7,
+        gridLineWidth: 0,
+        minorGridLineWidth: 0,
+        lineColor: 'transparent',
+        minorTickLength: 0,
+        tickLength: 0,
+        tickInterval: 1,
+        labels: {
+           style: {
+              color: '#757575'
+           }
+        }
+    },
+    plotOptions: {
+      bar: {
+        borderWidth: 0
+      },
+      series: { 
+        stacking: 'normal',
+        pointWidth: 10,
+        enableMouseTracking: false, 
+        shadow: false, 
+        animation: false
+      } 
+    },
+    legend: {
+      enabled: false
+    },
+    exporting: {
+     buttons: {
+       contextButton: {
+         enabled: false
+       },
+       exportButton: {
+         enabled: false,
+       }
+      }
+    },
+    credits: {
+        enabled: false
+    },
+    series: [{
+        data: [
+               {y: 0, color: '#b3e6c9'},
+               {y: 4, color: '#ffe9e6'},
+               {y: 5, color: '#ffcccc'}
+              ]
+        },
+        {
+        data: [
+               {y: 7, color: '#24c667'},
+               {y: 3, color: '#FF6347'},
+               {y: 2, color: 'red'}
+              ]
+    }]
+  });
+
+  Highcharts.chart('prospectsByTypeBar', {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        backgroundColor: 'white',
+        borderColor: 'white',
+        height: 250,
+        type: 'pie'
+    },
+    title: {
+        text: 'Industries',
+        align: 'center',
+        verticalAlign: 'middle'
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    plotOptions: {
+      pie: {
+          allowPointSelect: true,
+          cursor: 'pointer',
+          dataLabels: {
+            enabled: true,
+            format: '<b>{point.name}</b>: <br/>{point.percentage:.1f} %',
+            style: {
+              color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || '#757575'
+            },
+            connectorColor: '#757575'
+          }
+      },
+      series: { 
+        innerSize: '70%',
+        enableMouseTracking: false, 
+        shadow: false, 
+        animation: false
+      } 
+    },
+    legend: {
+      enabled: false
+    },
+    exporting: {
+     buttons: {
+       contextButton: {
+         enabled: false
+       },
+       exportButton: {
+         enabled: false,
+       }
+      }
+    },
+    credits: {
+        enabled: false
+    },
+    series: [{
+        data: [{
+            name: 'Logistcis',
+            y: 25,
+            color: '#24c667'
+        }, {
+            name: 'Manufacturing',
+            y: 25,
+            color: 'red'
+        }, {
+            name: 'Others',
+            y: 50,
+            color: '#DCDCDC',
+            outerSize: '80%',
+        }]
+    }]
+  });
+
+</script>
+

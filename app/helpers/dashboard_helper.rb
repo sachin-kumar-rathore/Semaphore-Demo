@@ -33,8 +33,10 @@ module DashboardHelper
     seriesList.delete_if { |h| h[:y] == 0 }
     total_projects = seriesList.inject(0.0){|sum, elm| sum + elm[:y]}
     seriesList = seriesList.each { |elm| elm[:y] = (elm[:y]/total_projects).round(2) }.sort_by {|elm| elm[:y]}
-    seriesList.last[:sliced] = true
-    seriesList.last[:selected] = true
+    if seriesList.present?
+      seriesList.last[:sliced] = true
+      seriesList.last[:selected] = true
+    end
     return seriesList.to_json
   end
 
@@ -50,8 +52,10 @@ module DashboardHelper
       seriesList[indx][:y] = (each_value/total_projects).round(2)
     end
     seriesList.sort_by {|elm| elm[:y]}
-    seriesList.last[:sliced] = true
-    seriesList.last[:selected] = true
+    if seriesList.present?
+      seriesList.last[:sliced] = true
+      seriesList.last[:selected] = true
+    end
     return seriesList.to_json
   end
 

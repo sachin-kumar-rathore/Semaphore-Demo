@@ -121,7 +121,7 @@
 					<h3>Attraction - Industry type</h3>
 				</div>
 				<div class="cardImg">
-					<div class="ct-chart" id="prospectsByIndustryTypeBar"></div>
+					<div align="center" id="prospectsByIndustryTypeBar"></div>
 				</div>
 				<div class="botmheading"><%= link_to 'View Report', yearly_reports_path %></div>
 			</div>
@@ -188,60 +188,4 @@
 
 </div>
 
-<script>
-  $(document).ready(function ($) {
-
-    loadProspectsByIndustryType();
-
-    function loadProspectsByIndustryType() {
-      var seriesList = <%=raw get_new_industry_report(@results['industry_type_id']) %>;
-      var labels = seriesList.map(function (a) {
-        return a.meta + " - " + a.percentage + "%";
-      });
-      var chart = new Chartist.Pie('#prospectsByIndustryTypeBar', {
-        series: seriesList,
-        labels: labels
-      }, {
-        donut: true,
-        showLabel: true,
-//        chartPadding: 60,
-        labelOffset: 30,
-        labelDirection: 'explode',
-        plugins: [
-          Chartist.plugins.tooltip()
-        ]
-      });
-
-      chart.on('draw', function (data) {
-        if (data.type === 'slice') {
-          var pathLength = data.element._node.getTotalLength();
-
-          data.element.attr({
-            'stroke-dasharray': pathLength + 'px ' + pathLength + 'px'
-          });
-
-          var animationDefinition = {
-            'stroke-dashoffset': {
-              id: 'anim' + data.index,
-              dur: 1000,
-              from: -pathLength + 'px',
-              to: '0px',
-              easing: Chartist.Svg.Easing.easeOutQuint,
-              fill: 'freeze'
-            }
-          };
-
-          if (data.index !== 0) {
-            animationDefinition['stroke-dashoffset'].begin = 'anim' + (data.index - 1) + '.end';
-          }
-
-          data.element.attr({
-            'stroke-dashoffset': -pathLength + 'px'
-          });
-          data.element.animate(animationDefinition, false);
-        }
-      });
-    }
-
-  })
-</script>
+<%= render 'chart_script' %>

@@ -1,6 +1,7 @@
 # Manage dashboard for org users
 class DashboardController < ApplicationController
   before_action :authenticate_user!
+  before_action :is_it_demo_mode?
 
   include DashboardModule
 
@@ -8,6 +9,7 @@ class DashboardController < ApplicationController
     @projects = current_org.projects
     @project_status_group = @projects.status({'1': 'Active', '2': 'Preliminary'}).group_by { |p| p.status }
     generate_periodic_report('yearly')
+    @not_demo_mode = @results['project_type_id'].present?
     @tasks = current_org.tasks.without_activity.limit(5).sort_by_priority_then_end_date
     @emails = current_org.emails.includes(:contacts).limit(5)
   end
@@ -20,6 +22,7 @@ class DashboardController < ApplicationController
 
   def activity
     generate_periodic_report(params[:activity].downcase)
+    @not_demo_mode = @not_demo_mode || @results['project_type_id'].present?
   end
 
   def emails
@@ -55,5 +58,9 @@ class DashboardController < ApplicationController
 
   def email_filtering_params(params)
     params.slice(:project, :contact)
+  end
+
+  def is_it_demo_mode?
+    @not_demo_mode = true
   end
 end

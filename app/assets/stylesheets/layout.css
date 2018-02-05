@@ -1086,3 +1086,45 @@ a:not([href]):not([tabindex]){
   font-size: 12px;
   padding: 4px 10px;
 }
+/****Demo mode Hover CSS***/
+.hoverOverlay{
+  position:relative;
+  overflow:hidden;
+}
+.overlaySec{
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(255,255,255,0.8);
+  z-index: 2;
+  transform:translate(0 , -100%);
+  -webkit-transition: all 400ms ease-in-out 0s;
+  -moz-transition: all 400ms ease-in-out 0s;
+  -o-transition: all 400ms ease-in-out 0s;
+  transition: all 400ms ease-in-out 0s;
+}
+.hoverOverlay:hover .overlaySec{
+  transform:translate(0 , 0);
+}
+.overlaySec > a {
+  color: #fff;
+  background: #2ed573;
+  border-radius: 4px;
+  padding: 8px 20px;
+  -webkit-transition: all 300ms ease-in-out 0s;
+  -moz-transition: all 300ms ease-in-out 0s;
+  -o-transition: all 300ms ease-in-out 0s;
+  transition: all 300ms ease-in-out 0s;
+  font-weight: 600;
+  text-decoration: none;
+}
+.overlaySec > a > span > i {
+  margin-right: 10px;
+  vertical-align: middle;
+}
+/*************************************************************************/

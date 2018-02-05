@@ -1,0 +1,78 @@
+{
+  "project_types": [
+    {
+      "name": "2015",
+      "color": "#24c667",
+      "data": [
+        0.5,
+        1.9,
+        0.6,
+        1.1
+      ]
+    },
+    {
+      "name": "2016",
+      "color": "red",
+      "data": [
+        0.9,
+        0,
+        1.05,
+        0
+      ]
+    },
+    {
+      "name": "2017",
+      "color": "blue",
+      "data": [
+        0,
+        0.5,
+        0.95,
+        0
+      ]
+    }
+  ],
+  "project_status": [
+    {
+      "name": "Logistcis",
+      "y": 25,
+      "color": "#24c667"
+    },
+    {
+      "name": "Manufacturing",
+      "y": 25,
+      "color": "red"
+    },
+    {
+      "name": "Others",
+      "y": 50,
+      "color": "#DCDCDC",
+      "sliced": true,
+      "selected": true
+    }
+  ],
+
+  "new_projects": [
+    {
+      "name": "Logistcis",
+      "y": 25,
+      "color": "#24c667"
+    },
+    {
+      "name": "Manufacturing",
+      "y": 10,
+      "color": "#FF6347"
+    },
+    {
+      "name": "Warehouse",
+      "y": 15,
+      "color": "#ffe9e6"
+    },
+    {
+      "name": "Others",
+      "y": 50,
+      "color": "#ccccff",
+      "sliced": true,
+      "selected": true
+    }
+  ]
+}

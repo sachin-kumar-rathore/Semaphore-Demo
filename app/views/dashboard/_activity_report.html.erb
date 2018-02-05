@@ -95,6 +95,7 @@
     }
 
     function loadBusinessProspectBar() {
+      var seriesData = <%=raw dashboard_generic_prospect_total(results) %>;
       Highcharts.chart('businessProspectBarDashboard', {
         chart: {
           plotBackgroundColor: null,
@@ -106,7 +107,7 @@
           type: 'pie'
         },
         title: {
-          text: 'Prospects',
+          text: seriesData.length == 0 ? '' : 'Prospects',
           align: 'center',
           verticalAlign: 'middle'
         },
@@ -150,7 +151,7 @@
           enabled: false
         },
         series: [{
-          data: <%=raw dashboard_generic_prospect_total(results) %>
+          data: seriesData
         }]
       });
 

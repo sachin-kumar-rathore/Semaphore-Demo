@@ -8,7 +8,7 @@ module DashboardHelper
         .inject({}) { |sum, n| sum.merge(results['project_type_id'][n]) { |key, v1, v2| v1+v2 } }
         .sort_by { |key, val| val.count }.reverse.first(4)
 
-    project_types_to_show = filtered_project_types.collect { |type| type[0] }
+    project_types_to_show = filtered_project_types.collect { |type| type[0] }.sort
     seriesList = list_of_project_types_to_show(results, project_types_to_show)
     labels = current_org.project_types.filter_by_id(project_types_to_show).pluck(:name)
     if @not_demo_mode

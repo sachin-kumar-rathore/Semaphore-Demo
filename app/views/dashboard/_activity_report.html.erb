@@ -109,7 +109,8 @@
         title: {
           text: seriesData.length == 0 ? '' : 'Prospects',
           align: 'center',
-          verticalAlign: 'middle'
+          verticalAlign: 'middle',
+          style: {"font": 'bold 12px "Montserrat", sans-serif' }
         },
         tooltip: {
           pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -118,6 +119,7 @@
           pie: {
             allowPointSelect: true,
             cursor: 'pointer',
+            size: 130,
             dataLabels: {
               enabled: true,
               format: '<b>{point.name}</b>: <br/>{point.percentage:.1f} %',

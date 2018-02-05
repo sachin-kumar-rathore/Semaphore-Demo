@@ -19,15 +19,7 @@ module DashboardHelper
   end
 
   def dashboard_generic_prospect_total(results)
-    seriesList = Project::STATUS.collect { |obj| {name: obj, y: 0.0} }
-    results['status'].keys.each do |year|
-      Project::STATUS.each do |obj|
-        if series = seriesList.find { |data| data[:name] == obj }
-          series[:y] += results['status'][year][obj].try(:length) || 0
-        end
-      end
-    end
-    seriesList.delete_if { |h| h[:y] == 0 }
+    seriesList = list_of_prospect_totals_to_show(results)
     total_projects = seriesList.inject(0.0) { |sum, elm| sum + elm[:y] }
     seriesList = seriesList.each { |elm| elm[:y] = (elm[:y]/total_projects).round(2) }.sort_by { |elm| elm[:y] }
     if seriesList.present?
@@ -46,19 +38,9 @@ module DashboardHelper
         .select { |p| p if p.business_type == "New Business" }
         .group_by { |p| p.industry_type_id }
     seriesList = grouped_result.collect { |obj| {name: '', y: 0.0} }
-    total_projects = grouped_result.inject(0.0) { |result, obj| result + obj[1].count }
-    grouped_result.keys.each_with_index do |industry_id, indx|
-      seriesList[indx][:name] = current_org.industry_types.find(industry_id).name
-      each_value = grouped_result[industry_id].count
-      seriesList[indx][:y] = (each_value/total_projects).round(2)
-    end
-    seriesList.sort_by { |elm| elm[:y] }
-    if seriesList.present?
-      seriesList.last[:sliced] = true
-      seriesList.last[:selected] = true
-    end
+    seriesData = list_of_industry_types_to_show(seriesList, grouped_result)
     if @not_demo_mode
-      return seriesList.to_json
+      return seriesData.to_json
     else
       return load_demo_data["new_projects"].to_json
     end
@@ -73,6 +55,34 @@ module DashboardHelper
       end
       seriesList.push({name: 'Year: ' + year.to_s, data: series})
     end
+    return seriesList
+  end
+
+  def list_of_industry_types_to_show(seriesList, grouped_result)
+    total_projects = grouped_result.inject(0.0) { |result, obj| result + obj[1].count }
+    grouped_result.keys.each_with_index do |industry_id, indx|
+      seriesList[indx][:name] = current_org.industry_types.find(industry_id).name
+      each_value = grouped_result[industry_id].count
+      seriesList[indx][:y] = (each_value/total_projects).round(2)
+    end
+    seriesList.sort_by { |elm| elm[:y] }
+    if seriesList.present?
+      seriesList.last[:sliced] = true
+      seriesList.last[:selected] = true
+    end
+    return seriesList
+  end
+
+  def list_of_prospect_totals_to_show(results)
+    seriesList = Project::STATUS.collect { |obj| {name: obj, y: 0.0} }
+    results['status'].keys.each do |year|
+      Project::STATUS.each do |obj|
+        if series = seriesList.find { |data| data[:name] == obj }
+          series[:y] += results['status'][year][obj].try(:length) || 0
+        end
+      end
+    end
+    seriesList.delete_if { |h| h[:y] == 0 }
     return seriesList
   end
 

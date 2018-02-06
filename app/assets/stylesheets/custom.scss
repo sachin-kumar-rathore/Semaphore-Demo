@@ -328,6 +328,25 @@ html, body {
   .ct-chart .ct-bar{
     stroke-width: 5px;
   }
+  .cardTopTitle {
+    padding-bottom: 10px;
+  }
+  .cardTopTitle > h3 {
+    font-size: 14px;
+    font-weight: 500;
+    color: #6d6f72;
+    margin: 0 0 10px;
+  }
+  .borderTitle {
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+  }
+  .nowrapBtn .btn {
+    font-size: 13px;
+    padding: 6px 6px;
+    white-space: nowrap;
+  }
 }
 .export-site-referrals-report{
   .digg_pagination{
@@ -390,5 +409,25 @@ html, body {
 .emails-listing {
   select, button {
     font-family: 'Montserrat', sans-serif;
+  }
+}
+#businessTypeCharts.active {
+  color: #000;
+  font-weight: 600;
+  background: none;
+}
+#cardOrTableViewTab.active {
+  color: #2ED573;
+  font-weight: 600;
+  background: none;
+}
+@media (max-width: 1280px) {
+  .yearlyReport{
+    .nav-tabs-line .nav-link{
+      padding: .715rem 1.00rem;
+      font-size: .85rem;
+      line-height: 1.2rem;
+    }
+
   }
 }

@@ -1,64 +1,439 @@
 <div class="row">
-  <div class="col-md-5">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="panel mb-10">
-          <div class="panel-body">
-            <div class="panel-header">
-              <strong class="font-weight-bold">Business Prospect</strong>
-            </div>
-            <div class="ct-chart mb-10" id="businessProspectBar"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="panel mb-10">
-          <div class="panel-body">
-            <div class="panel-header">
-              <strong class="font-weight-bold">Business Prospect</strong>
-            </div>
-            <div class="ct-chart mb-10" id="businessProspectBar1"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+	<div class="col-md-6">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel mb-10">
+					<div class="panel-body">
+						<div class="panel-header">
+							<strong class="font-weight-bold">Business Prospect</strong>
+						</div>
+						<div class="ct-chart" id="businessProspectBar"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel mb-10">
+					<div class="panel-body">
+						<div class="panel-header">
+							<strong class="font-weight-bold">Total New Investment</strong>
+						</div>
+						<div class="ct-chart" id="totalNewInvestmentBar"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-  <div class="col-md-7">
-    <div class="panel mb-10">
-      <div class="panel-body">
-        <div class="panel-header">
-          <strong class="font-weight-bold">Prospects By Type</strong>
-        </div>
-        <div class="ct-chart mb-10" id="prospectsByTypeBar"></div>
-      </div>
-    </div>
-  </div>
+	<div class="col-md-6">
+		<div class="panel mb-10">
+			<div class="panel-body">
+				<div class="panel-header">
+					<strong class="font-weight-bold">Prospects By Type</strong>
+				</div>
+				<div class="ct-chart" id="prospectsByTypeBar"></div>
+			</div>
+		</div>
+	</div>
 </div>
 
 <div class="row">
-  <div class="col-md-7">
-    <div class="panel mb-10">
-      <div class="panel-body">
-        <div class="panel-header">
-          <strong class="font-weight-bold">Prospects By Type Comparison</strong>
-        </div>
-        <div class="ct-chart mb-10" id="prospectsByTypeComparisonBar"></div>
-      </div>
-    </div>
-  </div>
+	<div class="col-md-6">
+		<div class="panel mb-10">
+			<div class="panel-body">
+				<div class="panel-header">
+					<strong class="font-weight-bold">Prospects By Type Comparison</strong>
+				</div>
+				<div class="ct-chart" id="prospectsByTypeComparisonBar"></div>
+			</div>
+		</div>
+	</div>
 
-  <div class="col-md-5">
-    <div class="panel mb-10">
-      <div class="panel-body">
-        <div class="panel-header">
-          <strong class="font-weight-bold">Business Prospect</strong>
-        </div>
-        <div class="ct-chart mb-10" id="businessProspectColumn"></div>
-      </div>
-    </div>
-  </div>
+	<div class="col-md-6">
+		<div class="panel mb-10">
+			<div class="panel-body">
+				<div class="panel-header">
+					<strong class="font-weight-bold">Prospect Lead Sources Comparison</strong>
+				</div>
+				<div class="ct-chart" id="prospectLeadSourcesComparisonBar"></div>
+			</div>
+		</div>
+	</div>
 </div>
-<%= render 'card_view_script'%>
+
+<div class="row">
+	<div class="col-md-6">
+		<div class="panel mb-10">
+			<div class="panel-body">
+				<div class="panel-header">
+					<strong class="font-weight-bold">Industry Type Comparison</strong>
+				</div>
+				<div class="ct-chart" id="industryTypeComparisonBar"></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-6">
+		<div class="panel mb-10">
+			<div class="panel-body">
+				<div class="panel-header">
+					<strong class="font-weight-bold">Industry Type</strong>
+				</div>
+				<div class="ct-chart" id="prospectsByIndustryTypeBar"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-6">
+		<div class="panel mb-10">
+			<div class="panel-body">
+				<div class="panel-header">
+					<strong class="font-weight-bold">Total Numbers</strong>
+				</div>
+
+				<div id="widgetLineareaOne">
+					<div class="card-block p-20 pt-10">
+						<div class="mb-20 grey-500">
+							<i class="fa fa-caret-down red-500 font-size-18"></i>
+							<strong class="font-size-18 black"><%= results['retained_jobs'].values.sum %></strong>
+							<small>Total Numbers of Retained Jobs</small>
+						</div>
+						<div class="mb-20 grey-500">
+							<i class="fa fa-caret-up green-500 font-size-18"></i>
+							<strong class="font-size-18 black"><%= results['new_jobs'].values.sum %></strong>
+							<small>Total Numbers of New Jobs</small>
+						</div>
+						<div class="mb-20 grey-500">
+							<i class="fa fa-caret-up green-500 font-size-18"></i>
+							<strong class="font-size-18 black">$<%= results['net_new_investment'].values.sum %></strong>
+							<small>Total Number of New Investment</small>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-6">
+		<div class="panel mb-10">
+			<div class="panel-body">
+				<div class="panel-header">
+					<strong class="font-weight-bold">Elimination Reason Chart</strong>
+				</div>
+				<div class="ct-chart" id="eliminationReasonStack"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+  $(document).ready(function ($) {
+
+    loadIndustryTypeComparison();
+    loadProspectsByTypeComparison(); //ok
+    loadProspectLeadSourcesComparison();
+    loadBusinessProspectBar(); //ok
+    loadProspectsByProjectType(); //ok
+    loadProspectsByIndustryType();
+    loadTotalNewInvestment(); //ok
+    loadEliminationReasonStack();
+
+    function loadIndustryTypeComparison() {
+      var labels = <%=raw current_org.industry_types.pluck(:name) %>;
+      var seriesList = <%=raw get_associated_types(results, 'industry_type_id') %>;
+      loadComparisonCharts(labels, seriesList, '#industryTypeComparisonBar');
+    }
+
+    function loadProspectsByTypeComparison() {
+      var resultedData = <%=raw get_project_types_comparison(results, 'project_type_id') %>;
+      Highcharts.chart('prospectsByTypeComparisonBar', {
+
+        chart: {
+          plotBackgroundColor: null,
+          plotBorderWidth: null,
+          plotShadow: false,
+          backgroundColor: 'white',
+          borderColor: 'white',
+          height: 250,
+          type: 'bar'
+        },
+        title: {
+          text: null
+        },
+        xAxis: {
+          categories: resultedData.labels,
+          gridLineWidth: 0,
+          minorGridLineWidth: 0,
+          lineColor: 'transparent',
+          minorTickLength: 0,
+          tickLength: 0,
+          labels: {
+            style: {
+              color: '#757575'
+            }
+          }
+        },
+        yAxis: {
+          title: {
+            text: null,
+          },
+          gridLineWidth: 0,
+          minorGridLineWidth: 0,
+          lineColor: 'transparent',
+          minorTickLength: 0,
+          tickLength: 0,
+          tickInterval: 1,
+          labels: {
+            style: {
+              color: '#757575'
+            }
+          }
+        },
+        plotOptions: {
+          series: {
+            pointWidth: 3,
+            enableMouseTracking: false,
+            shadow: false,
+            animation: false
+          }
+        },
+        legend: {
+          enabled: true,
+          symbolRadius: 0,
+          align: 'left',
+          itemStyle: {color: '#757575'}
+        },
+        exporting: {
+          buttons: {
+            contextButton: {
+              enabled: false
+            },
+            exportButton: {
+              enabled: false
+            }
+          }
+        },
+        credits: {
+          enabled: false
+        },
+        series: resultedData.data
+      });
+    }
+
+    function loadProspectLeadSourcesComparison() {
+      var labels = <%=raw current_org.sources.pluck(:name) %>;
+      var seriesList = <%=raw get_associated_types(results, 'source_id') %>;
+      loadComparisonCharts(labels, seriesList, '#prospectLeadSourcesComparisonBar');
+    }
+
+    function loadComparisonCharts(labels, seriesList, selector) {
+      var labelsHeight = labels.length * 40 * 2;
+
+      new Chartist.Bar(selector, {
+        labels: labels,
+        series: seriesList
+      }, {
+        horizontalBars: true,
+        height: labelsHeight + 'px',
+        axisX: {onlyInteger: true},
+        axisY: {offset: 70},
+        plugins: [
+          Chartist.plugins.tooltip()
+        ]
+      });
+    }
+
+    function loadBusinessProspectBar() {
+      var seriesData = <%=raw get_generic_prospect_total_new(results, 'status', Project::STATUS) %>;
+      drawStackedBarChart('businessProspectBar', seriesData, true);
+    }
+
+    function loadProspectsByProjectType() {
+      var seriesData = <%=raw get_associated_types_total_new(results, 'project_type_id') %>;
+      Highcharts.chart('prospectsByTypeBar', {
+        chart: {
+          plotBackgroundColor: null,
+          plotBorderWidth: null,
+          plotShadow: false,
+          backgroundColor: 'white',
+          borderColor: 'white',
+          height: 250,
+          type: 'pie'
+        },
+        title: {
+          text: seriesData.length == 0 ? '' : 'Prospects',
+          align: 'center',
+          verticalAlign: 'middle',
+          style: {"font": 'bold 12px "Montserrat", sans-serif' }
+        },
+        tooltip: {
+          pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+          pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            size: 130,
+            dataLabels: {
+              enabled: true,
+              format: '<b>{point.name}</b>: <br/>{point.percentage:.1f} %',
+              style: {
+                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || '#757575'
+              },
+              connectorColor: '#757575'
+            }
+          },
+          series: {
+            innerSize: '70%',
+            enableMouseTracking: false,
+            shadow: false,
+            animation: false
+          }
+        },
+        legend: {
+          enabled: false
+        },
+        exporting: {
+          buttons: {
+            contextButton: {
+              enabled: false
+            },
+            exportButton: {
+              enabled: false
+            }
+          }
+        },
+        credits: {
+          enabled: false
+        },
+        series: [{
+          data: seriesData
+        }]
+      });
+    }
+
+    function loadProspectsByIndustryType() {
+      var data = {
+        series: <%=raw get_associated_types_total(results, 'industry_type_id') %>
+      };
+      loadProspectsByDifferentType(data, '#prospectsByIndustryTypeBar');
+    }
+
+    function loadTotalNewInvestment() {
+      var seriesData = <%=raw net_new_investment(results, 'net_new_investment') %>;
+      drawStackedBarChart('totalNewInvestmentBar', seriesData, false);
+    }
+
+    function drawStackedBarChart(selector, seriesData, allowLegend){
+      Highcharts.chart(selector, {
+        chart: {
+          plotBackgroundColor: null,
+          plotBorderWidth: null,
+          plotShadow: false,
+          backgroundColor: 'white',
+          borderColor: 'white',
+          height: 125,
+          type: 'bar'
+        },
+        title: {
+          text: null
+        },
+        xAxis: {
+          categories: seriesData.labels,
+          gridLineWidth: 0,
+          minorGridLineWidth: 0,
+          lineColor: 'transparent',
+          minorTickLength: 0,
+          tickLength: 0,
+          labels: {
+            style: {
+              color: '#757575'
+            }
+          }
+        },
+        yAxis: {
+          title: {
+            text: null
+          },
+          gridLineWidth: 0,
+          minorGridLineWidth: 0,
+          lineColor: 'transparent',
+          minorTickLength: 0,
+          tickLength: 0,
+          tickInterval: 1,
+          labels: {
+            style: {
+              color: '#757575'
+            }
+          }
+        },
+        plotOptions: {
+          bar: {
+            borderWidth: 0
+          },
+          series: {
+            pointWidth: 10,
+            enableMouseTracking: false,
+            shadow: false,
+            animation: false,
+            stacking: 'normal'
+          }
+        },
+        legend: {
+          enabled: allowLegend
+        },
+        exporting: {
+          buttons: {
+            contextButton: {
+              enabled: false
+            },
+            exportButton: {
+              enabled: false,
+            }
+          }
+        },
+        credits: {
+          enabled: false
+        },
+        series: seriesData.data
+      });
+    }
+
+    function loadEliminationReasonStack() {
+      var labels = <%=raw current_org.elimination_reasons.pluck(:name) %>;
+      var seriesList = <%=raw get_associated_types(results, 'elimination_reason_id') %>;
+      new Chartist.Bar('#eliminationReasonStack', {
+        labels: labels,
+        series: seriesList
+      }, {
+        stackBars: true,
+        axisX: {onlyInteger: true},
+        axisY: {offset: 70},
+        plugins: [
+          Chartist.plugins.tooltip()
+        ]
+      });
+    }
+
+    function loadProspectsByDifferentType(data, selector) {
+
+      var sum = function (a, b) {
+        return a + b.value
+      };
+
+      new Chartist.Pie(selector, data, {
+        labelInterpolationFnc: function (value, idx) {
+          return Math.round(value / data.series.reduce(sum, 0) * 100) + '%';
+        },
+        labelOffset: 40,
+        labelDirection: 'explode',
+        plugins: [Chartist.plugins.tooltip()]
+      });
+    }
+
+  });
+</script>
+

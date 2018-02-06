@@ -60,6 +60,54 @@ module ReportsHelper
     return seriesList.to_json
   end
 
+  def get_generic_prospect_total_new(results, type, parameters)
+    labels = results[type].keys
+    seriesList = []
+    parameters.each do |type_name|
+      typeData = {data: []}
+      results[type].keys.each do |year|
+        typeData[:data] << {y: (results[type][year][type_name].nil? ? 0 : results[type][year][type_name].try(:length) || 0)}
+      end
+      typeData[:name] = type_name
+      seriesList << typeData
+    end
+    # seriesList.delete_if { |h| h[:value] == 0 }
+    return {labels: labels, data: seriesList}.to_json
+  end
+
+  def get_associated_types_total_new(results, type)
+    reporting_parameter_objects = filter_model_rows(type)
+    seriesList = list_of_prospect_type_totals_to_show(results, reporting_parameter_objects, type)
+    total_projects = seriesList.inject(0.0) { |sum, elm| sum + elm[:y] }
+    seriesList = seriesList.each { |elm| elm[:y] = (elm[:y]/total_projects).round(2) }.sort_by { |elm| elm[:y] }
+    if seriesList.present?
+      seriesList.last[:sliced] = true
+      seriesList.last[:selected] = true
+    end
+
+    return seriesList.to_json
+  end
+
+  def list_of_prospect_type_totals_to_show(results, typeList, type)
+    seriesList = typeList.collect { |obj| {name: obj.name, y: 0.0} }
+    results[type].keys.each do |year|
+      typeList.each do |obj|
+        if series = seriesList.find { |data| data[:name] == obj.name }
+          series[:y] += results[type][year][obj.id].try(:length) || 0
+        end
+      end
+    end
+    seriesList.delete_if { |h| h[:y] == 0 }
+    return seriesList
+  end
+
+  def get_project_types_comparison(results, type)
+    project_types_to_show = filter_model_rows(type).pluck(:id).sort
+    seriesList = list_of_project_types_to_show(results, project_types_to_show)
+    labels = current_org.project_types.filter_by_id(project_types_to_show).pluck(:name)
+    return {labels: labels, data: seriesList}.to_json
+  end
+
   def get_new_industry_report(data)
     grouped_result = data.values.collect { |year| year.values }.flatten
         .select { |p| p if p.business_type == "New Business" }
@@ -72,6 +120,16 @@ module ReportsHelper
       seriesList[indx][:percentage] = (seriesList[indx][:value]/total_projects).round(2)
     end
     return seriesList.to_json
+  end
+
+  def net_new_investment(results, type)
+    seriesList = []
+    typeData = {data: []}
+    results[type].keys.each do |year|
+      typeData[:data] << {y: results[type][year].to_f}
+    end
+    seriesList << typeData
+    return {labels: results[type].keys, data: seriesList}.to_json
   end
 
   def filter_model_rows(reference_column)

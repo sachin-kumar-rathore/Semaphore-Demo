@@ -1,149 +1,29 @@
-<div class="row">
-	<div class="col-md-6">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="panel mb-10">
-					<div class="panel-body">
-						<div class="panel-header">
-							<strong class="font-weight-bold">Business Prospect</strong>
-						</div>
-						<div class="ct-chart" id="businessProspectBar"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<div class="panel mb-10">
-					<div class="panel-body">
-						<div class="panel-header">
-							<strong class="font-weight-bold">Total New Investment</strong>
-						</div>
-						<div class="ct-chart" id="totalNewInvestmentBar"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="col-md-6">
-		<div class="panel mb-10">
-			<div class="panel-body">
-				<div class="panel-header">
-					<strong class="font-weight-bold">Prospects By Type</strong>
-				</div>
-				<div class="ct-chart" id="prospectsByTypeBar"></div>
-			</div>
-		</div>
-	</div>
-</div>
-
-<div class="row">
-	<div class="col-md-7">
-		<div class="panel mb-10">
-			<div class="panel-body">
-				<div class="panel-header">
-					<strong class="font-weight-bold">Prospects By Type Comparison</strong>
-				</div>
-				<div class="ct-chart" id="prospectsByTypeComparisonBar"></div>
-			</div>
-		</div>
-	</div>
-
-  <div class="col-md-5">
-    <div class="panel mb-10">
-      <div class="panel-body">
-        <div class="panel-header">
-          <strong class="font-weight-bold">Prospect Square foot Request</strong>
-        </div>
-        <div class="ct-chart mb-10" id="squareFootRequestedColumn"></div>
+<div align="center" id="businessProspectBar"></div><br>
+<div align="center" id="totalNewInvestmentBar"></div><br>
+<div align="center" id="prospectsByTypeBar"></div><br>
+<div align="center" id="prospectsByTypeComparisonBar"></div><br>
+<div align="center" id="squareFootRequestedColumn"></div><br>
+<div align="center" id="prospectsByIndustryTypeBar"></div><br>
+<div align="center" id="acreageRequestedColumn"></div><br>
+<div align="center" id="industryTypeComparisonBar"></div><br>
+<div align="center" id="prospectLeadSourcesComparisonBar"></div><br>
+<div align="center">
+  <div id="widgetLineareaOne">
+    <div class="card-block p-20 pt-10">
+      <div class="mb-20 grey-500">
+        <i class="fa fa-caret-down red-500 font-size-18"></i>
+        <strong class="font-size-18 black"><%= @results['retained_jobs'].values.sum %></strong>
+        <small>Total Numbers of Retained Jobs</small>
       </div>
-    </div>
-  </div>
-
-</div>
-
-<div class="row">
-  <div class="col-md-5">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="panel mb-10">
-          <div class="panel-body">
-            <div class="panel-header">
-              <strong class="font-weight-bold">Total Numbers</strong>
-            </div>
-
-            <div id="widgetLineareaOne">
-              <div class="card-block p-20 pt-10">
-                <div class="mb-20 grey-500">
-                  <i class="fa fa-caret-down red-500 font-size-18"></i>
-                  <strong class="font-size-18 black"><%= results['retained_jobs'].values.sum %></strong>
-                  <small>Total Numbers of Retained Jobs</small>
-                </div>
-                <div class="mb-20 grey-500">
-                  <i class="fa fa-caret-up green-500 font-size-18"></i>
-                  <strong class="font-size-18 black"><%= results['new_jobs'].values.sum %></strong>
-                  <small>Total Numbers of New Jobs</small>
-                </div>
-                <div class="mb-20 grey-500">
-                  <i class="fa fa-caret-up green-500 font-size-18"></i>
-                  <strong class="font-size-18 black">$<%= results['net_new_investment'].values.sum %></strong>
-                  <small>Total Number of New Investment</small>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="mb-20 grey-500">
+        <i class="fa fa-caret-up green-500 font-size-18"></i>
+        <strong class="font-size-18 black"><%= @results['new_jobs'].values.sum %></strong>
+        <small>Total Numbers of New Jobs</small>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="panel mb-10">
-          <div class="panel-body">
-            <div class="panel-header">
-              <strong class="font-weight-bold">Industry Type</strong>
-            </div>
-            <div class="ct-chart" id="prospectsByIndustryTypeBar"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="panel mb-10">
-          <div class="panel-body">
-            <div class="panel-header">
-              <strong class="font-weight-bold">Prospect Acreage Request</strong>
-            </div>
-            <div class="ct-chart mb-10" id="acreageRequestedColumn"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-7">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="panel mb-10">
-          <div class="panel-body">
-            <div class="panel-header">
-              <strong class="font-weight-bold">Industry Type Comparison</strong>
-            </div>
-            <div class="ct-chart" id="industryTypeComparisonBar"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="panel mb-10">
-          <div class="panel-body">
-            <div class="panel-header">
-              <strong class="font-weight-bold">Prospect Lead Sources Comparison</strong>
-            </div>
-            <div class="ct-chart" id="prospectLeadSourcesComparisonBar"></div>
-          </div>
-        </div>
+      <div class="mb-20 grey-500">
+        <i class="fa fa-caret-up green-500 font-size-18"></i>
+        <strong class="font-size-18 black">$<%= @results['net_new_investment'].values.sum %></strong>
+        <small>Total Number of New Investment</small>
       </div>
     </div>
   </div>
@@ -163,47 +43,47 @@
     loadAcresRequestedStack();
 
     function loadIndustryTypeComparison() {
-      var resultedData = <%=raw get_generic_types_comparison(results, 'industry_type_id') %>;
+      var resultedData = <%=raw get_generic_types_comparison(@results, 'industry_type_id') %>;
       drawTypeComparisonChart('industryTypeComparisonBar', resultedData);
     }
 
     function loadProspectsByTypeComparison() {
-      var resultedData = <%=raw get_generic_types_comparison(results, 'project_type_id') %>;
+      var resultedData = <%=raw get_generic_types_comparison(@results, 'project_type_id') %>;
       drawTypeComparisonChart('prospectsByTypeComparisonBar', resultedData);
     }
 
     function loadProspectLeadSourcesComparison() {
-      var resultedData = <%=raw get_generic_types_comparison(results, 'source_id') %>;
+      var resultedData = <%=raw get_generic_types_comparison(@results, 'source_id') %>;
       drawTypeComparisonChart('prospectLeadSourcesComparisonBar', resultedData);
     }
 
     function loadBusinessProspectBar() {
-      var seriesData = <%=raw get_generic_prospect_total_new(results, 'status', Project::STATUS) %>;
+      var seriesData = <%=raw get_generic_prospect_total_new(@results, 'status', Project::STATUS) %>;
       drawStackedBarChart('businessProspectBar', seriesData, true);
     }
 
     function loadProspectsByProjectType() {
-      var seriesData = <%=raw get_associated_types_total_new(results, 'project_type_id') %>;
+      var seriesData = <%=raw get_associated_types_total_new(@results, 'project_type_id') %>;
       drawProspectTypesPieChart('prospectsByTypeBar', seriesData, 'Prospects');
     }
 
     function loadProspectsByIndustryType() {
-      var seriesData = <%=raw get_associated_types_total_new(results, 'industry_type_id') %>;
+      var seriesData = <%=raw get_associated_types_total_new(@results, 'industry_type_id') %>;
       drawProspectTypesPieChart('prospectsByIndustryTypeBar', seriesData, 'Industries');
     }
 
     function loadTotalNewInvestment() {
-      var seriesData = <%=raw net_new_investment(results, 'net_new_investment') %>;
+      var seriesData = <%=raw net_new_investment(@results, 'net_new_investment') %>;
       drawStackedBarChart('totalNewInvestmentBar', seriesData, false);
     }
 
     function loadSquareFootRequestedStack() {
-      var seriesData = <%=raw get_generic_prospect_total_new(results, 'square_feet_requested', Project::SQUARE_FEET_REQUESTED) %>;
+      var seriesData = <%=raw get_generic_prospect_total_new(@results, 'square_feet_requested', Project::SQUARE_FEET_REQUESTED) %>;
       drawProspectColumnBarChart('squareFootRequestedColumn', seriesData)
     }
 
     function loadAcresRequestedStack() {
-      var seriesData = <%=raw get_generic_prospect_total_new(results, 'acres_requested', Project::ACRES_REQUESTED) %>;
+      var seriesData = <%=raw get_generic_prospect_total_new(@results, 'acres_requested', Project::ACRES_REQUESTED) %>;
       drawProspectColumnBarChart('acreageRequestedColumn', seriesData)
     }
 
@@ -215,7 +95,7 @@
           plotShadow: false,
           backgroundColor: 'white',
           borderColor: 'white',
-          height: Math.max(150, seriesData.labels.length * 55),
+          height: seriesData.labels.length * 55,
           type: 'bar'
         },
         title: {
@@ -354,7 +234,7 @@
           plotShadow: false,
           backgroundColor: 'white',
           borderColor: 'white',
-          height: Math.max(125, resultData.labels.length * 80),
+          height: resultData.labels.length * 80,
           type: 'bar'
         },
         title: {
@@ -504,4 +384,3 @@
 
   });
 </script>
-

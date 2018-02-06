@@ -20,46 +20,6 @@ module ReportsHelper
     ]
   end
 
-  def get_associated_types(results, type)
-    seriesList = []
-    results[type].keys.each do |year|
-      series = []
-      filter_model_rows(type).pluck(:id).each do |obj|
-        data = {meta: 'Year: ' + year.to_s, value: results[type][year][obj].try(:length) || 0}
-        series.push(data)
-      end
-      seriesList.push(series)
-    end
-    return seriesList.to_json
-  end
-
-  def get_associated_types_total(results, type)
-    reporting_parameter_objects = filter_model_rows(type)
-    seriesList = reporting_parameter_objects.collect { |obj| {meta: obj.name, value: 0, id: obj.id} }
-    results[type].keys.each do |year|
-      reporting_parameter_objects.pluck(:id).each do |obj|
-        if series = seriesList.find {|data| data[:id] == obj}
-          series[:value] += results[type][year][obj].try(:length) || 0
-        end
-      end
-    end
-    seriesList.delete_if { |h| h[:value] == 0 }
-    return seriesList.to_json
-  end
-
-  def get_generic_prospect_total(results, type, parameters)
-    seriesList = parameters.collect { |obj| {meta: obj, value: 0} }
-    results[type].keys.each do |year|
-      parameters.each do |obj|
-        if series = seriesList.find {|data| data[:meta] == obj}
-          series[:value] += results[type][year][obj].try(:length) || 0
-        end
-      end
-    end
-    seriesList.delete_if { |h| h[:value] == 0 }
-    return seriesList.to_json
-  end
-
   def get_generic_prospect_total_new(results, type, parameters)
     labels = results[type].keys
     seriesList = []
@@ -71,7 +31,6 @@ module ReportsHelper
       typeData[:name] = type_name
       seriesList << typeData
     end
-    # seriesList.delete_if { |h| h[:value] == 0 }
     return {labels: labels, data: seriesList}.to_json
   end
 
@@ -101,25 +60,24 @@ module ReportsHelper
     return seriesList
   end
 
-  def get_project_types_comparison(results, type)
-    project_types_to_show = filter_model_rows(type).pluck(:id).sort
-    seriesList = list_of_project_types_to_show(results, project_types_to_show)
-    labels = current_org.project_types.filter_by_id(project_types_to_show).pluck(:name)
+  def get_generic_types_comparison(results, type)
+    generic_types = filter_model_rows(type)
+    generic_types_to_show = generic_types.pluck(:id).sort
+    seriesList = list_of_generic_types_comparison_to_show(results, generic_types_to_show, type)
+    labels = generic_types.filter_by_id(generic_types_to_show).pluck(:name)
     return {labels: labels, data: seriesList}.to_json
   end
 
-  def get_new_industry_report(data)
-    grouped_result = data.values.collect { |year| year.values }.flatten
-        .select { |p| p if p.business_type == "New Business" }
-        .group_by {|p| p.industry_type_id}
-    seriesList = grouped_result.collect { |obj| {meta: '', value: 0, percentage: 0.0} }
-    total_projects = grouped_result.inject(0.0) { |result, obj| result + obj[1].count }
-    grouped_result.keys.each_with_index do |industry_id, indx|
-      seriesList[indx][:meta] = current_org.industry_types.find(industry_id).name
-      seriesList[indx][:value] = grouped_result[industry_id].count
-      seriesList[indx][:percentage] = (seriesList[indx][:value]/total_projects).round(2)
+  def list_of_generic_types_comparison_to_show(results, generic_types, type)
+    seriesList = []
+    results[type].keys.each do |year|
+      series = []
+      generic_types.each do |type_id|
+        series.push(results[type][year][type_id].try(:length) || 0)
+      end
+      seriesList.push({name: 'Year: ' + year.to_s, data: series})
     end
-    return seriesList.to_json
+    return seriesList
   end
 
   def net_new_investment(results, type)

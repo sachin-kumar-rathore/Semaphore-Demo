@@ -31,13 +31,12 @@ module ReportingModule
   end
 
   def download_report(activity)
-    if (params[:report_format] == 'pdf')
-      pdf = WickedPdf.new.pdf_from_string(as_html)
-      save_path = Rails.root.join('public', "#{activity}_report.pdf")
-      File.open(save_path, 'wb') do |file|
-        file << pdf
+    if (params[:format] == 'pdf')
+      respond_to do |format|
+        format.pdf do
+          render pdf: "yearly_report"   # Excluding ".pdf" extension.
+        end
       end
-      send_file("#{Rails.root}/public/#{activity}_report.pdf", type: "application/pdf", :disposition => 'attachment')
     else
       respond_to do |format|
         format.xls

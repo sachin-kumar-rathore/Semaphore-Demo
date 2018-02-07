@@ -40,7 +40,9 @@ module ReportingModule
       end
     else
       respond_to do |format|
-        format.xls
+        format.xls {
+          response.headers['Content-Disposition'] = "attachment; filename=\"#{activity}_report.xls\""
+        }
       end
     end
   end

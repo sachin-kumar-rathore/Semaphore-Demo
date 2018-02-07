@@ -1,6 +1,6 @@
-<div class="row">
+<div class="form-row">
   <div class="col-md-6">
-    <div class="row">
+    <div class="form-row">
       <div class="col-md-12">
         <div class="panel mb-10">
           <div class="panel-body">
@@ -12,7 +12,7 @@
         </div>
       </div>
     </div>
-    <div class="row">
+    <div class="form-row">
       <div class="col-md-12">
         <div class="panel mb-10">
           <div class="panel-body">
@@ -38,7 +38,7 @@
   </div>
 </div>
 
-<div class="row">
+<div class="form-row">
   <div class="col-md-7">
     <div class="panel mb-10">
       <div class="panel-body">
@@ -63,9 +63,9 @@
 
 </div>
 
-<div class="row">
-  <div class="col-md-5">
-    <div class="row">
+<div class="form-row">
+  <div class="col-xl-5 col-md-6">
+    <div class="form-row">
       <div class="col-md-12">
         <div class="panel mb-10">
           <div class="panel-body">
@@ -96,7 +96,7 @@
         </div>
       </div>
     </div>
-    <div class="row">
+    <div class="form-row">
       <div class="col-md-12">
         <div class="panel mb-10">
           <div class="panel-body">
@@ -108,7 +108,7 @@
         </div>
       </div>
     </div>
-    <div class="row">
+    <div class="form-row">
       <div class="col-md-12">
         <div class="panel mb-10">
           <div class="panel-body">
@@ -121,8 +121,8 @@
       </div>
     </div>
   </div>
-  <div class="col-md-7">
-    <div class="row">
+  <div class="col-xl-7 col-md-6">
+    <div class="form-row">
       <div class="col-md-12">
         <div class="panel mb-10">
           <div class="panel-body">
@@ -134,7 +134,7 @@
         </div>
       </div>
     </div>
-    <div class="row">
+    <div class="form-row">
       <div class="col-md-12">
         <div class="panel mb-10">
           <div class="panel-body">
@@ -294,7 +294,7 @@
           type: 'pie'
         },
         title: {
-          text: seriesData.length == 0 ? '' : centerText,
+          text: null,//seriesData.length == 0 ? '' : centerText,
           align: 'center',
           verticalAlign: 'middle',
           style: {"font": 'bold 12px "Montserrat", sans-serif'}
@@ -306,7 +306,7 @@
           pie: {
             allowPointSelect: true,
             cursor: 'pointer',
-            size: 150,
+//            size: 150,
             dataLabels: {
               enabled: true,
               format: '<b>{point.name}</b>: <br/>{point.percentage:.1f} %',
@@ -324,7 +324,7 @@
           }
         },
         legend: {
-          enabled: false
+          enabled: true
         },
         exporting: {
           buttons: {

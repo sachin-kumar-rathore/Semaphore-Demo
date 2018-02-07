@@ -38,7 +38,7 @@
 <%
 	start_date_or_year = params[:start_date] ? params[:start_date] : Date.today.to_date - 30
 	end_date_or_compare = params[:end_date] ? params[:end_date] : Date.today
-	chart_date_range = "From: #{start_date_or_year.strftime("%d-%m-%Y")}, To: #{end_date_or_compare.strftime("%d-%m-%Y")}"
+	chart_date_range = "From: #{start_date_or_year}, To: #{end_date_or_compare}"
 %>
 
 <%= render :partial => 'pdf_scripts', locals: {date_range: chart_date_range} %>

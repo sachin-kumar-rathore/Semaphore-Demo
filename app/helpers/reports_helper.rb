@@ -25,11 +25,16 @@ module ReportsHelper
     seriesList = []
     parameters.each do |type_name|
       typeData = {data: []}
+      nil_counter = 0
       results[type].keys.each do |year|
-        typeData[:data] << {y: (results[type][year][type_name].nil? ? 0 : results[type][year][type_name].try(:length) || 0)}
+        data_value = (results[type][year][type_name].nil? ? 0 : results[type][year][type_name].try(:length) || 0)
+        typeData[:data] << {y: data_value}
+        nil_counter += 1 if data_value == 0
       end
-      typeData[:name] = type_name
-      seriesList << typeData
+      if(nil_counter != results[type].keys.count)
+        typeData[:name] = type_name
+        seriesList << typeData
+      end
     end
     return {labels: labels, data: seriesList}.to_json
   end
@@ -61,10 +66,10 @@ module ReportsHelper
   end
 
   def get_generic_types_comparison(results, type)
-    generic_types = filter_model_rows(type)
-    generic_types_to_show = generic_types.pluck(:id).sort
+    generic_types = results[type].keys.collect{|year| results[type][year].keys}.flatten.uniq
+    generic_types_to_show = generic_types.sort
     seriesList = list_of_generic_types_comparison_to_show(results, generic_types_to_show, type)
-    labels = generic_types.filter_by_id(generic_types_to_show).pluck(:name)
+    labels = filter_model_rows(type).filter_by_id(generic_types_to_show).pluck(:name)
     return {labels: labels, data: seriesList}.to_json
   end
 

@@ -31,10 +31,11 @@ module ReportingModule
   end
 
   def download_report(activity)
-    if (params[:format] == 'pdf')
+    if (request.format == 'pdf')
       respond_to do |format|
         format.pdf do
-          render pdf: "yearly_report"   # Excluding ".pdf" extension.
+          # send_data("#{activity}_report", filename: "#{activity}_report.pdf", type: 'application/pdf')
+          render pdf: "#{activity}_report"
         end
       end
     else

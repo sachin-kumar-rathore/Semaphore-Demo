@@ -1,0 +1,392 @@
+<script>
+
+  <% if @selected_parameters.include?('status') %>
+  	loadBusinessProspectBar();
+  <% end %>
+  <% if @selected_parameters.include?('net_new_investment') %>
+  	loadTotalNewInvestment();
+  <% end %>
+  <% if @selected_parameters.include?('project_type_id') %>
+		loadProspectsByProjectType();
+		loadProspectsByTypeComparison();
+  <% end %>
+  <% if @selected_parameters.include?('square_feet_requested') %>
+  	loadSquareFootRequestedStack();
+  <% end %>
+  <% if @selected_parameters.include?('industry_type_id') %>
+		loadIndustryTypeComparison();
+		loadProspectsByIndustryType();
+  <% end %>
+  <% if @selected_parameters.include?('source_id') %>
+  	loadProspectLeadSourcesComparison();
+  <% end %>
+  <% if @selected_parameters.include?('acres_requested') %>
+  	loadAcresRequestedStack();
+  <% end %>
+  <% if @selected_parameters.include?('elimination_reason_id') %>
+  	loadEliminationReasonComparison();
+  <% end %>
+  <% if @selected_parameters.include?('competition_id') %>
+  	loadCompetitionComparison();
+  <% end %>
+
+  function loadIndustryTypeComparison() {
+    var text = "Industry Types Comparison - <%=raw date_range %>";
+    var resultedData = <%=raw get_generic_types_comparison(@results, 'industry_type_id') %>;
+    drawTypeComparisonChart('industryTypeComparisonBar', resultedData, text);
+  }
+
+  function loadProspectsByTypeComparison() {
+    var text = "Prospects by Types Comparison - <%=raw date_range %>";
+    var resultedData = <%=raw get_generic_types_comparison(@results, 'project_type_id') %>;
+    drawTypeComparisonChart('prospectsByTypeComparisonBar', resultedData, text);
+  }
+
+  function loadEliminationReasonComparison() {
+    var text = "Elimination Reasons - <%=raw date_range %>";
+    var resultedData = <%=raw get_generic_types_comparison(@results, 'elimination_reason_id') %>;
+    drawTypeComparisonChart('eliminationReasonCompBar', resultedData, text);
+  }
+
+  function loadCompetitionComparison() {
+    var text = "Competitions - <%=raw date_range %>";
+    var resultedData = <%=raw get_generic_types_comparison(@results, 'competition_id') %>;
+    drawTypeComparisonChart('competitionCompBar', resultedData, text);
+  }
+
+  function loadProspectLeadSourcesComparison() {
+    var text = "Prospect Lead Sources Comparison - <%=raw date_range %>";
+    var resultedData = <%=raw get_generic_types_comparison(@results, 'source_id') %>;
+    drawTypeComparisonChart('prospectLeadSourcesComparisonBar', resultedData, text);
+  }
+
+  function loadBusinessProspectBar() {
+    var text = "Business Prospects - <%=raw date_range %>";
+    var seriesData = <%=raw get_generic_prospect_total_new(@results, 'status', Project::STATUS) %>;
+    drawStackedBarChart('businessProspectBar', seriesData, true, text);
+  }
+
+  function loadProspectsByProjectType() {
+    var text = "Prospects by Type - <%=raw date_range %>";
+    var seriesData = <%=raw get_associated_types_total_new(@results, 'project_type_id') %>;
+    drawProspectTypesPieChart('prospectsByTypeBar', seriesData, 'Prospects', text);
+  }
+
+  function loadProspectsByIndustryType() {
+    var text = "Prospects by Industry Types - <%=raw date_range %>";
+    var seriesData = <%=raw get_associated_types_total_new(@results, 'industry_type_id') %>;
+    drawProspectTypesPieChart('prospectsByIndustryTypeBar', seriesData, 'Industries', text);
+  }
+
+  function loadTotalNewInvestment() {
+    var text = "Total New Investments - <%=raw date_range %>";
+    var seriesData = <%=raw net_new_investment(@results, 'net_new_investment') %>;
+    drawStackedBarChart('totalNewInvestmentBar', seriesData, false, text);
+  }
+
+  function loadSquareFootRequestedStack() {
+    var text = "Square Foot Requested Comparison - <%=raw date_range %>";
+    var seriesData = <%=raw get_generic_prospect_total_new(@results, 'square_feet_requested', Project::SQUARE_FEET_REQUESTED) %>;
+    drawProspectColumnBarChart('squareFootRequestedColumn', seriesData, text);
+  }
+
+  function loadAcresRequestedStack() {
+    var text = "Acres Requested Comparison - <%=raw date_range %>";
+    var seriesData = <%=raw get_generic_prospect_total_new(@results, 'acres_requested', Project::ACRES_REQUESTED) %>;
+    drawProspectColumnBarChart('acreageRequestedColumn', seriesData, text);
+  }
+
+  function drawStackedBarChart(selector, seriesData, allowLegend, titleText) {
+    Highcharts.chart(selector, {
+      chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        backgroundColor: 'white',
+        type: 'bar'
+      },
+      title: {
+        text: titleText
+      },
+      xAxis: {
+        categories: seriesData.labels,
+        gridLineWidth: 0,
+        minorGridLineWidth: 0,
+        lineColor: 'transparent',
+        minorTickLength: 0,
+        tickLength: 0,
+        labels: {
+          style: {
+            color: '#757575'
+          }
+        }
+      },
+      yAxis: {
+        title: {
+          text: null
+        },
+        gridLineWidth: 0,
+        minorGridLineWidth: 0,
+        lineColor: 'transparent',
+        minorTickLength: 0,
+        tickLength: 0,
+        tickInterval: 1,
+        labels: {
+          style: {
+            color: '#757575'
+          }
+        }
+      },
+      plotOptions: {
+        bar: {
+          borderWidth: 0
+        },
+        series: {
+          pointWidth: 10,
+          enableMouseTracking: false,
+          shadow: false,
+          animation: false,
+          stacking: 'normal'
+        }
+      },
+      legend: {
+        enabled: allowLegend
+      },
+      exporting: {
+        buttons: {
+          contextButton: {
+            enabled: false
+          },
+          exportButton: {
+            enabled: false,
+          }
+        }
+      },
+      credits: {
+        enabled: false
+      },
+      series: seriesData.data
+    });
+  }
+
+  function drawProspectTypesPieChart(selector, seriesData, centerText, titleText) {
+    Highcharts.chart(selector, {
+      chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        backgroundColor: 'white',
+        type: 'pie'
+      },
+      title: {
+        text: titleText
+      },
+      tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+      },
+      plotOptions: {
+        pie: {
+          allowPointSelect: true,
+          cursor: 'pointer',
+          size: 150,
+          dataLabels: {
+            enabled: true,
+            format: '<b>{point.name}</b>: <br/>{point.percentage:.1f} %',
+            style: {
+              color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || '#757575'
+            },
+            connectorColor: '#757575'
+          }
+        },
+        series: {
+          innerSize: '70%',
+          enableMouseTracking: false,
+          shadow: false,
+          animation: false
+        }
+      },
+      legend: {
+        enabled: false
+      },
+      exporting: {
+        buttons: {
+          contextButton: {
+            enabled: false
+          },
+          exportButton: {
+            enabled: false
+          }
+        }
+      },
+      credits: {
+        enabled: false
+      },
+      series: [{
+        data: seriesData
+      }]
+    });
+  }
+
+  function drawTypeComparisonChart(selector, resultData, titleText) {
+    Highcharts.chart(selector, {
+
+      chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        backgroundColor: 'white',
+        type: 'bar'
+      },
+      title: {
+        text: titleText
+      },
+      xAxis: {
+        categories: resultData.labels,
+        gridLineWidth: 0,
+        minorGridLineWidth: 0,
+        lineColor: 'transparent',
+        minorTickLength: 0,
+        tickLength: 0,
+        labels: {
+          style: {
+            color: '#757575'
+          }
+        }
+      },
+      yAxis: {
+        title: {
+          text: null
+        },
+        gridLineWidth: 0,
+        minorGridLineWidth: 0,
+        lineColor: 'transparent',
+        minorTickLength: 0,
+        tickLength: 0,
+        tickInterval: 1,
+        labels: {
+          style: {
+            color: '#757575'
+          }
+        }
+      },
+      plotOptions: {
+        series: {
+          pointWidth: 3,
+          enableMouseTracking: false,
+          shadow: false,
+          animation: false
+        }
+      },
+      legend: {
+        enabled: true,
+        symbolRadius: 0,
+        align: 'left',
+        itemStyle: {color: '#757575'}
+      },
+      exporting: {
+        buttons: {
+          contextButton: {
+            enabled: false
+          },
+          exportButton: {
+            enabled: false
+          }
+        }
+      },
+      credits: {
+        enabled: false
+      },
+      series: resultData.data
+    });
+  }
+
+  function drawProspectColumnBarChart(selector, resultData, titleText) {
+    Highcharts.chart(selector, {
+      chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        backgroundColor: 'white',
+        type: 'column'
+      },
+      title: {
+        text: titleText
+      },
+      xAxis: {
+        categories: resultData.labels,
+        gridLineWidth: 0,
+        minorGridLineWidth: 0,
+        lineColor: 'transparent',
+        minorTickLength: 0,
+        tickLength: 0,
+        labels: {
+          style: {
+            color: '#757575'
+          }
+        }
+      },
+      yAxis: {
+        title: {
+          text: null
+        },
+        gridLineWidth: 0,
+        minorGridLineWidth: 0,
+        lineColor: 'transparent',
+        minorTickLength: 0,
+        tickLength: 0,
+        tickInterval: 1,
+        labels: {
+          style: {
+            color: '#757575'
+          }
+        }
+      },
+      plotOptions: {
+        series: {
+          pointWidth: 20,
+          enableMouseTracking: false,
+          shadow: false,
+          animation: false
+        },
+        column: {
+          borderWidth: 0,
+          stacking: 'normal',
+          dataLabels: {
+            enabled: true,
+            verticalAlign: 'top',
+            style: {
+              textOutline: 0
+            },
+            color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'black'
+          }
+        }
+      },
+      legend: {
+        enabled: true
+      },
+      exporting: {
+        buttons: {
+          contextButton: {
+            enabled: false
+          },
+          exportButton: {
+            enabled: false
+          }
+        }
+      },
+      credits: {
+        enabled: false
+      },
+      series: resultData.data
+    });
+  }
+
+</script>
+
+<style>
+	#widgetLineareaOne{
+		border: 2px solid rgb(51, 92, 173);
+		padding: 20px 0;
+		margin: 0 20px;
+	}
+</style>

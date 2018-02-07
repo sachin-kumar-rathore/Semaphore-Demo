@@ -1,54 +1,54 @@
 <div class="row">
-	<div class="col-md-6">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="panel mb-10">
-					<div class="panel-body">
-						<div class="panel-header">
-							<strong class="font-weight-bold">Business Prospect</strong>
-						</div>
-						<div class="ct-chart" id="businessProspectBar"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<div class="panel mb-10">
-					<div class="panel-body">
-						<div class="panel-header">
-							<strong class="font-weight-bold">Total New Investment</strong>
-						</div>
-						<div class="ct-chart" id="totalNewInvestmentBar"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+  <div class="col-md-6">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel mb-10">
+          <div class="panel-body">
+            <div class="panel-header">
+              <strong class="font-weight-bold">Business Prospect</strong>
+            </div>
+            <div class="ct-chart" id="businessProspectBar"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel mb-10">
+          <div class="panel-body">
+            <div class="panel-header">
+              <strong class="font-weight-bold">Total New Investment</strong>
+            </div>
+            <div class="ct-chart" id="totalNewInvestmentBar"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-	<div class="col-md-6">
-		<div class="panel mb-10">
-			<div class="panel-body">
-				<div class="panel-header">
-					<strong class="font-weight-bold">Prospects By Type</strong>
-				</div>
-				<div class="ct-chart" id="prospectsByTypeBar"></div>
-			</div>
-		</div>
-	</div>
+  <div class="col-md-6">
+    <div class="panel mb-10">
+      <div class="panel-body">
+        <div class="panel-header">
+          <strong class="font-weight-bold">Prospects By Type</strong>
+        </div>
+        <div class="ct-chart" id="prospectsByTypeBar"></div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="row">
-	<div class="col-md-7">
-		<div class="panel mb-10">
-			<div class="panel-body">
-				<div class="panel-header">
-					<strong class="font-weight-bold">Prospects By Type Comparison</strong>
-				</div>
-				<div class="ct-chart" id="prospectsByTypeComparisonBar"></div>
-			</div>
-		</div>
-	</div>
+  <div class="col-md-7">
+    <div class="panel mb-10">
+      <div class="panel-body">
+        <div class="panel-header">
+          <strong class="font-weight-bold">Prospects By Type Comparison</strong>
+        </div>
+        <div class="ct-chart" id="prospectsByTypeComparisonBar"></div>
+      </div>
+    </div>
+  </div>
 
   <div class="col-md-5">
     <div class="panel mb-10">
@@ -207,7 +207,7 @@
       drawProspectColumnBarChart('acreageRequestedColumn', seriesData)
     }
 
-    function drawStackedBarChart(selector, seriesData, allowLegend){
+    function drawStackedBarChart(selector, seriesData, allowLegend) {
       Highcharts.chart(selector, {
         chart: {
           plotBackgroundColor: null,
@@ -297,7 +297,7 @@
           text: seriesData.length == 0 ? '' : centerText,
           align: 'center',
           verticalAlign: 'middle',
-          style: {"font": 'bold 12px "Montserrat", sans-serif' }
+          style: {"font": 'bold 12px "Montserrat", sans-serif'}
         },
         tooltip: {
           pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -345,7 +345,7 @@
       });
     }
 
-    function drawTypeComparisonChart(selector, resultData){
+    function drawTypeComparisonChart(selector, resultData) {
       Highcharts.chart(selector, {
 
         chart: {
@@ -420,7 +420,7 @@
       });
     }
 
-    function drawProspectColumnBarChart(selector, resultData){
+    function drawProspectColumnBarChart(selector, resultData) {
       Highcharts.chart(selector, {
         chart: {
           plotBackgroundColor: null,

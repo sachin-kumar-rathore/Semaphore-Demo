@@ -44,10 +44,6 @@ module ReportsHelper
     seriesList = list_of_prospect_type_totals_to_show(results, reporting_parameter_objects, type)
     total_projects = seriesList.inject(0.0) { |sum, elm| sum + elm[:y] }
     seriesList = seriesList.each { |elm| elm[:y] = (elm[:y]/total_projects).round(2) }.sort_by { |elm| elm[:y] }
-    if seriesList.present?
-      seriesList.last[:sliced] = true
-      seriesList.last[:selected] = true
-    end
 
     return seriesList.to_json
   end
@@ -91,7 +87,7 @@ module ReportsHelper
     typeData = {data: []}
     results[type].keys.each do |year|
       data_value = results[type][year].to_f
-      if data_value >= 0.0
+      if data_value > 0.0
         typeData[:data] << {y: data_value}
         labels << year
       end

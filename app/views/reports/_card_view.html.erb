@@ -7,7 +7,7 @@
             <div class="panel-header">
               <strong class="font-weight-bold">Business Prospect</strong>
             </div>
-            <div class="ct-chart" id="businessProspectBar"></div>
+            <div class="ct-chart mb-10" id="businessProspectBar"></div>
           </div>
         </div>
       </div>
@@ -19,7 +19,7 @@
             <div class="panel-header">
               <strong class="font-weight-bold">Total New Investment</strong>
             </div>
-            <div class="ct-chart" id="totalNewInvestmentBar"></div>
+            <div class="ct-chart mb-10" id="totalNewInvestmentBar"></div>
           </div>
         </div>
       </div>
@@ -32,7 +32,7 @@
         <div class="panel-header">
           <strong class="font-weight-bold">Prospects By Type</strong>
         </div>
-        <div class="ct-chart" id="prospectsByTypeBar"></div>
+        <div class="ct-chart mb-10" id="prospectsByTypeBar"></div>
       </div>
     </div>
   </div>
@@ -45,7 +45,7 @@
         <div class="panel-header">
           <strong class="font-weight-bold">Prospects By Type Comparison</strong>
         </div>
-        <div class="ct-chart" id="prospectsByTypeComparisonBar"></div>
+        <div class="ct-chart mb-10" id="prospectsByTypeComparisonBar"></div>
       </div>
     </div>
   </div>
@@ -103,7 +103,7 @@
             <div class="panel-header">
               <strong class="font-weight-bold">Industry Type</strong>
             </div>
-            <div class="ct-chart" id="prospectsByIndustryTypeBar"></div>
+            <div class="ct-chart mb-10" id="prospectsByIndustryTypeBar"></div>
           </div>
         </div>
       </div>
@@ -129,7 +129,7 @@
             <div class="panel-header">
               <strong class="font-weight-bold">Industry Type Comparison</strong>
             </div>
-            <div class="ct-chart" id="industryTypeComparisonBar"></div>
+            <div class="ct-chart mb-10" id="industryTypeComparisonBar"></div>
           </div>
         </div>
       </div>
@@ -141,7 +141,7 @@
             <div class="panel-header">
               <strong class="font-weight-bold">Prospect Lead Sources Comparison</strong>
             </div>
-            <div class="ct-chart" id="prospectLeadSourcesComparisonBar"></div>
+            <div class="ct-chart mb-10" id="prospectLeadSourcesComparisonBar"></div>
           </div>
         </div>
       </div>
@@ -360,7 +360,7 @@
           text: null
         },
         xAxis: {
-          categories: resultData.labels,
+          categories: resultData.labels.sort(),
           gridLineWidth: 0,
           minorGridLineWidth: 0,
           lineColor: 'transparent',

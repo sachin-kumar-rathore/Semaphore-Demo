@@ -290,7 +290,6 @@
           plotShadow: false,
           backgroundColor: 'white',
           borderColor: 'white',
-          height: 320,
           type: 'pie'
         },
         title: {
@@ -306,10 +305,10 @@
           pie: {
             allowPointSelect: true,
             cursor: 'pointer',
-//            size: 150,
+            showInLegend: true,
             dataLabels: {
               enabled: true,
-              format: '<b>{point.name}</b>: <br/>{point.percentage:.1f} %',
+              format: '{point.percentage:.1f} %',
               style: {
                 color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || '#757575'
               },
@@ -318,9 +317,9 @@
           },
           series: {
             innerSize: '70%',
-            enableMouseTracking: false,
+            enableMouseTracking: true,
             shadow: false,
-            animation: false
+            animation: true
           }
         },
         legend: {
@@ -478,7 +477,7 @@
               style: {
                 textOutline: 0
               },
-              color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'black'
+              color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white'
             }
           }
         },

@@ -21,17 +21,17 @@ module ReportsHelper
   end
 
   def get_generic_prospect_total_new(results, type, parameters)
-    labels = results[type].keys
+    labels = results[type].keys.sort
     seriesList = []
     parameters.each do |type_name|
       typeData = {data: []}
       nil_counter = 0
-      results[type].keys.each do |year|
+      labels.each do |year|
         data_value = (results[type][year][type_name].nil? ? 0 : results[type][year][type_name].try(:length) || 0)
         typeData[:data] << {y: data_value}
         nil_counter += 1 if data_value == 0
       end
-      if(nil_counter != results[type].keys.count)
+      if(nil_counter != labels.count)
         typeData[:name] = type_name
         seriesList << typeData
       end
@@ -87,12 +87,17 @@ module ReportsHelper
 
   def net_new_investment(results, type)
     seriesList = []
+    labels = []
     typeData = {data: []}
     results[type].keys.each do |year|
-      typeData[:data] << {y: results[type][year].to_f}
+      data_value = results[type][year].to_f
+      if data_value >= 0.0
+        typeData[:data] << {y: data_value}
+        labels << year
+      end
     end
     seriesList << typeData
-    return {labels: results[type].keys, data: seriesList}.to_json
+    return {labels: labels, data: seriesList}.to_json
   end
 
   def filter_model_rows(reference_column)

@@ -9,7 +9,7 @@
       <Table>
         <Row>
           <Cell>
-            <Data ss:Type="String">Year</Data>
+            <Data ss:Type="String">Month</Data>
           </Cell>
           <Cell>
             <Data ss:Type="String">Type</Data>
@@ -22,7 +22,7 @@
           <% @results['project_type_id'][year].keys.each do |typeId| %>
             <Row>
               <Cell>
-                <Data ss:Type="Number"><%= year %></Data>
+                <Data ss:Type="String"><%= year %></Data>
               </Cell>
               <Cell>
                 <Data ss:Type="String"><%= ProjectType.find(typeId).name %></Data>
@@ -42,7 +42,7 @@
       <Table>
         <Row>
           <Cell>
-            <Data ss:Type="String">Year</Data>
+            <Data ss:Type="String">Month</Data>
           </Cell>
           <Cell>
             <Data ss:Type="String">Type</Data>
@@ -55,7 +55,7 @@
           <% @results['industry_type_id'][year].keys.each do |typeId| %>
             <Row>
               <Cell>
-                <Data ss:Type="Number"><%= year %></Data>
+                <Data ss:Type="String"><%= year %></Data>
               </Cell>
               <Cell>
                 <Data ss:Type="String"><%= IndustryType.find(typeId).name %></Data>
@@ -75,7 +75,7 @@
       <Table>
         <Row>
           <Cell>
-            <Data ss:Type="String">Year</Data>
+            <Data ss:Type="String">Month</Data>
           </Cell>
           <Cell>
             <Data ss:Type="String">Type</Data>
@@ -88,7 +88,7 @@
           <% @results['source_id'][year].keys.each do |typeId| %>
             <Row>
               <Cell>
-                <Data ss:Type="Number"><%= year %></Data>
+                <Data ss:Type="String"><%= year %></Data>
               </Cell>
               <Cell>
                 <Data ss:Type="String"><%= Source.find(typeId).name %></Data>
@@ -108,7 +108,7 @@
       <Table>
         <Row>
           <Cell>
-            <Data ss:Type="String">Year</Data>
+            <Data ss:Type="String">Month</Data>
           </Cell>
           <Cell>
             <Data ss:Type="String">Type</Data>
@@ -121,7 +121,7 @@
           <% @results['elimination_reason_id'][year].keys.each do |typeId| %>
             <Row>
               <Cell>
-                <Data ss:Type="Number"><%= year %></Data>
+                <Data ss:Type="String"><%= year %></Data>
               </Cell>
               <Cell>
                 <Data ss:Type="String"><%= EliminationReason.find(typeId).name %></Data>
@@ -141,7 +141,7 @@
       <Table>
         <Row>
           <Cell>
-            <Data ss:Type="String">Year</Data>
+            <Data ss:Type="String">Month</Data>
           </Cell>
           <Cell>
             <Data ss:Type="String">Type</Data>
@@ -154,7 +154,7 @@
           <% @results['competition_id'][year].keys.each do |typeId| %>
             <Row>
               <Cell>
-                <Data ss:Type="Number"><%= year %></Data>
+                <Data ss:Type="String"><%= year %></Data>
               </Cell>
               <Cell>
                 <Data ss:Type="String"><%= Competition.find(typeId).name %></Data>
@@ -174,7 +174,7 @@
       <Table>
         <Row>
           <Cell>
-            <Data ss:Type="String">Year</Data>
+            <Data ss:Type="String">Month</Data>
           </Cell>
           <Cell>
             <Data ss:Type="String">Status</Data>
@@ -187,7 +187,7 @@
           <% @results['status'][year].keys.each do |typeId| %>
             <Row>
               <Cell>
-                <Data ss:Type="Number"><%= year %></Data>
+                <Data ss:Type="String"><%= year %></Data>
               </Cell>
               <Cell>
                 <Data ss:Type="String"><%= typeId %></Data>
@@ -207,7 +207,7 @@
       <Table>
         <Row>
           <Cell>
-            <Data ss:Type="String">Year</Data>
+            <Data ss:Type="String">Month</Data>
           </Cell>
           <Cell>
             <Data ss:Type="String">Acres</Data>
@@ -220,7 +220,7 @@
           <% @results['acres_requested'][year].keys.each do |typeId| %>
             <Row>
               <Cell>
-                <Data ss:Type="Number"><%= year %></Data>
+                <Data ss:Type="String"><%= year %></Data>
               </Cell>
               <Cell>
                 <Data ss:Type="String"><%= typeId %></Data>
@@ -240,7 +240,7 @@
       <Table>
         <Row>
           <Cell>
-            <Data ss:Type="String">Year</Data>
+            <Data ss:Type="String">Month</Data>
           </Cell>
           <Cell>
             <Data ss:Type="String">Square foot</Data>
@@ -253,7 +253,7 @@
           <% @results['square_feet_requested'][year].keys.each do |typeId| %>
             <Row>
               <Cell>
-                <Data ss:Type="Number"><%= year %></Data>
+                <Data ss:Type="String"><%= year %></Data>
               </Cell>
               <Cell>
                 <Data ss:Type="String"><%= typeId %></Data>

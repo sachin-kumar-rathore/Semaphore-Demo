@@ -21,7 +21,7 @@ module ReportsHelper
   end
 
   def get_generic_prospect_total_new(results, type, parameters)
-    labels = results[type].keys.sort
+    labels = results[type].keys
     seriesList = []
     parameters.each do |type_name|
       typeData = {data: []}
@@ -86,7 +86,7 @@ module ReportsHelper
     seriesList = []
     labels = []
     typeData = {data: []}
-    results[type].keys.each do |year|
+    results[type].keys.reverse.each do |year|
       data_value = results[type][year].to_f
       if data_value > 0.0
         typeData[:data] << {y: data_value}

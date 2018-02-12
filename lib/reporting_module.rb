@@ -19,7 +19,7 @@ module ReportingModule
     end
 
     predefined_parameters.each do |param|
-      @results[param] = @projects.group_by { |p| p.active_date.year }
+      @results[param] = (activity == 'yearly') ? @projects.order("active_date").group_by { |p| p.active_date.year } : @projects.order("active_date").group_by { |p| p.active_date.strftime('%b,%y') }
       @results[param].each do |key, values|
         if aggregation_columns.include?(param)
           @results[param][key] = values.sum { |p| p[param] }

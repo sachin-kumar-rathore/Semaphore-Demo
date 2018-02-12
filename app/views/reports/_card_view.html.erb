@@ -179,7 +179,7 @@
 
     function loadBusinessProspectBar() {
       var seriesData = <%=raw get_generic_prospect_total_new(results, 'status', Project::STATUS) %>;
-      drawStackedBarChart('businessProspectBar', seriesData, true);
+      drawProspectColumnBarChart('businessProspectBar', seriesData);
     }
 
     function loadProspectsByProjectType() {
@@ -221,6 +221,9 @@
         title: {
           text: null
         },
+        tooltip: {
+          pointFormat: '${point.y}'
+        },
         xAxis: {
           categories: seriesData.labels,
           gridLineWidth: 0,
@@ -256,9 +259,9 @@
           },
           series: {
             pointWidth: 10,
-            enableMouseTracking: false,
+            enableMouseTracking: true,
             shadow: false,
-            animation: false,
+            animation: true,
             stacking: 'normal'
           }
         },
@@ -271,7 +274,7 @@
               enabled: false
             },
             exportButton: {
-              enabled: false,
+              enabled: false
             }
           }
         },
@@ -299,7 +302,7 @@
           style: {"font": 'bold 12px "Montserrat", sans-serif'}
         },
         tooltip: {
-          pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+          pointFormat: '{point.percentage:.1f}%'
         },
         plotOptions: {
           pie: {

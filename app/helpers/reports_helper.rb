@@ -36,6 +36,7 @@ module ReportsHelper
         seriesList << typeData
       end
     end
+    seriesList = seriesList.sort_by { |elm| elm[:name] }
     return {labels: labels, data: seriesList}.to_json
   end
 
@@ -43,7 +44,7 @@ module ReportsHelper
     reporting_parameter_objects = filter_model_rows(type)
     seriesList = list_of_prospect_type_totals_to_show(results, reporting_parameter_objects, type)
     total_projects = seriesList.inject(0.0) { |sum, elm| sum + elm[:y] }
-    seriesList = seriesList.each { |elm| elm[:y] = (elm[:y]/total_projects).round(2) }.sort_by { |elm| elm[:y] }
+    seriesList = seriesList.each { |elm| elm[:y] = (elm[:y]/total_projects).round(2) }.sort_by { |elm| elm[:name] }
 
     return seriesList.to_json
   end

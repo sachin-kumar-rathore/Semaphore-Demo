@@ -19,7 +19,7 @@ module ReportingModule
     end
 
     predefined_parameters.each do |param|
-      @results[param] = @projects.group_by { |p| p.active_date.year }
+      @results[param] = (activity == 'yearly') ? @projects.order("active_date").group_by { |p| p.active_date.year } : @projects.order("active_date").group_by { |p| p.active_date.strftime('%b,%y') }
       @results[param].each do |key, values|
         if aggregation_columns.include?(param)
           @results[param][key] = values.sum { |p| p[param] }
@@ -31,16 +31,18 @@ module ReportingModule
   end
 
   def download_report(activity)
-    if (params[:report_format] == 'pdf')
-      pdf = WickedPdf.new.pdf_from_string(as_html)
-      save_path = Rails.root.join('public', "#{activity}_report.pdf")
-      File.open(save_path, 'wb') do |file|
-        file << pdf
+    if (request.format == 'pdf')
+      respond_to do |format|
+        format.pdf do
+          # send_data("#{activity}_report", filename: "#{activity}_report.pdf", type: 'application/pdf')
+          render pdf: "#{activity}_report"
+        end
       end
-      send_file("#{Rails.root}/public/#{activity}_report.pdf", type: "application/pdf", :disposition => 'attachment')
     else
       respond_to do |format|
-        format.xls
+        format.xls {
+          response.headers['Content-Disposition'] = "attachment; filename=\"#{activity}_report.xls\""
+        }
       end
     end
   end

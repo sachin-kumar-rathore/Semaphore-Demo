@@ -1,0 +1,44 @@
+<div align="center" id="businessProspectBar"></div><br>
+<div align="center" id="totalNewInvestmentBar"></div><br>
+<div align="center" id="prospectsByTypeBar"></div><br>
+<div align="center" id="prospectsByTypeComparisonBar"></div><br>
+<div align="center" id="squareFootRequestedColumn"></div><br>
+<div align="center" id="prospectsByIndustryTypeBar"></div><br>
+<div align="center" id="acreageRequestedColumn"></div><br>
+<div align="center" id="industryTypeComparisonBar"></div><br>
+<div align="center" id="prospectLeadSourcesComparisonBar"></div><br>
+<div align="center">
+	<div class="panel">
+		<div class="panel-body">
+			<div id="widgetLineareaOne">
+				<div class="card-block p-20 pt-10">
+					<div class="mb-20 grey-500">
+						<i class="fa fa-caret-down red-500 font-size-18"></i>
+						<strong class="font-size-18 black"><%= @results['retained_jobs'].values.sum %></strong>
+						<small>Total Numbers of Retained Jobs</small>
+					</div>
+					<div class="mb-20 grey-500">
+						<i class="fa fa-caret-up green-500 font-size-18"></i>
+						<strong class="font-size-18 black"><%= @results['new_jobs'].values.sum %></strong>
+						<small>Total Numbers of New Jobs</small>
+					</div>
+					<div class="mb-20 grey-500">
+						<i class="fa fa-caret-up green-500 font-size-18"></i>
+						<strong class="font-size-18 black">$<%= @results['net_new_investment'].values.sum %></strong>
+						<small>Total Number of New Investment</small>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div align="center" id="eliminationReasonCompBar"></div><br>
+<div align="center" id="competitionCompBar"></div><br>
+
+<%
+	start_date_or_year = params[:start_date] ? params[:start_date] : Date.today.to_date - 30
+	end_date_or_compare = params[:end_date] ? params[:end_date] : Date.today
+	chart_date_range = "From: #{start_date_or_year}, To: #{end_date_or_compare}"
+%>
+
+<%= render :partial => 'pdf_scripts', locals: {date_range: chart_date_range} %>

@@ -174,12 +174,13 @@
 
     function loadProspectLeadSourcesComparison() {
       var resultedData = <%=raw get_generic_types_comparison(results, 'source_id') %>;
-      drawTypeComparisonChart('prospectLeadSourcesComparisonBar', resultedData);
+//      drawTypeComparisonChart('prospectLeadSourcesComparisonBar', resultedData);
+      drawStackedBarChart('prospectLeadSourcesComparisonBar', resultedData, true); // converted to Stackbar Chart
     }
 
     function loadBusinessProspectBar() {
       var seriesData = <%=raw get_generic_prospect_total_new(results, 'status', Project::STATUS) %>;
-      drawProspectColumnBarChart('businessProspectBar', seriesData);
+      drawStackedBarChart('businessProspectBar', seriesData, true);
     }
 
     function loadProspectsByProjectType() {
@@ -222,7 +223,7 @@
           text: null
         },
         tooltip: {
-          pointFormat: '${point.y}'
+          pointFormat: '{point.y}'
         },
         xAxis: {
           categories: seriesData.labels,

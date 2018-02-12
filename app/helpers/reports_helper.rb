@@ -77,7 +77,7 @@ module ReportsHelper
       generic_types.each do |type_id|
         series.push(results[type][year][type_id].try(:length) || 0)
       end
-      seriesList.push({name: 'Year: ' + year.to_s, data: series})
+      seriesList.push({name: year.to_s, data: series})
     end
     return seriesList
   end

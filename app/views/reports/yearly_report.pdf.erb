@@ -1,0 +1,44 @@
+<div align="center" id="businessProspectBar"></div><br>
+<div align="center" id="totalNewInvestmentBar"></div><br>
+<div align="center" id="prospectsByTypeBar"></div><br>
+<div align="center" id="prospectsByTypeComparisonBar"></div><br>
+<div align="center" id="squareFootRequestedColumn"></div><br>
+<div align="center" id="prospectsByIndustryTypeBar"></div><br>
+<div align="center" id="acreageRequestedColumn"></div><br>
+<div align="center" id="industryTypeComparisonBar"></div><br>
+<div align="center" id="prospectLeadSourcesComparisonBar"></div><br>
+<div align="center">
+	<div class="panel">
+		<div class="panel-body">
+			<div id="widgetLineareaOne">
+				<div class="card-block p-20 pt-10">
+					<div class="mb-20 grey-500">
+						<i class="fa fa-caret-down red-500 font-size-18"></i>
+						<strong class="font-size-18 black"><%= @results['retained_jobs'].values.sum %></strong>
+						<small>Total Numbers of Retained Jobs</small>
+					</div>
+					<div class="mb-20 grey-500">
+						<i class="fa fa-caret-up green-500 font-size-18"></i>
+						<strong class="font-size-18 black"><%= @results['new_jobs'].values.sum %></strong>
+						<small>Total Numbers of New Jobs</small>
+					</div>
+					<div class="mb-20 grey-500">
+						<i class="fa fa-caret-up green-500 font-size-18"></i>
+						<strong class="font-size-18 black">$<%= @results['net_new_investment'].values.sum %></strong>
+						<small>Total Number of New Investment</small>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div align="center" id="eliminationReasonCompBar"></div><br>
+<div align="center" id="competitionCompBar"></div><br>
+
+<%
+	start_date_or_year = params[:year_to_compare] ? params[:year_to_compare].to_i : 3
+	end_date_or_compare = params[:year] ? params[:year].to_i : Date.today.year
+	chart_date_range = "From: #{start_date_or_year.year.ago.strftime("%d-%m-%Y")}, To: #{DateTime.new(end_date_or_compare).end_of_year.strftime("%d-%m-%Y")}"
+%>
+
+<%= render :partial => 'pdf_scripts', locals: {date_range: chart_date_range} %>

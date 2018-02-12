@@ -1,5 +1,6 @@
 class ReportsController < ApplicationController
 
+  before_action :change_format, only: [:yearly_report, :monthly_report]
   before_action :authenticate_user!
   before_action :set_selected_parameters, only: [:index, :yearly, :monthly]
   respond_to :html, only: [:index]
@@ -76,6 +77,10 @@ class ReportsController < ApplicationController
   def set_selected_parameters
     @selected_parameters = %w(status square_feet_requested acres_requested project_type_id industry_type_id source_id
                               elimination_reason_id competition_id net_new_investment new_jobs retained_jobs)
+  end
+
+  def change_format
+    request.format = params[:format]
   end
 
 end

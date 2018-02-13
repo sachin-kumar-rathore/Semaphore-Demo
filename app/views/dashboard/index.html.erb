@@ -158,9 +158,9 @@
     <div class="col-lg-8">
       <div class="card cardPadding <%= "hoverOverlay" if @tasks.count == 0 %>">
         <% if @tasks.count == 0 %>
-            <div class="overlaySec">
-              <a href="<%= tasks_path %>"><span><i class="fa fa-plus"></i></span>Create Your First Task</a>
-            </div>
+					<div class="overlaySec">
+						<a href="<%= tasks_path %>"><span><i class="fa fa-plus"></i></span>Create Your First Task</a>
+					</div>
         <% end %>
 
         <div class="form-row">
@@ -194,8 +194,12 @@
 
   <div class="row">
     <div class="col-lg-12">
-      <div class="card cardPadding">
-
+      <div class="card cardPadding <%= "hoverOverlay" if @emails.count == 0 %>">
+				<% if @emails.count == 0 %>
+					<div class="overlaySec">
+						<a href="javascript:void(0)"><span><i class="fa fa-plus"></i></span>Forward Your First Email</a>
+					</div>
+				<% end %>
         <div class="form-row">
           <div class="col">
             <div class="title-menu">
@@ -211,7 +215,7 @@
 
         <!-- Panel Filtering rows -->
         <table class="table tableCustomStyle table-hover removeTblSearch footable" id="dashboardEmails" data-toggle-column="first" data-empty="There are no emails." data-show-toggle="true">
-          <%= render partial: 'emails', locals: {emails: @emails} %>
+          <%= render partial: 'emails', locals: {emails: @emails.count > 0 ? @emails : load_demo_tasks_emails('email')} %>
         </table>
         <div class="botmheading">
           <%= link_to 'View All', emails_path %>

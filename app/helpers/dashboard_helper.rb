@@ -110,8 +110,16 @@ module DashboardHelper
 
   def load_demo_tasks_emails(object)
     objects = []
-    5.times do
-      objects << Task.new(priority: Task::PRIORITY.sample, progress: rand(0..100), description: Faker::Lorem.sentence)
+    if object == 'task'
+      5.times do
+        objects << Task.new(priority: Task::PRIORITY.sample, progress: rand(0..100),
+                            description: Faker::Lorem.sentence)
+      end
+    else
+      5.times do
+        objects << Email.new(sent_to: Faker::Internet.email, sent_by: Faker::Internet.email,
+                             subject: Faker::Lorem.sentence, email_date: Faker::Date.between(100.days.ago, Date.today))
+      end
     end
     return objects
   end

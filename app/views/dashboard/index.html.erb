@@ -6,10 +6,10 @@
           <li>
             <div class="projectSec <%= "hoverOverlay" if @projects.count == 0 %>">
               <% if @projects.count == 0 %>
-                  <div class="overlaySec">
-                    <a href="<%= new_project_path %>"><span><i class="fa fa-plus"></i></span>Create Your First
-                      Project</a>
-                  </div>
+                <div class="overlaySec">
+                  <a href="<%= new_project_path %>"><span><i class="fa fa-plus"></i></span>Create Your First
+                    Project</a>
+                </div>
               <% end %>
               <div class="title-menu">
                 <span><button type="button" class="btn activeBtn">Active</button></span>
@@ -56,10 +56,10 @@
           <li>
             <div class="projectSec <%= "hoverOverlay" if @projects.count == 0 %>">
               <% if @projects.count == 0 %>
-                  <div class="overlaySec">
-                    <a href="<%= new_project_path %>"><span><i class="fa fa-plus"></i></span>Create Your First
-                      Project</a>
-                  </div>
+                <div class="overlaySec">
+                  <a href="<%= new_project_path %>"><span><i class="fa fa-plus"></i></span>Create Your First
+                    Project</a>
+                </div>
               <% end %>
               <div class="title-menu">
                 <span><button type="button" class="btn activeBtn primary">Preliminary</button></span>
@@ -109,9 +109,9 @@
     <div class="col-lg-8">
       <div class="card cardPadding <%= "hoverOverlay" unless @not_demo_mode %>">
         <% unless @not_demo_mode %>
-            <div class="overlaySec">
-              <a href="<%= new_project_path %>"><span><i class="fa fa-plus"></i></span>Create Your First Project</a>
-            </div>
+          <div class="overlaySec">
+            <a href="<%= new_project_path %>"><span><i class="fa fa-plus"></i></span>Create Your First Project</a>
+          </div>
         <% end %>
         <div class="form-row">
           <div class="col">
@@ -142,9 +142,9 @@
     <div class="col-lg-4">
       <div class="card cardPadding <%= "hoverOverlay" unless @not_demo_mode %>">
         <% unless @not_demo_mode %>
-            <div class="overlaySec">
-              <a href="<%= new_project_path %>"><span><i class="fa fa-plus"></i></span>Create Your First Project</a>
-            </div>
+          <div class="overlaySec">
+            <a href="<%= new_project_path %>"><span><i class="fa fa-plus"></i></span>Create Your First Project</a>
+          </div>
         <% end %>
         <div class="title-menu">
           <h3>Attraction - Industry type</h3>
@@ -158,9 +158,9 @@
     <div class="col-lg-8">
       <div class="card cardPadding <%= "hoverOverlay" if @tasks.count == 0 %>">
         <% if @tasks.count == 0 %>
-					<div class="overlaySec">
-						<a href="<%= tasks_path %>"><span><i class="fa fa-plus"></i></span>Create Your First Task</a>
-					</div>
+          <div class="overlaySec">
+            <a href="<%= tasks_path %>"><span><i class="fa fa-plus"></i></span>Create Your First Task</a>
+          </div>
         <% end %>
 
         <div class="form-row">
@@ -195,11 +195,11 @@
   <div class="row">
     <div class="col-lg-12">
       <div class="card cardPadding <%= "hoverOverlay" if @emails.count == 0 %>">
-				<% if @emails.count == 0 %>
-					<div class="overlaySec">
-						<a href="javascript:void(0)"><span><i class="fa fa-plus"></i></span>Forward Your First Email</a>
-					</div>
-				<% end %>
+        <% if @emails.count == 0 %>
+          <div class="overlaySec">
+            <a href="javascript:void(0)"><span><i class="fa fa-plus"></i></span>Forward Your First Email</a>
+          </div>
+        <% end %>
         <div class="form-row">
           <div class="col">
             <div class="title-menu">
@@ -258,7 +258,7 @@
           pie: {
             allowPointSelect: true,
             cursor: 'pointer',
-						size: 130,
+            size: 130,
             dataLabels: {
               enabled: true,
               format: '<b>{point.name}</b>: <br/>{point.percentage:.1f} %',

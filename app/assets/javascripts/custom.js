@@ -433,3 +433,7 @@ function reloadUsers(){
     dataType: 'script'
   });
 }
+
+$(document).on("click", "#toggleMenubar", function () {
+  $('.logo-image').toggleClass('hidden-class');
+});

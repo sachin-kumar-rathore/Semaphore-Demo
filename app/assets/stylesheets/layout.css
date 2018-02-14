@@ -1128,3 +1128,12 @@ a:not([href]):not([tabindex]){
   vertical-align: middle;
 }
 /*************************************************************************/
+
+.menu-icon {
+  width: 50px;
+  font-size: 28px;
+}
+
+.hidden-class {
+  visibility: hidden;
+}

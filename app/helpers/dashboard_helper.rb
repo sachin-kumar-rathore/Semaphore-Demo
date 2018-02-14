@@ -22,10 +22,6 @@ module DashboardHelper
     seriesList = list_of_prospect_totals_to_show(results)
     total_projects = seriesList.inject(0.0) { |sum, elm| sum + elm[:y] }
     seriesList = seriesList.each { |elm| elm[:y] = (elm[:y]/total_projects).round(2) }.sort_by { |elm| elm[:y] }
-    if seriesList.present?
-      seriesList.last[:sliced] = true
-      seriesList.last[:selected] = true
-    end
     if @not_demo_mode
       return seriesList.to_json
     else
@@ -66,10 +62,6 @@ module DashboardHelper
       seriesList[indx][:y] = (each_value/total_projects).round(2)
     end
     seriesList.sort_by { |elm| elm[:y] }
-    if seriesList.present?
-      seriesList.last[:sliced] = true
-      seriesList.last[:selected] = true
-    end
     return seriesList
   end
 

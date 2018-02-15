@@ -434,6 +434,3 @@ function reloadUsers(){
   });
 }
 
-$(document).on("click", "#toggleMenubar", function () {
-  $('.logo-image').toggleClass('hidden-class');
-});

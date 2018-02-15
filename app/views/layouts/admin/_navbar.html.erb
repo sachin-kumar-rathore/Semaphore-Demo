@@ -4,11 +4,13 @@
       <span class="sr-only">Toggle navigation</span>
       <span class="hamburger-bar"></span>
     </button>
-    <button type="button" class="navbar-toggler collapsed" data-target="#site-navbar-collapse" data-toggle="collapse">
+    <!--button type="button" class="navbar-toggler collapsed" data-target="#site-navbar-collapse" data-toggle="collapse">
       <i class="icon md-more" aria-hidden="true"></i>
-    </button>
+    </button-->
     <div class="navbar-brand navbar-brand-center site-gridmenu-toggle" data-toggle="gridmenu">
-    <div class="logo"><a href="javascript:void(0)"><img src="/assets/logo.png" alt="..."></a></div>
+      <div class="logo"> 
+        <%= render '/layouts/logo_svg' %>
+      </div>
     </div>
     <button type="button" class="navbar-toggler collapsed" data-target="#site-navbar-search" data-toggle="collapse">
       <span class="sr-only">Toggle Search</span>
@@ -20,7 +22,7 @@
     <div class="collapse navbar-collapse navbar-collapse-toolbar" id="site-navbar-collapse">
       <!-- Navbar Toolbar -->
       <ul class="nav navbar-toolbar">
-        <li class="nav-item hidden-float" id="toggleMenubar">
+        <!--li class="nav-item hidden-float" id="toggleMenubar">
           <a class="nav-link waves-effect waves-light waves-round" data-toggle="menubar" href="#" role="button">
             <i class="icon hamburger hamburger-arrow-left hided unfolded">
               <span class="sr-only">Toggle menubar</span>
@@ -32,7 +34,7 @@
           <a class="nav-link icon icon-fullscreen waves-effect waves-light waves-round" data-toggle="fullscreen" href="#" role="button">
             <span class="sr-only">Toggle fullscreen</span>
           </a>
-        </li>
+        </li-->
         <li class="nav-item hidden-float">
           <a class="nav-link icon md-search waves-effect waves-light waves-round" data-toggle="collapse" href="#" data-target="#site-navbar-search" role="button">
             <span class="sr-only">Toggle Search</span>

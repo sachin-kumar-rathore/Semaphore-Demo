@@ -2,7 +2,7 @@ require 'rails_helper'
 require 'faker'
 
 RSpec.describe Site, type: :model do
-  subject { described_class.new(contact_id: Faker::Number, property_number: Faker::Numeric, property_name: Faker::Text,
+  subject { described_class.new(contact_id: Faker::Number, property_number: Faker::Numeric, name: Faker::Text,
                                 property_type: Faker::Text, address_line: Faker::Text, city: Faker::Text,
                                 state: Faker::Text, zip_code: Faker::Text, country: Faker::Text, available_acreage: Faker::Numeric,
                                 available_square_feet: Faker::Numeric, total_acreage: Faker::Numeric, total_square_feet: Faker::Numeric,
@@ -19,7 +19,7 @@ RSpec.describe Site, type: :model do
   end
 
   it 'is not valid without an property name' do
-    subject.property_name = nil
+    subject.name = nil
     expect(subject).to_not be_valid
   end
 

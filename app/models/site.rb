@@ -1,7 +1,8 @@
 class Site < ApplicationRecord
   include SpreadSheet
 
-  IMPORT_PARAMETERS = ["site_number", "property_name", "contact_id", "property_type", "address_line",
+  IMPORT_PARAMETERS = ["site_number", "name", "contact_id", "property_type", "address_line",
+
                       "city", "country", "state", "zip_code", "special_district", "available_acreage", "available_square_feet",
                       "total_acreage", "total_square_feet", "latitude", "longitude"]
   attr_accessor :project_id
@@ -20,7 +21,7 @@ class Site < ApplicationRecord
   has_many :projects, through: :project_sites
   belongs_to :business_unit
   # == Validations == #
-  validates_presence_of :organization_id, :property_name, :site_number, :property_type, :address_line, :city, :state,
+  validates_presence_of :organization_id, :name, :site_number, :property_type, :address_line, :city, :state,
                         :zip_code, :country
 
   validates :available_acreage, presence:true, numericality: {only_float: true}
@@ -36,7 +37,7 @@ class Site < ApplicationRecord
   # == Callbacks == #
   after_create :add_site_to_project, if: :has_project_id?
   # == Scopes and Other macros == #
-  scope :property_name, -> (property_name) { where("property_name ilike ?","%#{property_name}%")}
+  scope :property_name, -> (property_name) { where("name ilike ?","%#{property_name}%")}
   scope :site_number, -> (site_number) { where("site_number = ?",site_number)}
   scope :zip_code, -> (zip_code) { where("zip_code = ?",zip_code)}
   scope :filter_by_date, -> (start_date, end_date) { where("created_at >= ? AND created_at <= ?", start_date, end_date)}

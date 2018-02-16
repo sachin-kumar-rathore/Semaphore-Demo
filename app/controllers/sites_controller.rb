@@ -81,7 +81,7 @@ class SitesController < ApplicationController
 
   def site_params
     params.require(:site).permit(:organization_id, :contact_id, :site_number,
-                                 :property_name, :property_type, :address_line,
+                                 :name, :property_type, :address_line,
                                  :city, :state, :zip_code, :country,
                                  :available_acreage, :available_square_feet,
                                  :contact_id, :total_acreage,

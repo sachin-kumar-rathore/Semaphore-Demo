@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180123134627) do
+ActiveRecord::Schema.define(version: 20180130060806) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,7 +82,6 @@ ActiveRecord::Schema.define(version: 20180123134627) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "organization_id"
-    t.string "title"
     t.string "phone_number_1"
     t.string "phone_number_2"
     t.string "cell_phone"
@@ -118,7 +117,6 @@ ActiveRecord::Schema.define(version: 20180123134627) do
     t.bigint "industry_type_id"
     t.bigint "business_unit_id"
     t.bigint "project_type_id"
-    t.string "company_organization_name"
     t.index ["business_unit_id"], name: "index_companies_on_business_unit_id"
     t.index ["industry_type_id"], name: "index_companies_on_industry_type_id"
     t.index ["organization_id"], name: "index_companies_on_organization_id"
@@ -208,6 +206,7 @@ ActiveRecord::Schema.define(version: 20180123134627) do
     t.text "notes"
     t.bigint "contact_category_id"
     t.bigint "business_unit_id"
+    t.string "organization_name"
     t.index ["business_unit_id"], name: "index_contacts_on_business_unit_id"
     t.index ["contact_category_id"], name: "index_contacts_on_contact_category_id"
   end
@@ -404,7 +403,7 @@ ActiveRecord::Schema.define(version: 20180123134627) do
     t.integer "organization_id"
     t.integer "contact_id"
     t.string "site_number"
-    t.string "property_name"
+    t.string "name"
     t.string "property_type"
     t.string "address_line"
     t.string "city"

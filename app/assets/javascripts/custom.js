@@ -434,3 +434,26 @@ function reloadUsers(){
   });
 }
 
+$(document).on("click", "#custom-export-projects-btn", function () {
+  $('#hiddenExportField').val("true");
+});
+$(document).on("click", "#basic-export-projects-btn", function () {
+  $('#hiddenExportField').val("false");
+});
+
+function checkAll(ele) {
+  var checkboxes = document.getElementsByClassName('custom-export-chk');
+  if (ele.checked) {
+    for (var i = 0; i < checkboxes.length; i++) {
+      if (checkboxes[i].type == 'checkbox') {
+        checkboxes[i].checked = true;
+      }
+    }
+  } else {
+    for (var i = 0; i < checkboxes.length; i++) {
+      if (checkboxes[i].type == 'checkbox') {
+        checkboxes[i].checked = false;
+      }
+    }
+  }
+}

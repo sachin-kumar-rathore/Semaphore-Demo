@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+          xmlns:o="urn:schemas-microsoft-com:office:office"
+          xmlns:x="urn:schemas-microsoft-com:office:excel"
+          xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+          xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Styles>
+    <Style ss:ID="bold">
+        <Font ss:Bold="1"/>
+    </Style>
+  </Styles>
+  <% if @projects.present? %>
+    <Worksheet ss:Name="Export Projects Data">
+      <Table>
+        <% if params[:custom_export] && params[:custom].present? %>
+        <!-- for custom export -->
+          <Row>
+            <% params[:custom].each do |key, value| %>
+              <Cell ss:StyleID="bold"><Data ss:Type="String"><%= value %></Data></Cell>
+            <% end %>
+          </Row>
+  
+          <% @projects.each do |project| %>
+            <Row>
+              <% params[:custom].each do |key, value| %>
+                <Cell><Data ss:Type="String"><%= get_field_value(project, key) %></Data></Cell>
+              <% end %>
+            </Row>
+          <% end %>
+        <% else %>
+        <!-- for basic export -->
+          <Row>
+            <% export_options.values.each do |title| %>
+              <Cell ss:StyleID="bold"><Data ss:Type="String"><%= title %></Data></Cell>
+            <% end %>
+          </Row>
+  
+          <% @projects.each do |project| %>
+            <Row>
+              <% export_options.keys.each do |field| %>
+                <Cell><Data ss:Type="String"><%= get_field_value(project, field) %></Data></Cell>
+              <% end %>
+            </Row>
+          <% end %>
+        <% end %>
+      </Table>
+    </Worksheet>
+  <% end %>
+</Workbook>

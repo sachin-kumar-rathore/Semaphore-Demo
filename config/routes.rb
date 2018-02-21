@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     end
     collection do
       get :check_companies_number_validity
+      get :export_form
+      get :export
     end
     resources :contacts, controller: 'company_contacts' do
       member do

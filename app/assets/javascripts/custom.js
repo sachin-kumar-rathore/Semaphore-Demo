@@ -457,3 +457,10 @@ function checkAll(ele) {
     }
   }
 }
+
+$(document).on("click", "#export-all-companies-btn", function () {
+  $('#exportAllCompanies').val("true");
+});
+$(document).on("click", "#export-companies-btn", function () {
+  $('#exportAllCompanies').val("false");
+});

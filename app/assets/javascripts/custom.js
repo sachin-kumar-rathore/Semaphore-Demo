@@ -464,3 +464,60 @@ $(document).on("click", "#export-all-companies-btn", function () {
 $(document).on("click", "#export-companies-btn", function () {
   $('#exportAllCompanies').val("false");
 });
+
+function saveCustomConfig() {
+  var path = '/custom_exports/save_custom_configs';
+  customConfigRequest(path);
+}
+
+function customConfigRequest(path) {
+  var name = $('#customOptionName').val();
+  if (name) {
+     var checked_options = $(":checked").map(function(){return $(this).attr("id");}).get();
+    $.ajax({
+      url: path,
+      type: "POST",
+      data: { name: name, options: checked_options}
+    });
+  }
+  else {
+    alert('Name can not be blank!');
+  }
+}
+
+function applyCustomOption(id, filters, name) {
+  applyfilters(filters, name);
+  $('.custom_export_tr').removeClass('active_custom_export');
+  $('.custom_export_'+id).addClass('active_custom_export');
+
+  $('#customOptionName').val(null);
+  $('.save-custom-config').html('Save');
+  $('.save-custom-config').attr("onclick", "saveCustomConfig()");
+}
+
+function applyfilters(filters, name) {
+  var checkboxes = document.getElementsByClassName('custom-export-chk');
+  for (var i = 0; i < checkboxes.length; i++) {
+    if ((checkboxes[i].type == 'checkbox') && (filters.includes(checkboxes[i].id))) {
+      checkboxes[i].checked = true;
+    }
+    else {
+      checkboxes[i].checked = false;
+    }
+  };
+}
+
+$(document).on("click", ".edit-custom-export", function () {
+  var name = $(this).data("name");
+  var filters = $(this).data("filters");
+  var custom_export_id = $(this).data("custom_id");
+  applyfilters(filters, name);
+  $('#customOptionName').val(name);
+  $('.save-custom-config').html('Update');
+  $('.save-custom-config').attr("onclick", "editCustomConfig("+custom_export_id+")");
+});
+
+function editCustomConfig(id) {
+  var path = '/custom_exports/'+ id +'/edit_custom_configs';
+  customConfigRequest(path);
+}

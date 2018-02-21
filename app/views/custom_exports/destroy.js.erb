@@ -1,0 +1,5 @@
+$('.flashMessages').html("<%= j render partial: 'shared/flash_messages' %>");
+<% if @custom_exports.present? %>
+  $('.custom-options-list').html("<%= escape_javascript(render partial: '/projects/custom_exports_list', locals: { custom_exports: @custom_exports } ) %>"); 
+  $('#customOptionName').val(null);
+<% end %>

@@ -166,6 +166,15 @@ Rails.application.routes.draw do
   resources :imports, only: [:index]
   resources :exports, only: [:index]
 
+  resources :custom_exports, only: [:destroy]  do
+    collection do
+      post :save_custom_configs
+    end
+    member do
+      post :edit_custom_configs
+    end
+  end
+
   resources :manage_users do
     member do
       get :edit_invitation

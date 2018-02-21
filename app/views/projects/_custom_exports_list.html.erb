@@ -1,0 +1,28 @@
+<table class="table footable table tableCustomStyle table-hover removeTblSearch bodrTop" id="userLists" data-empty="There are no users." data-show-toggle="true">
+  <thead>
+    <tr>
+      <th data-breakpoints="xs sm">Other saved Exports:</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% custom_exports.each do |custom_export| %>
+      <tr class="custom_export_tr custom_export_<%= custom_export.id %>">
+        <td>
+          <a class="apply-custom-option" data-href="#" onclick="applyCustomOption('<%= custom_export.id %>', '<%= custom_export.filters %>', '<%= custom_export.name %>');"><%= custom_export.name %></a>
+        </td>
+        <td>
+          <div class="openLeft moreOptions dropdown">
+            <a class="" data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false" data-animation="scale-down" role="button">
+              <i class="icon md-more-vert" aria-hidden="true"></i>
+            </a>
+            <div class="dropdown-menu" role="menu">
+              <a class="dropdown-item edit-custom-export" data-filters="<%= custom_export.filters %>" data-name='<%= custom_export.name %>' data-custom_id="<%= custom_export.id %>" role="menuitem"><i class="icon md-edit" aria-hidden="true"></i> Edit</a>
+              <a class="dropdown-item delete-option" data-href="<%= custom_export_path(custom_export) %>" role="menuitem"><i class="icon md-delete" aria-hidden="true"></i> Delete</a>
+            </div>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

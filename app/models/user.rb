@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :documents, dependent: :nullify
   has_many :user_roles, dependent: :destroy
   has_many :security_roles, through: :user_roles
+  has_many :custom_exports, dependent: :destroy
   before_save :minimum_one_role
 
   PAGINATION_VALUE = 8

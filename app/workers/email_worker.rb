@@ -1,7 +1,8 @@
 class EmailWorker
   include Sidekiq::Worker
 
-  def perform(email)
+  def perform(email_id)
+    email = Email.find(email_id)
     contact = email.organization.contacts.find_by_email(email.sent_by)
     if contact.present?
       email.contacts << contact

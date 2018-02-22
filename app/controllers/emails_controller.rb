@@ -28,7 +28,7 @@ class EmailsController < ApplicationController
       @email.generate_email(params)
       begin
         @email.save
-        EmailWorker.perform_in(10.minutes, @email)
+        EmailWorker.perform_in(10.minutes, @email.id)
       rescue Exception => e
         puts "caught exception #{e}!"
       end

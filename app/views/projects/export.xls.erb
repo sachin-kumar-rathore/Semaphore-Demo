@@ -12,7 +12,7 @@
   <% if @projects.present? %>
     <Worksheet ss:Name="Export Projects Data">
       <Table>
-        <% if params[:custom_export] && params[:custom].present? %>
+        <% if (params[:custom_export] == 'true') && params[:custom].present? %>
         <!-- for custom export -->
           <Row>
             <% params[:custom].each do |key, value| %>

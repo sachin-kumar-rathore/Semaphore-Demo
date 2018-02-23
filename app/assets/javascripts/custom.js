@@ -442,19 +442,10 @@ $(document).on("click", "#basic-export-projects-btn", function () {
 });
 
 function checkAll(ele) {
-  var checkboxes = document.getElementsByClassName('custom-export-chk');
   if (ele.checked) {
-    for (var i = 0; i < checkboxes.length; i++) {
-      if (checkboxes[i].type == 'checkbox') {
-        checkboxes[i].checked = true;
-      }
-    }
+    $(".custom-export-checkboxes input:checkbox").prop("checked", true);
   } else {
-    for (var i = 0; i < checkboxes.length; i++) {
-      if (checkboxes[i].type == 'checkbox') {
-        checkboxes[i].checked = false;
-      }
-    }
+    $(".custom-export-checkboxes input:checkbox").prop("checked", false);
   }
 }
 
@@ -511,7 +502,11 @@ $(document).on("click", ".edit-custom-export", function () {
   var name = $(this).data("name");
   var filters = $(this).data("filters");
   var custom_export_id = $(this).data("custom_id");
+  
   applyfilters(filters, name);
+  $('.custom_export_tr').removeClass('active_custom_export');
+  $('.custom_export_'+custom_export_id).addClass('active_custom_export');
+
   $('#customOptionName').val(name);
   $('.save-custom-config').html('Update');
   $('.save-custom-config').attr("onclick", "editCustomConfig("+custom_export_id+")");

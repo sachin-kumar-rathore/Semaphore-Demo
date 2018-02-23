@@ -132,11 +132,13 @@ class CompaniesController < ApplicationController
                                     :number_of, :average_age_of_buildings,
                                     :room_for_expansion, :owned_or_leased,
                                     :lease_expiration_date_str, :facility_notes,
-                                    :owner_id, :naics_codes)
+                                    :owner_id)
   end
 
   def products_and_services_params
-    params.require(:company).permit(:primary_products_and_services)
+    params.require(:company).permit(:primary_products_and_services, :naics_code_1,
+                                    :naics_code_2, :naics_code_3, :naics_code_4,
+                                    :naics_code_5)
   end
 
   def local_employment_params

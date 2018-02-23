@@ -13,18 +13,20 @@
               <span>Check all</span>
             </div>
           </div><br>
-          <% export_options.to_a.in_groups_of(3).each do |options| %>
-            <div class="row">
-              <% options.each do |option| %>
-                <% if option.present? %>
-                  <div class="form-inline col-md-4 col-4 custom-export-block">
-                    <input type="checkbox" class="to-labelauty-icon custom-export-chk" id="<%= option[0].to_s %>" name="custom[<%= option[0].to_s %>]" value = "<%=option[1]%>" />
-                    <span><%= option[1] %></span>
-                  </div>
+          <div class="custom-export-checkboxes">
+            <% export_options.to_a.in_groups_of(3).each do |options| %>
+              <div class="row">
+                <% options.each do |option| %>
+                  <% if option.present? %>
+                    <div class="form-inline col-md-4 col-4 custom-export-block">
+                      <input type="checkbox" class="to-labelauty-icon custom-export-chk" id="<%= option[0].to_s %>" name="custom[<%= option[0].to_s %>]" value = "<%=option[1]%>" />
+                      <span><%= option[1] %></span>
+                    </div>
+                  <% end %>
                 <% end %>
-              <% end %>
-            </div>
-          <% end %>
+              </div>
+            <% end %>
+          </div>
         </div>
         <hr>
         <div class="row">

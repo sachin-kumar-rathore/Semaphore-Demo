@@ -58,10 +58,7 @@ module CompaniesHelper
     associated_fields = ['project_type', 'industry_type', 'business_unit']
     boolen_fields = ['room_for_expansion', 'business_union_represented', 'member_investor']
     
-    if field.to_s.split('_').first == 'naics'
-      company.naics_codes
-
-    elsif associated_fields.include?(field.to_s)
+    if associated_fields.include?(field.to_s)
       company.send(field).try(:name)
     
     elsif boolen_fields.include?(field.to_s)

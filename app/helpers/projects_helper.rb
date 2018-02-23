@@ -48,9 +48,9 @@ module ProjectsHelper
     
     if field.to_s == 'contact'
       contacts = []
-      contacts = project.primary_contact.try(:name)
-      #contacts << project.contacts.pluck(:name)
-      contacts
+      contacts[0] = project.primary_contact.try(:name)
+      contacts << project.contacts.pluck(:name)
+      contacts.flatten.join(', ')
 
     elsif field.to_s == 'considered_location' 
       project.send(field).try(:location)
@@ -71,7 +71,6 @@ module ProjectsHelper
   end
 
   def load_project_manager_data_with_id
-    users = current_org.security_roles.where(name: 'Project Manager').first.users
-    users.map { |user| [(user.first_name + ' ' + user.last_name), user.id] }
+    current_org.org_project_managers.map { |user| [(user.first_name + ' ' + user.last_name), user.id] }
   end
 end

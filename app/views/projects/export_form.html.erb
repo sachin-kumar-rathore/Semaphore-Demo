@@ -1,0 +1,19 @@
+<div class="nav-tabs-horizontal" data-plugin="tabs" id="dashboard-tabs" >
+  <% content_for :navigation_bar do %>
+    <ul class="nav nav-tabs tasks-tabs" role="tablist">
+      <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#basicExportTab" role="tab">Basic Export</a></li>
+      <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#customExportTab" role="tab">Custom Export</a></li>
+    </ul>
+  <% end %>
+  <%= form_tag(export_projects_path(format: :xls), method: :get, class: 'step-form') do %>
+    <div class="tab-content pt-20">
+      <div class="tab-pane active" id="basicExportTab" role="tabpanel">
+        <%= render 'basic_export_form' %>
+      </div>
+      <div class="tab-pane" id="customExportTab" role="tabpanel">
+        <%= render 'custom_export_form' %>
+      </div>
+      <%= hidden_field_tag 'custom_export', 'false', id: 'hiddenExportField' %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,61 @@
+<div class="row">
+  <div class="col-lg-8">
+    <div class="panel">
+      <div class="panel-body">
+        <div class="col-md-12">
+          <div class="row">
+            <strong>Filter criteria set on Basic Export is used for Custom Export.</strong>
+          </div><br>
+          <div class="row">
+            <strong>Select the project data you wish to export: </strong>
+            <div class="col-md-4 col-4">
+              <input type="checkbox" class="to-labelauty-icon" data-label="false" onchange="checkAll(this)" name="all_fields" value = "true" />
+              <span>Check all</span>
+            </div>
+          </div><br>
+          <div class="custom-export-checkboxes">
+            <% export_options.to_a.in_groups_of(3).each do |options| %>
+              <div class="row">
+                <% options.each do |option| %>
+                  <% if option.present? %>
+                    <div class="form-inline col-md-4 col-4 custom-export-block">
+                      <input type="checkbox" class="to-labelauty-icon custom-export-chk" id="<%= option[0].to_s %>" name="custom[<%= option[0].to_s %>]" value = "<%=option[1]%>" />
+                      <span><%= option[1] %></span>
+                    </div>
+                  <% end %>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-md-2 custom-export-button">
+            <button type="submit" class="btn btn-block green-btn " id="custom-export-projects-btn">Export</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="filterSec">
+      <div class="filter-heading"><h3>Current Custom Export</h3></div>
+        <div class="form-row">
+          <div class="form-group col-md-12">
+            <label for="customOptionName">Name:</label>
+            <input type="text" name="custom_export_name" class="form-control" id="customOptionName">
+          </div>
+            <div class="form-group updBtn col-md-12">
+              <button type="button" class="btn btn-primary save-custom-config" onclick="saveCustomConfig()">Save</button>
+            </div>
+        </div>
+        <div class="custom-options-list">
+          <%= render  partial: 'custom_exports_list', locals: { custom_exports: current_user.custom_exports } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

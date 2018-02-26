@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     end
     collection do
       get :check_companies_number_validity
+      get :export_form
+      get :export
     end
     resources :contacts, controller: 'company_contacts' do
       member do
@@ -105,6 +107,8 @@ Rails.application.routes.draw do
 
     collection do
       get :check_projects_number_validity
+      get :export_form
+      get :export
     end
   end
 
@@ -160,6 +164,17 @@ Rails.application.routes.draw do
   end
 
   resources :imports, only: [:index]
+  resources :exports, only: [:index]
+
+  resources :custom_exports, only: [:destroy]  do
+    collection do
+      post :save_custom_configs
+    end
+    member do
+      post :edit_custom_configs
+    end
+  end
+
   resources :manage_users do
     member do
       get :edit_invitation

@@ -58,4 +58,8 @@ class Organization < ApplicationRecord
       config.to_s.constantize::create_configs(self.id)
     end
   end
+
+  def org_project_managers
+   security_roles.where(name: 'Project Manager').first.try(:users)
+  end
 end

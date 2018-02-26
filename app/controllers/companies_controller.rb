@@ -71,6 +71,27 @@ class CompaniesController < ApplicationController
     assign_message_and_status_for_id_validity('companies')
   end
 
+  def export_form; end
+
+  def export
+    @companies = current_org.companies
+    unless (params[:export_all] == 'true')
+      filtering_params(params).each do |key, value|
+        @companies = @companies.public_send(key, value) if value.present?
+      end
+    end
+    if @companies.present?
+      respond_to do |format|
+        format.xls {
+          response.headers['Content-Disposition'] = "attachment; filename=\"companyExport.xls\""
+        }
+      end
+    else
+      redirect_to export_form_companies_path
+      flash[:danger] = 'No records are found'
+    end
+  end
+
   private
 
   def load_companies
@@ -111,11 +132,13 @@ class CompaniesController < ApplicationController
                                     :number_of, :average_age_of_buildings,
                                     :room_for_expansion, :owned_or_leased,
                                     :lease_expiration_date_str, :facility_notes,
-                                    :owner_id, :naics_codes)
+                                    :owner_id)
   end
 
   def products_and_services_params
-    params.require(:company).permit(:primary_products_and_services)
+    params.require(:company).permit(:primary_products_and_services, :naics_code_1,
+                                    :naics_code_2, :naics_code_3, :naics_code_4,
+                                    :naics_code_5)
   end
 
   def local_employment_params

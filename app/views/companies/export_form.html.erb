@@ -1,0 +1,53 @@
+<div class="nav-tabs-horizontal" data-plugin="tabs" id="dashboard-tabs" >
+  <% content_for :navigation_bar do %>
+    <ul class="nav nav-tabs tasks-tabs" role="tablist">
+      <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#basicExportTab" role="tab">Basic Export</a></li>
+    </ul>
+  <% end %>
+  <%= form_tag(export_companies_path(format: :xls), method: :get, class: 'step-form') do %>
+    <div class="tab-content pt-20">
+      <div class="tab-pane active" id="basicExportTab" role="tabpanel">
+        <div class="panel">
+          <div class="panel-body">
+            <div class="row">
+              <div class="form-group col-md-5">
+                <label for="addName">Company Name:</label>
+                <input type="text" class="form-control" name="company_name" autocomplete="off" id="addName" />
+              </div>
+              <div class="form-group col-md-5">
+                <label for="addName">Contact Name:</label>
+                <input type="text" name="associated_contact" class="form-control" id="addName">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-5">
+                <label for="addName">Associated Project:</label>
+                <input type="text" name="associated_project" class="form-control" id="addName">
+              </div>
+              <div class="form-group col-md-5">
+                <label for="addName">Associated Activity:</label>
+                <input type="text" name="associated_activity" class="form-control" id="addName">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-5">
+                <label>Industry Type:</label>
+                <%= select_tag 'industry_type_id', options_for_select(load_active_type("industry_types") ), { class: "form-control custom-select", data:{"live-search":true}, include_blank: 'Please Select' } %>
+              </div>
+            </div>
+            <%= hidden_field_tag 'export_all', 'false', id: 'exportAllCompanies' %>
+            <hr>
+            <div class="row">
+              <div class="col-md-2 custom-export-button pull-left">
+                <button type="submit" class="btn btn-block green-btn " id="export-companies-btn">Export</button>
+              </div>
+              <div class="col-md-2">
+                <button type="submit" class="btn btn-block green-btn " id="export-all-companies-btn">Export All</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

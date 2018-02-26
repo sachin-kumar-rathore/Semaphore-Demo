@@ -39,9 +39,12 @@ class Project < ApplicationRecord
   belongs_to :provided_service
   belongs_to :source
   belongs_to :elimination_reason
+  belongs_to :primary_contact, class_name: 'Contact', foreign_key: :primary_contact_id
+  belongs_to :project_manager, class_name: 'User', foreign_key: :project_manager_id
 
   # SCOPE
   scope :status, ->(status) { where('status IN (?)', status.values) }
+  scope :project_manager_id, ->(project_manager_id) { where('project_manager_id = (?)', project_manager_id) }
   scope :primary_contact_id, ->(primary_contact_id) { where('primary_contact_id = (?)', primary_contact_id) }
   scope :project_number, ->(project_number) { where('project_number = ?', project_number) }
   scope :industry_type_id, ->(industry_type_id) { where('industry_type_id = ?', industry_type_id) }

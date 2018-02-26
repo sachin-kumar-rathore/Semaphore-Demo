@@ -1139,3 +1139,24 @@ a:not([href]):not([tabindex]){
 .ui-menu-item .ui-menu-item-wrapper:hover {
   border: none !important;
 }
+
+.export-button {
+  margin-left: 350px;
+}
+
+.custom-export-button {
+  margin-left: 265px;
+}
+
+.custom-export-block {
+  display: inline-block;
+}
+
+.custom-export-chk {
+  margin-right: 5px;
+}
+
+.active_custom_export {
+  background-color: #f4fdf8;
+  border-left-color: #2ED573 !important;
+}

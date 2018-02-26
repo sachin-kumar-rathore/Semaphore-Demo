@@ -61,6 +61,26 @@ class ProjectsController < ApplicationController
     assign_message_and_status_for_id_validity('projects')
   end
 
+  def export_form; end
+
+  def export
+    @projects = current_org.projects
+    filtering_params(params).each do |key, value|
+      @projects = @projects.public_send(key, value) if value.present?
+    end
+    if @projects.present?
+      respond_to do |format|
+        format.xls {
+          file_name =  (params[:custom_export] == 'true') ? 'customProjectExport' : 'basicProjectExport'
+          response.headers['Content-Disposition'] = "attachment; filename=\"#{file_name}.xls\""
+        }
+      end
+    else
+      redirect_to export_form_projects_path
+      flash[:danger] = 'No records are found'
+    end
+  end
+
   private
 
   def set_project
@@ -87,7 +107,7 @@ class ProjectsController < ApplicationController
                                     :primary_contact_id, :source_id,
                                     :considered_location_id,
                                     :provided_service_id,
-                                    :competition_id, :activity_id)
+                                    :competition_id, :activity_id, :project_manager_id)
   end
 
   def filtering_params(params)
@@ -95,7 +115,7 @@ class ProjectsController < ApplicationController
                  :completion, :project_number, :industry_type_id,
                  :project_name, :public_release, :business_type,
                  :considered_location_id, :project_type_id, :source_id,
-                 :company)
+                 :company, :project_manager_id)
   end
 
   def activity_params

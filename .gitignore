@@ -42,3 +42,4 @@ config/database.yml
 /config/application.yml
 /public/yearly_report.pdf
 /public/yearly_report.xls
+*.rdb

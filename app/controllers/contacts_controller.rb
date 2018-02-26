@@ -57,6 +57,20 @@ class ContactsController < ApplicationController
     redirect_back fallback_location: contacts_path
   end
 
+  def export
+    @contacts = current_org.contacts
+    if @contacts.present?
+      respond_to do |format|
+        format.xls {
+          response.headers['Content-Disposition'] = "attachment; filename=\"contactExport.xls\""
+        }
+      end
+    else
+      redirect_to exports_path
+      flash[:danger] = 'No records are found'    
+    end
+  end
+
   private
 
   def set_contact

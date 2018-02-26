@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+          xmlns:o="urn:schemas-microsoft-com:office:office"
+          xmlns:x="urn:schemas-microsoft-com:office:excel"
+          xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+          xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Styles>
+    <Style ss:ID="bold">
+        <Font ss:Bold="1"/>
+    </Style>
+  </Styles>
+  <% if @contacts.present? %>
+    <Worksheet ss:Name="Export Contacts Data">
+      <Table>
+        <!-- for basic export -->
+        <Row>
+          <% contact_export_options.values.each do |title| %>
+            <Cell ss:StyleID="bold"><Data ss:Type="String"><%= title %></Data></Cell>
+          <% end %>
+        </Row>
+
+        <% @contacts.each do |contact| %>
+          <Row>
+            <% contact_export_options.keys.each do |field| %>
+              <Cell><Data ss:Type="String"><%= get_contact_field_value(contact, field) %></Data></Cell>
+            <% end %>
+          </Row>
+        <% end %>
+      </Table>
+    </Worksheet>
+  <% end %>
+</Workbook>

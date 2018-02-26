@@ -59,7 +59,7 @@ class Organization < ApplicationRecord
     end
   end
 
-  def org_project_managers
-   security_roles.where(name: 'Project Manager').first.try(:users)
+  def project_managers
+   security_roles.where(name: 'Project Manager').map(&:users).flatten.compact
   end
 end

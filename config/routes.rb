@@ -50,6 +50,7 @@ Rails.application.routes.draw do
   resources :contacts do
     collection do
       post :import_contacts, as: :import
+      get :export
     end
   end
 

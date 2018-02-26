@@ -71,6 +71,6 @@ module ProjectsHelper
   end
 
   def load_project_manager_data_with_id
-    current_org.org_project_managers.map { |user| [(user.first_name + ' ' + user.last_name), user.id] }
+    current_org.project_managers.map { |user| [(user.first_name + ' ' + user.last_name), user.id] }
   end
 end

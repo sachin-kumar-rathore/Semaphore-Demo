@@ -100,5 +100,12 @@ Rails.application.configure do
     :password => ENV["mailgun_password"],
     :enable_starttls_auto => true
   }
+
+  config.middleware.use ExceptionNotification::Rack,
+                        email: {
+                            email_prefix: Rails.env,
+                            sender_address: "'Exception Notifier' <#{ENV["mailgun_address"]}>",
+                            exception_recipients: ENV["exception_recipients"]
+                        }
   
 end

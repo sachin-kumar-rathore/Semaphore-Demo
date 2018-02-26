@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180130060806) do
+ActiveRecord::Schema.define(version: 20180223075100) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -113,10 +113,14 @@ ActiveRecord::Schema.define(version: 20180130060806) do
     t.boolean "business_union_represented"
     t.string "peak_season"
     t.text "union_notes"
-    t.string "naics_codes"
     t.bigint "industry_type_id"
     t.bigint "business_unit_id"
     t.bigint "project_type_id"
+    t.string "naics_code_1"
+    t.string "naics_code_2"
+    t.string "naics_code_3"
+    t.string "naics_code_4"
+    t.string "naics_code_5"
     t.index ["business_unit_id"], name: "index_companies_on_business_unit_id"
     t.index ["industry_type_id"], name: "index_companies_on_industry_type_id"
     t.index ["organization_id"], name: "index_companies_on_organization_id"
@@ -215,6 +219,15 @@ ActiveRecord::Schema.define(version: 20180130060806) do
     t.bigint "contact_id", null: false
     t.bigint "email_id", null: false
     t.index ["contact_id", "email_id"], name: "index_contacts_emails_on_contact_id_and_email_id"
+  end
+
+  create_table "custom_exports", force: :cascade do |t|
+    t.string "name"
+    t.string "filters", default: [], array: true
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_custom_exports_on_user_id"
   end
 
   create_table "documents", force: :cascade do |t|
@@ -355,6 +368,7 @@ ActiveRecord::Schema.define(version: 20180130060806) do
     t.bigint "provided_service_id"
     t.bigint "source_id"
     t.bigint "elimination_reason_id"
+    t.integer "project_manager_id"
     t.index ["business_unit_id"], name: "index_projects_on_business_unit_id"
     t.index ["company_id"], name: "index_projects_on_company_id"
     t.index ["competition_id"], name: "index_projects_on_competition_id"
@@ -515,6 +529,7 @@ ActiveRecord::Schema.define(version: 20180130060806) do
   add_foreign_key "contact_method_types", "organizations"
   add_foreign_key "contacts", "business_units"
   add_foreign_key "contacts", "contact_categories"
+  add_foreign_key "custom_exports", "users"
   add_foreign_key "documents", "organizations"
   add_foreign_key "documents", "users"
   add_foreign_key "elimination_reasons", "organizations"

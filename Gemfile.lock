@@ -98,6 +98,9 @@ GEM
       faraday
       multi_json
     erubi (1.7.0)
+    exception_notification (4.2.2)
+      actionmailer (>= 4.0, < 6)
+      activesupport (>= 4.0, < 6)
     excon (0.59.0)
     execjs (2.7.0)
     factory_girl (4.8.1)
@@ -317,6 +320,7 @@ DEPENDENCIES
   devise
   devise_invitable (~> 1.7.0)
   elasticsearch-model
+  exception_notification (~> 4.2, >= 4.2.2)
   factory_girl (~> 4.7)
   faker (~> 1.8, >= 1.8.4)
   figaro

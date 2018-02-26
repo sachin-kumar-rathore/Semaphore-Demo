@@ -14,14 +14,14 @@
       <Table>
         <!-- for basic export -->
         <Row>
-          <% contact_export_options.values.each do |title| %>
+          <% Constant::EXPORT_CONTACTS.values.each do |title| %>
             <Cell ss:StyleID="bold"><Data ss:Type="String"><%= title %></Data></Cell>
           <% end %>
         </Row>
 
         <% @contacts.each do |contact| %>
           <Row>
-            <% contact_export_options.keys.each do |field| %>
+            <% Constant::EXPORT_CONTACTS.keys.each do |field| %>
               <Cell><Data ss:Type="String"><%= get_contact_field_value(contact, field) %></Data></Cell>
             <% end %>
           </Row>

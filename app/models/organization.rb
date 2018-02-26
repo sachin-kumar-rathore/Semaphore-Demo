@@ -48,12 +48,12 @@ class Organization < ApplicationRecord
   def create_admin_role(name=nil)
     name = name || "Administrator"
     self.security_roles.create!(name: name,
-      project_permissions: {"read"=>"All", "assign"=>"All", "create"=>"All", "delete"=>"All", "update"=>"All"},
-      site_permissions: {"read"=>"All", "assign"=>"All", "create"=>"All", "delete"=>"All", "update"=>"All"},
-      contact_permissions: {"read"=>"All", "assign"=>"All", "create"=>"All", "delete"=>"All", "update"=>"All"},
-      configuration_permissions: {"read"=>"All", "assign"=>"All", "create"=>"All", "delete"=>"All", "update"=>"All"},
-      user_permissions: {"read"=>"All", "assign"=>"All", "create"=>"All", "delete"=>"All", "update"=>"All"},
-      company_permissions: {"read"=>"All", "assign"=>"All", "create"=>"All", "delete"=>"All", "update"=>"All"} ) 
+      project_permissions: SecurityRole::PERMIT_ALL,
+      site_permissions: SecurityRole::PERMIT_ALL,
+      contact_permissions: SecurityRole::PERMIT_ALL,
+      configuration_permissions: SecurityRole::PERMIT_ALL,
+      user_permissions: SecurityRole::PERMIT_ALL,
+      company_permissions: SecurityRole::PERMIT_ALL ) 
   end
 
   def create_config

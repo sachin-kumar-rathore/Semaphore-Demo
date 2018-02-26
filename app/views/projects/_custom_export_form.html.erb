@@ -14,7 +14,7 @@
             </div>
           </div><br>
           <div class="custom-export-checkboxes">
-            <% export_options.to_a.in_groups_of(3).each do |options| %>
+            <% Constant::EXPORT_PROJECTS.to_a.in_groups_of(3).each do |options| %>
               <div class="row">
                 <% options.each do |option| %>
                   <% if option.present? %>

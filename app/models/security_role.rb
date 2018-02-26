@@ -8,6 +8,7 @@ class SecurityRole < ApplicationRecord
   has_many :users, through: :user_roles
 
   SECURITY_ROLES = ["Board", "Contact/Visit Review", "Project Manager", "Read Only User"]
+  PERMIT_ALL = {"read"=>"All", "assign"=>"All", "create"=>"All", "delete"=>"All", "update"=>"All"}
 
   def self.create_configs( org_id )
     organization =  Organization.find org_id

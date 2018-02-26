@@ -14,14 +14,14 @@
       <Table>
         <!-- for basic export -->
         <Row>
-          <% company_export_options.values.each do |title| %>
+          <% Constant::EXPORT_COMPANIES.values.each do |title| %>
             <Cell ss:StyleID="bold"><Data ss:Type="String"><%= title %></Data></Cell>
           <% end %>
         </Row>
 
         <% @companies.each do |company| %>
           <Row>
-            <% company_export_options.keys.each do |field| %>
+            <% Constant::EXPORT_COMPANIES.keys.each do |field| %>
               <Cell><Data ss:Type="String"><%= get_company_field_value(company, field) %></Data></Cell>
             <% end %>
           </Row>

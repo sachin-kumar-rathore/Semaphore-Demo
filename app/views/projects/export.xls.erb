@@ -30,14 +30,14 @@
         <% else %>
         <!-- for basic export -->
           <Row>
-            <% export_options.values.each do |title| %>
+            <% Constant::EXPORT_PROJECTS.values.each do |title| %>
               <Cell ss:StyleID="bold"><Data ss:Type="String"><%= title %></Data></Cell>
             <% end %>
           </Row>
   
           <% @projects.each do |project| %>
             <Row>
-              <% export_options.keys.each do |field| %>
+              <% Constant::EXPORT_PROJECTS.keys.each do |field| %>
                 <Cell><Data ss:Type="String"><%= get_field_value(project, field) %></Data></Cell>
               <% end %>
             </Row>

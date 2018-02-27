@@ -14,7 +14,7 @@
         <div class="form-group col-md-6 col-lg-3">
           <label for="priority">Active Date:</label>
           <div class="rightIconFld">
-            <%= project.text_field 'active_date_str', class: "form-control  datepicker", value: "#{@project.active_date ? @project.active_date.strftime("%m/%d/%Y") : Date.today}", data: {plugin: "datepicker"} %>
+            <%= project.text_field 'active_date_str', class: "form-control  datepicker", value: "#{@project.active_date ? @project.active_date.strftime("%m/%d/%Y") : Date.today.strftime("%m/%d/%Y")}", data: {plugin: "datepicker"} %>
             <label for="activeDate" class="fldRightIcon"> <i class="icon fa fa-calendar-o" aria-hidden="true"></i> </label>
           </div>
         </div>

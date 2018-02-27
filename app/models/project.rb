@@ -19,6 +19,7 @@ class Project < ApplicationRecord
   # CALLBACK
   before_validation :convert_dates_format
   after_create :copy_activity_records, if: :has_activity_id?
+  before_save :update_other_requested_feet
 
   # ASSOCIATION
   belongs_to :organization
@@ -144,5 +145,11 @@ class Project < ApplicationRecord
     end
     save
     @activity.update_attribute(:converted, true)
+  end
+
+  def update_other_requested_feet
+    if(params[:project][:square_feet_requested] != 'Other')
+      self.other_square_ft_requested = 0
+    end
   end
 end

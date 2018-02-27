@@ -66,7 +66,8 @@ class Project < ApplicationRecord
   scope :source_id, ->(source_id) { where('source_id = ?', source_id) }
   scope :company, ->(company) { where('company_id = ?', company) }
   scope :filter_by_active_date, -> (start_time, end_time) { where("active_date >= ? AND active_date <= ?", start_time, end_time)}
-
+  scope :active, -> { where(status: "Active")}
+  
   # VALIDATION
   validates :project_number, uniqueness: true, presence: true, length: { is: 6 }
   validates :name, presence: true

@@ -148,7 +148,7 @@ class Project < ApplicationRecord
   end
 
   def update_other_requested_feet
-    if(params[:project][:square_feet_requested] != 'Other')
+    if(self.square_feet_requested != 'Other')
       self.other_square_ft_requested = 0
     end
   end

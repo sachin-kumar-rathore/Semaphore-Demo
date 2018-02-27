@@ -167,7 +167,7 @@
         </div>
 				<div id="otherSquareFeetRequested" class="form-group col-lg-3 <%= @project.square_feet_requested == 'Other' ? 'show' : 'hidden' %>">
 					<label for="OtherSquareFeet">Other Square Feet Requested:</label>
-					<%= project.text_field 'other_square_ft_requested', class: "form-control", required: true, placeholder: "Requested Square feet" %>
+					<%= project.number_field 'other_square_ft_requested', class: "form-control", required: true, placeholder: "Requested Square feet" %>
 				</div>
       </div>
       <div class="form-row">

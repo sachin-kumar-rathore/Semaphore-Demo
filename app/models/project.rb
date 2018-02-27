@@ -6,7 +6,7 @@ class Project < ApplicationRecord
 
   SQUARE_FEET_REQUESTED = ['1-25,999', '26-44,999', '45-75,999',
                            '76-99,999', '100-149,999', '150-199,999',
-                           '200-399,999', '400,000+'].freeze
+                           '200-399,999', '400,000+', 'Other'].freeze
   ACRES_REQUESTED = ['up to 1', 'up to 2', 'up to 3', 'up to 4',
                      'up to 5'].freeze
   BUSINESS_TYPE = ['Existing Business', 'New Business'].freeze
@@ -19,6 +19,7 @@ class Project < ApplicationRecord
   # CALLBACK
   before_validation :convert_dates_format
   after_create :copy_activity_records, if: :has_activity_id?
+  before_save :update_other_requested_feet
 
   # ASSOCIATION
   belongs_to :organization
@@ -36,7 +37,7 @@ class Project < ApplicationRecord
   belongs_to :business_unit
   belongs_to :considered_location
   belongs_to :competition
-  belongs_to :provided_service
+  belongs_to :incentive
   belongs_to :source
   belongs_to :elimination_reason
   belongs_to :primary_contact, class_name: 'Contact', foreign_key: :primary_contact_id
@@ -77,6 +78,7 @@ class Project < ApplicationRecord
   validates :business_type, inclusion: { in: Project::BUSINESS_TYPE, message: '%{value} is not a valid business type.' }
   validates :square_feet_requested, inclusion: { in: Project::SQUARE_FEET_REQUESTED, message: '%{value} is not valid.' }
   validates :acres_requested, inclusion: { in: Project::ACRES_REQUESTED, message: '%{value} is not valid.' }
+  validates :other_square_ft_requested, :numericality => {:only_integer => true}
 
   #Add validation for project manager and company
   private
@@ -143,5 +145,11 @@ class Project < ApplicationRecord
     end
     save
     @activity.update_attribute(:converted, true)
+  end
+
+  def update_other_requested_feet
+    if(self.square_feet_requested != 'Other')
+      self.other_square_ft_requested = 0
+    end
   end
 end

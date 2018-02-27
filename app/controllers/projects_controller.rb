@@ -106,7 +106,7 @@ class ProjectsController < ApplicationController
                                     :site_visit_3_str, :company_id,
                                     :primary_contact_id, :source_id,
                                     :considered_location_id,
-                                    :provided_service_id,
+                                    :incentive_id, :other_square_ft_requested,
                                     :competition_id, :activity_id, :project_manager_id)
   end
 

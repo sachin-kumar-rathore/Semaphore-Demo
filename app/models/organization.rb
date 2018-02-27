@@ -1,10 +1,10 @@
 class Organization < ApplicationRecord
 
-  SETTINGS = ['project_types', 'industry_types', 'provided_services', 'competitions', 
+  SETTINGS = ['project_types', 'industry_types', 'incentives', 'competitions',
               'sources', 'elimination_reasons', 'contact_categories', 'business_units',
               'contact_method_types', 'company_activity_types']
 
-  CONFIG = %i[ProjectType IndustryType ProvidedService Source EliminationReason ContactCategory]
+  CONFIG = %i[ProjectType IndustryType Incentive Source EliminationReason ContactCategory]
   CONFIG_WITHOUT_STATUS = %i[BusinessUnit SecurityRole ContactMethodType CompanyActivityType]
   
   has_many :users, dependent: :destroy
@@ -18,7 +18,7 @@ class Organization < ApplicationRecord
   has_many :companies, dependent: :destroy
   has_many :project_types, dependent: :destroy
   has_many :industry_types, dependent: :destroy
-  has_many :provided_services, dependent: :destroy
+  has_many :incentives, dependent: :destroy
   has_many :competitions, dependent: :destroy
   has_many :sources, dependent: :destroy
   has_many :contact_categories, dependent: :destroy

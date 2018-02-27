@@ -26,7 +26,7 @@ module ProjectsHelper
       net_new_investment: 'Net New Investment',
       net_new_investment_notes: 'New Investment Notes',
       considered_location: 'Considered Locations',
-      provided_service: 'Service Provided',
+      incentive: 'Incentives',
       competition: 'Competition',
       source: 'Source',
       site_visit_1: 'Site Visit 1',
@@ -43,7 +43,7 @@ module ProjectsHelper
   end
 
   def get_field_value(project, field)
-    associated_fields = ['project_type', 'industry_type', 'company', 'elimination_reason', 'provided_service', 'competition', 'source']
+    associated_fields = ['project_type', 'industry_type', 'company', 'elimination_reason', 'incentive', 'competition', 'source']
     boolen_fields = ['site_selector', 'utilize_sites', 'speculative_building', 'public_release']
     
     if field.to_s == 'contact'
@@ -72,5 +72,15 @@ module ProjectsHelper
 
   def load_project_manager_data_with_id
     current_org.project_managers.map { |user| [(user.first_name + ' ' + user.last_name), user.id] }
+  end
+
+  def assign_default_project_number
+    project_numbers = Project.pluck(:project_number)
+    while(true)
+      project_no = rand.to_s[2..7]
+      unless project_numbers.include?(project_no)
+        return project_no
+      end
+    end
   end
 end

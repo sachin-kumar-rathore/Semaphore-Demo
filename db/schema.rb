@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180227124457) do
+ActiveRecord::Schema.define(version: 20180227154811) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -378,6 +378,7 @@ ActiveRecord::Schema.define(version: 20180227124457) do
     t.bigint "source_id"
     t.bigint "elimination_reason_id"
     t.integer "project_manager_id"
+    t.integer "other_square_ft_requested", default: 0
     t.index ["business_unit_id"], name: "index_projects_on_business_unit_id"
     t.index ["company_id"], name: "index_projects_on_company_id"
     t.index ["competition_id"], name: "index_projects_on_competition_id"

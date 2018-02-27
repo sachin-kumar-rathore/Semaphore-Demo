@@ -516,3 +516,12 @@ function editCustomConfig(id) {
   var path = '/custom_exports/'+ id +'/edit_custom_configs';
   customConfigRequest(path);
 }
+$(document).on("change", "#project_square_feet_requested", function () {
+  if ($(this).val() == 'Other'){
+    $('#otherSquareFeetRequested').addClass('show');
+    $('#otherSquareFeetRequested').removeClass('hidden');
+  }else{
+    $('#otherSquareFeetRequested').addClass('hidden');
+    $('#otherSquareFeetRequested').removeClass('show');
+  }
+});

@@ -165,6 +165,10 @@
           <label>Square Feet Requested:</label>
           <%= project.select :square_feet_requested, options_for_select( Project::SQUARE_FEET_REQUESTED, project.object.square_feet_requested), {}, class: 'form-control custom-select' %>
         </div>
+				<div id="otherSquareFeetRequested" class="form-group col-lg-3 <%= @project.square_feet_requested == 'Other' ? 'show' : 'hidden' %>">
+					<label for="OtherSquareFeet">Other Square Feet Requested:</label>
+					<%= project.text_field 'other_square_ft_requested', class: "form-control", required: true, placeholder: "Requested Square feet" %>
+				</div>
       </div>
       <div class="form-row">
         <div class="form-group col-lg-9">

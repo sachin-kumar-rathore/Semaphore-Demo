@@ -4,11 +4,17 @@
       <%= render partial: 'shared/error_messages', locals: {obj: @project} %>
     </div>
     <div class="formRowSize">
+			<div class="form-row">
+				<div class="form-group col-md-6 col-lg-3">
+					<label>Source:</label>
+					<%= project.select :source_id, options_for_select(load_active_type("sources") , project.object.source_id), {}, class: 'form-control custom-select' %>
+				</div>
+			</div>
       <div class="form-row">
         <div class="form-group col-md-6 col-lg-3">
           <label for="priority">Active Date:</label>
           <div class="rightIconFld">
-            <%= project.text_field 'active_date_str', class: "form-control  datepicker", value: "#{@project.active_date.strftime("%m/%d/%Y") if @project.active_date}", data: {plugin: "datepicker"} %>
+            <%= project.text_field 'active_date_str', class: "form-control  datepicker", value: "#{@project.active_date ? @project.active_date.strftime("%m/%d/%Y") : Date.today}", data: {plugin: "datepicker"} %>
             <label for="activeDate" class="fldRightIcon"> <i class="icon fa fa-calendar-o" aria-hidden="true"></i> </label>
           </div>
         </div>
@@ -87,7 +93,8 @@
       <div class="form-row">
         <div class="form-group col-md-6 col-lg-3">
           <label for="project">Project #</label>
-          <%= project.text_field 'project_number', class: "form-control", id: "projectsNumber", maxlength: 6, minlength: 6, required: true, placeholder: "Project" %>
+          <%= project.text_field 'project_number', class: "form-control", id: "projectsNumber", maxlength: 6, minlength: 6,
+																 required: true, value: assign_default_project_number %>
           <div id="projectsNumberMessage" value="<%= @project ? @project.id : nil %>"></div>
         </div>
         <div class="form-group col-md-6 col-lg-3">
@@ -252,10 +259,10 @@
         </div>
         <div class="form-row">
           <div class="col-12">
-            <label for="competition">Service Provided:</label>
+            <label for="competition">Incentives:</label>
           </div>
           <div class="form-group col-md-9 col-lg-3">
-            <%= project.select :provided_service_id, options_for_select( load_active_type("provided_services"), project.object.provided_service_id), {}, class: 'form-control custom-select' %>
+            <%= project.select :incentive_id, options_for_select( load_active_type("incentives"), project.object.incentive_id), {}, class: 'form-control custom-select' %>
           </div>
         </div>
       </div>
@@ -292,10 +299,6 @@
                   <%= project.text_field 'public_release_date_str', class: "form-control datepicker", value: "#{@project.public_release_date}", data: {plugin: "datepicker"} %>
                   <label for="feleaseDate" class="fldRightIcon"> <i class="icon fa fa-calendar-o" aria-hidden="true"></i> </label>
                 </div>
-              </div>
-              <div class="form-group">
-                <label>Source:</label>
-                <%= project.select :source_id, options_for_select(load_active_type("sources") , project.object.source_id), {}, class: 'form-control custom-select' %>
               </div>
               <div class="form-group">
                 <label>Elimination Reason:</label>

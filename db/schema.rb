@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180223075100) do
+ActiveRecord::Schema.define(version: 20180227124457) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20180223075100) do
     t.datetime "updated_at", null: false
     t.bigint "company_activity_type_id"
     t.bigint "company_id"
-    t.bigint "provided_service_id"
+    t.bigint "incentive_id"
     t.bigint "contact_method_type_id"
     t.string "name"
     t.string "activity_number"
@@ -35,8 +35,8 @@ ActiveRecord::Schema.define(version: 20180223075100) do
     t.index ["company_activity_type_id"], name: "index_activities_on_company_activity_type_id"
     t.index ["company_id"], name: "index_activities_on_company_id"
     t.index ["contact_method_type_id"], name: "index_activities_on_contact_method_type_id"
+    t.index ["incentive_id"], name: "index_activities_on_incentive_id"
     t.index ["organization_id"], name: "index_activities_on_organization_id"
-    t.index ["provided_service_id"], name: "index_activities_on_provided_service_id"
   end
 
   create_table "admins", force: :cascade do |t|
@@ -269,6 +269,15 @@ ActiveRecord::Schema.define(version: 20180223075100) do
     t.index ["mailable_type", "mailable_id"], name: "index_emails_on_mailable_type_and_mailable_id"
   end
 
+  create_table "incentives", force: :cascade do |t|
+    t.string "name"
+    t.string "status"
+    t.bigint "organization_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_incentives_on_organization_id"
+  end
+
   create_table "industry_types", force: :cascade do |t|
     t.string "name"
     t.string "status"
@@ -365,7 +374,7 @@ ActiveRecord::Schema.define(version: 20180223075100) do
     t.bigint "business_unit_id"
     t.bigint "considered_location_id"
     t.bigint "competition_id"
-    t.bigint "provided_service_id"
+    t.bigint "incentive_id"
     t.bigint "source_id"
     t.bigint "elimination_reason_id"
     t.integer "project_manager_id"
@@ -374,20 +383,11 @@ ActiveRecord::Schema.define(version: 20180223075100) do
     t.index ["competition_id"], name: "index_projects_on_competition_id"
     t.index ["considered_location_id"], name: "index_projects_on_considered_location_id"
     t.index ["elimination_reason_id"], name: "index_projects_on_elimination_reason_id"
+    t.index ["incentive_id"], name: "index_projects_on_incentive_id"
     t.index ["industry_type_id"], name: "index_projects_on_industry_type_id"
     t.index ["organization_id"], name: "index_projects_on_organization_id"
     t.index ["project_type_id"], name: "index_projects_on_project_type_id"
-    t.index ["provided_service_id"], name: "index_projects_on_provided_service_id"
     t.index ["source_id"], name: "index_projects_on_source_id"
-  end
-
-  create_table "provided_services", force: :cascade do |t|
-    t.string "name"
-    t.string "status"
-    t.bigint "organization_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["organization_id"], name: "index_provided_services_on_organization_id"
   end
 
   create_table "security_roles", force: :cascade do |t|
@@ -511,8 +511,8 @@ ActiveRecord::Schema.define(version: 20180223075100) do
   add_foreign_key "activities", "companies"
   add_foreign_key "activities", "company_activity_types"
   add_foreign_key "activities", "contact_method_types"
+  add_foreign_key "activities", "incentives"
   add_foreign_key "activities", "organizations"
-  add_foreign_key "activities", "provided_services"
   add_foreign_key "business_units", "organizations"
   add_foreign_key "companies", "business_units"
   add_foreign_key "companies", "industry_types"
@@ -533,6 +533,7 @@ ActiveRecord::Schema.define(version: 20180223075100) do
   add_foreign_key "documents", "organizations"
   add_foreign_key "documents", "users"
   add_foreign_key "elimination_reasons", "organizations"
+  add_foreign_key "incentives", "organizations"
   add_foreign_key "industry_types", "organizations"
   add_foreign_key "project_contacts", "contacts"
   add_foreign_key "project_contacts", "projects"
@@ -544,12 +545,11 @@ ActiveRecord::Schema.define(version: 20180223075100) do
   add_foreign_key "projects", "competitions"
   add_foreign_key "projects", "considered_locations"
   add_foreign_key "projects", "elimination_reasons"
+  add_foreign_key "projects", "incentives"
   add_foreign_key "projects", "industry_types"
   add_foreign_key "projects", "organizations"
   add_foreign_key "projects", "project_types"
-  add_foreign_key "projects", "provided_services"
   add_foreign_key "projects", "sources"
-  add_foreign_key "provided_services", "organizations"
   add_foreign_key "security_roles", "organizations"
   add_foreign_key "service_provideds", "organizations"
   add_foreign_key "sites", "business_units"

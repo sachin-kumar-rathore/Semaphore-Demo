@@ -36,7 +36,7 @@ class Project < ApplicationRecord
   belongs_to :business_unit
   belongs_to :considered_location
   belongs_to :competition
-  belongs_to :provided_service
+  belongs_to :incentive
   belongs_to :source
   belongs_to :elimination_reason
   belongs_to :primary_contact, class_name: 'Contact', foreign_key: :primary_contact_id

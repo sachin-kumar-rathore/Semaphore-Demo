@@ -55,7 +55,7 @@ class ActivitiesController < ApplicationController
 
   def activity_params
     params.require(:activity).permit(:company_activity_type_id, :name,
-                                     :activity_number, :provided_service_id,
+                                     :activity_number, :incentive_id,
                                      :contact_date_str, :contact_method_type_id,
                                      :primary_contact_id, :assigned_user,
                                      :description, :follow_up_date_str,

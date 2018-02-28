@@ -516,6 +516,7 @@ function editCustomConfig(id) {
   var path = '/custom_exports/'+ id +'/edit_custom_configs';
   customConfigRequest(path);
 }
+
 $(document).on("change", "#project_square_feet_requested", function () {
   if ($(this).val() == 'Other'){
     $('#otherSquareFeetRequested').addClass('show');
@@ -523,5 +524,17 @@ $(document).on("change", "#project_square_feet_requested", function () {
   }else{
     $('#otherSquareFeetRequested').addClass('hidden');
     $('#otherSquareFeetRequested').removeClass('show');
+  }
+});
+
+// Toggle the where located field
+$(document).on("click", "input[name*='status']", function() {
+  if ($(this).val() == 'Successful'){
+    $('#where_located_div').addClass('show');
+    $('#where_located_div').removeClass('hidden');
+  }
+  else{
+    $('#where_located_div').addClass('hidden');
+    $('#where_located_div').removeClass('show');
   }
 });

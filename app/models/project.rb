@@ -80,6 +80,12 @@ class Project < ApplicationRecord
   validates :acres_requested, inclusion: { in: Project::ACRES_REQUESTED, message: '%{value} is not valid.' }
   validates :other_square_ft_requested, :numericality => {:only_integer => true}
 
+  STATUS.each do |state|
+    define_method("is_#{state.downcase}?") do
+      status == state
+    end
+  end
+
   #Add validation for project manager and company
   private
 
@@ -152,4 +158,5 @@ class Project < ApplicationRecord
       self.other_square_ft_requested = 0
     end
   end
+
 end

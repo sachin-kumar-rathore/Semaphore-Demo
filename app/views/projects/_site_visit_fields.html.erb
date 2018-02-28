@@ -1,0 +1,14 @@
+<div class="nested-fields">
+	<div class="form-group">
+		<label for="sVisit3">Site Visit:</label>
+		<div class="rightIconFld">
+			<%= f.text_field 'visit_date', class: "form-control datepicker", value: "#{f.object.visit_date.strftime("%m/%d/%Y") if f.object.visit_date.present?}", data: {plugin: "datepicker"} %>
+			<label for="sVisit3" class="fldRightIcon"> <i class="icon fa fa-calendar-o" aria-hidden="true"></i> </label>
+		</div>
+	</div>
+  <%= link_to_remove_association "Remove Visit Date", f, class: 'btn btn-danger' %>
+</div>
+
+<script>
+  $('[data-plugin="datepicker"]').datepicker();
+</script>

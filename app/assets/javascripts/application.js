@@ -49,3 +49,4 @@
 //= require highcharts/modules/no-data-to-display
 //= require highcharts/modules/offline-exporting
 //= require highcharts/themes/grid
+//= require cocoon

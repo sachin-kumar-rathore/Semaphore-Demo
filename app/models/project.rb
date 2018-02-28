@@ -2,7 +2,7 @@ require 'searchable'
 # Project Model
 class Project < ApplicationRecord
   include DateParser
-  include Searchable
+  # include Searchable
 
   SQUARE_FEET_REQUESTED = ['1-25,999', '26-44,999', '45-75,999',
                            '76-99,999', '100-149,999', '150-199,999',
@@ -42,6 +42,9 @@ class Project < ApplicationRecord
   belongs_to :elimination_reason
   belongs_to :primary_contact, class_name: 'Contact', foreign_key: :primary_contact_id
   belongs_to :project_manager, class_name: 'User', foreign_key: :project_manager_id
+  has_many  :site_visits, inverse_of: :project, dependent: :destroy
+
+  accepts_nested_attributes_for :site_visits, allow_destroy: true, reject_if: :all_blank
 
   # SCOPE
   scope :status, ->(status) { where('status IN (?)', status.values) }
@@ -68,7 +71,7 @@ class Project < ApplicationRecord
   scope :company, ->(company) { where('company_id = ?', company) }
   scope :filter_by_active_date, -> (start_time, end_time) { where("active_date >= ? AND active_date <= ?", start_time, end_time)}
   scope :active, -> { where(status: "Active")}
-  
+
   # VALIDATION
   validates :project_number, uniqueness: true, presence: true, length: { is: 6 }
   validates :name, presence: true

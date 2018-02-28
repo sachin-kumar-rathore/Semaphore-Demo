@@ -1,7 +1,9 @@
 # Manage projects belonging to an organization
 class ProjectsController < ApplicationController
+  include DateParser
   before_action :authenticate_user!
   before_action :set_project, only: %i[edit update show]
+  before_action :convert_site_visit_dates, only: [:update, :create]
   respond_to :html, only: %i[index new edit]
   respond_to :js
 
@@ -107,7 +109,8 @@ class ProjectsController < ApplicationController
                                     :primary_contact_id, :source_id,
                                     :considered_location_id,
                                     :incentive_id, :other_square_ft_requested,
-                                    :competition_id, :activity_id, :project_manager_id)
+                                    :competition_id, :activity_id, :project_manager_id,
+                                    site_visits_attributes: [:id, :visit_date, :_destroy])
   end
 
   def filtering_params(params)
@@ -135,6 +138,20 @@ class ProjectsController < ApplicationController
       redirect_to projects_path
     else
       redirect_to edit_project_path(@project)
+    end
+  end
+
+  def convert_site_visit_dates
+    begin
+      site_visits_attributes = params[:project][:site_visits_attributes]
+      if site_visits_attributes.present?
+        site_visits_attributes.keys.each do |key|
+          site_visits_attributes[key]['visit_date'] = convert_date(site_visits_attributes[key]['visit_date']) if site_visits_attributes[key]['visit_date'].present?
+          site_visits_attributes[key]['_destroy'] = true if site_visits_attributes[key]['_destroy'] == "1"
+        end
+      end
+    rescue StandardError
+      nil
     end
   end
 end

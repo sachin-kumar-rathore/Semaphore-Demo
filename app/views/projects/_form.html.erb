@@ -275,26 +275,34 @@
           <div class="form-row">
             <div class="col-md-6">
               <div class="form-group">
-                <label for="sVisit1">Site Vist 1:</label>
+                <label for="sVisit1">Site Visit 1:</label>
                 <div class="rightIconFld">
                   <%= project.text_field 'site_visit_1_str', class: "form-control datepicker", value: "#{@project.site_visit_1}", data: {plugin: "datepicker"} %>
                   <label for="sVisit1" class="fldRightIcon"> <i class="icon fa fa-calendar-o" aria-hidden="true"></i> </label>
                 </div>
               </div>
               <div class="form-group">
-                <label for="sVisit2">Site Vist 2:</label>
+                <label for="sVisit2">Site Visit 2:</label>
                 <div class="rightIconFld">
                   <%= project.text_field 'site_visit_2_str', class: "form-control datepicker", value: "#{@project.site_visit_2}",  data: {plugin: "datepicker"} %>
                   <label for="sVisit2" class="fldRightIcon"> <i class="icon fa fa-calendar-o" aria-hidden="true"></i> </label>
                 </div>
               </div>
               <div class="form-group">
-                <label for="sVisit3">Site Vist 3:</label>
+                <label for="sVisit3">Site Visit 3:</label>
                 <div class="rightIconFld">
                   <%= project.text_field 'site_visit_3_str', class: "form-control datepicker", value: "#{@project.site_visit_3}", data: {plugin: "datepicker"} %>
                   <label for="sVisit3" class="fldRightIcon"> <i class="icon fa fa-calendar-o" aria-hidden="true"></i> </label>
                 </div>
               </div>
+							<div id="siteVisitDates">
+								<%= project.fields_for :site_visits do |site_visit| %>
+										<%= render 'site_visit_fields', f: site_visit %>
+								<% end %>
+								<div class="links">
+									<%= link_to_add_association 'Add Visit Date', project, :site_visits, class: 'btn btn-default' %>
+								</div>
+							</div>
             </div>
             <div class="col-md-6">
               <div class="form-group">

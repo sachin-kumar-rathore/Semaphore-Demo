@@ -472,6 +472,13 @@ ul.ui-autocomplete {
 .custom-href:hover {
   color: #757575;
 }
-#siteVisitDates .btn-danger{
-  margin-bottom: 10px;
+#siteVisitDates{
+  .links{ margin-top: 10px}
+  .remove-link{
+    text-decoration: none;
+    color: #ef5350;
+    :hover{
+      text-decoration: none;
+    }
+  }
 }

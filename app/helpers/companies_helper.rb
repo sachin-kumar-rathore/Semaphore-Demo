@@ -16,10 +16,7 @@ module CompaniesHelper
       website: 'Website',
       email: 'Email',
       member_investor: 'Member Investor',
-      utility_provider_1: 'Utility Provider 1',
-      utility_provider_2: 'Utility Provider 2',
       notes: 'Company Notes',
-      business_unit: 'Business Unit',
       years_business_located: 'Years Business Located in Community',
       company_establishment_year: 'Years Company Established in Community',
       project_type: 'Type of Facility',
@@ -55,7 +52,7 @@ module CompaniesHelper
   end
 
   def get_company_field_value(company, field)
-    associated_fields = ['project_type', 'industry_type', 'business_unit']
+    associated_fields = ['project_type', 'industry_type']
     boolen_fields = ['room_for_expansion', 'business_union_represented', 'member_investor']
     
     if associated_fields.include?(field.to_s)

@@ -98,27 +98,11 @@
       </div>
       <br>
       <div class="row">
-        <div class="form-group col-md-3">
-          <label>Utility Provider 1:</label>
-          <%= company.text_field :utility_provider_1, class: 'form-control', id: 'inputUtilityProvider1' %>
-        </div>
-        <div class="form-group col-md-3">
-          <label>Utility Provider 2:</label>
-          <%= company.text_field :utility_provider_2, class: 'form-control', id: 'inputUtilityProvider2' %>
-        </div>
-      </div>
-      <div class="row">
         <div class="form-group col-md-9">
           <label id="inputCompanyNotes" >Company Notes:</label>
           <div class="formTextarea">
             <%= company.text_area 'notes', class: "form-control", rows: "3" %>
           </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-md-3">
-          <label >Business Unit:</label>
-          <%= company.select :business_unit_id, options_for_select(load_type("business_units"), company.object.business_unit_id), {}, {class: 'form-control custom-select', data:{"live-search":true } } %>
         </div>
       </div>
       <div class="divider-hr"></div>

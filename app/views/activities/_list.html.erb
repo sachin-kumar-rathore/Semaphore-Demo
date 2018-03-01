@@ -12,11 +12,11 @@
   <tbody>
     <% @activities.each do |activity| %>
       <tr>
-        <td><%= activity.name %></td>
-        <td><%= activity.company_activity_type.name %></td>
-        <td><%= activity.company ? activity.company.name : "Unassigned" %></td>
-        <td><%= activity.contact_date %></td>
-        <td><%= activity.converted ? "Yes" : "No" %></td>
+        <td><a class="custom-href" href="<%= edit_activity_path(activity) %>"><%= activity.name %></a></td>
+        <td><a class="custom-href" href="<%= edit_activity_path(activity) %>"><%= activity.company_activity_type.name %></a></td>
+        <td><a class="custom-href" href="<%= edit_company_path(activity.company) %>"><%= activity.company ? activity.company.name : "Unassigned" %></a></td>
+        <td><a class="custom-href" href="<%= edit_activity_path(activity) %>"><%= activity.contact_date %></a></td>
+        <td><a class="custom-href" href="<%= edit_activity_path(activity) %>"><%= activity.converted ? "Yes" : "No" %></a></td>
         <td>
           <div class="openLeft moreOptions dropdown">
             <a class="" data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false" data-animation="scale-down" role="button">

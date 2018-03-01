@@ -502,7 +502,7 @@ $(document).on("click", ".edit-custom-export", function () {
   var name = $(this).data("name");
   var filters = $(this).data("filters");
   var custom_export_id = $(this).data("custom_id");
-  
+
   applyfilters(filters, name);
   $('.custom_export_tr').removeClass('active_custom_export');
   $('.custom_export_'+custom_export_id).addClass('active_custom_export');
@@ -524,4 +524,25 @@ $(document).on("change", "#project_square_feet_requested", function () {
     $('#otherSquareFeetRequested').addClass('hidden');
     $('#otherSquareFeetRequested').removeClass('show');
   }
+});
+$(function() {
+  $('#siteVisitDates').on('cocoon:after-insert', function(e, inserted_item) {
+    $('#siteVisitDates .nested-fields').each(function (indx) {
+      var label_no = indx + 1;
+      $(this).find('.visitDateLabel').html("Site Visit " + label_no + ":")
+    });
+  });
+  $('#siteVisitDates').on('cocoon:after-remove', function(e, inserted_item) {
+    $('#siteVisitDates .nested-fields').each(function (indx) {
+      var label_no = indx + 1;
+      $(this).find('.visitDateLabel').html("Site Visit " + label_no + ":")
+    });
+  });
+});
+
+$(document).ready(function () {
+  $('#siteVisitDates .nested-fields').each(function (indx) {
+    var label_no = indx + 1;
+    $(this).find('.visitDateLabel').html("Site Visit " + label_no + ":")
+  });
 });

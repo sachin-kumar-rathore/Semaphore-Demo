@@ -13,6 +13,7 @@ class ProjectsController < ApplicationController
                              .where(id: params[:activity_id]).first
     end
     @project = assign_project
+    3.times { @project.site_visits.build }
   end
 
   def index

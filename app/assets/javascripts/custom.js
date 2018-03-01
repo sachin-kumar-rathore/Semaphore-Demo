@@ -538,3 +538,11 @@ $(document).on("click", "input[name*='status']", function() {
     $('#where_located_div').removeClass('show');
   }
 });
+
+// To change the value of progress in tasks to 100.00 on completion
+$(document).on("change", "#task_status", function() {
+  if ($(this).val() == 'Complete')
+    $('#task_progress').val('100.0')
+  else
+    $('#task_progress').val('0.0')
+});

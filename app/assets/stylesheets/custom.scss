@@ -475,6 +475,7 @@ ul.ui-autocomplete {
 .custom-href:hover {
   color: #757575;
 }
+
 #siteVisitDates{
   .links{ margin-top: 10px}
   .remove-link{
@@ -484,4 +485,8 @@ ul.ui-autocomplete {
       text-decoration: none;
     }
   }
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }

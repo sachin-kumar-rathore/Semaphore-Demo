@@ -526,13 +526,6 @@ $(document).on("change", "#project_square_feet_requested", function () {
   }
 });
 
-function click_task_row(id){
-  $.ajax({
-    url: '/tasks/' + id,
-    type: "GET"
-  });
-}
-
 // Toggle the where located field
 $(document).on("click", "input[name*='status']", function() {
   if ($(this).val() == 'Successful'){
@@ -574,3 +567,10 @@ $(document).ready(function () {
     $(this).find('.visitDateLabel').html("Site Visit " + label_no + ":")
   });
 });
+
+function click_row(object, id){
+  $.ajax({
+    url: '/' + object + '/' + id,
+    type: "GET"
+  });
+}

@@ -118,8 +118,7 @@ class CompaniesController < ApplicationController
                                     :city, :state, :zip_code, :country,
                                     :region, :phone_number_1, :fax, :website,
                                     :email, :member_investor,
-                                    :utility_provider_1, :utility_provider_2,
-                                    :notes, :business_unit_id)
+                                    :notes)
   end
 
   def history_params

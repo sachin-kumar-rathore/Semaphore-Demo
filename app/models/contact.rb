@@ -37,9 +37,11 @@ class Contact < ApplicationRecord
   validates_presence_of :name, :email
   validates_format_of :email, with: /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/, message: "Invalid"
   validates_uniqueness_of :email, scope: :organization_id
+  validate  :linkedin_url_validator
   # == Callbacks == #
   after_create :add_contact_to_project, if: :has_project_id? 
   after_create :add_contact_to_company, if: :has_company_id?
+  before_save :strip_linkedin_url
   # == Scopes and Other macros == #
   pg_search_scope :name_search, :against => :name, :using => {
       :tsearch => {:prefix => true}
@@ -98,5 +100,17 @@ class Contact < ApplicationRecord
     self.phone_number_1 = self.phone_number_1.to_i.to_s
     self.phone_number_2 = self.phone_number_2.to_i.to_s
     self.cell_phone = self.cell_phone.to_i.to_s    
+  end
+
+  def linkedin_url_validator
+    return if linkedin_url.blank?
+
+    unless linkedin_url.include? 'linkedin.com'
+      errors.add(:linkedin_url, 'is incorrect')
+    end
+  end
+
+  def strip_linkedin_url
+    linkedin_url.gsub!(/^https?\:\/\/(www.)?|(www.)/,'') unless linkedin_url.blank?
   end
 end

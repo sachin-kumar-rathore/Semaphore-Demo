@@ -83,6 +83,12 @@
               </div>
             </div>
             <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="addLinkedInUrl">LinkedIn URL:</label>
+                <%= form.text_field :linkedin_url, class: 'form-control', id: 'inputBasicLinkedinUrl' %>
+              </div>
+            </div>
+            <div class="form-row">
               <div class="form-group col">
                 <label for="city">Notes:</label>
                 <%= form.text_field :notes, class: 'form-control', id: 'inputBasicNotes' %>

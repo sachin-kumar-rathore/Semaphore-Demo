@@ -16,15 +16,15 @@
   <tbody>
   <% for task in tasks %>
       <tr>
-        <td><%= task.name %></td>
-        <td><span class="priorityDot <%= priority_class(task.priority) %>"></span><%= task.priority %></td>
-        <td><%= task.taskable_id ? task.taskable.name : "" %></td>
-        <td><span class="nowrapCol"><%= task.description %></span></td>
-        <td><%= task.status %></td>
-        <td><%= task.progress %> %</td>
-        <td><%= task.assignee.full_name %></td>
-        <td><%= task.start_date.strftime("%m/%d/%Y") if task.start_date.present? %></td>
-        <td><%= task.end_date.strftime("%m/%d/%Y") if task.end_date.present? %></td>
+        <td onclick="click_task_row('<%= task.id %>')"><%= task.name %></td>
+        <td onclick="click_task_row('<%= task.id %>')"><span class="priorityDot <%= priority_class(task.priority) %>"></span><%= task.priority %></td>
+        <td onclick="click_task_row('<%= task.id %>')"><%= task.taskable_id ? task.taskable.name : "" %></td>
+        <td onclick="click_task_row('<%= task.id %>')"><span class="nowrapCol"><%= task.description %></span></td>
+        <td onclick="click_task_row('<%= task.id %>')"><%= task.status %></td>
+        <td onclick="click_task_row('<%= task.id %>')"><%= task.progress %> %</td>
+        <td onclick="click_task_row('<%= task.id %>')"><%= task.assignee.full_name %></td>
+        <td onclick="click_task_row('<%= task.id %>')"><%= task.start_date.strftime("%m/%d/%Y") if task.start_date.present? %></td>
+        <td onclick="click_task_row('<%= task.id %>')"><%= task.end_date.strftime("%m/%d/%Y") if task.end_date.present? %></td>
         <td>
           <div class="openLeft moreOptions dropdown">
             <a class="" data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false" data-animation="scale-down" role="button">

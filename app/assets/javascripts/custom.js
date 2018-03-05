@@ -525,6 +525,34 @@ $(document).on("change", "#project_square_feet_requested", function () {
     $('#otherSquareFeetRequested').removeClass('show');
   }
 });
+
+function click_task_row(id){
+  $.ajax({
+    url: '/tasks/' + id,
+    type: "GET"
+  });
+}
+
+// Toggle the where located field
+$(document).on("click", "input[name*='status']", function() {
+  if ($(this).val() == 'Successful'){
+    $('#where_located_div').addClass('show');
+    $('#where_located_div').removeClass('hidden');
+  }
+  else{
+    $('#where_located_div').addClass('hidden');
+    $('#where_located_div').removeClass('show');
+  }
+});
+
+// To change the value of progress in tasks to 100.00 on completion
+$(document).on("change", "#task_status", function() {
+  if ($(this).val() == 'Complete')
+    $('#task_progress').val('100.0')
+  else
+    $('#task_progress').val('0.0')
+});
+
 $(function() {
   $('#siteVisitDates').on('cocoon:after-insert', function(e, inserted_item) {
     $('#siteVisitDates .nested-fields').each(function (indx) {

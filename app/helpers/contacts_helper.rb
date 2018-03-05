@@ -14,7 +14,8 @@ module ContactsHelper
       email: 'Email',
       website: 'Website',
       notes: 'Notes',
-      contact_category: 'Categories'
+      contact_category: 'Categories',
+      linkedin_url: 'Linkedin Url'
     }
   end
 

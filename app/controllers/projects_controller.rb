@@ -18,6 +18,7 @@ class ProjectsController < ApplicationController
 
   def index
     @projects =  request.format.html? ? current_org.projects.active : current_org.projects
+    @projects = @projects.includes(:site_visits).references(:site_visits)
     filtering_params(params).each do |key, value|
       @projects = @projects.public_send(key, value) if value.present?
     end

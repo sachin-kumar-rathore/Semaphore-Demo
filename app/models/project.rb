@@ -2,7 +2,7 @@ require 'searchable'
 # Project Model
 class Project < ApplicationRecord
   include DateParser
-  include Searchable
+  # include Searchable
 
   SQUARE_FEET_REQUESTED = ['1-25,999', '26-44,999', '45-75,999',
                            '76-99,999', '100-149,999', '150-199,999',
@@ -14,7 +14,6 @@ class Project < ApplicationRecord
               Inactive].freeze
 
   attr_accessor :active_date_str, :successful_completion_date_str,
-                :site_visit_1_str, :site_visit_2_str, :site_visit_3_str,
                 :public_release_date_str, :activity_id
   # CALLBACK
   before_validation :convert_dates_format
@@ -59,9 +58,7 @@ class Project < ApplicationRecord
   scope :business_type, ->(business_type) { where('business_type IN (?)', business_type.values) }
   scope :site_visit, ->(site_visit) {
                        if site_visit[:start].present? && site_visit[:end].present?
-                         where("site_visit_1 BETWEEN :start AND :end
-                                            OR site_visit_2 BETWEEN :start AND :end
-                                            OR site_visit_3 BETWEEN :start AND :end",
+                         where("site_visits.visit_date BETWEEN :start AND :end",
                                start: site_visit[:start], end: site_visit[:end])
                        end
                      }
@@ -100,21 +97,6 @@ class Project < ApplicationRecord
     end
     begin
       self.successful_completion_date = convert_date(successful_completion_date_str) if successful_completion_date_str.present?
-    rescue StandardError
-      nil
-    end
-    begin
-      self.site_visit_1 = convert_date(site_visit_1_str) if site_visit_1_str.present?
-    rescue StandardError
-      nil
-    end
-    begin
-      self.site_visit_2 = convert_date(site_visit_2_str) if site_visit_2_str.present?
-    rescue StandardError
-      nil
-    end
-    begin
-      self.site_visit_3 = convert_date(site_visit_3_str) if site_visit_3_str.present?
     rescue StandardError
       nil
     end

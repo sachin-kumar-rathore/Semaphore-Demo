@@ -552,3 +552,10 @@ $(document).on("change", "#task_status", function() {
   else
     $('#task_progress').val('0.0')
 });
+
+function click_row(object, id){
+  $.ajax({
+    url: '/' + object + '/' + id,
+    type: "GET"
+  });
+}

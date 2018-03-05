@@ -9,8 +9,8 @@
   <tbody>
     <% companies.each do |company| %>
       <tr>
-        <td><%= company.name %></td>
-        <td><%= company.updated_at.strftime("%m/%d/%Y") %></td>
+        <td><a class="custom-href" href="<%= edit_company_path(company) %>" data-turbolinks="false"><%= company.name %></td>
+        <td><a class="custom-href" href="<%= edit_company_path(company) %>" data-turbolinks="false"><%= company.updated_at.strftime("%m/%d/%Y") %></td>
         <td>
           <div class="openLeft moreOptions dropdown">
             <a class="" data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false" data-animation="scale-down" role="button">

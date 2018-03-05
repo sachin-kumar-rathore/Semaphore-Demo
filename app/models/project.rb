@@ -2,7 +2,7 @@ require 'searchable'
 # Project Model
 class Project < ApplicationRecord
   include DateParser
-  # include Searchable
+  include Searchable
 
   SQUARE_FEET_REQUESTED = ['1-25,999', '26-44,999', '45-75,999',
                            '76-99,999', '100-149,999', '150-199,999',

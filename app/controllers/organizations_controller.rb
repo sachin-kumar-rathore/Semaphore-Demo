@@ -1,11 +1,8 @@
 # Manage organizations
 class OrganizationsController < ApplicationController
-  before_action :authenticate_admin!, except: %i[edit_details update_details]
+  before_action :authenticate_admin!, except: %i[edit_details update]
   before_action :set_organization, except: %i[index edit_details]
   layout :resolve_layout
-  respond_to :js, only: [:update_details]
-  respond_to :html, except: [:update_details]
-  # layout 'admin'
 
   def index
     @organizations = Organization.all
@@ -50,7 +47,7 @@ class OrganizationsController < ApplicationController
   end
 
   def organization_params
-    params.require(:organization).permit(:name, :url,
+    params.require(:organization).permit(:name, :url, :logo,
                                          :primary_contact_first_name,
                                          :primary_contact_last_name,
                                          :primary_contact_phone,

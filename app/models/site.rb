@@ -3,6 +3,7 @@ require 'searchable'
 class Site < ApplicationRecord
   include SpreadSheet
   include Searchable
+  include Auditable
 
   IMPORT_PARAMETERS = ["site_number", "name", "contact_id", "property_type", "address_line",
                       "city", "country", "state", "zip_code", "special_district", "available_acreage", "available_square_feet",
@@ -89,5 +90,4 @@ class Site < ApplicationRecord
     contact.save(validate: false) if(import_params[:create_new_contacts] && contact.new_record?)
     site[:contact_id] = contact.id
   end
-
 end

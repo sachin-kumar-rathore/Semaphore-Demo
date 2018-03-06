@@ -17,6 +17,7 @@ class ProjectSitesController < SitesController
 
   def update
     if @site.update(site_params)
+      @site.create_audit_record(current_user, @project)
       flash.now[:success] = 'Site was successfully updated.'
     end
   end

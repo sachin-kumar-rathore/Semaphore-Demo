@@ -83,3 +83,4 @@ gem 'highcharts-rails'
 gem 'sidekiq', '~> 5.1'
 gem 'exception_notification', '~> 4.2', '>= 4.2.2'
 gem 'cocoon', '~> 1.2', '>= 1.2.9'
+gem "audited", "~> 4.5"

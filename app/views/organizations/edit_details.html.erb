@@ -1,0 +1,89 @@
+<div class="pageTitle">
+  <h2><i class="icon fa fa-cog"></i> Settings</h2>
+</div>
+<div class="btmLineLinks mb-20">
+  <ul class="nav">
+    <li class="nav-item">
+      <a class="nav-link" href="<%= manage_users_path %>">Manage Users</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="<%= manage_configurations_path %>">Manage Configuration</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link " href="<%= considered_locations_path %>">Considered Locations</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link " href="<%= security_roles_path %>">Manage Roles</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link " href="">Project Logs</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" href="<%= organization_details_path %>">Organization Details</a>
+    </li>
+  </ul>
+</div>
+
+<div class="orgInfoAlerts success"></div>
+<div class="orgInfoErrors"></div>
+<br>
+
+<div class="panel">
+  <header class="panel-heading">
+    <div class="tasksTopOptions">
+      <div class="row">
+        <div class="col">
+          <div class="tableTitle">
+            <h2>Organization Details</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="panel-body">
+    <%= form_for @organization, remote: true do |f| %>
+
+      <div class="row">
+        <div class="form-group col-md-4">
+          <label id="inputActvityName">Name:</label>
+          <%= f.text_field :name, class: "form-control", required: true %>
+        </div>
+
+        <div class="form-group col-md-4">
+          <%= f.label :url %><br>
+          <%= f.url_field :url, class: "form-control", disabled: true %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-md-3">
+          <%= f.label :primary_contact_first_name %><br>
+          <%= f.text_field :primary_contact_first_name, class: "form-control", required: true %>
+        </div>
+        <div class="form-group col-md-3">
+          <%= f.label :primary_contact_last_name %><br>
+          <%= f.text_field :primary_contact_last_name, class: "form-control", required: true %>
+        </div>
+        <div class="form-group col-md-3">
+          <%= f.label :primary_contact_phone %><br>
+          <%= f.text_field :primary_contact_phone, class: "form-control", required: true %>
+        </div>
+        <div class="form-group col-md-3">
+          <%= f.label :primary_contact_email %><br>
+          <%= f.email_field :primary_contact_email, class: "form-control", required: true %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-12">
+          <label class="form-control-label">Logo:</label>
+          <%= f.file_field :logo %>
+        </div>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+
+    <% end %>
+  </div>
+</div>

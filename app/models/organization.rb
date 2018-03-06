@@ -6,6 +6,8 @@ class Organization < ApplicationRecord
 
   CONFIG = %i[ProjectType IndustryType Incentive Source EliminationReason ContactCategory]
   CONFIG_WITHOUT_STATUS = %i[BusinessUnit SecurityRole ContactMethodType CompanyActivityType]
+
+  mount_uploader :logo, FileUploader
   
   has_many :users, dependent: :destroy
 

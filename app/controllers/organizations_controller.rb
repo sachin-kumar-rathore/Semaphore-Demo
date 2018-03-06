@@ -1,8 +1,8 @@
 # Manage organizations
 class OrganizationsController < ApplicationController
-  before_action :authenticate_admin!
-  before_action :set_organization, except: %i[index]
-  layout 'admin'
+  before_action :authenticate_admin!, except: %i[edit_details update]
+  before_action :set_organization, except: %i[index edit_details]
+  layout :resolve_layout
 
   def index
     @organizations = Organization.all
@@ -29,6 +29,14 @@ class OrganizationsController < ApplicationController
     bypass_sign_in_with_user
   end
 
+  def edit_details
+    @organization = current_user.organization
+  end
+
+  def update_details
+
+  end
+
   private
 
   def set_organization
@@ -39,7 +47,7 @@ class OrganizationsController < ApplicationController
   end
 
   def organization_params
-    params.require(:organization).permit(:name, :url,
+    params.require(:organization).permit(:name, :url, :logo,
                                          :primary_contact_first_name,
                                          :primary_contact_last_name,
                                          :primary_contact_phone,
@@ -54,6 +62,15 @@ class OrganizationsController < ApplicationController
     else
       flash[:danger] = 'Unable to login as user. Please try again.'
       redirect_to organizations_path
+    end
+  end
+
+  def resolve_layout
+    case action_name
+      when "edit_details"
+        "application"
+      else
+        "admin"
     end
   end
 end

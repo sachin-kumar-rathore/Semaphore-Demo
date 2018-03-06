@@ -184,4 +184,6 @@ Rails.application.routes.draw do
   end
 
   resources :search, only: [:index]
+
+  get 'organization_details' => 'organizations#edit_details'
 end

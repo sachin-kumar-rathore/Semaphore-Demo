@@ -164,6 +164,9 @@
         <% end %>
 
         <div class="form-row">
+					<div class="col">
+						<h4 class="m-0">Tasks</h4>
+					</div>
           <div class="col">
             <div class="title-menu">
               <%= select_tag :project_id, options_for_select(load_data_with_id(@projects)), include_blank: 'All Projects',
@@ -201,7 +204,10 @@
           </div>
         <% end %>
         <div class="form-row">
-          <div class="col">
+					<div class="col-md-2">
+						<h4 class="m-0">Emails</h4>
+					</div>
+          <div class="col text-right">
             <div class="title-menu">
               <%= select_tag :project, options_for_select(load_data_with_id(@projects)), include_blank: 'All Projects',
                              class: 'btn activeBtn', id: 'dashboard_email_by_project' %>

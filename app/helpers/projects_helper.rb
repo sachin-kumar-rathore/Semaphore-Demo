@@ -71,17 +71,12 @@ module ProjectsHelper
   end
 
   def load_project_manager_data_with_id
-    current_org.project_managers.map { |user| [(user.first_name + ' ' + user.last_name), user.id] }
+    current_org.project_managers.map { |user| [user.full_name, user.id] }
   end
 
   def assign_default_project_number
-    project_numbers = Project.pluck(:project_number)
-    while(true)
-      project_no = rand.to_s[2..7]
-      unless project_numbers.include?(project_no)
-        return project_no
-      end
-    end
+    project_no = rand.to_s[2..7]
+    return Project.pluck(:project_number).include?(project_no.to_s) ? assign_default_project_number : project_no
   end
 
   def audit_description(audit)

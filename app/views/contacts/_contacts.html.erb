@@ -13,7 +13,7 @@
     <% for contact in contacts %>
       <tr>
         <td><a class="clickable" data-href="<%= @project ? project_contact_path(@project, contact) : contact_path(contact) %>"><%= contact.name %></td>
-        <td><a class="clickable" data-href="<%= @project ? project_contact_path(@project, contact) : contact_path(contact) %>"><%= contact.organization ? contact.organization.name : 'ORG' %></td>
+        <td><a class="clickable" data-href="<%= @project ? project_contact_path(@project, contact) : contact_path(contact) %>"><%= contact.organization ? contact.organization_name : 'ORG' %></td>
         <td><a class="clickable" data-href="<%= @project ? project_contact_path(@project, contact) : contact_path(contact) %>"><%= contact.cell_phone %></td>
         <td><a class="clickable" data-href="<%= @project ? project_contact_path(@project, contact) : contact_path(contact) %>"><%= contact.email %></td>
         <td>

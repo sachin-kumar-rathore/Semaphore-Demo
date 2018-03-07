@@ -12,6 +12,7 @@
         <div class="formStyle mt--30">
           <%= render partial: 'contacts/filters', locals: { controller: 'project_contacts', action: 'show_existing_contacts' } %>
         </div>
+        <br>
         <div class="panel">
           <div class="panel-body" id="existingContactsList">
             <%= render partial: "existing_contacts_list", locals: {contacts: @contacts} %>

@@ -1,6 +1,6 @@
 require 'searchable'
 class Document < ApplicationRecord
-
+  audited associated_with: :documentable
   include Searchable
   
   mount_uploader :name, FileUploader

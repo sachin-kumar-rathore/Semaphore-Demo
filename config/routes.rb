@@ -111,6 +111,10 @@ Rails.application.routes.draw do
       get :export_form
       get :export
     end
+
+    member do
+      get :logs
+    end
   end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
@@ -186,4 +190,6 @@ Rails.application.routes.draw do
   resources :search, only: [:index]
 
   get 'organization_details' => 'organizations#edit_details'
+
+  resources :project_logs, only: [:index]
 end

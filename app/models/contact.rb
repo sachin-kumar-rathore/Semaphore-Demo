@@ -3,6 +3,7 @@ require 'searchable'
 class Contact < ApplicationRecord
   include SpreadSheet
   include Searchable
+  include Auditable
   
   IMPORT_PARAMETERS = ["name", "title", "address_line_1", "address_line_2",
                       "city_state_zip", "phone_number_1", "phone_number_2", "cell_phone",

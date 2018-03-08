@@ -10,9 +10,9 @@
   <tbody>
     <% sites.each do |site| %>
         <tr>
-          <td class="cursor-pointer" onclick="click_row('sites', '<%= site.id %>')"><%= site.site_number %></td>
-          <td class="cursor-pointer" onclick="click_row('sites', '<%= site.id %>')"><%= site.name %></td>
-          <td class="cursor-pointer" onclick="click_row('sites', '<%= site.id %>')"><%= site.zip_code %></td>
+          <td><a class="clickable" data-href="<%= @project ? project_site_path(@project, site) : site_path(site) %>" data-toggle="modal" data-target="#viewContactModal1"><%= site.site_number %></td>
+          <td><a class="clickable" data-href="<%= @project ? project_site_path(@project, site) : site_path(site) %>" data-toggle="modal" data-target="#viewContactModal1"><%= site.name %></td>
+          <td><a class="clickable" data-href="<%= @project ? project_site_path(@project, site) : site_path(site) %>" data-toggle="modal" data-target="#viewContactModal1"><%= site.zip_code %></td>
           <td>
             <div class="openLeft moreOptions dropdown"> 
               <a class="" data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false" data-animation="scale-down" role="button"> <i class="icon md-more-vert" aria-hidden="true"></i> </a>

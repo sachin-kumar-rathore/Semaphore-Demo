@@ -26,7 +26,7 @@
                     <td class="text-center"><%= site.created_at.strftime('%m/%d/%Y') %></td>
                     <td class="text-center"><%= site.site_number %> | <%= site.name %></td>
                     <td class="text-center"><%= site.projects.collect { |p| p.name }.join(', ') %></td>
-                    <td class="text-center"><%= site.projects.collect { |p| p.company.name }.join(', ') %></td>
+                    <td class="text-center"><%= site.projects.collect { |p| p.company.try(:name) }.join(', ') %></td>
                     <td class="text-center"><%= site.city %></td>
                     <td class="text-center"><%= site.country %></td>
                   </tr>

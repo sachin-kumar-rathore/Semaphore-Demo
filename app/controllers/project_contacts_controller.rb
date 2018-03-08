@@ -17,6 +17,7 @@ class ProjectContactsController < ContactsController
 
   def update
     if @contact.update(contact_params)
+      @contact.create_audit_record(current_user, @project)
       flash.now[:success] = 'Contact was successfully updated.'
     end
   end

@@ -1,5 +1,5 @@
 class Email < ApplicationRecord
-
+  audited associated_with: :mailable
   # == Constants == #
   self.per_page = 5
 

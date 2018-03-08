@@ -1,0 +1,5 @@
+$('#logsTab').html("<%= j render partial: 'project_logs_list' %>");
+$(".tab-content").children('.tab-pane').removeClass("active");
+$('#logsTab').addClass("active");
+$(".nav-item").children('.nav-link').removeClass("active");
+$('#logsNavLink').addClass("active");

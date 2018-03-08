@@ -11,15 +11,15 @@
   <tbody>
     <% @activities.each do |activity| %>
       <tr>
-        <td><%= activity.name %></td>
-        <td><%= activity.company_activity_type.name %></td>
-        <td><%= activity.contact_date %></td>
-        <td><%= activity.converted ? "Yes" : "No" %></td>
+        <td><a class="custom-href" href="<%= edit_company_activity_path(@company, activity) %>" data-turbolinks="false"><%= activity.name %></td>
+        <td><a class="custom-href" href="<%= edit_company_activity_path(@company, activity) %>" data-turbolinks="false"><%= activity.company_activity_type.name %></td>
+        <td><a class="custom-href" href="<%= edit_company_activity_path(@company, activity) %>" data-turbolinks="false"><%= activity.contact_date %></td>
+        <td><a class="custom-href" href="<%= edit_company_activity_path(@company, activity) %>" data-turbolinks="false"><%= activity.converted ? "Yes" : "No" %></td>
         <td>
           <div class="openLeft moreOptions dropdown">
             <a class="" data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false" data-animation="scale-down" role="button"> <i class="icon md-more-vert" aria-hidden="true"></i> </a>
             <div class="dropdown-menu" role="menu">
-              <a class="dropdown-item clickable" href="<%= edit_company_activity_path(@company, activity) %>" role="menuitem"><i class="icon fa fa-pencil" aria-hidden="true"></i> Edit</a>
+              <a class="dropdown-item clickable" href="<%= edit_company_activity_path(@company, activity) %>" data-turbolinks="false" role="menuitem"><i class="icon fa fa-pencil" aria-hidden="true"></i> Edit</a>
             </div>
           </div>
         </td>

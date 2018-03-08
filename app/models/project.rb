@@ -3,12 +3,13 @@ require 'searchable'
 class Project < ApplicationRecord
   include DateParser
   include Searchable
-
+  audited
+  has_associated_audits
   SQUARE_FEET_REQUESTED = ['1-25,999', '26-44,999', '45-75,999',
                            '76-99,999', '100-149,999', '150-199,999',
                            '200-399,999', '400,000+', 'Other'].freeze
-  ACRES_REQUESTED = ['up to 1', 'up to 2', 'up to 3', 'up to 4',
-                     'up to 5'].freeze
+  ACRES_REQUESTED = ['up to 5', '6 to 10', '11 to 30', '31 to 50',
+                     '51 to 99', '100+'].freeze
   BUSINESS_TYPE = ['Existing Business', 'New Business'].freeze
   STATUS = %w[Preliminary Active Delayed Eliminated Successful
               Inactive].freeze

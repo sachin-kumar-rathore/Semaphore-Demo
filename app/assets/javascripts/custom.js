@@ -567,10 +567,3 @@ $(document).ready(function () {
     $(this).find('.visitDateLabel').html("Site Visit " + label_no + ":")
   });
 });
-
-function click_row(object, id){
-  $.ajax({
-    url: '/' + object + '/' + id,
-    type: "GET"
-  });
-}

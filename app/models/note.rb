@@ -1,6 +1,6 @@
 require 'searchable'
 class Note < ApplicationRecord
-
+  audited associated_with: :notable
   include Searchable
   
   #Modules

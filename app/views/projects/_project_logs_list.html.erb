@@ -1,0 +1,43 @@
+<div class="panel">
+  <div class="panel-body row">
+    <div class="col-md-4">
+      <h3>Project Logs</h3>
+    </div>
+  </div>
+  <div class="panel-body tableDesign" id="logsList" >
+    <table class="table tableCustomStyle tableImg table-hover removeTblSearch bodrTop footable footable-6 footable-filtering footable-filtering-right footable-paging footable-paging-center breakpoint-lg" data-toggle-column="first" data-empty="There are no project logs" data-show-toggle="true">
+      <thead>
+        <tr>
+          <th>PROJECT#</th>
+          <th>PROJECT NAME</th>
+          <th data-breakpoints="xs">COMPANY NAME</th>
+          <th data-breakpoints="xs">USER FIRST NAME</th>
+          <th data-breakpoints="xs">USER LAST NAME</th>
+          <th data-breakpoints="xs">DATE</th>
+          <th data-breakpoints="xs">DESCRIPTION</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @project_logs.each do |audit| %>
+          <% project = (audit.auditable_type == 'Project') ? audit.auditable : audit.associated %>
+          <tr>
+            <td><%= project.project_number %></a></td>
+            <td><%= project.name %></td>
+            <td><a class="custom-href" href="<%= project.company ? edit_company_path(project.company_id) : 'javascript:void(0)' %>" data-turbolinks="false"><%= project.company ? project.company.name : "No Company" %></td>
+            <td><%= audit.user.first_name %></td>
+            <td><%= audit.user.last_name %></td>
+            <td><%= filter_month_date_year(audit.created_at) %></td>
+            <td><%= audit_description(audit) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="digg_pagination">
+  <%= js_will_paginate @project_logs %>
+</div>
+
+<script>
+  $('.footable').footable();
+</script>

@@ -1,7 +1,7 @@
 <table class="table tableCustomStyle tableImg table-hover removeTblSearch bodrTop footable footable-6 footable-filtering footable-filtering-right footable-paging footable-paging-center breakpoint-lg" data-toggle-column="first" data-empty="There are no tasks." data-show-toggle="true" >
   <thead>
     <tr>
-      <th data-name="task" data-type="number" data-breakpoints="xs sm" class="footable-first-visible">Task</th>
+      <th data-name="task" data-breakpoints="xs sm" class="footable-first-visible">Task</th>
       <th data-name="priority" data-breakpoints="xs sm">Priority</th>
       <th data-name="status">Status</th>
       <th data-name="complete" data-breakpoints="xs sm md">Complete</th>
@@ -15,14 +15,14 @@
   <tbody>
   <% for task in tasks %>
       <tr>
-        <td><%= task.name %></td>
-        <td><span class="priorityDot <%= priority_class(task.priority) %>"></span><%= task.priority %></td>
-        <td><%= task.status %></td>
-        <td><%= task.progress %> %</td>
-        <td><%= task.assignee.full_name %></td>
-        <td><%= task.description.truncate(25) %></td>
-        <td><%= task.start_date.strftime("%m/%d/%Y") if task.start_date.present? %></td>
-        <td><%= task.end_date.strftime("%m/%d/%Y") if task.end_date.present? %></td>
+        <td class="clickable" data-href="<%= project_task_path(task, project_id: @project) %>" data-toggle="modal" data-target="#viewContactModal1"><%= task.name %></td>
+        <td class="clickable" data-href="<%= project_task_path(task, project_id: @project) %>" data-toggle="modal" data-target="#viewContactModal1"><span class="priorityDot <%= priority_class(task.priority) %>"></span><%= task.priority %></td>
+        <td class="clickable" data-href="<%= project_task_path(task, project_id: @project) %>" data-toggle="modal" data-target="#viewContactModal1"><%= task.status %></td>
+        <td class="clickable" data-href="<%= project_task_path(task, project_id: @project) %>" data-toggle="modal" data-target="#viewContactModal1"><%= task.progress %> %</td>
+        <td class="clickable" data-href="<%= project_task_path(task, project_id: @project) %>" data-toggle="modal" data-target="#viewContactModal1"><%= task.assignee.full_name %></td>
+        <td class="clickable" data-href="<%= project_task_path(task, project_id: @project) %>" data-toggle="modal" data-target="#viewContactModal1"><%= task.description.truncate(25) %></td>
+        <td class="clickable" data-href="<%= project_task_path(task, project_id: @project) %>" data-toggle="modal" data-target="#viewContactModal1"><%= task.start_date.strftime("%m/%d/%Y") if task.start_date.present? %></td>
+        <td class="clickable" data-href="<%= project_task_path(task, project_id: @project) %>" data-toggle="modal" data-target="#viewContactModal1"><%= task.end_date.strftime("%m/%d/%Y") if task.end_date.present? %></td>
         <td>
           <div class="openLeft moreOptions dropdown"> 
             <a class="" data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false" data-animation="scale-down" role="button"> <i class="icon md-more-vert" aria-hidden="true"></i> </a>

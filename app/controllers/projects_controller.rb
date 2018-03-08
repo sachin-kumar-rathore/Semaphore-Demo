@@ -2,7 +2,7 @@
 class ProjectsController < ApplicationController
   include ProjectModule
   before_action :authenticate_user!
-  before_action :set_project, only: %i[edit update show]
+  before_action :set_project, only: %i[edit update show logs]
   before_action :convert_site_visit_dates, only: [:update, :create]
   respond_to :html, only: %i[index new edit]
   respond_to :js
@@ -84,6 +84,11 @@ class ProjectsController < ApplicationController
       redirect_to export_form_projects_path
       flash[:danger] = 'No records are found'
     end
+  end
+
+  def logs
+    @project_logs = (@project.audits + @project.associated_audits).sort.reverse
+                     .paginate(page: params[:page], per_page: 8)
   end
 
   private

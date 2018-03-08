@@ -14,7 +14,7 @@
       <tr>
         <td><a class="custom-href" href="projects/<%= project.id %>/edit"><%= project.project_number %></a></td>
         <td><a class="custom-href" href="projects/<%= project.id %>/edit"><%= project.name %></td>
-        <td><a class="custom-href" href="<%= project.company ? edit_company_path(project.company_id) : '' %>"><%= project.company ? project.company.name : "No Company" %></td>
+        <td><a class="custom-href" href="<%= project.company ? edit_company_path(project.company_id) : 'javascript:void(0)' %>" data-turbolinks="false"><%= project.company ? project.company.name : "No Company" %></td>
         <td><%= project.active_date %></td>
         <td><%= project.status %></td>
         <td>

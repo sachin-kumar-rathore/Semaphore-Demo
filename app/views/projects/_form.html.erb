@@ -114,11 +114,13 @@
     <div class="divider-hr"></div>
     <div class="formRowSize">
       <div class="form-row">
-        <div class="col-12">
+        <div class="form-group col-lg-3">
           <label for="companyName">Company Name:</label>
+          <%= project.select(:company_id, load_company_data_with_id(current_org.companies), { include_blank: 'No company' }, class: 'custom-select form-control') %>
         </div>
-        <div class="form-group col-md-9 col-lg-3">
-          <%= project.select(:company_id, load_data_with_id(current_org.companies),{ include_blank: 'No Company' }, class: 'custom-select form-control') %>
+        <div id="quick_add_company" class="form-group col-lg-3 hidden">
+          <label for="NewCompanyName">Quick add company:</label>
+          <%= project.text_field 'new_company_name', class: "form-control", placeholder: "quick add company" %>
         </div>
       </div>
       <div class="form-row">

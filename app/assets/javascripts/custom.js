@@ -567,3 +567,11 @@ $(document).ready(function () {
     $(this).find('.visitDateLabel').html("Site Visit " + label_no + ":")
   });
 });
+
+$(document).on("change", "#project_company_id", function () {
+  if ($(this).val() == 'Other'){
+    $('#quick_add_company').removeClass('hidden');
+  }else{
+    $('#quick_add_company').addClass('hidden');
+  }
+});

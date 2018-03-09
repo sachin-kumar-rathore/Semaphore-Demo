@@ -15,11 +15,12 @@ class Project < ApplicationRecord
               Inactive].freeze
 
   attr_accessor :active_date_str, :successful_completion_date_str,
-                :public_release_date_str, :activity_id
+                :public_release_date_str, :activity_id, :new_company_name
   # CALLBACK
   before_validation :convert_dates_format
   after_create :copy_activity_records, if: :has_activity_id?
   before_save :update_other_requested_feet
+  before_save :create_new_company
 
   # ASSOCIATION
   belongs_to :organization
@@ -145,4 +146,8 @@ class Project < ApplicationRecord
     end
   end
 
+  def create_new_company
+    @company = organization.companies.new(name: new_company_name)
+    self.company_id = @company.id if @company.save(validate: false)
+  end
 end

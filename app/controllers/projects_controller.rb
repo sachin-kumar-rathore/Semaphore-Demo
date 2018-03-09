@@ -114,7 +114,7 @@ class ProjectsController < ApplicationController
                                     :located, :project_number, :retained_jobs,
                                     :company_id,
                                     :primary_contact_id, :source_id,
-                                    :considered_location_id,
+                                    :considered_location_id, :new_company_name,
                                     :incentive_id, :other_square_ft_requested,
                                     :competition_id, :activity_id, :project_manager_id,
                                     site_visits_attributes: [:id, :visit_date, :_destroy])

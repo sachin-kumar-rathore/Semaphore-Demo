@@ -97,4 +97,8 @@ module ProjectsHelper
     when 'Email' then "Email #{audit.auditable.try(:subject)}"
     end
   end
+
+  def load_company_data_with_id(companies)
+    [['Quick add company', 'Other']] + load_data_with_id(companies)
+  end
 end

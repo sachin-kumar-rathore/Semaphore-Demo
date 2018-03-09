@@ -517,25 +517,12 @@ function editCustomConfig(id) {
   customConfigRequest(path);
 }
 $(document).on("change", "#project_square_feet_requested", function () {
-  if ($(this).val() == 'Other'){
-    $('#otherSquareFeetRequested').addClass('show');
-    $('#otherSquareFeetRequested').removeClass('hidden');
-  }else{
-    $('#otherSquareFeetRequested').addClass('hidden');
-    $('#otherSquareFeetRequested').removeClass('show');
-  }
+  show_hide_div_content(this, '#otherSquareFeetRequested', 'Other')
 });
 
 // Toggle the where located field
 $(document).on("click", "input[name*='status']", function() {
-  if ($(this).val() == 'Successful'){
-    $('#where_located_div').addClass('show');
-    $('#where_located_div').removeClass('hidden');
-  }
-  else{
-    $('#where_located_div').addClass('hidden');
-    $('#where_located_div').removeClass('show');
-  }
+  show_hide_div_content(this, '#where_located_div', 'Successful')
 });
 
 // To change the value of progress in tasks to 100.00 on completion
@@ -569,9 +556,19 @@ $(document).ready(function () {
 });
 
 $(document).on("change", "#project_company_id", function () {
-  if ($(this).val() == 'Other'){
-    $('#quick_add_company').removeClass('hidden');
-  }else{
-    $('#quick_add_company').addClass('hidden');
-  }
+  show_hide_div_content(this, '#quick_add_company', 'Other')
 });
+
+// Toggle the public release date and elimination reason fields
+$(document).on("click", "input[name*='status']", function() {
+  show_hide_div_content(this, '.publicRelease-and-elimination', 'Successful')
+});
+
+function show_hide_div_content(object, div, value_to_be_compared) {
+  if (object.value == value_to_be_compared){
+    $(div).removeClass('hidden');
+  }
+  else{
+    $(div).addClass('hidden');
+  }
+}

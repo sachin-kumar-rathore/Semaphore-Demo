@@ -145,8 +145,8 @@
           </div>
         </div>
       </div>
-      <div class="form-row <%= @project.is_successful? ? 'show' : 'hidden' %>" id="where_located_div">
-        <div class="form-group col-lg-6">
+      <div class="form-row">
+        <div class="form-group col-lg-6 <%= 'hidden' if @project.new_record? || !@project.is_successful?  %>" id="where_located_div">
           <label for="where_located">Where Located:</label>
           <%= project.text_field 'where_located', class: "form-control", placeholder:"Where Located" %>
         </div>
@@ -167,7 +167,7 @@
           <label>Square Feet Requested:</label>
           <%= project.select :square_feet_requested, options_for_select( Project::SQUARE_FEET_REQUESTED, project.object.square_feet_requested), {}, class: 'form-control custom-select' %>
         </div>
-        <div id="otherSquareFeetRequested" class="form-group col-lg-3 <%= @project.square_feet_requested == 'Other' ? 'show' : 'hidden' %>">
+        <div id="otherSquareFeetRequested" class="form-group col-lg-3 <%= 'hidden' unless @project.square_feet_requested == 'Other' %>">
           <label for="OtherSquareFeet">Other Square Feet Requested:</label>
           <%= project.number_field 'other_square_ft_requested', class: "form-control", required: true, placeholder: "Requested Square feet" %>
         </div>
@@ -285,21 +285,19 @@
                 </div>
               </div>
             </div>
-            <% unless @project.new_record? %>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="feleaseDate">Public Release Date:</label>
-                  <div class="rightIconFld">
-                    <%= project.text_field 'public_release_date_str', class: "form-control datepicker", value: "#{@project.public_release_date}", data: {plugin: "datepicker"} %>
-                    <label for="feleaseDate" class="fldRightIcon"> <i class="icon fa fa-calendar-o" aria-hidden="true"></i> </label>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label>Elimination Reason:</label>
-                  <%= project.select :elimination_reason_id, options_for_select(load_active_type("elimination_reasons"), project.object.elimination_reason_id), {}, class: 'form-control custom-select' %>
+            <div class="col-md-6 publicRelease-and-elimination hidden">
+              <div class="form-group">
+                <label for="feleaseDate">Public Release Date:</label>
+                <div class="rightIconFld">
+                  <%= project.text_field 'public_release_date_str', class: "form-control datepicker", value: "#{@project.public_release_date}", data: {plugin: "datepicker"} %>
+                  <label for="feleaseDate" class="fldRightIcon"> <i class="icon fa fa-calendar-o" aria-hidden="true"></i> </label>
                 </div>
               </div>
-            <% end %>
+              <div class="form-group">
+                <label>Elimination Reason:</label>
+                <%= project.select :elimination_reason_id, options_for_select(load_active_type("elimination_reasons"), project.object.elimination_reason_id), {}, class: 'form-control custom-select' %>
+              </div>
+            </div>
           </div>
         </div>
         <div class="col-lg-5">

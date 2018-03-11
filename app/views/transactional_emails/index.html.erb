@@ -1,0 +1,32 @@
+<div class="panel">
+  <div class="panel-body">
+    <table class="table table-striped table-hover toggle-circle footable designTable" data-toggle-column="first" data-empty="There are no transactional emails." data-show-toggle="true" id="transEmailList" >
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Subject</th>
+        <th data-breakpoints="xs">OPERATIONS</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% for email in @transactional_emails %>
+          <tr>
+            <td><%= email.name %></td>
+            <td><%= email.subject %></td>
+            <td>
+              <a class="btn btn-sm btn-primary" href="<%= edit_transactional_email_path(email) %>" data-turbolinks="false">Manage</a>
+            </td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="digg_pagination">
+  <%= js_will_paginate @transactional_emails %>
+</div>
+
+<script>
+  $('.footable').footable();
+</script>

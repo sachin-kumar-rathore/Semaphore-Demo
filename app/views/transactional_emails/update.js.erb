@@ -1,0 +1,11 @@
+<% if params[:commit] == 'Test' %>
+  $('.orgInfoAlerts').html("Email Successfully sent.");
+<% else %>
+  <% if @transactional_email.errors.blank? %>
+    $('.orgInfoAlerts').html("Transactional email was successfully updated.");
+    $('.orgInfoErrors').html("");
+  <% else %>
+    $('.orgInfoAlerts').html("");
+    $('.orgInfoErrors').html("<%= j render partial: 'shared/error_messages', locals: {obj: @transactional_email} %>");
+  <% end %>
+<% end %>

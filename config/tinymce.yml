@@ -1,0 +1,4 @@
+plugins:
+  - table
+  - link
+visual_anchor_class: 'button-class'

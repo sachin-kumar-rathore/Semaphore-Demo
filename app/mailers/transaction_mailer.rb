@@ -6,10 +6,9 @@ class TransactionMailer < ApplicationMailer
     mail(to: mailerObj.assignee.email, subject: transaction_email.subject)
   end
 
-  def send_test_email(emailTypeId, sent_to)
-    transaction_email = TransactionalEmail.find_by_type_id(emailTypeId)
-    @email_body = generate_email_body(emailTypeId, transaction_email.body, Task.new)
-    mail(to: sent_to, subject: transaction_email.subject)
+  def send_test_email(emailTypeId, parameters, send_to)
+    @email_body = generate_email_body(emailTypeId, parameters[:body], Task.new)
+    mail(to: send_to, subject: parameters[:subject])
   end
 
   def generate_email_body(type_id, body, mailerObj)
@@ -20,21 +19,21 @@ class TransactionMailer < ApplicationMailer
 
   def generate_email_constants(emailTypeId, mailerObj)
     if mailerObj.new_record?
-      return [ ["<NAME>", "Test User"], ["<TASK_LINK>", 'http://192.241.247.185/tasks'], ["<ASSIGNER>", "TestAssigener"] ]
+      return [ ["_NAME_", "Test User"], ["_TASK_LINK_", 'http://192.241.247.185/tasks'], ["_ASSIGNER_", "TestAssigener"] ]
     else
       case emailTypeId
         when 1
-          [ ["<NAME>", mailerObj.assignee.full_name], ["<TASK_LINK>", tasks_url], ["<ASSIGNER>", mailerObj.user.full_name] ]
+          [ ["_NAME_", mailerObj.assignee.full_name], ["_TASK_LINK_", tasks_url], ["_ASSIGNER_", mailerObj.user.full_name] ]
         when 2
-          [ ["<NAME>", mailerObj.assignee.full_name], ["<TASK_LINK>", tasks_url], ["<ASSIGNER>", mailerObj.user.full_name] ]
+          [ ["_NAME_", mailerObj.assignee.full_name], ["_TASK_LINK_", tasks_url], ["_ASSIGNER_", mailerObj.user.full_name] ]
         when 3
-          [ ["<NAME>", mailerObj.assignee.full_name], ["<TASK_LINK>", tasks_url], ["<ASSIGNER>", mailerObj.user.full_name] ]
+          [ ["_NAME_", mailerObj.assignee.full_name], ["_TASK_LINK_", tasks_url], ["_ASSIGNER_", mailerObj.user.full_name] ]
         when 4
-          [ ["<NAME>", mailerObj.assignee.full_name], ["<TASK_LINK>", tasks_url], ["<ASSIGNER>", mailerObj.user.full_name] ]
+          [ ["_NAME_", mailerObj.assignee.full_name], ["_TASK_LINK_", tasks_url], ["_ASSIGNER_", mailerObj.user.full_name] ]
         when 5..7 # New Task Creation, New Task Assigned, New Tasks Re-Assigned
-          [ ["<NAME>", mailerObj.assignee.full_name], ["<TASK_LINK>", tasks_url], ["<ASSIGNER>", mailerObj.user.full_name] ]
+          [ ["_NAME_", mailerObj.assignee.full_name], ["_TASK_LINK_", tasks_url], ["_ASSIGNER_", mailerObj.user.full_name] ]
         else
-          [ ["<NAME>", "Test User"], ["<TASK_LINK>", 'http://192.241.247.185/tasks'], ["<ASSIGNER>", "TestAssigener"] ]
+          [ ["_NAME_", "Test User"], ["_TASK_LINK_", 'http://192.241.247.185/tasks'], ["_ASSIGNER_", "TestAssigener"] ]
       end
     end
   end

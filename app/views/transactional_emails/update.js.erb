@@ -1,5 +1,9 @@
 <% if params[:commit] == 'Test' %>
-  $('.orgInfoAlerts').html("Email Successfully sent.");
+	<% if defined?(@errors) %>
+  	$('.orgInfoAlerts').html("Email is Invalid. Please insert valid Email address.");
+  <% else %>
+		$('.orgInfoAlerts').html("Email Successfully sent.");
+	<% end %>
 <% else %>
   <% if @transactional_email.errors.blank? %>
     $('.orgInfoAlerts').html("Transactional email was successfully updated.");

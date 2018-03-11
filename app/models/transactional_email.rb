@@ -23,7 +23,7 @@ class TransactionalEmail < ApplicationRecord
   private
 
   def assign_unique_type_id
-    self.type_id  = (TransactionalEmail.last.type_id + 1)
+    self.type_id  = TransactionalEmail.all.count > 0 ? (TransactionalEmail.last.type_id + 1) : 1
   end
 
 end

@@ -6,7 +6,8 @@ class TransactionalEmailsController < ApplicationController
   # GET /transactional_emails
   # GET /transactional_emails.json
   def index
-    @transactional_emails = TransactionalEmail.all.paginate(page: params[:page], per_page: 8)
+    @transactional_emails = TransactionalEmail.all
+        .paginate(page: params[:page], per_page: 8)
   end
 
   # GET /transactional_emails/1
@@ -43,7 +44,12 @@ class TransactionalEmailsController < ApplicationController
   # PATCH/PUT /transactional_emails/1.json
   def update
     if params[:commit] == 'Test'
-      TransactionMailer.send_test_email(@transactional_email.type_id, params[:send_to])
+      if valid_email?(params[:send_to])
+        TransactionMailer.send_test_email(@transactional_email.type_id,
+                                          transactional_email_params, params[:send_to]).deliver
+      else
+        @errors = "Email is Invalid!"
+      end
     else
       @transactional_email.update(transactional_email_params)
     end
@@ -68,5 +74,10 @@ class TransactionalEmailsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def transactional_email_params
     params.require(:transactional_email).permit(:name, :subject, :body, :send_to)
+  end
+
+  def valid_email?(email)
+    valid_email_regex = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
+    email.present? && (email =~ valid_email_regex)
   end
 end

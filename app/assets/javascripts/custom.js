@@ -68,15 +68,20 @@ $(document).on("change", "#assign", function () {
   filterRequest();
 });
 
+$(document).on("change", "#filter_by_status", function () {
+  filterRequest();
+});
+
 function filterRequest() {
   var project_id = $('#task_filter_by_project').val();
   var user_filter = ($('#current_user_filter .nav-link').hasClass("active"));
   var assigned_to_me = ($('#assign').val() == "Assigned To Me");
+  var status = $('#filter_by_status').val();
   $.ajax({
     url: "/tasks",
     type: "GET",
     dataType: 'script',
-    data: {current_user_filter: user_filter, project_id: project_id, assigned_to_me: assigned_to_me}
+    data: {current_user_filter: user_filter, project_id: project_id, assigned_to_me: assigned_to_me, status: status}
   });
 }
 

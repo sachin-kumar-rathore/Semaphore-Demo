@@ -2,6 +2,7 @@
 class TasksController < ApplicationController
   before_action :authenticate_user!
   before_action :set_task, only: %i[show edit update destroy]
+  before_action :set_project, only: %i[show]
   before_action :set_users, only: %i[show new]
   respond_to :html, only: [:index]
   respond_to :js
@@ -55,6 +56,10 @@ class TasksController < ApplicationController
 
   def set_users
     @users = current_org.users
+  end
+  
+  def set_project
+    @project = @task.taskable
   end
 
   def filter_tasks_by_user

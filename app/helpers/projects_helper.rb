@@ -29,13 +29,11 @@ module ProjectsHelper
       incentive: 'Incentives',
       competition: 'Competition',
       source: 'Source',
-      site_visit_1: 'Site Visit 1',
-      site_visit_2: 'Site Visit 2',
-      site_visit_3: 'Site Visit 3',
+      site_visits: 'Site Visits',
       site_selector: 'Site Selector',
       utilize_sites: 'Sites and Building Database Utilized',
       speculative_building: 'Speculative Building',
-      located: 'Located',
+      where_located: 'Located',
       public_release: 'Public Release',
       public_release_date: 'Public Release Date',
       successful_completion_date: 'Completion Date'
@@ -54,6 +52,9 @@ module ProjectsHelper
 
     elsif field.to_s == 'considered_location' 
       project.send(field).try(:location)
+
+    elsif field.to_s == 'site_visits' 
+      project.send(field).pluck(:visit_date).join(', ')
 
     elsif field.to_s == 'project_manager'
       pr_manager = project.send(field)

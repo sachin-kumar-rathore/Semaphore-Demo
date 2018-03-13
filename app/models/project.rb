@@ -148,7 +148,9 @@ class Project < ApplicationRecord
   end
 
   def create_new_company
-    @company = organization.companies.new(name: new_company_name)
-    self.company_id = @company.id if @company.save(validate: false)
+    if new_company_name.present?
+      @company = organization.companies.new(name: new_company_name)
+      self.company_id = @company.id if @company.save(validate: false)
+    end
   end
 end

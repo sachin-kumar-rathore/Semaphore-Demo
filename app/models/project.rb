@@ -40,7 +40,7 @@ class Project < ApplicationRecord
   belongs_to :competition
   belongs_to :incentive
   belongs_to :source
-  belongs_to :elimination_reason
+  belongs_to :elimination_reason, optional: true
   belongs_to :primary_contact, class_name: 'Contact', foreign_key: :primary_contact_id
   belongs_to :project_manager, class_name: 'User', foreign_key: :project_manager_id
   has_many  :site_visits, inverse_of: :project, dependent: :destroy

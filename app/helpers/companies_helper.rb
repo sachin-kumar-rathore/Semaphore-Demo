@@ -65,9 +65,4 @@ module CompaniesHelper
       company.send(field)
     end
   end
-
-  def assign_default_company_number
-    company_no = rand.to_s[2..7]
-    return Company.pluck(:company_number).include?(company_no.to_s) ? assign_default_company_number : company_no
-  end
 end

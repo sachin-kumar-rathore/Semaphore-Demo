@@ -20,7 +20,7 @@
                 </div>
                 <div class="form-group col-md-4">
                   <label>Company Number:</label>
-                    <%= form.text_field :company_number, value: (@company.company_number ? @company.company_number : assign_default_company_number), class: 'form-control', id: 'companiesNumber', maxlength: 6, minlength: 6, required: true %>
+                    <%= form.text_field :company_number, value: (@company.company_number ? @company.company_number : assign_default_object_number('company')), class: 'form-control', id: 'companiesNumber', maxlength: 6, minlength: 6, required: true %>
                     <div id="companiesNumberMessage" value="<%= @company ? @company.id : nil %>"></div>
                 </div>
                 <div class="form-group col-md-4">

@@ -17,7 +17,8 @@ class Activity < ApplicationRecord
   has_many :documents, as: :documentable, dependent: :destroy
   has_many :emails, as: :mailable, dependent: :destroy
   
-  validates :activity_number, uniqueness: true, presence: true, length: { is: 6 }
+  validates :activity_number, presence: true, length: { is: 6 }
+  validates_uniqueness_of :activity_number, scope: :organization_id
   validates :name , presence: true
 
   private

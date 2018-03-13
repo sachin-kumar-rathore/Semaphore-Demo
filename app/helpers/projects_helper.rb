@@ -75,11 +75,6 @@ module ProjectsHelper
     current_org.project_managers.map { |user| [user.full_name, user.id] }
   end
 
-  def assign_default_project_number
-    project_no = rand.to_s[2..7]
-    return Project.pluck(:project_number).include?(project_no.to_s) ? assign_default_project_number : project_no
-  end
-
   def audit_description(audit)
     project = (audit.auditable_type == 'Project') ? audit.auditable : audit.associated
     action = (audit.action == 'destroy') ? 'deleted' : "#{audit.action}d"

@@ -28,4 +28,12 @@ module ApplicationHelper
       ''
     end
   end
+
+  def assign_default_object_number(object)
+    object_number_records = current_org.send(object.pluralize).pluck((object + '_number').to_sym)
+    while true
+      rand_num = rand.to_s[2..7]
+      return rand_num unless object_number_records.include?(rand_num.to_s)
+    end
+  end
 end

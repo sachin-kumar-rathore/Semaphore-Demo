@@ -72,7 +72,8 @@ class Project < ApplicationRecord
   scope :active, -> { where(status: "Active")}
 
   # VALIDATION
-  validates :project_number, uniqueness: true, presence: true, length: { is: 6 }
+  validates :project_number, presence: true, length: { is: 6 }
+  validates_uniqueness_of :project_number, scope: :organization_id
   validates :name, presence: true
   validate :successful_completion_date_is_after_active_date
   validates :business_type, inclusion: { in: Project::BUSINESS_TYPE, message: '%{value} is not a valid business type.' }

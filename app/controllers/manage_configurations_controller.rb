@@ -21,6 +21,11 @@ class ManageConfigurationsController < ApplicationController
     return unless @setting_type
     flash[:success] = "#{setting_type_name} successfully added."
     load_setting_types
+    if params[:respond_to_ajax]
+      respond_to do |format|
+        format.json { render json: @setting_type }
+      end
+    end
   end
 
   def edit; end

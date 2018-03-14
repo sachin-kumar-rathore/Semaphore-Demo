@@ -561,7 +561,14 @@ $(document).ready(function () {
 });
 
 $(document).on("change", "#project_company_id", function () {
-  show_hide_div_content(this, '#quick_add_company', 'Other')
+  if ($(this).val() === '0'){
+    $('#quick_add_company').removeClass('hidden');
+    $('#project_new_company_name').attr('required', true);
+  }
+  else{
+    $('#quick_add_company').addClass('hidden');
+    $('#project_new_company_name').attr('required', false);
+  }
 });
 
 // Toggle the public release date and elimination reason fields

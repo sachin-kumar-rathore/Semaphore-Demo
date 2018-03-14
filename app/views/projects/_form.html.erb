@@ -118,9 +118,9 @@
           <label for="companyName">Company Name:</label>
           <%= project.select(:company_id, load_company_data_with_id(current_org.companies), { include_blank: 'No company' }, class: 'custom-select form-control') %>
         </div>
-        <div id="quick_add_company" class="form-group col-lg-3 hidden">
+        <div id="quick_add_company" class="form-group col-lg-3 <%= 'hidden' unless @project.company_id == 0 %>">
           <label for="NewCompanyName">Quick add company:</label>
-          <%= project.text_field 'new_company_name', class: "form-control", placeholder: "quick add company" %>
+          <%= project.text_field 'new_company_name', class: "form-control", placeholder: "quick add company", required: @project.company_id == 0 ? true : false%>
         </div>
       </div>
       <div class="form-row">

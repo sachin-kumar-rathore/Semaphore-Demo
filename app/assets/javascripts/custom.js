@@ -608,3 +608,19 @@ $(document).on("click", ".add-activity-type", function () {
     $('#manageConfigMessage').html("This field can't be blank");
   }
 });
+
+function markReadSectionRequest(section, org_id, user_id) {
+  $.ajax({
+    url: '/organizations/' + org_id + '/users/' + user_id + '/mark_section_as_read',
+    type: "PATCH",
+    data: { section: section }
+  });
+}
+
+function getSectionInformation(section, org_id, user_id, object) {
+  $.ajax({
+    url: '/organizations/' + org_id + '/users/' + user_id + '/get_section_information',
+    type: "GET",
+    data: { section: section, show_anyway: $(object).data('value')}
+  });
+}

@@ -1,0 +1,32 @@
+<div class="panel">
+  <div class="panel-body">
+    <table class="table table-striped table-hover toggle-circle footable designTable" data-toggle-column="first" data-empty="There are no records." data-show-toggle="true" id="orgList" >
+      <thead>
+        <tr>
+          <th>SECTION</th>
+          <th>INFORMATION</th>
+          <th data-breakpoints="xs">OPERATIONS</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% for section in @section_guides %>
+          <tr>
+            <td><%= section.section_name %></td>
+            <td><%= truncate(section.section_info, length: 50, separator: ' ') %></td>
+            <td>
+              <a class="btn btn-primary" href="<%= edit_section_guide_path(section) %>" data-turbolinks="false">Manage</a>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="digg_pagination">
+  <%= js_will_paginate @section_guides %>
+</div>
+
+<script>
+  $('.footable').footable();
+</script>

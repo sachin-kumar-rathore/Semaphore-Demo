@@ -1160,3 +1160,9 @@ a:not([href]):not([tabindex]){
   background-color: #f4fdf8;
   border-left-color: #2ED573 !important;
 }
+
+.section-info-icon {
+  float: right; 
+  font-size: 25px;
+  margin-left: 835px;
+}

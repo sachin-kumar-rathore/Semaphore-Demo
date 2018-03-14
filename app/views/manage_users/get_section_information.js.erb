@@ -1,0 +1,7 @@
+<% unless @status%>
+  $('.section-info-flash').html("<%= j render partial: '/layouts/shared/section_info'%>");
+  $('.section-info').addClass('alert alert-success');
+<% else %>
+  $('.section-info').removeClass('alert alert-success');
+  $('.section-info-flash').html("");
+<% end %>

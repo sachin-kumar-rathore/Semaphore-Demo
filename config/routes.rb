@@ -43,7 +43,12 @@ Rails.application.routes.draw do
     member do
       get :sign_in_as_user
     end
-    resources :users, controller: 'manage_users', only: %i[edit update]
+    resources :users, controller: 'manage_users', only: %i[edit update] do
+      member do
+        patch :mark_section_as_read
+        get :get_section_information
+      end
+    end
   end
 
   resources :dashboard, only: [:index]
@@ -192,5 +197,8 @@ Rails.application.routes.draw do
   get 'organization_details' => 'organizations#edit_details'
 
   resources :project_logs, only: [:index]
+
   resources :transactional_emails, only: [:edit, :index, :update]
+
+  resources :section_guides, only: %i[index edit update]
 end

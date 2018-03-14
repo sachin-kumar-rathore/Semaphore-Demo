@@ -36,6 +36,7 @@ class Task < ApplicationRecord
   scope :without_activity, -> { where("taskable_type IS NULL OR taskable_type != (?)", "Activity") }
   scope :filter_by_project, ->(project_id) { where('taskable_id = ? AND taskable_type = ? ', project_id, 'Project') }
   scope :sort_by_priority_then_end_date, -> { order(priority: :asc, end_date: :asc) }
+  scope :filter_by_status, ->(status) { where('status = ?', status) }
   # == Instance methods == #
 
   # == Private == #

@@ -13,7 +13,6 @@ Rails.application.routes.draw do
     end
     collection do
       get :check_companies_number_validity
-      get :export_form
       get :export
     end
     resources :contacts, controller: 'company_contacts' do
@@ -34,6 +33,8 @@ Rails.application.routes.draw do
     end
     resources :activities, controller: 'company_activities'
   end
+  get 'exports/export_companies_form', to: 'companies#export_form', as: 'export_form_companies'
+  get 'exports/export_projects_form', to: 'projects#export_form', as: 'export_form_projects'
 
   resources :organizations, only: %i[show edit update index] do
     member do
@@ -108,7 +109,6 @@ Rails.application.routes.draw do
 
     collection do
       get :check_projects_number_validity
-      get :export_form
       get :export
     end
 

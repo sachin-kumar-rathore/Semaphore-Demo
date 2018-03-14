@@ -1,7 +1,7 @@
 require 'searchable'
 
 class Task < ApplicationRecord
-  include Searchable
+  # include Searchable
   audited associated_with: :taskable
   attr_accessor :start_date_str, :end_date_str
   # == Constants == #
@@ -30,6 +30,8 @@ class Task < ApplicationRecord
 
   # == Callbacks == #
   before_validation :convert_dates_format
+  after_save :send_task_alert_email
+
   # == Scopes and Other macros == #
   scope :without_activity, -> { where("taskable_type IS NULL OR taskable_type != (?)", "Activity") }
   scope :filter_by_project, ->(project_id) { where('taskable_id = ? AND taskable_type = ? ', project_id, 'Project') }
@@ -50,6 +52,16 @@ class Task < ApplicationRecord
     if end_date < start_date
       errors.add(:end_date, "cannot be before the start date") 
     end 
+  end
+
+  def send_task_alert_email
+    if self.id_changed?
+      TransactionMailer.send_email(5, self).deliver
+    else
+      if self.assignee_id_changed?
+        TransactionMailer.send_email(6, self).deliver
+      end
+    end
   end
 
 end

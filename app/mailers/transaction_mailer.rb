@@ -11,6 +11,8 @@ class TransactionMailer < ApplicationMailer
     mail(to: send_to, subject: parameters[:subject])
   end
 
+  private
+
   def generate_email_body(type_id, body, mailerObj)
     replacements = generate_email_constants(type_id, mailerObj)
     replacements.each {|replacement| body.gsub!(replacement[0], replacement[1])}

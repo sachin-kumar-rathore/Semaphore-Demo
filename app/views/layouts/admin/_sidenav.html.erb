@@ -3,13 +3,13 @@
     <div>
       <div>
         <ul class="site-menu" data-plugin="menu">
-          <li class="site-menu-item active">
+          <li class="site-menu-item <%= active_class('organizations') %>">
             <a class="animsition-link" href="<%= organizations_path %>">
               <i class="site-menu-icon md-view-dashboard" aria-hidden="true"></i>
               <span class="site-menu-title">Organizations</span>
             </a>
           </li>
-          <li class="site-menu-item active">
+          <li class="site-menu-item <%= active_class('transactional_emails') %>">
             <a class="animsition-link" href="<%= transactional_emails_path %>">
               <i class="site-menu-icon md-email" aria-hidden="true"></i>
               <span class="site-menu-title">Transaction Emails</span>

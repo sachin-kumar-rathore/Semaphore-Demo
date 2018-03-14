@@ -33,10 +33,6 @@ class OrganizationsController < ApplicationController
     @organization = current_user.organization
   end
 
-  def update_details
-
-  end
-
   private
 
   def set_organization

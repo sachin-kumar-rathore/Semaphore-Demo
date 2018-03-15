@@ -28,7 +28,8 @@ class Company < ApplicationRecord
   validates :average_age_of_buildings, inclusion: { in: Company::BUILDINGS_AGE, message: "%{value} is not a valid data." }, allow_nil: true
   validates :owned_or_leased, inclusion: { in: %w(Owned Leased), message: "%{value} is not a valid data." }, allow_nil: true
   validates :peak_season, inclusion: { in: Company::SEASONS, message: "%{value} is not a valid data." }, allow_nil: true
-  validates :company_number, uniqueness: true, presence: true, length: { is: 6 }
+  validates :company_number, presence: true, length: { is: 6 }
+  validates_uniqueness_of :company_number, scope: :organization_id
   validates :state, length: { is: 2 }
   validates :zip_code, length: { is: 5 }
   # == Callbacks == #

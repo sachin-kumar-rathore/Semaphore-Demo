@@ -561,7 +561,14 @@ $(document).ready(function () {
 });
 
 $(document).on("change", "#project_company_id", function () {
-  show_hide_div_content(this, '#quick_add_company', 'Other')
+  if ($(this).val() === '0'){
+    $('#quick_add_company').removeClass('hidden');
+    $('#project_new_company_name').attr('required', true);
+  }
+  else{
+    $('#quick_add_company').addClass('hidden');
+    $('#project_new_company_name').attr('required', false);
+  }
 });
 
 // Toggle the public release date and elimination reason fields
@@ -577,3 +584,27 @@ function show_hide_div_content(object, div, value_to_be_compared) {
     $(div).addClass('hidden');
   }
 }
+
+$(document).on("change", "#activity_company_activity_type_id", function () {
+  $('#manageConfigMessage').html('');
+  $("#new_activity_type").parent().removeClass("has-danger");
+  show_hide_div_content(this, '.manage_config_div', 'Quick add');
+});
+
+$(document).on("click", ".add-activity-type", function () {
+  if ($('#new_activity_type').val()) {
+    $.ajax({
+      url: '/manage_configurations',
+      type: "POST",
+      data: { type: 'company_activity_types', company_activity_type: { name: $('#new_activity_type').val() }, respond_to_ajax: true },
+      success: function(data) {
+        $('#activity_company_activity_type_id').prepend("<option value=" + data.id + " selected='selected'>" + data.name + "</option>");
+        $('.manage_config_div').addClass('hidden');
+        $('#new_activity_type').val('');
+      }
+    });
+  } else {
+    $("#new_activity_type").parent().addClass("has-danger");
+    $('#manageConfigMessage').html("This field can't be blank");
+  }
+});

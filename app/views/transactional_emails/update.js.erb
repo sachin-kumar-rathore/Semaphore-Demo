@@ -1,0 +1,15 @@
+<% if params[:commit] == 'Test' %>
+	<% if defined?(@errors) %>
+  	$('.orgInfoAlerts').html("Email is Invalid. Please insert valid Email address.");
+  <% else %>
+		$('.orgInfoAlerts').html("Email Successfully sent.");
+	<% end %>
+<% else %>
+  <% if @transactional_email.errors.blank? %>
+    $('.orgInfoAlerts').html("Transactional email was successfully updated.");
+    $('.orgInfoErrors').html("");
+  <% else %>
+    $('.orgInfoAlerts').html("");
+    $('.orgInfoErrors').html("<%= j render partial: 'shared/error_messages', locals: {obj: @transactional_email} %>");
+  <% end %>
+<% end %>

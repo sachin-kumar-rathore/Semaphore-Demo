@@ -50,3 +50,4 @@
 //= require highcharts/modules/offline-exporting
 //= require highcharts/themes/grid
 //= require cocoon
+//= require tinymce

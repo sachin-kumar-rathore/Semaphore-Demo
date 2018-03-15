@@ -192,4 +192,5 @@ Rails.application.routes.draw do
   get 'organization_details' => 'organizations#edit_details'
 
   resources :project_logs, only: [:index]
+  resources :transactional_emails, only: [:edit, :index, :update]
 end

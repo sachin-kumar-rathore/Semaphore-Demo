@@ -1,7 +1,7 @@
 require 'searchable'
 
 class Task < ApplicationRecord
-  # include Searchable
+  include Searchable
   audited associated_with: :taskable
   attr_accessor :start_date_str, :end_date_str
   # == Constants == #
@@ -57,10 +57,10 @@ class Task < ApplicationRecord
 
   def send_task_alert_email
     if self.id_changed?
-      TransactionMailer.send_email(5, self).deliver
+      TransactionEmailWorker.perform_in(10.minutes, 5, self.id)
     else
       if self.assignee_id_changed?
-        TransactionMailer.send_email(6, self).deliver
+        TransactionEmailWorker.perform_in(10.minutes, 6, self.id)
       end
     end
   end

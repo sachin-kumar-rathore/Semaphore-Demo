@@ -7,9 +7,6 @@
     <div class="nav-item" id="current_user_filter">
       <a class="nav-link" data-href="<%= tasks_path%>">My Tasks</a>
     </div>
-  <div class="section-info-icon">
-    <a data-value="true" onclick="getSectionInformation('task', '<%= current_org.id %>', '<%=current_user.id %>', this)"><i class="icon md-info"></i></a>
-  </div>
   </div>
 </div>
 <div class="row">
@@ -47,9 +44,3 @@
 </div>
 
 <div id="createOrEditTask"></div>
-
-<script>
-$(document).ready(function () {
-  getSectionInformation('task', '<%= current_org.id %>', '<%=current_user.id %>')
-})
-</script>

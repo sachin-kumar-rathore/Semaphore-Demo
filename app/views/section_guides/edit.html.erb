@@ -3,9 +3,6 @@
     <h3 class="panel-title">Edit Section Information</h3>
   </div>
   <div class="panel-body">
-    <div class="orgInfoAlerts success"></div>
-    <div class="orgInfoErrors"></div>
-    <br>
     <div class="col-md-12">
       <%= form_for @section_guide do |f| %>
         <div class="row">
@@ -20,6 +17,7 @@
             <%= f.text_area :section_info, rows: 8, class: "form-control", required: true %>
           </div>
         </div>
+        <hr>
         <div class="row">
           <div class="form-group mbFullWd col-auto">
             <button type="submit" class="btn green-btn col-md-3">Update</button>

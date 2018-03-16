@@ -60,8 +60,8 @@ class ManageUsersController < ApplicationController
   end
 
   def get_section_information
-    @message = SectionGuide.find_by_section_name(params[:section]).section_info
-    @status = (params[:show_anyway] =='true') ? false : current_user.mark_read_sections.include?(params[:section])
+    @message = SectionGuide.find_by_section_name(params[:section]).try(:section_info)
+    @status = (params[:show_anyway] == 'true') ? false : current_user.mark_read_sections.include?(params[:section])
   end
 
   private

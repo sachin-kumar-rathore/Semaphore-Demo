@@ -1161,8 +1161,12 @@ a:not([href]):not([tabindex]){
   border-left-color: #2ED573 !important;
 }
 
-.section-info-icon {
-  float: right; 
-  font-size: 25px;
-  margin-left: 835px;
+.section-info{
+  border: 1px solid #ff7544;
+  background-color: #fff;
+}
+
+.btn-orng {
+  background-color: #ff7544;
+  border: #ff7544;;
 }

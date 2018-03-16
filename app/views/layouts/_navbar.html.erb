@@ -43,6 +43,11 @@
       </ul>
       <!-- End Navbar Toolbar -->
     </div>
+    <% if params[:action] == 'index' %>
+      <div class="counter-icon">
+        <a class="section-info-icon" data-org-id='<%= current_org.id %>' data-user-id='<%= current_user.id %>' data-section='<%= get_current_section_name %>' onclick="getSectionInformation(true);"><i class="icon md-info"></i></a>
+      </div>
+    <% end %>
     <!-- End Navbar Collapse -->
     <!-- Site Navbar Seach -->
     <div class="collapse navbar-search-overlap" id="site-navbar-search">
@@ -59,7 +64,6 @@
     <!-- End Site Navbar Seach -->
   </div>
 </nav>
-
 <script>
   $('#search_query').autocomplete({
     source: $('#search_query').data('autocomplete-source'),
@@ -76,5 +80,5 @@
       return false;
     }
   });
-
+ 
 </script>

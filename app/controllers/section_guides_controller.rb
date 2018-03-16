@@ -10,9 +10,13 @@ class SectionGuidesController < ApplicationController
   def edit; end
 
   def update
-    return unless @section_guide.update(section_guide_params)
-    flash[:success] = 'Section information is successfully updated.'
-    redirect_to section_guides_path
+    if @section_guide.update(section_guide_params)
+      flash[:success] = 'Section information is successfully updated.'
+      redirect_to section_guides_path
+    else
+      flash[:danger] = @section_guide.errors.full_messages.join(', ')
+      render :edit
+    end
   end
 
   private

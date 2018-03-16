@@ -1,0 +1,13 @@
+<div class="section-info">
+  <div>
+    <a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <%= @message.present? ? simple_format(@message) : 'No information available' %>
+  </div><br>
+  <div class="tasksRightOptions">
+    <ul class="text-right">
+      <% unless params[:show_anyway] == 'true' %>
+        <li><a href="javascript:void(0)" class="btn btn-orng btn-primary" onclick="markReadSectionRequest('<%= params[:section] %>', '<%= current_org.id %>', '<%= current_user.id %>');" data-dismiss="alert">Don't show again</a></li>
+      <% end %>
+    </ul>
+  </div>
+</div>

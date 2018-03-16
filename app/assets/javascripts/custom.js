@@ -617,10 +617,19 @@ function markReadSectionRequest(section, org_id, user_id) {
   });
 }
 
-function getSectionInformation(section, org_id, user_id, object) {
+function getSectionInformation(value) {
+  var org_id = $('.section-info-icon').data('org-id');
+  var user_id = $('.section-info-icon').data('user-id');
+  var section = $('.section-info-icon').data('section');
   $.ajax({
     url: '/organizations/' + org_id + '/users/' + user_id + '/get_section_information',
     type: "GET",
-    data: { section: section, show_anyway: $(object).data('value')}
+    data: { section: section, show_anyway: value}
   });
 }
+
+$(document).ready(function () {
+  if (window.location.pathname.split('/').length == 2) {
+    getSectionInformation(false);
+  }
+})

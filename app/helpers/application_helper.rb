@@ -13,8 +13,7 @@ module ApplicationHelper
   end
 
   def active_class(section_name)
-    url = URI.parse(request.original_url)
-    return unless url.path.split("/").drop(1).first.eql? section_name
+    return unless get_current_section_name.eql? section_name
     'active'
   end
 
@@ -35,5 +34,10 @@ module ApplicationHelper
       rand_num = rand.to_s[2..7]
       return rand_num unless object_number_records.include?(rand_num.to_s)
     end
+  end
+
+  def get_current_section_name
+    url = URI.parse(request.original_url)
+    url.path.split("/").drop(1).first
   end
 end

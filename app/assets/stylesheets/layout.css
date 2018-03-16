@@ -1085,7 +1085,7 @@ a:not([href]):not([tabindex]){
 
 .yearlyReport .btn-primary, .btn-outline-primary {
   font-size: 12px;
-  padding: 4px 10px;
+  padding: 9px 10px;
 }
 /****Demo mode Hover CSS***/
 .hoverOverlay{
@@ -1166,7 +1166,7 @@ a:not([href]):not([tabindex]){
   background-color: #fff;
 }
 
-.btn-orng {
+.btn-orng, .btn-orng:hover {
   background-color: #ff7544;
   border: #ff7544;;
 }

@@ -89,11 +89,13 @@
         <tbody>
           <% results['elimination_reason_id'].keys.each do |year| %>
             <% results['elimination_reason_id'][year].keys.each do |typeId| %>
-              <tr>
-                <td class="text-center"><%= year %></td>
-                <td class="text-center"><%= EliminationReason.find(typeId).name %></td>
-                <td class="text-center"><%= results['elimination_reason_id'][year][typeId].count %></td>
-              </tr>
+              <% if typeId %>
+                <tr>
+                  <td class="text-center"><%= year %></td>
+                  <td class="text-center"><%= EliminationReason.find_by_id(typeId).try(:name) %></td>
+                  <td class="text-center"><%= results['elimination_reason_id'][year][typeId].count %></td>
+                </tr>
+              <% end %>
             <% end %>
           <% end %>
         </tbody>

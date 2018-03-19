@@ -1,25 +1,50 @@
-<h2>Change your password</h2>
-
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
-  <%= f.hidden_field :reset_password_token %>
-
-  <div class="field">
-    <%= f.label :password, "New password" %><br />
-    <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
-    <% end %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "off" %>
+<header>
+  <div class="headerSection">
+    <div class="container">
+      <div class="logo"><%= render '/layouts/logo_svg' %></div>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+</header>
+<section>
+  <div class="rightImgBg loginPage">
+    <div class="container">
+      <div class="formSection">
+        <div class="formTitle">
+          <h3>Change your password</h3>
+        </div>
+        <div class="formStyle">
+          <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+            <%= devise_error_messages! %>
+            <%= f.hidden_field :reset_password_token %>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="email">New Password:</label>
+                <% if @minimum_password_length %>
+                  <em>(<%= @minimum_password_length %> characters minimum)</em><br />
+                <% end %>
+                <%= f.password_field :password, autofocus: true, autocomplete: "off", class: "form-control outlineFld" %>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="email">Confirm new password:</label>
+                <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control outlineFld" %>
+              </div>
+            </div>
+            <div class="formBtnSection">
+              <%= f.submit "Change my password" , class: "btn primaryBtn" %>
+            </div>
+            <div class="formBtmLink"><%= link_to "New User? Sign up first.", new_user_registration_path %></div>
+            <div class="formBtmLink"><%= link_to "Already have an account? Sign In.", new_user_session_path %></div>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="actions">
-    <%= f.submit "Change my password" %>
+  <div class="pageBg">
+    <div class="pageBgCircle circleOne"></div>
+    <div class="pageBgCircle circleTwo"></div>
+    <div class="pageBgCircle circleThree"></div>
   </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+  
+</section>

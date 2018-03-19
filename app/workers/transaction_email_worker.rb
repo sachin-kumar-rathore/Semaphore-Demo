@@ -1,8 +1,13 @@
 class TransactionEmailWorker
   include Sidekiq::Worker
 
-  def perform(type_id, task_id)
-    task = Task.find_by_id(task_id)
-    TransactionMailer.send_email(type_id, task).deliver
+  def perform(type_id, object_type, object_id, opts={})
+    TransactionMailer.send_email(type_id, mailer_object(object_type, object_id), opts).deliver
+  end
+  
+  private
+
+  def mailer_object(object_type, object_id)
+    object_type.classify.constantize.find_by_id(object_id)
   end
 end

@@ -57,10 +57,10 @@ class Task < ApplicationRecord
 
   def send_task_alert_email
     if self.id_changed?
-      TransactionEmailWorker.perform_in(10.minutes, 5, self.id)
+      TransactionEmailWorker.perform_async(5, 'task', self.id)
     else
       if self.assignee_id_changed?
-        TransactionEmailWorker.perform_in(10.minutes, 6, self.id)
+        TransactionEmailWorker.perform_async(6, 'task', self.id)
       end
     end
   end

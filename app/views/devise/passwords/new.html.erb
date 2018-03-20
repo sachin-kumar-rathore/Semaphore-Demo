@@ -13,20 +13,22 @@
           <h3>Forgot your password?</h3>
         </div>
         <div class="formStyle">
-          <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-            <%= devise_error_messages! %>
-            <div class="form-row">
-              <div class="form-group col-md-6">
-                <label for="email">Email:</label>
-                <%= f.email_field :email, autofocus: true, class: "form-control outlineFld" %>
+          <div class="new-password-form">
+            <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, remote: true }) do |f| %>
+              <%= devise_error_messages! %>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="email">Email:</label>
+                  <%= f.email_field :email, autofocus: true, class: "form-control outlineFld" %>
+                </div>
               </div>
-            </div>
-            <div class="formBtnSection">
-              <%= f.submit "Send Me Reset Instructions" , class: "btn primaryBtn" %>
-            </div>
-            <div class="formBtmLink"><%= link_to "New User? Sign up first.", new_user_registration_path %></div>
-            <div class="formBtmLink"><%= link_to "Already have an account? Sign In.", new_user_session_path %></div>
-          <% end %>
+              <div class="formBtnSection">
+                <%= f.submit "Send Me Reset Instructions" , class: "btn primaryBtn" %>
+              </div>
+            <% end %>
+          </div>
+          <div class="formBtmLink"><%= link_to "New User? Sign up first.", new_user_registration_path %></div>
+          <div class="formBtmLink"><%= link_to "Already have an account? Sign In.", new_user_session_path %></div>
         </div>
       </div>
     </div>

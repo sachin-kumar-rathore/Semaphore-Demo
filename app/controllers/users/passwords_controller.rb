@@ -1,4 +1,5 @@
 class Users::PasswordsController < Devise::PasswordsController
+  respond_to :js, only: [:create]
   # GET /resource/password/new
   # def new
   #   super

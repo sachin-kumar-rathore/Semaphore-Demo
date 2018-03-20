@@ -43,7 +43,8 @@
       </ul>
       <!-- End Navbar Toolbar -->
     </div>
-    <% if params[:action] == 'index' %>
+    <!-- # To Do -> expand this functionality for all the sections -->
+    <% if controller_name == 'tasks' && action_name == 'index' %>
       <div class="counter-icon">
         <a class="section-info-icon" data-org-id='<%= current_org.id %>' data-user-id='<%= current_user.id %>' data-section='<%= get_current_section_name %>' onclick="getSectionInformation(true);"><i class="icon md-info"></i></a>
       </div>

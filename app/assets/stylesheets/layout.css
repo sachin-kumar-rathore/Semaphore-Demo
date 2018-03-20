@@ -1170,3 +1170,10 @@ a:not([href]):not([tabindex]){
   background-color: #ff7544;
   border: #ff7544;;
 }
+
+.horizontal-scroll {
+  overflow-x: auto;
+}
+.horizontal-scroll::-webkit-scrollbar {
+    display: none;
+}

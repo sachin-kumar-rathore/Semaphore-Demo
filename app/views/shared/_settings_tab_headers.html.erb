@@ -23,3 +23,29 @@
     </li>
   </ul>
 </div>
+
+<script >
+$(document).ready(function(){
+  // Add a trigger after the content is loaded and rendered
+  $(window).trigger('content:loaded');
+});
+
+$(function() {
+  var prevScrollHorizontal = 0;
+  $(".horizontal-scroll").scroll(function() { // Listens for scroll events
+    var currentHorizontal = $(this).scrollLeft();
+    if(prevScrollHorizontal != currentHorizontal) {
+      prevScrollHorizontal = currentHorizontal;
+      localStorage.setItem("scrollPositionHorizontal", currentHorizontal);
+        // Scrolled horizontally
+    }
+  });
+
+   //Listen for the 'content:loaded' event triggered above 
+  $(window).on('content:loaded', function() {       
+    if(localStorage.scrollPositionHorizontal) {                 
+      $(".horizontal-scroll").scrollLeft(localStorage.getItem("scrollPositionHorizontal"));
+    }
+  });
+});
+</script>

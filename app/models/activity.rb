@@ -9,7 +9,7 @@ class Activity < ApplicationRecord
 
   belongs_to :organization
   belongs_to :company, optional: true
-  belongs_to :company_activity_type
+  belongs_to :company_activity_type, optional: true
   belongs_to :incentive
   belongs_to :contact_method_type
   has_many :notes, as: :notable, dependent: :destroy

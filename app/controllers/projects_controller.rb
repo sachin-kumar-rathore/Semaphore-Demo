@@ -46,7 +46,7 @@ class ProjectsController < ApplicationController
   end
 
   def edit
-    (3 - @project.site_visits.count).times { @project.site_visits.build }
+    (3 - @project.site_visits.count).times { @project.site_visits.build } unless @project.blank?
     return unless @project.blank?
     flash[:danger] = 'Project not found.'
     redirect_to projects_path

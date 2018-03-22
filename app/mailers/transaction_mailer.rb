@@ -26,8 +26,8 @@ class TransactionMailer < ApplicationMailer
       case emailTypeId
         when 1
           [ ["_NAME_", mailerObj.name], ["_ORG_URL_", mailerObj.url], ["_EMAIL_", mailerObj.primary_contact_email] ]
-        when 2
-          [ ["_NAME_", mailerObj.full_name], ["_EMAIL_", mailerObj.email], ["_SIGN_IN_URL_", new_user_session_url] ]
+        when 2, 10
+          [ ["_NAME_", mailerObj.full_name], ["_EMAIL_", mailerObj.email], ["_SIGN_IN_URL_", new_user_session_url], ["_ORG_", mailerObj.organization.name] ]
         
         when 3
           [ ["_NAME_", mailerObj.full_name], ["_LINK_",  edit_user_password_url(reset_password_token: opts['token'])] ]
@@ -40,6 +40,11 @@ class TransactionMailer < ApplicationMailer
         
         when 8
           [ ["_NAME_", mailerObj.full_name], ["_SIGN_IN_URL_", new_user_session_url], ["_LINK_",  accept_user_invitation_url(invitation_token: opts['token'])] ]
+        
+        when 9, 11
+          new_user = mailerObj.organization.users.find_by_id(opts['new_user_id'])
+          [ ["_NAME_", mailerObj.full_name], ["_SIGN_IN_URL_", new_user_session_url], ["_EMAIL_", mailerObj.email], ["_USERNAME_", new_user.try(:full_name)], ["_USEREMAIL_", new_user.try(:email)] ]
+        
         else
           [ ["_NAME_", "Test User"], ["_LINK_", 'http://192.241.247.185/tasks'], ["_ASSIGNER_", "TestAssigener"] ]
       end

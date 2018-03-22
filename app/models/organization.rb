@@ -7,6 +7,8 @@ class Organization < ApplicationRecord
   CONFIG = %i[ProjectType IndustryType Incentive Source EliminationReason ContactCategory]
   CONFIG_WITHOUT_STATUS = %i[BusinessUnit SecurityRole ContactMethodType CompanyActivityType]
 
+  SECURITY_ROLES_HASH = { boards: "Board", contact_or_visit_review_users: "Contact/Visit Review", project_managers: "Project Manager", read_only_users: "Read Only User", administrators: "Administrator"}
+  
   mount_uploader :logo, FileUploader
   
   has_many :users, dependent: :destroy
@@ -37,6 +39,11 @@ class Organization < ApplicationRecord
 
   after_create :create_admin_role, :create_config, :create_config_without_status
 
+  SECURITY_ROLES_HASH.each do |arg, val|
+    define_method(arg) do
+      security_roles.where(name: val).map(&:users).flatten.compact
+    end
+  end
 
   def create_admin_role(name=nil)
     name = name || "Administrator"
@@ -59,9 +66,5 @@ class Organization < ApplicationRecord
     CONFIG_WITHOUT_STATUS.each do |config|
       config.to_s.constantize::create_configs(self.id)
     end
-  end
-
-  def project_managers
-   security_roles.where(name: 'Project Manager').map(&:users).flatten.compact
   end
 end

@@ -2,7 +2,7 @@
 class ProjectsController < ApplicationController
   include ProjectModule
   before_action :authenticate_user!
-  before_action :set_project, only: %i[edit update show logs]
+  before_action :set_project, only: %i[edit update show logs destroy]
   before_action :convert_site_visit_dates, only: [:update, :create]
   respond_to :html, only: %i[index new edit]
   respond_to :js
@@ -89,6 +89,15 @@ class ProjectsController < ApplicationController
   def logs
     @project_logs = (@project.audits + @project.associated_audits).sort.reverse
                      .paginate(page: params[:page], per_page: 8)
+  end
+
+  def destroy
+    if @project.destroy
+      flash[:success] = 'Project deleted successfully.'
+    else
+      flash[:danger] = 'Could not delete project.'
+    end
+    redirect_to projects_path
   end
 
   private

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180310041448) do
+ActiveRecord::Schema.define(version: 20180314121944) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -408,6 +408,13 @@ ActiveRecord::Schema.define(version: 20180310041448) do
     t.index ["source_id"], name: "index_projects_on_source_id"
   end
 
+  create_table "section_guides", force: :cascade do |t|
+    t.string "section_name"
+    t.text "section_info"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "security_roles", force: :cascade do |t|
     t.string "name"
     t.hstore "project_permissions", default: {}
@@ -533,6 +540,7 @@ ActiveRecord::Schema.define(version: 20180310041448) do
     t.bigint "invited_by_id"
     t.integer "invitations_count", default: 0
     t.boolean "active"
+    t.string "mark_read_sections", default: [], array: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["invitations_count"], name: "index_users_on_invitations_count"

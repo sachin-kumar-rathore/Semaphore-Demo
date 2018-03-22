@@ -81,7 +81,7 @@ Rails.application.routes.draw do
       get :emails
     end
   end
-  resources :projects, only: %i[new index create edit update show] do
+  resources :projects do
     resources :tasks, controller: 'project_tasks'
     resources :notes, except: [:edit]
     resources :files, controller: 'project_files'

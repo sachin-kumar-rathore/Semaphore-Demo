@@ -20,9 +20,25 @@
           <label id="inputCompanyName">Company Name:</label>
           <%= activity.select :company_id, options_for_select(load_data_with_id(current_org.companies), activity.object.company_id), {include_blank: 'No Company'}, data: {"live-search": true}, disabled: @company, class: 'form-control custom-select' %>
         </div>
-        <div class="form-group col-md-3">
+        <div class="form-group col-md-3 target-dropdown">
           <label for="inputActivityType">Activity Type:</label>
-          <%= activity.select :company_activity_type_id, options_for_select(load_type("company_activity_types") + ['Quick add'], activity.object.company_activity_type_id), {}, class: 'form-control custom-select' %>
+          <%= activity.select :company_activity_type_id, options_for_select(load_type("company_activity_types") + ['Quick add'], activity.object.company_activity_type_id), {include_blank: 'Nothing selected '}, class: 'form-control custom-select' %>
+        </div>
+        <div class="form-group col-md-3 manage_config_div hidden">
+          <div class="row">
+            <div class="col mr--10">
+              <label for="inputActivityType">Activity Type:</label>
+              <input type="text" name="new_activity_type" id="new_activity_type" class="form-control">
+            </div>
+            <div class="add-activity-type  mr-3 ml--1">
+              <button type="button", class="btn btn-primary quick-add-btn"><i class="icon fa fa-plus btnIcon"></i></button> 
+            </div>
+            <div class="cancel-quick-add quick-add-btn">
+              <!--button type="button", class="btn btn-danger quick-add-btn"><i class="icon fa fa-close btnIcon"></i></button-->
+              <a href="javascript:void(0)" class="close" aria-label="close">&times;</i></a>
+            </div>
+            <div class="ml-15" id="manageConfigMessage"></div>
+          </div>
         </div>
         <div class="form-group col-md-3">
           <label for="inputProvidedService">Incentives:</label>
@@ -57,14 +73,6 @@
         <div class="form-group col-md-3">
           <label id="inputAssignedUser">Assigned User:</label>
           <%= activity.select(:assigned_user, current_org.users.collect { |user| [user.full_name, user.id]}, { include_blank: 'Nothing selected' }, data: {"live-search": true}, class: 'form-control custom-select') %>
-        </div>
-        <div class="form-group col-md-3 manage_config_div hidden">
-          <label id="inputActivityType">Quick add activity type:</label>
-          <input type="text" name="new_activity_type" id="new_activity_type" class="form-control">
-          <div id="manageConfigMessage"></div>
-        </div>
-        <div class="form-group col-md-3 add-activity-type manage_config_div mt-30 hidden">
-          <button type="button", class="btn btn-primary">Add</button>
         </div>
       </div>
       <div class="row">

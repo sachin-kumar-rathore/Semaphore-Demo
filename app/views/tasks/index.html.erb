@@ -16,14 +16,15 @@
         <div class="tasksTopOptions">
           <div class="row">
             <div class="col">
-              <div class="tasksSelectFilter">
+              <div class="tasksSelectFilter align-top">
                 <%= select_tag :task_filter_by_project, options_for_select(load_data_with_id(current_org.projects)), include_blank: 'All Tasks' , class: 'form-control custom-select' %>
               </div>
-              <div class="tasksSelectFilter assign-filter" hidden="true" >
+              <div class="tasksSelectFilter assign-filter align-top" hidden="true" >
                 <%= select_tag :assign, options_for_select(["Assigned To Me","Assigned By Me"]), class: 'form-control custom-select' %>
               </div>
               <div class="tasksSelectFilter status-filter" >
                 <%= select_tag :filter_by_status, options_for_select(["In-Progress", "Complete", "All"]), class: 'form-control custom-select' %>
+                <div class="align-right"> - Filter by Status</div>
               </div>
             </div>
             <div class="col col-auto">

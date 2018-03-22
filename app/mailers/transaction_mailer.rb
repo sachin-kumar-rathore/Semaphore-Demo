@@ -30,13 +30,16 @@ class TransactionMailer < ApplicationMailer
           [ ["_NAME_", mailerObj.full_name], ["_EMAIL_", mailerObj.email], ["_SIGN_IN_URL_", new_user_session_url] ]
         
         when 3
-          [ ["_NAME_", mailerObj.full_name], ["_LINK_",  edit_user_password_url(mailerObj, reset_password_token: opts['token'])] ]
+          [ ["_NAME_", mailerObj.full_name], ["_LINK_",  edit_user_password_url(reset_password_token: opts['token'])] ]
         
         when 4
-          [ ["_NAME_", mailerObj.full_name], ["_SIGN_IN_URL", new_user_session_url] ]
+          [ ["_NAME_", mailerObj.full_name], ["_SIGN_IN_URL_", new_user_session_url] ]
         
         when 5..7 # New Task Creation, New Task Assigned, New Tasks Re-Assigned 
           [ ["_NAME_", mailerObj.assignee.full_name], ["_LINK_", tasks_url], ["_ASSIGNER_", mailerObj.user.full_name] ]
+        
+        when 8
+          [ ["_NAME_", mailerObj.full_name], ["_SIGN_IN_URL_", new_user_session_url], ["_LINK_",  accept_user_invitation_url(invitation_token: opts['token'])] ]
         else
           [ ["_NAME_", "Test User"], ["_LINK_", 'http://192.241.247.185/tasks'], ["_ASSIGNER_", "TestAssigener"] ]
       end

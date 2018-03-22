@@ -1177,3 +1177,9 @@ a:not([href]):not([tabindex]){
 .horizontal-scroll::-webkit-scrollbar {
     display: none;
 }
+
+.quick-add-btn {
+  min-width: 20px;
+  padding: 6px 5px;
+  margin-top: 32px;
+}

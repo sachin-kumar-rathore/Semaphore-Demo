@@ -588,8 +588,24 @@ function show_hide_div_content(object, div, value_to_be_compared) {
 $(document).on("change", "#activity_company_activity_type_id", function () {
   $('#manageConfigMessage').html('');
   $("#new_activity_type").parent().removeClass("has-danger");
-  show_hide_div_content(this, '.manage_config_div', 'Quick add');
+  convert_text_field($(this).val(), '.manage_config_div', '.target-dropdown', 'Quick add');
 });
+
+$(document).on("click", ".cancel-quick-add", function () {
+  convert_text_field('', '.manage_config_div', '.target-dropdown', 'Quick add');
+  $('#activity_company_activity_type_id').val('');
+});
+
+function convert_text_field(object_value, div, target_div, value_to_be_compared) {
+  if (object_value == value_to_be_compared){
+    $(div).removeClass('hidden');
+    $(target_div).addClass('hidden');
+  }
+  else{
+    $(div).addClass('hidden');
+    $(target_div).removeClass('hidden')
+  }
+}
 
 $(document).on("click", ".add-activity-type", function () {
   if ($('#new_activity_type').val()) {
@@ -600,6 +616,7 @@ $(document).on("click", ".add-activity-type", function () {
       success: function(data) {
         $('#activity_company_activity_type_id').prepend("<option value=" + data.id + " selected='selected'>" + data.name + "</option>");
         $('.manage_config_div').addClass('hidden');
+        $('.target-dropdown').removeClass('hidden');
         $('#new_activity_type').val('');
       }
     });

@@ -38,11 +38,24 @@ class User < ApplicationRecord
 
   validates_presence_of :first_name, :last_name
 
+  protected
+
+  def send_devise_notification(notification, *args)
+    TransactionEmailWorker.perform_async(email_type_id(notification), 'user', self.id, { token: args[0] })
+  end
+
   private
 
   def minimum_one_role
     if user_roles.blank? && created_by_invite?
       errors.add(:base, 'User must be assigned atleast one role.')
+    end
+  end
+
+  def email_type_id(notification)
+    case notification
+    when :reset_password_instructions then 3
+    when :invitation_instructions then 8
     end
   end
 end

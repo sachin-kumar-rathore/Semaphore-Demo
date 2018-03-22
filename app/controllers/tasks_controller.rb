@@ -65,12 +65,12 @@ class TasksController < ApplicationController
   def filter_tasks_by_user
     if params[:current_user_filter] == 'true'
       if params[:assigned_to_me] == 'true'
-        current_user.assigned_tasks.without_activity
+        current_user.assigned_tasks
       else
-        current_user.tasks.without_activity
+        current_user.tasks
       end
     else
-      current_org.tasks.without_activity
+      current_org.tasks
     end
   end
 

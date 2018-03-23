@@ -31,7 +31,7 @@ class ManageUsersController < ApplicationController
   end
 
   def create
-    @user = User.invite!(invite_user_params) do |u|
+    @user = User.invite!(invite_user_params, current_user) do |u|
       u.skip_invitation = !u.active || u.user_roles.blank?
     end
     flash.now[:success] = 'User was successfully created.' if @user.persisted?

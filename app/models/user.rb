@@ -70,7 +70,8 @@ class User < ApplicationRecord
 
   def notify_admins(emailTypeId)
     @admin_users = organization.administrators.reject { |admin_user| admin_user.id == self.id }
-    @admin_users.each do |admin_user|
+    @admin_users = @admin_users << invited_by if invited_by 
+    @admin_users.uniq.each do |admin_user|
       TransactionEmailWorker.perform_async(emailTypeId, 'user', admin_user.id, { new_user_id: self.id })
     end
   end

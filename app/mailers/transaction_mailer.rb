@@ -21,7 +21,7 @@ class TransactionMailer < ApplicationMailer
 
   def generate_email_constants(emailTypeId, mailerObj, opts={})
     if mailerObj.new_record?
-      return [ ["_NAME_", "Test User"], ["_LINK_", 'http://192.241.247.185/tasks'], ["_ASSIGNER_", "TestAssigener"], ["_SIGN_IN_URL_", new_user_session_url] ]
+      return [ ["_NAME_", "Test User"], ["_LINK_", tasks_url], ["_ASSIGNER_", "TestAssigener"], ["_SIGN_IN_URL_", new_user_session_url] ]
     else
       case emailTypeId
         when 1
@@ -46,7 +46,7 @@ class TransactionMailer < ApplicationMailer
           [ ["_NAME_", mailerObj.full_name], ["_SIGN_IN_URL_", new_user_session_url], ["_EMAIL_", mailerObj.email], ["_USERNAME_", new_user.try(:full_name)], ["_USEREMAIL_", new_user.try(:email)] ]
         
         else
-          [ ["_NAME_", "Test User"], ["_LINK_", 'http://192.241.247.185/tasks'], ["_ASSIGNER_", "TestAssigener"] ]
+          [ ["_NAME_", "Test User"], ["_LINK_", tasks_url], ["_ASSIGNER_", "TestAssigener"] ]
       end
     end
   end

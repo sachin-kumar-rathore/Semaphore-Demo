@@ -3,11 +3,13 @@ class TransactionMailer < ApplicationMailer
   def send_email(emailTypeId, mailerObj, opts={})
     transaction_email = TransactionalEmail.find_by_type_id(emailTypeId)
     @email_body = generate_email_body(emailTypeId, transaction_email.body, mailerObj, opts)
+    attachments.inline['logo.png'] = File.read("#{Rails.root}/app/assets/images/updatedLogo.png")
     mail(to: email_address(mailerObj), subject: transaction_email.subject)
   end
 
   def send_test_email(emailTypeId, parameters, send_to)
     @email_body = generate_email_body(emailTypeId, parameters[:body], Task.new)
+    attachments.inline['logo.png'] = File.read("#{Rails.root}/app/assets/images/updatedLogo.png")
     mail(to: send_to, subject: parameters[:subject])
   end
 
@@ -39,7 +41,7 @@ class TransactionMailer < ApplicationMailer
           [ ["_NAME_", mailerObj.assignee.full_name], ["_LINK_", tasks_url], ["_ASSIGNER_", mailerObj.user.full_name] ]
         
         when 8
-          [ ["_NAME_", mailerObj.full_name], ["_SIGN_IN_URL_", new_user_session_url], ["_LINK_",  accept_user_invitation_url(invitation_token: opts['token'])] ]
+          [ ["_NAME_", mailerObj.full_name], ["_SIGN_IN_URL_", new_user_session_url.to_s], ["_LINK_",  accept_user_invitation_url(invitation_token: opts['token'])] ]
         
         when 9, 11
           new_user = mailerObj.organization.users.find_by_id(opts['new_user_id'])

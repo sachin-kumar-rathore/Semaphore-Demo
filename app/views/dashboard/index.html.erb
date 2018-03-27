@@ -134,7 +134,7 @@
         <div class="form-row" id="dashboardActivityReport">
           <%= render partial: 'activity_report', locals: {results: @results} %>
         </div>
-        <div class="botmheading"><%= link_to 'View Report', yearly_reports_path %></div>
+        <div class="botmheading"><a class="custom-href" href="<%= yearly_reports_path() %>" data-turbolinks="false">View Report</a></div>
       </div>
     </div>
   </div>

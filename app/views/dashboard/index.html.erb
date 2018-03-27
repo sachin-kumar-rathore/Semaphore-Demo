@@ -197,6 +197,41 @@
 
   <div class="row">
     <div class="col-lg-12">
+      <div class="card cardPadding <%= "hoverOverlay" if @projects.count == 0 %>">
+        <% if @projects.count == 0 %>
+          <div class="overlaySec">
+            <a href="javascript:void(0)"><span><i class="fa fa-plus"></i></span>Create Your First Project</a>
+          </div>
+        <% end %>
+        <div class="form-row">
+          <div class="col-md-2">
+            <h4 class="m-0">Projects</h4>
+          </div>
+          <div class="col text-right">
+            <div class="title-menu">
+              <%= select_tag :status, options_for_select(Project::STATUS), include_blank: 'All',
+                             class: 'btn activeBtn', id: 'dashboard_project_by_status' %>
+              <h3> - Filter by status</h3>
+              <%= select_tag :project_type, options_for_select( load_active_type("project_types") ), include_blank: 'All Project Types',
+                             class: 'btn activeBtn', id: 'dashboard_project_by_project_type' %>
+              <h3> - Filter by Project Type</h3>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel Filtering rows -->
+        <table class="table tableCustomStyle table-hover removeTblSearch footable" id="dashboardProjects" data-toggle-column="first" data-empty="There are no emails." data-show-toggle="true">
+          <%= render partial: 'projects', locals: {projects: @projects.count > 0 ? @projects.limit(5) : load_demo_projects} %>
+        </table>
+        <div class="botmheading">
+          <%= link_to 'View All', projects_path %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
       <div class="card cardPadding <%= "hoverOverlay" if @emails.count == 0 %>">
         <% if @emails.count == 0 %>
           <div class="overlaySec">

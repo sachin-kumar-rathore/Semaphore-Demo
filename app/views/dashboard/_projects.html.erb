@@ -1,0 +1,20 @@
+<thead>
+  <tr>
+    <th>PROJECT#</th>
+    <th>PROJECT NAME</th>
+    <th data-breakpoints="xs">COMPANY NAME</th>
+    <th data-breakpoints="xs">STARTED</th>
+    <th data-breakpoints="xs">STATUS</th>
+  </tr>
+</thead>
+<tbody>
+  <% projects.each do |project| %>
+    <tr>
+      <td><a class="custom-href" href="projects/<%= project.id %>/edit"><%= project.project_number %></a></td>
+      <td><a class="custom-href" href="projects/<%= project.id %>/edit"><%= project.name %></a></td>
+      <td><a class="custom-href" href="<%= project.company ? edit_company_path(project.company_id) : 'javascript:void(0)' %>" data-turbolinks="false"><%= project.company ? project.company.name : "No Company" %></a></td>
+      <td><a class="custom-href" href="projects/<%= project.id %>/edit"><%= project.active_date %></a></td>
+      <td><a class="custom-href" href="projects/<%= project.id %>/edit"><%= project.status %></a></td>
+    </tr>
+  <% end %>
+</tbody>

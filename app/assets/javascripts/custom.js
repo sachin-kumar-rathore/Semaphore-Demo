@@ -650,3 +650,12 @@ $(document).ready(function () {
     getSectionInformation(false);
   }
 })
+
+$(document).on("change", "#dashboard_project_by_status, #dashboard_project_by_project_type", function () {
+  $.ajax({
+    url: "/dashboard/projects",
+    type: "GET",
+    dataType: 'script',
+    data: { status: $('#dashboard_project_by_status').val(), project_type_id: $('#dashboard_project_by_project_type').val()  }
+  });
+});

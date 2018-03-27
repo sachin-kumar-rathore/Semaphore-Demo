@@ -51,8 +51,6 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :dashboard, only: [:index]
-
   resources :contacts do
     collection do
       post :import_contacts, as: :import
@@ -79,6 +77,7 @@ Rails.application.routes.draw do
       get :tasks
       get :activity
       get :emails
+      get :projects
     end
   end
   resources :projects do

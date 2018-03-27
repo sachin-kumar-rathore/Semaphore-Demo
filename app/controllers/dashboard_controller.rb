@@ -32,6 +32,13 @@ class DashboardController < ApplicationController
     end
     @emails = @emails.limit(5)
   end
+  
+  def projects
+    @projects = current_org.projects
+    @projects = @projects.status(status: params[:status]) if params[:status].present?
+    @projects = @projects.project_type_id(params[:project_type_id]) if params[:project_type_id].present?
+    @projects = @projects.limit(5)
+  end
 
   private
 

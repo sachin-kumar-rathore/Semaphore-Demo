@@ -22,7 +22,7 @@
         </div>
         <div class="form-group col-md-3 target-dropdown">
           <label for="inputActivityType">Activity Type:</label>
-          <%= activity.select :company_activity_type_id, options_for_select(load_type("company_activity_types") + ['Quick add'], activity.object.company_activity_type_id), {include_blank: 'Nothing selected '}, class: 'form-control custom-select' %>
+          <%= activity.select :company_activity_type_id, options_for_select(load_type_with_quick_add("company_activity_types", 'Activity Type'), activity.object.company_activity_type_id), {include_blank: ''}, class: 'form-control custom-select' %>
         </div>
         <div class="form-group col-md-3 manage_config_div hidden">
           <div class="row">
@@ -34,7 +34,6 @@
               <button type="button", class="btn btn-primary quick-add-btn"><i class="icon fa fa-plus btnIcon"></i></button> 
             </div>
             <div class="cancel-quick-add quick-add-btn">
-              <!--button type="button", class="btn btn-danger quick-add-btn"><i class="icon fa fa-close btnIcon"></i></button-->
               <a href="javascript:void(0)" class="close" aria-label="close">&times;</i></a>
             </div>
             <div class="ml-15" id="manageConfigMessage"></div>

@@ -40,4 +40,8 @@ module ApplicationHelper
     url = URI.parse(request.original_url)
     url.path.split("/").drop(1).first
   end
+
+  def load_type_with_quick_add(type, record_name)
+    load_type(type) + [['[+ QUICK ADD +] New ' + record_name, 'Quick add']]
+  end
 end

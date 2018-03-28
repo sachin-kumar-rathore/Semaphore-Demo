@@ -4,7 +4,7 @@ class SectionGuidesController < ApplicationController
   layout 'admin'
 
   def index
-    @section_guides = SectionGuide.all.paginate(page: params[:page], per_page: 8)
+    @section_guides = SectionGuide.all.order('id') #.paginate(page: params[:page], per_page: 8)
   end
 
   def edit; end

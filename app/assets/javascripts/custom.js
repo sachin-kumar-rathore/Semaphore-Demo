@@ -646,7 +646,7 @@ function getSectionInformation(value) {
 }
 
 $(document).ready(function () {
-  if (window.location.pathname.split('/')[1] == 'tasks') {
+  if ($('.section-info-icon').data('user-id')) {
     getSectionInformation(false);
   }
 })

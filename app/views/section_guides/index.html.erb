@@ -11,8 +11,8 @@
       <tbody>
       <% for section in @section_guides %>
           <tr>
-            <td><a class="custom-href" href="<%= edit_section_guide_path(section) %>" data-turbolinks="false"><%= section.section_name %></td>
-            <td><a class="custom-href" href="<%= edit_section_guide_path(section) %>" data-turbolinks="false"><%= truncate(section.section_info, length: 50, separator: ' ') %></td>
+            <td><a class="custom-href" href="<%= edit_section_guide_path(section) %>" data-turbolinks="false"><%= section.section_name.titleize %></a></td>
+            <td><a class="custom-href" href="<%= edit_section_guide_path(section) %>" data-turbolinks="false"><%= truncate(section.section_info, length: 50, separator: ' ') %></a></td>
             <td>
               <div class="openLeft moreOptions dropdown">
                 <a class="" data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false" data-animation="scale-down" role="button">
@@ -31,7 +31,7 @@
 </div>
 
 <div class="digg_pagination">
-  <%= js_will_paginate @section_guides %>
+  <%#= js_will_paginate @section_guides %>
 </div>
 
 <script>

@@ -13,10 +13,10 @@
     <% @projects.each do |project| %>
       <tr>
         <td><a class="custom-href" href="projects/<%= project.id %>/edit"><%= project.project_number %></a></td>
-        <td><a class="custom-href" href="projects/<%= project.id %>/edit"><%= project.name %></td>
-        <td><a class="custom-href" href="<%= project.company ? edit_company_path(project.company_id) : 'javascript:void(0)' %>" data-turbolinks="false"><%= project.company ? project.company.name : "No Company" %></td>
-        <td><a class="custom-href" href="projects/<%= project.id %>/edit"><%= project.active_date %></td>
-        <td><a class="custom-href" href="projects/<%= project.id %>/edit"><%= project.status %></td>
+        <td><a class="custom-href" href="projects/<%= project.id %>/edit"><%= project.name %></a></td>
+        <td><a class="custom-href" href="<%= project.company ? edit_company_path(project.company_id) : 'javascript:void(0)' %>" data-turbolinks="false"><%= project.company ? project.company.name : "No Company" %></a></td>
+        <td><a class="custom-href" href="projects/<%= project.id %>/edit"><%= project.active_date %></a></td>
+        <td><a class="custom-href" href="projects/<%= project.id %>/edit"><%= project.status %></a></td>
         <td>
           <div class="openLeft moreOptions dropdown"> 
             <a class="" data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false" data-animation="scale-down" role="button"> <i class="icon md-more-vert" aria-hidden="true"></i> </a>

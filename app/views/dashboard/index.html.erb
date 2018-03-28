@@ -210,7 +210,7 @@
           </div>
           <div class="col text-right">
             <div class="title-menu">
-              <%= select_tag :status, options_for_select(Project::STATUS), include_blank: 'All',
+              <%= select_tag :status, options_for_select(Project::STATUS, 'Active'), include_blank: 'All',
                              class: 'btn activeBtn', id: 'dashboard_project_by_status' %>
               <h3> - Filter by status</h3>
               <%= select_tag :project_type, options_for_select( load_active_type("project_types") ), include_blank: 'All Project Types',
@@ -222,7 +222,7 @@
 
         <!-- Panel Filtering rows -->
         <table class="table tableCustomStyle table-hover removeTblSearch footable" id="dashboardProjects" data-toggle-column="first" data-empty="There are no emails." data-show-toggle="true">
-          <%= render partial: 'projects', locals: {projects: @projects.count > 0 ? @projects.limit(5) : load_demo_projects} %>
+          <%= render partial: 'projects', locals: {projects: @projects.count > 0 ? @projects.active.limit(5) : load_demo_projects} %>
         </table>
         <div class="botmheading">
           <%= link_to 'View All', projects_path %>

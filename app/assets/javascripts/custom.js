@@ -645,10 +645,12 @@ function getSectionInformation(value) {
   });
 }
 
-$(document).ready(function () {
-  if ($('.section-info-icon').data('user-id')) {
-    getSectionInformation(false);
-  }
+$(document).on('turbolinks:load', function() {
+  setTimeout(function() {
+    if ($('.section-info-icon').data('user-id')) {
+      getSectionInformation(false);
+    }
+  }, 500);
 })
 
 $(document).on("change", "#dashboard_project_by_status, #dashboard_project_by_project_type", function () {

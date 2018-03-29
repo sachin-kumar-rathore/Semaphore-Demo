@@ -8,7 +8,7 @@
       <th data-name="assignedTo">Assigned To</th>
       <th data-name="description" data-breakpoints="xs sm md">Description</th>
       <th data-breakpoints="xs">Start date</th>
-      <th data-name="sDate" data-type="date" data-breakpoints="xs sm md" data-format-string="MMM YYYY" class="footable-last-visible">Due Date</th>
+      <th data-name="sDate" data-breakpoints="xs sm md" class="footable-last-visible">Due Date</th>
       <th></th>
     </tr>
   </thead>
@@ -19,7 +19,7 @@
         <td class="clickable" data-href="<%= project_task_path(task, project_id: @project) %>" data-toggle="modal" data-target="#viewContactModal1"><span class="priorityDot <%= priority_class(task.priority) %>"></span><%= task.priority %></td>
         <td class="clickable" data-href="<%= project_task_path(task, project_id: @project) %>" data-toggle="modal" data-target="#viewContactModal1"><%= task.status %></td>
         <td class="clickable" data-href="<%= project_task_path(task, project_id: @project) %>" data-toggle="modal" data-target="#viewContactModal1"><%= task.progress %> %</td>
-        <td class="clickable" data-href="<%= project_task_path(task, project_id: @project) %>" data-toggle="modal" data-target="#viewContactModal1"><%= task.assignee.full_name %></td>
+        <td class="clickable" data-href="<%= project_task_path(task, project_id: @project) %>" data-toggle="modal" data-target="#viewContactModal1"><%= task.assignee.try(:full_name) %></td>
         <td class="clickable" data-href="<%= project_task_path(task, project_id: @project) %>" data-toggle="modal" data-target="#viewContactModal1"><%= task.description.truncate(25) %></td>
         <td class="clickable" data-href="<%= project_task_path(task, project_id: @project) %>" data-toggle="modal" data-target="#viewContactModal1"><%= task.start_date.strftime("%m/%d/%Y") if task.start_date.present? %></td>
         <td class="clickable" data-href="<%= project_task_path(task, project_id: @project) %>" data-toggle="modal" data-target="#viewContactModal1"><%= task.end_date.strftime("%m/%d/%Y") if task.end_date.present? %></td>

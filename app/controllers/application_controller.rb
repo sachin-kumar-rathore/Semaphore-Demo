@@ -31,7 +31,11 @@ class ApplicationController < ActionController::Base
   end
 
   def render_404
-    render template: 'layouts/error_404', status: 404
+    respond_to do |format|
+      format.html { render :file => "layouts/error_404", :layout => false, :status => :not_found }
+      format.xml  { head :not_found }
+      format.any  { head :not_found }
+    end
   end
 
   def current_org

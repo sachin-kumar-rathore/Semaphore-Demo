@@ -1,3 +1,4 @@
+<div class="section-info-flash"></div>
 <div class="dashboard-menu">
   <div class="row">
     <div class="col-lg-4">
@@ -134,7 +135,7 @@
         <div class="form-row" id="dashboardActivityReport">
           <%= render partial: 'activity_report', locals: {results: @results} %>
         </div>
-        <div class="botmheading"><%= link_to 'View Report', yearly_reports_path %></div>
+        <div class="botmheading"><a class="custom-href" href="<%= yearly_reports_path() %>" data-turbolinks="false">View Report</a></div>
       </div>
     </div>
   </div>
@@ -152,7 +153,7 @@
         <div class="cardImg">
           <div align="center" id="prospectsByIndustryTypeBarDashboard"></div>
         </div>
-        <div class="botmheading"><%= link_to 'View Report', yearly_reports_path %></div>
+        <div class="botmheading"><a class="custom-href" href="<%= yearly_reports_path() %>" data-turbolinks="false">View Report</a></div>
       </div>
     </div>
     <div class="col-lg-8">
@@ -197,6 +198,41 @@
 
   <div class="row">
     <div class="col-lg-12">
+      <div class="card cardPadding <%= "hoverOverlay" if @projects.count == 0 %>">
+        <% if @projects.count == 0 %>
+          <div class="overlaySec">
+            <a href="javascript:void(0)"><span><i class="fa fa-plus"></i></span>Create Your First Project</a>
+          </div>
+        <% end %>
+        <div class="form-row">
+          <div class="col-md-2">
+            <h4 class="m-0">Projects</h4>
+          </div>
+          <div class="col text-right">
+            <div class="title-menu">
+              <%= select_tag :status, options_for_select(Project::STATUS, 'Active'), include_blank: 'All',
+                             class: 'btn activeBtn', id: 'dashboard_project_by_status' %>
+              <h3> - Filter by status</h3>
+              <%= select_tag :project_type, options_for_select( load_active_type("project_types") ), include_blank: 'All Project Types',
+                             class: 'btn activeBtn', id: 'dashboard_project_by_project_type' %>
+              <h3> - Filter by Project Type</h3>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel Filtering rows -->
+        <table class="table tableCustomStyle table-hover removeTblSearch footable" id="dashboardProjects" data-toggle-column="first" data-empty="There are no emails." data-show-toggle="true">
+          <%= render partial: 'projects', locals: {projects: @projects.count > 0 ? @projects.active.limit(5) : load_demo_projects} %>
+        </table>
+        <div class="botmheading">
+          <%= link_to 'View All', projects_path %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
       <div class="card cardPadding <%= "hoverOverlay" if @emails.count == 0 %>">
         <% if @emails.count == 0 %>
           <div class="overlaySec">
@@ -205,7 +241,7 @@
         <% end %>
         <div class="form-row">
           <div class="col-md-2">
-            <h4 class="m-0">Emails</h4>
+            <h4 class="m-0">Mailbox</h4>
           </div>
           <div class="col text-right">
             <div class="title-menu">

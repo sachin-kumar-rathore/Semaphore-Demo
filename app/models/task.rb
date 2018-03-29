@@ -30,10 +30,13 @@ class Task < ApplicationRecord
 
   # == Callbacks == #
   before_validation :convert_dates_format
+  after_save :send_task_alert_email
+
   # == Scopes and Other macros == #
   scope :without_activity, -> { where("taskable_type IS NULL OR taskable_type != (?)", "Activity") }
   scope :filter_by_project, ->(project_id) { where('taskable_id = ? AND taskable_type = ? ', project_id, 'Project') }
   scope :sort_by_priority_then_end_date, -> { order(priority: :asc, end_date: :asc) }
+  scope :filter_by_status, ->(status) { where('status = ?', status) }
   # == Instance methods == #
 
   # == Private == #
@@ -50,6 +53,16 @@ class Task < ApplicationRecord
     if end_date < start_date
       errors.add(:end_date, "cannot be before the start date") 
     end 
+  end
+
+  def send_task_alert_email
+    if self.id_changed?
+      TransactionEmailWorker.perform_async(5, 'task', self.id)
+    else
+      if self.assignee_id_changed?
+        TransactionEmailWorker.perform_async(6, 'task', self.id)
+      end
+    end
   end
 
 end

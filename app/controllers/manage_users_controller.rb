@@ -31,7 +31,7 @@ class ManageUsersController < ApplicationController
   end
 
   def create
-    @user = User.invite!(invite_user_params) do |u|
+    @user = User.invite!(invite_user_params, current_user) do |u|
       u.skip_invitation = !u.active || u.user_roles.blank?
     end
     flash.now[:success] = 'User was successfully created.' if @user.persisted?
@@ -52,6 +52,16 @@ class ManageUsersController < ApplicationController
     return unless @user.destroy
     flash.now[:success] = 'User successfully deleted.'
     load_users
+  end
+  
+  def mark_section_as_read
+    sections = current_user.mark_read_sections << params[:section]
+    current_user.update_attributes(mark_read_sections: sections.uniq)
+  end
+
+  def get_section_information
+    @message = SectionGuide.find_by_section_name(params[:section]).try(:section_info)
+    @status = (params[:show_anyway] == 'true') ? false : current_user.mark_read_sections.include?(params[:section])
   end
 
   private

@@ -8,13 +8,13 @@
 <li class="site-menu-item has-sub <%= active_class('emails') %>">
 	<a href="<%= emails_path %>">
 		<i class="site-menu-icon fa fa-envelope" aria-hidden="true"></i>
-		<span class="site-menu-title">Emails</span>
+		<span class="site-menu-title">Mailbox</span>
 		<span class="site-menu-arrow"></span>
 	</a>
 </li>
 <li class="site-menu-item has-sub <%= active_class('activities') %>">
 	<a href="<%= activities_path %>">
-		<i class="site-menu-icon md-apps" aria-hidden="true"></i>
+		<i class="site-menu-icon fa fa-handshake-o" aria-hidden="true"></i>
 		<span class="site-menu-title">Activities</span>
 		<span class="site-menu-arrow"></span>
 	</a>
@@ -68,7 +68,7 @@
 		<span class="site-menu-arrow"></span>
 	</a>
 </li>
-<li class="site-menu-item has-sub">
+<li class="site-menu-item has-sub data-exports <%= active_class('exports') %>">
   <a href="<%= exports_path %>">
     <i class="site-menu-icon fa fa-file-excel-o" aria-hidden="true"></i>
     <span class="site-menu-title">Data Exports</span>

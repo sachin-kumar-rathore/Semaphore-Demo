@@ -2,7 +2,7 @@
 class ProjectsController < ApplicationController
   include ProjectModule
   before_action :authenticate_user!
-  before_action :set_project, only: %i[edit update show logs]
+  before_action :set_project, only: %i[edit update show logs destroy]
   before_action :convert_site_visit_dates, only: [:update, :create]
   respond_to :html, only: %i[index new edit]
   respond_to :js
@@ -46,7 +46,7 @@ class ProjectsController < ApplicationController
   end
 
   def edit
-    (3 - @project.site_visits.count).times { @project.site_visits.build }
+    (3 - @project.site_visits.count).times { @project.site_visits.build } unless @project.blank?
     return unless @project.blank?
     flash[:danger] = 'Project not found.'
     redirect_to projects_path
@@ -91,6 +91,15 @@ class ProjectsController < ApplicationController
                      .paginate(page: params[:page], per_page: 8)
   end
 
+  def destroy
+    if @project.destroy
+      flash[:success] = 'Project deleted successfully.'
+    else
+      flash[:danger] = 'Could not delete project.'
+    end
+    redirect_to projects_path
+  end
+
   private
 
   def set_project
@@ -114,7 +123,7 @@ class ProjectsController < ApplicationController
                                     :located, :project_number, :retained_jobs,
                                     :company_id,
                                     :primary_contact_id, :source_id,
-                                    :considered_location_id,
+                                    :considered_location_id, :new_company_name,
                                     :incentive_id, :other_square_ft_requested,
                                     :competition_id, :activity_id, :project_manager_id,
                                     site_visits_attributes: [:id, :visit_date, :_destroy])

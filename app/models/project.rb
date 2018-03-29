@@ -15,11 +15,12 @@ class Project < ApplicationRecord
               Inactive].freeze
 
   attr_accessor :active_date_str, :successful_completion_date_str,
-                :public_release_date_str, :activity_id
+                :public_release_date_str, :activity_id, :new_company_name
   # CALLBACK
   before_validation :convert_dates_format
   after_create :copy_activity_records, if: :has_activity_id?
   before_save :update_other_requested_feet
+  before_save :create_new_company
 
   # ASSOCIATION
   belongs_to :organization
@@ -39,7 +40,7 @@ class Project < ApplicationRecord
   belongs_to :competition
   belongs_to :incentive
   belongs_to :source
-  belongs_to :elimination_reason
+  belongs_to :elimination_reason, optional: true
   belongs_to :primary_contact, class_name: 'Contact', foreign_key: :primary_contact_id
   belongs_to :project_manager, class_name: 'User', foreign_key: :project_manager_id
   has_many  :site_visits, inverse_of: :project, dependent: :destroy
@@ -71,7 +72,8 @@ class Project < ApplicationRecord
   scope :active, -> { where(status: "Active")}
 
   # VALIDATION
-  validates :project_number, uniqueness: true, presence: true, length: { is: 6 }
+  validates :project_number, presence: true, length: { is: 6 }
+  validates_uniqueness_of :project_number, scope: :organization_id
   validates :name, presence: true
   validate :successful_completion_date_is_after_active_date
   validates :business_type, inclusion: { in: Project::BUSINESS_TYPE, message: '%{value} is not a valid business type.' }
@@ -145,4 +147,10 @@ class Project < ApplicationRecord
     end
   end
 
+  def create_new_company
+    if new_company_name.present?
+      @company = organization.companies.new(name: new_company_name)
+      self.company_id = @company.id if @company.save(validate: false)
+    end
+  end
 end

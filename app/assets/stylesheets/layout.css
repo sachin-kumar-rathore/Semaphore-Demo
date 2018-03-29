@@ -1085,7 +1085,7 @@ a:not([href]):not([tabindex]){
 
 .yearlyReport .btn-primary, .btn-outline-primary {
   font-size: 12px;
-  padding: 4px 10px;
+  padding: 9px 10px;
 }
 /****Demo mode Hover CSS***/
 .hoverOverlay{
@@ -1159,4 +1159,27 @@ a:not([href]):not([tabindex]){
 .active_custom_export {
   background-color: #f4fdf8;
   border-left-color: #2ED573 !important;
+}
+
+.section-info{
+  border: 1px solid #ff7544;
+  background-color: #fff;
+}
+
+.btn-orng, .btn-orng:hover {
+  background-color: #ff7544;
+  border: #ff7544;;
+}
+
+.horizontal-scroll {
+  overflow-x: auto;
+}
+.horizontal-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.quick-add-btn {
+  min-width: 20px;
+  padding: 6px 5px;
+  margin-top: 32px;
 }

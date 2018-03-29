@@ -39,7 +39,7 @@
               <div class="form-group col-md-6">
                 <label for="priority">Start Date:</label>
                 <div class="rightIconFld">
-                  <%= form.text_field 'start_date_str', class: "form-control  datepicker", value:  @task.start_date ? @task.start_date : Date.today.strftime('%m/%d/%Y'), data: {plugin: "datepicker"}, required: true %>
+                  <%= form.text_field 'start_date_str', class: "form-control  datepicker", value:  @task.start_date ? filter_month_date_year(@task.start_date) : filter_month_date_year(Date.today), data: {plugin: "datepicker"}, required: true %>
                   <label for="startDate" class="fldRightIcon">
                     <i class="icon fa fa-calendar-o" aria-hidden="true"></i>
                   </label>
@@ -48,7 +48,7 @@
               <div class="form-group col-md-6">
                 <label for="assignTo">Due Date:</label>
                 <div class="rightIconFld">
-                  <%= form.text_field 'end_date_str', class: "form-control  datepicker", value:  @task.end_date ? @task.end_date : Date.today.strftime('%m/%d/%Y'), data: {plugin: "datepicker"}, required: true %>
+                  <%= form.text_field 'end_date_str', class: "form-control  datepicker", value:  @task.end_date ? filter_month_date_year(@task.end_date) : filter_month_date_year(Date.today), data: {plugin: "datepicker"}, required: true %>
                   <label for="dueDate" class="fldRightIcon">
                     <i class="icon fa fa-calendar-o" aria-hidden="true"></i>
                   </label>

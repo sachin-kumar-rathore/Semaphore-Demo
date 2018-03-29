@@ -5,3 +5,10 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+require 'faker'
+
+TransactionalEmail::TYPES.each do |type|
+  unless TransactionalEmail.find_by_type_id(type[:type_id])
+    TransactionalEmail.create!(name: type[:name], body: Faker::Lorem.paragraph, type_id: type[:type_id], subject: type[:name])
+  end
+end

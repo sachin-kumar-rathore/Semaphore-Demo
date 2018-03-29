@@ -15,6 +15,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       resource.organization_id = organization.id
       resource.user_roles.new(security_role_id: security_role.id)
       resource.active = true
+      send_welcome_emails(organization, resource)
     end
   end
 
@@ -68,6 +69,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def organization_params
     params.require(:org).permit(:name, :url, :primary_contact_first_name,
      :primary_contact_last_name, :primary_contact_phone, :primary_contact_email)
+  end
+
+  def send_welcome_emails(organization, resource)
+    TransactionEmailWorker.perform_async(1, 'organization', organization.id)
+    TransactionEmailWorker.perform_async(2, 'user', resource.id)
   end
 
 end

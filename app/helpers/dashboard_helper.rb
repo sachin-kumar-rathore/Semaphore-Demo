@@ -116,4 +116,13 @@ module DashboardHelper
     return objects
   end
 
+  def load_demo_projects
+    projects = []
+    5.times do
+      projects << Project.new(project_number: Faker::Number.number(6), name: Faker::Lorem.word, 
+                             active_date: Faker::Date.between(2.years.ago, Date.today), 
+                             status: Project::STATUS[Faker::Number.between(1, 5)])
+    end
+    projects
+  end
 end

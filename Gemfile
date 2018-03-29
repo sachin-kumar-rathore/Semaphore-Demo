@@ -84,3 +84,4 @@ gem 'sidekiq', '~> 5.1'
 gem 'exception_notification', '~> 4.2', '>= 4.2.2'
 gem 'cocoon', '~> 1.2', '>= 1.2.9'
 gem "audited", "~> 4.5"
+gem 'tinymce-rails', '~> 4.7', '>= 4.7.2'

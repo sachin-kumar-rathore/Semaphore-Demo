@@ -12,6 +12,7 @@ class User < ApplicationRecord
   has_many :security_roles, through: :user_roles
   has_many :custom_exports, dependent: :destroy
   before_save :minimum_one_role
+  after_update :welcome_user_and_notify_admin, if: :saved_change_to_invitation_accepted_at?
 
   PAGINATION_VALUE = 8
   
@@ -38,11 +39,40 @@ class User < ApplicationRecord
 
   validates_presence_of :first_name, :last_name
 
+  protected
+
+  def send_devise_notification(notification, *args)
+    case notification
+    when :reset_password_instructions
+      TransactionEmailWorker.perform_async(3, 'user', self.id, { token: args[0] })
+    when :invitation_instructions
+      send_invitation_emails(args[0])
+    end
+  end
+
   private
 
   def minimum_one_role
     if user_roles.blank? && created_by_invite?
       errors.add(:base, 'User must be assigned atleast one role.')
+    end
+  end
+
+  def send_invitation_emails(token)
+    TransactionEmailWorker.perform_async(8, 'user', self.id, { token: token })
+    notify_admins(9)
+  end
+
+  def welcome_user_and_notify_admin
+    TransactionEmailWorker.perform_async(10, 'user', self.id)
+    notify_admins(11)
+  end
+
+  def notify_admins(emailTypeId)
+    @admin_users = organization.administrators.reject { |admin_user| admin_user.id == self.id }
+    @admin_users = @admin_users << invited_by if invited_by 
+    @admin_users.uniq.each do |admin_user|
+      TransactionEmailWorker.perform_async(emailTypeId, 'user', admin_user.id, { new_user_id: self.id })
     end
   end
 end

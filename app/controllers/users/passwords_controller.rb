@@ -1,4 +1,5 @@
 class Users::PasswordsController < Devise::PasswordsController
+  respond_to :js, only: [:create]
   # GET /resource/password/new
   # def new
   #   super
@@ -15,9 +16,11 @@ class Users::PasswordsController < Devise::PasswordsController
   # end
 
   # PUT /resource/password
-  # def update
-  #   super
-  # end
+  def update
+    super do |resource|
+      send_reset_password_confirmation_mail(resource)
+    end
+  end
 
   # protected
 
@@ -29,4 +32,10 @@ class Users::PasswordsController < Devise::PasswordsController
   # def after_sending_reset_password_instructions_path_for(resource_name)
   #   super(resource_name)
   # end
+
+  private
+
+  def send_reset_password_confirmation_mail(resource)
+    TransactionEmailWorker.perform_async(4, 'user', resource.id)
+  end
 end

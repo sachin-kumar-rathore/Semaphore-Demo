@@ -68,15 +68,20 @@ $(document).on("change", "#assign", function () {
   filterRequest();
 });
 
+$(document).on("change", "#filter_by_status", function () {
+  filterRequest();
+});
+
 function filterRequest() {
   var project_id = $('#task_filter_by_project').val();
   var user_filter = ($('#current_user_filter .nav-link').hasClass("active"));
   var assigned_to_me = ($('#assign').val() == "Assigned To Me");
+  var status = $('#filter_by_status').val();
   $.ajax({
     url: "/tasks",
     type: "GET",
     dataType: 'script',
-    data: {current_user_filter: user_filter, project_id: project_id, assigned_to_me: assigned_to_me}
+    data: {current_user_filter: user_filter, project_id: project_id, assigned_to_me: assigned_to_me, status: status}
   });
 }
 
@@ -517,25 +522,12 @@ function editCustomConfig(id) {
   customConfigRequest(path);
 }
 $(document).on("change", "#project_square_feet_requested", function () {
-  if ($(this).val() == 'Other'){
-    $('#otherSquareFeetRequested').addClass('show');
-    $('#otherSquareFeetRequested').removeClass('hidden');
-  }else{
-    $('#otherSquareFeetRequested').addClass('hidden');
-    $('#otherSquareFeetRequested').removeClass('show');
-  }
+  show_hide_div_content(this, '#otherSquareFeetRequested', 'Other')
 });
 
 // Toggle the where located field
 $(document).on("click", "input[name*='status']", function() {
-  if ($(this).val() == 'Successful'){
-    $('#where_located_div').addClass('show');
-    $('#where_located_div').removeClass('hidden');
-  }
-  else{
-    $('#where_located_div').addClass('hidden');
-    $('#where_located_div').removeClass('show');
-  }
+  show_hide_div_content(this, '#where_located_div', 'Successful')
 });
 
 // To change the value of progress in tasks to 100.00 on completion
@@ -565,5 +557,107 @@ $(document).ready(function () {
   $('#siteVisitDates .nested-fields').each(function (indx) {
     var label_no = indx + 1;
     $(this).find('.visitDateLabel').html("Site Visit " + label_no + ":")
+  });
+});
+
+$(document).on("change", "#project_company_id", function () {
+  if ($(this).val() === '0'){
+    $('#quick_add_company').removeClass('hidden');
+    $('#project_new_company_name').attr('required', true);
+  }
+  else{
+    $('#quick_add_company').addClass('hidden');
+    $('#project_new_company_name').attr('required', false);
+  }
+});
+
+// Toggle the public release date and elimination reason fields
+$(document).on("click", "input[name*='status']", function() {
+  show_hide_div_content(this, '.publicRelease-and-elimination', 'Successful')
+});
+
+function show_hide_div_content(object, div, value_to_be_compared) {
+  if (object.value == value_to_be_compared){
+    $(div).removeClass('hidden');
+  }
+  else{
+    $(div).addClass('hidden');
+  }
+}
+
+$(document).on("change", "#activity_company_activity_type_id", function () {
+  $('#manageConfigMessage').html('');
+  $("#new_activity_type").parent().removeClass("has-danger");
+  convert_text_field($(this).val(), '.manage_config_div', '.target-dropdown', 'Quick add');
+});
+
+$(document).on("click", ".cancel-quick-add", function () {
+  convert_text_field('', '.manage_config_div', '.target-dropdown', 'Quick add');
+  $('#activity_company_activity_type_id').val('');
+});
+
+function convert_text_field(object_value, div, target_div, value_to_be_compared) {
+  if (object_value == value_to_be_compared){
+    $(div).removeClass('hidden');
+    $(target_div).addClass('hidden');
+  }
+  else{
+    $(div).addClass('hidden');
+    $(target_div).removeClass('hidden')
+  }
+}
+
+$(document).on("click", ".add-activity-type", function () {
+  if ($('#new_activity_type').val()) {
+    $.ajax({
+      url: '/manage_configurations',
+      type: "POST",
+      data: { type: 'company_activity_types', company_activity_type: { name: $('#new_activity_type').val() }, respond_to_ajax: true },
+      success: function(data) {
+        $('#activity_company_activity_type_id').prepend("<option value=" + data.id + " selected='selected'>" + data.name + "</option>");
+        $('.manage_config_div').addClass('hidden');
+        $('.target-dropdown').removeClass('hidden');
+        $('#new_activity_type').val('');
+      }
+    });
+  } else {
+    $("#new_activity_type").parent().addClass("has-danger");
+    $('#manageConfigMessage').html("This field can't be blank");
+  }
+});
+
+function markReadSectionRequest(section, org_id, user_id) {
+  $.ajax({
+    url: '/organizations/' + org_id + '/users/' + user_id + '/mark_section_as_read',
+    type: "PATCH",
+    data: { section: section }
+  });
+}
+
+function getSectionInformation(value) {
+  var org_id = $('.section-info-icon').data('org-id');
+  var user_id = $('.section-info-icon').data('user-id');
+  var section = $('.section-info-icon').data('section');
+  $.ajax({
+    url: '/organizations/' + org_id + '/users/' + user_id + '/get_section_information',
+    type: "GET",
+    data: { section: section, show_anyway: value}
+  });
+}
+
+$(document).on('turbolinks:load', function() {
+  setTimeout(function() {
+    if ($('.section-info-icon').data('user-id')) {
+      getSectionInformation(false);
+    }
+  }, 200);
+})
+
+$(document).on("change", "#dashboard_project_by_status, #dashboard_project_by_project_type", function () {
+  $.ajax({
+    url: "/dashboard/projects",
+    type: "GET",
+    dataType: 'script',
+    data: { status: $('#dashboard_project_by_status').val(), project_type_id: $('#dashboard_project_by_project_type').val()  }
   });
 });

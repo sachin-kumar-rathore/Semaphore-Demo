@@ -29,13 +29,11 @@ module ProjectsHelper
       incentive: 'Incentives',
       competition: 'Competition',
       source: 'Source',
-      site_visit_1: 'Site Visit 1',
-      site_visit_2: 'Site Visit 2',
-      site_visit_3: 'Site Visit 3',
+      site_visits: 'Site Visits',
       site_selector: 'Site Selector',
       utilize_sites: 'Sites and Building Database Utilized',
       speculative_building: 'Speculative Building',
-      located: 'Located',
+      where_located: 'Located',
       public_release: 'Public Release',
       public_release_date: 'Public Release Date',
       successful_completion_date: 'Completion Date'
@@ -54,6 +52,9 @@ module ProjectsHelper
 
     elsif field.to_s == 'considered_location' 
       project.send(field).try(:location)
+
+    elsif field.to_s == 'site_visits' 
+      project.send(field).pluck(:visit_date).join(', ')
 
     elsif field.to_s == 'project_manager'
       pr_manager = project.send(field)
@@ -74,11 +75,6 @@ module ProjectsHelper
     current_org.project_managers.map { |user| [user.full_name, user.id] }
   end
 
-  def assign_default_project_number
-    project_no = rand.to_s[2..7]
-    return Project.pluck(:project_number).include?(project_no.to_s) ? assign_default_project_number : project_no
-  end
-
   def audit_description(audit)
     project = (audit.auditable_type == 'Project') ? audit.auditable : audit.associated
     action = (audit.action == 'destroy') ? 'deleted' : "#{audit.action}d"
@@ -96,5 +92,9 @@ module ProjectsHelper
     when 'Document' then "File #{File.basename(audit.auditable.name.path) if audit.auditable}"
     when 'Email' then "Email #{audit.auditable.try(:subject)}"
     end
+  end
+
+  def load_company_data_with_id(companies)
+    [['Quick add company', 0 ]] + load_data_with_id(companies)
   end
 end

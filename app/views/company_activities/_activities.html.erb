@@ -12,7 +12,7 @@
     <% @activities.each do |activity| %>
       <tr>
         <td><a class="custom-href" href="<%= edit_company_activity_path(@company, activity) %>" data-turbolinks="false"><%= activity.name %></td>
-        <td><a class="custom-href" href="<%= edit_company_activity_path(@company, activity) %>" data-turbolinks="false"><%= activity.company_activity_type.name %></td>
+        <td><a class="custom-href" href="<%= edit_company_activity_path(@company, activity) %>" data-turbolinks="false"><%= activity.company_activity_type.try(:name) %></td>
         <td><a class="custom-href" href="<%= edit_company_activity_path(@company, activity) %>" data-turbolinks="false"><%= activity.contact_date %></td>
         <td><a class="custom-href" href="<%= edit_company_activity_path(@company, activity) %>" data-turbolinks="false"><%= activity.converted ? "Yes" : "No" %></td>
         <td>

@@ -22,7 +22,7 @@
         <td><a class="clickable" data-href="<%= task_path(task) %>"><span class="nowrapCol"><%= task.description %></span></td>
         <td><a class="clickable" data-href="<%= task_path(task) %>"><%= task.status %></td>
         <td><a class="clickable" data-href="<%= task_path(task) %>"><%= task.progress %> %</td>
-        <td><a class="clickable" data-href="<%= task_path(task) %>"><%= task.assignee.full_name %></td>
+        <td><a class="clickable" data-href="<%= task_path(task) %>"><%= task.assignee.try(:full_name) %></td>
         <td><a class="clickable" data-href="<%= task_path(task) %>"><%= task.start_date.strftime("%m/%d/%Y") if task.start_date.present? %></td>
         <td><a class="clickable" data-href="<%= task_path(task) %>"><%= task.end_date.strftime("%m/%d/%Y") if task.end_date.present? %></td>
         <td>

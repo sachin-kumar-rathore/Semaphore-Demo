@@ -1,0 +1,7 @@
+plugins:
+  - table
+  - link
+  - textcolor
+visual_anchor_class: 'button-class'
+branding: false
+toolbar: "forecolor backcolor"

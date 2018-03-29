@@ -1,0 +1,39 @@
+<div class="panel">
+  <div class="panel-body">
+    <table class="table table-striped table-hover toggle-circle footable tableCustomStyle" data-toggle-column="first" data-empty="There are no records." data-show-toggle="true">
+      <thead>
+        <tr>
+          <th>SECTION</th>
+          <th>INFORMATION</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      <% for section in @section_guides %>
+          <tr>
+            <td><a class="custom-href" href="<%= edit_section_guide_path(section) %>" data-turbolinks="false"><%= section.section_name.titleize %></a></td>
+            <td><a class="custom-href" href="<%= edit_section_guide_path(section) %>" data-turbolinks="false"><%= truncate(section.section_info, length: 50, separator: ' ') %></a></td>
+            <td>
+              <div class="openLeft moreOptions dropdown">
+                <a class="" data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false" data-animation="scale-down" role="button">
+                  <i class="icon md-more-vert" aria-hidden="true"></i>
+                </a>
+                <div class="dropdown-menu" role="menu">
+                  <a class="dropdown-item" href="<%= edit_section_guide_path(section) %>" data-turbolinks="false" role="menuitem"><i class="icon md-edit" aria-hidden="true"></i> Edit</a>
+                </div>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="digg_pagination">
+  <%#= js_will_paginate @section_guides %>
+</div>
+
+<script>
+  $('.footable').footable();
+</script>

@@ -33,7 +33,8 @@ class Site < ApplicationRecord
   validates :total_square_feet, presence:true, numericality: {only_float: true}
   validates :latitude, presence:true, numericality: {only_float: true}
   validates :longitude, presence:true, numericality: {only_float: true}
-  validates :site_number, uniqueness: true, presence: true, length: { is: 6 }
+  validates :site_number, presence: true, length: { is: 6 }
+  validates_uniqueness_of :site_number, scope: :organization_id
   validates :state, length: { is: 2 }
   validates :zip_code, length: { is: 5 }
 

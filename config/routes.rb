@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :admins, controllers: { sessions: 'admins/sessions' }
-  devise_for :users, controllers: { registrations: 'users/registrations' }
+  devise_for :users, controllers: { registrations: 'users/registrations', passwords: 'users/passwords' }
 
   resources :companies do
     member do
@@ -13,7 +13,6 @@ Rails.application.routes.draw do
     end
     collection do
       get :check_companies_number_validity
-      get :export_form
       get :export
     end
     resources :contacts, controller: 'company_contacts' do
@@ -34,6 +33,8 @@ Rails.application.routes.draw do
     end
     resources :activities, controller: 'company_activities'
   end
+  get 'exports/export_companies_form', to: 'companies#export_form', as: 'export_form_companies'
+  get 'exports/export_projects_form', to: 'projects#export_form', as: 'export_form_projects'
 
   resources :organizations, only: %i[show edit update index] do
     member do
@@ -42,10 +43,13 @@ Rails.application.routes.draw do
     member do
       get :sign_in_as_user
     end
-    resources :users, controller: 'manage_users', only: %i[edit update]
+    resources :users, controller: 'manage_users', only: %i[edit update] do
+      member do
+        patch :mark_section_as_read
+        get :get_section_information
+      end
+    end
   end
-
-  resources :dashboard, only: [:index]
 
   resources :contacts do
     collection do
@@ -73,9 +77,10 @@ Rails.application.routes.draw do
       get :tasks
       get :activity
       get :emails
+      get :projects
     end
   end
-  resources :projects, only: %i[new index create edit update show] do
+  resources :projects do
     resources :tasks, controller: 'project_tasks'
     resources :notes, except: [:edit]
     resources :files, controller: 'project_files'
@@ -108,7 +113,6 @@ Rails.application.routes.draw do
 
     collection do
       get :check_projects_number_validity
-      get :export_form
       get :export
     end
 
@@ -118,7 +122,7 @@ Rails.application.routes.draw do
   end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root 'dashboard#index'
+  root 'home#index'
 
   resources :tasks do
     collection do
@@ -192,4 +196,8 @@ Rails.application.routes.draw do
   get 'organization_details' => 'organizations#edit_details'
 
   resources :project_logs, only: [:index]
+
+  resources :transactional_emails, only: [:edit, :index, :update]
+
+  resources :section_guides, only: %i[index edit update]
 end

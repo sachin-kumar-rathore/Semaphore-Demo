@@ -206,6 +206,22 @@ $(document).on("click", ".delete-option", function () {
   }
 });
 
+$(document).on("click", ".delete-record", function () {
+  $('body').removeClass('modal-open');
+  var link = $(this).data("href");
+  $.ajax({
+    url: link,
+    type: "DELETE",
+    dataType: 'script'
+  });
+});
+
+$(document).on("click", ".delete-user", function () {
+  var link = $(this).data("href");
+  $('#confirmationModal').modal('show');
+  $('.delete-record').attr('data-href', link);
+});
+
 //company_id_check
 
 $(document).on("input", "#companiesNumber", function () {

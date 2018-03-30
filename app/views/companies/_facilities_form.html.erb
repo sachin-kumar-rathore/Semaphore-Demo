@@ -63,11 +63,11 @@
         <div class="col-md-6">
           <div class="row">
             <div class="form-inline col-md-3 col-6 custom-radioBtn">
-              <%= company.radio_button :owned_or_leased, 'false', checked: true, id: 'inputRadiosUncheckedOwn' %>
+              <%= company.radio_button :owned_or_leased, 'Owned', checked: true, id: 'inputRadiosUncheckedOwn' %>
               <label for="inputRadiosUncheckedOwn">Owned</label>
             </div>
             <div class="form-inline col-md-3 col-6 custom-radioBtn">
-              <%= company.radio_button :owned_or_leased, 'true', id: 'inputRadiosCheckedLease' %>
+              <%= company.radio_button :owned_or_leased, 'Leased', id: 'inputRadiosCheckedLease' %>
               <label for="inputRadiosCheckedLease">Leased</label>
             </div>
           </div>

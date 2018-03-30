@@ -120,7 +120,7 @@ class ProjectsController < ApplicationController
                                     :site_selector, :utilize_sites,
                                     :speculative_building,
                                     :elimination_reason_id,
-                                    :located, :project_number, :retained_jobs,
+                                    :where_located, :project_number, :retained_jobs,
                                     :company_id,
                                     :primary_contact_id, :source_id,
                                     :considered_location_id, :new_company_name,

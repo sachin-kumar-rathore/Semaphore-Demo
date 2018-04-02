@@ -1,0 +1,8 @@
+<div class="custom-breadcrumbs">
+  <% if breadcrumbs.any? %>
+    <% breadcrumbs[0...-1].each do |link| %>
+      <%= link_to link.text, link.url, data: { turbolinks: false } %> /
+    <% end %>
+    <%= link_to breadcrumbs.last.text, breadcrumbs.last.link, class: 'current', data: { turbolinks: false } %>
+  <% end %>
+</div>

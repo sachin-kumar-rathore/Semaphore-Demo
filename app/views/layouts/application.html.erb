@@ -14,6 +14,7 @@
 <%= render 'layouts/navbar' %>
 <%= render 'layouts/sidenav' %>
 <div class="page">
+  <%= render 'shared/custom_breadcrumbs' unless controller_name == 'dashboard' %>
   <%= yield :navigation_bar %>
   <div class="page-content container-fluid">
     <div class="flashMessages"><%= render partial: 'shared/flash_messages' %></div>

@@ -111,19 +111,16 @@ $(document).on("click", ".spinnerButton", function () {
   $('.spinner').removeAttr('hidden');
 });
 
-$(document).on("click", ".delete-clickable", function () {
-  var result = confirm("Are you sure you want to delete this file?");
-  if (result) {
-    var link = $(this).data("href");
-    $.ajax({
-      url: link,
-      beforeSend: function (xhr) {
-        xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
-      },
-      type: "DELETE",
-      dataType: 'script'
-    });
-  }
+$(document).on("click", ".delete-record-clickable", function () {
+  var link = $(this).data("href");
+  $.ajax({
+    url: link,
+    beforeSend: function (xhr) {
+      xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+    },
+    type: "DELETE",
+    dataType: 'script'
+  });
 });
 
 $(document).on("change", "#files_filter_by_project", function () {
@@ -195,19 +192,9 @@ function reloadCompanyProjects(id) {
   });
 }
 
-$(document).on("click", ".delete-option", function () {
-  var link = $(this).data("href");
-  if(confirm("Are you sure?")){
-    $.ajax({
-      url: link,
-      type: "DELETE",
-      dataType: 'script'
-    });
-  }
-});
-
 $(document).on("click", ".delete-record", function () {
   $('body').removeClass('modal-open');
+  $('.modal-backdrop').remove();
   var link = $(this).data("href");
   $.ajax({
     url: link,
@@ -216,10 +203,15 @@ $(document).on("click", ".delete-record", function () {
   });
 });
 
-$(document).on("click", ".delete-user", function () {
+$(document).on("click", ".delete-option, .delete-clickable", function () {
   var link = $(this).data("href");
   $('#confirmationModal').modal('show');
-  $('.delete-record').attr('data-href', link);
+  $('.delete').attr('data-href', link);
+  if ($(this).hasClass('delete-option')) {
+    $('.delete').addClass('delete-record');
+  } else {
+    $('.delete').addClass('delete-record-clickable');
+  }
 });
 
 //company_id_check

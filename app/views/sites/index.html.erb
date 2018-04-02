@@ -19,7 +19,7 @@
                 <ul>
                   <li>
                     <button class="btn btn-default waves-effect waves-classic clickable pull-right" data-href="<%= new_site_path %>"
-                    id="createNewSite" type="button"><i class="icon fa fa-plus btnIcon" aria-hidden="true"></i> Add Site/Buiding
+                    id="createNewSite" type="button"><i class="icon fa fa-plus btnIcon" aria-hidden="true"></i> Add Site/Building
                   </button>
                   </li>
                   <li>
@@ -44,3 +44,4 @@
 </div>
 <div id="createOrEditSite"></div>
 <%= render :partial => 'sites/import_sites_form' %>
+<%= render partial: "/shared/confirmation_popup", locals: { record_type: 'Site/Building' } %>

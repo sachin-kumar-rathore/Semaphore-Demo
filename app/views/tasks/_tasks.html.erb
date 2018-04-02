@@ -16,15 +16,15 @@
   <tbody>
   <% for task in tasks %>
       <tr>
-        <td><a class="clickable" data-href="<%= task_path(task) %>"><%= task.name %></td>
-        <td><a class="clickable" data-href="<%= task_path(task) %>"><span class="priorityDot <%= priority_class(task.priority) %>"></span><%= task.priority %></td>
-        <td><a class="clickable" data-href="<%= task_path(task) %>"><%= task.taskable_id ? task.taskable.name : "" %></td>
-        <td><a class="clickable" data-href="<%= task_path(task) %>"><span class="nowrapCol"><%= task.description %></span></td>
-        <td><a class="clickable" data-href="<%= task_path(task) %>"><%= task.status %></td>
-        <td><a class="clickable" data-href="<%= task_path(task) %>"><%= task.progress %> %</td>
-        <td><a class="clickable" data-href="<%= task_path(task) %>"><%= task.assignee.try(:full_name) %></td>
-        <td><a class="clickable" data-href="<%= task_path(task) %>"><%= task.start_date.strftime("%m/%d/%Y") if task.start_date.present? %></td>
-        <td><a class="clickable" data-href="<%= task_path(task) %>"><%= task.end_date.strftime("%m/%d/%Y") if task.end_date.present? %></td>
+        <td><a class="clickable" data-href="<%= task_path(task) %>"><%= task.name %></a></td>
+        <td><a class="clickable" data-href="<%= task_path(task) %>"><span class="priorityDot <%= priority_class(task.priority) %>"></span><%= task.priority %></a></td>
+        <td><a class="clickable" data-href="<%= task_path(task) %>"><%= task.taskable_id ? task.taskable.name : "" %></a></td>
+        <td><a class="clickable" data-href="<%= task_path(task) %>"><span class="nowrapCol"><%= task.description %></span></a></td>
+        <td><a class="clickable" data-href="<%= task_path(task) %>"><%= task.status %></a></td>
+        <td><a class="clickable" data-href="<%= task_path(task) %>"><%= task.progress %> %</a></td>
+        <td><a class="clickable" data-href="<%= task_path(task) %>"><%= task.assignee.try(:full_name) %></a></td>
+        <td><a class="clickable" data-href="<%= task_path(task) %>"><%= task.start_date.strftime("%m/%d/%Y") if task.start_date.present? %></a></td>
+        <td><a class="clickable" data-href="<%= task_path(task) %>"><%= task.end_date.strftime("%m/%d/%Y") if task.end_date.present? %></a></td>
         <td>
           <div class="openLeft moreOptions dropdown">
             <a class="" data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false" data-animation="scale-down" role="button">

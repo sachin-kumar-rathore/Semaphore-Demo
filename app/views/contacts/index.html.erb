@@ -28,3 +28,4 @@
 
 <div id="createOrEditContact"></div>
 <%= render :partial => 'contacts/import_contacts_form' %>
+<%= render partial: "/shared/confirmation_popup", locals: { record_type: 'Contact' } %>

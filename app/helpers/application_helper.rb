@@ -44,4 +44,8 @@ module ApplicationHelper
   def load_type_with_quick_add(type, record_name)
     load_type(type) + [['[+ QUICK ADD +] New ' + record_name, 'Quick add']]
   end
+
+  def all_custom_modules
+    CustomModule.where(id: current_org.custom_module_ids).order('id asc')
+  end
 end

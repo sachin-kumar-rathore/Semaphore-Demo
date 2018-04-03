@@ -47,6 +47,17 @@
     <span class="site-menu-arrow"></span>
   </a>
 </li>
+
+<% all_custom_modules.each do |custom_module| %>
+  <li class="site-menu-item has-sub <%= active_class(custom_module.controller_name) %>">
+    <a href="/<%= custom_module.controller_name %>">
+      <i class="site-menu-icon fa fa-cube" aria-hidden="true"></i>
+      <span class="site-menu-title"><%= custom_module.name %></span>
+      <span class="site-menu-arrow"></span>
+    </a>
+  </li>
+<% end %>
+
 <li class="site-menu-item has-sub <%= active_class('reports') %>">
   <a href="<%= reports_path %>">
     <i class="site-menu-icon fa fa-file-text-o" aria-hidden="true"></i>

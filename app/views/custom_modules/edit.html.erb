@@ -1,0 +1,29 @@
+<div class="panel">
+  <div class="panel-heading">
+    <h3 class="panel-title">Edit Custom Module </h3>
+  </div>
+  <div class="panel-body">
+    <div class="col-md-12">
+      <%= form_for @custom_module do |f| %>
+        <div class="error-messages">
+          <%= render partial: 'shared/error_messages', locals: {obj: @custom_module} %>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-4">
+            <label>Name:</label><br>
+            <%= f.text_field :name, class: "form-control", required: true %>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="form-group mbFullWd col-auto">
+            <button type="submit" class="btn green-btn col-md-3">Update</button>
+          </div>
+          <div class="form-group mbFullWd col-auto">
+            <%= link_to 'Cancel', custom_modules_path, class: "btn btn-outline-primary", data: { turbolinks: false } %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

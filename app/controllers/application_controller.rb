@@ -62,4 +62,9 @@ class ApplicationController < ActionController::Base
       current_org.send(type)
     end
   end
+
+  def authenticate_custom_module
+    custom_module = CustomModule.find_by(controller_name: params[:controller])
+    redirect_to dashboard_index_path unless current_org.custom_module_ids.include?(custom_module.id)
+  end
 end

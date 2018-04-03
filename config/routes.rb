@@ -200,4 +200,13 @@ Rails.application.routes.draw do
   resources :transactional_emails, only: [:edit, :index, :update]
 
   resources :section_guides, only: %i[index edit update]
+
+  resources :custom_modules, only: %i[index edit update] do
+    member do
+      get :show_org_list
+      patch :enable_disable_custom_module
+    end
+  end
+  resources :module_one, only: %i[index]
+  resources :module_two, only: %i[index]
 end

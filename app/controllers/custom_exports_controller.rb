@@ -1,4 +1,5 @@
 class CustomExportsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_custom_export, only: %i[edit_custom_configs destroy]
 
   def save_custom_configs

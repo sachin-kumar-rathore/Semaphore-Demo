@@ -7,9 +7,9 @@
     <!--button type="button" class="navbar-toggler collapsed" data-target="#site-navbar-collapse" data-toggle="collapse">
       <i class="icon md-more" aria-hidden="true"></i>
     </button-->
-    <div class="navbar-brand navbar-brand-center site-gridmenu-toggle" data-toggle="gridmenu">
+    <div class="navbar-brand navbar-brand-center site-gridmenu-toggle">
       <div class="logo"> 
-        <%= render '/layouts/logo_svg' %>
+        <a href="<%= logo_redirect_path %>"><%= render '/layouts/logo_svg' %></a>
       </div>
     </div>
     <button type="button" class="navbar-toggler collapsed" data-target="#site-navbar-search" data-toggle="collapse">

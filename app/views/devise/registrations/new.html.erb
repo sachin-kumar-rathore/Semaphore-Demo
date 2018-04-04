@@ -1,7 +1,9 @@
 <header>
   <div class="headerSection">
     <div class="container">
-      <div class="logo"><%= render '/layouts/logo_svg' %></div>
+      <div class="logo">
+        <a href="<%= logo_redirect_path %>"><%= render '/layouts/logo_svg' %></a>
+      </div>
     </div>
   </div>
 </header>

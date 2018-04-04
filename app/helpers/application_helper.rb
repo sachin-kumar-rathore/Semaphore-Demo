@@ -48,4 +48,14 @@ module ApplicationHelper
   def all_custom_modules
     CustomModule.where(id: current_org.custom_module_ids).order('id asc')
   end
+  
+  def logo_redirect_path
+    if current_admin
+      organizations_path
+    elsif current_user
+      dashboard_index_path
+    else
+      root_path
+    end     
+  end
 end

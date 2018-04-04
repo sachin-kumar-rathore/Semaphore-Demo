@@ -1,5 +1,5 @@
 crumb :root do
-  link "Home", root_path
+  link "Home", dashboard_index_path
 end
 
 # tasks breadcrumbs
@@ -53,7 +53,7 @@ crumb :company do |company|
 end
 
 crumb :company_activities do |company|
-  link "Activities", company_activities_path(company)
+  link "Activities", edit_company_path(company) + '#activities'
   parent :company, company
 end
 

@@ -67,4 +67,8 @@ class Organization < ApplicationRecord
       config.to_s.constantize::create_configs(self.id)
     end
   end
+
+  def custom_module_status(custom_module_id)
+    custom_module_ids.include?(custom_module_id) ? 'Active' : 'Inactive'
+  end
 end

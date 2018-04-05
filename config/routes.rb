@@ -42,6 +42,7 @@ Rails.application.routes.draw do
     end
     member do
       get :sign_in_as_user
+      patch :toggle_access_custom_module
     end
     resources :users, controller: 'manage_users', only: %i[edit update] do
       member do
@@ -201,12 +202,7 @@ Rails.application.routes.draw do
 
   resources :section_guides, only: %i[index edit update]
 
-  resources :custom_modules, only: %i[index edit update] do
-    member do
-      get :show_org_list
-      patch :enable_disable_custom_module
-    end
-  end
+  resources :custom_modules, only: %i[index edit update]
   resources :module_one, only: %i[index]
   resources :module_two, only: %i[index]
 end

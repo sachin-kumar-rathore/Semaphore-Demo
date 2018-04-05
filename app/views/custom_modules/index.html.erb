@@ -11,7 +11,6 @@
       <% for custom_module in @custom_modules %>
           <tr>
             <td><a class="custom-href" href="<%= edit_custom_module_path(custom_module) %>" data-turbolinks="false"><%= custom_module.name %></a></td>
-            <!--td><a class="custom-href" href="<%= edit_custom_module_path(custom_module) %>" data-turbolinks="false"><%= custom_module.controller_name %></a></td-->
             <td>
               <div class="openLeft moreOptions dropdown">
                 <a class="" data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false" data-animation="scale-down" role="button">
@@ -19,8 +18,6 @@
                 </a>
                 <div class="dropdown-menu" role="menu">
                   <a class="dropdown-item" href="<%= edit_custom_module_path(custom_module) %>" data-turbolinks="false" role="menuitem"><i class="icon md-edit" aria-hidden="true"></i> Edit</a>
-                  <a class="dropdown-item" href="<%= show_org_list_custom_module_path(custom_module) %>" data-turbolinks="false" role="menuitem"><i class="icon fa fa-check-circle" aria-hidden="true"></i> Enable</a>
-                  <a class="dropdown-item" href="<%= show_org_list_custom_module_path(custom_module, disable: true) %>" data-turbolinks="false" role="menuitem"><i class="icon fa fa-ban" aria-hidden="true"></i> Disable</a>
                 </div>
               </div>
             </td>
@@ -32,7 +29,7 @@
 </div>
 
 <div class="digg_pagination">
-  <%#= js_will_paginate @custom_modules %>
+  <%= js_will_paginate @custom_modules %>
 </div>
 
 <script>

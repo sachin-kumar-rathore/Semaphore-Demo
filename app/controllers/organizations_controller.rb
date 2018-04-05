@@ -2,6 +2,7 @@
 class OrganizationsController < ApplicationController
   before_action :authenticate_admin!, except: %i[edit_details update]
   before_action :set_organization, except: %i[index edit_details]
+  before_action :load_custom_modules, only: %i[edit toggle_access_custom_module]
   layout :resolve_layout
 
   def index
@@ -31,6 +32,13 @@ class OrganizationsController < ApplicationController
 
   def edit_details
     @organization = current_user.organization
+  end
+
+  def toggle_access_custom_module
+    custom_module_ids = custom_module_id_array
+    if @organization.update_attributes(custom_module_ids: custom_module_ids.uniq)
+      flash.now[:success] = 'Request successfully processed'
+    end
   end
 
   private
@@ -68,5 +76,15 @@ class OrganizationsController < ApplicationController
       else
         "admin"
     end
+  end
+
+  def load_custom_modules
+    @custom_modules = CustomModule.all.order('id')
+  end
+
+  def custom_module_id_array
+    custom_module_ids = @organization.custom_module_ids
+    custom_module_ids = params[:disable] ? custom_module_ids.reject { |id| id == params[:module_id].to_i}
+                                         : custom_module_ids << params[:module_id]
   end
 end

@@ -1,0 +1,6 @@
+<% if @organization.errors.blank? %>
+  $('.flashMessages').html("<%= j render partial: 'shared/flash_messages' %>");
+  $('.customModulesList').html("<%= j render partial: 'custom_modules_list' %>"); 
+<% else %>
+  $('.error-messages').html("<%= j render partial: 'shared/error_messages', locals: {obj: @organization} %>");
+<% end %>

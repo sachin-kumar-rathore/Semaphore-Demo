@@ -43,7 +43,7 @@ class TransactionMailer < ApplicationMailer
         when 8
           [ ["_NAME_", mailerObj.full_name], ["_SIGN_IN_URL_", new_user_session_url.to_s], ["_LINK_",  accept_user_invitation_url(invitation_token: opts['token'])] ]
         
-        when 9, 11
+        when 9, 11, 12, 13
           new_user = mailerObj.organization.users.find_by_id(opts['new_user_id'])
           [ ["_NAME_", mailerObj.full_name], ["_SIGN_IN_URL_", new_user_session_url], ["_EMAIL_", mailerObj.email], ["_USERNAME_", new_user.try(:full_name)], ["_USEREMAIL_", new_user.try(:email)] ]
         

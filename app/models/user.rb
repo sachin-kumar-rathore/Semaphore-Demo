@@ -44,9 +44,9 @@ class User < ApplicationRecord
   def send_devise_notification(notification, *args)
     case notification
     when :reset_password_instructions
-      TransactionEmailWorker.perform_async(3, 'user', self.id, { token: args[0] })
+      trigger_email(3, self.id, { token: args[0] })
     when :invitation_instructions
-      send_invitation_emails(args[0])
+      send_emails_to_users(8, 9, 12, { token: args[0] })
     end
   end
 
@@ -58,21 +58,29 @@ class User < ApplicationRecord
     end
   end
 
-  def send_invitation_emails(token)
-    TransactionEmailWorker.perform_async(8, 'user', self.id, { token: token })
-    notify_admins(9)
+  def welcome_user_and_notify_admin
+    send_emails_to_users(10, 11, 13)
   end
 
-  def welcome_user_and_notify_admin
-    TransactionEmailWorker.perform_async(10, 'user', self.id)
-    notify_admins(11)
+  def send_emails_to_users(emailTypeId, admin_emailTypeId, invited_by_emailTypeID, opts={})
+    trigger_email(emailTypeId, self.id, opts)
+    notify_admins(admin_emailTypeId)
+    notify_invited_by_user(invited_by_emailTypeID) if invited_by
   end
 
   def notify_admins(emailTypeId)
-    @admin_users = organization.administrators.reject { |admin_user| admin_user.id == self.id }
+    @admin_users = organization.administrators.reject { |admin_user| admin_user.invitation_status == 'Pending'}
     @admin_users = @admin_users << invited_by if invited_by 
     @admin_users.uniq.each do |admin_user|
-      TransactionEmailWorker.perform_async(emailTypeId, 'user', admin_user.id, { new_user_id: self.id })
+      trigger_email(emailTypeId, admin_user.id, { new_user_id: self.id })
     end
+  end
+
+  def notify_invited_by_user(emailTypeId)
+    trigger_email(emailTypeId, self.invited_by.id, { new_user_id: self.id })
+  end
+
+  def trigger_email(type_id, user_id, opts={})
+    TransactionEmailWorker.perform_async(type_id, 'user', user_id, opts)
   end
 end

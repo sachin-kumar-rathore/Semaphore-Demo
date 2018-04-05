@@ -32,10 +32,10 @@ class TransactionMailer < ApplicationMailer
           [ ["_NAME_", mailerObj.full_name], ["_EMAIL_", mailerObj.email], ["_SIGN_IN_URL_", new_user_session_url], ["_ORG_", mailerObj.organization.name] ]
         
         when 3
-          [ ["_NAME_", mailerObj.full_name], ["_LINK_",  edit_user_password_url(reset_password_token: opts['token'])] ]
+          reset_password_constants(mailerObj, opts)
         
         when 4
-          [ ["_NAME_", mailerObj.full_name], ["_SIGN_IN_URL_", new_user_session_url] ]
+          password_confirmation_constants(mailerObj)
         
         when 5..7 # New Task Creation, New Task Assigned, New Tasks Re-Assigned 
           [ ["_NAME_", mailerObj.assignee.full_name], ["_LINK_", tasks_url], ["_ASSIGNER_", mailerObj.user.full_name] ]
@@ -64,4 +64,22 @@ class TransactionMailer < ApplicationMailer
     end
   end
 
+  def reset_password_constants(mailerObj, opts)
+    if mailerObj.class.to_s == 'Admin'
+      user_name = mailerObj.email
+      password_accept_link = edit_admin_password_url(reset_password_token: opts['token'])
+    else
+      user_name = mailerObj.full_name
+      password_accept_link = edit_user_password_url(reset_password_token: opts['token'])
+    end 
+   
+    [ ["_NAME_", user_name], ["_LINK_",  password_accept_link] ]
+  end
+
+  def password_confirmation_constants(mailerObj)
+    user_name = mailerObj.class.to_s == 'User' ? mailerObj.full_name : mailerObj.email
+    sign_in_link = mailerObj.class.to_s == 'User' ? new_user_session_url : new_admin_session_url
+    
+    [ ["_NAME_", user_name], ["_SIGN_IN_URL_", sign_in_link] ]
+  end
 end

@@ -4,6 +4,7 @@
       <thead>
       <tr>
         <th>NAME</th>
+        <th>ROLE</th>
         <th>SUBJECT</th>
         <th></th>
       </tr>
@@ -11,8 +12,9 @@
       <tbody>
       <% for email in @transactional_emails %>
           <tr>
-            <td><a class="custom-href" href="<%= edit_transactional_email_path(email) %>" data-turbolinks="false"><%= email.name %></td>
-            <td><a class="custom-href" href="<%= edit_transactional_email_path(email) %>" data-turbolinks="false"><%= email.subject %></td>
+            <td><a class="custom-href" href="<%= edit_transactional_email_path(email) %>" data-turbolinks="false"><%= email.name %></a></td>
+            <td><a class="custom-href" href="<%= edit_transactional_email_path(email) %>" data-turbolinks="false"><%= email.recipient_roles %></a></td>
+            <td><a class="custom-href" href="<%= edit_transactional_email_path(email) %>" data-turbolinks="false"><%= email.subject %></a></td>
             <td>
               <div class="openLeft moreOptions dropdown">
                 <a class="" data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false" data-animation="scale-down" role="button">

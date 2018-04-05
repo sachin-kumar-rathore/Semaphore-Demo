@@ -10,7 +10,15 @@ class TransactionalEmail < ApplicationRecord
       {name: 'New Task Assigned', type_id: 6},
       {name: 'New Tasks Re-Assigned', type_id: 7}
   ]
-
+  
+  EMAIL_ROLES = {
+                  org_admins: 'All Org Admins',
+                  org_users: 'All Org Users',
+                  all: 'All System Users',
+                  org: 'Org',
+                  first_org_admin: 'First Org Admin'
+                }
+  
   # == Attributes == #
   attr_accessor :send_to
 
@@ -18,7 +26,6 @@ class TransactionalEmail < ApplicationRecord
   before_create :assign_unique_type_id
 
   validates_presence_of :name, :subject, :body
-
 
   private
 

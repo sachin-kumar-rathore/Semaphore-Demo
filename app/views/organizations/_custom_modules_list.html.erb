@@ -1,29 +1,10 @@
-<table class="table table-striped table-hover toggle-circle footable tableCustomStyle" data-toggle-column="first" data-empty="There are no modules." data-show-toggle="true">
-  <thead>
-    <tr>
-      <th>Module Name</th>
-      <th>Status</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-  <% for custom_module in @custom_modules %>
-      <tr>
-        <% status = @organization.custom_module_status(custom_module.id) %>
-        <td><a class="custom-href" href="<%= edit_custom_module_path(custom_module) %>" data-turbolinks="false"><%= custom_module.name %></a></td>
-        <td><a class="custom-href" href="<%= edit_custom_module_path(custom_module) %>" data-turbolinks="false"><%= status %></a></td>
-        <td>
-          <% if status == 'Active' %>
-             <%= link_to "Disable Module", toggle_access_custom_module_organization_path(module_id: custom_module.id, disable: true), method: :patch, remote: true, class: "btn btn-orng btn-primary" %></td>
-          <% else %>
-            <%= link_to "Enable Module", toggle_access_custom_module_organization_path(module_id: custom_module.id), method: :patch, remote: true, class: "btn btn-primary green-btn" %></td>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<script>
-  $('.footable').footable();
-</script>
+<% status = @organization.custom_module_status(custom_module.id) %>
+<td><a class="custom-href" href="<%= edit_custom_module_path(custom_module) %>" data-turbolinks="false"><%= custom_module.name %></a></td>
+<td><a class="custom-href status" href="<%= edit_custom_module_path(custom_module) %>" data-turbolinks="false"><%= status %></a></td>
+<td>
+  <% if status == 'Active' %>
+     <%= link_to "Disable Module", toggle_access_custom_module_organization_path(module_id: custom_module.id, disable: true), method: :patch, remote: true, class: "btn btn-orng btn-primary disable" %></td>
+  <% else %>
+    <%= link_to "Enable Module", toggle_access_custom_module_organization_path(module_id: custom_module.id), method: :patch, remote: true, class: "btn btn-primary green-btn enable" %></td>
+  <% end %>
+</td>

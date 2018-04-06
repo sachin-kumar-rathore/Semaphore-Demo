@@ -5,6 +5,25 @@ aria-expanded="false" aria-controls="orgPayment">
 <div class="collapse" id="customModules">
   <div class="error-messages"></div>
   <div class="panel-body customModulesList">
-   <%= render 'custom_modules_list' %>
+    <table class="table table-striped table-hover toggle-circle footable tableCustomStyle" data-toggle-column="first" data-empty="There are no modules." data-show-toggle="true">
+      <thead>
+        <tr>
+          <th>Module Name</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for custom_module in @custom_modules %>
+          <tr class='customModule_<%=custom_module.id%>''>
+            <%= render partial: 'custom_modules_list', locals: {custom_module: custom_module} %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
 </div>
+
+<script>
+  $('.footable').footable();
+</script>

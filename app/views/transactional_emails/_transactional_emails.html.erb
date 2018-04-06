@@ -1,0 +1,33 @@
+<table class="table table-striped table-hover toggle-circle footable tableCustomStyle" data-toggle-column="first" data-empty="There are no transactional emails." data-show-toggle="true" id="transEmailList" >
+  <thead>
+  <tr>
+    <th>NAME</th>
+    <th>ROLE</th>
+    <th>SUBJECT</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% for email in transactional_emails %>
+      <tr>
+        <td><a class="custom-href" href="<%= edit_transactional_email_path(email) %>" data-turbolinks="false"><%= email.name %></a></td>
+        <td><a class="custom-href" href="<%= edit_transactional_email_path(email) %>" data-turbolinks="false"><%= TransactionalEmail::EMAIL_ROLES[email.recipient_roles.to_sym] %></a></td>
+        <td><a class="custom-href" href="<%= edit_transactional_email_path(email) %>" data-turbolinks="false"><%= email.subject %></a></td>
+        <td>
+          <div class="openLeft moreOptions dropdown">
+            <a class="" data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false" data-animation="scale-down" role="button">
+              <i class="icon md-more-vert" aria-hidden="true"></i>
+            </a>
+            <div class="dropdown-menu" role="menu">
+              <a class="dropdown-item" href="<%= edit_transactional_email_path(email) %>" data-turbolinks="false" role="menuitem"><i class="icon md-edit" aria-hidden="true"></i> Edit</a>
+            </div>
+          </div>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<script>
+  $('.footable').footable();
+</script>

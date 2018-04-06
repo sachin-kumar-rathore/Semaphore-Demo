@@ -19,6 +19,8 @@ class TransactionalEmail < ApplicationRecord
                   first_org_admin: 'First Org Admin'
                 }
   
+  has_many :subcategories, class_name: 'TransactionalEmail', foreign_key: :category_id
+ 
   # == Attributes == #
   attr_accessor :send_to
 

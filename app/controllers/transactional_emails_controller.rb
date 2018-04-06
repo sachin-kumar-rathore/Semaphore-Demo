@@ -6,8 +6,7 @@ class TransactionalEmailsController < ApplicationController
   # GET /transactional_emails
   # GET /transactional_emails.json
   def index
-    @transactional_emails = TransactionalEmail.all.order('type_id')
-        #.paginate(page: params[:page], per_page: 8)
+    @categories = TransactionalEmail.where(category_id: nil).order('type_id')
   end
 
 

@@ -44,7 +44,7 @@
       <!-- End Navbar Toolbar -->
     </div>
     <!-- # To Do -> expand this functionality for all the sections -->
-    <% if current_user && !(controller_name == 'company_activities') && (action_name == 'index' || action_name == 'edit_details') %>
+    <% if current_user && (controller_name != 'company_activities') && (action_name == 'index' || action_name == 'edit_details') %>
       <div class="counter-icon">
         <a class="section-info-icon" data-org-id='<%= current_org.id %>' data-user-id='<%= current_user.id %>' data-section='<%= get_current_section_name %>' onclick="getSectionInformation(true);"><i class="icon md-info"></i></a>
       </div>
@@ -81,5 +81,10 @@
       return false;
     }
   });
- 
+
+$( window ).load(function() {
+  if ($('.section-info-icon').data('user-id') && <%= !$redis.get('marked_sections').include?(get_current_section_name) %>) {
+    autoPopulateSectionInfo();
+  }
+})
 </script>

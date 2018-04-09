@@ -13,6 +13,7 @@ class User < ApplicationRecord
   has_many :custom_exports, dependent: :destroy
   before_save :minimum_one_role
   after_update :welcome_user_and_notify_admin, if: :saved_change_to_invitation_accepted_at?
+  after_update :set_cache_data, if: -> { :saved_change_to_current_sign_in_at? || :saved_change_to_mark_read_sections? }
 
   PAGINATION_VALUE = 8
   
@@ -82,5 +83,9 @@ class User < ApplicationRecord
 
   def trigger_email(type_id, user_id, opts={})
     TransactionEmailWorker.perform_async(type_id, 'user', user_id, opts)
+  end
+
+  def set_cache_data
+    $redis.set("marked_sections", mark_read_sections)
   end
 end

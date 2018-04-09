@@ -653,13 +653,11 @@ function getSectionInformation(value) {
   });
 }
 
-$(document).on('turbolinks:load', function() {
+function autoPopulateSectionInfo() {
   setTimeout(function() {
-    if ($('.section-info-icon').data('user-id')) {
-      getSectionInformation(false);
-    }
+    getSectionInformation(false);
   }, 200);
-})
+}
 
 $(document).on("change", "#dashboard_project_by_status, #dashboard_project_by_project_type", function () {
   $.ajax({

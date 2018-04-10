@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180314121944) do
+ActiveRecord::Schema.define(version: 20180406075740) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -249,6 +249,13 @@ ActiveRecord::Schema.define(version: 20180314121944) do
     t.index ["user_id"], name: "index_custom_exports_on_user_id"
   end
 
+  create_table "custom_modules", force: :cascade do |t|
+    t.string "name"
+    t.string "controller_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "documents", force: :cascade do |t|
     t.string "name"
     t.string "size"
@@ -327,6 +334,7 @@ ActiveRecord::Schema.define(version: 20180314121944) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "logo"
+    t.integer "custom_module_ids", default: [], array: true
   end
 
   create_table "project_contacts", force: :cascade do |t|
@@ -504,6 +512,8 @@ ActiveRecord::Schema.define(version: 20180314121944) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "recipient_roles"
+    t.integer "category_id"
   end
 
   create_table "user_roles", force: :cascade do |t|

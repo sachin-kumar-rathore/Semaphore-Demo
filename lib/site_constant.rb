@@ -1,4 +1,4 @@
-module Constant
+module SiteConstant
 
   SITE_LOIS_IMPORT_PARAMETERS = {
                                   site_number: 'Building ID',                 

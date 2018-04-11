@@ -1,9 +1,7 @@
 require 'searchable'
 
 class Site < ApplicationRecord
-  include SpreadSheet
-  include Searchable
-  include Auditable
+  include SpreadSheet, Searchable, Auditable, SiteConstant
 
   IMPORT_PARAMETERS = ["site_number", "name", "contact_id", "property_type", "address_line",
                       "city", "country", "state", "zip_code", "special_district", "available_acreage", "available_square_feet",
@@ -101,7 +99,7 @@ class Site < ApplicationRecord
         (2..spreadsheet.last_row).each do |index|
           site = new
           row = Hash[[header, spreadsheet.row(index)].transpose]
-          site.attributes = Hash[Constant::SITE_LOIS_IMPORT_PARAMETERS.each_pair.collect{ |key, value| [key, (key == :property_type ? row[value].to_s.downcase : row[value])] }]
+          site.attributes = Hash[SiteConstant::SITE_LOIS_IMPORT_PARAMETERS.each_pair.collect{ |key, value| [key, (key == :property_type ? row[value].to_s.downcase : row[value])] }]
             .merge(organization_id: current_org_id,business_unit_id: import_params[:business_unit_id])
           assign_contact_to_lois_site(current_org, site, import_params, row)
           site.handle_string_data_type
@@ -120,7 +118,7 @@ class Site < ApplicationRecord
   def self.assign_contact_to_lois_site(current_org, site, import_params, row)
     contact = current_org.contacts.where(email: row['Contact E-mail']).first_or_initialize
     if(import_params[:create_new_contacts] && contact.new_record?)
-      contact.attributes = Hash[Constant::SITE_CONTACT_LOIS_PARAMS.each_pair.collect{ |key, value| [key, row[value]] }]
+      contact.attributes = Hash[SiteConstant::SITE_CONTACT_LOIS_PARAMS.each_pair.collect{ |key, value| [key, row[value]] }]
       contact.city_state_zip = [row['Contact City'], row['Contact State'], row['Contact Zip']].join(' ')
       contact.save(validate: false)
     end

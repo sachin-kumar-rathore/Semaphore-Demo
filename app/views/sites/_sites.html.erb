@@ -26,6 +26,7 @@
     <% end %>
   </tbody>
 </table>
+<%= render partial: "/shared/confirmation_popup", locals: { record_type: 'Site/Building' } %>
 
 <div class="digg_pagination">
   <%= js_will_paginate sites %>

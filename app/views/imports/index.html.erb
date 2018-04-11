@@ -1,5 +1,6 @@
 <% breadcrumb :imports %>
 <div class="section-info-flash"></div>
+<div class="error-messages"></div>
 <div class="row">
   <div class="col-md-6">
     <div class="panel panel-bordered">
@@ -22,7 +23,7 @@
       <div class="panel-body">
         <button class="btn btn-primary" data-target="#siteImportFormCenter" data-toggle="modal" id="importNewSites" type="button">
 					<i class="icon fa fa-download btnIcon" aria-hidden="true"></i> Import Sites</button>
-        <button class="btn btn-primary" data-target="" data-toggle="modal" type="button">
+        <button class="btn btn-primary" data-target="#siteLoisImportFormCenter" data-toggle="modal" type="button">
 					<i class="icon fa fa-download btnIcon" aria-hidden="true"></i> LOIS Import</button>
       </div>
     </div>
@@ -30,3 +31,4 @@
 </div>
 <%= render :partial => 'sites/import_sites_form' %>
 <%= render :partial => 'contacts/import_contacts_form' %>
+<div class="loisImportForm"><%= render :partial => 'sites/lois_import_form' %></div>

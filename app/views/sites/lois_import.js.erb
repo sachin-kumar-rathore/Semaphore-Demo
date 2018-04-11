@@ -1,0 +1,5 @@
+$('#siteLoisImportFormCenter').modal('hide');
+$('.lois-file').val('');
+$('.error-messages').html("<%= j render(partial: 'import_errors') %>");
+$('.spinner').attr('hidden', 'true');
+$('.spinnerButton').html('Upload & import Sites/Buildings');

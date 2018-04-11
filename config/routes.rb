@@ -64,6 +64,7 @@ Rails.application.routes.draw do
       get :find_contact
       get :check_sites_number_validity
       post :import_sites, as: :import
+      post :lois_import
     end
   end
 

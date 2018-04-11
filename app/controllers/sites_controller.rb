@@ -53,6 +53,14 @@ class SitesController < ApplicationController
     end
     redirect_back fallback_location: sites_path
   end
+  
+  def lois_import
+    @errors = Site.lois_import(params[:lois_import], current_org.id)
+    if @errors.blank?
+      flash[:success] = 'Sites Successfully Imported.'
+      redirect_back fallback_location: sites_path
+    end
+  end
 
   def find_contact
     @contacts = current_org.contacts.where('name ilike ? or email ilike ?',

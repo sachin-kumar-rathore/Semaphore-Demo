@@ -24,16 +24,16 @@ class Site < ApplicationRecord
   has_many :projects, through: :project_sites
   belongs_to :business_unit
   # == Validations == #
-  validates_presence_of :organization_id, :name, :site_number, :property_type, :address_line, :city, :state,
-                        :zip_code, :country
+  validates_presence_of :organization_id, :name, :site_number
 
-  validates :available_acreage, presence:true, numericality: {only_float: true}
-  validates :available_square_feet, presence:true, numericality: {only_float: true}
-  validates :total_acreage, presence:true, numericality: {only_float: true}
-  validates :total_square_feet, presence:true, numericality: {only_float: true}
-  validates :latitude, presence:true, numericality: {only_float: true}
-  validates :longitude, presence:true, numericality: {only_float: true}
-  validates :site_number, presence: true, length: { is: 6 }
+  validates :available_acreage, numericality: {only_float: true}, allow_blank: true
+  validates :available_square_feet, numericality: {only_float: true}, allow_blank: true
+  validates :total_acreage, numericality: {only_float: true}, allow_blank: true
+  validates :total_square_feet, numericality: {only_float: true}, allow_blank: true
+  validates :latitude, numericality: {only_float: true}, allow_blank: true
+  validates :longitude, numericality: {only_float: true}, allow_blank: true
+  validates :site_number, presence: true, length: {minimum: 6, maximum: 24}
+  validates_format_of :site_number, with: /\A[a-zA-Z0-9]+\z/, message: " is Invalid"
   validates_uniqueness_of :site_number, scope: :organization_id
   validates :state, length: { is: 2 }
   validates :zip_code, length: { is: 5 }
@@ -82,13 +82,48 @@ class Site < ApplicationRecord
   end
   
   def handle_string_data_type
-    self.site_number = self.site_number.to_i.to_s
     self.zip_code = self.zip_code.to_i.to_s    
   end
 
   def self.assign_contact(current_org, site, import_params, email)
     contact = current_org.contacts.where(email: email).first_or_initialize
     contact.save(validate: false) if(import_params[:create_new_contacts] && contact.new_record?)
+    site[:contact_id] = contact.id
+  end
+
+  def self.lois_import(import_params, current_org_id)
+    error_messages = []
+    sites = []
+    begin
+      spreadsheet, current_org = get_spreadsheet_and_organization(import_params, current_org_id) 
+      Site.transaction do
+        header = spreadsheet.row(1)
+        (2..spreadsheet.last_row).each do |index|
+          site = new
+          row = Hash[[header, spreadsheet.row(index)].transpose]
+          site.attributes = Hash[Constant::SITE_LOIS_IMPORT_PARAMETERS.each_pair.collect{ |key, value| [key, (key == :property_type ? row[value].to_s.downcase : row[value])] }]
+            .merge(organization_id: current_org_id,business_unit_id: import_params[:business_unit_id])
+          assign_contact_to_lois_site(current_org, site, import_params, row)
+          site.handle_string_data_type
+          sites << site
+          site.add_errors(index, error_messages)
+        end
+        sites.map(&:save) if error_messages.blank?
+        raise ActiveRecord::Rollback, "Deleting Contacts........." if !error_messages.blank?
+      end
+    rescue Exception => e
+      error_messages << e
+    end
+    error_messages
+  end
+
+  def self.assign_contact_to_lois_site(current_org, site, import_params, row)
+    contact = current_org.contacts.where(email: row['Contact E-mail']).first_or_initialize
+    if(import_params[:create_new_contacts] && contact.new_record?)
+      contact.attributes = Hash[Constant::SITE_CONTACT_LOIS_PARAMS.each_pair.collect{ |key, value| [key, row[value]] }]
+      contact.city_state_zip = [row['Contact City'], row['Contact State'], row['Contact Zip']].join(' ')
+      contact.save(validate: false)
+    end
     site[:contact_id] = contact.id
   end
 end

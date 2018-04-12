@@ -5,8 +5,8 @@ class ProjectContact < ApplicationRecord
   audited associated_with: :project
 
   # === Callbacks === #
-  after_create_commit :assign_contact_emails_to_project
-  after_destroy_commit :remove_contact_emails_from_project
+  after_create_commit :assign_contact_emails_to_project, if: :contact_emails_present?
+  after_destroy_commit :remove_contact_emails_from_project, if: :contact_emails_present?
 
   # === Private Methods === #
   private
@@ -17,5 +17,9 @@ class ProjectContact < ApplicationRecord
 
   def remove_contact_emails_from_project
     ProjectEmailWorker.perform_in(1.minutes, 'remove', self.contact.id, self.project.id)
+  end
+
+  def contact_emails_present?
+    self.contact.emails.count > 0
   end
 end

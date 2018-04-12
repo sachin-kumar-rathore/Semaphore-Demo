@@ -34,7 +34,7 @@ class Site < ApplicationRecord
   validates_format_of :site_number, with: /\A[a-zA-Z0-9]+\z/, message: " is Invalid"
   validates_uniqueness_of :site_number, scope: :organization_id
   validates :state, length: { is: 2 }
-  validates :zip_code, length: { is: 5 }
+  validates :zip_code, format: { with: /\A\d{5}([\-]\d{4})?\z/ }
 
   # == Callbacks == #
   after_create :add_site_to_project, if: :has_project_id?
@@ -57,7 +57,6 @@ class Site < ApplicationRecord
           site.attributes = Hash[Site::IMPORT_PARAMETERS.each_with_index.collect{ |item,i| [item, spreadsheet.cell(index,i+1)] }]
             .merge(organization_id: current_org_id,business_unit_id: import_params[:business_unit_id])
           assign_contact(current_org, site, import_params, email)
-          site.handle_string_data_type
           sites << site
           site.add_errors(index, error_messages)
         end
@@ -77,10 +76,6 @@ class Site < ApplicationRecord
 
   def has_project_id?
     project_id.present?    
-  end
-  
-  def handle_string_data_type
-    self.zip_code = self.zip_code.to_i.to_s    
   end
 
   def self.assign_contact(current_org, site, import_params, email)
@@ -102,7 +97,6 @@ class Site < ApplicationRecord
           site.attributes = Hash[SiteConstant::SITE_LOIS_IMPORT_PARAMETERS.each_pair.collect{ |key, value| [key, (key == :property_type ? row[value].to_s.downcase : row[value])] }]
             .merge(organization_id: current_org_id,business_unit_id: import_params[:business_unit_id])
           assign_contact_to_lois_site(current_org, site, import_params, row)
-          site.handle_string_data_type
           sites << site
           site.add_errors(index, error_messages)
         end

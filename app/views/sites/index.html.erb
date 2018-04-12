@@ -1,5 +1,6 @@
 <% breadcrumb :sites %>
 <div class="section-info-flash"></div>
+<div class="error-messages"></div>
 <div class="row">
   <div class="col-xl-8">
     <div class="panel">
@@ -27,6 +28,9 @@
                     <button class="btn btn-default waves-effect waves-classic" data-target="#siteImportFormCenter" data-toggle="modal"
                       id="importNewSites" type="button">Excel Import
                     </button>
+                    <button class="btn btn-default waves-effect waves-classic" data-target="#siteLoisImportFormCenter" data-toggle="modal"
+                      id="importNewSites" type="button">LOIS Import
+                    </button>
                   </li>
                 </ul>
               </div>
@@ -45,3 +49,4 @@
 </div>
 <div id="createOrEditSite"></div>
 <%= render :partial => 'sites/import_sites_form' %>
+<%= render :partial => 'sites/lois_import_form' %>

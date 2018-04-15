@@ -24,6 +24,7 @@ class Email < ApplicationRecord
   scope :project, -> (project) { where("mailable_type = ? AND mailable_id = ?", "Project", project)}
   scope :contact, -> (contact) { where(contacts: {id: contact})}
   scope :without_activity, -> { where("mailable_type IS NULL OR mailable_type != (?)", "Activity") }
+  scope :receiver, ->(email) { where('sent_to ilike ?', "%#{email}%") }
 
   # == Instance methods == #
   def generate_email(params)

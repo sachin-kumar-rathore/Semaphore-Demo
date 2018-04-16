@@ -1,0 +1,35 @@
+<% breadcrumb :outlook_contacts %>
+<% if @outlook_login_url %>
+  <%= render 'sign_in_outlook' %>
+<% else %>
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="panel">
+        <header class="panel-heading">
+          <div class="tasksTopOptions">
+            <div class="row">
+              <div class="col">
+                <div class="tableTitle">
+                 <h2>Import Your Outlook Contacts</h2>
+              </div>
+              </div>
+              <% if @contacts.present? %>
+                <div class="col col-auto">
+                  <div class="tasksRightOptions">
+                    <ul>
+                      <li><%= link_to 'Import All', import_or_update_outlook_contacts_path, method: :post, remote: true, class: "btn btn-primary" %></li>
+                    </ul>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </header>
+        <div class="panel-body" id="outlookContactsList">
+          <%= render 'outlook_contact_list' %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+<div class="contactModals"></div>

@@ -1,0 +1,38 @@
+<div class="modal fade modalStyle" id="tempContactDetailsModal" aria-hidden="true" aria-labelledby="emailDetailsModal"
+     role="dialog" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title">CONTACT DETAILS</h4>
+      </div>
+      <div class="modal-body">
+        <hr>
+        <div class="example">
+          <div class="row">
+            <div class="col-md-12">
+              <ul class="list-group list-group-full">
+                <li class="list-group-item"><b>Name: </b> <%= temp_contact.name %></li>
+                <li class="list-group-item"><b>Email: </b> <%= temp_contact.email %></li>
+                <li class="list-group-item"><b>Phone Number 1: </b> <%= temp_contact.phone_number_1 %></li>
+                <li class="list-group-item"><b>Cell Phone: </b> <%= temp_contact.cell_phone %></li>
+                <li class="list-group-item"><b>Address 1: </b> <%= temp_contact.address_line_1 %></li>
+                <li class="list-group-item"><b>City, State & Zip Code:: </b> <%= temp_contact.city_state_zip %></li>
+                <li class="list-group-item"><b>Notes: </b> <%= temp_contact.notes %></li>
+              </ul>
+            </div>
+          </div>
+          <hr>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-6">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

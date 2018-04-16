@@ -667,3 +667,11 @@ $(document).on("change", "#dashboard_project_by_status, #dashboard_project_by_pr
     data: { status: $('#dashboard_project_by_status').val(), project_type_id: $('#dashboard_project_by_project_type').val()  }
   });
 });
+
+function reloadTempContacts() {
+  $.ajax({
+    url: '/imports/contacts/outlook',
+    type: "GET",
+    dataType: 'script'
+  });
+}

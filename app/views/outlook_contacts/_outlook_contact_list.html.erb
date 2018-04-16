@@ -1,0 +1,29 @@
+<table class="footable table tableCustomStyle table-hover removeTblSearch" data-toggle-column="first" data-empty="There are no contacts" >
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th data-breakpoints="xs sm md">EMAIL</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% for contact in @contacts %>
+      <tr>
+        <td><a class="clickable" data-href="<%= outlook_contact_path(contact) %>"><%= contact.name %></a></td>
+        <td><a class="clickable" data-href="<%= outlook_contact_path(contact) %>"><%= contact.email %></a></td>
+        <td><%= link_to (contact.exist ? 'Update Contact' : 'Import Contact'), import_or_update_outlook_contacts_path(temp_contact_id: contact.id), method: :post, remote: true, class: "btn btn-primary" %></td>
+        <td><%= link_to (contact.exist ? 'No Update' : 'No Import'), import_or_update_outlook_contacts_path(temp_contact_id: contact.id, discard: true), method: :post, remote: true, class: "btn btn-danger" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="digg_pagination">
+  <%= js_will_paginate @contacts %>
+</div>
+
+<script>
+  $('.footable').footable();
+</script>

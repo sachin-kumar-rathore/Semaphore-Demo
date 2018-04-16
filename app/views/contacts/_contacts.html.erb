@@ -30,6 +30,8 @@
   </tbody>
 </table>
 
+<%= render partial: "/shared/confirmation_popup", locals: { record_type: 'Contact' } %>
+
 <div class="digg_pagination">
   <%= js_will_paginate contacts, container: false, inner_window: "2", link_separator: "" %>
 </div>

@@ -12,8 +12,11 @@
                 <div class="col-auto"> <a data-href="<%= new_contact_path %>" class="btn btn-default clickable">
                   <i class="icon fa fa-plus btnIcon" aria-hidden="true"></i> Add Contact</a>
                 </div>
-                <div class="col-md"> <a class="btn btn-primary" data-toggle="modal" data-target="#contactImportFormCenter" id="importNewContacts">
-                  <i class="icon fa fa-download btnIcon" aria-hidden="true"></i> Import Contact</a>
+                <div class="col-auto"> <a class="btn btn-primary" data-toggle="modal" data-target="#contactImportFormCenter" id="importNewContacts">
+                  <i class="icon fa fa-download btnIcon" aria-hidden="true"></i> Import XLS</a>
+                </div>
+                <div class="col-auto"> <a class="btn btn-primary" id="importOutlookContacts" href="<%= outlook_contacts_path %>">
+                  <i class="icon fa fa-download btnIcon" aria-hidden="true"></i> Import Outlook</a>
                 </div>
               </div>
             </div>      
@@ -29,4 +32,3 @@
 
 <div id="createOrEditContact"></div>
 <%= render :partial => 'contacts/import_contacts_form' %>
-<%= render partial: "/shared/confirmation_popup", locals: { record_type: 'Contact' } %>

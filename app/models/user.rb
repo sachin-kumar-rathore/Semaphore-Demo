@@ -11,6 +11,8 @@ class User < ApplicationRecord
   has_many :user_roles, dependent: :destroy
   has_many :security_roles, through: :user_roles
   has_many :custom_exports, dependent: :destroy
+  has_many :temp_contacts, dependent: :destroy
+
   before_save :minimum_one_role
   after_update :welcome_user_and_notify_admin, if: :saved_change_to_invitation_accepted_at?
   after_update :set_cache_data, if: -> { :saved_change_to_current_sign_in_at? || :saved_change_to_mark_read_sections? }

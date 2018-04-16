@@ -35,6 +35,9 @@ Rails.application.routes.draw do
   end
   get 'exports/export_companies_form', to: 'companies#export_form', as: 'export_form_companies'
   get 'exports/export_projects_form', to: 'projects#export_form', as: 'export_form_projects'
+  get 'imports/contacts/outlook', to: 'outlook_contacts#index', as: 'outlook_contacts'
+  
+  get :authorize, to: 'auth#get_token'
 
   resources :organizations, only: %i[show edit update index] do
     member do
@@ -57,6 +60,10 @@ Rails.application.routes.draw do
       post :import_contacts, as: :import
       get :export
     end
+  end
+
+  resources :outlook_contacts, only: %[show] do
+    post :import_or_update_contact, as: :import_or_update, on: :collection
   end
 
   resources :sites do

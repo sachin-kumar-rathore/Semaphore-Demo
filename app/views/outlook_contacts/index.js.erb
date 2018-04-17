@@ -1,1 +1,4 @@
 $('#outlookContactsList').html("<%=j render partial: 'outlook_contact_list' %>");
+if ($('#tempContactsTable td').length == 1) {
+  $('.tasksRightOptions').html('');
+}

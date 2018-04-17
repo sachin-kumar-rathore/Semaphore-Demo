@@ -37,7 +37,7 @@ Rails.application.routes.draw do
   get 'exports/export_projects_form', to: 'projects#export_form', as: 'export_form_projects'
   get 'imports/contacts/outlook', to: 'outlook_contacts#index', as: 'outlook_contacts'
   
-  get :authorize, to: 'auth#get_token'
+  get :authorize_user, to: 'auth#get_token'
 
   resources :organizations, only: %i[show edit update index] do
     member do

@@ -11,7 +11,7 @@ class OutlookContactsController < ApplicationController
   end
 
   def show
-    @temp_contact = current_user.temp_contacts.find_by_id(params[:id])
+    @temp_contact = current_user.temp_contacts.find_by_email(params[:email])
   end
 
   def import_or_update_contact
@@ -22,7 +22,6 @@ class OutlookContactsController < ApplicationController
     else
       import_all_outlook_contacts
     end
-    load_temp_contacts
   end
 
   private
@@ -47,7 +46,13 @@ class OutlookContactsController < ApplicationController
   end
 
   def load_temp_contacts
-    @contacts = current_user.reload.temp_contacts.paginate(page: params[:page], per_page: Contact::PAGINATION_VALUE)
+    @contacts = current_user.temp_contacts
+    paginate_temp_contacts
+    (params[:page] = params[:page].to_i - 1) && paginate_temp_contacts if params[:page] && params[:page].to_i > 1 && @contacts.blank?
+  end
+  
+  def paginate_temp_contacts
+    @contacts = @contacts.paginate(page: params[:page], per_page: Contact::PAGINATION_VALUE)
   end
 
   def import_all_outlook_contacts

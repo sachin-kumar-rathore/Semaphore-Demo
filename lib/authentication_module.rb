@@ -18,11 +18,11 @@ module AuthenticationModule
   end
 
   def get_login_url
-    client.auth_code.authorize_url(redirect_uri: authorize_url, scope: SCOPES.join(' '))
+    client.auth_code.authorize_url(redirect_uri: authorize_user_url, scope: SCOPES.join(' '))
   end
 
   def get_token_from_code(code)
-    client.auth_code.get_token(code, redirect_uri: authorize_url, scope: SCOPES.join(' '))
+    client.auth_code.get_token(code, redirect_uri: authorize_user_url, scope: SCOPES.join(' '))
   end
 
   def get_access_token

@@ -1,4 +1,4 @@
-<table class="footable table tableCustomStyle table-hover removeTblSearch" data-toggle-column="first" data-empty="There are no contacts" >
+<table id="tempContactsTable" class="footable table tableCustomStyle table-hover removeTblSearch" data-toggle-column="first" data-empty="There are no contacts" >
   <thead>
     <tr>
       <th>Name</th>
@@ -11,10 +11,10 @@
   <tbody>
     <% for contact in @contacts %>
       <tr>
-        <td><a class="clickable" data-href="<%= outlook_contact_path(contact) %>"><%= contact.name %></a></td>
-        <td><a class="clickable" data-href="<%= outlook_contact_path(contact) %>"><%= contact.email %></a></td>
-        <td><%= link_to (contact.exist ? 'Update Contact' : 'Import Contact'), import_or_update_outlook_contacts_path(temp_contact_id: contact.id), method: :post, remote: true, class: "btn btn-primary" %></td>
-        <td><%= link_to (contact.exist ? 'No Update' : 'No Import'), import_or_update_outlook_contacts_path(temp_contact_id: contact.id, discard: true), method: :post, remote: true, class: "btn btn-danger" %></td>
+        <td><a class="clickable" data-href="<%= outlook_contact_path(contact, email: contact.email) %>"><%= contact.name %></a></td>
+        <td><a class="clickable" data-href="<%= outlook_contact_path(contact, email: contact.email) %>"><%= contact.email %></a></td>
+        <td><%= link_to (contact.exist ? 'Update Contact' : 'Import Contact'), import_or_update_outlook_contacts_path(temp_contact_id: contact.id, page: params[:page]), method: :post, remote: true, class: "btn btn-primary" %></td>
+        <td><%= link_to (contact.exist ? 'No Update' : 'No Import'), import_or_update_outlook_contacts_path(temp_contact_id: contact.id, discard: true, page: params[:page]), method: :post, remote: true, class: "btn btn-danger" %></td>
       </tr>
     <% end %>
   </tbody>

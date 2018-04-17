@@ -668,10 +668,12 @@ $(document).on("change", "#dashboard_project_by_status, #dashboard_project_by_pr
   });
 });
 
-function reloadTempContacts() {
+function reloadTempContacts(page) {
+  if(page == '') { page = 1 }
   $.ajax({
     url: '/imports/contacts/outlook',
     type: "GET",
-    dataType: 'script'
+    dataType: 'script',
+    data: { page: page }
   });
 }

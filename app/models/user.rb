@@ -15,7 +15,6 @@ class User < ApplicationRecord
 
   before_save :minimum_one_role
   after_update :welcome_user_and_notify_admin, if: :saved_change_to_invitation_accepted_at?
-  after_update :set_cache_data, if: -> { :saved_change_to_current_sign_in_at? || :saved_change_to_mark_read_sections? }
 
   PAGINATION_VALUE = 8
   
@@ -72,9 +71,8 @@ class User < ApplicationRecord
   end
 
   def notify_admins(emailTypeId)
-    @admin_users = organization.administrators.reject { |admin_user| admin_user.invitation_status == 'Pending'}
-    @admin_users = @admin_users << invited_by if invited_by 
-    @admin_users.uniq.each do |admin_user|
+    admin_users = organization.administrators.reject { |admin_user| admin_user.invitation_status == 'Pending'} 
+    admin_users.uniq.each do |admin_user|
       trigger_email(emailTypeId, admin_user.id, { new_user_id: self.id })
     end
   end
@@ -85,9 +83,5 @@ class User < ApplicationRecord
 
   def trigger_email(type_id, user_id, opts={})
     TransactionEmailWorker.perform_async(type_id, 'user', user_id, opts)
-  end
-
-  def set_cache_data
-    $redis.set("marked_sections", mark_read_sections)
   end
 end

@@ -82,9 +82,9 @@
     }
   });
 
-$( window ).load(function() {
-  if ($('.section-info-icon').data('user-id') && <%= !$redis.get('marked_sections').include?(get_current_section_name) %>) {
+$(function() {
+  if ($('.section-info-icon').data('user-id') && <%= !current_user.mark_read_sections.include?(get_current_section_name) %>) {
     autoPopulateSectionInfo();
   }
-})
+});
 </script>

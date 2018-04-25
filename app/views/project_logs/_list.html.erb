@@ -18,8 +18,8 @@
         <td><a class="custom-href" href="<%= edit_project_path(project.id) %>"><%= project.project_number %></a></td>
         <td><a class="custom-href" href="<%= edit_project_path(project.id) %>"><%= project.name %></td>
         <td><a class="custom-href" href="<%= project.company ? edit_company_path(project.company_id) : 'javascript:void(0)' %>" data-turbolinks="false"><%= project.company ? project.company.name : "No Company" %></td>
-        <td><%= audit.user.first_name %></td>
-        <td><%= audit.user.last_name %></td>
+        <td><%= audit.user.try(:first_name) %></td>
+        <td><%= audit.user.try(:last_name) %></td>
         <td><%= filter_month_date_year(audit.created_at) %></td>
         <td><%= audit_description(audit) %></td>
         <td>

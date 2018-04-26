@@ -1,0 +1,4 @@
+$('#enable2FA').modal('hide');
+$('.modal-backdrop').remove();
+$('.enable-2-FA').html("<%= j render partial: 'enable_authy' %>");
+$('#enable2FA').modal('show');

@@ -28,6 +28,7 @@ gem 'elasticsearch-model'
 # gem 'therubyracer', platforms: :ruby
 # Devise is a flexible authentication solution for Rails based on Warden
 gem 'devise'
+gem 'devise-authy'
 # 
 gem "roo", "~> 2.7.0"
 gem 'roo-xls'

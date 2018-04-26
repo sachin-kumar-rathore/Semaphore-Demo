@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
     if resource_or_scope == :admin
       new_admin_session_path
     else
-      $redis.del($redis.keys)
+      $redis.del 'outlook_token'
       root_path
     end
   end

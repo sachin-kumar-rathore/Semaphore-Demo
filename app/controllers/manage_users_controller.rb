@@ -5,7 +5,7 @@ class ManageUsersController < ApplicationController
   before_action :set_org_and_user, only: %i[edit update]
   before_action :set_user, only: %i[edit_invitation update_invitation destroy]
   respond_to :js
-  respond_to :html, only: [:index]
+  respond_to :html, only: [:index, :user_details]
 
   def index
     @users = current_org.users.includes(:user_roles)
@@ -41,11 +41,7 @@ class ManageUsersController < ApplicationController
   def edit; end
 
   def update
-    if params[:password].blank? && params[:password_confirmation].blank?
-      @user.update(update_params_without_password)
-    else
-      @user.update(update_params)
-    end
+    update_details
   end
 
   def destroy
@@ -62,6 +58,17 @@ class ManageUsersController < ApplicationController
   def get_section_information
     @message = SectionGuide.find_by_section_name(params[:section]).try(:section_info)
     @status = (params[:show_anyway] == 'true') ? false : current_user.mark_read_sections.include?(params[:section])
+  end
+
+  def user_details; end
+
+  def update_user_details
+    @user = current_user
+    if update_details
+      flash.now[:success] = 'Details successfully updated'
+    else
+      flash.now[:danger] = 'Could not update your details'
+    end
   end
 
   private
@@ -103,5 +110,13 @@ class ManageUsersController < ApplicationController
 
   def filtering_params(params)
     params.slice(:first_name, :last_name, :user_role)
+  end
+
+  def update_details
+    if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
+      @user.update(update_params_without_password)
+    else
+      @user.update(update_params)
+    end
   end
 end

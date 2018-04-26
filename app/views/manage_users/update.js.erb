@@ -1,5 +1,5 @@
 <% if @user.errors.blank? %>
-  $('#orgUsersList').html("<%= j render(partial: 'organizations/users_list', locals: { users: @organization.users }) %>")
+  $('#orgUsersList').html("<%= j render(partial: 'organizations/users_list', locals: { users: @organization.users.invitation_accepted }) %>")
   $('.orgUserAlerts').html('Successfully saved data for <%= @user.full_name %>.');
   $('.orgUserErrors').html("");
   $('.modal-backdrop').remove();

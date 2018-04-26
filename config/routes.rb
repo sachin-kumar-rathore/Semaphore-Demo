@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   devise_for :admins, controllers: { sessions: 'admins/sessions', passwords: 'admins/passwords' }
-  devise_for :users, controllers: { registrations: 'users/registrations', passwords: 'users/passwords' }
+  devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations', passwords: 'users/passwords', devise_authy: 'users/devise_authy' },
+                     path_names: {  verify_authy: "/verify-token",
+                                    enable_authy: "/enable-two-factor",
+                                    verify_authy_installation: "/verify-installation",
+                                    authy_onetouch_status: "/onetouch-status"
+                                  }
 
   resources :companies do
     member do
@@ -197,12 +202,14 @@ Rails.application.routes.draw do
     member do
       get :edit_invitation
       patch :update_invitation
+      patch :update_user_details
     end
   end
 
   resources :search, only: [:index]
 
   get 'organization_details' => 'organizations#edit_details'
+  get 'my_details', to: 'manage_users#user_details'
 
   resources :project_logs, only: [:index]
 

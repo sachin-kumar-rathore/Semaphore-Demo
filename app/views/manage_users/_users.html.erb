@@ -4,6 +4,7 @@
       <th data-breakpoints="xs sm">FIRST NAME</th>
       <th data-breakpoints="xs sm">LAST NAME</th>
       <th>EMAIL</th>
+      <th data-breakpoints="xs sm md">2 FA</th>
       <th data-breakpoints="xs sm md">STATUS</th>
       <th data-breakpoints="xs sm md">INVITATION STATUS</th>
       <th></th>
@@ -12,11 +13,12 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
-        <td><%= user.first_name %></td>
-        <td><%= user.last_name %></td>
-        <td><%= user.email %></td>
-        <td><%= user.status %></td>
-        <td><%= user.invitation_status %></td>
+        <td><a class="clickable" data-href="<%= edit_invitation_manage_user_path(user.id) %>"><%= user.first_name %></a></td>
+        <td><a class="clickable" data-href="<%= edit_invitation_manage_user_path(user.id) %>"><%= user.last_name %></a></td>
+        <td><a class="clickable" data-href="<%= edit_invitation_manage_user_path(user.id) %>"><%= user.email %></a></td>
+        <td><a class="clickable" data-href="<%= edit_invitation_manage_user_path(user.id) %>"><%= user.authy_enabled ? 'On' : 'Off' %></a></td>
+        <td><a class="clickable" data-href="<%= edit_invitation_manage_user_path(user.id) %>"><%= user.status %></a></td>
+        <td><a class="clickable" data-href="<%= edit_invitation_manage_user_path(user.id) %>"><%= user.invitation_status %></a></td>
         <td>
           <div class="openLeft moreOptions dropdown">
             <a class="" data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false" data-animation="scale-down" role="button">

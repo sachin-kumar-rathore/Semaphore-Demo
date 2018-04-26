@@ -157,6 +157,11 @@ crumb :organization_details do
   parent :settings
 end
 
+crumb :my_details do
+  link 'My Details', my_details_path
+  parent :settings
+end
+
 #outlook import
 crumb :import_contacts do
   link 'Contacts', contacts_path

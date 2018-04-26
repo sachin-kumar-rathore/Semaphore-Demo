@@ -1,0 +1,42 @@
+<header>
+  <div class="headerSection">
+    <div class="container">
+      <div class="logo">
+        <a href="<%= logo_redirect_path %>"><%= render '/layouts/logo_svg' %></a>
+      </div>
+    </div>
+  </div>
+</header>
+<section>
+  <div class="rightImgBg loginPage">
+    <div class="container">
+      <div class="formSection">
+        <div class="formTitle">
+          <h3>Verify Your Authy Token</h3>
+        </div>
+        <div class="formStyle">
+          <div class="two-factor-auth">
+            <%= verify_authy_form do %>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="token">Please enter your Authy token:</label><br>
+                  <%= text_field_tag :token, "", autofocus: true, class: "form-control outlineFld" %>
+                </div>
+              </div>
+              <div class="formBtmLink"><%= authy_request_sms_link %></div>
+              <div class="formBtnSection">
+                <%= submit_tag "Check Token" , class: "btn primaryBtn" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pageBg">
+    <div class="pageBgCircle circleOne"></div>
+    <div class="pageBgCircle circleTwo"></div>
+    <div class="pageBgCircle circleThree"></div>
+  </div>
+</section>
+

@@ -3,6 +3,7 @@
   <tr>
     <th>NAME</th>
     <th>EMAIL</th>
+    <th>2 FA</th>
     <th data-breakpoints="xs">LAST LOG IN</th>
     <th data-breakpoints="xs">OPERATIONS</th>
   </tr>
@@ -12,6 +13,7 @@
         <tr>
           <td><%= user.full_name %></td>
           <td><%= user.email %></td>
+          <td><%= user.authy_enabled ? 'On' : 'Off' %></td>
           <td><%= user.last_sign_in_at.to_formatted_s(:long_ordinal) %></td>
           <td>
             <a class="btn btn-primary green-btn" href="<%= sign_in_as_user_organization_path(@organization, user_id: user.id) %>" target="_blank" >Sign In as User</a>

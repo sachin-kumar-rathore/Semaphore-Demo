@@ -1,0 +1,7 @@
+<% if @error %>
+  $('.error-messages').html('<ul><li><%= @error %></li></ul>');
+  $('#authy-token').val('');
+<% else %>
+  $('.flashMessages').html("<%= escape_javascript render partial: 'shared/flash_messages' %>");
+  $('.enbale-disable-2FA').html("<a class='btn btn-primary' data-remote='true' href='<%= user_enable_authy_path %>'>Enable Two-Factor Authentication</a>")
+<% end %>

@@ -4,5 +4,5 @@
 <% else %>
   $('#enable2FA').modal('hide');
   $('.flashMessages').html("<%= escape_javascript render partial: 'shared/flash_messages' %>");
-  $('.enbale-disable-2FA').html("<a class='btn btn-primary' data-method='post' href='/users/disable_authy' data-remote='true'>Disable Two-Factor Authentication</a>");
+  $('.enbale-disable-2FA').html("<a class='btn btn-orng btn-primary' data-method='post' href='/users/disable_authy' data-remote='true'>Disable Two-Factor Authentication</a>");
 <% end %>

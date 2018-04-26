@@ -3,5 +3,5 @@ $('.error-messages').html('');
   $('.flashMessages').html("<%= j render partial: 'shared/flash_messages' %>");
 <% else %>
   $('.error-messages').html("<%= j render partial: 'shared/error_messages', locals: {obj: @user} %>");
-  $('.password-field').val('');
 <% end %>
+$('.password-field').val('');

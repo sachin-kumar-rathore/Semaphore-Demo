@@ -1,0 +1,7 @@
+<% if @errors.blank? %>
+  $('.sync-btn').addClass('hidden');
+  $('.flashMessages').html("<%= escape_javascript render partial: 'shared/flash_messages' %>");
+  $('#selected-files-list').html("<%= j render partial: 'selected_files' %>")
+<% else %>
+  $('.error-messages').html("<%= j render(partial: 'shared/errors') %>");
+<% end %>

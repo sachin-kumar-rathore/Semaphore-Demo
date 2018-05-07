@@ -220,4 +220,18 @@ Rails.application.routes.draw do
   resources :custom_modules, only: %i[index edit update]
   resources :module_one, only: %i[index]
   resources :module_two, only: %i[index]
+  
+  resources :dropboxes, only: %i[index destroy] do
+    collection do
+      get :connect
+      post :verify_code
+      get :content
+      post :select_files
+      post :sync_files
+    end
+    member do
+      get :download_dropbox_file
+    end
+  end
+
 end

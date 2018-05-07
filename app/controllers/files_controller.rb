@@ -15,6 +15,9 @@ class FilesController < ApplicationController
                .where('documentable_id = ? AND documentable_type = ?',
                       params[:project_id], 'Project')
     end
+
+    @files = @files.filter_by_doc_type(params[:file_type]) if params[:file_type].present?
+    
     @files = @files.paginate(page: params[:page], per_page: 10)
                    .order('updated_at DESC')
   end

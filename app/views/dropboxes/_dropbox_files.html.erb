@@ -1,0 +1,45 @@
+<table class="table tableCustomStyle tableImg table-hover removeTblSearch bodrTop footable footable-6 footable-filtering footable-filtering-right footable-paging footable-paging-center breakpoint-lg" data-toggle-column="first" data-empty="There are no files" data-show-toggle="true" >
+  <thead>
+    <tr>
+      <th>NAME</th>
+      <th></th>
+      <th>SIZE</th>
+      <th data-breakpoints="xs">UPLOADED BY</th>
+      <th data-breakpoints="xs">ASSIGNED PROJECT</th>
+      <th data-breakpoints="xs">DATE MODIFIED</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for file in @dropbox_files %>
+      <tr>
+        <td><%= file.file_name %></td>
+        <td><i class='icon <%= sync_status(file) %>'></i></td>
+        <td><%= (file.size.to_f/1000).round(1) %> kB</td>
+        <td><%= file.user.full_name %></td>
+        <td><%= file.documentable ? file.documentable.name : 'Unassigned' %></td>
+        <td><%= file.updated_at.strftime("%m/%d/%Y") if file.updated_at.present? %></td>
+        <td>
+          <div class="openLeft moreOptions dropdown">
+            <a class="" data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false" data-animation="scale-down" role="button">
+              <i class="icon md-more-vert" aria-hidden="true"></i>
+            </a>
+            <div class="dropdown-menu" role="menu">
+              <a class="dropdown-item" href="<%= download_dropbox_file_dropbox_path(file) %>" role="menuitem" target='_blank'><i class="icon fa fa-download" aria-hidden="true"></i> Download</a>
+              <a class="dropdown-item delete-clickable" data-href="<%= dropbox_path(file) %>" role="menuitem"><i class="icon fa fa-trash" aria-hidden="true"></i> Delete</a>
+            </div>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= render partial: "/shared/confirmation_popup", locals: { record_type: 'Dropbox File' } %>
+<div class="digg_pagination">
+  <%= js_will_paginate @dropbox_files %>
+</div>
+
+<script>
+  $('.footable').footable();
+</script>

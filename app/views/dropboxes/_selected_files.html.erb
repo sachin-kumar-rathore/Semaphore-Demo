@@ -1,0 +1,36 @@
+<table id="dropboxSelectedFiles" class="table tableCustomStyle tableImg table-hover removeTblSearch bodrTop footable footable-6 footable-filtering footable-filtering-right footable-paging footable-paging-center breakpoint-lg" data-toggle-column="first" data-empty="There are no files selected" data-show-toggle="true">
+  <thead>
+    <tr>
+      <th data-breakpoints="xs">File Name</th>
+      <th data-breakpoints="xs md">Assigned to Project</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody >  
+    <% if @selected_files.present? %>
+      <% for file in @selected_files.flatten %>
+        <tr>
+          <td><%= file['file_name'] %></td>
+          <td>
+            <% project = current_org.projects.where(id: file['documentable_id']).first %>
+            <%= project ? project.name : 'No Assignment' %>
+          </td>
+          <td>
+            <button class="btn btn-primary autoWd select-file-button" data-target="#syncProjectWithFile" data-toggle="modal" type="button" data-path='<%= file['file_path'] %>' data-name='<%= file['file_name'] %>' data-size='<%= file['size'] %>'>
+              Associate
+            </button>
+          </td>
+          <td><a href='<%= select_files_dropboxes_path(discard: true, file_path: file['file_path'] )%>' data-method='post' data-remote='true' class="btn btn-block btn-danger autoWd"><i class="fa fa-minus white"></a></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+<hr>
+<%= link_to 'Sync', sync_files_dropboxes_path, method: :post, remote: true, class: "btn btn-primary sync-btn #{@selected_files.present? ? '' : 'hidden' }" %>
+<%= render 'show_projects_list' %>
+
+<script>
+  $('.footable').footable();
+</script>

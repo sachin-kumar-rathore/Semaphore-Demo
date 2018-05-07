@@ -1,0 +1,12 @@
+<div class="panel panel-body">
+  <% if @errors %>
+    <div id="error_explanation">
+      <%= pluralize(@errors.count, 'error') %> prohibited data from being saved:
+      <ul>
+        <% @errors.each do |message| %>
+            <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+</div>

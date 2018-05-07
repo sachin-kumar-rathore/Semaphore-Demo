@@ -1,0 +1,37 @@
+<table class="table tableCustomStyle tableImg table-hover removeTblSearch bodrTop footable footable-6 footable-filtering footable-filtering-right footable-paging footable-paging-center breakpoint-lg" data-toggle-column="first" data-empty="Your dropbox is empty" data-show-toggle="true">
+  <thead>
+    <tr>
+      <th data-breakpoints="xs">File/Folder Name</th>
+      <th></th>
+      <th data-breakpoints="xs md">Size</th>
+      <th data-breakpoints="xs md">Select</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @results['Folder'].present? %>
+      <% for result in @results['Folder'] %>
+        <tr>
+          <td><a class="custom-href" href="<%= content_dropboxes_path(folder_path: result.path_lower) %>" data-remote="true"><i class="material-icons icon themeColor" style="font-size: 16px;">&#xe2c7;</i> <%= result.name %></a></td>
+          <td></td>
+          <td></td>
+        </tr>
+      <% end %>
+    <% end %>
+    <% if @results['File'].present? %>
+      <% for result in @results['File'] %>
+        <tr class='<%= dropbox_file_row_class(result) %>' id="dropbox_file_row">
+          <td><i class="icon fa fa-file themeColor" aria-hidden="true" style="font-size: 14px;"></i> <%= result.name %></td>
+          <td><i class='icon <%= synced_file?(result.path_lower) %> themeColor' style="font-size: 14px;"></i></td>
+          <td><%= (result.size.to_f/1000).round(1) %> kB</td>
+          <td>
+            <a href='<%= select_files_dropboxes_path(file_path: result.path_lower, file_name: result.name, file_size: result.size)%>' data-method='post' data-remote='true' class="btn btn-primary autoWd"><i class="fa fa-plus white"></a>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<script>
+  $('.footable').footable();
+</script>

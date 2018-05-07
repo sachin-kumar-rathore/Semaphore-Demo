@@ -46,7 +46,7 @@ module ApplicationHelper
   end
 
   def all_custom_modules
-    CustomModule.where(id: current_org.custom_module_ids).order('id asc')
+    CustomModule.where(id: current_org.custom_module_ids, side_bar_enabled: true).order('id asc')
   end
   
   def logo_redirect_path
@@ -57,5 +57,9 @@ module ApplicationHelper
     else
       root_path
     end     
+  end
+
+  def enabled_custom_module? controller_name
+    current_org.custom_module_ids.include?(CustomModule.find_by_controller_name(controller_name).try(:id))
   end
 end

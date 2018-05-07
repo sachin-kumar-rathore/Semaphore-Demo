@@ -92,3 +92,4 @@ gem 'tinymce-rails', '~> 4.7', '>= 4.7.2'
 gem 'gretel'  # for breadcrumbs
 gem 'oauth2'
 gem 'microsoft_graph'
+gem 'dropbox_api'

@@ -22,7 +22,7 @@ class CustomModulesController < ApplicationController
   private
   
   def custom_module_params
-    params.require(:custom_module).permit(:name)
+    params.require(:custom_module).permit(:name, :side_bar_enabled)
   end
 
   def set_custom_module

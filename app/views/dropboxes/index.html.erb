@@ -1,0 +1,50 @@
+<% breadcrumb :dropbox %>
+<% if current_user.dropbox_token.present? %>
+  <div class="error-messages"></div>
+  <div class="panel">
+    <header class="panel-heading">
+      <div class="tasksTopOptions">
+        <div class="row">
+          <div class="col">
+            <div class="tableTitle">
+             <h2>Dropbox Files</h2>
+          </div>
+          </div>
+          <div class="col col-auto">
+            <div class="tasksRightOptions">
+              <ul>
+                <li><a href="<%= content_dropboxes_path %>" class="btn btn-default" data-turbolinks="false"><i class="icon fa fa-plus btnIcon" aria-hidden="true"></i> Sync Files</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="panel-body dropboxFileList">
+      <%= render 'dropbox_files' %>
+    </div>
+  </div>
+<% else %>
+<div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-bordered">
+      <div class="panel-heading tableTitle">
+        <h2 class="panel-title">Connect with Dropbox</h2>
+      </div>
+      <div class="panel-body">
+        <% if current_user.dropbox_token.present? %>
+          Connected
+        <% else %>
+          <a  class="btn btn-primary" href="<%= connect_dropboxes_path %>" target="_blank">
+            Connect
+          </a>
+          <button class="btn btn-primary" data-target="#DropboxFormCenter" data-toggle="modal" type="button">
+            Enter Code
+          </button>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+<%= render :partial => 'dropbox_form' %>

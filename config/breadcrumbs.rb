@@ -172,3 +172,12 @@ crumb :outlook_contacts do
   link 'Outlook', outlook_contacts_path
   parent :import_contacts
 end
+
+crumb :dropbox do
+  link 'Dropbox', dropboxes_path
+end
+
+crumb :dropbox_content do
+  link 'Content', dropboxes_path
+  parent :dropbox
+end

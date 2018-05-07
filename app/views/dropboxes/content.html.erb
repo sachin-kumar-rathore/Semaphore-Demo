@@ -1,0 +1,24 @@
+<% breadcrumb :dropbox_content %>
+<div class="error-messages"></div>
+<div class="row">
+  <div class="col-md-6">
+    <div class="panel">
+      <div class="panel-heading">
+        <h2 class="panel-title"><%= link_to 'Dropbox', content_dropboxes_path, remote: true, class: 'custom-href' %></h2>
+      </div>
+      <div class="panel-body folder-entries">
+        <%= render 'content_list' %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="panel">
+      <div class="panel-heading">
+        <h2 class="panel-title">Selected Files</h2>
+      </div>
+      <div class="panel-body" id="selected-files-list">
+        <%= render 'selected_files' %>       
+      </div>
+    </div>
+  </div>
+</div>

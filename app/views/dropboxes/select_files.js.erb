@@ -1,0 +1,13 @@
+$('.modal-backdrop').remove();
+$('#selected-files-list').html("<%= j render partial: 'selected_files' %>")
+
+$('.sync-btn').removeClass('hidden');
+if ($('#dropboxSelectedFiles td').length == 1) {
+  $('.sync-btn').addClass('hidden');
+}
+
+<% if params[:discard] %>
+   $('.file'+"<%=params[:file_path].gsub('/', '_').gsub(/[. ]/, '_')%>").removeClass('hidden')
+<% else %>
+  $('.file'+"<%=params[:file_path].gsub('/', '_').gsub(/[. ]/, '_')%>").addClass('hidden')
+<% end %>

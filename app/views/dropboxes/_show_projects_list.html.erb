@@ -1,0 +1,34 @@
+<div class="modal fade modalStyle" id="syncProjectWithFile" aria-hidden="true" aria-labelledby="assignProjectToFile"
+     role="dialog" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= form_tag select_files_dropboxes_path, method: :post, remote: true do |form| %>
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+          <h6 class="modal-title" id="addUserModalLabel"><%= "ADD PROJECT" %></h6>
+        </div>
+        <div class="modal-body">
+          <div class="example-wrap formStyle">
+            <div class="row">
+              <div class="form-group col-md-12">
+                <label>Assign To:</label>
+                <%= select_tag "project_id", options_for_select(current_org.projects.all.map{ |project| [project.name, project.id] }), class: 'form-control custom-select', data:{"live-search":true}, include_blank: 'Please Select' %>
+              </div>
+              <%= hidden_field_tag 'file_path', '', id: 'sync-file-path' %>
+              <%= hidden_field_tag 'file_name', '', id: 'sync-file-name' %>
+              <%= hidden_field_tag 'file_size', '', id: 'sync-file-size' %>
+            </div>
+          </div>
+          <div class="modalFooterBtns">
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary">Assign</button>
+              <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

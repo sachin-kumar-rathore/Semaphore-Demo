@@ -13,11 +13,19 @@
             <div class="col">
               <div class="tasksSelectFilter">
                 <%= select_tag :files_filter_by_project, options_for_select(load_data_with_id(current_org.projects)), include_blank: 'All Files' , class: 'form-control custom-select' %>
+                <div class="align-right"> - Filter by Project</div>
+              </div>
+              <div class="tasksSelectFilter">
+                <%= select_tag :files_filter_by_file_type, options_for_select(['EDLT', 'Dropbox']), include_blank: 'All Files' , class: 'form-control custom-select' %>
+                <div class="align-right"> - Filter by Type</div>
               </div>
             </div>
             <div class="col col-auto">
               <div class="tasksRightOptions">
                 <ul>
+                  <% if enabled_custom_module?('dropboxes') %>
+                    <li><a class="btn btn-primary" href="<%= dropboxes_path %>">Dropbox</a></li>
+                  <% end %>
                   <li><a class="btn btn-default clickable" data-href="<%= new_file_path %>"><i class="icon fa fa-plus btnIcon" aria-hidden="true"></i> Add New File</a></li>
                 </ul>
               </div>
@@ -34,4 +42,3 @@
 </div>
 
 <div id="createOrEditFile"></div>
-<%= render partial: "/shared/confirmation_popup", locals: { record_type: 'File' } %>

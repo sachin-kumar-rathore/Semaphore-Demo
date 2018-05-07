@@ -4,6 +4,7 @@
       <thead>
         <tr>
           <th>Module Name</th>
+          <th>Side Bar Enabled</th>
           <th></th>
         </tr>
       </thead>
@@ -11,6 +12,7 @@
       <% for custom_module in @custom_modules %>
           <tr>
             <td><a class="custom-href" href="<%= edit_custom_module_path(custom_module) %>" data-turbolinks="false"><%= custom_module.name %></a></td>
+            <td><a class="custom-href" href="<%= edit_custom_module_path(custom_module) %>" data-turbolinks="false"><%= custom_module.side_bar_enabled ? 'Yes' : 'No' %></a></td>
             <td>
               <div class="openLeft moreOptions dropdown">
                 <a class="" data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false" data-animation="scale-down" role="button">

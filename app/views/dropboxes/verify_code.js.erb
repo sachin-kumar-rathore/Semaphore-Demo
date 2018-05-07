@@ -1,0 +1,7 @@
+<% if @auth.nil? %>
+	$('.error-messages').html("<%= j render(partial: 'shared/error_messages', locals: { obj: current_user }) %>");
+  $('.dropbox-code').val('');
+<% else %>
+  window.location.reload(true);
+  $('.flashMessages').html("<%= escape_javascript render partial: 'shared/flash_messages' %>");
+<% end %>

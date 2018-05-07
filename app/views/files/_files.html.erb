@@ -2,6 +2,7 @@
   <thead>
     <tr>
       <th>NAME</th>
+      <th></th>
       <th>SIZE</th>
       <th data-breakpoints="xs">UPLOADED BY</th>
       <th data-breakpoints="xs">ASSIGNED PROJECT</th>
@@ -12,7 +13,8 @@
   <tbody>
     <% for file in files %>
       <tr>
-        <td><%= File.basename(file.name.to_s) %></td>
+        <td><i class='icon themeColor <%= file.file_type == 'EDLT' ? "fa fa-file" : "fa fa-dropbox" %>'></i> <%= file.file_type == 'EDLT' ? File.basename(file.name.to_s) : file.file_name %></td>
+        <td><i class='icon <%= sync_status(file) %>'></i></td>
         <td><%= (file.size.to_f/1000).round(1) %> kB </td>
         <td><%= file.user.full_name %></td>
         <% if file.documentable_id? %>
@@ -27,9 +29,11 @@
               <i class="icon md-more-vert" aria-hidden="true"></i>
             </a>
             <div class="dropdown-menu" role="menu">
-              <a class="dropdown-item" href="<%= file.name %>" role="menuitem"><i class="icon fa fa-download" aria-hidden="true"></i> Download</a>
+              <a class="dropdown-item" href="<%= file.file_type == 'EDLT' ? file.name : download_dropbox_file_dropbox_path(file) %>" role="menuitem" target="_blank"><i class="icon fa fa-download" aria-hidden="true"></i> Download</a>
               <a class="dropdown-item delete-clickable" data-href="<%= file_path(file) %>" role="menuitem"><i class="icon fa fa-trash" aria-hidden="true"></i> Delete</a>
-              <a class="dropdown-item clickable" data-href="<%= edit_file_path(file) %>" role="menuitem"><i class="icon fa fa-pencil" aria-hidden="true"></i> Edit</a>
+              <% if file.file_type == 'EDLT' %>
+                <a class="dropdown-item clickable" data-href="<%= edit_file_path(file) %>" role="menuitem"><i class="icon fa fa-pencil" aria-hidden="true"></i> Edit</a>
+              <% end %>
               <% if !file.documentable_id? %>
                 <a class="dropdown-item clickable" data-href="<%= show_projects_file_path(file) %>" role="menuitem"><i class="icon fa fa-plus" aria-hidden="true"></i> Assign Project</a>
               <%end%>
@@ -40,6 +44,7 @@
     <% end %>
   </tbody>
 </table>
+<%= render partial: "/shared/confirmation_popup", locals: { record_type: 'File' } %>
 
 <div class="digg_pagination">
   <%= js_will_paginate files %>

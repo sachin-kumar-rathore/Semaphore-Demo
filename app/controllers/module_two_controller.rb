@@ -1,4 +1,4 @@
-class ModuleTwoController < ApplicationController
+class ModuleTwoController < ManageCustomModulesController
   before_action :authenticate_user!
   before_action :authenticate_custom_module
   

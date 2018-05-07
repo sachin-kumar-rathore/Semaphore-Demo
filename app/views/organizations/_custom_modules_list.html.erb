@@ -1,5 +1,6 @@
 <% status = @organization.custom_module_status(custom_module.id) %>
 <td><a class="custom-href" href="<%= edit_custom_module_path(custom_module) %>" data-turbolinks="false"><%= custom_module.name %></a></td>
+<td><a class="custom-href" href="<%= edit_custom_module_path(custom_module) %>" data-turbolinks="false"><%= custom_module.side_bar_enabled ? 'Yes' : 'No' %></a></td>
 <td><a class="custom-href status" href="<%= edit_custom_module_path(custom_module) %>" data-turbolinks="false"><%= status %></a></td>
 <td>
   <% if status == 'Active' %>

@@ -133,6 +133,16 @@ $(document).on("change", "#files_filter_by_project", function () {
   });
 });
 
+$(document).on("change", "#files_filter_by_file_type", function () {
+  var file_type = $('#files_filter_by_file_type').val();
+  $.ajax({
+    url: "/files",
+    type: "GET",
+    data: {file_type: file_type},
+    dataType: 'script'
+  });
+});
+
 //project_files
 
 function reloadProjectFiles(id) {
@@ -675,5 +685,19 @@ function reloadTempContacts(page) {
     type: "GET",
     dataType: 'script',
     data: { page: page }
+  });
+}
+
+$(document). on('click', '.select-file-button', function() {
+  $('#sync-file-path').val($(this).data('path'));
+  $('#sync-file-name').val($(this).data('name'));
+  $('#sync-file-size').val($(this).data('size'));
+});
+
+function reloadDropboxFiles() {
+  $.ajax({
+    url: '/dropboxes',
+    type: "GET",
+    dataType: 'script'
   });
 }

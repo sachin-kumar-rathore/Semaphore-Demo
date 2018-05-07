@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
     if resource_or_scope == :admin
       new_admin_session_path
     else
-      $redis.del 'outlook_token'
+      $redis.del($redis.keys) if $redis.keys
       root_path
     end
   end
@@ -61,14 +61,6 @@ class ApplicationController < ActionController::Base
       current_org.send(type).where.not(id: params[:id])
     else
       current_org.send(type)
-    end
-  end
-
-  def authenticate_custom_module
-    custom_module = CustomModule.find_by(controller_name: params[:controller])
-    unless current_org.custom_module_ids.include?(custom_module.id)
-      redirect_to dashboard_index_path
-      flash[:danger] = "You don't have access to requested page"
     end
   end
 end

@@ -28,7 +28,7 @@ module DropboxModule
   end
 
   def save_records
-    selected_files,errors = JSON.parse($redis.get("selected_dropbox_files")), []
+    selected_files,errors = parse_selected_files, []
     org_dropbox_files = dropbox_files
     selected_files.each_with_index do |record, index|
       file = org_dropbox_files.where(file_path: record['file_path']).first
@@ -44,7 +44,7 @@ module DropboxModule
 
   def select_dropbox_file
     @selected_files = []
-    @selected_files << JSON.parse($redis.get("selected_dropbox_files")) if $redis.get('selected_dropbox_files')
+    @selected_files << parse_selected_files
     @selected_files = @selected_files.flatten.reject {|file| file['file_path'] == params[:file_path]}
     @selected_files << { file_path: params[:file_path], file_name: params[:file_name], documentable_id: params[:project_id], size: params[:file_size] }.stringify_keys unless params[:discard]
     $redis.set("selected_dropbox_files", @selected_files.flatten.to_json)
@@ -56,5 +56,9 @@ module DropboxModule
 
   def file_params(params_hash)
     params_hash.merge(user_id: current_user.id, documentable_type: 'Project', file_type: 'Dropbox')
+  end
+
+  def parse_selected_files
+    JSON.parse($redis.get("selected_dropbox_files")) if $redis.get('selected_dropbox_files')
   end
 end

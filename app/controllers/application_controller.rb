@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
     if resource_or_scope == :admin
       new_admin_session_path
     else
-      $redis.del($redis.keys) if $redis.keys
+      $redis.del($redis.keys) if $redis.keys.present?
       root_path
     end
   end

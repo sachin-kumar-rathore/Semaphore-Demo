@@ -701,3 +701,13 @@ function reloadDropboxFiles() {
     dataType: 'script'
   });
 }
+
+function checkboxValidation() {
+  var requiredCheckboxes = $(':checkbox[required]');
+
+  if(requiredCheckboxes.is(':checked')) {
+    requiredCheckboxes.removeAttr('required');
+  } else {
+    requiredCheckboxes.attr('required', 'required');
+  }
+}

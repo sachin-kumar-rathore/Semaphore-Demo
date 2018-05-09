@@ -1,0 +1,4 @@
+$('.modal-backdrop').remove();
+//$('#packageFormCenter').modal("hide");
+$('#packageList').html("<%= j render partial: 'list' %>");
+$('.flashMessages').html("<%= j render partial: 'shared/flash_messages' %>");

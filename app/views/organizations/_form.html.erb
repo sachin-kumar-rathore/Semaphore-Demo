@@ -10,34 +10,38 @@ aria-expanded="false" aria-controls="editOrgInfo">
     <div class="col-md-12">
       <%= form_for @organization, remote: true do |f| %>
         <div class="row">
-          <div class="form-group form-material col-md-3">
+          <div class="form-group col-md-3">
             <%= f.label :name %><br>
             <%= f.text_field :name, class: "form-control", required: true %>
           </div>
-          <div class="form-group form-material col-md-3">
+          <div class="form-group col-md-3">
             <%= f.label :url %><br>
             <%= f.url_field :url, class: "form-control", disabled: true %>
           </div>
+          <div class="form-group col-md-3">
+            <%= f.label :package %><br>
+            <%= f.select :package_id, options_for_select(load_data_with_id(Package), f.object.package.try(:id)), {}, class: 'custom-select form-control' %>
+          </div>
         </div>
         <div class="row">
-          <div class="form-group form-material col-md-3">
+          <div class="form-group col-md-3">
             <%= f.label :primary_contact_first_name %><br>
             <%= f.text_field :primary_contact_first_name, class: "form-control", required: true %>
           </div>
-          <div class="form-group form-material col-md-3">
+          <div class="form-group col-md-3">
             <%= f.label :primary_contact_last_name %><br>
             <%= f.text_field :primary_contact_last_name, class: "form-control", required: true %>
           </div>
-          <div class="form-group form-material col-md-3">
+          <div class="form-group col-md-3">
             <%= f.label :primary_contact_phone %><br>
             <%= f.text_field :primary_contact_phone, class: "form-control", required: true %>
           </div>
-          <div class="form-group form-material col-md-3">
+          <div class="form-group col-md-3">
             <%= f.label :primary_contact_email %><br>
             <%= f.email_field :primary_contact_email, class: "form-control", required: true %>
           </div>
         </div>
-        <div class="form-group form-material">
+        <div class="form-group">
           <button type="submit" class="btn green-btn col-md-3">Save</button>
         </div>
       <% end %>

@@ -4,8 +4,8 @@ class CustomModulesController < ApplicationController
   before_action :set_custom_module, except: %[index]
 
   def index
-    @custom_modules = CustomModule.all.order('id ASC')
-                                  .paginate(page: params[:page], per_page: 8)
+    @custom_modules = custom_modules.order('id ASC')
+                                    .paginate(page: params[:page], per_page: 8)
   end
 
   def edit; end
@@ -22,10 +22,14 @@ class CustomModulesController < ApplicationController
   private
   
   def custom_module_params
-    params.require(:custom_module).permit(:name, :side_bar_enabled)
+    params.require(:general_module).permit(:name, :side_bar_enabled)
   end
 
   def set_custom_module
-    @custom_module = CustomModule.find_by_id(params[:id])
+    @custom_module = custom_modules.find_by_id(params[:id])
+  end
+
+  def custom_modules
+    GeneralModule.custom_modules
   end
 end

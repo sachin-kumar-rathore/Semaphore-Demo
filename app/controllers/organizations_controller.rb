@@ -18,6 +18,7 @@ class OrganizationsController < ApplicationController
 
   def update
     @organization.update(organization_params)
+    @organization.organization_package.update(organization_package_params)
   end
 
   def sign_in_as_admin
@@ -35,7 +36,7 @@ class OrganizationsController < ApplicationController
   end
 
   def toggle_access_custom_module
-    @custom_module = CustomModule.find_by(id: params[:module_id])
+    @custom_module = GeneralModule.custom_modules.find_by(id: params[:module_id])
     custom_module_ids = custom_module_id_array
     if @organization.update_attributes(custom_module_ids: custom_module_ids.uniq)
       flash.now[:success] = 'Request successfully processed'
@@ -57,6 +58,10 @@ class OrganizationsController < ApplicationController
                                          :primary_contact_last_name,
                                          :primary_contact_phone,
                                          :primary_contact_email)
+  end
+  
+  def organization_package_params
+    params.require(:organization).permit(:package_id)
   end
 
   def bypass_sign_in_with_user
@@ -80,7 +85,7 @@ class OrganizationsController < ApplicationController
   end
 
   def load_custom_modules
-    @custom_modules = CustomModule.all.order('id')
+    @custom_modules = GeneralModule.custom_modules.order('id')
   end
 
   def custom_module_id_array

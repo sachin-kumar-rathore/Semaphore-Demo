@@ -1,0 +1,8 @@
+<% if @package.errors.blank? %>
+  $('.modal-backdrop').remove();
+  $('#packageFormCenter').modal("hide");
+  $('.flashMessages').html("<%= j render partial: 'shared/flash_messages' %>");
+  $('#packageList').html("<%= j render partial: 'list' %>");
+<% else %>
+  $('#packageFormCenter .error-messages').html("<%= j render partial: 'shared/error_messages', locals: {obj: @package} %>");
+<% end %>

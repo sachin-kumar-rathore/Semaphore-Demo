@@ -234,4 +234,5 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :packages, except: %i[edit update]
 end

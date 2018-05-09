@@ -45,8 +45,8 @@ module ApplicationHelper
     load_type(type) + [['[+ QUICK ADD +] New ' + record_name, 'Quick add']]
   end
 
-  def all_custom_modules
-    CustomModule.where(id: current_org.custom_module_ids, side_bar_enabled: true).order('id asc')
+  def enabled_custom_modules_list
+    GeneralModule.custom_modules.where(id: current_org.custom_module_ids, side_bar_enabled: true).order('id asc')
   end
   
   def logo_redirect_path
@@ -60,6 +60,10 @@ module ApplicationHelper
   end
 
   def enabled_custom_module? controller_name
-    current_org.custom_module_ids.include?(CustomModule.find_by_controller_name(controller_name).try(:id))
+    current_org.custom_module_ids.include?(GeneralModule.custom_modules.find_by_controller_name(controller_name).try(:id))
+  end
+
+  def module_icon(controller_name)
+    Constant::MODULE_ICONS[controller_name.to_sym].split(', ')
   end
 end

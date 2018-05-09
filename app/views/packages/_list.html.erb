@@ -1,0 +1,33 @@
+<table class="table footable table tableCustomStyle table-hover removeTblSearch bodrTop" id="userLists" data-empty="There are no packages" data-show-toggle="true">
+  <thead>
+    <tr>
+      <th>Package</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @packages.each do |package| %>
+      <tr>
+        <td><a class="clickable" data-href="<%= package_path(package) %>"><%= package.name %></a></td>
+        <td>
+          <div class="openLeft moreOptions dropdown">
+            <a class="" data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false" data-animation="scale-down" role="button">
+              <i class="icon md-more-vert" aria-hidden="true"></i>
+            </a>
+            <div class="dropdown-menu" role="menu">
+              <a class="dropdown-item clickable" data-href='<%= package_path(package) %>' role="menuitem"><i class="icon fa fa-eye" aria-hidden="true"></i> View</a>
+              <a class="dropdown-item delete-option<%#= delete_option_class(package) %>" <%#= delete_method_data_string(security_role) %> data-href= ' <%= package_path(package) %>' role="menuitem"><i class="icon md-delete" aria-hidden="true"></i> Delete</a>
+            </div>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<div id="packageDetailModal"></div>
+<%= render partial: "/shared/confirmation_popup", locals: { record_type: 'Package' } %>
+<%#= render partial: "alert_popup" %>
+
+<script>
+  $('.footable').footable();
+</script>

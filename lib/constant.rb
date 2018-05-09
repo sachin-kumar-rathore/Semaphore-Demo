@@ -106,4 +106,43 @@ module Constant
                       contact_category: 'Categories',
                       linkedin_url: 'Linkedin Url'
                     }
+
+  GENERAL_MODULES = [
+                      { name: 'Home', controller_name: 'dashboard' },
+                      { name: 'Tasks', controller_name: 'tasks' },
+                      { name: 'Mailbox', controller_name: 'emails' },
+                      { name: 'Activities', controller_name: 'activities' },
+                      { name: 'Contacts', controller_name: 'contacts' },
+                      { name: 'Projects', controller_name: 'projects' },
+                      { name: 'Companies', controller_name: 'companies' },
+                      { name: 'Sites & Buildings', controller_name: 'sites' },
+                      { name: 'Reports', controller_name: 'reports' },
+                      { name: 'Files', controller_name: 'files' },
+                      { name: 'Data Imports', controller_name: 'imports' },
+                      { name: 'Data Exports', controller_name: 'exports' }
+                    ]
+
+  CUSTOM_MODULES = [
+                     { name: 'Module 1', controller_name: 'module_one' },
+                     { name: 'Module 2', controller_name: 'module_two' },
+                     { name: 'Dropbox', controller_name: 'dropboxes', side_bar_enabled: false }
+                   ]
+
+  MODULE_ICONS = {
+                   dashboard: 'fa fa-home',
+                   tasks: 'fa fa-tasks',
+                   emails: 'fa fa-envelope',
+                   activities: 'fa fa-handshake-o',
+                   contacts: 'fa fa-address-book-o',
+                   projects: 'fa fa-gears',
+                   companies: 'fa fa-building-o',
+                   sites: 'material-icons, domain',
+                   reports: 'fa fa-file-text-o',
+                   files: 'fa fa-files-o',
+                   imports: 'fa fa-file-excel-o',
+                   exports: 'fa fa-file-excel-o',
+                   module_one: 'fa fa-cube',
+                   module_two: 'fa fa-cube',
+                   dropboxes: 'fa fa-dropbox'
+                 }
 end

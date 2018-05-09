@@ -9,10 +9,11 @@ class Organization < ApplicationRecord
 
   SECURITY_ROLES_HASH = { boards: "Board", contact_or_visit_review_users: "Contact/Visit Review", project_managers: "Project Manager", read_only_users: "Read Only User", administrators: "Administrator"}
   
+  attr_accessor :package_id
+
   mount_uploader :logo, FileUploader
   
   has_many :users, dependent: :destroy
-
   has_many :contacts, dependent: :destroy
   has_many :sites
   has_many :projects
@@ -33,11 +34,13 @@ class Organization < ApplicationRecord
   has_many :considered_locations, dependent: :destroy
   has_many :security_roles, dependent: :destroy
   has_many :activities, dependent: :destroy
+  has_one :organization_package, dependent: :destroy
+  has_one :package, through: :organization_package
     
   validates_presence_of :name, :primary_contact_first_name, :primary_contact_phone, :primary_contact_email
   validates_format_of :primary_contact_email, with: Devise::email_regexp
 
-  after_create :create_admin_role, :create_config, :create_config_without_status
+  after_create :create_admin_role, :create_config, :create_config_without_status, :assign_default_package
 
   SECURITY_ROLES_HASH.each do |arg, val|
     define_method(arg) do
@@ -70,5 +73,13 @@ class Organization < ApplicationRecord
 
   def custom_module_status(custom_module_id)
     custom_module_ids.include?(custom_module_id) ? 'Active' : 'Inactive'
+  end
+
+  def assign_default_package
+    organization_package.create(package_id: Package.find_by(name: 'default-standard').try(:id))
+  end
+
+  def enabled_modules
+    package.general_modules
   end
 end

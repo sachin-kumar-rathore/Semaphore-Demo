@@ -4,7 +4,7 @@
   </div>
   <div class="panel-body">
     <div class="col-md-12">
-      <%= form_for @custom_module do |f| %>
+      <%= form_for @custom_module, url: custom_module_path do |f| %>
         <div class="error-messages">
           <%= render partial: 'shared/error_messages', locals: {obj: @custom_module} %>
         </div>

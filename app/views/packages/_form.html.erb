@@ -1,0 +1,56 @@
+<!-- Security Roles Modal -->
+<div class="modal fade" id='packageFormCenter' aria-hidden="true" aria-labelledby='securityRolesFormCenter'
+  role="dialog" tabindex="-1">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <%= form_for @package, remote: true do |form| %>
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title">PACKAGE INFORMATION</h4>
+        </div>
+        <div class="modal-body">
+          <div class="error-messages"></div>
+          <div class="row">
+            <div class="form-group col-md-6 offset-md-3">
+              <label class="form-control-label">Name:</label>
+              <%= form.text_field :name, class: "form-control", placeholder: "Package Name", required: true %>
+            </div>
+          </div>
+          <br>
+          <div class="custom-export-checkboxes">
+            <div class="row">
+              <strong>Select Modules: </strong>
+              <div class="form-inline col-md-4 col-4">
+                <input type="checkbox" class="to-labelauty-icon mr-5" data-label="false" onchange="checkAll(this)" />
+                <span>Check all</span>
+              </div>
+            </div>
+            <br>
+            <% @modules.in_groups_of(3).each do |options| %>
+              <div class="row">
+                <% options.each do |option| %>
+                  <% if option.present? %>
+                    <div class="form-inline col-md-4 col-4">
+                      <%= form.check_box(:module_ids, { multiple: true, required: true }, option.id, nil) %>
+                      <span class="ml-5"><%= option.name %></span>
+                    </div>
+                  <% end %>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="form-group form-material col-md-6">
+              <button type="submit" class="btn btn-sm green-btn" onclick="checkboxValidation()">Save</button>
+              <button type="button" class="btn btn-sm white-btn" data-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->

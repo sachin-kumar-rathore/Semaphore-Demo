@@ -31,7 +31,9 @@
             <div class="col col-auto">
               <div class="tasksRightOptions">
                 <ul>
-                  <li><a class="btn btn-default clickable" data-href="<%= new_task_path %>"><i class="icon fa fa-plus btnIcon" aria-hidden="true"></i> Add New Task</a></li>
+                  <% if can_write? %>
+                    <li><a class="btn btn-default clickable" data-href="<%= new_task_path %>"><i class="icon fa fa-plus btnIcon" aria-hidden="true"></i> Add New Task</a></li>
+                  <% end %>
                 </ul>
               </div>
             </div>
@@ -46,4 +48,3 @@
 </div>
 
 <div id="createOrEditTask"></div>
-<%= render partial: "/shared/confirmation_popup", locals: { record_type: 'Task' } %>

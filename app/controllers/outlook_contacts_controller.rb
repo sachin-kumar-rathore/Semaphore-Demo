@@ -1,5 +1,5 @@
 class OutlookContactsController < ManageGeneralModulesController
-  before_action :authenticate_user!, :authorized_module?, :authorize_current_controller
+  before_action :authenticate_user!, :authorized_module?
   
   include AuthenticationModule
 
@@ -60,9 +60,5 @@ class OutlookContactsController < ManageGeneralModulesController
       insert_or_modify_contact(temp_contact)
     end
     flash.now[:success] = 'All contacts are successfully imported'
-  end
-
-  def authorize_current_controller
-    match_enabled_module('contacts')
   end
 end

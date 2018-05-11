@@ -7,9 +7,11 @@
         </div>
       </div>
       <div class="col col-auto">
-        <button class="btn btn-default col-md-12 clickable" data-href="<%= new_activity_file_path(activity_id: @activity.id) %>" type="button" >
-          <i class="icon fa fa-plus btnIcon" aria-hidden="true"></i> Add New File
-        </button>
+        <% if can_write? && can_write?('files') %>
+          <button class="btn btn-default col-md-12 clickable" data-href="<%= new_activity_file_path(activity_id: @activity.id) %>" type="button" >
+            <i class="icon fa fa-plus btnIcon" aria-hidden="true"></i> Add New File
+          </button>
+        <% end %>
       </div>
     </div>
   </div>

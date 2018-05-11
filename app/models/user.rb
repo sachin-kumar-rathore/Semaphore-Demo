@@ -13,6 +13,7 @@ class User < ApplicationRecord
   has_many :security_roles, through: :user_roles
   has_many :custom_exports, dependent: :destroy
   has_many :temp_contacts, dependent: :destroy
+  has_many :suspicious_activities
 
   before_save :minimum_one_role
   after_update :welcome_user_and_notify_admin, if: :saved_change_to_invitation_accepted_at?
@@ -23,6 +24,8 @@ class User < ApplicationRecord
   scope :first_name, ->(first_name) { where('first_name ilike ?', "%#{first_name}%") }
   scope :last_name, ->(last_name) { where('last_name ilike ?', "%#{last_name}%") }
   scope :user_role, -> (user_role) { where(user_roles: {security_role_id: user_role})}
+
+  validates_presence_of :first_name, :last_name
 
   def full_name
     "#{first_name} #{last_name}"
@@ -40,7 +43,19 @@ class User < ApplicationRecord
     end
   end
 
-  validates_presence_of :first_name, :last_name
+  def can_write?(module_controller)
+    accesses = module_accesses(module_controller)
+    return false unless accesses.present?
+    accesses.map { |permissions| eval(permissions)['access'] }.uniq.include?('Write')
+  end
+
+  def can_access_module?(module_controller)
+    # Uncomment below code when 'status' column of /security_roles form is enabled
+    #accesses = module_accesses(module_controller)
+    #return true unless accesses.present?
+    #accesses.map { |permissions| eval(permissions)['status'] }.uniq.include?('true')
+    return true
+  end
 
   protected
 
@@ -84,5 +99,16 @@ class User < ApplicationRecord
 
   def trigger_email(type_id, user_id, opts={})
     TransactionEmailWorker.perform_async(type_id, 'user', user_id, opts)
+  end
+
+  def module_accesses(module_controller)
+    security_roles.map { |role| role.accesses[module_controller]  }
+                  .reject { |access| access.nil? }
+  end
+
+  def check_permissions(module_controller, key, value)
+    accesses = module_accesses(module_controller)
+    return false unless accesses.present?
+    accesses.map { |permissions| eval(permissions)[key] }.uniq.include?(value)
   end
 end

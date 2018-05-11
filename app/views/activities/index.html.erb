@@ -16,9 +16,11 @@
             </div>
             <div class="col col-auto">
               <div class="tasksRightOptions">
-                <ul>
-                  <li><a class="btn btn-default" href="<%= new_activity_path %>"><i class="icon fa fa-plus btnIcon" aria-hidden="true"></i> Add New Activity</a></li>
-                </ul>
+                <% if can_write? %>
+                  <ul>
+                    <li><a class="btn btn-default" href="<%= new_activity_path %>"><i class="icon fa fa-plus btnIcon" aria-hidden="true"></i> Add New Activity</a></li>
+                  </ul>
+                <% end %>
               </div>
             </div>
           </div>

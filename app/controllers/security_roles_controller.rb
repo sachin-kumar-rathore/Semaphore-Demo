@@ -17,7 +17,7 @@ class SecurityRolesController < ApplicationController
   def create
     @security_role = current_org.security_roles.create(security_role_params)
     return unless @security_role
-    flash[:success] = 'Security Role successfully added.'
+    flash.now[:success] = 'Security Role successfully added.'
     load_security_roles
   end
 
@@ -25,33 +25,20 @@ class SecurityRolesController < ApplicationController
 
   def update
     return unless @security_role.update(security_role_params)
-    flash[:success] = 'Security Role successfully updated.'
+    flash.now[:success] = 'Security Role successfully updated.'
     load_security_roles
   end
 
   def destroy
     return unless @security_role.destroy
-    flash[:success] = 'Security Role successfully deleted.'
+    flash.now[:success] = 'Security Role successfully deleted.'
     load_security_roles
   end
 
   private
 
   def security_role_params
-    params.require(:security_role).permit(:name, project_permissions: %i[read create update
-                                                              delete assign],
-                                                 site_permissions: %i[read create update
-                                                           delete assign],
-                                                 contact_permissions: %i[read create update
-                                                              delete assign],
-                                                 configuration_permissions: %i[read create
-                                                                   update delete
-                                                                   assign],
-                                                 user_permissions: %i[read create update
-                                                           delete assign],
-                                                 companie_permissions: %i[read create
-                                                               update
-                                                               delete assign])
+    params.require(:security_role).permit(:name, :accesses => {})
   end
 
   def load_security_roles

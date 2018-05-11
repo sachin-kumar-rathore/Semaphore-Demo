@@ -11,16 +11,16 @@
   <tbody>
     <% for note in notes %>
       <tr>
-        <td><%= note.date %></td>
-        <td><%= note.subject %></td>
-        <td><%= note.description.truncate(30) %></td>
+        <td><a class="clickable" data-href="<%= activity_note_path(note, activity_id: @activity.id) %>"><%= note.date %></a></td>
+        <td><a class="clickable" data-href="<%= activity_note_path(note, activity_id: @activity.id) %>"><%= note.subject %></a></td>
+        <td><a class="clickable" data-href="<%= activity_note_path(note, activity_id: @activity.id) %>"><%= note.description.truncate(30) %></a></td>
         <td>
           <div class="openLeft moreOptions dropdown">
             <a class="" data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false" data-animation="scale-down" role="button">
               <i class="icon md-more-vert" aria-hidden="true"></i>
             </a>
             <div class="dropdown-menu" role="menu">
-              <a class="dropdown-item clickable" data-href="<%= activity_note_path(note, activity_id: @activity.id) %>" role="menuitem"><i class="icon md-edit" aria-hidden="true"></i> Edit</a>
+              <a class="dropdown-item clickable" data-href="<%= activity_note_path(note, activity_id: @activity.id) %>" role="menuitem"><i class="icon <%= edit_view_class %>" aria-hidden="true"></i><%= can_write? ? 'Edit' : 'View' %></a>
             </div>
           </div>
         </td>

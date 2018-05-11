@@ -3,11 +3,8 @@ class EmailsController < ManageGeneralModulesController
   skip_before_action :verify_authenticity_token, only: %i[create]
   before_action :authenticate_user!, only: %i[index]
   before_action :authorized_module?
-  before_action :set_email, only: %i[show edit update destroy
-                                     show_existing_contacts
-                                     attach_contact_to_email
-                                     show_existing_projects_and_activities
-                                     attach_project_or_activity_to_email]
+  before_action :authorized_user_to_write?, except: %i[index show create]
+  before_action :set_email, except: %i[index create]
   respond_to :html, only: %i[index]
   respond_to :js
 

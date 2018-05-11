@@ -1,0 +1,26 @@
+<table class="table table-striped table-hover designTable rolesTable" id="rolesTable">
+  <thead>
+    <th>Entity</th>
+    <th>Permission</th>
+    <th>Status</th>
+  </thead>
+  <tbody>
+  <%= type.fields_for :accesses do |access| %>
+    <% modules.each do |entity| %>
+      <tr>
+        <td><%= entity.name %></td>
+        <%= access.fields_for entity.controller_name.to_sym do |entity_access| %>
+          <td>
+            <% object_accesses = type.object.new_record? || type.object.accesses[entity.controller_name].nil? ? nil : eval(type.object.accesses[entity.controller_name])['access'] %>
+            <%= entity_access.select :access, options_for_select(SecurityRole::PERMISSIONS, object_accesses), {}, class: 'form-control custom-select' %>
+          </td>
+          <td>
+            <% object_status = type.object.new_record? || type.object.accesses[entity.controller_name].nil? ? nil : eval(type.object.accesses[entity.controller_name])['status'] %>
+            <%= entity_access.select :status, options_for_select([['On', true], ['Off', false]], object_status), {}, { disabled: true, class: 'form-control custom-select' } %>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  <% end %>
+  </tbody>
+</table>

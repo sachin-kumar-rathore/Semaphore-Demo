@@ -1,5 +1,5 @@
 class SecurityRole < ApplicationRecord
-  PERMISSIONS = ["read", "create", "update", "delete", "assign"]
+  PERMISSIONS = ["Read", "Write"]
 
   validates :name, presence: true
   validates_uniqueness_of :name, scope: :organization_id

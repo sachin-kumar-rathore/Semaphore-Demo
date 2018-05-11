@@ -8,7 +8,7 @@
   <tbody>
     <% @security_roles.each do |security_role| %>
       <tr>
-        <td><%= security_role.name %></td>
+        <td><a class="clickable" data-href="<%= edit_security_role_path(security_role) %>"><%= security_role.name %></a></td>
         <td>
           <div class="openLeft moreOptions dropdown">
             <a class="" data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false" data-animation="scale-down" role="button">

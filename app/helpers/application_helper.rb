@@ -64,4 +64,17 @@ module ApplicationHelper
   def module_icon(module_controller)
     Constant::MODULE_ICONS[module_controller.to_sym].split(', ')
   end
+
+  def can_write?(module_controller=get_current_section_name)
+    current_user.can_write?(module_controller)
+  end
+
+  def disabled_form?(module_controller=nil)
+    result = module_controller ? (can_write? && can_write?(module_controller)) : can_write?
+    result ? '' : "disabled=disabled"
+  end
+
+  def edit_view_class
+    can_write? ? 'md-edit' : 'fa fa-eye'
+  end
 end

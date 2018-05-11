@@ -31,8 +31,10 @@
               <i class="icon md-more-vert" aria-hidden="true"></i>
             </a>
             <div class="dropdown-menu" role="menu">
-              <a class="dropdown-item clickable" data-href="<%= task_path(task) %>" role="menuitem"><i class="icon md-edit" aria-hidden="true"></i> Edit</a>
-              <a class="dropdown-item delete-option" data-href="<%= task_path(task) %>" role="menuitem"><i class="icon md-delete" aria-hidden="true"></i> Delete</a>
+              <a class="dropdown-item clickable" data-href="<%= task_path(task) %>" role="menuitem"><i class="icon <%= edit_view_class %>" aria-hidden="true"></i><%= can_write? ? 'Edit' : 'View' %></a>
+              <% if can_write? %>
+                <a class="dropdown-item delete-option" data-href="<%= task_path(task) %>" role="menuitem"><i class="icon md-delete" aria-hidden="true"></i> Delete</a>
+              <% end %>
             </div>
           </div>
         </td>
@@ -40,6 +42,7 @@
     <% end %>
   </tbody>
 </table>
+<%= render partial: "/shared/confirmation_popup", locals: { record_type: 'Task' } %>
 
 <div class="digg_pagination">
   <%= js_will_paginate tasks, container: false %>

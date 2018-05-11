@@ -15,8 +15,8 @@ TransactionalEmail::TYPES.each do |type|
 end
 
 # System Modules and Default Package
-GeneralModule.create(Constant::GENERAL_MODULES)
-GeneralModule.create(Constant::CUSTOM_MODULES.merge(is_custom: true))
+GeneralModule.create(Constant::GENERAL_MODULES.first)
+GeneralModule.create(Constant::CUSTOM_MODULES.first.merge(is_custom: true))
 
 default_modules = GeneralModule.default_modules
 default_package = Package.create(name: 'default-standard')

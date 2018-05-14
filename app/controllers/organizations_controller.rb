@@ -18,7 +18,7 @@ class OrganizationsController < ApplicationController
 
   def update
     @organization.update(organization_params)
-    @organization.organization_package.update(organization_package_params)
+    update_package
   end
 
   def sign_in_as_admin
@@ -92,5 +92,11 @@ class OrganizationsController < ApplicationController
     custom_module_ids = @organization.custom_module_ids
     custom_module_ids = params[:disable] ? custom_module_ids.reject { |id| id == params[:module_id].to_i}
                                          : custom_module_ids << params[:module_id]
+  end
+
+  def update_package
+    org_package = @organization.organization_package
+    org_package ? org_package.update(organization_package_params)
+                : @organization.create_organization_package(organization_package_params)
   end
 end

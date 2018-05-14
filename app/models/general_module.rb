@@ -5,5 +5,6 @@ class GeneralModule < ApplicationRecord
   has_many :packages, through: :package_modules
 
   scope :custom_modules, -> { where(is_custom: true) }
+  scope :default_modules, -> { where(is_custom: false) }
   scope :side_bar_modules, -> { where(side_bar_enabled: true) }
 end

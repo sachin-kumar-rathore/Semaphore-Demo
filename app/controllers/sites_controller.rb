@@ -1,6 +1,6 @@
 # Manage sites/buildings belonging an organziation
-class SitesController < ApplicationController
-  before_action :authenticate_user!
+class SitesController < ManageGeneralModulesController
+  before_action :authenticate_user!, :authorized_module?
   before_action :set_site, only: %i[show edit update destroy]
   respond_to :html, only: [:index]
   respond_to :js

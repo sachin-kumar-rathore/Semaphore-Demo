@@ -1,6 +1,6 @@
 # Manage dashboard for org users
-class DashboardController < ApplicationController
-  before_action :authenticate_user!
+class DashboardController < ManageGeneralModulesController
+  before_action :authenticate_user!, :authorized_module?
   before_action :is_it_demo_mode?
 
   include DashboardModule

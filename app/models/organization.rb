@@ -76,10 +76,26 @@ class Organization < ApplicationRecord
   end
 
   def assign_default_package
-    organization_package.create(package_id: Package.find_by(name: 'default-standard').try(:id))
+    create_organization_package(package_id: Package.find_by(name: 'default-standard').try(:id))
   end
 
   def enabled_modules
     package.general_modules
+  end
+
+  def custom_modules
+    GeneralModule.custom_modules.where(id: custom_module_ids).order('id asc')
+  end
+
+  def enabled_default_module?(module_controller)
+    enabled_modules.pluck(:controller_name).include?(module_controller)
+  end
+
+  def enabled_custom_module?(module_controller)
+    custom_module_ids.include?(GeneralModule.custom_modules.find_by_controller_name(module_controller).try(:id))
+  end
+
+  def enabled_module?(module_controller)
+    enabled_default_module?(module_controller) || enabled_custom_module(module_controller)
   end
 end

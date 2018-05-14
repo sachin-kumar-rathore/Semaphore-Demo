@@ -20,18 +20,22 @@
               <div class="tasksRightOptions">
                 <ul>
                   <li>
-                    <button class="btn btn-default waves-effect waves-classic clickable pull-right" data-href="<%= new_site_path %>"
+                    <button class="btn btn-default waves-effect waves-classic clickable" data-href="<%= new_site_path %>"
                     id="createNewSite" type="button"><i class="icon fa fa-plus btnIcon" aria-hidden="true"></i> Add Site/Building
                   </button>
                   </li>
-                  <li>
-                    <button class="btn btn-default waves-effect waves-classic" data-target="#siteImportFormCenter" data-toggle="modal"
-                      id="importNewSites" type="button">Excel Import
-                    </button>
-                    <button class="btn btn-default waves-effect waves-classic" data-target="#siteLoisImportFormCenter" data-toggle="modal"
-                      id="importNewSites" type="button">LOIS Import
-                    </button>
-                  </li>
+                  <% if current_org.enabled_default_module?('imports') %>
+                    <li>
+                      <button class="btn btn-default waves-effect waves-classic" data-target="#siteImportFormCenter" data-toggle="modal"
+                        id="importNewSites" type="button">Excel Import
+                      </button>
+                    </li>
+                    <li>
+                      <button class="btn btn-default waves-effect waves-classic" data-target="#siteLoisImportFormCenter" data-toggle="modal"
+                        id="importNewSites" type="button">LOIS Import
+                      </button>
+                    </li>
+                  <% end %>
                 </ul>
               </div>
             </div>
@@ -48,5 +52,8 @@
   </div>
 </div>
 <div id="createOrEditSite"></div>
-<%= render :partial => 'sites/import_sites_form' %>
-<%= render :partial => 'sites/lois_import_form' %>
+
+<% if current_org.enabled_default_module?('imports') %>
+  <%= render :partial => 'sites/import_sites_form' %>
+  <%= render :partial => 'sites/lois_import_form' %>
+<% end %>

@@ -2,36 +2,40 @@
 <div class="section-info-flash"></div>
 <div class="error-messages"></div>
 <div class="row">
-  <div class="col-md-6">
-    <div class="panel panel-bordered">
-      <div class="panel-heading tableTitle">
-        <h2 class="panel-title">Import Contacts</h2>
-      </div>
-      <div class="panel-body">
-        <button class="btn btn-primary" data-target="#contactImportFormCenter" data-toggle="modal" id="importNewContacts" type="button">
-					<i class="icon fa fa-download btnIcon" aria-hidden="true"></i> Import XLS
-        </button>
-        <a class="btn btn-primary" id="importOutlookContacts" href="<%= outlook_contacts_path %>">
-          <i class="icon fa fa-download btnIcon" aria-hidden="true"></i> Import Outlook
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-md-6">
-    <div class="panel panel-bordered">
-      <div class="panel-heading tableTitle">
-        <h2 class="panel-title">Import Sites/Buildings</h2>
-      </div>
-      <div class="panel-body">
-        <button class="btn btn-primary" data-target="#siteImportFormCenter" data-toggle="modal" id="importNewSites" type="button">
-					<i class="icon fa fa-download btnIcon" aria-hidden="true"></i> Import Sites</button>
-        <button class="btn btn-primary" data-target="#siteLoisImportFormCenter" data-toggle="modal" type="button">
-					<i class="icon fa fa-download btnIcon" aria-hidden="true"></i> LOIS Import</button>
+  <% if current_org.enabled_default_module?('contacts') %>
+    <div class="col-md-6">
+      <div class="panel panel-bordered">
+        <div class="panel-heading tableTitle">
+          <h2 class="panel-title">Import Contacts</h2>
+        </div>
+        <div class="panel-body">
+          <button class="btn btn-primary" data-target="#contactImportFormCenter" data-toggle="modal" id="importNewContacts" type="button">
+	  				<i class="icon fa fa-download btnIcon" aria-hidden="true"></i> Import XLS
+          </button>
+          <a class="btn btn-primary" id="importOutlookContacts" href="<%= outlook_contacts_path %>">
+            <i class="icon fa fa-download btnIcon" aria-hidden="true"></i> Import Outlook
+          </a>
+        </div>
       </div>
     </div>
-  </div>
+    <%= render :partial => 'contacts/import_contacts_form' %>
+  <% end %>
+  
+  <% if current_org.enabled_default_module?('sites') %>
+    <div class="col-md-6">
+      <div class="panel panel-bordered">
+        <div class="panel-heading tableTitle">
+          <h2 class="panel-title">Import Sites/Buildings</h2>
+        </div>
+        <div class="panel-body">
+          <button class="btn btn-primary" data-target="#siteImportFormCenter" data-toggle="modal" id="importNewSites" type="button">
+            <i class="icon fa fa-download btnIcon" aria-hidden="true"></i> Import Sites</button>
+          <button class="btn btn-primary" data-target="#siteLoisImportFormCenter" data-toggle="modal" type="button">
+            <i class="icon fa fa-download btnIcon" aria-hidden="true"></i> LOIS Import</button>
+        </div>
+      </div>
+    </div>
+    <%= render :partial => 'sites/import_sites_form' %>
+    <%= render :partial => 'sites/lois_import_form' %>
+  <% end %>
 </div>
-<%= render :partial => 'sites/import_sites_form' %>
-<%= render :partial => 'contacts/import_contacts_form' %>
-<%= render :partial => 'sites/lois_import_form' %>

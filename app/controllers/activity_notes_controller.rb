@@ -1,6 +1,6 @@
 # Manage notes inside a particular activity
-class ActivityNotesController < ApplicationController
-  before_action :authenticate_user!, :set_activity
+class ActivityNotesController < ManageGeneralModulesController
+  before_action :authenticate_user!, :set_activity, :authorized_module?
   before_action :set_note, only: %i[show update destroy]
   respond_to :js
 

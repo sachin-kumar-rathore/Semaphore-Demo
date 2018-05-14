@@ -2,24 +2,43 @@
   <% content_for :navigation_bar do %>
     <ul class="nav nav-tabs animation-fade tasks-tabs" role="tablist">
       <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#main" id="mainNavLink" role="tab">Main</a></li>
-      <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#contacts" role="tab" id="contactsNavLink" >Contacts</a></li>
-      <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#projects" role="tab" id="projectsNavLink" >Projects</a></li>
-      <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#activities" role="tab" id="activitiesNavLink">Activities</a></li>
+      
+      <% if current_org.enabled_default_module?('contacts') %>
+        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#contacts" role="tab" id="contactsNavLink" >Contacts</a></li>
+      <% end %>
+
+      <% if current_org.enabled_default_module?('projects') %>
+        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#projects" role="tab" id="projectsNavLink" >Projects</a></li>
+      <% end %>
+
+      <% if current_org.enabled_default_module?('activities') %>
+        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#activities" role="tab" id="activitiesNavLink">Activities</a></li>
+      <% end %>
     </ul>
   <% end %>
+
   <div class="tab-content pt-20">
     <div class="tab-pane active" id="main" role="tabpanel">
       <%= render 'edit_company_form' %>
     </div>
-    <div class="tab-pane" id="contacts" role="tabpanel">
-      <%= render 'company_contacts/company_contacts_list' %>
-    </div>
-    <div class="tab-pane" id="projects" role="tabpanel">
-      <%= render 'company_projects/company_projects_list' %>
-    </div>
-    <div class="tab-pane" id="activities" role="tabpanel">
-      <%= render 'company_activities/company_activities_list' %>
-    </div>
+
+    <% if current_org.enabled_default_module?('contacts') %>
+      <div class="tab-pane" id="contacts" role="tabpanel">
+        <%= render 'company_contacts/company_contacts_list' %>
+      </div>
+    <% end %>
+
+    <% if current_org.enabled_default_module?('projects') %>
+      <div class="tab-pane" id="projects" role="tabpanel">
+        <%= render 'company_projects/company_projects_list' %>
+      </div>
+    <% end %>
+
+    <% if current_org.enabled_default_module?('activities') %>
+      <div class="tab-pane" id="activities" role="tabpanel">
+        <%= render 'company_activities/company_activities_list' %>
+      </div>
+    <% end %>
   </div>
 </div>
 

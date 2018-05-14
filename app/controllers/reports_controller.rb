@@ -1,7 +1,7 @@
-class ReportsController < ApplicationController
+class ReportsController < ManageGeneralModulesController
 
   before_action :change_format, only: [:yearly_report, :monthly_report]
-  before_action :authenticate_user!
+  before_action :authenticate_user!, :authorized_module?
   before_action :set_selected_parameters, only: [:index, :yearly, :monthly]
   respond_to :html, only: [:index]
   respond_to :js

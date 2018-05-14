@@ -1,6 +1,7 @@
 # Manage contacts inside an organization
-class ContactsController < ApplicationController
-  before_action :authenticate_user!
+class ContactsController < ManageGeneralModulesController
+  before_action :authenticate_user!, :authorized_module?
+  before_action :authorize_current_controller, only: %i[export]
   before_action :set_contact, only: %i[show edit update destroy]
   respond_to :html, only: %i[index]
   respond_to :js
@@ -95,5 +96,9 @@ class ContactsController < ApplicationController
                                     :contact_category_id, :title,
                                     :cell_phone, :notes, :project_id,
                                     :company_id, :organization_name, :linkedin_url)
+  end
+
+  def authorize_current_controller
+    match_enabled_module('contacts')
   end
 end

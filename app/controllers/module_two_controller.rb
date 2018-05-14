@@ -1,6 +1,5 @@
-class ModuleTwoController < ManageCustomModulesController
-  before_action :authenticate_user!
-  before_action :authenticate_custom_module
+class ModuleTwoController < ManageGeneralModulesController
+  before_action :authenticate_user!, :authorized_module?
   
   def index; end
 end

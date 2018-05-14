@@ -1,6 +1,6 @@
 # Manage tasks belonging to an organization
-class TasksController < ApplicationController
-  before_action :authenticate_user!
+class TasksController < ManageGeneralModulesController
+  before_action :authenticate_user!, :authorized_module?
   before_action :set_task, only: %i[show edit update destroy]
   before_action :set_project, only: %i[show]
   before_action :set_users, only: %i[show new]

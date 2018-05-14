@@ -1,7 +1,8 @@
 # Manage projects belonging to an organization
-class ProjectsController < ApplicationController
+class ProjectsController < ManageGeneralModulesController
   include ProjectModule
-  before_action :authenticate_user!
+  before_action :authenticate_user!, :authorized_module?
+  before_action :authorize_current_controller, only: %i[export_form export]
   before_action :set_project, only: %i[edit update show logs destroy]
   before_action :convert_site_visit_dates, only: [:update, :create]
   respond_to :html, only: %i[index new edit]
@@ -157,4 +158,7 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def authorize_current_controller
+    match_enabled_module('projects')
+  end
 end

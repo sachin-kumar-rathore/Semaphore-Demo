@@ -56,6 +56,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  private
+
   def assign_records(type)
     if params[:id].present?
       current_org.send(type).where.not(id: params[:id])

@@ -1166,9 +1166,15 @@ a:not([href]):not([tabindex]){
   background-color: #fff;
 }
 
-.btn-orng, .btn-orng:hover {
+.btn-orng,
+.btn-orng:hover,
+.btn-orng:focus,
+.btn-orng:active
+{
   background-color: #ff7544;
-  border: #ff7544;;
+  border-color: #ff7544;
+  color: #fff;
+  box-shadow: none;
 }
 
 .horizontal-scroll {

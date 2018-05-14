@@ -7,12 +7,11 @@ class PackagesController < ApplicationController
     load_packages
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @package = Package.new
-    @modules = GeneralModule.order('id asc')
+    @modules = GeneralModule.default_modules.order('id asc')
   end
 
   def create

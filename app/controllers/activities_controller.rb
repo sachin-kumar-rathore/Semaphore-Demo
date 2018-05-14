@@ -1,6 +1,6 @@
 # Manage activities under an organization
-class ActivitiesController < ApplicationController
-  before_action :authenticate_user!
+class ActivitiesController < ManageGeneralModulesController
+  before_action :authenticate_user!, :authorized_module?
   before_action :set_activity, only: %i[edit update destroy]
 
   def index

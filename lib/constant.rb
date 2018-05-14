@@ -145,4 +145,11 @@ module Constant
                    module_two: 'fa fa-cube',
                    dropboxes: 'fa fa-dropbox'
                  }
+
+  SECTIONS = [
+               'dashboard', 'tasks', 'emails', 'activities', 'contacts', 'projects',
+               'companies', 'sites', 'reports', 'files', 'imports', 'exports',
+               'manage_users', 'manage_configurations', 'considered_locations',
+               'security_roles', 'project_logs', 'organization_details'
+             ]
 end

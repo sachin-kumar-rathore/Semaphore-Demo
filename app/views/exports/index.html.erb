@@ -1,44 +1,50 @@
 <% breadcrumb :exports %>
 <div class="section-info-flash"></div>
 <div class="row">
-  <div class="col-md-6">
-    <div class="panel panel-bordered">
-      <div class="panel-heading tableTitle">
-        <h2 class="panel-title">Export Projects</h2>
-      </div>
-      <div class="panel-body">
-        <div class="export-projects-btn">
-          <%= link_to "Export Projects", export_form_projects_path, class: "col-md-13 btn btn-primary green-btn", data: { turbolinks: false } %>
+  <% if current_org.enabled_default_module?('projects') %>
+    <div class="col-md-6">
+      <div class="panel panel-bordered">
+        <div class="panel-heading tableTitle">
+          <h2 class="panel-title">Export Projects</h2>
+        </div>
+        <div class="panel-body">
+          <div class="export-projects-btn">
+            <%= link_to "Export Projects", export_form_projects_path, class: "col-md-13 btn btn-primary green-btn", data: { turbolinks: false } %>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  <% end %>
 
-  <div class="col-md-6">
-    <div class="panel panel-bordered">
-      <div class="panel-heading tableTitle">
-        <h2 class="panel-title">Export Companies</h2>
-      </div>
-      <div class="panel-body">
-        <div class="export-companies-btn">
-          <%= link_to "Export Companies", export_form_companies_path, class: "col-md-13 btn btn-primary green-btn", data: { turbolinks: false } %>
+  <% if current_org.enabled_default_module?('companies') %>
+    <div class="col-md-6">
+      <div class="panel panel-bordered">
+        <div class="panel-heading tableTitle">
+          <h2 class="panel-title">Export Companies</h2>
+        </div>
+        <div class="panel-body">
+          <div class="export-companies-btn">
+            <%= link_to "Export Companies", export_form_companies_path, class: "col-md-13 btn btn-primary green-btn", data: { turbolinks: false } %>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  <% end %>
 </div>
 
 <div class="row">
-  <div class="col-md-6">
-    <div class="panel panel-bordered">
-      <div class="panel-heading tableTitle">
-        <h2 class="panel-title">Export Contacts</h2>
-      </div>
-      <div class="panel-body">
-        <div class="export-contacts-btn">
-          <%= link_to "Export Contacts", export_contacts_path(:format => 'xls'), class: "col-md-13 btn btn-primary green-btn", data: { turbolinks: false }%>
+  <% if current_org.enabled_default_module?('contacts') %>
+    <div class="col-md-6">
+      <div class="panel panel-bordered">
+        <div class="panel-heading tableTitle">
+          <h2 class="panel-title">Export Contacts</h2>
+        </div>
+        <div class="panel-body">
+          <div class="export-contacts-btn">
+            <%= link_to "Export Contacts", export_contacts_path(:format => 'xls'), class: "col-md-13 btn btn-primary green-btn", data: { turbolinks: false }%>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  <% end %>
 </div>

@@ -1,5 +1,7 @@
 require 'uri'
 module ApplicationHelper
+  include Constant
+
   def load_active_type(type)
     current_org.send(type).active.map{ |type| [type.name, type.id] }
   end
@@ -46,7 +48,7 @@ module ApplicationHelper
   end
 
   def enabled_custom_modules_list
-    GeneralModule.custom_modules.where(id: current_org.custom_module_ids, side_bar_enabled: true).order('id asc')
+    current_org.custom_modules.side_bar_modules
   end
   
   def logo_redirect_path
@@ -59,11 +61,7 @@ module ApplicationHelper
     end     
   end
 
-  def enabled_custom_module? controller_name
-    current_org.custom_module_ids.include?(GeneralModule.custom_modules.find_by_controller_name(controller_name).try(:id))
-  end
-
-  def module_icon(controller_name)
-    Constant::MODULE_ICONS[controller_name.to_sym].split(', ')
+  def module_icon(module_controller)
+    Constant::MODULE_ICONS[module_controller.to_sym].split(', ')
   end
 end

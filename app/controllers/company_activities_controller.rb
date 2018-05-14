@@ -1,6 +1,6 @@
 # Manage acitivites associated with a particular company
 class CompanyActivitiesController < ActivitiesController
-  before_action :set_company
+  before_action :set_company, :authorize_current_controller
   respond_to :js
 
   def new
@@ -19,5 +19,9 @@ class CompanyActivitiesController < ActivitiesController
     else
       redirect_to edit_company_activity_path(@company, @activity)
     end
+  end
+
+  def authorize_current_controller
+    match_enabled_module('activities')
   end
 end

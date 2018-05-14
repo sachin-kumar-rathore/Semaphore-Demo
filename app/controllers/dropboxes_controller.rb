@@ -1,6 +1,5 @@
-class DropboxesController < ManageCustomModulesController
-  before_action :authenticate_user!
-  before_action :authenticate_custom_module
+class DropboxesController < ManageGeneralModulesController
+  before_action :authenticate_user!, :authorized_module?
   before_action :check_dropbox_token, except: [:index, :connect, :verify_code]
 
   include DropboxModule
@@ -27,7 +26,7 @@ class DropboxesController < ManageCustomModulesController
   def content
     result = client.list_folder(params[:folder_path] ? params[:folder_path] : "")
     @results = result.entries.group_by { |i| i.class.to_s.split('::').last }
-    @selected_files = parse_selected_files
+    @selected_files = parse_selected_files if $redis.get('selected_dropbox_files')
   end
 
   def sync_files

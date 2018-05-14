@@ -1,7 +1,8 @@
 # Manage emails belonging to an organization
-class EmailsController < ApplicationController
+class EmailsController < ManageGeneralModulesController
   skip_before_action :verify_authenticity_token, only: %i[create]
   before_action :authenticate_user!, only: %i[index]
+  before_action :authorized_module?
   before_action :set_email, only: %i[show edit update destroy
                                      show_existing_contacts
                                      attach_contact_to_email

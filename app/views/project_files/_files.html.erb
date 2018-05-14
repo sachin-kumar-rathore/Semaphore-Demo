@@ -20,10 +20,12 @@
             <a class="" data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false" data-animation="scale-down" role="button"> <i class="icon md-more-vert" aria-hidden="true"></i> </a>
             <div class="dropdown-menu" role="menu"> 
               <a class="dropdown-item" href="<%= file.file_type == 'EDLT' ? file.name : download_dropbox_file_dropbox_path(file) %>" role="menuitem" target="_blank"><i class="icon fa fa-download" aria-hidden="true"></i> Download</a>
-              <% if file.file_type == 'EDLT' %>
-                <a class="dropdown-item clickable" data-href="<%= edit_project_file_path(file, project_id: @project) %>" role="menuitem" data-toggle="modal" data-target="#viewContactModal1"><i class="icon fa fa-pencil" aria-hidden="true"></i> Edit</a> 
-              <% end %>
-              <a class="dropdown-item delete-clickable" data-href="<%= project_file_path(file, project_id: @project) %>" role="menuitem"><i class="icon md-delete" aria-hidden="true"></i> Delete</a> 
+              <% if write_access %>
+                <% if file.file_type == 'EDLT' %>
+                  <a class="dropdown-item clickable" data-href="<%= edit_project_file_path(file, project_id: @project) %>" role="menuitem" data-toggle="modal" data-target="#viewContactModal1"><i class="icon fa fa-pencil" aria-hidden="true"></i> Edit</a> 
+                <% end %>
+                <a class="dropdown-item delete-clickable" data-href="<%= project_file_path(file, project_id: @project) %>" role="menuitem"><i class="icon md-delete" aria-hidden="true"></i> Delete</a> 
+                <% end %>
             </div>
           </div>
         </td>
@@ -31,6 +33,8 @@
     <% end %>
   </tbody>
 </table>
+
+<%= render partial: "/shared/confirmation_popup", locals: { record_type: 'Project File' } %>
 
 <div class="digg_pagination">
   <%= js_will_paginate files %>

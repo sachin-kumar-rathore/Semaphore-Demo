@@ -29,7 +29,7 @@
               <i class="icon md-more-vert" aria-hidden="true"></i>
             </a>
             <div class="dropdown-menu" role="menu">
-              <a class="dropdown-item clickable" data-href="<%= activity_task_path(task, activity_id: @activity) %>" role="menuitem"><i class="icon <%= edit_view_class %>" aria-hidden="true"></i><%= can_write? ? 'Edit' : 'View' %></a>
+              <a class="dropdown-item clickable" data-href="<%= activity_task_path(task, activity_id: @activity) %>" role="menuitem"><i class="icon <%= write_access ? 'md-edit' : 'fa fa-eye' %>" aria-hidden="true"></i><%= write_access ? 'Edit' : 'View' %></a>
             </div>
           </div>
         </td>

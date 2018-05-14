@@ -16,16 +16,19 @@ class ManageGeneralModulesController < ApplicationController
 
   def authorized_user_to_write?
     get_sections.each do |section|
-      general_module = GeneralModule.find_by(controller_name: section)
-      return unless general_module.present?
-      unless current_user.can_write?(section)
-        mark_as_suspicious_activity(general_module)
-        redirect_root and return
-      end
+      break if verify_access(section)
     end
   end
 
+  def authorized_to_write_current_section?
+    verify_access(current_section)
+  end
+
   private
+  
+  def current_section
+    split_url.first
+  end
 
   def get_sections
     split_url.reject { |element| element.scan(/\D/).empty? }
@@ -46,6 +49,15 @@ class ManageGeneralModulesController < ApplicationController
   end
 
   def mark_as_suspicious_activity(module_controller)
-    current_org.suspicious_activities.create(user_id: current_user.id, general_module_id: general_module.id)
+    current_org.suspicious_activities.create(user_id: current_user.id, general_module_id: module_controller.id)
+  end
+
+  def verify_access(section)
+    general_module = GeneralModule.find_by(controller_name: section)
+    return unless general_module.present?
+    unless current_user.can_write?(section)
+      mark_as_suspicious_activity(general_module)
+      redirect_root and return true
+    end
   end
 end

@@ -8,10 +8,11 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
-          <h4 class="modal-title"><%= @note.new_record? ? 'ADD NEW NOTE' : 'EDIT NOTE' %></h4>
+          <% disabled_form = disabled_form? %>
+          <h4 class="modal-title"><%= disabled_form.blank? ? (@note.new_record? ? 'ADD NEW NOTE' : 'EDIT NOTE') : 'NOTE DETAILS' %></h4>
         </div>
         <div class="modal-body">
-          <div class="formStyle">
+          <fieldset <%= disabled_form %> class="formStyle">
             <div class="error-messages"></div>
             <div class="form-row">
               <div class="form-group col-md-8">
@@ -24,7 +25,7 @@
                   <span class="input-group-addon">
                   <i class="icon md-calendar" aria-hidden="true"></i>
                   </span>
-                  <%= form.text_field 'date_str', class: "form-control  datepicker", value:  @note.date ? @note.date : Date.today.strftime('%m/%d/%Y'), data: {plugin: "datepicker"}, required: true %>
+                  <%= form.text_field 'date_str', class: "form-control  datepicker", value:  @note.date ? filter_month_date_year(@note.date) : filter_month_date_year(Date.today), data: {plugin: "datepicker"}, required: true %>
                 </div>
               </div>
             </div>
@@ -35,12 +36,14 @@
                 <%= form.text_area 'description', rows: 6, class: "form-control", required: true %>
               </div>
             </div>
-            <div class="form-row">
-              <div class="form-group col-md-6">
-                <button type="submit" class="btn btn-sm green-btn"><%= @note.new_record? ? ' Save ' : ' Save changes' %></button>
-                <button type="button" class="btn btn-sm white-btn" data-dismiss="modal">Cancel</button>
+            <% unless disabled_form.present? %>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <button type="submit" class="btn btn-sm green-btn"><%= @note.new_record? ? ' Save ' : ' Save changes' %></button>
+                  <button type="button" class="btn btn-sm white-btn" data-dismiss="modal">Cancel</button>
+                </div>
               </div>
-            </div>
+            <% end %>
           </div>
         </div>
       <% end %>

@@ -7,7 +7,7 @@
         </div>
       </div>
       <div class="col col-auto">
-        <% if can_write? && can_write?('tasks') %>
+        <% if write_access = can_write? && can_write?('tasks') %>
           <button class="btn btn-default col-md-12 clickable" data-href="<%= new_activity_task_path(activity_id: @activity.id) %>" type="button" >
             <i class="icon fa fa-plus btnIcon" aria-hidden="true"></i> Add New Task
           </button>
@@ -16,7 +16,7 @@
     </div>
   </div>
   <div class="panel-body tableDesign" id="tasksList" >
-    <%= render partial: 'tasks', locals: { tasks: @tasks } %>
+    <%= render partial: 'tasks', locals: { tasks: @tasks, write_access: write_access } %>
   </div>
 </div>
 <div id="createOrEditTask"></div>

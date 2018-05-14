@@ -7,7 +7,7 @@
         </div>
       </div>
       <div class="col col-auto">
-        <% if can_write? %>
+        <% if write_access = can_write? %>
           <button class="btn btn-default col-md-12 clickable" data-href="<%= new_activity_note_path(activity_id: @activity.id) %>" type="button" >
             <i class="icon fa fa-plus btnIcon" aria-hidden="true"></i> Add New Note
           </button>
@@ -16,7 +16,7 @@
     </div>
   </div>
   <div class="panel-body tableDesign" id="notesList">
-    <%= render partial: "notes", locals: {notes: @notes} %>
+    <%= render partial: "notes", locals: {notes: @notes, write_access: write_access} %>
   </div>
   <div id="createOrEditNote"></div>
 </div>

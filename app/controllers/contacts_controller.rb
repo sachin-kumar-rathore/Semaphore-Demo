@@ -2,6 +2,10 @@
 class ContactsController < ManageGeneralModulesController
   before_action :authenticate_user!, :authorized_module?
   before_action :authorize_current_controller, only: %i[export]
+  before_action :authorized_user_to_write?, except: %i[index show export show_existing_contacts
+                                                       attach_contact_to_project]
+  before_action :authorized_to_write_current_section?, only: %i[show_existing_contacts
+                                                                attach_contact_to_project]
   before_action :set_contact, only: %i[show edit update destroy]
   respond_to :html, only: %i[index]
   respond_to :js

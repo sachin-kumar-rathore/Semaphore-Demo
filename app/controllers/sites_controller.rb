@@ -1,6 +1,10 @@
 # Manage sites/buildings belonging an organziation
 class SitesController < ManageGeneralModulesController
   before_action :authenticate_user!, :authorized_module?
+  before_action :authorized_user_to_write?, except: %i[index show edit show_existing_sites
+                                                       attach_site_to_project]
+  before_action :authorized_to_write_current_section?, only: %i[show_existing_sites
+                                                                attach_site_to_project]
   before_action :set_site, only: %i[show edit update destroy]
   respond_to :html, only: [:index]
   respond_to :js

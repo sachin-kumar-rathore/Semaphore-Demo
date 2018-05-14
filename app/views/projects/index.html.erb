@@ -1,7 +1,7 @@
 <% breadcrumb :projects %>
 <div class="section-info-flash"></div>
 <div class="col-md-2 add-project-btn">
-  <%= link_to "Add New Project", new_project_path, class: "col-md-13 btn btn-primary green-btn", data: { turbolinks: false } %>
+  <%= link_to "Add New Project", new_project_path, class: "col-md-13 btn btn-primary green-btn", data: { turbolinks: false } if write_access = can_write? %>
 </div>
 
 <div class="panel panel-bordered">
@@ -10,8 +10,6 @@
 <br/>
 <div class="panel">
   <div class="panel-body tableDesign" id="projectsList">
-    <%= render 'projects_list' %>
+    <%= render 'projects_list', write_access: write_access %>
   </div>
 </div>
-
-<%= render partial: "/shared/confirmation_popup", locals: { record_type: 'Project' } %>

@@ -1,17 +1,21 @@
 <div class="panel">
   <div class="panel-body">
-    <div class="row">
-      <div class="col-auto">
-        <button class="btn btn-primary green-btn waves-effect waves-classic col-md-12 clickable" data-href="<%= new_project_site_path(@project) %>" type="button" ><i class="icon fa fa-plus" aria-hidden="true"></i>Add Site/Building </button>
+    <% if can_write? %>
+      <div class="row">
+        <% if can_write?('sites') %>
+          <div class="col-auto">
+            <button class="btn btn-primary green-btn waves-effect waves-classic col-md-12 clickable" data-href="<%= new_project_site_path(@project) %>" type="button" ><i class="icon fa fa-plus" aria-hidden="true"></i>Add Site/Building </button>
+          </div>
+        <% end %>
+        <div class="col-auto">
+          <%= button_to "Add Existing Building", show_existing_sites_project_sites_path(@project), class: "btn btn-outline-primary waves-effect waves-classic col-md-12", method: :get, remote: true %>
+        </div>
       </div>
-      <div class="col-auto">
-        <%= button_to "Add Existing Building", show_existing_sites_project_sites_path(@project), class: "btn btn-outline-primary waves-effect waves-classic col-md-12", method: :get, remote: true %>
-      </div>
+      <br>
+    <% end %>
+    <div class="tableDesign" id="sitesList">
+      <%= render partial: "sites/sites", locals: {sites: project_sites} %>
     </div>
-  </div>
-  <div class="panel-body tableDesign" id="sitesList">
-    <%= render partial: "sites/sites", locals: {sites: project_sites} %>
   </div>
   <div id="createOrEditSite"></div>
 </div>
-<%= render partial: "/shared/confirmation_popup", locals: { record_type: 'Project Site' } %>

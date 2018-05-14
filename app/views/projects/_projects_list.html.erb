@@ -14,7 +14,11 @@
       <tr>
         <td><a class="custom-href" href="projects/<%= project.id %>/edit"><%= project.project_number %></a></td>
         <td><a class="custom-href" href="projects/<%= project.id %>/edit"><%= project.name %></a></td>
-        <td><a class="custom-href" href="<%= project.company ? edit_company_path(project.company_id) : 'javascript:void(0)' %>" data-turbolinks="false"><%= project.company ? project.company.name : "No Company" %></a></td>
+        <td>
+          <a class="custom-href" href="<%= current_org.enabled_default_module?('companies') && project.company ? edit_company_path(project.company_id) : 'javascript:void(0)' %>" data-turbolinks="false">
+            <%= project.company ? project.company.name : "No Company" %>
+          </a>
+        </td>
         <td><a class="custom-href" href="projects/<%= project.id %>/edit"><%= project.active_date %></a></td>
         <td><a class="custom-href" href="projects/<%= project.id %>/edit"><%= project.status %></a></td>
         <td>
@@ -22,7 +26,9 @@
             <a class="" data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false" data-animation="scale-down" role="button"> <i class="icon md-more-vert" aria-hidden="true"></i> </a>
             <div class="dropdown-menu" role="menu"> 
               <a class="dropdown-item" href="projects/<%= project.id %>/edit" role="menuitem"><i class="icon fa fa-eye" aria-hidden="true"></i> View</a> 
-              <a class="dropdown-item delete-option" data-href="<%= project_path(project) %>" role="menuitem"><i class="icon md-delete" aria-hidden="true"></i> Delete</a>
+              <% if write_access %>
+                <a class="dropdown-item delete-option" data-href="<%= project_path(project) %>" role="menuitem"><i class="icon md-delete" aria-hidden="true"></i> Delete</a>
+              <% end %>
             </div>
           </div>
         </td>
@@ -30,6 +36,8 @@
     <% end %>
   </tbody>
 </table>
+<%= render partial: "/shared/confirmation_popup", locals: { record_type: 'Project' } %>
+
 <div class="digg_pagination">
   <%= js_will_paginate @projects %>
 </div>

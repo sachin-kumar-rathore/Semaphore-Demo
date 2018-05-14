@@ -4,12 +4,13 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
-        <h4 class="modal-title" id="addTaskModalLabel"><%= contact.new_record? ? 'ADD CONTACT' : 'EDIT CONTACT' %></h4>
+        <% write_access =  @project ? (can_write? && can_write?('contacts')) : can_write? %>
+        <h4 class="modal-title" id="addContactModalLabel"><%= write_access ? (contact.new_record? ? 'ADD CONTACT' : 'EDIT CONTACT') : 'CONTACT DETAILS' %></h4>
       </div>
       <div class="modal-body">
-        <div class="formStyle">
-          <div class="error-messages"></div>
-          <%= form_for contact, url: url_for(controller: controller, action: action), remote: true do |form| %>
+        <%= form_for contact, url: url_for(controller: controller, action: action), remote: true do |form| %>
+          <fieldset <%= write_access ? '' : 'disabled=disabled' %> class="formStyle">
+            <div class="error-messages"></div>
             <div class="form-row">
               <div class="form-group col-md-4">
                 <label for="addName">Name:</label>
@@ -96,13 +97,15 @@
             </div>
             <%= hidden_field_tag 'contact[project_id]', @project ? @project.id : nil %>  
             
-            <div class="modalFooterBtns">
-              <button type="submit" class="btn btn-primary" ><%= contact.new_record? ? ' Save ' : ' Save changes' %></button>
-              <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
-            </div>
-          <% end %>
-        </div>
-      </div>
+            <% if write_access %>
+              <div class="modalFooterBtns">
+                <button type="submit" class="btn btn-primary" ><%= contact.new_record? ? ' Save ' : ' Save changes' %></button>
+                <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
+              </div>
+            <% end %>
+          </div>
+        </fieldset>
+      <% end %>
     </div>
   </div>
 </div>

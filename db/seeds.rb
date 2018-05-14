@@ -8,6 +8,7 @@
 require 'faker'
 
 # Transactional Emails
+TransactionalEmail.destroy_all if TransactionalEmail.count > 0
 TransactionalEmail::TYPES.each do |type|
   unless TransactionalEmail.find_by_type_id(type[:type_id])
     TransactionalEmail.create!(name: type[:name], body: Faker::Lorem.paragraph, type_id: type[:type_id], subject: type[:name])
@@ -15,14 +16,17 @@ TransactionalEmail::TYPES.each do |type|
 end
 
 # System Modules and Default Package
-GeneralModule.create(Constant::GENERAL_MODULES.first)
-GeneralModule.create(Constant::CUSTOM_MODULES.first.merge(is_custom: true))
+GeneralModule.destroy_all if GeneralModule.count > 0
+GeneralModule.create(Constant::GENERAL_MODULES)
+GeneralModule.create(Constant::CUSTOM_MODULES.map { |m| m.merge(is_custom: true) })
 
+Package.destroy_all if Package.count > 0
 default_modules = GeneralModule.default_modules
 default_package = Package.create(name: 'default-standard')
 default_modules.map{ |default_module| default_package.package_modules.create(general_module_id: default_module.id) }
 
 # Section's information
+SectionGuide.destroy_all if SectionGuide.count > 0
 Constant::SECTIONS.each do |section_name|
   SectionGuide.create(section_name: section_name, section_info: Faker::Lorem.paragraph)
 end

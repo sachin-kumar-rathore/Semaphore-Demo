@@ -15,20 +15,22 @@
   <tbody>
   <% for task in tasks %>
       <tr>
-        <td class="clickable" data-href="<%= project_task_path(task, project_id: @project) %>" data-toggle="modal" data-target="#viewContactModal1"><%= task.name %></td>
-        <td class="clickable" data-href="<%= project_task_path(task, project_id: @project) %>" data-toggle="modal" data-target="#viewContactModal1"><span class="priorityDot <%= priority_class(task.priority) %>"></span><%= task.priority %></td>
-        <td class="clickable" data-href="<%= project_task_path(task, project_id: @project) %>" data-toggle="modal" data-target="#viewContactModal1"><%= task.status %></td>
-        <td class="clickable" data-href="<%= project_task_path(task, project_id: @project) %>" data-toggle="modal" data-target="#viewContactModal1"><%= task.progress %> %</td>
-        <td class="clickable" data-href="<%= project_task_path(task, project_id: @project) %>" data-toggle="modal" data-target="#viewContactModal1"><%= task.assignee.try(:full_name) %></td>
-        <td class="clickable" data-href="<%= project_task_path(task, project_id: @project) %>" data-toggle="modal" data-target="#viewContactModal1"><%= task.description.truncate(25) %></td>
-        <td class="clickable" data-href="<%= project_task_path(task, project_id: @project) %>" data-toggle="modal" data-target="#viewContactModal1"><%= task.start_date.strftime("%m/%d/%Y") if task.start_date.present? %></td>
-        <td class="clickable" data-href="<%= project_task_path(task, project_id: @project) %>" data-toggle="modal" data-target="#viewContactModal1"><%= task.end_date.strftime("%m/%d/%Y") if task.end_date.present? %></td>
+        <td><a class="clickable" data-href="<%= project_task_path(task, project_id: @project) %>" ><%= task.name %></a></td>
+        <td><a class="clickable" data-href="<%= project_task_path(task, project_id: @project) %>" ><span class="priorityDot <%= priority_class(task.priority) %>"></span><%= task.priority %></a></td>
+        <td><a class="clickable" data-href="<%= project_task_path(task, project_id: @project) %>" ><%= task.status %></a></td>
+        <td><a class="clickable" data-href="<%= project_task_path(task, project_id: @project) %>" ><%= task.progress %> %</a></td>
+        <td><a class="clickable" data-href="<%= project_task_path(task, project_id: @project) %>" ><%= task.assignee.try(:full_name) %></a></td>
+        <td><a class="clickable" data-href="<%= project_task_path(task, project_id: @project) %>" ><%= task.description.truncate(25) %></a></td>
+        <td><a class="clickable" data-href="<%= project_task_path(task, project_id: @project) %>" ><%= filter_month_date_year(task.start_date) if task.start_date.present? %></a></td>
+        <td><a class="clickable" data-href="<%= project_task_path(task, project_id: @project) %>" ><%= filter_month_date_year(task.end_date) if task.end_date.present? %></a></td>
         <td>
           <div class="openLeft moreOptions dropdown"> 
             <a class="" data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false" data-animation="scale-down" role="button"> <i class="icon md-more-vert" aria-hidden="true"></i> </a>
-            <div class="dropdown-menu" role="menu"> 
-              <a class="dropdown-item clickable" data-href="<%= project_task_path(task, project_id: @project) %>" role="menuitem" data-toggle="modal" data-target="#viewContactModal1"><i class="icon fa fa-pencil" aria-hidden="true"></i> Edit</a> 
-              <a class="dropdown-item delete-clickable" data-href="<%= project_task_path(task, project_id: @project.id) %>" role="menuitem"><i class="icon md-delete" aria-hidden="true"></i> Delete</a> 
+            <div class="dropdown-menu" role="menu">
+              <a class="dropdown-item clickable" data-href="<%= project_task_path(task, project_id: @project) %>" role="menuitem"><i class="icon <%= write_access ? 'md-edit' : 'fa fa-eye' %>" aria-hidden="true"></i><%= write_access ? 'Edit' : 'View' %></a> 
+              <% if write_access %>
+                <a class="dropdown-item delete-clickable" data-href="<%= project_task_path(task, project_id: @project.id) %>" role="menuitem"><i class="icon md-delete" aria-hidden="true"></i> Delete</a> 
+              <% end %>
             </div>
           </div>
         </td>
@@ -36,6 +38,7 @@
     <% end %>
   </tbody>
 </table>
+<%= render partial: "/shared/confirmation_popup", locals: { record_type: 'Project Task' } %>
 
 <div class="digg_pagination">
   <%= js_will_paginate tasks %>

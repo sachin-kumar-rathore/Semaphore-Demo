@@ -1,9 +1,5 @@
 <div class="panel">
-  <header class="panel-heading">
-    <h3 class="panel-title">
-    </h3>
-  </header>
-  <div class="panel-body">
+  <div class="<%= 'panel-body' unless @project %>">
     <div class="formStyle">
       <%= form_tag url_for(controller: controller, action: action), remote: true, method: :get do %>
       <div class="form-row">

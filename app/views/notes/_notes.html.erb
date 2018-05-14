@@ -1,4 +1,4 @@
-<table class="table tableCustomStyle tableImg table-hover removeTblSearch bodrTop footable footable-6 footable-filtering footable-filtering-right footable-paging footable-paging-center breakpoint-lg" data-toggle-column="first" data-empty="There are no notes" data-show-toggle="true" >
+<table class="table tableCustomStyle tableImg table-hover removeTblSearch footable footable-6 footable-filtering footable-filtering-right footable-paging footable-paging-center breakpoint-lg" data-toggle-column="first" data-empty="There are no notes" data-show-toggle="true" >
   <thead>
     <tr>
       <th>Date</th>
@@ -11,15 +11,17 @@
   <tbody>
     <% for note in notes %>
       <tr>
-        <td><%= note.date %></td>
-        <td><%= note.subject.truncate(40) %></td>
-        <td><%= note.description.truncate(50) %></td>
+        <td><a class="clickable" data-href="<%= project_note_path(note, project_id: @project.id) %>"><%= note.date %></a></td>
+        <td><a class="clickable" data-href="<%= project_note_path(note, project_id: @project.id) %>"><%= note.subject.truncate(40) %></a></td>
+        <td><a class="clickable" data-href="<%= project_note_path(note, project_id: @project.id) %>"><%= note.description.truncate(50) %></a></td>
         <td>
           <div class="openLeft moreOptions dropdown"> 
             <a class="" data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false" data-animation="scale-down" role="button"> <i class="icon md-more-vert" aria-hidden="true"></i> </a>
             <div class="dropdown-menu" role="menu"> 
-              <a class="dropdown-item clickable" data-href="<%= project_note_path(note, project_id: @project.id) %>" role="menuitem" data-toggle="modal" data-target="#viewContactModal1"><i class="icon fa fa-pencil" aria-hidden="true"></i> Edit</a> 
-              <a class="dropdown-item delete-clickable" data-href="<%= project_note_path(note, project_id: @project.id) %>" role="menuitem"><i class="icon md-delete" aria-hidden="true"></i> Delete</a> 
+              <a class="dropdown-item clickable" data-href="<%= project_note_path(note, project_id: @project.id) %>" role="menuitem" data-toggle="modal" data-target="#viewContactModal1"><i class="icon <%= write_access ? 'md-edit' : 'fa fa-eye' %>" aria-hidden="true"></i><%= write_access ? 'Edit' : 'View' %></a> 
+              <% if write_access %>
+                <a class="dropdown-item delete-clickable" data-href="<%= project_note_path(note, project_id: @project.id) %>" role="menuitem"><i class="icon md-delete" aria-hidden="true"></i> Delete</a> 
+              <% end %>
             </div>
           </div>
         </td>

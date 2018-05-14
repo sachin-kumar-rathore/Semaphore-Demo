@@ -70,7 +70,7 @@ module ApplicationHelper
   end
 
   def disabled_form?(module_controller=nil)
-    result = module_controller ? (can_write? && can_write?(module_controller)) : can_write?
+    result = module_controller && (module_controller != get_current_section_name) ? (can_write? && can_write?(module_controller)) : can_write?
     result ? '' : "disabled=disabled"
   end
 

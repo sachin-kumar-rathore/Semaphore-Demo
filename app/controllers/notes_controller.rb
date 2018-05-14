@@ -1,6 +1,7 @@
 # Manage Notes inside a project
-class NotesController < ApplicationController
+class NotesController < ManageGeneralModulesController
   before_action :authenticate_user!, :set_project
+  before_action :authorized_user_to_write?, except: %i[index show]
   before_action :set_note, only: %i[show update destroy]
   respond_to :js
 

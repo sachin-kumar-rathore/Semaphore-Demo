@@ -5,25 +5,26 @@
         <h3>Project Files</h3>
       </div>
       <div class="col">
-        <div class="tasksRightOptions pull-right">
-        <ul>
-          <li>
-            <button class="btn btn-default waves-effect waves-classic clickable col-auto" data-href="<%= new_project_file_path(project_id: @project.id) %>" type="button"><i class="icon fa fa-plus btnIcon" aria-hidden="true"></i>Add File
-            </button>
-          </li>
-          <li>
-            <div class="openLeft moreOptions dropdown"> <a class="" data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false" data-animation="scale-down" role="button"> <i class="icon md-more-vert" aria-hidden="true"></i> </a>
-              <div class="dropdown-menu" role="menu"> <a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon md-view-dashboard" aria-hidden="true"></i> Action</a> <a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon md-view-dashboard" aria-hidden="true"></i> Action</a> </div>
-            </div>
-          </li>
-        </ul>
-        </div>
+        <% if write_access = can_write? && can_write?('files') %>
+          <div class="tasksRightOptions pull-right">
+            <ul>
+              <li>
+                <button class="btn btn-default waves-effect waves-classic clickable col-auto" data-href="<%= new_project_file_path(project_id: @project.id) %>" type="button"><i class="icon fa fa-plus btnIcon" aria-hidden="true"></i>Add File
+                </button>
+              </li>
+              <li>
+                <div class="openLeft moreOptions dropdown"> <a class="" data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false" data-animation="scale-down" role="button"> <i class="icon md-more-vert" aria-hidden="true"></i> </a>
+                  <div class="dropdown-menu" role="menu"> <a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon md-view-dashboard" aria-hidden="true"></i> Action</a> <a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon md-view-dashboard" aria-hidden="true"></i> Action</a> </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
   <div class="panel-body tableDesign" id="filesList" >
-    <%= render partial: 'files', locals: { files: @files } %>
+    <%= render partial: 'files', locals: { files: @files, write_access: write_access } %>
   </div>
 </div>
 <div id="createOrEditFile"></div>
-<%= render partial: "/shared/confirmation_popup", locals: { record_type: 'Project File' } %>

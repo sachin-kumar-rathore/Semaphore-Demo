@@ -1,6 +1,6 @@
 <div class="panel panel-body">
   <%= form_for @activity, class: "col-md-12" do |activity| %>
-    <fieldset <%= disabled_form? %> class="formStyle">
+    <fieldset <%= disabled_form = disabled_form? %> class="formStyle">
       <div class="error-messages">
         <%= render partial: 'shared/error_messages', locals: {obj: @activity} %>
       </div>
@@ -85,7 +85,7 @@
       <% if @company %>
         <%= hidden_field_tag 'company_id', @company.id %>
       <% end %>
-      <% if can_write? %>
+      <% unless disabled_form.present? %>
         <div class="divider-hr"></div>
         <div class="form-row">
           <div class="form-group mbFullWd col-auto">
@@ -97,7 +97,7 @@
           <div class="form-group mbFullWd col-auto">
             <%= link_to 'Cancel', activities_path, class: "btn btn-outline-primary", data: {turbolinks: false} %>
           </div>
-          <% unless @activity.new_record? || @activity.converted? %>
+          <% unless (@activity.new_record? || @activity.converted?) || !(current_org.enabled_default_module?('projects') && can_write?('projects')) %>
             <div class="form-group mbFullWd col-auto">
               <%= link_to 'Push Activity To Project', new_project_path(activity_id: @activity.id), class: "btn btn-primary", data: {turbolinks: "false"} %>
             </div>

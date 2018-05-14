@@ -8,10 +8,11 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
-          <h4 class="modal-title" id="addTaskModalLabel"><%= can_write? ? (@task.new_record? ? 'ADD NEW TASK' : 'EDIT TASK') : 'TASK DETAILS' %></h4>
+          <% write_access = can_write? && can_write?('tasks') %>
+          <h4 class="modal-title" id="addTaskModalLabel"><%= write_access ? (@task.new_record? ? 'ADD NEW TASK' : 'EDIT TASK') : 'TASK DETAILS' %></h4>
         </div>
         <div class="modal-body">
-          <fieldset <%= disabled_form?('tasks') %> class="formStyle">
+          <fieldset <%= write_access ? '' : 'disabled=disabled' %> class="formStyle">
             <div class="error-messages"></div>
             <div class="example">
               <div class="row">
@@ -79,7 +80,7 @@
           </fieldset>
           <%= form.hidden_field :taskable_id, value: @activity.id %>
           
-          <% if can_write? %> 
+          <% if write_access %> 
             <div class="modalFooterBtns">
               <div class="form-row">
                 <div class="col-auto">

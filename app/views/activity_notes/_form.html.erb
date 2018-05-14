@@ -8,10 +8,11 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
-          <h4 class="modal-title" id="addUserModalLabel"><%= can_write? ? (@note.new_record? ? 'ADD NEW NOTE' : 'EDIT NOTE') : 'NOTE DETAILS' %></h4>
+          <% disabled_form = disabled_form? %>
+          <h4 class="modal-title" id="addUserModalLabel"><%= disabled_form.blank? ? (@note.new_record? ? 'ADD NEW NOTE' : 'EDIT NOTE') : 'NOTE DETAILS' %></h4>
         </div>
         <div class="modal-body">
-          <fieldset <%= disabled_form? %> class="formStyle">
+          <fieldset <%= disabled_form %> class="formStyle">
             <div class="error-messages"></div>
             <div class="row">
               <div class="form-group col-md-8">
@@ -36,7 +37,7 @@
               </div>
             </div>
             
-            <% if can_write? %>
+            <% unless disabled_form.present? %>
               <div class="modalFooterBtns">
                 <div class="form-row">
                   <div class="col-auto">

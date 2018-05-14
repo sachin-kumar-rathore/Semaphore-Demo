@@ -2,11 +2,11 @@
   <div class="form-group">
     <label class="visitDateLabel" for="sVisit3">Site Visit:</label>
     <div class="rightIconFld">
-      <%= f.text_field 'visit_date', class: "form-control datepicker", value: "#{f.object.visit_date.strftime("%m/%d/%Y") if f.object.visit_date.present?}", data: {plugin: "datepicker"} %>
+      <%= f.text_field 'visit_date', class: "form-control datepicker", value: "#{filter_month_date_year(f.object.visit_date) if f.object.visit_date.present?}", data: {plugin: "datepicker"} %>
       <label for="sVisit3" class="fldRightIcon"> <i class="icon fa fa-calendar-o" aria-hidden="true"></i> </label>
     </div>
   </div>
-  <%= link_to_remove_association "Remove", f, class: 'remove-link' %>
+  <%= link_to_remove_association "Remove", f, class: 'remove-link' if can_write? %>
 </div>
 
 <script>

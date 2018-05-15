@@ -102,13 +102,16 @@ class User < ApplicationRecord
   end
 
   def module_accesses(module_controller)
-    security_roles.map { |role| role.accesses[module_controller]  }
+    get_user_roles.map { |role| role['accesses'][module_controller]  }
                   .reject { |access| access.nil? }
   end
 
-  def check_permissions(module_controller, key, value)
-    accesses = module_accesses(module_controller)
-    return false unless accesses.present?
-    accesses.map { |permissions| eval(permissions)[key] }.uniq.include?(value)
+  def get_user_roles
+    $redis.set('user_roles', security_roles.to_json) unless $redis.get('user_roles')
+    parse_user_roles
+  end
+
+  def parse_user_roles
+    JSON.parse($redis.get('user_roles'))
   end
 end

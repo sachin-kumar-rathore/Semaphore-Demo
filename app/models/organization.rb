@@ -41,7 +41,7 @@ class Organization < ApplicationRecord
   validates_presence_of :name, :primary_contact_first_name, :primary_contact_phone, :primary_contact_email
   validates_format_of :primary_contact_email, with: Devise::email_regexp
 
-  after_create :create_admin_role, :create_config, :create_config_without_status, :assign_default_package
+  after_create :assign_default_package, :create_admin_role, :create_config, :create_config_without_status
 
   SECURITY_ROLES_HASH.each do |arg, val|
     define_method(arg) do
@@ -49,15 +49,10 @@ class Organization < ApplicationRecord
     end
   end
 
-  def create_admin_role(name=nil)
+  def create_admin_role(name=nil, accesses={})
     name = name || "Administrator"
-    self.security_roles.create!(name: name,
-      project_permissions: SecurityRole::PERMIT_ALL,
-      site_permissions: SecurityRole::PERMIT_ALL,
-      contact_permissions: SecurityRole::PERMIT_ALL,
-      configuration_permissions: SecurityRole::PERMIT_ALL,
-      user_permissions: SecurityRole::PERMIT_ALL,
-      company_permissions: SecurityRole::PERMIT_ALL ) 
+    self.enabled_modules.pluck(:controller_name).map { |module_controller| accesses[module_controller] = {access: 'Write', status: true }.stringify_keys } unless accesses.present?
+    self.security_roles.create!(name: name, accesses: accesses) 
   end
 
   def create_config

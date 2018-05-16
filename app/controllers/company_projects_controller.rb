@@ -1,6 +1,6 @@
 # Manage projects inside a company
 class CompanyProjectsController < ManageGeneralModulesController
-  before_action :authenticate_user!, :authorized_module?
+  before_action :authenticate_user!, :authorized_module?, :authorized_to_write_current_section?
   before_action :set_company
   respond_to :js
 

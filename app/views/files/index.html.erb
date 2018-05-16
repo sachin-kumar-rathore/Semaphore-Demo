@@ -23,10 +23,12 @@
             <div class="col col-auto">
               <div class="tasksRightOptions">
                 <ul>
-                  <% if current_org.enabled_module?('dropboxes') %>
+                  <% if current_org.enabled_custom_module?('dropboxes') %>
                     <li><a class="btn btn-primary" href="<%= dropboxes_path %>">Dropbox</a></li>
                   <% end %>
-                  <li><a class="btn btn-default clickable" data-href="<%= new_file_path %>"><i class="icon fa fa-plus btnIcon" aria-hidden="true"></i> Add New File</a></li>
+                  <% if write_access = can_write? %>
+                    <li><a class="btn btn-default clickable" data-href="<%= new_file_path %>"><i class="icon fa fa-plus btnIcon" aria-hidden="true"></i> Add New File</a></li>
+                  <% end %>
                 </ul>
               </div>
             </div>
@@ -34,7 +36,7 @@
         </div>
       </header>
       <div class="panel-body designTable" id="filesList">
-        <%= render :partial => 'files', locals: {files: @files} %>
+        <%= render :partial => 'files', locals: {files: @files, write_access: write_access} %>
       </div>
     </div>
 

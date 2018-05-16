@@ -8,8 +8,8 @@
   <tbody>
     <% @company_projects.each do |project| %>
       <tr>
-        <td><a class="custom-href" href="<%= edit_project_path(project) %>" data-turbolinks="false"><%= project.project_number %></td>
-        <td><a class="custom-href" href="<%= edit_project_path(project) %>" data-turbolinks="false"><%= project.name %></td>
+        <td><a class="custom-href" href="<%= edit_project_path(project) %>" data-turbolinks="false"><%= project.project_number %></a></td>
+        <td><a class="custom-href" href="<%= edit_project_path(project) %>" data-turbolinks="false"><%= project.name %></a></td>
       </tr>
     <% end %>
   </tbody>

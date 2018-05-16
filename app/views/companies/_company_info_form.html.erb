@@ -9,6 +9,7 @@
     <div class="alerts"></div>
     <br/>
     <%= form_for @company, url: company_info_update_company_path, method: :patch, remote: true  do |company| %>
+    <fieldset <%= form_state %>>
       <div class="row">
         <div class="form-group col-md-6">
           <label id="inputCompanyName" >Company Name:</label>
@@ -108,17 +109,20 @@
         </div>
       </div>
       <div class="divider-hr"></div>
-      <div class="form-row">
-        <div class="col-auto">
-          <button type="submit" class="btn btn-primary" name= "commit", value= "Save & Close">Save & Close</button>
+      <% if write_access %>
+        <div class="form-row">
+          <div class="col-auto">
+            <button type="submit" class="btn btn-primary" name= "commit", value= "Save & Close">Save & Close</button>
+          </div>
+          <div class="col-auto">
+            <button type="submit" class="btn btn-outline-primary">Save</button>
+          </div>
+          <div class="col-auto">
+            <%= link_to 'Cancel', companies_path, class: "btn btn-outline-primary", data: { turbolinks: false } %>
+          </div>
         </div>
-        <div class="col-auto">
-          <button type="submit" class="btn btn-outline-primary">Save</button>
-        </div>
-        <div class="col-auto">
-          <%= link_to 'Cancel', companies_path, class: "btn btn-outline-primary", data: { turbolinks: false } %>
-        </div>
-      </div> 
+      <% end %>
+    </fieldset>
     <% end %>
   </div>
 </div>

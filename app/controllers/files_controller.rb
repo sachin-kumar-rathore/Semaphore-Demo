@@ -1,7 +1,7 @@
 # Manage files belonging to an organization
 class FilesController < ManageGeneralModulesController
   before_action :authenticate_user!, :authorized_module?
-  before_action :authorized_user_to_write?, except: %i[index edit]
+  before_action :authorized_user_to_write?, except: %i[index]
   before_action :set_file, only: %i[edit update destroy show_projects
                                     attach_project_to_file]
   respond_to :html, only: %i[index]

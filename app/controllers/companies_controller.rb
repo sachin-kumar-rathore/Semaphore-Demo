@@ -2,6 +2,7 @@
 class CompaniesController < ManageGeneralModulesController
   before_action :authenticate_user!, :authorized_module?
   before_action :authorize_current_controller, only: %i[export_form export]
+  before_action :authorized_user_to_write?, except: %i[index show edit export_form export]
   before_action :set_company, except: %i[index new]
   respond_to :html, only: %i[index edit]
   respond_to :js

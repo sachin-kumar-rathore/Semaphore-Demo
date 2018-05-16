@@ -10,6 +10,7 @@
     </tr>
   </thead>
   <tbody>
+    <% write_access = can_write? unless local_assigns.has_key? :write_access %>
     <% @projects.each do |project| %>
       <tr>
         <td><a class="custom-href" href="projects/<%= project.id %>/edit"><%= project.project_number %></a></td>

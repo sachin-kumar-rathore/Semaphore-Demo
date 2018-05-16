@@ -1,6 +1,7 @@
-<%= render 'company_info_form' %>
-<%= render 'history_form' %>
-<%= render 'facilities_form' %>
-<%= render 'products_and_services_form' %>
-<%= render 'local_employment_form' %>
-<%= render 'union_representation_form' %>
+<% form_state, write_access = disabled_form?, can_write? %>
+<%= render 'company_info_form', form_state: form_state, write_access: write_access %>
+<%= render 'history_form', form_state: form_state, write_access: write_access %>
+<%= render 'facilities_form', form_state: form_state, write_access: write_access %>
+<%= render 'products_and_services_form', form_state: form_state, write_access: write_access %>
+<%= render 'local_employment_form', form_state: form_state, write_access: write_access %>
+<%= render 'union_representation_form', form_state: form_state, write_access: write_access %>

@@ -11,15 +11,24 @@
       <li class="nav-item">
         <a class="nav-link" data-toggle="tab" href="<%= activity_notes_path(@activity) %>" data-remote="true" role="tab" id="notesNavLink">Interactions</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="<%= activity_files_path(@activity) %>" data-remote="true" role="tab" id="filesNavLink">Files</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="<%= activity_tasks_path(@activity) %>" data-remote="true" role="tab" id="tasksNavLink">Tasks</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="<%= activity_emails_path(@activity) %>" data-remote="true" role="tab" id="emailsNavLink">Mailbox</a>
-      </li>
+
+      <% if current_org.enabled_default_module?('files') %>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="<%= activity_files_path(@activity) %>" data-remote="true" role="tab" id="filesNavLink">Files</a>
+        </li>
+      <% end %>
+
+      <% if current_org.enabled_default_module?('tasks') %>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="<%= activity_tasks_path(@activity) %>" data-remote="true" role="tab" id="tasksNavLink">Tasks</a>
+        </li>
+      <% end %>
+
+      <% if current_org.enabled_default_module?('emails') %>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="<%= activity_emails_path(@activity) %>" data-remote="true" role="tab" id="emailsNavLink">Mailbox</a>
+        </li>
+      <% end %>
       </ul>
   <% end %>
   <div class="tab-content pt-20">

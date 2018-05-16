@@ -18,7 +18,7 @@ module ProjectsHelper
     when 'ProjectContact' then "Contact #{audit.auditable.try(:contact).try(:name)}"
     when 'Contact' then "Contact #{audit.auditable.try(:name)}"
     when 'Note' then "Note #{audit.auditable.try(:subject)}"
-    when 'Document' then "File #{File.basename(audit.auditable.name.path) if audit.auditable}"
+    when 'Document' then "File #{audit.auditable.file_name || File.basename(audit.auditable.name.path) if audit.auditable}"
     when 'Email' then "Email #{audit.auditable.try(:subject)}"
     end
   end

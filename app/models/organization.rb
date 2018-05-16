@@ -92,6 +92,6 @@ class Organization < ApplicationRecord
   end
 
   def enabled_module?(module_controller)
-    enabled_default_module?(module_controller) || enabled_custom_module(module_controller)
+    enabled_default_module?(module_controller) || enabled_custom_module?(module_controller)
   end
 end

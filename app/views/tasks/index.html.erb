@@ -31,7 +31,7 @@
             <div class="col col-auto">
               <div class="tasksRightOptions">
                 <ul>
-                  <% if can_write? %>
+                  <% if write_access = can_write? %>
                     <li><a class="btn btn-default clickable" data-href="<%= new_task_path %>"><i class="icon fa fa-plus btnIcon" aria-hidden="true"></i> Add New Task</a></li>
                   <% end %>
                 </ul>
@@ -41,7 +41,7 @@
         </div>
       </header>
       <div class="panel-body" id="tasksList">
-        <%= render :partial => 'tasks', locals: {tasks: @tasks} %>
+        <%= render :partial => 'tasks', locals: { tasks: @tasks, write_access: write_access } %>
       </div>
     </div>
   </div>

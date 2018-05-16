@@ -8,6 +8,7 @@
   </tr>
   </thead>
   <tbody>
+    <% write_access = @project ? (can_write? && can_write?('sites')) : can_write? %>
     <% sites.each do |site| %>
         <tr>
           <td><a class="clickable" data-href="<%= @project ? project_site_path(@project, site) : site_path(site) %>" data-toggle="modal" data-target="#viewContactModal1"><%= site.site_number %></a></td>
@@ -16,10 +17,9 @@
           <td>
             <div class="openLeft moreOptions dropdown"> 
               <a class="" data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false" data-animation="scale-down" role="button"> <i class="icon md-more-vert" aria-hidden="true"></i> </a>
-              <div class="dropdown-menu" role="menu">
-                <% result = @project ? (can_write? && can_write?('sites')) : can_write? %> 
-                <a class="dropdown-item clickable" data-href="<%= @project ? project_site_path(@project, site) : site_path(site) %>" role="menuitem" data-toggle="modal" data-target="#viewContactModal1"><i class="icon <%= result ? 'md-edit' : 'fa fa-eye' %>" aria-hidden="true"></i><%= result ? 'Edit' : 'View' %></a> 
-                <% if result %>
+              <div class="dropdown-menu" role="menu"> 
+                <a class="dropdown-item clickable" data-href="<%= @project ? project_site_path(@project, site) : site_path(site) %>" role="menuitem" data-toggle="modal" data-target="#viewContactModal1"><i class="icon <%= write_access ? 'md-edit' : 'fa fa-eye' %>" aria-hidden="true"></i><%= write_access ? 'Edit' : 'View' %></a> 
+                <% if write_access %>
                   <a class="dropdown-item delete-clickable" data-href="<%= @project ? project_site_path(@project, site) : site_path(site) %>" role="menuitem"><i class="icon md-delete" aria-hidden="true"></i> Delete</a> 
                 <% end %>
               </div>

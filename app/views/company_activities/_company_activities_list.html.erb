@@ -6,14 +6,16 @@
           <h2>Company Activities</h2>
         </div>
       </div>
-      <div class="col col-auto">
-        <%= link_to new_company_activity_path(@company), class: "pull-right btn btn-default waves-effect waves-classic clickable", data: { turbolinks: false } do %>
-          <i class="icon fa fa-plus btnIcon" aria-hidden="true"></i> Add New Activity
-        <% end %>
-      </div>
+      <% if write_access = can_write? && can_write?('activities') %>
+        <div class="col col-auto">
+          <%= link_to new_company_activity_path(@company), class: "pull-right btn btn-default waves-effect waves-classic clickable", data: { turbolinks: false } do %>
+            <i class="icon fa fa-plus btnIcon" aria-hidden="true"></i> Add New Activity
+          <% end %>
+        </div>
+      <% end %>
     </div>
   </div>
   <div class="panel-body tableDesign" id="activitiesList">
-    <%= render partial: "company_activities/activities" %>
+    <%= render "company_activities/activities", write_access: write_access %>
   </div>
 </div>

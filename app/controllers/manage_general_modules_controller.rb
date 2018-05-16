@@ -56,7 +56,7 @@ class ManageGeneralModulesController < ApplicationController
     general_module = GeneralModule.find_by(controller_name: section)
     return unless general_module.present?
     unless current_user.can_write?(section)
-      mark_as_suspicious_activity(general_module)
+      mark_as_suspicious_activity(general_module) unless request.get?
       redirect_root and return true
     end
   end

@@ -1,18 +1,21 @@
 <div class="panel activitiesTabOptions">
-  <header class="panel-heading">
-    <h3 class="panel-title">
-      <div class="row">
-        <div class="col-md-4 tableTitle">
+  <div class="panel-body">
+    <div class="row">
+      <div class="col">
+        <div class="tableTitle">
           <h2>Company Projects</h2>
         </div>
-        <div class="col-md-8">
+      </div>
+      <% if can_write? %>
+        <div class="mbFullWd col-auto">
           <button class="pull-right btn btn-default waves-effect waves-classic clickable" data-href="<%= show_existing_projects_company_projects_path(@company.id) %>" type="button">
             <i class="icon fa fa-plus btnIcon" aria-hidden="true"></i> Associate Project
           </button>
         </div>
-      </div>
-    </h3>
-  </header>
+      <% end %>
+    </div>
+  </div>
+
 
   <div class="panel-body tableDesign" id="projectsList">
     <%= render partial: "company_projects/projects", locals: {company_projects: @company_projects} %>

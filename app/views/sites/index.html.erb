@@ -14,6 +14,7 @@
         </h3>
       </header>
       <header class="panel-heading">
+        <% if write_access = can_write? %>
         <div class="tasksTopOptions">
           <div class="row">
             <div class="col col-auto">
@@ -24,7 +25,7 @@
                     id="createNewSite" type="button"><i class="icon fa fa-plus btnIcon" aria-hidden="true"></i> Add Site/Building
                   </button>
                   </li>
-                  <% if current_org.enabled_default_module?('imports') %>
+                  <% if can_access_imports = current_org.enabled_default_module?('imports') %>
                     <li>
                       <button class="btn btn-default waves-effect waves-classic" data-target="#siteImportFormCenter" data-toggle="modal"
                         id="importNewSites" type="button">Excel Import
@@ -41,6 +42,7 @@
             </div>
           </div>
         </div>
+        <% end %>
       </header>
       <div class="panel-body" id="sitesList">
         <%= render partial: 'sites', locals: {sites: @sites} %>
@@ -53,7 +55,7 @@
 </div>
 <div id="createOrEditSite"></div>
 
-<% if current_org.enabled_default_module?('imports') %>
+<% if can_access_imports && write_access %>
   <%= render :partial => 'sites/import_sites_form' %>
   <%= render :partial => 'sites/lois_import_form' %>
 <% end %>

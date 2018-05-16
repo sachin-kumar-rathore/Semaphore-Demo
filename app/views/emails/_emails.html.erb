@@ -22,7 +22,7 @@
           </td>
         <% else %>
           <td>
-            <% if can_write?('emails') %>
+            <% if write_access = can_write?('emails') %>
               <button data-href="<%= show_existing_contacts_email_path(email) %>" class="btn btn-primary clickable">
                 <i class="fa fa-plus white"></i> Add
               </button>
@@ -37,7 +37,7 @@
           </td>
         <% else %>
           <td>
-            <% if can_write?('emails') %>
+            <% if write_access %>
               <button data-href="<%= show_existing_projects_and_activities_email_path(email) %>" class="btn btn-primary clickable">
                 <i class="fa fa-plus white"></i> Add
               </button>

@@ -12,7 +12,7 @@ class SecurityRole < ApplicationRecord
   after_update :delete_cache, if: :saved_change_to_accesses?
 
   def self.create_configs( org_id )
-    organization, accesses =  Organization.find org_id, {}
+    organization, accesses =  Organization.find_by_id(org_id), {}
     organization.enabled_modules.pluck(:controller_name).map { |module_controller| accesses[module_controller] = {access: 'Write', status: true }.stringify_keys }
     SECURITY_ROLES.each do |name|
       organization.create_admin_role(name, accesses)

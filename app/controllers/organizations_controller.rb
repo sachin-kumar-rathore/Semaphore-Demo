@@ -22,7 +22,8 @@ class OrganizationsController < ApplicationController
   end
 
   def sign_in_as_admin
-    @user = @organization.users.with_role :admin
+    admin_role = @organization.security_roles.find_by(name: 'Administrator')
+    @user = @organization.users.includes(:user_roles).user_role(admin_role.id)
     bypass_sign_in_with_user
   end
 

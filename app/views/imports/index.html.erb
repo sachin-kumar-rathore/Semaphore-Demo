@@ -2,7 +2,7 @@
 <div class="section-info-flash"></div>
 <div class="error-messages"></div>
 <div class="row">
-  <% if current_org.enabled_default_module?('contacts') %>
+  <% if current_org.enabled_default_module?('contacts') && can_write?('contacts') %>
     <div class="col-md-6">
       <div class="panel panel-bordered">
         <div class="panel-heading tableTitle">
@@ -21,7 +21,7 @@
     <%= render :partial => 'contacts/import_contacts_form' %>
   <% end %>
   
-  <% if current_org.enabled_default_module?('sites') %>
+  <% if current_org.enabled_default_module?('sites') && can_write?('sites') %>
     <div class="col-md-6">
       <div class="panel panel-bordered">
         <div class="panel-heading tableTitle">

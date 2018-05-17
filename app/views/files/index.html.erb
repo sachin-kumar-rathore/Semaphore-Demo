@@ -23,7 +23,7 @@
             <div class="col col-auto">
               <div class="tasksRightOptions">
                 <ul>
-                  <% if current_org.enabled_custom_module?('dropboxes') %>
+                  <% if current_org.enabled_custom_module?('dropboxes') && can_write?('dropboxes') %>
                     <li><a class="btn btn-primary" href="<%= dropboxes_path %>">Dropbox</a></li>
                   <% end %>
                   <% if write_access = can_write? %>

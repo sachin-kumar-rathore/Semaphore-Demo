@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load ready', function() {
+$(document).ready(function (){
   $('.step-form fieldset:first-of-type').fadeIn('slow');
   
   // next step

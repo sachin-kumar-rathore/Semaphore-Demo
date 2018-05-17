@@ -1,5 +1,5 @@
 class OutlookContactsController < ManageGeneralModulesController
-  before_action :authenticate_user!, :authorized_module?
+  before_action :authenticate_user!, :authorized_module?, :authorized_user_to_write?
   
   include AuthenticationModule
 

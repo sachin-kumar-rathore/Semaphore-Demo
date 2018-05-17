@@ -1,7 +1,7 @@
 <div class="section-info-flash"></div>
 <div class="dashboard-menu">
   <div class="row">
-    <% if current_org.enabled_default_module?('projects') %>
+    <% if enabled_reports = current_org.enabled_default_module?('reports') %>
     <div class="col-lg-4">
       <div class="projectMenu">
         <ul>
@@ -108,8 +108,6 @@
         </ul>
       </div>
     </div>
-    <% end %>
-    <% if current_org.enabled_default_module?('reports') %>
     <div class="col-lg-8">
       <div class="card cardPadding <%= "hoverOverlay" unless @not_demo_mode %>">
         <% unless @not_demo_mode %>
@@ -144,7 +142,7 @@
     <% end %>
   </div>
   <div class="row">
-    <% if current_org.enabled_default_module?('reports') %>
+    <% if enabled_reports %>
       <div class="col-lg-4">
         <div class="card cardPadding <%= "hoverOverlay" unless @not_demo_mode %>">
           <% unless @not_demo_mode %>
@@ -163,7 +161,7 @@
       </div>
     <% end %>
     <% if current_org.enabled_default_module?('tasks') %>
-    <div class="col-lg-8">
+    <div class="<%= enabled_reports ? 'col-lg-8' : 'col-lg-12' %>">
       <div class="card cardPadding <%= "hoverOverlay" if @tasks.count == 0 %>">
         <% if @tasks.count == 0 %>
           <div class="overlaySec">

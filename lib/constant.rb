@@ -152,4 +152,26 @@ module Constant
                'manage_users', 'manage_configurations', 'considered_locations',
                'security_roles', 'project_logs', 'organization_details'
              ]
+
+  EMAIL_TYPES = [
+            {name: 'Welcome New Organization', type_id: 1, recipient_roles: 'org'},
+            {name: 'Welcome First User', type_id: 2, recipient_roles: 'first_org_admin'},
+            {name: 'Reset Password', type_id: 3, recipient_roles: 'all'},
+            {name: 'Reset Password Confirmation', type_id: 4, recipient_roles: 'all'},
+            {name: 'New Task Creation', type_id: 5, recipient_roles: 'org_users'},
+            {name: 'New Task Assigned', type_id: 6, recipient_roles: 'org_users'},
+            {name: 'New Tasks Re-Assigned', type_id: 7, recipient_roles: 'org_users'},
+            {name: 'New User Invitation', type_id: 8, recipient_roles: 'org_users'},
+            {name: 'New User Invite Notification(admins)', type_id: 9, recipient_roles: 'org_admins'},
+            {name: 'Welcome New User', type_id: 10, recipient_roles: 'org_users'},
+            {name: 'New User Notification(admins)', type_id: 11, recipient_roles: 'org_admins'},
+            {name: 'New User Invite Notification(inviter)', type_id: 12, recipient_roles: 'org_admins'},
+            {name: 'New User Notification(inviter)', type_id: 13, recipient_roles: 'org_users'},
+            {name: 'New User Emails', type_id: 14, recipient_roles: ''},
+            {name: 'New User Invitation Emails', type_id: 15, recipient_roles: ''},
+            {name: 'New User Welcome Emails', type_id: 16, recipient_roles: ''},
+            {name: 'Task Assignment Emails', type_id: 17, recipient_roles: ''},
+            {name: 'Reset Password Emails', type_id: 18, recipient_roles: ''},
+            {name: 'Other Emails', type_id: 19, recipient_roles: ''}
+          ]
 end

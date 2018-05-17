@@ -12,39 +12,37 @@
           </div>
           <div class="col col-auto">
             <div class="tasksRightOptions">
-              <ul>
-                <li><a href="<%= content_dropboxes_path %>" class="btn btn-default" data-turbolinks="false"><i class="icon fa fa-plus btnIcon" aria-hidden="true"></i> Sync Files</a></li>
-              </ul>
+              <% if write_access = can_write? %>
+                <ul>
+                  <li><a href="<%= content_dropboxes_path %>" class="btn btn-default" data-turbolinks="false"><i class="icon fa fa-plus btnIcon" aria-hidden="true"></i> Sync Files</a></li>
+                </ul>
+              <% end %>
             </div>
           </div>
         </div>
       </div>
     </header>
     <div class="panel-body dropboxFileList">
-      <%= render 'dropbox_files' %>
+      <%= render 'dropbox_files', write_access: write_access %>
     </div>
   </div>
 <% else %>
-<div class="row">
-  <div class="col-md-6">
-    <div class="panel panel-bordered">
-      <div class="panel-heading tableTitle">
-        <h2 class="panel-title">Connect with Dropbox</h2>
-      </div>
-      <div class="panel-body">
-        <% if current_user.dropbox_token.present? %>
-          Connected
-        <% else %>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="panel panel-bordered">
+        <div class="panel-heading tableTitle">
+          <h2 class="panel-title">Connect with Dropbox</h2>
+        </div>
+        <div class="panel-body">
           <a  class="btn btn-primary" href="<%= connect_dropboxes_path %>" target="_blank">
             Connect
           </a>
           <button class="btn btn-primary" data-target="#DropboxFormCenter" data-toggle="modal" type="button">
             Enter Code
           </button>
-        <% end %>
+        </div>
       </div>
     </div>
   </div>
-</div>
+  <%= render :partial => 'dropbox_form' %>
 <% end %>
-<%= render :partial => 'dropbox_form' %>

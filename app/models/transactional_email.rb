@@ -1,16 +1,6 @@
 class TransactionalEmail < ApplicationRecord
 
-  # == Constants == #
-  TYPES = [
-      {name: 'Welcome New Organization', type_id: 1},
-      {name: 'Welcome First User', type_id: 2},
-      {name: 'Reset Password', type_id: 3},
-      {name: 'Reset Password Confirmation', type_id: 4},
-      {name: 'New Task Creation', type_id: 5},
-      {name: 'New Task Assigned', type_id: 6},
-      {name: 'New Tasks Re-Assigned', type_id: 7}
-  ]
-  
+  # == Constants == #  
   EMAIL_ROLES = {
                   org_admins: 'All Org Admins',
                   org_users: 'All Org Users',

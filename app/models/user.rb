@@ -23,7 +23,8 @@ class User < ApplicationRecord
   scope :all_except, ->(user) { where.not(id: user) }
   scope :first_name, ->(first_name) { where('first_name ilike ?', "%#{first_name}%") }
   scope :last_name, ->(last_name) { where('last_name ilike ?', "%#{last_name}%") }
-  scope :user_role, -> (user_role) { where(user_roles: {security_role_id: user_role})}
+  scope :user_role, ->(user_role) { where(user_roles: {security_role_id: user_role})}
+  scope :with_role, ->(role) { includes(:security_roles).where(security_roles: { name: role }) }
 
   validates_presence_of :first_name, :last_name
 

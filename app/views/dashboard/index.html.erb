@@ -208,7 +208,7 @@
       <div class="card cardPadding <%= "hoverOverlay" if @projects.count == 0 %>">
         <% if @projects.count == 0 %>
           <div class="overlaySec">
-            <a href="javascript:void(0)"><span><i class="fa fa-plus"></i></span>Create Your First Project</a>
+            <a href="<%= new_project_path %>"><span><i class="fa fa-plus"></i></span>Create Your First Project</a>
           </div>
         <% end %>
         <div class="form-row">

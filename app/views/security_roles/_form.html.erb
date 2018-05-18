@@ -25,10 +25,13 @@
                   <h5 class="modal-title">Features:</h5>
                   <%= render partial: 'module_fields', locals: { type: type, modules: current_org.enabled_modules } %>
                 </div>
-                <div class="row">
-                  <h5 class="modal-title">Custom Features:</h5>
-                  <%= render partial: 'module_fields', locals: { type: type, modules: current_org.custom_modules } %>
-                </div>
+                <% custom_modules = current_org.custom_modules %>
+                <% if custom_modules.present? %>
+                  <div class="row">
+                    <h5 class="modal-title">Custom Features:</h5>
+                    <%= render partial: 'module_fields', locals: { type: type, modules: custom_modules } %>
+                  </div>
+                <% end %>
               </div>
               <hr>
               <div class="row">

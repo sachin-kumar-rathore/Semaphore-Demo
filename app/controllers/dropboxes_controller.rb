@@ -1,5 +1,5 @@
 class DropboxesController < ManageGeneralModulesController
-  before_action :authenticate_user!, :authorized_module?, :authorized_user_to_write?
+  before_action :has_write_permision
   before_action :check_dropbox_token, except: [:index, :connect, :verify_code]
 
   include DropboxModule

@@ -1,4 +1,5 @@
 <% if @user.errors.blank? %>
+  $('.settings-tab-headers').html("<%= j render partial: 'shared/settings_tab_headers' %>")
   reloadUsers();
   $('.flashMessages').html("<%= j render partial: 'shared/flash_messages' %>");
 <% else %>

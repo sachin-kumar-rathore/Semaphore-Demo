@@ -1,7 +1,6 @@
 # Manage activities under an organization
 class ActivitiesController < ManageGeneralModulesController
-  before_action :authenticate_user!, :authorized_module?
-  before_action :authorized_user_to_write?, except: %i[index edit]
+  before_action :has_write_permision, except: %i[index edit]
   before_action :set_activity, only: %i[edit update destroy]
 
   def index

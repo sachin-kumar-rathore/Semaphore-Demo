@@ -1,7 +1,6 @@
 # Manage tasks belonging to an organization
 class TasksController < ManageGeneralModulesController
-  before_action :authenticate_user!, :authorized_module?
-  before_action :authorized_user_to_write?, except: %i[index show]
+  before_action :has_write_permision, except: %i[index show]
   before_action :set_task, only: %i[show edit update destroy]
   before_action :set_project, only: %i[show]
   before_action :set_users, only: %i[show new]

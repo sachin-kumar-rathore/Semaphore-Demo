@@ -1,11 +1,10 @@
 # Manage contacts inside an organization
 class ContactsController < ManageGeneralModulesController
-  before_action :authenticate_user!, :authorized_module?
-  before_action :authorize_current_controller, only: %i[export]
-  before_action :authorized_user_to_write?, except: %i[index show export show_existing_contacts
-                                                       attach_contact_to_project attach_contact_to_company]
-  before_action :authorized_to_write_current_section?, only: %i[show_existing_contacts attach_contact_to_project
-                                                               attach_contact_to_company]
+  before_action :authenticate_imports, only: %i[import_contacts]
+  before_action :has_write_permision, except: %i[index show export show_existing_contacts
+                                                 attach_contact_to_project attach_contact_to_company]
+  before_action :has_write_permision_on_current_section, only: %i[show_existing_contacts attach_contact_to_project
+                                                                  attach_contact_to_company]
   before_action :set_contact, only: %i[show edit update destroy]
   respond_to :html, only: %i[index]
   respond_to :js
@@ -100,9 +99,5 @@ class ContactsController < ManageGeneralModulesController
                                     :contact_category_id, :title,
                                     :cell_phone, :notes, :project_id,
                                     :company_id, :organization_name, :linkedin_url)
-  end
-
-  def authorize_current_controller
-    match_enabled_module('contacts')
   end
 end

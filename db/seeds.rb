@@ -9,7 +9,6 @@ require 'faker'
 
 
 # Transactional Emails
-TransactionalEmail.destroy_all if TransactionalEmail.count > 0
 Constant::EMAIL_TYPES.each do |type|
   TransactionalEmail.create!(name: type[:name], body: Faker::Lorem.paragraph, type_id: type[:type_id],
                              subject: type[:name], recipient_roles: type[:recipient_roles])
@@ -32,7 +31,6 @@ GeneralModule.destroy_all if GeneralModule.count > 0
 GeneralModule.create!(Constant::GENERAL_MODULES)
 GeneralModule.create!(Constant::CUSTOM_MODULES.map { |m| m.merge(is_custom: true) })
 
-Package.destroy_all if Package.count > 0
 default_modules = GeneralModule.default_modules
 default_package = Package.create!(name: 'default-standard')
 default_modules.map{ |default_module| default_package.package_modules.create(general_module_id: default_module.id) }
@@ -45,16 +43,13 @@ Constant::SECTIONS.each do |section_name|
 end
 
 # SuperAdmin
-Admin.destroy_all if Admin.count > 0
 Admin.create!(email: 'superadmin@example.com', password: '12345678', password_confirmation: '12345678')
 
 # First Organization
-Organization.destroy_all if Organization.count > 0
 Organization.create!(name: 'Test Organization', url: 'testorg.com', primary_contact_first_name: Faker::Name.first_name , 
                      primary_contact_last_name: Faker::Name.last_name, primary_contact_phone: Faker::PhoneNumber.phone_number, 
                      primary_contact_email: "admin@example.com")
 
 # First User
-User.destroy_all if User.count > 0
 User.create!(email: 'admin@example.com', password: '12345678', password_confirmation: '12345678',
              first_name: Faker::Name.first_name , last_name: Faker::Name.last_name, organization_id: Organization.first.id)

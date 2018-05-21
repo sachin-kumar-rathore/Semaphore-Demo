@@ -14,7 +14,7 @@ class Project < ApplicationRecord
   STATUS = %w[Preliminary Active Delayed Eliminated Successful
               Inactive].freeze
 
-  attr_accessor :active_date_str, :successful_completion_date_str,
+  attr_accessor :active_date_str, :successful_completion_date_str, :user_id,
                 :public_release_date_str, :activity_id, :new_company_name
   # CALLBACK
   before_validation :convert_dates_format
@@ -148,9 +148,12 @@ class Project < ApplicationRecord
   end
 
   def create_new_company
-    if new_company_name.present?
+    current_user = organization.users.find_by_id(user_id)
+    if new_company_name.present? && current_user.can_write?('companies')
       @company = organization.companies.new(name: new_company_name)
       self.company_id = @company.id if @company.save(validate: false)
+    else
+      self.company_id = nil
     end
   end
 end

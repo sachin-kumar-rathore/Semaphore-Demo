@@ -1,9 +1,7 @@
 # Manage projects belonging to an organization
 class ProjectsController < ManageGeneralModulesController
   include ProjectModule
-  before_action :authenticate_user!, :authorized_module?
-  before_action :authorize_current_controller, only: %i[export_form export]
-  before_action :authorized_user_to_write?, only: %i[new create update destroy check_projects_number_validity]
+  before_action :has_write_permision, only: %i[new create update destroy check_projects_number_validity]
   before_action :set_project, only: %i[edit update show logs destroy]
   before_action :convert_site_visit_dates, only: [:update, :create]
   respond_to :html, only: %i[index new edit]
@@ -123,7 +121,7 @@ class ProjectsController < ManageGeneralModulesController
                                     :speculative_building,
                                     :elimination_reason_id,
                                     :where_located, :project_number, :retained_jobs,
-                                    :company_id,
+                                    :company_id, :user_id,
                                     :primary_contact_id, :source_id,
                                     :considered_location_id, :new_company_name,
                                     :incentive_id, :other_square_ft_requested,
@@ -157,9 +155,5 @@ class ProjectsController < ManageGeneralModulesController
     else
       redirect_to edit_project_path(@project)
     end
-  end
-
-  def authorize_current_controller
-    match_enabled_module('projects')
   end
 end

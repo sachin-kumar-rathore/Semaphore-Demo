@@ -1,5 +1,6 @@
 class OutlookContactsController < ManageGeneralModulesController
-  before_action :authenticate_user!, :authorized_module?, :authorized_user_to_write?
+  skip_before_action :authenticate_module!
+  before_action :authorize_contacts_and_imports
   
   include AuthenticationModule
 
@@ -60,5 +61,12 @@ class OutlookContactsController < ManageGeneralModulesController
       insert_or_modify_contact(temp_contact)
     end
     flash.now[:success] = 'All contacts are successfully imported'
+  end
+
+  def authorize_contacts_and_imports
+    ['imports', 'contacts'].each do |section|
+      match_enabled_module(section) 
+      verify_write_access(section)
+    end
   end
 end

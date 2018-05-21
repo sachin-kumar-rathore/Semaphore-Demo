@@ -123,25 +123,26 @@ $(document).on("click", ".delete-record-clickable", function () {
   });
 });
 
+// filter files
+
 $(document).on("change", "#files_filter_by_project", function () {
-  var project_id = $('#files_filter_by_project').val();
-  $.ajax({
-    url: "/files",
-    type: "GET",
-    data: {project_id: project_id},
-    dataType: 'script'
-  });
+  filesFilterRequest();
 });
 
 $(document).on("change", "#files_filter_by_file_type", function () {
+  filesFilterRequest();
+});
+
+function filesFilterRequest() {
+  var project_id = $('#files_filter_by_project').val();
   var file_type = $('#files_filter_by_file_type').val();
   $.ajax({
     url: "/files",
     type: "GET",
-    data: {file_type: file_type},
+    data: { project_id: project_id, file_type: file_type },
     dataType: 'script'
   });
-});
+}
 
 //project_files
 

@@ -1,8 +1,6 @@
 # Manage companies inside an organization
 class CompaniesController < ManageGeneralModulesController
-  before_action :authenticate_user!, :authorized_module?
-  before_action :authorize_current_controller, only: %i[export_form export]
-  before_action :authorized_user_to_write?, except: %i[index show edit export_form export]
+  before_action :has_write_permision, except: %i[index show edit export_form export]
   before_action :set_company, except: %i[index new]
   respond_to :html, only: %i[index edit]
   respond_to :js
@@ -181,9 +179,5 @@ class CompaniesController < ManageGeneralModulesController
     @company_projects = @company.projects
                                 .paginate(page: params[:page], per_page: 8)
                                 .order('updated_at DESC')
-  end
-
-  def authorize_current_controller
-    match_enabled_module('companies')
   end
 end

@@ -1,7 +1,7 @@
 # Manage notes inside a particular activity
 class ActivityNotesController < ManageGeneralModulesController
-  before_action :authenticate_user!, :set_activity, :authorized_module?
-  before_action :authorized_user_to_write?, except: %i[index show]
+  before_action :set_activity
+  before_action :has_write_permision, except: %i[index show]
   before_action :set_note, only: %i[show update destroy]
   respond_to :js
 

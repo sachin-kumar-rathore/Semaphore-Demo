@@ -1,11 +1,13 @@
 # Manage Users in an Organization by admin
 class ManageUsersController < ManageGeneralModulesController
   before_action :authenticate_admin!, only: %i[edit update]
-  before_action :authenticate_user!, except: %i[edit update]
+  skip_before_action :authenticate_user!, only: %i[edit update]
+  skip_before_action :authenticate_module!
   before_action :has_admin_role, only: %i[index new create edit_invitation 
-                                      update_invitation destroy]
+                                          update_invitation destroy]
   before_action :set_org_and_user, only: %i[edit update]
   before_action :set_user, only: %i[edit_invitation update_invitation destroy]
+  after_action :delete_cache, only: %i[update_invitation destroy]
   respond_to :js
   respond_to :html, only: [:index, :user_details]
 
@@ -120,5 +122,9 @@ class ManageUsersController < ManageGeneralModulesController
     else
       @user.update(update_params)
     end
+  end
+
+  def delete_cache
+    $redis.del('user_roles')
   end
 end

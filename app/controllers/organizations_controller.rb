@@ -1,5 +1,6 @@
 # Manage organizations
 class OrganizationsController < ManageGeneralModulesController
+  skip_before_action :authenticate_user!, :authenticate_module!
   before_action :authenticate_admin!, except: %i[edit_details update]
   before_action :has_admin_role, only: %i[edit_details update]
   before_action :set_organization, except: %i[index edit_details]

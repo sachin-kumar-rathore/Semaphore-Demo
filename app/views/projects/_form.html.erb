@@ -124,6 +124,7 @@
             <label for="NewCompanyName">Quick add company:</label>
             <%= project.text_field 'new_company_name', class: "form-control", placeholder: "quick add company", required: @project.company_id == 0 ? true : false%>
           </div>
+          <%= hidden_field_tag "project[user_id]", current_user.id %>
         <% end %>
       </div>
       <div class="form-row">

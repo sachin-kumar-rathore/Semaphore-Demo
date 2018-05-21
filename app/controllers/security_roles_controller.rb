@@ -1,6 +1,7 @@
 # Manage security roles inside settings
 class SecurityRolesController < ManageGeneralModulesController
-  before_action :authenticate_user!, :has_admin_role
+  skip_before_action :authenticate_module!
+  before_action :has_admin_role
   before_action :set_security_role, only: %i[edit update destroy]
   respond_to :js, except: [:index]
   respond_to :html, except: [:index]

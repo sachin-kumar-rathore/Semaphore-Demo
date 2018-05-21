@@ -1,5 +1,6 @@
 class ProjectLogsController < ManageGeneralModulesController
-  before_action :authenticate_user!, :authorize_controller
+  skip_before_action :authenticate_module!  
+  before_action :authorize_project_section
   
   def index
     @projects = current_org.projects
@@ -17,7 +18,7 @@ class ProjectLogsController < ManageGeneralModulesController
     params.slice(:start_date, :project_name, :company, :project_manager_id)
   end
 
-  def authorize_controller
+  def authorize_project_section
     match_enabled_module('projects')
   end
 end

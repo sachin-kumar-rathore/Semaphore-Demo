@@ -1,6 +1,8 @@
 class ManageGeneralModulesController < ApplicationController
+  before_action :authenticate_user!, :authenticate_module!
+  before_action :authenticate_exports, only: %i[export]
 
-  def authorized_module?
+  def authenticate_module!
     get_sections.each do |section|
       break if match_enabled_module(section)
     end
@@ -13,13 +15,13 @@ class ManageGeneralModulesController < ApplicationController
     redirect_root and return true unless result
   end
 
-  def authorized_user_to_write?
+  def has_write_permision
     get_sections.each do |section|
       break unless verify_write_access(section)
     end
   end
 
-  def authorized_to_write_current_section?
+  def has_write_permision_on_current_section
     verify_write_access(current_section)
   end
 
@@ -72,5 +74,13 @@ class ManageGeneralModulesController < ApplicationController
       mark_as_suspicious_activity(general_module) unless request.get?
       redirect_root and return false
     end
+  end
+
+  def authenticate_exports
+    match_enabled_module('exports')
+  end
+
+  def authenticate_imports
+    match_enabled_module('imports')
   end
 end

@@ -90,8 +90,4 @@ class Organization < ApplicationRecord
   def enabled_custom_module?(module_controller)
     custom_module_ids.include?(GeneralModule.custom_modules.find_by_controller_name(module_controller).try(:id))
   end
-
-  def enabled_module?(module_controller)
-    enabled_default_module?(module_controller) || enabled_custom_module?(module_controller)
-  end
 end

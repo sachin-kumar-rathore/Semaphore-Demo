@@ -1,6 +1,6 @@
 # Manage locations inside settings section
-class ConsideredLocationsController < ApplicationController
-  before_action :authenticate_user!
+class ConsideredLocationsController < ManageGeneralModulesController
+  before_action :authenticate_user!, :has_admin_role
   before_action :set_considered_location, only: %i[edit destroy update
                                                    show_contacts attach_contact
                                                    remove_contact]

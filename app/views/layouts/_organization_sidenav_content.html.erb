@@ -1,4 +1,4 @@
-<% current_org.enabled_modules.side_bar_modules.each do |general_module| %>
+<% side_bar_default_modules.each do |general_module| %>
   <li class="site-menu-item has-sub data-exports <%= active_class(general_module.controller_name) %>">
     <a href="/<%= general_module.controller_name %>">
       <% icon, content = module_icon(general_module.controller_name) %>
@@ -20,8 +20,9 @@
     </a>
   </li>
 <% end %>
+
 <li class="site-menu-item">
-  <a href="<%= manage_users_path %>">
+  <a href="<%= current_user.is_admin? ? manage_users_path : my_details_path %>">
     <i class="site-menu-icon md-settings" aria-hidden="true"></i>
     <span class="site-menu-title">Settings</span>
   </a>

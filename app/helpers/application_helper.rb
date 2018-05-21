@@ -61,6 +61,10 @@ module ApplicationHelper
     end     
   end
 
+  def side_bar_default_modules
+    current_org.enabled_modules.side_bar_modules.all_except('manage_users')
+  end
+
   def module_icon(module_controller)
     Constant::MODULE_ICONS[module_controller.to_sym].split(', ')
   end

@@ -58,6 +58,10 @@ class User < ApplicationRecord
     return true
   end
 
+  def is_admin?
+    security_roles.pluck(:name).include?('Administrator')
+  end
+
   protected
 
   def send_devise_notification(notification, *args)

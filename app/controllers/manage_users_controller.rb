@@ -1,7 +1,9 @@
 # Manage Users in an Organization by admin
-class ManageUsersController < ApplicationController
+class ManageUsersController < ManageGeneralModulesController
   before_action :authenticate_admin!, only: %i[edit update]
   before_action :authenticate_user!, except: %i[edit update]
+  before_action :has_admin_role, only: %i[index new create edit_invitation 
+                                      update_invitation destroy]
   before_action :set_org_and_user, only: %i[edit update]
   before_action :set_user, only: %i[edit_invitation update_invitation destroy]
   respond_to :js

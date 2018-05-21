@@ -1,6 +1,6 @@
 # Manage configuration tab inside settings
-class ManageConfigurationsController < ApplicationController
-  before_action :authenticate_user!
+class ManageConfigurationsController < ManageGeneralModulesController
+  before_action :authenticate_user!, :has_admin_role
   before_action :initialize_type, except: [:index]
   before_action :set_setting_type, only: %i[edit destroy update]
   respond_to :js

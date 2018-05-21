@@ -8,4 +8,5 @@ class GeneralModule < ApplicationRecord
   scope :custom_modules, -> { where(is_custom: true) }
   scope :default_modules, -> { where(is_custom: false) }
   scope :side_bar_modules, -> { where(side_bar_enabled: true) }
+  scope :all_except, ->(module_controller) { where.not(controller_name: module_controller) }
 end

@@ -1,5 +1,5 @@
-class ProjectLogsController < ApplicationController
-  before_action :authenticate_user!
+class ProjectLogsController < ManageGeneralModulesController
+  before_action :authenticate_user!, :authorize_controller
   
   def index
     @projects = current_org.projects
@@ -15,5 +15,9 @@ class ProjectLogsController < ApplicationController
 
   def filtering_params(params)
     params.slice(:start_date, :project_name, :company, :project_manager_id)
+  end
+
+  def authorize_controller
+    match_enabled_module('projects')
   end
 end

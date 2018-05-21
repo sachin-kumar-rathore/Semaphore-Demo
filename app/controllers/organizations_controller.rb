@@ -1,6 +1,7 @@
 # Manage organizations
-class OrganizationsController < ApplicationController
+class OrganizationsController < ManageGeneralModulesController
   before_action :authenticate_admin!, except: %i[edit_details update]
+  before_action :has_admin_role, only: %i[edit_details update]
   before_action :set_organization, except: %i[index edit_details]
   before_action :load_custom_modules, only: %i[edit]
   layout :resolve_layout
@@ -18,7 +19,7 @@ class OrganizationsController < ApplicationController
 
   def update
     @organization.update(organization_params)
-    update_package
+    update_package if params[:organization][:package_id]
   end
 
   def sign_in_as_admin
@@ -40,6 +41,7 @@ class OrganizationsController < ApplicationController
     custom_module_ids = custom_module_id_array
     if @organization.update_attributes(custom_module_ids: custom_module_ids.uniq)
       flash.now[:success] = 'Request successfully processed'
+      $redis.del('org_module_ids')
     end
   end
 
@@ -98,5 +100,6 @@ class OrganizationsController < ApplicationController
     org_package = @organization.organization_package
     org_package ? org_package.update(organization_package_params)
                 : @organization.create_organization_package(organization_package_params)
+    $redis.del('org_module_ids')
   end
 end

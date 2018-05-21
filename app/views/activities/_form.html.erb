@@ -20,25 +20,28 @@
           <label id="inputCompanyName">Company Name:</label>
           <%= activity.select :company_id, options_for_select(load_data_with_id(current_org.companies), activity.object.company_id), {include_blank: 'No Company'}, data: {"live-search": true}, disabled: @company, class: 'form-control custom-select' %>
         </div>
+        <% is_admin = current_user.is_admin? %>
         <div class="form-group col-md-3 target-dropdown">
           <label for="inputActivityType">Activity Type:</label>
-          <%= activity.select :company_activity_type_id, options_for_select(load_type_with_quick_add("company_activity_types", 'Activity Type'), activity.object.company_activity_type_id), {include_blank: ''}, class: 'form-control custom-select' %>
+          <%= activity.select :company_activity_type_id, options_for_select((is_admin ? load_type_with_quick_add("company_activity_types", 'Activity Type') : load_type('company_activity_types')), activity.object.company_activity_type_id), {include_blank: ''}, class: 'form-control custom-select' %>
         </div>
-        <div class="form-group col-md-3 manage_config_div hidden">
-          <div class="row">
-            <div class="col mr--10">
-              <label for="inputActivityType">Activity Type:</label>
-              <input type="text" name="new_activity_type" id="new_activity_type" class="form-control">
+        <% if is_admin %>
+          <div class="form-group col-md-3 manage_config_div hidden">
+            <div class="row">
+              <div class="col mr--10">
+                <label for="inputActivityType">Activity Type:</label>
+                <input type="text" name="new_activity_type" id="new_activity_type" class="form-control">
+              </div>
+              <div class="add-activity-type  mr-3 ml--1">
+                <button type="button", class="btn btn-primary quick-add-btn"><i class="icon fa fa-plus btnIcon"></i></button> 
+              </div>
+              <div class="cancel-quick-add quick-add-btn">
+                <a href="javascript:void(0)" class="close" aria-label="close">&times;</i></a>
+              </div>
+              <div class="ml-15" id="manageConfigMessage"></div>
             </div>
-            <div class="add-activity-type  mr-3 ml--1">
-              <button type="button", class="btn btn-primary quick-add-btn"><i class="icon fa fa-plus btnIcon"></i></button> 
-            </div>
-            <div class="cancel-quick-add quick-add-btn">
-              <a href="javascript:void(0)" class="close" aria-label="close">&times;</i></a>
-            </div>
-            <div class="ml-15" id="manageConfigMessage"></div>
           </div>
-        </div>
+        <% end %>
         <div class="form-group col-md-3">
           <label for="inputProvidedService">Incentives:</label>
           <%= activity.select :incentive_id, options_for_select(load_active_type("incentives"), activity.object.incentive_id), {}, class: 'form-control custom-select' %>

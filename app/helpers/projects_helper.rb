@@ -24,6 +24,7 @@ module ProjectsHelper
   end
 
   def load_company_data_with_id(companies)
-    [['Quick add company', 0 ]] + load_data_with_id(companies)
+    current_user.can_write?('companies') ? [['Quick add company', 0 ]] + load_data_with_id(companies)
+                                         : load_data_with_id(companies)
   end
 end

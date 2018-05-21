@@ -119,7 +119,8 @@ module Constant
                       { name: 'Reports', controller_name: 'reports' },
                       { name: 'Files', controller_name: 'files' },
                       { name: 'Data Imports', controller_name: 'imports' },
-                      { name: 'Data Exports', controller_name: 'exports' }
+                      { name: 'Data Exports', controller_name: 'exports' },
+                      { name: 'Settings', controller_name: 'manage_users'}
                     ]
 
   CUSTOM_MODULES = [
@@ -143,7 +144,8 @@ module Constant
                    exports: 'fa fa-file-excel-o',
                    module_one: 'fa fa-cube',
                    module_two: 'fa fa-cube',
-                   dropboxes: 'fa fa-dropbox'
+                   dropboxes: 'fa fa-dropbox',
+                   manage_users: 'md-settings'
                  }
 
   SECTIONS = [

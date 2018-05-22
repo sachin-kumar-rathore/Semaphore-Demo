@@ -212,14 +212,18 @@
           </div>
         <% end %>
         <div class="form-row">
-          <div class="col-md-2">
+          <div class="col">
             <h4 class="m-0">Projects</h4>
           </div>
-          <div class="col text-right">
+          <div class="col">
             <div class="title-menu">
               <%= select_tag :status, options_for_select(Project::STATUS, 'Active'), include_blank: 'All',
                              class: 'btn activeBtn', id: 'dashboard_project_by_status' %>
               <h3> - Filter by status</h3>
+            </div>
+          </div>
+          <div class="col-auto">
+            <div class="title-menu">
               <%= select_tag :project_type, options_for_select( load_active_type("project_types") ), include_blank: 'All Project Types',
                              class: 'btn activeBtn', id: 'dashboard_project_by_project_type' %>
               <h3> - Filter by Project Type</h3>
@@ -249,14 +253,18 @@
           </div>
         <% end %>
         <div class="form-row">
-          <div class="col-md-2">
+          <div class="col">
             <h4 class="m-0">Mailbox</h4>
           </div>
-          <div class="col text-right">
+          <div class="col">
             <div class="title-menu">
               <%= select_tag :project, options_for_select(load_data_with_id(@projects)), include_blank: 'All Projects',
                              class: 'btn activeBtn', id: 'dashboard_email_by_project' %>
               <h3> - Filter by Project</h3>
+            </div>
+          </div>
+          <div class="col-auto">
+            <div class="title-menu">
               <%= select_tag :contact, options_for_select(load_data_with_id(current_org.contacts)), include_blank: 'All Contacts',
                              class: 'btn activeBtn', id: 'dashboard_email_by_contact' %>
               <h3> - Filter by Contact</h3>

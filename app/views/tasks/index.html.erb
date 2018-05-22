@@ -15,7 +15,7 @@
     <div class="panel">
       <header class="panel-heading">
         <div class="tasksTopOptions">
-          <div class="row">
+          <div class="form-row">
             <div class="col">
               <div class="tasksSelectFilter align-top">
                 <%= select_tag :task_filter_by_project, options_for_select(load_data_with_id(current_org.projects)), include_blank: 'All Tasks' , class: 'form-control custom-select' %>
@@ -28,7 +28,7 @@
                 <div class="align-right"> - Filter by Status</div>
               </div>
             </div>
-            <div class="col col-auto">
+            <div class="col-auto">
               <div class="tasksRightOptions">
                 <ul>
                   <% if write_access = can_write? %>

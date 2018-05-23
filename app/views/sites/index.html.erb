@@ -16,31 +16,31 @@
       <header class="panel-heading">
         <% if write_access = can_write? %>
           <div class="tasksTopOptions">
-              <div class="form-row">
-                <div class="col">
-                  <div class="tasksRightOptions">
+            <div class="form-row">
+              <div class="col">
+                <div class="tasksRightOptions">
+                  <div class="tasksSelectFilter">
+                    <button class="btn btn-default waves-effect waves-classic clickable" data-href="<%= new_site_path %>"
+                            id="createNewSite" type="button">
+                      <i class="icon fa fa-plus btnIcon" aria-hidden="true"></i> Add Site/Building
+                    </button>
+                  </div>
+                  <% if can_access_imports = current_org.enabled_default_module?('imports') %>
                     <div class="tasksSelectFilter">
-                      <button class="btn btn-default waves-effect waves-classic clickable" data-href="<%= new_site_path %>"
-                              id="createNewSite" type="button">
-                        <i class="icon fa fa-plus btnIcon" aria-hidden="true"></i> Add Site/Building
+                      <button class="btn btn-default waves-effect waves-classic" data-target="#siteImportFormCenter" data-toggle="modal"
+                              id="importNewSites" type="button">Excel Import
                       </button>
                     </div>
-                    <% if can_access_imports = current_org.enabled_default_module?('imports') %>
-                        <div class="tasksSelectFilter">
-                          <button class="btn btn-default waves-effect waves-classic" data-target="#siteImportFormCenter" data-toggle="modal"
-                                  id="importNewSites" type="button">Excel Import
-                          </button>
-                        </div>
-                        <div class="tasksSelectFilter">
-                          <button class="btn btn-default waves-effect waves-classic" data-target="#siteLoisImportFormCenter" data-toggle="modal"
-                                  id="importNewSites" type="button">LOIS Import
-                          </button>
-                        </div>
-                    <% end %>
-                  </div>
+                    <div class="tasksSelectFilter">
+                      <button class="btn btn-default waves-effect waves-classic" data-target="#siteLoisImportFormCenter" data-toggle="modal"
+                              id="importNewSites" type="button">LOIS Import
+                      </button>
+                    </div>
+                  <% end %>
                 </div>
               </div>
             </div>
+          </div>
         <% end %>
       </header>
       <div class="panel-body" id="sitesList">

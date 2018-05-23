@@ -506,3 +506,12 @@ ul.ui-autocomplete {
 .tasksRightOptions .btn.btn-default.waves-effect.waves-classic{
   width: auto;
 }
+@media only screen and (max-width:440px){
+  .tasksTopOptions .tasksRightOptions ul li:first-child {
+    width: auto;
+    float:left;
+  }
+  ul.token-input-list{
+    width: auto;
+  }
+}

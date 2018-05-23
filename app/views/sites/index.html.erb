@@ -15,33 +15,32 @@
       </header>
       <header class="panel-heading">
         <% if write_access = can_write? %>
-        <div class="tasksTopOptions">
-          <div class="row">
-            <div class="col col-auto">
-              <div class="tasksRightOptions">
-                <ul>
-                  <li>
-                    <button class="btn btn-default waves-effect waves-classic clickable" data-href="<%= new_site_path %>"
-                    id="createNewSite" type="button"><i class="icon fa fa-plus btnIcon" aria-hidden="true"></i> Add Site/Building
-                  </button>
-                  </li>
-                  <% if can_access_imports = current_org.enabled_default_module?('imports') %>
-                    <li>
-                      <button class="btn btn-default waves-effect waves-classic" data-target="#siteImportFormCenter" data-toggle="modal"
-                        id="importNewSites" type="button">Excel Import
+          <div class="tasksTopOptions">
+              <div class="form-row">
+                <div class="col">
+                  <div class="tasksRightOptions">
+                    <div class="tasksSelectFilter">
+                      <button class="btn btn-default waves-effect waves-classic clickable" data-href="<%= new_site_path %>"
+                              id="createNewSite" type="button">
+                        <i class="icon fa fa-plus btnIcon" aria-hidden="true"></i> Add Site/Building
                       </button>
-                    </li>
-                    <li>
-                      <button class="btn btn-default waves-effect waves-classic" data-target="#siteLoisImportFormCenter" data-toggle="modal"
-                        id="importNewSites" type="button">LOIS Import
-                      </button>
-                    </li>
-                  <% end %>
-                </ul>
+                    </div>
+                    <% if can_access_imports = current_org.enabled_default_module?('imports') %>
+                        <div class="tasksSelectFilter">
+                          <button class="btn btn-default waves-effect waves-classic" data-target="#siteImportFormCenter" data-toggle="modal"
+                                  id="importNewSites" type="button">Excel Import
+                          </button>
+                        </div>
+                        <div class="tasksSelectFilter">
+                          <button class="btn btn-default waves-effect waves-classic" data-target="#siteLoisImportFormCenter" data-toggle="modal"
+                                  id="importNewSites" type="button">LOIS Import
+                          </button>
+                        </div>
+                    <% end %>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
         <% end %>
       </header>
       <div class="panel-body" id="sitesList">
@@ -50,7 +49,7 @@
     </div>
   </div>
   <div class="col-xl-4">
-    <%= render partial: 'filters', locals: { controller: 'sites', action: 'index'} %> 
+    <%= render partial: 'filters', locals: {controller: 'sites', action: 'index'} %>
   </div>
 </div>
 <div id="createOrEditSite"></div>

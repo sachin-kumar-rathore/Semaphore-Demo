@@ -9,7 +9,7 @@
       </header>
       <header class="panel-heading">
         <div class="tasksTopOptions">
-          <div class="row">
+          <div class="form-row">
             <div class="col">
               <div class="tasksSelectFilter">
                 <%= select_tag :files_filter_by_project, options_for_select(load_data_with_id(current_org.projects)), include_blank: 'All Files' , class: 'form-control custom-select' %>
@@ -20,7 +20,7 @@
                 <div class="align-right"> - Filter by Type</div>
               </div>
             </div>
-            <div class="col col-auto">
+            <div class="col-auto">
               <div class="tasksRightOptions">
                 <ul>
                   <% if current_org.enabled_custom_module?('dropboxes') && can_write?('dropboxes') %>

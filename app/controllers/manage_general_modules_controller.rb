@@ -82,5 +82,6 @@ class ManageGeneralModulesController < ApplicationController
 
   def authenticate_imports
     match_enabled_module('imports')
+    verify_write_access('imports')
   end
 end

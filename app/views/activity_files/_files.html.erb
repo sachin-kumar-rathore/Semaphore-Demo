@@ -33,6 +33,7 @@
     <% end %>
   </tbody>
 </table>
+<%= render partial: "/shared/confirmation_popup", locals: { record_type: 'Activity File' } %>
 
 <div class="digg_pagination">
   <%= js_will_paginate files %>

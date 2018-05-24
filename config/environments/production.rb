@@ -89,7 +89,7 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
-  config.action_mailer.default_url_options = { host: 'www.edleadtracker.com' }
+  config.action_mailer.default_url_options = { host: 'app.edleadtracker.com' }
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
@@ -105,8 +105,8 @@ Rails.application.configure do
   config.middleware.use ExceptionNotification::Rack,
                         email: {
                             email_prefix: Rails.env,
-                            sender_address: "'Exception Notifier' <#{ENV["mailgun_address"]}>",
-                            exception_recipients: ENV["exception_recipients"]
+                            sender_address: '"ED Leader Tracker" <no-reply@notifications.edleadtracker.com>',
+                            exception_recipients: 'skrathore.ror@gmail.com'
                         }
   
 end

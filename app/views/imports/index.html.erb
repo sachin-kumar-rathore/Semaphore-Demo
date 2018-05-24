@@ -1,6 +1,7 @@
 <% breadcrumb :imports %>
 <div class="section-info-flash"></div>
 <div class="error-messages"></div>
+<% if can_write? %>
 <div class="row">
   <% if current_org.enabled_default_module?('contacts') && can_write?('contacts') %>
     <div class="col-md-6">
@@ -39,3 +40,4 @@
     <%= render :partial => 'sites/lois_import_form' %>
   <% end %>
 </div>
+<% end %>

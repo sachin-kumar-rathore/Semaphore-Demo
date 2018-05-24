@@ -50,12 +50,15 @@ class Contact < ApplicationRecord
   pg_search_scope :email_search, :against => :email, :using => {
       :tsearch => {:prefix => true}
   }
-
+  pg_search_scope :org_search, :against => :organization_name, :using => {
+      :tsearch => {:prefix => true}
+  }
   # == Instance methods == #
-  def self.name_or_email_search(name, email)
+  def self.name_or_email_search(name, email, org_name)
     name_relation = name_search(name).pluck(:id)
     email_relation = email_search(email).pluck(:id)
-    search_result = name_relation | email_relation
+    org_relation = org_search(org_name).pluck(:id)
+    search_result = name_relation | email_relation | org_relation
     return where('id IN (?)', search_result)
   end
 

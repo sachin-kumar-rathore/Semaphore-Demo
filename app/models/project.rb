@@ -149,7 +149,8 @@ class Project < ApplicationRecord
 
   def create_new_company
     current_user = organization.users.find_by_id(user_id)
-    if new_company_name.present? && current_user.can_write?('companies')
+    return unless new_company_name.present? 
+    if current_user.can_write?('companies')
       @company = organization.companies.new(name: new_company_name)
       self.company_id = @company.id if @company.save(validate: false)
     else

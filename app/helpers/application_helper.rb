@@ -62,7 +62,7 @@ module ApplicationHelper
   end
 
   def side_bar_default_modules
-    current_org.enabled_modules.side_bar_modules.all_except('manage_users')
+    current_org.enabled_modules.all_except('manage_users')
   end
 
   def module_icon(module_controller)
@@ -76,9 +76,5 @@ module ApplicationHelper
   def disabled_form?(module_controller=nil)
     result = module_controller && (module_controller != get_current_section_name) ? (can_write? && can_write?(module_controller)) : can_write?
     result ? '' : "disabled=disabled"
-  end
-
-  def edit_view_class
-    can_write? ? 'md-edit' : 'fa fa-eye'
   end
 end

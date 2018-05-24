@@ -29,7 +29,7 @@
                 <div class="col-auto">
                   <div class="projectMenu">
                     <h3><span class="IconCart bgGreen"><i class="icon fa fa-caret-up"></i></span>
-                      $<%= project_resources_total(@project_status_group['Active'], 'wages') %>
+                      $<%= number_with_delimiter(project_resources_total(@project_status_group['Active'], 'wages'), delimiter: ",") %>
                       <span>wages</span>
                     </h3>
                   </div>
@@ -47,7 +47,7 @@
                 <div class="col-auto">
                   <div class="projectMenu">
                     <h3><span class="IconCart"><i class="icon fa fa-caret-down"></i></span>
-                      $<%= project_resources_total(@project_status_group['Active'], 'net_new_investment') %>
+                      $<%= number_with_delimiter(project_resources_total(@project_status_group['Active'], 'net_new_investment'), delimiter: ",") %>
                       <span>Investment</span>
                     </h3>
                   </div>
@@ -79,7 +79,7 @@
                 <div class="col-auto">
                   <div class="projectMenu">
                     <h3><span class="IconCart bgGreen"><i class="icon fa fa-caret-up"></i></span>
-                      $<%= project_resources_total(@project_status_group['Preliminary'], 'wages') %>
+                      $<%= number_with_delimiter(project_resources_total(@project_status_group['Preliminary'], 'wages'), delimiter: ",") %>
                       <span>wages</span>
                     </h3>
                   </div>
@@ -97,7 +97,7 @@
                 <div class="col-auto">
                   <div class="projectMenu">
                     <h3><span class="IconCart"><i class="icon fa fa-caret-down"></i></span>
-                      $<%= project_resources_total(@project_status_group['Preliminary'], 'net_new_investment') %>
+                      $<%= number_with_delimiter(project_resources_total(@project_status_group['Preliminary'], 'net_new_investment'), delimiter: ",") %>
                       <span>Investment</span>
                     </h3>
                   </div>
@@ -320,7 +320,7 @@
             size: 130,
             dataLabels: {
               enabled: true,
-              format: '<b>{point.name}</b>: <br/>{point.percentage:.1f} %',
+              format: '<b>{point.name}</b>: <br/>{point.percentage:.0f} %',
               style: {
                 color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || '#757575'
               },

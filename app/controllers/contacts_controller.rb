@@ -12,8 +12,8 @@ class ContactsController < ManageGeneralModulesController
   def index
     @contacts = current_org.contacts
     @contacts = @contacts.where('id = ?', params[:id]) if params[:id].present?
-
-    if params[:name].present? || params[:email].present?
+    
+    if params[:name].present? || params[:email].present? || params[:organization].present?
       @contacts = search_contacts
     end
     @contacts = @contacts.paginate(page: params[:page], per_page: Contact::PAGINATION_VALUE)
@@ -88,7 +88,7 @@ class ContactsController < ManageGeneralModulesController
   end
 
   def search_contacts
-    @contacts.name_or_email_search(params[:name], params[:email])
+    @contacts.name_or_email_search(params[:name], params[:email], params[:organization])
   end
 
   def contact_params

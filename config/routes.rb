@@ -38,8 +38,8 @@ Rails.application.routes.draw do
     end
     resources :activities, controller: 'company_activities'
   end
-  get 'exports/export_companies_form', to: 'companies#export_form', as: 'export_form_companies'
-  get 'exports/export_projects_form', to: 'projects#export_form', as: 'export_form_projects'
+  get 'exports/companies/export_form', to: 'companies#export_form', as: 'export_form_companies'
+  get 'exports/projects/export_form', to: 'projects#export_form', as: 'export_form_projects'
   get 'imports/contacts/outlook', to: 'outlook_contacts#index', as: 'outlook_contacts'
   
   get :authorize_user, to: 'auth#get_token'

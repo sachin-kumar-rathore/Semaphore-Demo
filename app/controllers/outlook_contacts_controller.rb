@@ -64,9 +64,12 @@ class OutlookContactsController < ManageGeneralModulesController
   end
 
   def authorize_contacts_and_imports
-    ['imports', 'contacts'].each do |section|
-      match_enabled_module(section) 
-      verify_write_access(section)
-    end
+    authenticate_imports
+    authenticate_contacts
+  end
+
+  def authenticate_contacts
+    match_enabled_module('contacts') 
+    verify_write_access('contacts')
   end
 end

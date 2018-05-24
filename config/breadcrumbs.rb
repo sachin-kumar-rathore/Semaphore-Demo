@@ -24,6 +24,10 @@ crumb :activity do |activity|
   parent :activities
 end
 
+crumb :new_activity do
+  link "New", new_activity_path
+  parent :activities
+end
 
 # contacts breadcrumbs
 crumb :contacts do
@@ -41,6 +45,10 @@ crumb :project do |project|
   parent :projects
 end
 
+crumb :new_project do
+  link "New", new_project_path
+  parent :projects
+end
 
 # companies breadcrumbs
 crumb :companies do
@@ -57,6 +65,10 @@ crumb :company_activities do |company|
   parent :company, company
 end
 
+crumb :new_company_activity do |company|
+  link "New", new_company_activity_path(company)
+  parent :company_activities, company
+end
 
 crumb :company_activity do |activity|
   link activity.name, edit_company_activity_path(activity.company, activity)

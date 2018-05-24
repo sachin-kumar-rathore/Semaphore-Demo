@@ -40,7 +40,7 @@
                 </div>
                 <div class="col-auto">
                   <% unless @file.new_record? %>
-                    <%= link_to 'Delete', file_path(@file), method: :delete, remote: true, class: "btn btn-block btn-danger" %>
+                    <%= link_to 'Delete', activity_file_path(@file, activity_id: @activity.id), method: :delete, remote: true, class: "btn btn-block btn-danger" %>
                   <% end %>
                 </div>
               </div>

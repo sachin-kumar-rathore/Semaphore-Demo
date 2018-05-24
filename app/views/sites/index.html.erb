@@ -25,7 +25,7 @@
                     id="createNewSite" type="button"><i class="icon fa fa-plus btnIcon" aria-hidden="true"></i> Add Site/Building
                   </button>
                   </li>
-                  <% if can_access_imports = current_org.enabled_default_module?('imports') %>
+                  <% if can_access_imports = current_org.enabled_default_module?('imports') && can_write?('imports') %>
                     <li>
                       <button class="btn btn-default waves-effect waves-classic" data-target="#siteImportFormCenter" data-toggle="modal"
                         id="importNewSites" type="button">Excel Import

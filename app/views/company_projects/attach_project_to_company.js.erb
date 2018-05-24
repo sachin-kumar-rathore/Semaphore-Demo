@@ -1,7 +1,8 @@
 <% if @project.errors.blank? %>
   $('#showExistingProjects').modal('hide');
+  $('.modal-backdrop').remove();
   $('.flashMessages').html("<%= j render partial: 'shared/flash_messages' %>"); 
+  $('#projects').html("<%= j render partial: 'company_projects_list' %>");
 <% else %>
   $('#showExistingProjects .error-messages').html("<%= j render partial: 'shared/error_messages', locals: {obj: @project} %>");
 <% end %>
-$('#projects').html("<%= j render partial: 'company_projects_list' %>");

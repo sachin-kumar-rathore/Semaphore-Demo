@@ -13,10 +13,11 @@ class CompanyProjectsController < ManageGeneralModulesController
   end
 
   def attach_project_to_company
-    @project = current_org.projects.where(id: params[:id]).first
-    return unless @project.update_attribute(:company_id, @company.id)
-    flash.now[:success] = 'Project was successfully associated to company.'
-    load_company_projects
+    @project = current_org.projects.find_by(id: params[:id])
+    if @project.update_attributes(company_id: @company.id)
+      flash.now[:success] = 'Project was successfully associated to company.'
+      load_company_projects
+    end
   end
 
   private

@@ -53,3 +53,5 @@ Organization.create!(name: 'Test Organization', url: 'testorg.com', primary_cont
 # First User
 User.create!(email: 'admin@example.com', password: '12345678', password_confirmation: '12345678',
              first_name: Faker::Name.first_name , last_name: Faker::Name.last_name, organization_id: Organization.first.id)
+admin_role = Organization.last.security_roles.where(name: 'Administrator')
+User.last.user_roles.create(security_role_id: admin_role.id)

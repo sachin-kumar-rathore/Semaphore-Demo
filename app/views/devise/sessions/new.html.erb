@@ -38,7 +38,7 @@
             <div class="formBtnSection">
               <%= f.submit "Log in" , class: "btn primaryBtn" %>
             </div>
-            <div class="formBtmLink"><%= link_to "New User? Sign up first.", new_user_registration_path %></div>
+            <div class="formBtmLink"><%= link_to "New User? Sign up first.", new_user_registration_path, data: { turbolinks: false } %></div>
           <% end %>
         </div>
       </div>

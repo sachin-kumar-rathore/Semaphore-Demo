@@ -5,44 +5,46 @@
   <div class="col-xl-8">
     <div class="panel">
       <header class="panel-heading">
-        <h3 class="panel-title">
-          <div class="row">
-            <div class="col-md-4">
-              <h4> Sites/Buildings</h4>
-            </div>
-          </div>
-        </h3>
-      </header>
-      <header class="panel-heading">
-        <% if write_access = can_write? %>
-          <div class="tasksTopOptions">
-            <div class="form-row">
-              <div class="col">
-                <div class="tasksRightOptions">
-                  <div class="tasksSelectFilter">
-                    <button class="btn btn-default waves-effect waves-classic clickable" data-href="<%= new_site_path %>"
-                            id="createNewSite" type="button">
-                      <i class="icon fa fa-plus btnIcon" aria-hidden="true"></i> Add Site/Building
-                    </button>
-                  </div>
-                  <% if can_access_imports = current_org.enabled_default_module?('imports') && can_write?('imports') %>
-                    <div class="tasksSelectFilter">
-                      <button class="btn btn-default waves-effect waves-classic" data-target="#siteImportFormCenter" data-toggle="modal"
-                              id="importNewSites" type="button">Excel Import
-                      </button>
-                    </div>
-                    <div class="tasksSelectFilter">
-                      <button class="btn btn-default waves-effect waves-classic" data-target="#siteLoisImportFormCenter" data-toggle="modal"
-                              id="importNewSites" type="button">LOIS Import
-                      </button>
-                    </div>
-                  <% end %>
-                </div>
+        <div class="tasksTopOptions">
+          <div class="form-row">
+            <div class="col">
+              <div class="tableTitle">
+                <h2>Sites/Buildings</h2>
               </div>
             </div>
+            <% if write_access = can_write? %>
+              <div class="col-auto">
+                <div class="tasksSelectFilter">
+                  <button class="btn btn-default waves-effect waves-classic clickable" data-href="<%= new_site_path %>"
+                          id="createNewSite" type="button">
+                    <i class="icon fa fa-plus btnIcon" aria-hidden="true"></i> Add Site/Building
+                  </button>
+                </div>
+              </div>
+              <% if can_access_imports = current_org.enabled_default_module?('imports') && can_write?('imports') %>
+                <div class="col-auto">
+                  <div class="tasksSelectFilter align-top">
+                    <button class="btn btn-default waves-effect waves-classic" data-target="#siteImportFormCenter" data-toggle="modal"
+                            id="importNewSites" type="button">Excel Import
+                    </button>
+                  </div>
+                </div>
+                <div class="col-auto">
+                  <div class="tasksSelectFilter align-top">
+                    <button class="btn btn-default waves-effect waves-classic" data-target="#siteLoisImportFormCenter" data-toggle="modal"
+                            id="importNewSites" type="button">LOIS Import
+                    </button>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+
           </div>
-        <% end %>
+        </div>
+
       </header>
+
+
       <div class="panel-body" id="sitesList">
         <%= render partial: 'sites', locals: {sites: @sites} %>
       </div>

@@ -87,7 +87,7 @@
                 </div>
                 <div class="mb-20 grey-500">
                   <i class="fa fa-caret-up green-500 font-size-18"></i>
-                  <strong class="font-size-18 black">$<%= results['net_new_investment'].values.sum %></strong>
+                  <strong class="font-size-18 black">$<%= number_with_delimiter(results['net_new_investment'].values.sum, delimiter: ',') %></strong>
                   <small>Total Number of New Investment</small>
                 </div>
               </div>
@@ -312,7 +312,7 @@
             showInLegend: true,
             dataLabels: {
               enabled: true,
-              format: '{point.percentage:.1f} %',
+              format: '{point.percentage:.0f} %',
               style: {
                 color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || '#757575'
               },

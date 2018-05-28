@@ -1,19 +1,33 @@
 <div class="panel">
-  <div class="panel-body">
-    <div class="row">
-      <div class="col-md-10 col-12">
-        <h3>Project Tasks</h3>
-      </div>
-      <% if write_access = can_write? && can_write?('tasks') %>
-        <div class="col-md-2 col-6">
-          <button class="btn btn-default waves-effect waves-classic clickable col-auto" data-href="<%= new_project_task_path(project_id: @project.id) %>" type="button"><i class="icon fa fa-plus btnIcon" aria-hidden="true"></i>Add New Task
-          </button>
+  <header class="panel-heading">
+
+    <div class="tasksTopOptions">
+      <div class="form-row">
+        <div class="col">
+          <div class="tableTitle">
+            <h2>Project Tasks</h2>
+          </div>
         </div>
-      <% end %>
+        <% if write_access = can_write? && can_write?('tasks') %>
+          <div class="col">
+            <div class="tasksRightOptions text-right">
+              <ul>
+                <div class="align-self-end">
+                  <button class="btn btn-default waves-effect waves-classic clickable" data-href="<%= new_project_task_path(project_id: @project.id) %>" type="button">
+                    <i class="icon fa fa-plus btnIcon" aria-hidden="true"></i>Add New Task
+                  </button>
+                </div>
+              </ul>
+            </div>
+          </div>
+        <% end %>
+      </div>
     </div>
-  </div>
-  <div class="panel-body" id="tasksList" >
-    <%= render partial: 'tasks', locals: { tasks: @tasks, write_access: write_access } %>
+
+  </header>
+
+  <div class="panel-body" id="tasksList">
+    <%= render partial: 'tasks', locals: {tasks: @tasks, write_access: write_access} %>
   </div>
 </div>
 <div id="createOrEditTask"></div>

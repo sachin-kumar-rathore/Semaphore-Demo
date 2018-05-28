@@ -94,7 +94,7 @@ module DashboardHelper
 
   def project_resources_total(object, resource)
     if @projects.count > 0
-      return object ? object.pluck(resource).sum : 0
+      return object ? object.pluck(resource).sum.round : 0
     else
       return resource == 'new_jobs' ? rand(10..100) : rand(50000..100000)
     end

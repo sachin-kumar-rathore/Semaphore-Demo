@@ -1,25 +1,16 @@
-<div class="panel panel-body">
-  <div class="">
+<div class="panel">
+  <div class="tasksTopOptions">
     <% if can_write? %>
-      <div class="row">
+      <div class="form-row">
         <% if can_write?('contacts') %>
           <div class="col-auto">
-            <button class="btn btn-primary green-btn waves-effect waves-classic col-md-12 clickable" data-href="<%= new_project_contact_path(@project) %>" type="button" ><i class="icon fa fa-plus" aria-hidden="true"></i>Add Contact </button>
+            <button class="btn btn-primary green-btn waves-effect waves-classic col-md-12 clickable" data-href="<%= new_project_contact_path(@project) %>" type="button">
+              <i class="icon fa fa-plus" aria-hidden="true"></i>Add Contact
+            </button>
           </div>
         <% end %>
-        <div class="col-md-3 col-12">
+        <div class="col-md-3 col-sm-4 col-xs-6">
           <%= button_to "Add Existing Contact", show_existing_contacts_project_contacts_path(@project), class: "btn btn-outline-primary waves-effect waves-classic col-md-10", method: :get, remote: true %>
-         </div>
-        <div class="col">
-          <div class="tasksRightOptions pull-right">
-          <ul>
-            <li>
-              <div class="openLeft moreOptions dropdown"> <a class="" data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false" data-animation="scale-down" role="button"> <i class="icon md-more-vert" aria-hidden="true"></i> </a>
-                <div class="dropdown-menu" role="menu"> <a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon md-view-dashboard" aria-hidden="true"></i> Action</a> <a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon md-view-dashboard" aria-hidden="true"></i> Action</a> </div>
-              </div>
-            </li>
-          </ul>
-          </div>
         </div>
       </div>
       <br>

@@ -1,25 +1,29 @@
 <div class="panel activitiesTabOptions">
-  <div class="panel-body">
-    <div class="row">
-      <div class="col">
-        <div class="tableTitle">
-          <h2>Company Contacts</h2>
+  <header class="panel-heading">
+    <div class="tasksTopOptions">
+      <div class="form-row">
+        <div class="col">
+          <div class="tableTitle">
+            <h2>Company Contacts</h2>
+          </div>
         </div>
+        <% if can_write? %>
+          <div class="col text-right">
+            <div class="tasksRightOptions">
+              <% if can_write?('contacts') %>
+                <button class="btn btn-default waves-effect waves-classic clickable" data-href="<%= new_company_contact_path(@company) %>" type="button" >
+                  <i class="icon fa fa-plus btnIcon" aria-hidden="true"></i> Add Contact
+                </button>
+              <% end %>
+              <button data-href ="<%= show_existing_contacts_company_contacts_path(@company)%>" class ="btn btn-default waves-effect waves-classic clickable" >
+                <i class="icon fa fa-plus btnIcon" aria-hidden="true"></i> Add Existing Contact
+              </button>
+            </div>
+          </div>
+        <% end %>
       </div>
-      <% if can_write? %>
-        <div class="mbFullWd col-auto">
-          <% if can_write?('contacts') %>
-            <button class="btn btn-default waves-effect waves-classic clickable" data-href="<%= new_company_contact_path(@company) %>" type="button" >
-              <i class="icon fa fa-plus btnIcon" aria-hidden="true"></i> Add Contact
-            </button>
-          <% end %>
-          <button data-href ="<%= show_existing_contacts_company_contacts_path(@company)%>" class ="btn btn-default waves-effect waves-classic clickable" >
-            <i class="icon fa fa-plus btnIcon" aria-hidden="true"></i> Add Existing Contact
-          </button>
-        </div>
-      <% end %>
     </div>
-  </div>
+  </header>
   <div class="panel-body designTable" id="contactsList">
     <%= render partial: "company_contacts/contacts", locals: {contacts: @company_contacts} %>
   </div>

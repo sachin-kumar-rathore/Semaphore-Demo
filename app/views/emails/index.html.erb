@@ -6,33 +6,29 @@
       <header class="panel-heading">
         <%= form_tag url_for(:controller => 'emails', :action => 'index'), :method => 'get', remote: true do %>
           <div class="tasksTopOptions">
-            <div class="row flex-sm-row-reverse">
-              <div class="col col-auto ml-auto">
-                <div class="tasksRightOptions">
-                  <ul>
-                    <li>
-                      <div class="tasksSelectFilter">
-                        <%= select_tag :project, options_for_select(load_data_with_id(current_org.projects)), include_blank: 'All Projects', class: 'form-control custom-select' %>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="tasksSelectFilter">
-                        <%= select_tag :contact, options_for_select(load_data_with_id(current_org.contacts)), include_blank: 'All Contacts', class: 'form-control custom-select' %>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="align-self-end">
-                        <button class="btn btn-primary" type="submit">Update & Show List</button>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div class="col-sm align-self-center">
+            <div class="form-row">
+              <div class="col-md-3">
                 <div class="tableTitle">
                   <h2>Emails</h2>
                 </div>
                 <span>Send BCC emails to mail@mailbox.edleadtracker.com</span>
+              </div>
+              <div class="col-xs-12 col-md-6 text-right">
+                <div class="tasksSelectFilter align-top">
+                  <%= select_tag :project, options_for_select(load_data_with_id(current_org.projects)), include_blank: 'All Projects', class: 'form-control custom-select' %>
+                </div>
+                <div class="tasksSelectFilter align-top">
+                  <%= select_tag :contact, options_for_select(load_data_with_id(current_org.contacts)), include_blank: 'All Contacts', class: 'form-control custom-select' %>
+                </div>
+              </div>
+              <div class="col">
+                <div class="tasksRightOptions">
+                  <ul>
+                    <div class="align-self-end">
+                      <button class="btn btn-primary" type="submit">Update & Show List</button>
+                    </div>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
